@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Creating a standalone (runnable) Kotlin .jar file with IntelliJ and Gradle - slar.se</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://slarse.org/theme/css/pygment.css" />
+      <link rel="stylesheet" href="https://slarse.org/theme/css/voidybootstrap.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://slarse.org/favicon.ico" />
+        <link href="https://slarse.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="slar.se Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slarse.org/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+              <li>
+                <a href="https://slarse.org/pages/about.html">About</a>
+              </li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slarse.org/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slarse.org/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slarse.org/">slar.se</a></h1>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Wed 17 October 2018
+</abbr> <h1>
+  <a href="https://slarse.org/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html" rel="bookmark"
+     title="Permalink to Creating a standalone (runnable) Kotlin .jar file with IntelliJ and Gradle">
+    Creating a standalone (runnable) Kotlin .jar file with IntelliJ and Gradle
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slarse.org/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slarse.org/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>I've recently started dabbling in some Kotlin, and have found it a very pleasant
+experience. One of the first things I wanted to do was to create a standalone
+<code>.jar</code> file, including the Kotlin runtime and any other dependencies. This,
+as it turns out, was a bit tricky. In this short article, I will walk you
+through creating a small command line application using the
+awesome <a href="https://ajalt.github.io/clikt/"><code>clikt</code> library</a>, and then packaging
+it into a standalone <code>.jar</code>.</p>
+<h2>Setting up</h2>
+<p>Start out with creating a new project by going to <code>File -&gt; New -&gt; Project</code>, select
+Gradle in the leftmost menu bar (i.e. <em>not</em> Kotlin), and then tick the Kotlin
+box in the <code>Additional Libraries and Frameworks</code> menu. Then just fill in any
+GroupId, ArtifactId and Version (I will use <code>slarse</code>, <code>app</code> and <code>0.1</code> for these
+fields, respectively). Then just click <code>Next</code> with the defaults until the
+project is created.</p>
+<h3>Initial Gradle configuration</h3>
+<p>In the project root, you should now have a file called <code>build.gradle</code>, which
+looks something like this:</p>
+<div class="highlight"><pre><span></span><span class="err">plugins</span> <span class="p">{</span>
+    <span class="err">id</span> <span class="err">&#39;org.jetbrains.kotlin.jvm&#39;</span> <span class="err">version</span> <span class="err">&#39;1.2.51&#39;</span>
+<span class="p">}</span>
+
+<span class="err">group</span> <span class="err">&#39;slarse&#39;</span>
+<span class="err">version</span> <span class="err">&#39;</span><span class="mf">0.1</span><span class="err">&#39;</span>
+
+<span class="err">repositories</span> <span class="p">{</span>
+    <span class="err">mavenCentral()</span>
+<span class="p">}</span>
+
+<span class="err">dependencies</span> <span class="p">{</span>
+    <span class="err">compile</span> <span class="nt">&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&quot;</span>
+<span class="p">}</span>
+
+<span class="err">compileKotlin</span> <span class="p">{</span>
+    <span class="err">kotlinOptions.jvmTarget</span> <span class="err">=</span> <span class="nt">&quot;1.8&quot;</span>
+<span class="p">}</span>
+<span class="err">compileTestKotlin</span> <span class="p">{</span>
+    <span class="err">kotlinOptions.jvmTarget</span> <span class="err">=</span> <span class="nt">&quot;1.8&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Before we can compile a project with <code>clikt</code>, we need to add it as a dependency.
+We can do that by adding <code>compile "com.github.ajalt:clikt:1.5.0"</code> in the
+dependencies section. It should now look like this:</p>
+<div class="highlight"><pre><span></span><span class="err">dependencies</span> <span class="p">{</span>
+    <span class="err">compile</span> <span class="nt">&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&quot;</span>
+    <span class="err">compile</span> <span class="s2">&quot;com.github.ajalt:clikt:1.5.0&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Then hit the little refresh symbol in the bottom left corner
+(should say <code>Refresh Gradle Project</code> when you hover your mouse over it) to
+download the new dependency. And that's it for now!
+We'll get back to the <code>gradle.build</code> file once we
+want to configure our <code>jar</code> task, but let's create the app first!</p>
+<h2>Creating the application</h2>
+<p>Let's make this easy: we'll just use the sample application available from the
+<a href="https://ajalt.github.io/clikt/"><code>clikt</code> documentation</a>. It looks like this:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Hello</span> <span class="p">:</span> <span class="n">CliktCommand</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">count</span><span class="p">:</span> <span class="n">Int</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="p">=</span><span class="s">&quot;Number of greetings&quot;</span><span class="p">).</span><span class="n">int</span><span class="p">().</span><span class="n">default</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="p">=</span><span class="s">&quot;The person to greet&quot;</span><span class="p">).</span><span class="n">prompt</span><span class="p">(</span><span class="s">&quot;Your name&quot;</span><span class="p">)</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">echo</span><span class="p">(</span><span class="s">&quot;Hello $name!&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">=</span> <span class="n">Hello</span><span class="p">().</span><span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Create a Kotlin file called <code>main.kt</code> at <code>src/main/kotlin/main.kt</code> and paste
+the above code into it. Note that we are using the default package here
+(i.e. not defining a package) for the sake of simplicity.</p>
+<p>For this to compile, we will need to add the following imports at the top:</p>
+<div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">com.github.ajalt.clikt.core.CliktCommand</span>
+<span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.default</span>
+<span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.option</span>
+<span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.prompt</span>
+<span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.types.int</span>
+</pre></div>
+
+
+<p>And that's it for the application, you should now be able to run it as usual.
+When running it, there should appear a prompt in the terminal saying <code>Your name:</code>.
+With that out of the way, the only thing left to do is to package our
+fantastic application into a standalone <code>.jar</code> file.</p>
+<h2>Packaging the application into a standalone <code>.jar</code> file</h2>
+<p>This is actually not very difficult, but you need to know what to do. We need
+to create a so-called "fat" jar, which includes both the Kotlin runtime and the
+<code>clikt</code> library. We also need to specify the name of our main class.</p>
+<div class="highlight"><pre><span></span><span class="err">jar</span> <span class="p">{</span>
+    <span class="err">manifest</span> <span class="err">{</span>
+        <span class="err">attributes</span> <span class="err">&#39;Main-Class&#39;:</span> <span class="err">&#39;MainKt&#39;</span>
+    <span class="p">}</span>
+    <span class="err">from</span> <span class="p">{</span>
+        <span class="err">configurations.compile.collect</span> <span class="err">{</span> <span class="err">it.isDirectory()</span> <span class="err">?</span> <span class="err">it</span> <span class="err">:</span> <span class="err">zipTree(it)</span> <span class="p">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>Note that the class file generated by Kotlin for a file called <code>something.kt</code>
+will be <code>SomethingKt.class</code>, which is why our main class is called <code>MainKt</code>.
+With that in mind, the <code>manifest</code> section is self-explanatory: we specify
+the main class. The <code>from</code> section collects all compile dependencies
+(that we specified in the <code>dependencies</code> section) and package them with the
+<code>.jar</code> file. The little piece of logic in the lambda is to properly add
+directories and <code>.jar</code> files, respectively (directories are just added,
+<code>.jar</code> files are unzipped and added).</p>
+<blockquote>
+<p><strong>Important:</strong> The main class file must be specified with its fully qualified
+name. For example, if I were to define <code>main.kt</code> in the package <code>se.slarse</code>,
+then I would need to put <code>se.slarse.MainKt</code> instead of just <code>MainKt</code> in the
+manifest.</p>
+</blockquote>
+<p>Anyway, that's really all we need to do.
+It should now be possible to run the <code>jar</code> Gradle task to produce a <code>.jar</code> file
+in <code>build/libs/&lt;ArtifactId&gt;-&lt;Version&gt;</code> (so in my case it is at
+<code>build/libs/app-0.1.jar</code>). And that's it, hope it helped someone!</p>
+<h1>Full source code and <code>build.gradle</code></h1>
+<p>Here are both of the files we wrote in this tutorial, in their entirety.</p>
+<div class="highlight"><pre><span></span><span class="c1">// main.kt</span>
+<span class="k">import</span> <span class="nn">com.github.ajalt.clikt.core.CliktCommand</span>
+<span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.default</span>
+<span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.option</span>
+<span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.prompt</span>
+<span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.types.int</span>
+
+<span class="k">class</span> <span class="nc">Hello</span> <span class="p">:</span> <span class="n">CliktCommand</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">count</span><span class="p">:</span> <span class="n">Int</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="p">=</span><span class="s">&quot;Number of greetings&quot;</span><span class="p">).</span><span class="n">int</span><span class="p">().</span><span class="n">default</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="p">=</span><span class="s">&quot;The person to greet&quot;</span><span class="p">).</span><span class="n">prompt</span><span class="p">(</span><span class="s">&quot;Your name&quot;</span><span class="p">)</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">echo</span><span class="p">(</span><span class="s">&quot;Hello $name!&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">=</span> <span class="n">Hello</span><span class="p">().</span><span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+
+
+<hr>
+<div class="highlight"><pre><span></span><span class="err">//</span> <span class="err">build.gradle</span>
+<span class="err">plugins</span> <span class="p">{</span>
+    <span class="err">id</span> <span class="err">&#39;org.jetbrains.kotlin.jvm&#39;</span> <span class="err">version</span> <span class="err">&#39;1.2.51&#39;</span>
+<span class="p">}</span>
+
+<span class="err">group</span> <span class="err">&#39;se.slarse&#39;</span>
+<span class="err">version</span> <span class="err">&#39;</span><span class="mf">0.1</span><span class="err">&#39;</span>
+
+<span class="err">repositories</span> <span class="p">{</span>
+    <span class="err">mavenCentral()</span>
+<span class="p">}</span>
+
+<span class="err">dependencies</span> <span class="p">{</span>
+    <span class="err">compile</span> <span class="nt">&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&quot;</span>
+    <span class="err">compile</span> <span class="s2">&quot;com.github.ajalt:clikt:1.5.0&quot;</span>
+<span class="p">}</span>
+
+<span class="err">compileKotlin</span> <span class="p">{</span>
+    <span class="err">kotlinOptions.jvmTarget</span> <span class="err">=</span> <span class="nt">&quot;1.8&quot;</span>
+<span class="p">}</span>
+<span class="err">compileTestKotlin</span> <span class="p">{</span>
+    <span class="err">kotlinOptions.jvmTarget</span> <span class="err">=</span> <span class="nt">&quot;1.8&quot;</span>
+<span class="p">}</span>
+
+<span class="err">jar</span> <span class="p">{</span>
+    <span class="err">manifest</span> <span class="err">{</span>
+        <span class="err">attributes</span> <span class="err">&#39;Main-Class&#39;:</span> <span class="err">&#39;MainKt&#39;</span>
+    <span class="p">}</span>
+    <span class="err">from</span> <span class="p">{</span>
+        <span class="err">configurations.compile.collect</span> <span class="err">{</span> <span class="err">it.isDirectory()</span> <span class="err">?</span> <span class="err">it</span> <span class="err">:</span> <span class="err">zipTree(it)</span> <span class="p">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</pre></div>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slarse.org/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slarse.org/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slarse.org/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+      <a href="https://slarse.org/tag/blog.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>blog
+      </a>
+      <a href="https://slarse.org/tag/unit-testing.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>unit testing
+      </a>
+      <a href="https://slarse.org/tag/testing-tips.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>testing tips
+      </a>
+      <a href="https://slarse.org/tag/bst.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>bst
+      </a>
+      <a href="https://slarse.org/tag/kotlin.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>kotlin
+      </a>
+      <a href="https://slarse.org/tag/data-structures.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>data structures
+      </a>
+      <a href="https://slarse.org/tag/gradle.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>gradle
+      </a>
+      <a href="https://slarse.org/tag/intellij.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>intellij
+      </a>
+      <a href="https://slarse.org/tag/python.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>python
+      </a>
+      <a href="https://slarse.org/tag/podcast.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>podcast
+      </a>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slarse.org/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>

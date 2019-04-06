@@ -1,5 +1,900 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Programming</title><link href="https://slarse.org/" rel="alternate"></link><link href="https://slarse.org/feeds/programming.atom.xml" rel="self"></link><id>https://slarse.org/</id><updated>2018-04-05T18:26:10+00:00</updated><entry><title>Properties as Pythonic setters</title><link href="https://slarse.org/properties-as-pythonic-setters.html" rel="alternate"></link><published>2018-04-05T18:26:10+00:00</published><updated>2018-04-05T18:26:10+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-04-05:/properties-as-pythonic-setters.html</id><summary type="html">&lt;p&gt;This is the second part in a two part series on Python properties. In
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Programming</title><link href="https://slarse.org/" rel="alternate"></link><link href="https://slarse.org/feeds/programming.atom.xml" rel="self"></link><id>https://slarse.org/</id><updated>2018-10-30T08:27:09+00:00</updated><entry><title>A binary search tree in Kotlin pt. 2: Generic node</title><link href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-2-generic-node.html" rel="alternate"></link><published>2018-10-30T08:26:05+00:00</published><updated>2018-10-30T08:26:05+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-10-30:/a-binary-search-tree-in-kotlin-pt-2-generic-node.html</id><summary type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
+part, we're gonna have a look at how to make the node representation from part 1
+capable of carrying any kind of data (i.e. &lt;em&gt;generic&lt;/em&gt;).&lt;/p&gt;
+&lt;h2&gt;Series index&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"&gt;Representing a node&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Generic node (this part …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
+part, we're gonna have a look at how to make the node representation from part 1
+capable of carrying any kind of data (i.e. &lt;em&gt;generic&lt;/em&gt;).&lt;/p&gt;
+&lt;h2&gt;Series index&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"&gt;Representing a node&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Generic node (this part!)&lt;/li&gt;
+&lt;li&gt;Generic BST with insert, contains and traversal (coming soon!)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Attribution and reading recommendations&lt;/h2&gt;
+&lt;p&gt;In this part, we'll start working a little bit with binary tree algorithms. More
+specifically, we'll complete the &lt;code&gt;contains&lt;/code&gt; function from part 1. All of the
+algorithms I implement in this series are based on
+&lt;a href="https://yourbasic.org/algorithms/binary-search-tree/"&gt;this article by Stefan Nilsson&lt;/a&gt;.
+If you are unfamiliar with the concepts of binary trees, I highly recommend that
+you sift through that article before continuing with this one.&lt;/p&gt;
+&lt;h2&gt;Improving &lt;code&gt;contains&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Recall the &lt;code&gt;contains&lt;/code&gt; function that we started working on in part 1. Before we
+start working on generics, I want us to complete this function. It will make
+some of the decisions about generics much more apparent. Anyway, here's
+&lt;code&gt;contains&lt;/code&gt; as we wrote it in part 1.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// check if data is contained in node&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="c1"&gt;// note implicit cast&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It's not a particularly useful function, as it only checks the current node.
+What we'd rather have it do is check the entire subtree, in which &lt;code&gt;node&lt;/code&gt; is the
+root. This can quite easily be performed with recursion. The &lt;code&gt;Empty&lt;/code&gt; case still
+stands, if we hit an empty node, the data is not contained in the tree. If
+&lt;code&gt;node&lt;/code&gt; is a &lt;code&gt;Node&lt;/code&gt;, on the other hand, there are three possibilities:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;data &amp;lt; node.data&lt;/code&gt;, in which case we keep searching in the left subtree.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;data &amp;gt; node.data&lt;/code&gt;, in which case we keep searching in the right subtree.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;data&lt;/code&gt; is neither smaller or larger than &lt;code&gt;node.data&lt;/code&gt;, so they are comparably
+equal. If this actually means that they are equal or not is implementation
+specific, but it is &lt;em&gt;highly&lt;/em&gt; recommended that ordering is consistent with
+&lt;code&gt;equals&lt;/code&gt;. We will assume that this is the case.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As we have three distinct cases, we can again use a &lt;code&gt;when&lt;/code&gt; expression.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// check if data is contained in the tree rooted in node&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="c1"&gt;// no-argument when so we can do arbitrary comparisons&lt;/span&gt;
+        &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that the nested &lt;code&gt;when&lt;/code&gt; expression has no argument in parentheses, allowing
+us to perform more complex operations in the matchings. And that's it for the
+&lt;code&gt;contains&lt;/code&gt; operation. It's really quite elegant. We can quickly ammend the
+&lt;code&gt;main&lt;/code&gt; function to try it out:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// create the tree&lt;/span&gt;
+    &lt;span class="c1"&gt;//          6&lt;/span&gt;
+    &lt;span class="c1"&gt;//         / \&lt;/span&gt;
+    &lt;span class="c1"&gt;//        3   9&lt;/span&gt;
+    &lt;span class="c1"&gt;//         \&lt;/span&gt;
+    &lt;span class="c1"&gt;//          4&lt;/span&gt;
+    &lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;root&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;left&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                    &lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+            &lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;9&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Search for elements in the tree&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;listOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Search for elements not in the tree&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;listOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="m"&gt;12&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With that out of the way, let's dive into making the whole thing generic!&lt;/p&gt;
+&lt;h2&gt;Getting generic&lt;/h2&gt;
+&lt;p&gt;Now, how do we make the node classes generic? A first attempt might be to just
+change the &lt;code&gt;Node&lt;/code&gt; class, and do something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;&lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nf"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comparable&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is a reasonable attempt. Before we dive into the problems, let's analyze
+what we just did. After &lt;code&gt;fun&lt;/code&gt; we write &lt;code&gt;&amp;lt;T : Comparable&amp;lt;T&amp;gt;&amp;gt;&lt;/code&gt;, which makes this
+function generic. The addition states that the type parameter &lt;code&gt;T&lt;/code&gt; can be
+substituted by any type that implements &lt;code&gt;Comparable&amp;lt;T&amp;gt;&lt;/code&gt; (which we need to be
+able to use &lt;code&gt;&amp;lt;&lt;/code&gt; and &lt;code&gt;&amp;gt;&lt;/code&gt;). &lt;code&gt;Node&amp;lt;T&amp;gt;&lt;/code&gt; simply defines a type parameter &lt;code&gt;T&lt;/code&gt; that
+can be substituted with &lt;em&gt;any&lt;/em&gt; type. It is a bit inconvenient that we could put
+non-comparable types in a &lt;code&gt;Node&lt;/code&gt; object, but we'll see that it sorts itself out
+when we create the &lt;code&gt;Tree&lt;/code&gt; class in part 3. For now, just ignore that detail.&lt;/p&gt;
+&lt;p&gt;Now, the above code won't compile, for multiple reasons. The first problem is
+that we can't ask at runtime if &lt;code&gt;node is Node&amp;lt;T&amp;gt;&lt;/code&gt; (the compiler will say &lt;em&gt;Cannot
+check for erased type: Node&lt;T&gt;&lt;/em&gt;), becuase information about generics is erased
+at runtime. We could succesfully match against a wildcard type parameter
+(meaning &lt;em&gt;any&lt;/em&gt; type) with &lt;code&gt;is Node&amp;lt;*&amp;gt;&lt;/code&gt;, but then we run into the real
+showstopper: we don't know whether &lt;code&gt;data&lt;/code&gt; and &lt;code&gt;node.data&lt;/code&gt; are actually
+comparable, as they might not have the same type. With the current class
+hierarchy, there is &lt;em&gt;no&lt;/em&gt; reasonable way around this. An &lt;code&gt;ANode&lt;/code&gt; is not
+parameterized, and therefore the dynamic type of an &lt;code&gt;ANode&lt;/code&gt; can be any &lt;code&gt;Node&lt;/code&gt;
+type (e.g. &lt;code&gt;Node&amp;lt;Int&amp;gt;&lt;/code&gt;, &lt;code&gt;Node&amp;lt;String&amp;gt;&lt;/code&gt; etc) or &lt;code&gt;Empty&lt;/code&gt;. We have to put the type
+parameter &lt;code&gt;T&lt;/code&gt; higher up in the inheritance chain. &lt;/p&gt;
+&lt;h3&gt;Inheriting from a generic class&lt;/h3&gt;
+&lt;p&gt;Since &lt;code&gt;ANode&lt;/code&gt; is the only class higher up in the inheritance chain (apart from
+&lt;code&gt;Any&lt;/code&gt;), this is where we need to put our type parameter. For &lt;code&gt;ANode&lt;/code&gt; and &lt;code&gt;Node&lt;/code&gt;,
+it is straightforward.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;sealed&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;&lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; 
+        &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that &lt;code&gt;Node&amp;lt;T&amp;gt;&lt;/code&gt; is inheriting from &lt;code&gt;ANode&amp;lt;T&amp;gt;&lt;/code&gt;. We cannot (and wouldn't want
+to, anyway) leave it as &lt;code&gt;ANode&lt;/code&gt;, because unlike Java, Kotlin does not support
+raw types. Now, since we cannot inherit from &lt;code&gt;ANode&lt;/code&gt;, but must specify the type
+parameter with a concrete type, what do we put there for &lt;code&gt;Empty&lt;/code&gt;? In the case of
+&lt;code&gt;Node&amp;lt;T&amp;gt;&lt;/code&gt;, we simply inherit from &lt;code&gt;ANode&amp;lt;T&amp;gt;&lt;/code&gt;, because &lt;code&gt;T&lt;/code&gt; is declared as a
+parameter to &lt;code&gt;Node&amp;lt;T&amp;gt;&lt;/code&gt; and is therefore concrete for for &lt;code&gt;ANode&lt;/code&gt;. We can't
+however just do something like&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="nc"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;because &lt;code&gt;T&lt;/code&gt; is not declared in that scope. We also can't give &lt;code&gt;Empty&lt;/code&gt; a type
+parameter, because &lt;code&gt;Empty&lt;/code&gt; is a singleton object, and type parameters simply
+don't work with singletons (it wouldn't make much sense, if you stop to think
+about it for a while). What we actually want to put as the type parameter, is
+nothing. Literally. We wan't &lt;code&gt;Nothing&lt;/code&gt;, a concrete type in Kotlin which is a
+subtype of every non-nullable type. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="nc"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Nothing&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that we don't want to put &lt;code&gt;Any&lt;/code&gt; (which is the supertype of every
+non-nullable type), because the we wouldn't be able to assign &lt;code&gt;Empty&lt;/code&gt; to any
+concrete type of &lt;code&gt;ANode&amp;lt;T&amp;gt;&lt;/code&gt;. Now you may be angrily shouting that you
+&lt;em&gt;still&lt;/em&gt; can't assign &lt;code&gt;Empty&lt;/code&gt; to &lt;em&gt;any&lt;/em&gt; type of &lt;code&gt;ANode&amp;lt;T&amp;gt;&lt;/code&gt;. Unfortunately,
+&lt;code&gt;ANode&amp;lt;T&amp;gt;&lt;/code&gt; (for any substition of &lt;code&gt;T&lt;/code&gt;) is &lt;em&gt;invariant&lt;/em&gt;. Let's fix that.&lt;/p&gt;
+&lt;h2&gt;Generics are invariant by default, but Kotlin can stretch the rules&lt;/h2&gt;
+&lt;p&gt;Any generc class is invariant by default. What does this mean? In short, it
+means that a generic type (e.g. &lt;code&gt;ANode&amp;lt;Int&amp;gt;&lt;/code&gt;) is not a supertype, nor subtype,
+of any other type. Formally, it means that if we have two types &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;B&lt;/code&gt;
+such that &lt;code&gt;B&lt;/code&gt; is a subtype of &lt;code&gt;A&lt;/code&gt;, &lt;code&gt;ANode&amp;lt;B&amp;gt;&lt;/code&gt; is &lt;em&gt;not&lt;/em&gt; a subtype of &lt;code&gt;ANode&amp;lt;A&amp;gt;&lt;/code&gt;.
+Take for example &lt;code&gt;Empty&lt;/code&gt;, which subtypes &lt;code&gt;ANode&amp;lt;Nothing&amp;gt;&lt;/code&gt;. It is not a subtype
+of &lt;code&gt;ANode&amp;lt;Int&amp;gt;&lt;/code&gt;, even though &lt;code&gt;Nothing&lt;/code&gt; is a subtype of &lt;code&gt;Int&lt;/code&gt;. Inconvenient, we
+want &lt;code&gt;Empty&lt;/code&gt; to be a subtype of &lt;em&gt;any&lt;/em&gt; concrete &lt;code&gt;ANode&lt;/code&gt;. We can achieve this by
+using the &lt;code&gt;out&lt;/code&gt; modifier, and declaring &lt;code&gt;Anode&amp;lt;out T&amp;gt;&lt;/code&gt;. Formally, we make
+&lt;code&gt;ANode&lt;/code&gt; &lt;em&gt;covariant&lt;/em&gt; on the type parameter &lt;code&gt;T&lt;/code&gt;. We can only do this if every use
+of &lt;code&gt;T&lt;/code&gt; is in an &lt;em&gt;out&lt;/em&gt; position (i.e.  return values). Note that this
+restriction applies only to the body of &lt;code&gt;ANode&lt;/code&gt;, the &lt;code&gt;T&lt;/code&gt; in &lt;code&gt;Node&amp;lt;T&amp;gt;&lt;/code&gt; is &lt;em&gt;not&lt;/em&gt;
+the same type parameter as in &lt;code&gt;ANode&amp;lt;out T&amp;gt;&lt;/code&gt;.  If you found all of that
+confusing (I sure did the first time I read about it), you can read more about
+variance in the
+&lt;a href="https://kotlinlang.org/docs/reference/generics.html"&gt;Kotlin docs on generics&lt;/a&gt;.
+Here is what the working class hierarchy looks like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;sealed&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="nc"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Nothing&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;
+        &lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;contains&lt;/code&gt; now looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// check if data is contained in node&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nf"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comparable&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, you may be asking yourself why in the world we can do the &lt;code&gt;is Node&amp;lt;T&amp;gt;&lt;/code&gt;
+check &lt;em&gt;now&lt;/em&gt;, while we could not before? Well, we're not actually checking at
+runtime whether &lt;code&gt;node&lt;/code&gt; is &lt;code&gt;Node&amp;lt;T&amp;gt;&lt;/code&gt;, because the compiler knows any variable
+with the static type &lt;code&gt;ANode&amp;lt;T&amp;gt;&lt;/code&gt; is either &lt;code&gt;Empty&lt;/code&gt;, or &lt;code&gt;Node&amp;lt;T&amp;gt;&lt;/code&gt;. So, for
+example, &lt;code&gt;ANode&amp;lt;Int&amp;gt;&lt;/code&gt; must have dynamic type &lt;code&gt;Empty&lt;/code&gt; or &lt;code&gt;Node&amp;lt;Int&amp;gt;&lt;/code&gt;, there are
+no other possibilities. As the compiler knows this, we can in fact skip the
+&lt;code&gt;&amp;lt;T&amp;gt;&lt;/code&gt; and just write &lt;code&gt;is Node&lt;/code&gt;. That's all we need of our node classes, so we
+can move on to implement the &lt;code&gt;Tree&lt;/code&gt; class in part 3!&lt;/p&gt;
+&lt;h2&gt;Final code listing&lt;/h2&gt;
+&lt;p&gt;This is the final state of the code that we'll be using for part 3.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;sealed&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;out&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="nc"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Nothing&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;
+        &lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;// check if data is contained in node&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nf"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comparable&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// create the tree&lt;/span&gt;
+    &lt;span class="c1"&gt;//          6&lt;/span&gt;
+    &lt;span class="c1"&gt;//         / \&lt;/span&gt;
+    &lt;span class="c1"&gt;//        3   9&lt;/span&gt;
+    &lt;span class="c1"&gt;//         \&lt;/span&gt;
+    &lt;span class="c1"&gt;//          4&lt;/span&gt;
+    &lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;root&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="n"&gt;left&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                    &lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+            &lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;9&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Search for elements in the tree&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;listOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;9&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Search for elements not in the tree&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;listOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="m"&gt;12&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>A binary search tree in Kotlin pt. 1: Representing a node</title><link href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html" rel="alternate"></link><published>2018-10-28T15:13:08+00:00</published><updated>2018-10-30T08:27:09+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-10-28:/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html</id><summary type="html">&lt;p&gt;In my journey to become a somewhat competent Kotlin developer, I've decided to
+implement a few of the basic data structures that I've picked up during my
+three years of computer science studies. First up, we have a generic binary
+tree. This is an interesting case, because it lets us …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In my journey to become a somewhat competent Kotlin developer, I've decided to
+implement a few of the basic data structures that I've picked up during my
+three years of computer science studies. First up, we have a generic binary
+tree. This is an interesting case, because it lets us both delve into generics
+in Kotlin, and some aspects of inheritance that differ from inheritance in
+Java (in a good way!). As I want to cover some topics in depth, this will be
+a three-part series with the following content:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;In the first part, we'll develop a basic class hierarchy for representing
+   nodes. It covers &lt;strong&gt;object&lt;/strong&gt; types, &lt;strong&gt;data classes&lt;/strong&gt; and &lt;strong&gt;sealed classes&lt;/strong&gt;,
+   as well as some other related topics. The node is however restricted to only
+   carry &lt;code&gt;Int&lt;/code&gt; data.&lt;/li&gt;
+&lt;li&gt;In the second part, we'll expand upon the class hierarchy from part 1 to
+   create a generic node class that can hold any type of data.&lt;/li&gt;
+&lt;li&gt;Finally, we'll use the results of part 2 to develop a rudimentary binary tree
+   in (what is in my opinion) idiomatic Kotlin.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you already know about object types, data classes and sealed classes, I
+recommend that you skip directly to part 2. If you are already comfortable with
+generics, including generic inheritance, you may skip directly to part 3.&lt;/p&gt;
+&lt;h2&gt;Series index&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Representing a node (this part!)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-2-generic-node.html"&gt;Generic node&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Generic BST with insert, contains and traversal (coming soon!)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Goals and intended audience&lt;/h2&gt;
+&lt;p&gt;I write articles mostly for myself, and as such, this article series is intended
+for developers with some experience with Java looking to get into Kotlin. Let's
+get at it then, shall we?&lt;/p&gt;
+&lt;h2&gt;Representing a node: A Java-like attempt&lt;/h2&gt;
+&lt;p&gt;As I see it, a tree node can be one of two things: existent, or non-existent.
+In other words, it can be a node or an empty node. As Kotlin is, thankfully,
+quite adverse to using &lt;code&gt;null&lt;/code&gt;, I will refrain from doing so as well. So what we
+want is an abstract node class &lt;code&gt;ANode&lt;/code&gt; and sub-classes &lt;code&gt;Node&lt;/code&gt; and &lt;code&gt;Empty&lt;/code&gt;. Let's
+give it a first try in a pretty Java-like manner, and then improve upon it with
+some neat Kotlin language constructs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;abstract&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ANode&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;
+    &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;
+    &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;
+
+    &lt;span class="k"&gt;constructor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;left&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you've had any experience with any remotely Java-looking language, you can
+probably guess what's going on here. There's the abstract &lt;code&gt;ANode&lt;/code&gt; class, the
+&lt;code&gt;Empty&lt;/code&gt; class representing the absence of a node and the &lt;code&gt;Node&lt;/code&gt; class
+representing an actual node. Note also that we have not delved into generics
+yet, this is a node that can only hold &lt;code&gt;Int&lt;/code&gt; data. That's fine for now, we'll
+expand upon this implementation with generics in part 2. When we later implement
+the binary tree, we will often want to distinguish between a &lt;code&gt;Node&lt;/code&gt; and &lt;code&gt;Empty&lt;/code&gt;.
+One such case is when we search the tree for a given value, to see if it is
+contained in the tree. This operation can be succinctly expressed using
+recursion, but let us leave that for part 2. For now, let's just check the first
+node (the &lt;em&gt;root&lt;/em&gt;), without exploring its children.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// check if data is contained in node&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="c1"&gt;// note implicit cast&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="n"&gt;IllegalArgumentException&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;node argument was neither Empty nor Node!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is of course a pretty stupid function at this point, but we'll make it much
+more worthwhile in part 2. Note the 
+&lt;a href="https://kotlinlang.org/docs/reference/basic-syntax.html"&gt;expression body&lt;/a&gt;
+used here, in combination with a
+&lt;a href="https://kotlinlang.org/docs/reference/control-flow.html"&gt;&lt;code&gt;when&lt;/code&gt; expression&lt;/a&gt;.
+If you are unfamiliar with those concepts, follow the links and read up on them,
+they will be crucial when implementing the tree algorithms in parts 2 and 3.
+Also note the
+&lt;a href="https://kotlinlang.org/docs/reference/typecasts.html"&gt;implicit cast&lt;/a&gt; occurring
+on the second line of the function. Since we used &lt;code&gt;is Node&lt;/code&gt; to match &lt;code&gt;node&lt;/code&gt;, the
+compiler can infer that &lt;code&gt;node&lt;/code&gt; is in fact a &lt;code&gt;Node&lt;/code&gt; object, and we can safely
+dereference it with &lt;code&gt;node.data&lt;/code&gt;! Finally, note that the &lt;code&gt;else&lt;/code&gt; case is needed as
+the compiler does not know that there are only two subclasses of &lt;code&gt;ANode&lt;/code&gt; (even
+though we currently do, in this very small project). We'll see how to resolve
+that shortly. Let's try this function out:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;false&lt;/span&gt;
+&lt;span class="p"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;true&lt;/span&gt;
+&lt;span class="p"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It seems to work just fine. We &lt;em&gt;could&lt;/em&gt; leave the class hierarchy like this and
+jump straight into generics. There are, however, three notable problems with the
+node classes.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;For each empty node we need, a new instance of &lt;code&gt;Empty&lt;/code&gt; is created. This is
+   wasteful.&lt;/li&gt;
+&lt;li&gt;The body of &lt;code&gt;Node&lt;/code&gt; is a whole lot of code for very little functionality.&lt;/li&gt;
+&lt;li&gt;The compiler can't tell that &lt;code&gt;Node&lt;/code&gt; and &lt;code&gt;Empty&lt;/code&gt; are the only subtypes of
+   &lt;code&gt;ANode&lt;/code&gt;, forcing us to use an &lt;code&gt;else&lt;/code&gt; in the &lt;code&gt;when&lt;/code&gt; expression.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As it turns out, all of these problems are easy to solve in Kotlin!&lt;/p&gt;
+&lt;h3&gt;Problem 1 solution: Singleton objects&lt;/h3&gt;
+&lt;p&gt;Problem number 1 can be solved very easily, as Kotlin has language support for
+the singleton pattern. We simply swap this declaration&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;for this declaration&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="nc"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;Empty&lt;/code&gt; is now a singleton object, so we can assign it without instantiating
+&lt;code&gt;Empty&lt;/code&gt;s all over the place. The constructor for &lt;code&gt;Node&lt;/code&gt; now looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;constructor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;       &lt;span class="c1"&gt;// note the lack of parentheses!&lt;/span&gt;
+    &lt;span class="n"&gt;left&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;One problem solved, two to go!&lt;/p&gt;
+&lt;h3&gt;Problem 2 solution: Primary constructors and data classes&lt;/h3&gt;
+&lt;p&gt;We can solve problem number 2 with Kotlin's syntax for
+&lt;a href="https://kotlinlang.org/docs/reference/classes.html"&gt;primary constructors&lt;/a&gt;.
+Instead of defining &lt;code&gt;Node&lt;/code&gt; the Java way, we do it the Kotlin way:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is &lt;em&gt;almost&lt;/em&gt; equivalent to the previous declaration, with the exception that
+&lt;code&gt;right&lt;/code&gt; and &lt;code&gt;left&lt;/code&gt; are assigned default values in the header such that they can
+be replaced by explicit arguments when calling the constructor. Note that
+&lt;code&gt;ANode&lt;/code&gt; must be instantiated right there in the header as well. However, since
+we know that &lt;code&gt;Node&lt;/code&gt; will always be a simple container, we can do one better here
+by prepending &lt;code&gt;data&lt;/code&gt; to the declaration.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This makes &lt;code&gt;Node&lt;/code&gt; a
+&lt;a href="https://kotlinlang.org/docs/reference/data-classes.html"&gt;data class&lt;/a&gt;, which
+among other things come with implementations of &lt;code&gt;equals&lt;/code&gt; and &lt;code&gt;toString&lt;/code&gt;. A
+fortunate accident here is that the &lt;code&gt;toString&lt;/code&gt; of &lt;code&gt;Node&lt;/code&gt; will actually let us
+view the whole tree with very little effort, as &lt;code&gt;toString&lt;/code&gt; will be called on
+both &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt;, recursively (this will be demonstrated in part 3). Do
+be careful not to create a cycle, though, as this will cause a stack overflow,
+endlessly calling &lt;code&gt;toString&lt;/code&gt; (a tree, by definition, has no cycles, so we are
+good in this case).&lt;/p&gt;
+&lt;h3&gt;Problem 3 solution: Sealed classes&lt;/h3&gt;
+&lt;p&gt;To reiterate, the problem was that the compiler can't tell that &lt;code&gt;Node&lt;/code&gt; and
+&lt;code&gt;Empty&lt;/code&gt; are the only subtypes of &lt;code&gt;ANode&lt;/code&gt;. Therefore, we needed the &lt;code&gt;else&lt;/code&gt; in the
+&lt;code&gt;when&lt;/code&gt; expression to cover up the non-existent case of the argument to
+&lt;code&gt;contains&lt;/code&gt; being anything else.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// check if data is contained in node&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="n"&gt;IllegalArgumentException&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;node argument was neither Empty nor Node!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We can, however, &lt;em&gt;tell&lt;/em&gt; the compiler that &lt;code&gt;Node&lt;/code&gt; and &lt;code&gt;Empty&lt;/code&gt; &lt;em&gt;are&lt;/em&gt; the only
+subtypes by making &lt;code&gt;ANode&lt;/code&gt; a
+&lt;a href="https://kotlinlang.org/docs/reference/sealed-classes.html_"&gt;&lt;code&gt;sealed&lt;/code&gt; class&lt;/a&gt;.
+Any subclass of a sealed class must be declared inside the same file, which lets
+the compiler know precisely which subtypes can exist. To accomplish this, we
+simply replace the &lt;code&gt;abstract&lt;/code&gt; modifier with &lt;code&gt;sealed&lt;/code&gt; (because &lt;code&gt;sealed&lt;/code&gt; implies
+&lt;code&gt;abstract&lt;/code&gt;, we don't need the latter).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;sealed&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ANode&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We can now drop the &lt;code&gt;else&lt;/code&gt; from &lt;code&gt;contains&lt;/code&gt;, because the compiler knows that a
+variable with static type &lt;code&gt;ANode&lt;/code&gt; is either &lt;code&gt;Empty&lt;/code&gt;, or a &lt;code&gt;Node&lt;/code&gt;, there are no
+other possibilities.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// check if data is contained in node
+fun contains(node: ANode, data: Int): Boolean = when (node) {
+    is Empty -&amp;gt; false
+    is Node -&amp;gt; data == node.data
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let's give it a try&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;true&lt;/span&gt;
+&lt;span class="p"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Neat, now we have a good base for venturing into the fraught land of generics in
+part 2.&lt;/p&gt;
+&lt;h2&gt;Final code listing&lt;/h2&gt;
+&lt;p&gt;The final version of the code, that we'll use in part 2, can be found below.
+I've also included a main function such that you can run the code in your
+preferred way, right off the bat!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;sealed&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ANode&lt;/span&gt;
+
+&lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="nc"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;// check if data is contained in node&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+    &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;==&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="c1"&gt;// note implicit cast&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>Creating a standalone (runnable) Kotlin .jar file with IntelliJ and Gradle</title><link href="https://slarse.org/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html" rel="alternate"></link><published>2018-10-17T20:15:46+00:00</published><updated>2018-10-29T21:02:18+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-10-17:/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html</id><summary type="html">&lt;p&gt;I've recently started dabbling in some Kotlin, and have found it a very pleasant
+experience. One of the first things I wanted to do was to create a standalone
+&lt;code&gt;.jar&lt;/code&gt; file, including the Kotlin runtime and any other dependencies. This,
+as it turns out, was a bit tricky. In this …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've recently started dabbling in some Kotlin, and have found it a very pleasant
+experience. One of the first things I wanted to do was to create a standalone
+&lt;code&gt;.jar&lt;/code&gt; file, including the Kotlin runtime and any other dependencies. This,
+as it turns out, was a bit tricky. In this short article, I will walk you
+through creating a small command line application using the
+awesome &lt;a href="https://ajalt.github.io/clikt/"&gt;&lt;code&gt;clikt&lt;/code&gt; library&lt;/a&gt;, and then packaging
+it into a standalone &lt;code&gt;.jar&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Setting up&lt;/h2&gt;
+&lt;p&gt;Start out with creating a new project by going to &lt;code&gt;File -&amp;gt; New -&amp;gt; Project&lt;/code&gt;, select
+Gradle in the leftmost menu bar (i.e. &lt;em&gt;not&lt;/em&gt; Kotlin), and then tick the Kotlin
+box in the &lt;code&gt;Additional Libraries and Frameworks&lt;/code&gt; menu. Then just fill in any
+GroupId, ArtifactId and Version (I will use &lt;code&gt;slarse&lt;/code&gt;, &lt;code&gt;app&lt;/code&gt; and &lt;code&gt;0.1&lt;/code&gt; for these
+fields, respectively). Then just click &lt;code&gt;Next&lt;/code&gt; with the defaults until the
+project is created.&lt;/p&gt;
+&lt;h3&gt;Initial Gradle configuration&lt;/h3&gt;
+&lt;p&gt;In the project root, you should now have a file called &lt;code&gt;build.gradle&lt;/code&gt;, which
+looks something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;plugins&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;id&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;org.jetbrains.kotlin.jvm&amp;#39;&lt;/span&gt; &lt;span class="err"&gt;version&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;1.2.51&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;group&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;slarse&amp;#39;&lt;/span&gt;
+&lt;span class="err"&gt;version&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+
+&lt;span class="err"&gt;repositories&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;mavenCentral()&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;dependencies&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;compile&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;compileKotlin&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;kotlinOptions.jvmTarget&lt;/span&gt; &lt;span class="err"&gt;=&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;1.8&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;compileTestKotlin&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;kotlinOptions.jvmTarget&lt;/span&gt; &lt;span class="err"&gt;=&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;1.8&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Before we can compile a project with &lt;code&gt;clikt&lt;/code&gt;, we need to add it as a dependency.
+We can do that by adding &lt;code&gt;compile "com.github.ajalt:clikt:1.5.0"&lt;/code&gt; in the
+dependencies section. It should now look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;dependencies&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;compile&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&amp;quot;&lt;/span&gt;
+    &lt;span class="err"&gt;compile&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;com.github.ajalt:clikt:1.5.0&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then hit the little refresh symbol in the bottom left corner
+(should say &lt;code&gt;Refresh Gradle Project&lt;/code&gt; when you hover your mouse over it) to
+download the new dependency. And that's it for now!
+We'll get back to the &lt;code&gt;gradle.build&lt;/code&gt; file once we
+want to configure our &lt;code&gt;jar&lt;/code&gt; task, but let's create the app first!&lt;/p&gt;
+&lt;h2&gt;Creating the application&lt;/h2&gt;
+&lt;p&gt;Let's make this easy: we'll just use the sample application available from the
+&lt;a href="https://ajalt.github.io/clikt/"&gt;&lt;code&gt;clikt&lt;/code&gt; documentation&lt;/a&gt;. It looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Hello&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CliktCommand&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;count&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;help&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Number of greetings&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;help&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;The person to greet&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Your name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;override&lt;/span&gt; &lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="m"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;echo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello $name!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;)&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create a Kotlin file called &lt;code&gt;main.kt&lt;/code&gt; at &lt;code&gt;src/main/kotlin/main.kt&lt;/code&gt; and paste
+the above code into it. Note that we are using the default package here
+(i.e. not defining a package) for the sake of simplicity.&lt;/p&gt;
+&lt;p&gt;For this to compile, we will need to add the following imports at the top:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.core.CliktCommand&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.parameters.options.default&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.parameters.options.option&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.parameters.options.prompt&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.parameters.types.int&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And that's it for the application, you should now be able to run it as usual.
+When running it, there should appear a prompt in the terminal saying &lt;code&gt;Your name:&lt;/code&gt;.
+With that out of the way, the only thing left to do is to package our
+fantastic application into a standalone &lt;code&gt;.jar&lt;/code&gt; file.&lt;/p&gt;
+&lt;h2&gt;Packaging the application into a standalone &lt;code&gt;.jar&lt;/code&gt; file&lt;/h2&gt;
+&lt;p&gt;This is actually not very difficult, but you need to know what to do. We need
+to create a so-called "fat" jar, which includes both the Kotlin runtime and the
+&lt;code&gt;clikt&lt;/code&gt; library. We also need to specify the name of our main class.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;jar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;manifest&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;attributes&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;Main-Class&amp;#39;:&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;MainKt&amp;#39;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="err"&gt;from&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;configurations.compile.collect&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt; &lt;span class="err"&gt;it.isDirectory()&lt;/span&gt; &lt;span class="err"&gt;?&lt;/span&gt; &lt;span class="err"&gt;it&lt;/span&gt; &lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="err"&gt;zipTree(it)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that the class file generated by Kotlin for a file called &lt;code&gt;something.kt&lt;/code&gt;
+will be &lt;code&gt;SomethingKt.class&lt;/code&gt;, which is why our main class is called &lt;code&gt;MainKt&lt;/code&gt;.
+With that in mind, the &lt;code&gt;manifest&lt;/code&gt; section is self-explanatory: we specify
+the main class. The &lt;code&gt;from&lt;/code&gt; section collects all compile dependencies
+(that we specified in the &lt;code&gt;dependencies&lt;/code&gt; section) and package them with the
+&lt;code&gt;.jar&lt;/code&gt; file. The little piece of logic in the lambda is to properly add
+directories and &lt;code&gt;.jar&lt;/code&gt; files, respectively (directories are just added,
+&lt;code&gt;.jar&lt;/code&gt; files are unzipped and added).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; The main class file must be specified with its fully qualified
+name. For example, if I were to define &lt;code&gt;main.kt&lt;/code&gt; in the package &lt;code&gt;se.slarse&lt;/code&gt;,
+then I would need to put &lt;code&gt;se.slarse.MainKt&lt;/code&gt; instead of just &lt;code&gt;MainKt&lt;/code&gt; in the
+manifest.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Anyway, that's really all we need to do.
+It should now be possible to run the &lt;code&gt;jar&lt;/code&gt; Gradle task to produce a &lt;code&gt;.jar&lt;/code&gt; file
+in &lt;code&gt;build/libs/&amp;lt;ArtifactId&amp;gt;-&amp;lt;Version&amp;gt;&lt;/code&gt; (so in my case it is at
+&lt;code&gt;build/libs/app-0.1.jar&lt;/code&gt;). And that's it, hope it helped someone!&lt;/p&gt;
+&lt;h1&gt;Full source code and &lt;code&gt;build.gradle&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;Here are both of the files we wrote in this tutorial, in their entirety.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// main.kt&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.core.CliktCommand&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.parameters.options.default&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.parameters.options.option&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.parameters.options.prompt&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.github.ajalt.clikt.parameters.types.int&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Hello&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CliktCommand&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;count&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Int&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;help&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Number of greetings&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;int&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;help&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;The person to greet&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Your name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;override&lt;/span&gt; &lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="m"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;echo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello $name!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Array&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;)&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;//&lt;/span&gt; &lt;span class="err"&gt;build.gradle&lt;/span&gt;
+&lt;span class="err"&gt;plugins&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;id&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;org.jetbrains.kotlin.jvm&amp;#39;&lt;/span&gt; &lt;span class="err"&gt;version&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;1.2.51&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;group&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;se.slarse&amp;#39;&lt;/span&gt;
+&lt;span class="err"&gt;version&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+
+&lt;span class="err"&gt;repositories&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;mavenCentral()&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;dependencies&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;compile&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&amp;quot;&lt;/span&gt;
+    &lt;span class="err"&gt;compile&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;com.github.ajalt:clikt:1.5.0&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;compileKotlin&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;kotlinOptions.jvmTarget&lt;/span&gt; &lt;span class="err"&gt;=&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;1.8&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;compileTestKotlin&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;kotlinOptions.jvmTarget&lt;/span&gt; &lt;span class="err"&gt;=&lt;/span&gt; &lt;span class="nt"&gt;&amp;quot;1.8&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="err"&gt;jar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;manifest&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;attributes&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;Main-Class&amp;#39;:&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;MainKt&amp;#39;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="err"&gt;from&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;configurations.compile.collect&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt; &lt;span class="err"&gt;it.isDirectory()&lt;/span&gt; &lt;span class="err"&gt;?&lt;/span&gt; &lt;span class="err"&gt;it&lt;/span&gt; &lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="err"&gt;zipTree(it)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="kotlin"></category><category term="gradle"></category><category term="intellij"></category></entry><entry><title>Awesome Python Podcasts</title><link href="https://slarse.org/awesome-python-podcasts.html" rel="alternate"></link><published>2018-07-03T07:34:33+00:00</published><updated>2018-10-29T21:03:07+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-07-03:/awesome-python-podcasts.html</id><summary type="html">&lt;p&gt;Whenever I find myself occupied with some monotonous task, I
+very much enjoy listening to podcasts. As programming is my
+number one passion, and Python is my favorite language, I tend
+to listen to podcasts that relate to them. In this post, I'll
+give a brief overview of my three …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Whenever I find myself occupied with some monotonous task, I
+very much enjoy listening to podcasts. As programming is my
+number one passion, and Python is my favorite language, I tend
+to listen to podcasts that relate to them. In this post, I'll
+give a brief overview of my three favorite podcasts, and just
+why I enjoy them as much as I do!&lt;/p&gt;
+&lt;h3&gt;Python Bytes&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://pythonbytes.fm/"&gt;&lt;em&gt;Python Bytes&lt;/em&gt;&lt;/a&gt; was the first podcast I ever
+listened to. It's a really neat show that comes out on a weekly basis,
+and focuses on delivering news and headlines in the Python community.
+The best part about the show is that they highlight awesome Python
+packages and tools that I would not have heard about otherwise. The
+episodes are fairly short, usually around the 20 minute mark, so they
+fit in even on a short commute. The episodes have, as far as I can recall,
+been published every week without fail for almost two years now, which
+is really nice. The hosts (Brian Okken and Micheal Kennedy) have great
+chemistry, and the show is recorded with decent enough equipment and
+well edited. All in all, I really enjoy the show and highly recommend it!&lt;/p&gt;
+&lt;h3&gt;Talk Python To Me&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://talkpython.fm/"&gt;&lt;em&gt;Talk Python To Me&lt;/em&gt;&lt;/a&gt; is Micheal Kennedy's (from
+Python Bytes) own show. In each episode, Micheal invites someone (sometimes
+multiple people at once) from
+the Python community to come talk about what they do. The episodes
+are fairly lengthy and often reach for the 1 hour mark, but they are
+also mostly entertaining throughout. As with Python Bytes, the episodes
+are well edited, meaning that awkward pauses and the like shine with their
+absence. Talk Python To Me is probably my favorite podcast right now and
+I can't recommend it enough.&lt;/p&gt;
+&lt;h3&gt;Podcast.__init__&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://www.podcastinit.com/"&gt;_Podcast.__init___&lt;/a&gt; is very similar to
+Talk Python To Me, seeing as both shows revolve around inviting prominent
+personalities to talk about their work. I haven't listened to all that many
+of the episodes, but I really enjoyed the first 7-8 episodes. Initially,
+the show had two hosts, but in the later episodes one of the original hosts
+is conspicuously abscent, which to me was to the detriment of the show. It's
+still a good show, mind you, but I enjoyed the early episodes more than the
+few late ones that I've listened to. The length of the episodes seem hover
+around the 1 hour mark, +/- some 20 minutes. I will probably revisit this
+post once I've listened to a few more of the episodes, but as it stands I
+recommend listening to the show from the beginning.&lt;/p&gt;
+&lt;h3&gt;Did I miss something?&lt;/h3&gt;
+&lt;p&gt;Those were my 3 top picks for Python podcasts. If you feel like I've missed
+some great podcast(s), feel free to drop a comment!&lt;/p&gt;</content><category term="python"></category><category term="podcast"></category></entry><entry><title>What the self? Python's self demystified!</title><link href="https://slarse.org/what-the-self-pythons-self-demystified.html" rel="alternate"></link><published>2018-05-01T16:04:01+00:00</published><updated>2018-05-01T16:04:01+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-05-01:/what-the-self-pythons-self-demystified.html</id><summary type="html">&lt;p&gt;Any Python programmer will sooner or later want to (or have to) write a class.
+With classes come &lt;code&gt;self&lt;/code&gt;, the &lt;em&gt;seemingly&lt;/em&gt; (do note the emphasis there)
+magical keyword that you just have to write out as the first parameter to every
+method. To really understand classes, you need to understand …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Any Python programmer will sooner or later want to (or have to) write a class.
+With classes come &lt;code&gt;self&lt;/code&gt;, the &lt;em&gt;seemingly&lt;/em&gt; (do note the emphasis there)
+magical keyword that you just have to write out as the first parameter to every
+method. To really understand classes, you need to understand what &lt;code&gt;self&lt;/code&gt;
+actually is: neither magical, nor a keyword. Let's demystify this integral part
+of Python classes!&lt;/p&gt;
+&lt;h2&gt;&lt;code&gt;self&lt;/code&gt; is not a keyword&lt;/h2&gt;
+&lt;p&gt;This is pretty easy to prove. Just open a Python interpreter and import the
+&lt;code&gt;keyword&lt;/code&gt; module.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;keyword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iskeyword&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;for&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="bp"&gt;True&lt;/span&gt;                            &lt;span class="c1"&gt;# aha, makes sense&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;keyword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iskeyword&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;else&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="bp"&gt;True&lt;/span&gt;                            &lt;span class="c1"&gt;# seems to be working&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;keyword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iskeyword&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="bp"&gt;False&lt;/span&gt;                           &lt;span class="c1"&gt;# proof!&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Alternatively, one can always consult the
+&lt;a href="https://docs.python.org/3/reference/lexical_analysis.html#keywords"&gt;list of keywords in the Python docs&lt;/a&gt;.
+Since &lt;code&gt;self&lt;/code&gt; is not a keyword, it has no special significance in the language
+itself. We can also verify that it's not some funky builtin by simply typing
+it out in the interpreter.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;
+&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="ne"&gt;NameError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;self&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;defined&lt;/span&gt;
+&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;self&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;defined&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This can &lt;a href="https://docs.python.org/3.6/library/constants.html"&gt;verified here&lt;/a&gt;).
+So, what in the world is &lt;code&gt;self&lt;/code&gt;? Actually, it's just a variable name.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Trivia:&lt;/strong&gt; If you try &lt;code&gt;keyword.iskeyword("True")&lt;/code&gt; and
+&lt;code&gt;keyword.iskeyword("False")&lt;/code&gt; in both Python2 and Python3, you will find that
+both are keywords in Python3, but not in Python2 (in 2, &lt;code&gt;True&lt;/code&gt; and &lt;code&gt;False&lt;/code&gt;
+are just builtin constants). In fact, &lt;code&gt;True&lt;/code&gt; and &lt;code&gt;False&lt;/code&gt; are not even
+write-protected in Python2, leading to shenanigans such as &lt;code&gt;True, False =
+False, True&lt;/code&gt; being possible. In Python3, the keyword status of &lt;code&gt;True&lt;/code&gt; and
+&lt;code&gt;False&lt;/code&gt; make such an assignment a syntax error.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;&lt;code&gt;self&lt;/code&gt; is just a variable name&lt;/h2&gt;
+&lt;p&gt;Consider the following code snippet of a (pretty useless) class that just
+stores two values (that are just assumed to be addable with each other),
+and defines a method that returns the sum of the values.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Tuple&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;A class for storing two values.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;second&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;second&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Return the sum of &amp;#39;first` and &amp;#39;second&amp;#39;.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Okay, so the class is terrible, but that really doesn't matter for the
+purposes of this article. Now we see &lt;code&gt;self&lt;/code&gt; in action for the first time.
+From the code, it's purpose is quite clear: it refers to the object instance
+on which the method is called. Usage looks something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Tuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;
+&lt;span class="mi"&gt;4&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt;
+&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# `self` in `sum` refers to `t`&lt;/span&gt;
+&lt;span class="mi"&gt;7&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So, &lt;code&gt;self&lt;/code&gt; is just a reference to the object on which the method is called (in
+this case, &lt;code&gt;t&lt;/code&gt;). This will probably become more apparent when reading
+&lt;a href="#two-ways-to-call-methods"&gt;Two ways to call methods&lt;/a&gt; further down, but just
+suspend your disbelief for moment and assume it is so.
+But, considering the &lt;code&gt;self&lt;/code&gt; is just a variable to which &lt;code&gt;t&lt;/code&gt; is assigned, what
+happens if we replace &lt;code&gt;self&lt;/code&gt; with, say, &lt;code&gt;donkey&lt;/code&gt;?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Tuple&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;A class for storing two values.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;donkey&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;second&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;donkey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt;
+        &lt;span class="n"&gt;donkey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;second&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;donkey&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Return the sum of &amp;#39;first&amp;#39; and &amp;#39;second&amp;#39;.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;donkey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;donkey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In fact, this will work exactly the same as when the first parameter was called
+&lt;code&gt;self&lt;/code&gt;, and usage is unchanged:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Tuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;
+&lt;span class="mi"&gt;4&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt;
+&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="mi"&gt;7&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To summarize, the first parameter in a method is simply a variable that refers to
+the instance on which the method was called. Naming it &lt;code&gt;self&lt;/code&gt; is
+&lt;a href="https://docs.python.org/3.6/howto/descriptor.html#functions-and-methods"&gt;just a convention&lt;/a&gt;
+, and we could name it anything. Note also that there is no technical
+need for consistency across methods, we could name the first parameter to the
+&lt;code&gt;__init__&lt;/code&gt; method &lt;code&gt;donkey&lt;/code&gt;, and the first (only) parameter to the &lt;code&gt;sum&lt;/code&gt; method
+&lt;code&gt;shrek&lt;/code&gt;, and it'd still work.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Tuple&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;A class for storing two values.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;donkey&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;second&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;donkey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt;
+        &lt;span class="n"&gt;donkey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;second&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shrek&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Return the sum of &amp;#39;first&amp;#39; and &amp;#39;second&amp;#39;.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;shrek&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;shrek&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;IMPORTANT:&lt;/strong&gt; &lt;em&gt;Always&lt;/em&gt; name the first parameter to a method &lt;code&gt;self&lt;/code&gt;. The
+convention exists for a reason: it makes your code more readable.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We could leave it at this, and hopefully walk away with a slightly better
+understanding of why we put &lt;code&gt;self&lt;/code&gt; everywhere in methods. But I think diving
+just a little bit deeper into where the first argument to methods actually
+comes from will prove fruitful.&lt;/p&gt;
+&lt;h2&gt;Two ways of calling methods&lt;/h2&gt;
+&lt;p&gt;Methods are defined on the class itself, and not on the instance. There is
+actually a way to call a method directly on the class, that is equivalent to
+the way we usually call methods on the instance.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Tuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;         &lt;span class="c1"&gt;# regular method call&lt;/span&gt;
+&lt;span class="mi"&gt;11&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Tuple&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;    &lt;span class="c1"&gt;# calling the method on the class itself, and passing&lt;/span&gt;
+&lt;span class="mi"&gt;11&lt;/span&gt;                  &lt;span class="c1"&gt;# `t` as the `self` argument&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The second way of calling &lt;code&gt;sum&lt;/code&gt; is explicit about where &lt;code&gt;self&lt;/code&gt; comes from: it's
+passed in as the first argument. If we think of the first, "regular" way of
+calling methods as shorthand for the second, it's suddenly entirely clear what
+the first argument actually is (the instance itself). Calling a method that has
+more parameters than just &lt;code&gt;self&lt;/code&gt; works as expected: simply pass in the
+additional arguments. To be super clear, with the following method added to
+&lt;code&gt;Tuple&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sum_mod&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mod&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Return the sum of the members modulo &amp;#39;mod&amp;#39;.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;second&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;mod&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;the following two method calls are equivalent&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Tuple&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum_mod&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Tuple&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum_mod&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And that pretty much concludes what I wanted to cover in this article!&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In the beginning, someone (probably Guido) said &lt;em&gt;let there be &lt;code&gt;self&lt;/code&gt;&lt;/em&gt;. And there was.
+The first parameter to a method is since then, &lt;em&gt;by convention&lt;/em&gt;, called &lt;code&gt;self&lt;/code&gt;, and
+refers to the object on which the method was called.
+Calling a method on some object &lt;code&gt;t&lt;/code&gt; (e.g. &lt;code&gt;t.sum()&lt;/code&gt;) can be viewed as shortand for
+calling the method on its class, and passing in a reference to &lt;code&gt;t&lt;/code&gt; as the first
+argument (e.g. &lt;code&gt;Tuple.sum(t)&lt;/code&gt;). If you are interested in learning about the dark magic
+going on behind the scenes, you can read up on the official documentation for the
+&lt;a href="https://docs.python.org/3.6/howto/descriptor.html"&gt;descriptor protocol&lt;/a&gt;, and
+more specifically the
+&lt;a href="https://docs.python.org/3.6/howto/descriptor.html#functions-and-methods"&gt;Functions and Methods&lt;/a&gt;
+part of it. It is however somewhat advanced, and I don't find it essential to
+understanding the semantics of method calls in Python. I hope you have found
+this article enlightening, stay tuned for more Python in the coming week!&lt;/p&gt;</content><category term="python"></category></entry><entry><title>Properties as Pythonic setters</title><link href="https://slarse.org/properties-as-pythonic-setters.html" rel="alternate"></link><published>2018-04-05T18:26:10+00:00</published><updated>2018-04-05T18:26:10+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-04-05:/properties-as-pythonic-setters.html</id><summary type="html">&lt;p&gt;This is the second part in a two part series on Python properties. In
 &lt;a href="https://slarse.org/properties-as-pythonic-getters.html"&gt;Part 1&lt;/a&gt; (which readers will be assumed to
 have at least skimmed through), we saw how a property can be used to create a
 read-only attribute that can be accessed like any data attribute (i.e …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the second part in a two part series on Python properties. In

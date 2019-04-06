@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>A binary search tree in Kotlin pt. 1: Representing a node - slar.se</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://slarse.org/theme/css/pygment.css" />
+      <link rel="stylesheet" href="https://slarse.org/theme/css/voidybootstrap.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://slarse.org/favicon.ico" />
+        <link href="https://slarse.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="slar.se Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slarse.org/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+              <li>
+                <a href="https://slarse.org/pages/about.html">About</a>
+              </li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slarse.org/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slarse.org/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slarse.org/">slar.se</a></h1>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Sun 28 October 2018
+</abbr> <h1>
+  <a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html" rel="bookmark"
+     title="Permalink to A binary search tree in Kotlin pt. 1: Representing a node">
+    A binary search tree in Kotlin pt. 1: Representing a node
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slarse.org/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slarse.org/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>In my journey to become a somewhat competent Kotlin developer, I've decided to
+implement a few of the basic data structures that I've picked up during my
+three years of computer science studies. First up, we have a generic binary
+tree. This is an interesting case, because it lets us both delve into generics
+in Kotlin, and some aspects of inheritance that differ from inheritance in
+Java (in a good way!). As I want to cover some topics in depth, this will be
+a three-part series with the following content:</p>
+<ol>
+<li>In the first part, we'll develop a basic class hierarchy for representing
+   nodes. It covers <strong>object</strong> types, <strong>data classes</strong> and <strong>sealed classes</strong>,
+   as well as some other related topics. The node is however restricted to only
+   carry <code>Int</code> data.</li>
+<li>In the second part, we'll expand upon the class hierarchy from part 1 to
+   create a generic node class that can hold any type of data.</li>
+<li>Finally, we'll use the results of part 2 to develop a rudimentary binary tree
+   in (what is in my opinion) idiomatic Kotlin.</li>
+</ol>
+<p>If you already know about object types, data classes and sealed classes, I
+recommend that you skip directly to part 2. If you are already comfortable with
+generics, including generic inheritance, you may skip directly to part 3.</p>
+<h2>Series index</h2>
+<ol>
+<li>Representing a node (this part!)</li>
+<li><a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-2-generic-node.html">Generic node</a></li>
+<li>Generic BST with insert, contains and traversal (coming soon!)</li>
+</ol>
+<h2>Goals and intended audience</h2>
+<p>I write articles mostly for myself, and as such, this article series is intended
+for developers with some experience with Java looking to get into Kotlin. Let's
+get at it then, shall we?</p>
+<h2>Representing a node: A Java-like attempt</h2>
+<p>As I see it, a tree node can be one of two things: existent, or non-existent.
+In other words, it can be a node or an empty node. As Kotlin is, thankfully,
+quite adverse to using <code>null</code>, I will refrain from doing so as well. So what we
+want is an abstract node class <code>ANode</code> and sub-classes <code>Node</code> and <code>Empty</code>. Let's
+give it a first try in a pretty Java-like manner, and then improve upon it with
+some neat Kotlin language constructs.</p>
+<div class="highlight"><pre><span></span><span class="k">abstract</span> <span class="k">class</span> <span class="nc">ANode</span>
+
+<span class="k">class</span> <span class="nc">Empty</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Node</span> <span class="p">:</span> <span class="n">ANode</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">data</span><span class="p">:</span> <span class="n">Int</span>
+    <span class="k">var</span> <span class="py">left</span><span class="p">:</span> <span class="n">ANode</span>
+    <span class="k">var</span> <span class="py">right</span><span class="p">:</span> <span class="n">ANode</span>
+
+    <span class="k">constructor</span><span class="p">(</span><span class="k">data</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="k">super</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="k">data</span> <span class="p">=</span> <span class="k">data</span><span class="p">;</span>
+        <span class="n">right</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">()</span>
+        <span class="n">left</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>If you've had any experience with any remotely Java-looking language, you can
+probably guess what's going on here. There's the abstract <code>ANode</code> class, the
+<code>Empty</code> class representing the absence of a node and the <code>Node</code> class
+representing an actual node. Note also that we have not delved into generics
+yet, this is a node that can only hold <code>Int</code> data. That's fine for now, we'll
+expand upon this implementation with generics in part 2. When we later implement
+the binary tree, we will often want to distinguish between a <code>Node</code> and <code>Empty</code>.
+One such case is when we search the tree for a given value, to see if it is
+contained in the tree. This operation can be succinctly expressed using
+recursion, but let us leave that for part 2. For now, let's just check the first
+node (the <em>root</em>), without exploring its children.</p>
+<div class="highlight"><pre><span></span><span class="c1">// check if data is contained in node</span>
+<span class="k">fun</span> <span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">,</span> <span class="k">data</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">is</span> <span class="n">Empty</span> <span class="p">-&gt;</span> <span class="k">false</span>
+    <span class="k">is</span> <span class="n">Node</span> <span class="p">-&gt;</span> <span class="k">data</span> <span class="p">==</span> <span class="n">node</span><span class="p">.</span><span class="k">data</span> <span class="c1">// note implicit cast</span>
+    <span class="k">else</span> <span class="p">-&gt;</span> <span class="k">throw</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;node argument was neither Empty nor Node!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This is of course a pretty stupid function at this point, but we'll make it much
+more worthwhile in part 2. Note the 
+<a href="https://kotlinlang.org/docs/reference/basic-syntax.html">expression body</a>
+used here, in combination with a
+<a href="https://kotlinlang.org/docs/reference/control-flow.html"><code>when</code> expression</a>.
+If you are unfamiliar with those concepts, follow the links and read up on them,
+they will be crucial when implementing the tree algorithms in parts 2 and 3.
+Also note the
+<a href="https://kotlinlang.org/docs/reference/typecasts.html">implicit cast</a> occurring
+on the second line of the function. Since we used <code>is Node</code> to match <code>node</code>, the
+compiler can infer that <code>node</code> is in fact a <code>Node</code> object, and we can safely
+dereference it with <code>node.data</code>! Finally, note that the <code>else</code> case is needed as
+the compiler does not know that there are only two subclasses of <code>ANode</code> (even
+though we currently do, in this very small project). We'll see how to resolve
+that shortly. Let's try this function out:</p>
+<div class="highlight"><pre><span></span><span class="p">&gt;&gt;&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">Empty</span><span class="p">(),</span> <span class="m">2</span><span class="p">)</span>
+<span class="k">false</span>
+<span class="p">&gt;&gt;&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span> <span class="m">2</span><span class="p">)</span>
+<span class="k">true</span>
+<span class="p">&gt;&gt;&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span> <span class="m">3</span><span class="p">)</span>
+<span class="k">false</span>
+</pre></div>
+
+
+<p>It seems to work just fine. We <em>could</em> leave the class hierarchy like this and
+jump straight into generics. There are, however, three notable problems with the
+node classes.</p>
+<ol>
+<li>For each empty node we need, a new instance of <code>Empty</code> is created. This is
+   wasteful.</li>
+<li>The body of <code>Node</code> is a whole lot of code for very little functionality.</li>
+<li>The compiler can't tell that <code>Node</code> and <code>Empty</code> are the only subtypes of
+   <code>ANode</code>, forcing us to use an <code>else</code> in the <code>when</code> expression.</li>
+</ol>
+<p>As it turns out, all of these problems are easy to solve in Kotlin!</p>
+<h3>Problem 1 solution: Singleton objects</h3>
+<p>Problem number 1 can be solved very easily, as Kotlin has language support for
+the singleton pattern. We simply swap this declaration</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Empty</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">()</span>
+</pre></div>
+
+
+<p>for this declaration</p>
+<div class="highlight"><pre><span></span><span class="k">object</span> <span class="nc">Empty</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">()</span>
+</pre></div>
+
+
+<p><code>Empty</code> is now a singleton object, so we can assign it without instantiating
+<code>Empty</code>s all over the place. The constructor for <code>Node</code> now looks like this:</p>
+<div class="highlight"><pre><span></span><span class="k">constructor</span><span class="p">(</span><span class="k">data</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="k">super</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="k">data</span> <span class="p">=</span> <span class="k">data</span><span class="p">;</span>
+    <span class="n">right</span> <span class="p">=</span> <span class="n">Empty</span>       <span class="c1">// note the lack of parentheses!</span>
+    <span class="n">left</span> <span class="p">=</span> <span class="n">Empty</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>One problem solved, two to go!</p>
+<h3>Problem 2 solution: Primary constructors and data classes</h3>
+<p>We can solve problem number 2 with Kotlin's syntax for
+<a href="https://kotlinlang.org/docs/reference/classes.html">primary constructors</a>.
+Instead of defining <code>Node</code> the Java way, we do it the Kotlin way:</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="k">val</span> <span class="py">data</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="k">var</span> <span class="py">right</span><span class="p">:</span> <span class="n">ANode</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">,</span> <span class="k">var</span> <span class="py">left</span><span class="p">:</span> <span class="n">ANode</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">)</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">()</span>
+</pre></div>
+
+
+<p>This is <em>almost</em> equivalent to the previous declaration, with the exception that
+<code>right</code> and <code>left</code> are assigned default values in the header such that they can
+be replaced by explicit arguments when calling the constructor. Note that
+<code>ANode</code> must be instantiated right there in the header as well. However, since
+we know that <code>Node</code> will always be a simple container, we can do one better here
+by prepending <code>data</code> to the declaration.</p>
+<div class="highlight"><pre><span></span><span class="k">data</span> <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="k">val</span> <span class="py">data</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="k">var</span> <span class="py">right</span><span class="p">:</span> <span class="n">ANode</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">,</span> <span class="k">var</span> <span class="py">left</span><span class="p">:</span> <span class="n">ANode</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">)</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">()</span>
+</pre></div>
+
+
+<p>This makes <code>Node</code> a
+<a href="https://kotlinlang.org/docs/reference/data-classes.html">data class</a>, which
+among other things come with implementations of <code>equals</code> and <code>toString</code>. A
+fortunate accident here is that the <code>toString</code> of <code>Node</code> will actually let us
+view the whole tree with very little effort, as <code>toString</code> will be called on
+both <code>left</code> and <code>right</code>, recursively (this will be demonstrated in part 3). Do
+be careful not to create a cycle, though, as this will cause a stack overflow,
+endlessly calling <code>toString</code> (a tree, by definition, has no cycles, so we are
+good in this case).</p>
+<h3>Problem 3 solution: Sealed classes</h3>
+<p>To reiterate, the problem was that the compiler can't tell that <code>Node</code> and
+<code>Empty</code> are the only subtypes of <code>ANode</code>. Therefore, we needed the <code>else</code> in the
+<code>when</code> expression to cover up the non-existent case of the argument to
+<code>contains</code> being anything else.</p>
+<div class="highlight"><pre><span></span><span class="c1">// check if data is contained in node</span>
+<span class="k">fun</span> <span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">,</span> <span class="k">data</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">is</span> <span class="n">Empty</span> <span class="p">-&gt;</span> <span class="k">false</span>
+    <span class="k">is</span> <span class="n">Node</span> <span class="p">-&gt;</span> <span class="k">data</span> <span class="p">==</span> <span class="n">node</span><span class="p">.</span><span class="k">data</span>
+    <span class="k">else</span> <span class="p">-&gt;</span> <span class="k">throw</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;node argument was neither Empty nor Node!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>We can, however, <em>tell</em> the compiler that <code>Node</code> and <code>Empty</code> <em>are</em> the only
+subtypes by making <code>ANode</code> a
+<a href="https://kotlinlang.org/docs/reference/sealed-classes.html_"><code>sealed</code> class</a>.
+Any subclass of a sealed class must be declared inside the same file, which lets
+the compiler know precisely which subtypes can exist. To accomplish this, we
+simply replace the <code>abstract</code> modifier with <code>sealed</code> (because <code>sealed</code> implies
+<code>abstract</code>, we don't need the latter).</p>
+<div class="highlight"><pre><span></span><span class="k">sealed</span> <span class="k">class</span> <span class="nc">ANode</span>
+</pre></div>
+
+
+<p>We can now drop the <code>else</code> from <code>contains</code>, because the compiler knows that a
+variable with static type <code>ANode</code> is either <code>Empty</code>, or a <code>Node</code>, there are no
+other possibilities.</p>
+<div class="highlight"><pre><span></span>// check if data is contained in node
+fun contains(node: ANode, data: Int): Boolean = when (node) {
+    is Empty -&gt; false
+    is Node -&gt; data == node.data
+}
+</pre></div>
+
+
+<p>Let's give it a try</p>
+<div class="highlight"><pre><span></span><span class="p">&gt;&gt;&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span> <span class="m">2</span><span class="p">)</span>
+<span class="k">true</span>
+<span class="p">&gt;&gt;&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">Empty</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+<span class="k">false</span>
+</pre></div>
+
+
+<p>Neat, now we have a good base for venturing into the fraught land of generics in
+part 2.</p>
+<h2>Final code listing</h2>
+<p>The final version of the code, that we'll use in part 2, can be found below.
+I've also included a main function such that you can run the code in your
+preferred way, right off the bat!</p>
+<div class="highlight"><pre><span></span><span class="k">sealed</span> <span class="k">class</span> <span class="nc">ANode</span>
+
+<span class="k">object</span> <span class="nc">Empty</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">()</span>
+
+<span class="k">data</span> <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="k">val</span> <span class="py">data</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="k">var</span> <span class="py">left</span><span class="p">:</span> <span class="n">ANode</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">,</span> <span class="k">var</span> <span class="py">right</span><span class="p">:</span> <span class="n">ANode</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">)</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">()</span>
+
+<span class="c1">// check if data is contained in node</span>
+<span class="k">fun</span> <span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">,</span> <span class="k">data</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">is</span> <span class="n">Empty</span> <span class="p">-&gt;</span> <span class="k">false</span>
+    <span class="k">is</span> <span class="n">Node</span> <span class="p">-&gt;</span> <span class="k">data</span> <span class="p">==</span> <span class="n">node</span><span class="p">.</span><span class="k">data</span> <span class="c1">// note implicit cast</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">Empty</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span> <span class="m">2</span><span class="p">))</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span> <span class="m">3</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slarse.org/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slarse.org/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slarse.org/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+      <a href="https://slarse.org/tag/blog.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>blog
+      </a>
+      <a href="https://slarse.org/tag/unit-testing.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>unit testing
+      </a>
+      <a href="https://slarse.org/tag/testing-tips.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>testing tips
+      </a>
+      <a href="https://slarse.org/tag/bst.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>bst
+      </a>
+      <a href="https://slarse.org/tag/kotlin.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>kotlin
+      </a>
+      <a href="https://slarse.org/tag/data-structures.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>data structures
+      </a>
+      <a href="https://slarse.org/tag/gradle.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>gradle
+      </a>
+      <a href="https://slarse.org/tag/intellij.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>intellij
+      </a>
+      <a href="https://slarse.org/tag/python.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>python
+      </a>
+      <a href="https://slarse.org/tag/podcast.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>podcast
+      </a>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slarse.org/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>

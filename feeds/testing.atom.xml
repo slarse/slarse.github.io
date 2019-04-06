@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Testing</title><link href="https://slarse.org/" rel="alternate"></link><link href="https://slarse.org/feeds/testing.atom.xml" rel="self"></link><id>https://slarse.org/</id><updated>2019-03-05T22:07:56+00:00</updated><entry><title>Testing tips: Tests that don't test</title><link href="https://slarse.org/tests-that-dont-test.html" rel="alternate"></link><published>2019-03-05T22:07:56+00:00</published><updated>2019-03-05T22:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2019-03-05:/tests-that-dont-test.html</id><summary type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
+pitfalls for the beginner. As I've done my fair share of unit testing, and
+taught a lot of students what I know, I've decided to share my top tips of
+things to think about when …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
+pitfalls for the beginner. As I've done my fair share of unit testing, and
+taught a lot of students what I know, I've decided to share my top tips of
+things to think about when testing. First up is one that may seem obvious, but
+beginners and experienced testers alike fail with on occasion: make sure you
+are actually testing something.&lt;/p&gt;
+&lt;h2&gt;Tests that don't test&lt;/h2&gt;
+&lt;p&gt;Quite often, I find tests written by students that don't actually test anything,
+and will pass regardless of what the student's code is doing. Sometimes, I find
+tests written by yours truly that are similarly ineffective. A test that passes
+when it should not is dangerous, because it makes you feel confident about code
+that isn't properly tested. On the flip side, a test that fails when it should
+not is annoying and may hamper productivity, but unlike a falsely positive test,
+it is highly noticeable. The devious part of tests that don't test is that they
+easily slip by unnoticed, you don't often investigate a test that passes! These
+tests generally come in four flavors:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Not calling the function under test.&lt;/li&gt;
+&lt;li&gt;Copy mistakes with references/pointers.&lt;/li&gt;
+&lt;li&gt;Mistakes during setup.&lt;/li&gt;
+&lt;li&gt;Mistakes with assertions.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Even though I have a few years worth of testing experience, and have written
+thousands upon thousands of tests, I still make these mistakes from time to
+time. Let's first go over them one by one to get a feel for what can go wrong.
+After that, I'll share my techniques for catching these errors. For all of the
+examples, we will look at a test case for sorting a randomly ordered list with
+an in-place sorting algorithm. The implementation under test is called &lt;code&gt;mysort&lt;/code&gt;.
+Assume that, for all examples, a list called &lt;code&gt;random_list&lt;/code&gt; with randomly ordered
+elements is setup in a fixture. The tests will be written in &lt;code&gt;pytest&lt;/code&gt; syntax,
+but most problems and solutions are easily transferable to many other languages
+and testing frameworks (e.g. JUnit in Java). Here is the test header and
+docstring. Note the inclusion of the &lt;code&gt;random_list&lt;/code&gt; fixture as a parameter. In the test,
+it can simply be used as a list.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_sort_randomly_ordered_list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;random_list&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Sort a randomly ordered list and ensure that the result for&lt;/span&gt;
+&lt;span class="sd"&gt;    ``mysort`` is the same as the built-in ``list.sort``&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For brevity, the docstring will be excluded from now on.  Let's get to it the,
+shall we?&lt;/p&gt;
+&lt;h3&gt;Not calling the function under test&lt;/h3&gt;
+&lt;p&gt;This mistake definitely sits in the top two most common ones that I encounter. A
+typical example of this is when using &lt;em&gt;redundant computation&lt;/em&gt; to produce a test
+oracle. That is, using some other implementation of the function under test to
+compute the expected result. What I've seen happen many times is that the
+student by mistake uses the other implementation for both the expected value,
+and the actual value. Here's an example.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_sort_randomly_ordered_list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;random_list&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# calculate test oracle&lt;/span&gt;
+    &lt;span class="n"&gt;expected&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;random_list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# note the copy for later!&lt;/span&gt;
+    &lt;span class="n"&gt;expected&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# calculate actual value, use ``sort`` by mistake&lt;/span&gt;
+    &lt;span class="c1"&gt;# should be ``mysort(random_list)``&lt;/span&gt;
+    &lt;span class="n"&gt;random_list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;random_list&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;expected&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Obviously, this test will always pass as &lt;code&gt;list.sort&lt;/code&gt; is used for both
+computations. This is a very common mistake, and if made once in a test suite, I
+often find it propagating elsewhere due to copy-paste errors. This kind of
+mistake is applicable in most any language, and is especially easy to make if
+the redundant function and the function under test have similar names and usage
+(which was actually not the case here!).&lt;/p&gt;
+&lt;h3&gt;Copy mistakes with references/pointers&lt;/h3&gt;
+&lt;p&gt;Another very common issue that is often related to redundant computation is
+failing to make a proper copy of a data structure. If you have a look at the
+previous example, there is comment telling you to note the copy. Compare that
+with this example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_sort_randomly_ordered_list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;random_list&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# calculate test oracle&lt;/span&gt;
+    &lt;span class="n"&gt;expected&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;random_list&lt;/span&gt; &lt;span class="c1"&gt;# this is not a copy!&lt;/span&gt;
+    &lt;span class="n"&gt;expected&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# calculate actual value&lt;/span&gt;
+    &lt;span class="n"&gt;mysort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;random_list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;random_list&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;expected&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Just assigning &lt;code&gt;expected = random_list&lt;/code&gt; will not create a copy of &lt;code&gt;random_list&lt;/code&gt;,
+but copy the reference to the list. Therefore, both &lt;code&gt;expected&lt;/code&gt; and &lt;code&gt;random_list&lt;/code&gt;
+reference the &lt;em&gt;same list&lt;/em&gt;. The assertion is then semantically equivalent to
+&lt;code&gt;assert random_list == random_list&lt;/code&gt;, which is obviously true no matter what
+&lt;code&gt;mysort&lt;/code&gt; did with the list. This is a problem in any language that uses
+references (not C++ references, but pointer-like references), such as Java and
+Python, or when dealing with pointers in pretty much any language that has them.&lt;/p&gt;
+&lt;h3&gt;Mistakes during setup&lt;/h3&gt;
+&lt;p&gt;This is also fairly common, and can manifest in a variety of ways. The general
+idea is that the setup is performed such that the outcome of the test is very
+likely to be the same even if the production code is anything but correct. One
+example would be that the supposedly randomly ordered list is actually
+comprised of duplicates of a single element. Let's have a look at an incorrect
+implementation of the &lt;code&gt;random_list&lt;/code&gt; fixture. Note that &lt;code&gt;_&lt;/code&gt; is used as a
+variable name when we don't care about the value of it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;random_list&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Generate a randomly ordered list with 100 elements.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;lst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;seed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5234&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# seed to make list generation deterministic&lt;/span&gt;
+        &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It is good practice to &lt;em&gt;seed&lt;/em&gt; the pseudo-random generator (PRG) when testing to
+make tests reproducible. A PRG is actually a deterministic function that, given
+an initial state (a seed), will always produce the same sequence of numbers.
+&lt;code&gt;random.seed(5234)&lt;/code&gt; sets this initial state to &lt;code&gt;5234&lt;/code&gt;. This fixture is actually
+fairly well implemented, but has a critical error. Since the seed is set inside
+the loop, before the call to &lt;code&gt;random.randint&lt;/code&gt;, the latter will always produce
+the same value. As the list is already sorted, &lt;code&gt;mysort&lt;/code&gt; can do almost anything
+but remove an element and still pass the test. This is a fairly sophisticated
+error that an intermediate tester may accidentally make. There are infinite
+variations on how setup may go wrong, and this is applicable to pretty much any
+programming language. As a side note, the correct way to do this would of
+course be to seed &lt;em&gt;before&lt;/em&gt; the loop. Note that even with the correct
+configuration, there is a very small chance that the random elements are
+generated in ascending order.&lt;/p&gt;
+&lt;h3&gt;Mistakes with assertions&lt;/h3&gt;
+&lt;p&gt;The final issue is also common, and comes in many shapes and forms. One thing I
+sometimes see is that the assertions are tautologies, such as &lt;code&gt;assert
+random_list == random_list&lt;/code&gt; (obviously true), and probably mostly result from
+typos and unchecked auto-completion. Another common one is that assertions are
+simply missing, and is most often found in tests that are large enough that a
+missing line or two is not immediately apparent.&lt;/p&gt;
+&lt;h2&gt;Finding tests that don't test&lt;/h2&gt;
+&lt;p&gt;There are essentially two ways I know of to find tests that (pretty much) never
+fail.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Write the tests first (Test-driven development)&lt;/li&gt;
+&lt;li&gt;Inject errors into production code and expect tests to fail&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Test-driven development (TDD)&lt;/h3&gt;
+&lt;p&gt;TDD involves writing the test cases before you implement the functionality.
+You first write the test cases, ensure that the test cases fail, and then
+implement the production code such that the tests pas. I typically use TDD
+when:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The functionality I need to implement is strictly defined.&lt;ul&gt;
+&lt;li&gt;Fox example when implementing well-defined algorithms and data structures.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;I'm fixing a bug.&lt;ul&gt;
+&lt;li&gt;Reproduce the bug with a test-case, then fix it!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This approach will catch many incarnations of the errors I've brought up in
+this article simply because the tests should definitely not pass before the
+production code is even written. There is one caveat, though. Some
+practitioners of TDD think that test cases should be written even before the
+function skeletons have been written, and argue that a compilation failure is
+also a test failure. With that approach, you probably will not catch any of the
+errors brought up here, except maybe
+&lt;a href="#not-calling-the-function-under-test"&gt;the first one&lt;/a&gt;. My recommendation for
+TDD is to write function skeletons and make sure the function can actually be
+called (it's perfectly fine if it crashes after being called). &lt;em&gt;Then&lt;/em&gt; write
+your tests, and make sure they fail before you start implementing production
+code. I don't think TDD is always practical to use, however, especially when
+I'm a bit unsure of what to do and need to experiment with different APIs.
+That's when the second technique comes in real handy.&lt;/p&gt;
+&lt;h3&gt;Inject errors into production code and expect tests to fail&lt;/h3&gt;
+&lt;p&gt;This is a highly useful technique that can always be performed, and I do this
+almost every time I implement tests after production code. The idea is simply to
+consider what your test is testing, and inject errors into the production code
+such that the test should fail. &lt;code&gt;test_sort_randomly_ordered_list&lt;/code&gt; is a fairly
+broad test case, so we can inject fairly general errors. A simple example would
+simply be to return early such that &lt;code&gt;mysort&lt;/code&gt; does not sort at all. Narrower test
+cases may require more sophisticated errors to be injected.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Aside: Mutation testing&lt;/strong&gt; There is actually a whole field of testing
+dedicated to this kind of error (or &lt;em&gt;fault&lt;/em&gt;) injection called
+&lt;a href="https://en.wikipedia.org/wiki/Mutation_testing"&gt;mutation testing&lt;/a&gt;. Faults are
+automatically injected into production code, and the test suite is run to
+determine whether the fault is found (&lt;em&gt;killed&lt;/em&gt;) or not. There are frameworks
+for this, such as the &lt;a href="http://pitest.org/"&gt;Pitest&lt;/a&gt; for Java, and
+&lt;a href="https://github.com/sixty-north/cosmic-ray"&gt;Cosmic Ray&lt;/a&gt; for Python. In
+general, it takes a &lt;em&gt;long&lt;/em&gt; time to run mutation testing on a test suite, as
+often the whole test suite needs to be run for a single fault. And there are
+many, many possible faults.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;While I framed this as a unit testing article, these concepts are applicable to
+most kinds of testing. You should always attempt to make sure that your test is
+doing what it claims to be doing. A single typo may be what stands between a
+test that does not test, and a test that does. This article focused on finding
+tests that don't test, but there are also things you can do to &lt;em&gt;prevent&lt;/em&gt; tests
+that don't test from manifesting. Copy/pasting test code and then making minor
+changes is for example a common source of most of the discussed errors. But
+ultimately, there is no surefire way of avoiding tests that don't test, so I
+strongly recommend that you actively search for them no matter what precautions
+you take!&lt;/p&gt;</content><category term="unit testing"></category><category term="testing tips"></category></entry></feed>

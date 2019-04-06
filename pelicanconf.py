@@ -35,7 +35,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-# LINKS = 
+# LINKS =
 
 # Social widget
 
@@ -50,6 +50,7 @@ SOCIAL = (
     ("GitHub", "https://github.com/slarse", "fab fa-github-square fa-fw fa-lg"),
 )
 
+STYLESHEET_FILES = ("pygment.css", "voidybootstrap.css")
 
 DEFAULT_PAGINATION = 10
 

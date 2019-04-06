@@ -12,7 +12,7 @@ EXTRA_PATH_METADATA = {
     "extra/favicon.ico": {"path": "favicon.ico"},  # and this
     "extra/CNAME": {"path": "CNAME"},
     "extra/LICENSE": {"path": "LICENSE"},
-    "extra/README": {"path": "README"},
+    "extra/README.md": {"path": "README.md"},
 }
 
 PATH = "content"

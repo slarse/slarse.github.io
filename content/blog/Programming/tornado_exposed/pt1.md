@@ -3,6 +3,7 @@ Date: 2018-12-25T22:42:36Z
 Modified: 2018-12-30T14:53:11Z
 Author: Simon Larsén
 Tags: kotlin,tornadofx,exposed,kuizzy
+Category: Programming
 
 I recently got it into my head that I'd like to make a quiz game with a GUI,
 which felt like a simple enough diversion during the holidays. Since I already

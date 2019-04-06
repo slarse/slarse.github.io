@@ -12,7 +12,7 @@ EXTRA_PATH_METADATA = {
     "extra/favicon.ico": {"path": "favicon.ico"},  # and this
     "extra/CNAME": {"path": "CNAME"},
     "extra/LICENSE": {"path": "LICENSE"},
-    "extra/README.md": {"path": "README.md"},
+    "extra/README": {"path": "README.md"},
 }
 
 PATH = "content"
@@ -35,12 +35,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (
-    ("Pelican", "http://getpelican.com/"),
-    ("Python.org", "http://python.org/"),
-    ("Jinja2", "http://jinja.pocoo.org/"),
-    ("You can modify those links in your config file", "#"),
-)
+# LINKS = 
 
 # Social widget
 

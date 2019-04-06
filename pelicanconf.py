@@ -6,7 +6,7 @@ AUTHOR = "Simon Larsén"
 SITENAME = "slar.se"
 SITEURL = ""
 
-STATIC_PATHS = ["images", "extra"]
+STATIC_PATHS = ["extra"]
 
 EXTRA_PATH_METADATA = {
     "extra/favicon.ico": {"path": "favicon.ico"},  # and this
@@ -55,4 +55,4 @@ STYLESHEET_FILES = ("pygment.css", "voidybootstrap.css")
 DEFAULT_PAGINATION = 5
 
 # Uncomment following line if you want document-relative URLs when developing
-# RELATIVE_URLS = True
+RELATIVE_URLS = True

@@ -1,4 +1,4 @@
-Title: 
+Title: Collapsing and expanding HTML elements using (mostly) CSS
 Date: 2018-11-14T17:57:34Z
 Author: Simon Larsén
 Category: Programming

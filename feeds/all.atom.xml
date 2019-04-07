@@ -1278,7 +1278,7 @@ fun contains(node: ANode, data: Int): Boolean = when (node) {
 
 
 &lt;p&gt;Neat, now we have a good base for venturing into the fraught land of generics in
-part 2.&lt;/p&gt;
+&lt;a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-2-generic-node.html"&gt;part 2&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Final code listing&lt;/h2&gt;
 &lt;p&gt;The final version of the code, that we'll use in part 2, can be found below.
 I've also included a main function such that you can run the code in your
@@ -1819,7 +1819,7 @@ and usage now looks like this:&lt;/p&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_end&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{val} is out of range for attribute count.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>Properties as Pythonic getters</title><link href="https://slarse.org/properties-as-pythonic-getters.html" rel="alternate"></link><published>2018-04-05T18:25:55+00:00</published><updated>2018-04-05T18:25:55+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-04-05:/properties-as-pythonic-getters.html</id><summary type="html">&lt;p&gt;If you come from either Java or C++, you've probably written your fair
+&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category></entry><entry><title>Properties as Pythonic getters</title><link href="https://slarse.org/properties-as-pythonic-getters.html" rel="alternate"></link><published>2018-04-05T18:25:55+00:00</published><updated>2018-04-05T18:25:55+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-04-05:/properties-as-pythonic-getters.html</id><summary type="html">&lt;p&gt;If you come from either Java or C++, you've probably written your fair
 share of getter and setter (also called accessor and mutator) methods.
 It is common for programmers that transition from such a language to Python
 to carry over this practice. In many cases in Python, we simply forego …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you come from either Java or C++, you've probably written your fair

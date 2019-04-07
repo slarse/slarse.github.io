@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Collapsing and expanding HTML elements using (mostly) CSS - slar.se</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://slarse.org/theme/css/pygment.css" />
+      <link rel="stylesheet" href="https://slarse.org/theme/css/voidybootstrap.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://slarse.org/favicon.ico" />
+        <link href="https://slarse.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="slar.se Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slarse.org/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+              <li>
+                <a href="https://slarse.org/pages/about.html">About</a>
+              </li>
+              <li>
+                <a href="https://slarse.org/pages/projects.html">Projects</a>
+              </li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slarse.org/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slarse.org/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slarse.org/">slar.se</a></h1>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Wed 14 November 2018
+</abbr> <h1>
+  <a href="https://slarse.org/collapsing-and-expanding-html-elements-using-mostly-css.html" rel="bookmark"
+     title="Permalink to Collapsing and expanding HTML elements using (mostly) CSS">
+    Collapsing and expanding HTML elements using (mostly) CSS
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slarse.org/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slarse.org/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>Sections that collapse and expand at the click of a button is fairly ubiquitous
+across the web nowadays. It's especially handy for mobile, where the display is
+much smaller than your typical computer monitor. In this article, I'll walk you
+through how to create a basic collapsible content-area using almost only CSS,
+along with a few lines of close-to-trivial JavaScript. The focus is on CSS, not
+JavaScript, so you should be able to follow this even with the most rudimentary
+programming experience.</p>
+<h1>The fictional sidebar</h1>
+<p>For this toy example, we will be creating a collapsible <code>div</code> (it could really
+be just about any element) that can be collapsed and expanded by clicking a
+"trigger". Just for the purpose of showing the effects more clearly, we'll do
+it inside of another <code>div</code> element, which we'll imagine is a sidebar of a
+website (like the sidebar with recent posts and tags on this site). Here's the
+markup for the sidebar:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+    <span class="cp">&lt;!- our content goes in here! --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>And the CSS:</p>
+<div class="highlight"><pre><span></span>.sidebar {
+  width: 30%;
+  border: black solid 2px;
+}
+</pre></div>
+
+
+<p>This is really <em>not</em> important for this demo, I just mention it so that you
+don't wonder about some unknown HTML and CSS in the final demo. Now, let's fill
+that sidebar up with some content.</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;trigger&quot;</span><span class="p">&gt;</span>Cool content heading<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+      This content would be neat to hide and show at the click of a button!
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>We have 3 <code>div</code> tags in total: one is the container (sidebar) which really has
+little to do with this article. The second is a heading for the content, which
+will act as the trigger for showing and hiding the content. The third is the
+one containing the content that we want to hide/show (a single paragraph).
+Let's get to it! Note the <code>id</code> attributes on the two inner <code>div</code> tags. When I
+later refer to the <code>#trigger</code>, I mean the div with <code>id="trigger"</code>, and likewise
+for the <code>#content</code>. The <code>id</code> attributes serve no other purpose here, you can
+remove them if you wish and everything will still work as expected.</p>
+<h2>Collapsing and expanding the <code>div</code></h2>
+<p>To collapse and expand <code>#content</code>, we will use two classes: <code>collapse-trigger</code>
+and <code>collapse</code>. The basic idea is this:</p>
+<ol>
+<li>An element with the <code>collapse</code> is hidden by default.</li>
+<li>If a <code>collapse</code> element follows an element with the <code>collapse-trigger</code> AND
+   the <code>active</code> classes, the <code>collapse</code> is visible.</li>
+</ol>
+<p>You can probably guess where to put the classes in the markup already:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;trigger&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapse-trigger&quot;</span><span class="p">&gt;</span>Cool content heading<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapsible&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+      This content would be neat to hide and show at the click of a button!
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>For the CSS, fulfilling point 1 above (<code>collapsible</code> hidden by default) is
+simple:</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This will simply not display the element.  But how do we fulfill the second
+requirement? We can use the
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_selectors">adjacent sibling combinator</a>
+(<code>+</code>). It's a selector combinator that allows us to match some element, only if
+it is immediately preceded by some other element. For example, the selector <code>h1
++ p</code> will match any <code>p</code> tag that is immediately preceded by an <code>h1</code> tag:</p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;h1&gt;</span>This is a heading<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p&gt;</span>This paragraph will be matched by &quot;h1 + p&quot;<span class="nt">&lt;/p&gt;</span>
+</pre></div>
+
+
+<p>So, to show our <code>collapsible</code> when it is directly preceded by a
+<code>collapse-trigger</code> AND <code>active</code> element, we do this:</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span> <span class="o">+</span> <span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>We display it as a <code>block</code> here, but one could use other display modes as well,
+depending on what visual effect is sought.  Note that we are chaining two
+classes in the left hand side of the <code>+</code> combinator, which means that an
+element matches only if it's <code>class</code> attribute contains both of those classes
+(and possibly more of them). The order of the classes is however not important,
+i.e. <code>.active.collapse-trigger</code> would be equivalent.</p>
+<p>That's actually all there is to it, as far as the CSS goes. Now, we can
+collapse and expand the <code>#content</code> by opening the developer tools (<code>F12</code> in
+Firefox and Chrome) and manually assigning the <code>active</code> class to <code>#trigger</code>.
+But that's not very convenient in every day use. This is where we need the
+tiniest bit of JavaScript to be able to toggle <code>active</code>.</p>
+<h2>Toggling the <code>active</code> class with the click of a button</h2>
+<p>What we want to do is to remove and add the <code>active</code> class from any
+<code>collapse-trigger</code> element by clicking it. Here, we need JavaScript, because
+there is no way to change the class of an element with only CSS. For every
+<code>collapse-trigger</code> in the page, we need to attach an event listener that
+toggles the <code>active</code> class every time the element is clicked. It can be done
+like this:</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">colTriggers</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colTrig</span> <span class="k">of</span> <span class="nx">colTriggers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span>  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Essentially, we use the <code>getElementsByClassName</code> DOM method to find all
+elements with the <code>collapse-trigger</code> class. Then, we iterate over those
+elements, and add an event listener to it. The first argument to
+<code>addEventListener</code> is an event (in this case a button click). The second
+argument is a callback function, for which we provide an anonymous function. If
+you have a hard time wrapping your head around anonymous functions, this will
+accomplish the same thing:</p>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">collapseTrigger</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">colTriggers</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colTrig</span> <span class="k">of</span> <span class="nx">colTriggers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">collapseTrigger</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>When the element is clicked, the <code>collapseTrigger</code> function is called.  Of
+course, we need to call <code>attachCollapseTriggers</code> sometime after the page has
+loaded for this to take effect. And that's it for the JavaScript, clicking the
+<code>#trigger</code> will now cause <code>#content</code> to collapse and expand!  However, it's not
+very clear to the user that the <code>#trigger</code> even can be clicked. Let's make that
+just a little bit more clear by adding some visual cues.</p>
+<h2>Finishing touches using the <code>::after</code> pseudo class</h2>
+<p>A typical visual cue that a drop down can be expanded is a down-triangle (▼).
+An up-triangle (▲) is as recognizable a cue that a menu can be collapsed. The
+down-triangle should be appended to any <code>collapse-trigger</code> that is not active,
+while the up-triangle should be appended to any <code>collapse-trigger</code> that also
+has the <code>active</code> class. We can do that simply use the <code>::after</code> pseudo class.</p>
+<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+    <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▼&quot;</span><span class="p">;</span>
+    <span class="k">float</span><span class="p">:</span> <span class="kc">right</span><span class="p">;</span> <span class="c">/* float to the right-hand side of the content box */</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+    <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▲&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>So, what happens here, exactly? When a <code>collapse-trigger</code> is not <code>active</code>, it
+doesn't match the <code>.collapse-trigger.active</code> selector, so the content will
+simply be the down-triangle. When a <code>collapse-trigger</code> <em>is</em> active, it will
+match both selectors. However, <code>.collapse-trigger.active</code> is more specific than
+<code>.collapse-trigger</code>, so it wins out, and the content will be an up-triangle.
+And that's it, all done!</p>
+<h1>Code listing and JSFiddle link</h1>
+<p>The full code is available in the following subsections, and you can find a
+<a href="https://jsfiddle.net/p3qtev5w/">JSFiddle here</a>.</p>
+<h3>Markup</h3>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!- the outer div with the class &quot;sidebar&quot; isn&#39;t important, it&#39;s just any container --&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapse-trigger&quot;</span><span class="p">&gt;</span>Cool content heading<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapsible&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+      This content would be neat to hide and show at the click of a button!
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<h3>CSS</h3>
+<div class="highlight"><pre><span></span><span class="c">/* the sidebar class is just an arbitrary container for this example */</span>
+<span class="p">.</span><span class="nc">sidebar</span> <span class="p">{</span>
+  <span class="k">width</span><span class="p">:</span> <span class="mi">30</span><span class="kt">%</span><span class="p">;</span>
+  <span class="k">padding</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
+  <span class="k">border</span><span class="p">:</span> <span class="kc">black</span> <span class="kc">solid</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+    <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▼&quot;</span><span class="p">;</span>
+    <span class="k">float</span><span class="p">:</span> <span class="kc">right</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+    <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▲&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span> <span class="o">+</span> <span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h3>JavaScript</h3>
+<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">colTriggers</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colTrig</span> <span class="k">of</span> <span class="nx">colTriggers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span>  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">attachCollapseTriggers</span><span class="p">();</span>
+</pre></div>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slarse.org/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slarse.org/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slarse.org/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+      <a href="https://slarse.org/tag/blog.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>blog
+      </a>
+      <a href="https://slarse.org/tag/unit-testing.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>unit testing
+      </a>
+      <a href="https://slarse.org/tag/testing-tips.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>testing tips
+      </a>
+      <a href="https://slarse.org/tag/exposed.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>exposed
+      </a>
+      <a href="https://slarse.org/tag/kotlin.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>kotlin
+      </a>
+      <a href="https://slarse.org/tag/kuizzy.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>kuizzy
+      </a>
+      <a href="https://slarse.org/tag/tornadofx.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>tornadofx
+      </a>
+      <a href="https://slarse.org/tag/html.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>html
+      </a>
+      <a href="https://slarse.org/tag/css.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>css
+      </a>
+      <a href="https://slarse.org/tag/javascript.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>javascript
+      </a>
+      <a href="https://slarse.org/tag/bst.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>bst
+      </a>
+      <a href="https://slarse.org/tag/data-structures.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>data structures
+      </a>
+      <a href="https://slarse.org/tag/gradle.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>gradle
+      </a>
+      <a href="https://slarse.org/tag/intellij.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>intellij
+      </a>
+      <a href="https://slarse.org/tag/python.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>python
+      </a>
+      <a href="https://slarse.org/tag/podcast.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>podcast
+      </a>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slarse.org/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>

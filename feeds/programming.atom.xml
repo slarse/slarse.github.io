@@ -613,7 +613,239 @@ Category&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;name&lt;/span
 &lt;code&gt;name&lt;/code&gt; attribute and crash. And that's it for part 1. In the next part, we'll
 look at how to create a read-only view of the &lt;code&gt;Categories&lt;/code&gt; table. You can
 find
-&lt;a href="https://slarse.org/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;part 2 here&lt;/a&gt;.&lt;/p&gt;</content><category term="kotlin"></category><category term="tornadofx"></category><category term="exposed"></category><category term="kuizzy"></category></entry><entry><title>A binary search tree in Kotlin pt. 2: Generic node</title><link href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-2-generic-node.html" rel="alternate"></link><published>2018-10-30T08:26:05+00:00</published><updated>2018-10-30T08:26:05+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-10-30:/a-binary-search-tree-in-kotlin-pt-2-generic-node.html</id><summary type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
+&lt;a href="https://slarse.org/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;part 2 here&lt;/a&gt;.&lt;/p&gt;</content><category term="kotlin"></category><category term="tornadofx"></category><category term="exposed"></category><category term="kuizzy"></category></entry><entry><title>Collapsing and expanding HTML elements using (mostly) CSS</title><link href="https://slarse.org/collapsing-and-expanding-html-elements-using-mostly-css.html" rel="alternate"></link><published>2018-11-14T17:57:34+00:00</published><updated>2018-11-14T17:57:34+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-11-14:/collapsing-and-expanding-html-elements-using-mostly-css.html</id><summary type="html">&lt;p&gt;Sections that collapse and expand at the click of a button is fairly ubiquitous
+across the web nowadays. It's especially handy for mobile, where the display is
+much smaller than your typical computer monitor. In this article, I'll walk you
+through how to create a basic collapsible content-area using almost …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Sections that collapse and expand at the click of a button is fairly ubiquitous
+across the web nowadays. It's especially handy for mobile, where the display is
+much smaller than your typical computer monitor. In this article, I'll walk you
+through how to create a basic collapsible content-area using almost only CSS,
+along with a few lines of close-to-trivial JavaScript. The focus is on CSS, not
+JavaScript, so you should be able to follow this even with the most rudimentary
+programming experience.&lt;/p&gt;
+&lt;h1&gt;The fictional sidebar&lt;/h1&gt;
+&lt;p&gt;For this toy example, we will be creating a collapsible &lt;code&gt;div&lt;/code&gt; (it could really
+be just about any element) that can be collapsed and expanded by clicking a
+"trigger". Just for the purpose of showing the effects more clearly, we'll do
+it inside of another &lt;code&gt;div&lt;/code&gt; element, which we'll imagine is a sidebar of a
+website (like the sidebar with recent posts and tags on this site). Here's the
+markup for the sidebar:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;sidebar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;!- our content goes in here! --&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And the CSS:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.sidebar {
+  width: 30%;
+  border: black solid 2px;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is really &lt;em&gt;not&lt;/em&gt; important for this demo, I just mention it so that you
+don't wonder about some unknown HTML and CSS in the final demo. Now, let's fill
+that sidebar up with some content.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;sidebar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;trigger&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Cool content heading&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      This content would be neat to hide and show at the click of a button!
+    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We have 3 &lt;code&gt;div&lt;/code&gt; tags in total: one is the container (sidebar) which really has
+little to do with this article. The second is a heading for the content, which
+will act as the trigger for showing and hiding the content. The third is the
+one containing the content that we want to hide/show (a single paragraph).
+Let's get to it! Note the &lt;code&gt;id&lt;/code&gt; attributes on the two inner &lt;code&gt;div&lt;/code&gt; tags. When I
+later refer to the &lt;code&gt;#trigger&lt;/code&gt;, I mean the div with &lt;code&gt;id="trigger"&lt;/code&gt;, and likewise
+for the &lt;code&gt;#content&lt;/code&gt;. The &lt;code&gt;id&lt;/code&gt; attributes serve no other purpose here, you can
+remove them if you wish and everything will still work as expected.&lt;/p&gt;
+&lt;h2&gt;Collapsing and expanding the &lt;code&gt;div&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;To collapse and expand &lt;code&gt;#content&lt;/code&gt;, we will use two classes: &lt;code&gt;collapse-trigger&lt;/code&gt;
+and &lt;code&gt;collapse&lt;/code&gt;. The basic idea is this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;An element with the &lt;code&gt;collapse&lt;/code&gt; is hidden by default.&lt;/li&gt;
+&lt;li&gt;If a &lt;code&gt;collapse&lt;/code&gt; element follows an element with the &lt;code&gt;collapse-trigger&lt;/code&gt; AND
+   the &lt;code&gt;active&lt;/code&gt; classes, the &lt;code&gt;collapse&lt;/code&gt; is visible.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can probably guess where to put the classes in the markup already:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;sidebar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;trigger&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;collapse-trigger&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Cool content heading&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;content&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;collapsible&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      This content would be neat to hide and show at the click of a button!
+    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For the CSS, fulfilling point 1 above (&lt;code&gt;collapsible&lt;/code&gt; hidden by default) is
+simple:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapsible&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will simply not display the element.  But how do we fulfill the second
+requirement? We can use the
+&lt;a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_selectors"&gt;adjacent sibling combinator&lt;/a&gt;
+(&lt;code&gt;+&lt;/code&gt;). It's a selector combinator that allows us to match some element, only if
+it is immediately preceded by some other element. For example, the selector &lt;code&gt;h1
++ p&lt;/code&gt; will match any &lt;code&gt;p&lt;/code&gt; tag that is immediately preceded by an &lt;code&gt;h1&lt;/code&gt; tag:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;This is a heading&lt;span class="nt"&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;This paragraph will be matched by &amp;quot;h1 + p&amp;quot;&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So, to show our &lt;code&gt;collapsible&lt;/code&gt; when it is directly preceded by a
+&lt;code&gt;collapse-trigger&lt;/code&gt; AND &lt;code&gt;active&lt;/code&gt; element, we do this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapse-trigger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;active&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapsible&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We display it as a &lt;code&gt;block&lt;/code&gt; here, but one could use other display modes as well,
+depending on what visual effect is sought.  Note that we are chaining two
+classes in the left hand side of the &lt;code&gt;+&lt;/code&gt; combinator, which means that an
+element matches only if it's &lt;code&gt;class&lt;/code&gt; attribute contains both of those classes
+(and possibly more of them). The order of the classes is however not important,
+i.e. &lt;code&gt;.active.collapse-trigger&lt;/code&gt; would be equivalent.&lt;/p&gt;
+&lt;p&gt;That's actually all there is to it, as far as the CSS goes. Now, we can
+collapse and expand the &lt;code&gt;#content&lt;/code&gt; by opening the developer tools (&lt;code&gt;F12&lt;/code&gt; in
+Firefox and Chrome) and manually assigning the &lt;code&gt;active&lt;/code&gt; class to &lt;code&gt;#trigger&lt;/code&gt;.
+But that's not very convenient in every day use. This is where we need the
+tiniest bit of JavaScript to be able to toggle &lt;code&gt;active&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Toggling the &lt;code&gt;active&lt;/code&gt; class with the click of a button&lt;/h2&gt;
+&lt;p&gt;What we want to do is to remove and add the &lt;code&gt;active&lt;/code&gt; class from any
+&lt;code&gt;collapse-trigger&lt;/code&gt; element by clicking it. Here, we need JavaScript, because
+there is no way to change the class of an element with only CSS. For every
+&lt;code&gt;collapse-trigger&lt;/code&gt; in the page, we need to attach an event listener that
+toggles the &lt;code&gt;active&lt;/code&gt; class every time the element is clicked. It can be done
+like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;attachCollapseTriggers&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;colTriggers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getElementsByClassName&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;collapse-trigger&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;colTrig&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="nx"&gt;colTriggers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;colTrig&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;click&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;classList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;toggle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;active&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Essentially, we use the &lt;code&gt;getElementsByClassName&lt;/code&gt; DOM method to find all
+elements with the &lt;code&gt;collapse-trigger&lt;/code&gt; class. Then, we iterate over those
+elements, and add an event listener to it. The first argument to
+&lt;code&gt;addEventListener&lt;/code&gt; is an event (in this case a button click). The second
+argument is a callback function, for which we provide an anonymous function. If
+you have a hard time wrapping your head around anonymous functions, this will
+accomplish the same thing:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;collapseTrigger&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;classList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;toggle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;active&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;attachCollapseTriggers&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;colTriggers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getElementsByClassName&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;collapse-trigger&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;colTrig&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="nx"&gt;colTriggers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;colTrig&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;click&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;collapseTrigger&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When the element is clicked, the &lt;code&gt;collapseTrigger&lt;/code&gt; function is called.  Of
+course, we need to call &lt;code&gt;attachCollapseTriggers&lt;/code&gt; sometime after the page has
+loaded for this to take effect. And that's it for the JavaScript, clicking the
+&lt;code&gt;#trigger&lt;/code&gt; will now cause &lt;code&gt;#content&lt;/code&gt; to collapse and expand!  However, it's not
+very clear to the user that the &lt;code&gt;#trigger&lt;/code&gt; even can be clicked. Let's make that
+just a little bit more clear by adding some visual cues.&lt;/p&gt;
+&lt;h2&gt;Finishing touches using the &lt;code&gt;::after&lt;/code&gt; pseudo class&lt;/h2&gt;
+&lt;p&gt;A typical visual cue that a drop down can be expanded is a down-triangle (▼).
+An up-triangle (▲) is as recognizable a cue that a menu can be collapsed. The
+down-triangle should be appended to any &lt;code&gt;collapse-trigger&lt;/code&gt; that is not active,
+while the up-triangle should be appended to any &lt;code&gt;collapse-trigger&lt;/code&gt; that also
+has the &lt;code&gt;active&lt;/code&gt; class. We can do that simply use the &lt;code&gt;::after&lt;/code&gt; pseudo class.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapse-trigger&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;▼&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;float&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;right&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c"&gt;/* float to the right-hand side of the content box */&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapse-trigger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;active&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;▲&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So, what happens here, exactly? When a &lt;code&gt;collapse-trigger&lt;/code&gt; is not &lt;code&gt;active&lt;/code&gt;, it
+doesn't match the &lt;code&gt;.collapse-trigger.active&lt;/code&gt; selector, so the content will
+simply be the down-triangle. When a &lt;code&gt;collapse-trigger&lt;/code&gt; &lt;em&gt;is&lt;/em&gt; active, it will
+match both selectors. However, &lt;code&gt;.collapse-trigger.active&lt;/code&gt; is more specific than
+&lt;code&gt;.collapse-trigger&lt;/code&gt;, so it wins out, and the content will be an up-triangle.
+And that's it, all done!&lt;/p&gt;
+&lt;h1&gt;Code listing and JSFiddle link&lt;/h1&gt;
+&lt;p&gt;The full code is available in the following subsections, and you can find a
+&lt;a href="https://jsfiddle.net/p3qtev5w/"&gt;JSFiddle here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Markup&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;!- the outer div with the class &amp;quot;sidebar&amp;quot; isn&amp;#39;t important, it&amp;#39;s just any container --&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;sidebar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;collapse-trigger&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Cool content heading&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;collapsible&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      This content would be neat to hide and show at the click of a button!
+    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;CSS&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;/* the sidebar class is just an arbitrary container for this example */&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;sidebar&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;padding&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="kt"&gt;em&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;border&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;black&lt;/span&gt; &lt;span class="kc"&gt;solid&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapse-trigger&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;▼&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;float&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;right&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapse-trigger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;active&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;after&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;▲&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapsible&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapse-trigger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;active&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;collapsible&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;JavaScript&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;attachCollapseTriggers&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;colTriggers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getElementsByClassName&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;collapse-trigger&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;colTrig&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="nx"&gt;colTriggers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;colTrig&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;addEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;click&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;classList&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;toggle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;active&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nx"&gt;attachCollapseTriggers&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="html"></category><category term="css"></category><category term="javascript"></category></entry><entry><title>A binary search tree in Kotlin pt. 2: Generic node</title><link href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-2-generic-node.html" rel="alternate"></link><published>2018-10-30T08:26:05+00:00</published><updated>2018-10-30T08:26:05+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-10-30:/a-binary-search-tree-in-kotlin-pt-2-generic-node.html</id><summary type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
 part, we're gonna have a look at how to make the node representation from part 1
 capable of carrying any kind of data (i.e. &lt;em&gt;generic&lt;/em&gt;).&lt;/p&gt;
 &lt;h2&gt;Series index&lt;/h2&gt;

@@ -2,6 +2,7 @@ Title: A binary search tree in Kotlin pt. 1: Representing a node
 Date: 2018-10-28T15:13:08Z
 Modified: 2018-10-30T08:27:09Z
 Author: Simon Larsén
+Category: Programming
 Tags: bst,kotlin,data structures
 
 In my journey to become a somewhat competent Kotlin developer, I've decided to
@@ -28,7 +29,7 @@ generics, including generic inheritance, you may skip directly to part 3.
 ## Series index
 
 1. Representing a node (this part!)
-2. [Generic node]({filename}binary_search_tree_kotlin_pt2.md)
+2. [Generic node]({filename}pt2.md)
 3. Generic BST with insert, contains and traversal (coming soon!)
 
 ## Goals and intended audience
@@ -227,7 +228,7 @@ false
 ```
 
 Neat, now we have a good base for venturing into the fraught land of generics in
-part 2.
+[part 2]({filename}pt2.md).
 
 ## Final code listing
 The final version of the code, that we'll use in part 2, can be found below.

@@ -1,6 +1,7 @@
 Title: A binary search tree in Kotlin pt. 2: Generic node
 Date: 2018-10-30T08:26:05Z
 Author: Simon Larsén
+Category: Programming
 Tags: bst,kotlin,data structures
 
 Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
@@ -8,7 +9,7 @@ part, we're gonna have a look at how to make the node representation from part 1
 capable of carrying any kind of data (i.e. _generic_).
 
 ## Series index
-1. [Representing a node]({filename}binary_search_tree_kotlin_pt1.md)
+1. [Representing a node]({filename}pt1.md)
 2. Generic node (this part!)
 3. Generic BST with insert, contains and traversal (coming soon!)
 

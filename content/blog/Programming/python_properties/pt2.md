@@ -1,9 +1,11 @@
 Title: Properties as Pythonic setters
 Date: 2018-04-05T18:26:10Z
 Author: Simon Larsén
+Category: Programming
+Tags: python
 
 This is the second part in a two part series on Python properties. In
-[Part 1]({filename}python_properties_pt1.md) (which readers will be assumed to
+[Part 1]({filename}pt1.md) (which readers will be assumed to
 have at least skimmed through), we saw how a property can be used to create a
 read-only attribute that can be accessed like any data attribute (i.e with
 `obj.attr`), but raises an `AttributeError` when written to. Now, we will look
@@ -13,7 +15,7 @@ validation.
 
 ### A property as a Pythonic setter
 Using the `Ticker` class version from the final listing in 
-[Part 1]({filename}python_properties_pt1.md), we are unable to set the `count`
+[Part 1]({filename}pt1.md), we are unable to set the `count`
 attribute to _any_ value.
 
 ```bash

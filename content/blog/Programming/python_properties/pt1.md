@@ -1,6 +1,7 @@
 Title: Properties as Pythonic getters
 Date: 2018-04-05T18:25:55Z
 Author: Simon Larsén
+Category: Programming
 Tags: python
 
 If you come from either Java or C++, you've probably written your fair
@@ -22,7 +23,7 @@ way, while still providing a uniform API. For example, we might want a
 way to access the root element of a binary tree, but without risking to alter 
 its container.
 
-### [Part 2: Properties as Pythonic setters]({filename}python_properties_pt2.md)
+### [Part 2: Properties as Pythonic setters]({filename}pt2.md)
 In the second part, we'll have a look at how we can use properties to also
 implement a setter method, with input validation, that can be utulized just 
 like any plain ol' data attribute (e.g. like `obj.attr = 42`). This is useful
@@ -174,6 +175,6 @@ class Ticker:
 ```
             
 Now is about the time to move on to
-[Part 2]({filename}python_properties_pt2.md), in which we expand on the `count`
+[Part 2]({filename}pt2.md), in which we expand on the `count`
 property to allow us to set the internal count, but only within the range `[0,
 _end)`!

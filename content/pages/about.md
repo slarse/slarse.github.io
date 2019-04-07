@@ -9,6 +9,13 @@ also work as a teaching assistant on several courses at KTH, do some freelance
 web development on the side and work on my own projects whenever there is time
 left over.
 
+### What is this "slarse"?
+"slarse" was the (presumably) automatically generated username that I was
+provided with when I started studying at KTH. It just kind of stuck. When I
+started working as a TA, one of my colleagues even called me slarse for over a
+year because that's what came to mind first for him. It's more or less my online
+identity/alias nowadays.
+
 ### Contact me
 Feel free to send me an email!
 

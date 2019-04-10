@@ -5,7 +5,7 @@ Tags: totw,bash
 
 Have you ever found yourself furiously tapping the UP-arrow (or `ctrl+p`) to
 find a command that's probably waaaay up there? Would you be surprised if I
-told you theres a better way? When you want to re-use a command you've written
+told you there's a better way? When you want to re-use a command you've written
 previously, and you know it's not the previous command, or the one before that,
 your first resort should be a _reverse search_. This can be accessed with
 `ctrl+r`. If you press that button combination, you should see something like this:

@@ -9,6 +9,17 @@ also work as a teaching assistant on several courses at KTH, do some freelance
 web development on the side and work on my own projects whenever there is time
 left over.
 
+### About this web site
+This site serves primarily as my private blog. I sometimes write lengthy
+articles and even series of articles on topics related to programming,
+mostly within the Python or Kotlin programming languages. I find that it's
+a good way to cement newly aquired knowledge. I also recently started my
+[Tip of the Week]({category}tip of the week) series, which is an article series
+where I publish a small article with programming or Linux-related tips each
+week. Finally, I also try to keep the site up to date with my current
+[Projects]({filename}/pages/projects.md), which is a bit likn an online CV
+(but isn't particularly formal).
+
 ### What is this "slarse"?
 "slarse" was the (presumably) automatically generated username that I was
 provided with when I started studying at KTH. It just kind of stuck. When I

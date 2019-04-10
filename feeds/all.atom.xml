@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slarse.org/" rel="alternate"></link><link href="https://slarse.org/feeds/all.atom.xml" rel="self"></link><id>https://slarse.org/</id><updated>2019-04-09T23:15:00+02:00</updated><entry><title>Announcing Tip of the Week (TotW)</title><link href="https://slarse.org/announcing-tip-of-the-week-totw.html" rel="alternate"></link><published>2019-04-09T23:15:00+02:00</published><updated>2019-04-09T23:15:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2019-04-09:/announcing-tip-of-the-week-totw.html</id><summary type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-09T23:15:00+02:00</updated><entry><title>Announcing Tip of the Week (TotW)</title><link href="https://slar.se/announcing-tip-of-the-week-totw.html" rel="alternate"></link><published>2019-04-09T23:15:00+02:00</published><updated>2019-04-09T23:15:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/announcing-tip-of-the-week-totw.html</id><summary type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
 a little series: Tip of the Week! Every week, I'll spend 30 minutes or so
 writing a very small article about some tip related to programming, Linux or
 technology in general. And no, this one does …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
 a little series: Tip of the Week! Every week, I'll spend 30 minutes or so
 writing a very small article about some tip related to programming, Linux or
 technology in general. And no, this one does not count, so I still have to
-write this week's TotW!&lt;/p&gt;</content><category term="totw"></category></entry><entry><title>Migrating my blog</title><link href="https://slarse.org/migrating-my-blog.html" rel="alternate"></link><published>2019-04-06T18:32:00+02:00</published><updated>2019-04-06T18:32:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2019-04-06:/migrating-my-blog.html</id><summary type="html">&lt;p&gt;I'm currently in the midst of migrating &lt;a href="https://slar.se"&gt;my old blog&lt;/a&gt; over
+write this week's TotW!&lt;/p&gt;</content><category term="totw"></category></entry><entry><title>Migrating my blog</title><link href="https://slar.se/migrating-my-blog.html" rel="alternate"></link><published>2019-04-06T18:32:00+02:00</published><updated>2019-04-06T18:32:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-06:/migrating-my-blog.html</id><summary type="html">&lt;p&gt;I'm currently in the midst of migrating &lt;a href="https://slar.se"&gt;my old blog&lt;/a&gt; over
 here. Until I'm done, both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</summary><content type="html">&lt;p&gt;I'm currently in the midst of migrating &lt;a href="https://slar.se"&gt;my old blog&lt;/a&gt; over
-here. Until I'm done, both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Testing tips: Tests that don't test</title><link href="https://slarse.org/tests-that-dont-test.html" rel="alternate"></link><published>2019-03-05T22:07:56+00:00</published><updated>2019-03-05T22:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2019-03-05:/tests-that-dont-test.html</id><summary type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
+here. Until I'm done, both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Testing tips: Tests that don't test</title><link href="https://slar.se/tests-that-dont-test.html" rel="alternate"></link><published>2019-03-05T22:07:56+00:00</published><updated>2019-03-05T22:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-03-05:/tests-that-dont-test.html</id><summary type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
 pitfalls for the beginner. As I've done my fair share of unit testing, and
 taught a lot of students what I know, I've decided to share my top tips of
 things to think about when …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
@@ -210,7 +210,7 @@ that don't test from manifesting. Copy/pasting test code and then making minor
 changes is for example a common source of most of the discussed errors. But
 ultimately, there is no surefire way of avoiding tests that don't test, so I
 strongly recommend that you actively search for them no matter what precautions
-you take!&lt;/p&gt;</content><category term="unit testing"></category><category term="testing tips"></category></entry><entry><title>TornadoFX+Exposed pt. 3: Adding, editing and removing rows</title><link href="https://slarse.org/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html" rel="alternate"></link><published>2018-12-30T14:50:50+00:00</published><updated>2018-12-30T15:13:57+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-12-30:/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html</id><summary type="html">&lt;p&gt;Welcome to the third and final part in this article series on using TornadoFX
+you take!&lt;/p&gt;</content><category term="unit testing"></category><category term="testing tips"></category></entry><entry><title>TornadoFX+Exposed pt. 3: Adding, editing and removing rows</title><link href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html" rel="alternate"></link><published>2018-12-30T14:50:50+00:00</published><updated>2018-12-30T15:13:57+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-30:/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html</id><summary type="html">&lt;p&gt;Welcome to the third and final part in this article series on using TornadoFX
 together with Exposed. In the previous two parts, we set up the database with a
 single table and created a simple TornadoFX view with which we could view its
 contents. Now, we will focus on adding …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Welcome to the third and final part in this article series on using TornadoFX
@@ -225,8 +225,8 @@ previous ones, but it also contains a whole lot more content.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1&gt;Article index&lt;/h1&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href="https://slarse.org/tornadofxexposed-pt-1-project-and-database-setup.html"&gt;Project and database setup&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://slarse.org/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;Showing a database table&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-1-project-and-database-setup.html"&gt;Project and database setup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;Showing a database table&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Adding, editing and removing rows -- This part!&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1&gt;Making the app interactive&lt;/h1&gt;
@@ -306,7 +306,7 @@ be fairly easy to read: the button's action will do nothing if the currently
 selected model is &lt;code&gt;null&lt;/code&gt; (i.e. nothing is selected), and call the
 &lt;code&gt;deleteCategory&lt;/code&gt; method otherwise. You should now have a view looking something
 like this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Table view with a delete button" src="https://slarse.org/images/tornado_exposed/view_with_delete.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Table view with a delete button" src="https://slar.se/images/tornado_exposed/view_with_delete.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;If you first click a row and then the delete button, the row should disappear.
 Now that we can delete rows, let's turn our attention to adding new rows.&lt;/p&gt;
 &lt;h2&gt;Adding new rows&lt;/h2&gt;
@@ -371,7 +371,7 @@ need to import &lt;code&gt;TextField&lt;/code&gt;&lt;/p&gt;
 
 
 &lt;p&gt;This will result in a view looking something like this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="View with add category form" src="https://slarse.org/images/tornado_exposed/view_with_add_form.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="View with add category form" src="https://slar.se/images/tornado_exposed/view_with_add_form.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Writing some stuff in the fields and clicking &lt;code&gt;ADD CATEGORY&lt;/code&gt; should immediately
 create a new row in the table. Not the most beautiful thing in the world, I'll
 admit, but it serves its purpose for this guide. Now we only have one more
@@ -408,10 +408,10 @@ allow us to see which cells have been edited, but not saved.&lt;/p&gt;
 
 
 &lt;p&gt;Now, we can edit cells by clicking them:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Editing a cell" src="https://slarse.org/images/tornado_exposed/editing_cell.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Editing a cell" src="https://slar.se/images/tornado_exposed/editing_cell.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;And after pressing enter, we can see that the cell has been edited by the blue
 triangle. The cell is &lt;em&gt;dirty&lt;/em&gt;:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Dirty cell" src="https://slarse.org/images/tornado_exposed/edited_cell.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Dirty cell" src="https://slar.se/images/tornado_exposed/edited_cell.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;However, the change won't "stick". If we restart the application, the text will
 be back to what it was before we edited the cell. The reason is that the change
 was never committed to the database, it was just stored in the model. Thus,
@@ -467,7 +467,7 @@ dirty cells to their previous state.&lt;/p&gt;
 &lt;p&gt;Note that this does not require a transaction, as all that happens is that the
 model state is reset (the DAO is unaffected). This will leave us with a final
 GUI looking like this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Final GUI" src="https://slarse.org/images/tornado_exposed/final_gui.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Final GUI" src="https://slar.se/images/tornado_exposed/final_gui.jpg"&gt;&lt;/p&gt;
 &lt;h1&gt;Closing words&lt;/h1&gt;
 &lt;p&gt;That was all for this series of articles on TornadoFX and exposed. This is by
 no means a fully-fledged database UI, but it is a pretty good start.  There are
@@ -488,7 +488,7 @@ off the top of my head.&lt;/p&gt;
 &lt;li&gt;The views are completely unstyled and look rather dull.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;And with that, I wish you good fortune in working with this! Of course, you are
-free to use all of these examples as you see fit.&lt;/p&gt;</content><category term="exposed"></category><category term="kotlin"></category><category term="kuizzy"></category><category term="tornadofx"></category></entry><entry><title>TornadoFX+Exposed pt. 2: Showing a database table</title><link href="https://slarse.org/tornadofxexposed-pt-2-showing-a-database-table.html" rel="alternate"></link><published>2018-12-26T09:09:47+00:00</published><updated>2018-12-30T15:14:09+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-12-26:/tornadofxexposed-pt-2-showing-a-database-table.html</id><summary type="html">&lt;p&gt;Welcome to the second part of the TornadoFX+Exposed series of articles. In this
+free to use all of these examples as you see fit.&lt;/p&gt;</content><category term="exposed"></category><category term="kotlin"></category><category term="kuizzy"></category><category term="tornadofx"></category></entry><entry><title>TornadoFX+Exposed pt. 2: Showing a database table</title><link href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html" rel="alternate"></link><published>2018-12-26T09:09:47+00:00</published><updated>2018-12-30T15:14:09+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-26:/tornadofxexposed-pt-2-showing-a-database-table.html</id><summary type="html">&lt;p&gt;Welcome to the second part of the TornadoFX+Exposed series of articles. In this
 part, we'll take a look at how to create a TornadoFX view for the &lt;code&gt;Categories&lt;/code&gt;
 table. In the next part, we'll expand upon the view and make it possible to
 add, edit and delete rows.&lt;/p&gt;
@@ -503,9 +503,9 @@ add, edit and delete rows.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1&gt;Article index&lt;/h1&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href="https://slarse.org/tornadofxexposed-pt-1-project-and-database-setup.html"&gt;Project and database setup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-1-project-and-database-setup.html"&gt;Project and database setup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Showing a database table -- This part!&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://slarse.org/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;Adding, editing and removing rows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;Adding, editing and removing rows&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1&gt;Creating a table view&lt;/h1&gt;
 &lt;p&gt;To be able to view the &lt;code&gt;Categories&lt;/code&gt; table, we're going to need three things:&lt;/p&gt;
@@ -624,10 +624,10 @@ following:&lt;/p&gt;
 
 &lt;p&gt;Running the main method will start the app, and you should then see a view that
 looks something like this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Read only view" src="https://slarse.org/images/tornado_exposed/read_only_view.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Read only view" src="https://slar.se/images/tornado_exposed/read_only_view.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;That's pretty much it for this part. In the next and final part, we'll look
 into how to add, delete and edit rows of the &lt;code&gt;Categories&lt;/code&gt; table. You can find
-&lt;a href="https://slarse.org/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;part 3 here.&lt;/a&gt;&lt;/p&gt;</content><category term="exposed"></category><category term="kotlin"></category><category term="kuizzy"></category><category term="tornadofx"></category></entry><entry><title>TornadoFX+Exposed pt. 1: Project and database setup</title><link href="https://slarse.org/tornadofxexposed-pt-1-project-and-database-setup.html" rel="alternate"></link><published>2018-12-25T22:42:36+00:00</published><updated>2018-12-30T14:53:11+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-12-25:/tornadofxexposed-pt-1-project-and-database-setup.html</id><summary type="html">&lt;p&gt;I recently got it into my head that I'd like to make a quiz game with a GUI,
+&lt;a href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;part 3 here.&lt;/a&gt;&lt;/p&gt;</content><category term="exposed"></category><category term="kotlin"></category><category term="kuizzy"></category><category term="tornadofx"></category></entry><entry><title>TornadoFX+Exposed pt. 1: Project and database setup</title><link href="https://slar.se/tornadofxexposed-pt-1-project-and-database-setup.html" rel="alternate"></link><published>2018-12-25T22:42:36+00:00</published><updated>2018-12-30T14:53:11+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-25:/tornadofxexposed-pt-1-project-and-database-setup.html</id><summary type="html">&lt;p&gt;I recently got it into my head that I'd like to make a quiz game with a GUI,
 which felt like a simple enough diversion during the holidays. Since I already
 have this site to maintain in terms of web development, I figured that desktop
 app development in Kotlin using …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I recently got it into my head that I'd like to make a quiz game with a GUI,
@@ -649,8 +649,8 @@ admin part of Kuizzy up and running.&lt;/p&gt;
 &lt;h1&gt;Article index&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Project and database setup -- This part!&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://slarse.org/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;Showing a database table&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://slarse.org/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;Adding, editing and removing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;Showing a database table&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;Adding, editing and removing&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1&gt;Getting started&lt;/h1&gt;
 &lt;p&gt;In this first article, we will be concerned only with getting everything set up.
@@ -668,7 +668,7 @@ meant to develop it further on your own.&lt;/p&gt;
 &lt;p&gt;I think it helps tremendously when reading something to have the end goal in
 sight. What we're shooting for here is an interface that looks something like
 this:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Final app" src="https://slarse.org/images/tornado_exposed/final_gui.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Final app" src="https://slar.se/images/tornado_exposed/final_gui.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;We will be able to create and delete rows, as well as edit rows directly in
 the table. It's not
 pretty and it's not very user friendly, but it conveys an idea and has all the
@@ -824,7 +824,7 @@ Category&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;name&lt;/span
 &lt;code&gt;name&lt;/code&gt; attribute and crash. And that's it for part 1. In the next part, we'll
 look at how to create a read-only view of the &lt;code&gt;Categories&lt;/code&gt; table. You can
 find
-&lt;a href="https://slarse.org/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;part 2 here&lt;/a&gt;.&lt;/p&gt;</content><category term="kotlin"></category><category term="tornadofx"></category><category term="exposed"></category><category term="kuizzy"></category></entry><entry><title>Collapsing and expanding HTML elements using (mostly) CSS</title><link href="https://slarse.org/collapsing-and-expanding-html-elements-using-mostly-css.html" rel="alternate"></link><published>2018-11-14T17:57:34+00:00</published><updated>2018-11-14T17:57:34+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-11-14:/collapsing-and-expanding-html-elements-using-mostly-css.html</id><summary type="html">&lt;p&gt;Sections that collapse and expand at the click of a button is fairly ubiquitous
+&lt;a href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;part 2 here&lt;/a&gt;.&lt;/p&gt;</content><category term="kotlin"></category><category term="tornadofx"></category><category term="exposed"></category><category term="kuizzy"></category></entry><entry><title>Collapsing and expanding HTML elements using (mostly) CSS</title><link href="https://slar.se/collapsing-and-expanding-html-elements-using-mostly-css.html" rel="alternate"></link><published>2018-11-14T17:57:34+00:00</published><updated>2018-11-14T17:57:34+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-11-14:/collapsing-and-expanding-html-elements-using-mostly-css.html</id><summary type="html">&lt;p&gt;Sections that collapse and expand at the click of a button is fairly ubiquitous
 across the web nowadays. It's especially handy for mobile, where the display is
 much smaller than your typical computer monitor. In this article, I'll walk you
 through how to create a basic collapsible content-area using almost …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Sections that collapse and expand at the click of a button is fairly ubiquitous
@@ -1056,18 +1056,18 @@ And that's it, all done!&lt;/p&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 
 &lt;span class="nx"&gt;attachCollapseTriggers&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="html"></category><category term="css"></category><category term="javascript"></category></entry><entry><title>A binary search tree in Kotlin pt. 2: Generic node</title><link href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-2-generic-node.html" rel="alternate"></link><published>2018-10-30T08:26:05+00:00</published><updated>2018-10-30T08:26:05+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-10-30:/a-binary-search-tree-in-kotlin-pt-2-generic-node.html</id><summary type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
+&lt;/pre&gt;&lt;/div&gt;</content><category term="html"></category><category term="css"></category><category term="javascript"></category></entry><entry><title>A binary search tree in Kotlin pt. 2: Generic node</title><link href="https://slar.se/a-binary-search-tree-in-kotlin-pt-2-generic-node.html" rel="alternate"></link><published>2018-10-30T08:26:05+00:00</published><updated>2018-10-30T08:26:05+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-30:/a-binary-search-tree-in-kotlin-pt-2-generic-node.html</id><summary type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
 part, we're gonna have a look at how to make the node representation from part 1
 capable of carrying any kind of data (i.e. &lt;em&gt;generic&lt;/em&gt;).&lt;/p&gt;
 &lt;h2&gt;Series index&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"&gt;Representing a node&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slar.se/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"&gt;Representing a node&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Generic node (this part …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
 part, we're gonna have a look at how to make the node representation from part 1
 capable of carrying any kind of data (i.e. &lt;em&gt;generic&lt;/em&gt;).&lt;/p&gt;
 &lt;h2&gt;Series index&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"&gt;Representing a node&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slar.se/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"&gt;Representing a node&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Generic node (this part!)&lt;/li&gt;
 &lt;li&gt;Generic BST with insert, contains and traversal (coming soon!)&lt;/li&gt;
 &lt;/ol&gt;
@@ -1309,7 +1309,7 @@ can move on to implement the &lt;code&gt;Tree&lt;/code&gt; class in part 3!&lt;/
         &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>A binary search tree in Kotlin pt. 1: Representing a node</title><link href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html" rel="alternate"></link><published>2018-10-28T15:13:08+00:00</published><updated>2018-10-30T08:27:09+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-10-28:/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html</id><summary type="html">&lt;p&gt;In my journey to become a somewhat competent Kotlin developer, I've decided to
+&lt;/pre&gt;&lt;/div&gt;</content><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>A binary search tree in Kotlin pt. 1: Representing a node</title><link href="https://slar.se/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html" rel="alternate"></link><published>2018-10-28T15:13:08+00:00</published><updated>2018-10-30T08:27:09+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-28:/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html</id><summary type="html">&lt;p&gt;In my journey to become a somewhat competent Kotlin developer, I've decided to
 implement a few of the basic data structures that I've picked up during my
 three years of computer science studies. First up, we have a generic binary
 tree. This is an interesting case, because it lets us …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In my journey to become a somewhat competent Kotlin developer, I've decided to
@@ -1335,7 +1335,7 @@ generics, including generic inheritance, you may skip directly to part 3.&lt;/p&
 &lt;h2&gt;Series index&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Representing a node (this part!)&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-2-generic-node.html"&gt;Generic node&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://slar.se/a-binary-search-tree-in-kotlin-pt-2-generic-node.html"&gt;Generic node&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Generic BST with insert, contains and traversal (coming soon!)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Goals and intended audience&lt;/h2&gt;
@@ -1517,7 +1517,7 @@ fun contains(node: ANode, data: Int): Boolean = when (node) {
 
 
 &lt;p&gt;Neat, now we have a good base for venturing into the fraught land of generics in
-&lt;a href="https://slarse.org/a-binary-search-tree-in-kotlin-pt-2-generic-node.html"&gt;part 2&lt;/a&gt;.&lt;/p&gt;
+&lt;a href="https://slar.se/a-binary-search-tree-in-kotlin-pt-2-generic-node.html"&gt;part 2&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Final code listing&lt;/h2&gt;
 &lt;p&gt;The final version of the code, that we'll use in part 2, can be found below.
 I've also included a main function such that you can run the code in your
@@ -1539,7 +1539,7 @@ preferred way, right off the bat!&lt;/p&gt;
     &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>Creating a standalone (runnable) Kotlin .jar file with IntelliJ and Gradle</title><link href="https://slarse.org/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html" rel="alternate"></link><published>2018-10-17T20:15:46+00:00</published><updated>2018-10-29T21:02:18+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-10-17:/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html</id><summary type="html">&lt;p&gt;I've recently started dabbling in some Kotlin, and have found it a very pleasant
+&lt;/pre&gt;&lt;/div&gt;</content><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>Creating a standalone (runnable) Kotlin .jar file with IntelliJ and Gradle</title><link href="https://slar.se/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html" rel="alternate"></link><published>2018-10-17T20:15:46+00:00</published><updated>2018-10-29T21:02:18+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-17:/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html</id><summary type="html">&lt;p&gt;I've recently started dabbling in some Kotlin, and have found it a very pleasant
 experience. One of the first things I wanted to do was to create a standalone
 &lt;code&gt;.jar&lt;/code&gt; file, including the Kotlin runtime and any other dependencies. This,
 as it turns out, was a bit tricky. In this …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've recently started dabbling in some Kotlin, and have found it a very pleasant
@@ -1722,7 +1722,7 @@ in &lt;code&gt;build/libs/&amp;lt;ArtifactId&amp;gt;-&amp;lt;Version&amp;gt;&lt;
         &lt;span class="err"&gt;configurations.compile.collect&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt; &lt;span class="err"&gt;it.isDirectory()&lt;/span&gt; &lt;span class="err"&gt;?&lt;/span&gt; &lt;span class="err"&gt;it&lt;/span&gt; &lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="err"&gt;zipTree(it)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="err"&gt;}&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="kotlin"></category><category term="gradle"></category><category term="intellij"></category></entry><entry><title>Awesome Python Podcasts</title><link href="https://slarse.org/awesome-python-podcasts.html" rel="alternate"></link><published>2018-07-03T07:34:33+00:00</published><updated>2018-10-29T21:03:07+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-07-03:/awesome-python-podcasts.html</id><summary type="html">&lt;p&gt;Whenever I find myself occupied with some monotonous task, I
+&lt;/pre&gt;&lt;/div&gt;</content><category term="kotlin"></category><category term="gradle"></category><category term="intellij"></category></entry><entry><title>Awesome Python Podcasts</title><link href="https://slar.se/awesome-python-podcasts.html" rel="alternate"></link><published>2018-07-03T07:34:33+00:00</published><updated>2018-10-29T21:03:07+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-07-03:/awesome-python-podcasts.html</id><summary type="html">&lt;p&gt;Whenever I find myself occupied with some monotonous task, I
 very much enjoy listening to podcasts. As programming is my
 number one passion, and Python is my favorite language, I tend
 to listen to podcasts that relate to them. In this post, I'll
@@ -1768,7 +1768,7 @@ post once I've listened to a few more of the episodes, but as it stands I
 recommend listening to the show from the beginning.&lt;/p&gt;
 &lt;h3&gt;Did I miss something?&lt;/h3&gt;
 &lt;p&gt;Those were my 3 top picks for Python podcasts. If you feel like I've missed
-some great podcast(s), feel free to drop a comment!&lt;/p&gt;</content><category term="python"></category><category term="podcast"></category></entry><entry><title>What the self? Python's self demystified!</title><link href="https://slarse.org/what-the-self-pythons-self-demystified.html" rel="alternate"></link><published>2018-05-01T16:04:01+00:00</published><updated>2018-05-01T16:04:01+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-05-01:/what-the-self-pythons-self-demystified.html</id><summary type="html">&lt;p&gt;Any Python programmer will sooner or later want to (or have to) write a class.
+some great podcast(s), feel free to drop a comment!&lt;/p&gt;</content><category term="python"></category><category term="podcast"></category></entry><entry><title>What the self? Python's self demystified!</title><link href="https://slar.se/what-the-self-pythons-self-demystified.html" rel="alternate"></link><published>2018-05-01T16:04:01+00:00</published><updated>2018-05-01T16:04:01+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-05-01:/what-the-self-pythons-self-demystified.html</id><summary type="html">&lt;p&gt;Any Python programmer will sooner or later want to (or have to) write a class.
 With classes come &lt;code&gt;self&lt;/code&gt;, the &lt;em&gt;seemingly&lt;/em&gt; (do note the emphasis there)
 magical keyword that you just have to write out as the first parameter to every
 method. To really understand classes, you need to understand …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Any Python programmer will sooner or later want to (or have to) write a class.
@@ -1951,11 +1951,11 @@ more specifically the
 &lt;a href="https://docs.python.org/3.6/howto/descriptor.html#functions-and-methods"&gt;Functions and Methods&lt;/a&gt;
 part of it. It is however somewhat advanced, and I don't find it essential to
 understanding the semantics of method calls in Python. I hope you have found
-this article enlightening, stay tuned for more Python in the coming week!&lt;/p&gt;</content><category term="python"></category></entry><entry><title>Properties as Pythonic setters</title><link href="https://slarse.org/properties-as-pythonic-setters.html" rel="alternate"></link><published>2018-04-05T18:26:10+00:00</published><updated>2018-04-05T18:26:10+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-04-05:/properties-as-pythonic-setters.html</id><summary type="html">&lt;p&gt;This is the second part in a two part series on Python properties. In
-&lt;a href="https://slarse.org/properties-as-pythonic-getters.html"&gt;Part 1&lt;/a&gt; (which readers will be assumed to
+this article enlightening, stay tuned for more Python in the coming week!&lt;/p&gt;</content><category term="python"></category></entry><entry><title>Properties as Pythonic setters</title><link href="https://slar.se/properties-as-pythonic-setters.html" rel="alternate"></link><published>2018-04-05T18:26:10+00:00</published><updated>2018-04-05T18:26:10+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-04-05:/properties-as-pythonic-setters.html</id><summary type="html">&lt;p&gt;This is the second part in a two part series on Python properties. In
+&lt;a href="https://slar.se/properties-as-pythonic-getters.html"&gt;Part 1&lt;/a&gt; (which readers will be assumed to
 have at least skimmed through), we saw how a property can be used to create a
 read-only attribute that can be accessed like any data attribute (i.e …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the second part in a two part series on Python properties. In
-&lt;a href="https://slarse.org/properties-as-pythonic-getters.html"&gt;Part 1&lt;/a&gt; (which readers will be assumed to
+&lt;a href="https://slar.se/properties-as-pythonic-getters.html"&gt;Part 1&lt;/a&gt; (which readers will be assumed to
 have at least skimmed through), we saw how a property can be used to create a
 read-only attribute that can be accessed like any data attribute (i.e with
 &lt;code&gt;obj.attr&lt;/code&gt;), but raises an &lt;code&gt;AttributeError&lt;/code&gt; when written to. Now, we will look
@@ -1964,7 +1964,7 @@ normal data attribute (i.e. with &lt;code&gt;t.count = 42&lt;/code&gt;), while a
 validation.&lt;/p&gt;
 &lt;h3&gt;A property as a Pythonic setter&lt;/h3&gt;
 &lt;p&gt;Using the &lt;code&gt;Ticker&lt;/code&gt; class version from the final listing in 
-&lt;a href="https://slarse.org/properties-as-pythonic-getters.html"&gt;Part 1&lt;/a&gt;, we are unable to set the &lt;code&gt;count&lt;/code&gt;
+&lt;a href="https://slar.se/properties-as-pythonic-getters.html"&gt;Part 1&lt;/a&gt;, we are unable to set the &lt;code&gt;count&lt;/code&gt;
 attribute to &lt;em&gt;any&lt;/em&gt; value.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt;&amp;gt;&amp;gt; &lt;span class="nv"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Ticker&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;24&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# valid range for count is thus [0, 23]&lt;/span&gt;
 &amp;gt;&amp;gt;&amp;gt; t.count &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;11&lt;/span&gt;    &lt;span class="c1"&gt;# this is well within that range&lt;/span&gt;
@@ -2058,7 +2058,7 @@ and usage now looks like this:&lt;/p&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_end&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{val} is out of range for attribute count.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category></entry><entry><title>Properties as Pythonic getters</title><link href="https://slarse.org/properties-as-pythonic-getters.html" rel="alternate"></link><published>2018-04-05T18:25:55+00:00</published><updated>2018-04-05T18:25:55+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slarse.org,2018-04-05:/properties-as-pythonic-getters.html</id><summary type="html">&lt;p&gt;If you come from either Java or C++, you've probably written your fair
+&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category></entry><entry><title>Properties as Pythonic getters</title><link href="https://slar.se/properties-as-pythonic-getters.html" rel="alternate"></link><published>2018-04-05T18:25:55+00:00</published><updated>2018-04-05T18:25:55+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-04-05:/properties-as-pythonic-getters.html</id><summary type="html">&lt;p&gt;If you come from either Java or C++, you've probably written your fair
 share of getter and setter (also called accessor and mutator) methods.
 It is common for programmers that transition from such a language to Python
 to carry over this practice. In many cases in Python, we simply forego …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you come from either Java or C++, you've probably written your fair
@@ -2078,7 +2078,7 @@ from accidentally changing the internal state of an object in an unintended
 way, while still providing a uniform API. For example, we might want a 
 way to access the root element of a binary tree, but without risking to alter 
 its container.&lt;/p&gt;
-&lt;h3&gt;&lt;a href="https://slarse.org/properties-as-pythonic-setters.html"&gt;Part 2: Properties as Pythonic setters&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a href="https://slar.se/properties-as-pythonic-setters.html"&gt;Part 2: Properties as Pythonic setters&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;In the second part, we'll have a look at how we can use properties to also
 implement a setter method, with input validation, that can be utulized just 
 like any plain ol' data attribute (e.g. like &lt;code&gt;obj.attr = 42&lt;/code&gt;). This is useful
@@ -2219,6 +2219,6 @@ result is just assumed to be obvious. Therefore, here is the full listing of
 
 
 &lt;p&gt;Now is about the time to move on to
-&lt;a href="https://slarse.org/properties-as-pythonic-setters.html"&gt;Part 2&lt;/a&gt;, in which we expand on the &lt;code&gt;count&lt;/code&gt;
+&lt;a href="https://slar.se/properties-as-pythonic-setters.html"&gt;Part 2&lt;/a&gt;, in which we expand on the &lt;code&gt;count&lt;/code&gt;
 property to allow us to set the internal count, but only within the range &lt;code&gt;[0,
 _end)&lt;/code&gt;!&lt;/p&gt;</content><category term="python"></category></entry></feed>

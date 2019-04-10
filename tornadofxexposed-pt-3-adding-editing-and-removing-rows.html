@@ -21,16 +21,16 @@
             crossorigin="anonymous">
 
 
-      <link rel="stylesheet" href="https://slarse.org/theme/css/pygment.css" />
-      <link rel="stylesheet" href="https://slarse.org/theme/css/voidybootstrap.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/pygment.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" href="https://slarse.org/favicon.ico" />
-        <link href="https://slarse.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="slar.se Atom Feed" />
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="slar.se Atom Feed" />
   </head>
 
   <body>
@@ -45,24 +45,24 @@
 		  <span class="icon-bar"></span>
 		  <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="https://slarse.org/" rel="home">
+		<a class="navbar-brand" href="https://slar.se/" rel="home">
           <i class="fas fa-home fa-fw fa-lg"> </i> </a>
        </div>
 
       <div class="collapse navbar-collapse" id="main-navbar-collapse">
         <ul class="nav navbar-nav">
               <li>
-                <a href="https://slarse.org/pages/about.html">About</a>
+                <a href="https://slar.se/pages/about.html">About</a>
               </li>
               <li>
-                <a href="https://slarse.org/pages/projects.html">Projects</a>
+                <a href="https://slar.se/pages/projects.html">Projects</a>
               </li>
             <li class="divider"></li>
             <li class="">
-              <a href="https://slarse.org/archives.html">Archives</a>
+              <a href="https://slar.se/archives.html">Archives</a>
             </li>
           <li class="divider"></li>
-            <li><a href="https://slarse.org/feeds/all.atom.xml" 
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
                    type="application/atom+xml" rel="alternate">
                 <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
         </ul> <!-- /nav -->
@@ -72,7 +72,7 @@
 
 	<div class="jumbotron" id="overview">
 	  <div class="container">
-		<h1><a href="https://slarse.org/">slar.se</a></h1>
+		<h1><a href="https://slar.se/">slar.se</a></h1>
 	  </div>
 	</div>
 
@@ -84,15 +84,15 @@
 <abbr class="article-header-date">
   Sun 30 December 2018
 </abbr> <h1>
-  <a href="https://slarse.org/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html" rel="bookmark"
+  <a href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html" rel="bookmark"
      title="Permalink to TornadoFX+Exposed pt. 3: Adding, editing and removing rows">
     TornadoFX+Exposed pt. 3: Adding, editing and removing rows
   </a>
 </h1><div class="article-header-info">
   <p>
-      Posted by <a href="https://slarse.org/author/simon-larsen.html">Simon Larsén</a>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
     in 
-    <a href="https://slarse.org/category/programming.html">
+    <a href="https://slar.se/category/programming.html">
       Programming</a>
     &nbsp;&nbsp;
   </p>
@@ -110,8 +110,8 @@ previous ones, but it also contains a whole lot more content.</p>
 </blockquote>
 <h1>Article index</h1>
 <ol>
-<li><a href="https://slarse.org/tornadofxexposed-pt-1-project-and-database-setup.html">Project and database setup</a></li>
-<li><a href="https://slarse.org/tornadofxexposed-pt-2-showing-a-database-table.html">Showing a database table</a></li>
+<li><a href="https://slar.se/tornadofxexposed-pt-1-project-and-database-setup.html">Project and database setup</a></li>
+<li><a href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html">Showing a database table</a></li>
 <li>Adding, editing and removing rows -- This part!</li>
 </ol>
 <h1>Making the app interactive</h1>
@@ -191,7 +191,7 @@ be fairly easy to read: the button's action will do nothing if the currently
 selected model is <code>null</code> (i.e. nothing is selected), and call the
 <code>deleteCategory</code> method otherwise. You should now have a view looking something
 like this:</p>
-<p><img alt="Table view with a delete button" src="https://slarse.org/images/tornado_exposed/view_with_delete.jpg"></p>
+<p><img alt="Table view with a delete button" src="https://slar.se/images/tornado_exposed/view_with_delete.jpg"></p>
 <p>If you first click a row and then the delete button, the row should disappear.
 Now that we can delete rows, let's turn our attention to adding new rows.</p>
 <h2>Adding new rows</h2>
@@ -256,7 +256,7 @@ need to import <code>TextField</code></p>
 
 
 <p>This will result in a view looking something like this:</p>
-<p><img alt="View with add category form" src="https://slarse.org/images/tornado_exposed/view_with_add_form.jpg"></p>
+<p><img alt="View with add category form" src="https://slar.se/images/tornado_exposed/view_with_add_form.jpg"></p>
 <p>Writing some stuff in the fields and clicking <code>ADD CATEGORY</code> should immediately
 create a new row in the table. Not the most beautiful thing in the world, I'll
 admit, but it serves its purpose for this guide. Now we only have one more
@@ -293,10 +293,10 @@ allow us to see which cells have been edited, but not saved.</p>
 
 
 <p>Now, we can edit cells by clicking them:</p>
-<p><img alt="Editing a cell" src="https://slarse.org/images/tornado_exposed/editing_cell.jpg"></p>
+<p><img alt="Editing a cell" src="https://slar.se/images/tornado_exposed/editing_cell.jpg"></p>
 <p>And after pressing enter, we can see that the cell has been edited by the blue
 triangle. The cell is <em>dirty</em>:</p>
-<p><img alt="Dirty cell" src="https://slarse.org/images/tornado_exposed/edited_cell.jpg"></p>
+<p><img alt="Dirty cell" src="https://slar.se/images/tornado_exposed/edited_cell.jpg"></p>
 <p>However, the change won't "stick". If we restart the application, the text will
 be back to what it was before we edited the cell. The reason is that the change
 was never committed to the database, it was just stored in the model. Thus,
@@ -352,7 +352,7 @@ dirty cells to their previous state.</p>
 <p>Note that this does not require a transaction, as all that happens is that the
 model state is reset (the DAO is unaffected). This will leave us with a final
 GUI looking like this:</p>
-<p><img alt="Final GUI" src="https://slarse.org/images/tornado_exposed/final_gui.jpg"></p>
+<p><img alt="Final GUI" src="https://slar.se/images/tornado_exposed/final_gui.jpg"></p>
 <h1>Closing words</h1>
 <p>That was all for this series of articles on TornadoFX and exposed. This is by
 no means a fully-fledged database UI, but it is a pretty good start.  There are
@@ -401,13 +401,13 @@ free to use all of these examples as you see fit.</p>
 <div class="col-xs-6 col-md-12">
 <h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
 <ul class="list-unstyled category-links">
-  <li><a href="https://slarse.org/category/blog.html" >
+  <li><a href="https://slar.se/category/blog.html" >
     <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
-  <li><a href="https://slarse.org/category/programming.html" >
+  <li><a href="https://slar.se/category/programming.html" >
     <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
-  <li><a href="https://slarse.org/category/testing.html" >
+  <li><a href="https://slar.se/category/testing.html" >
     <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
-  <li><a href="https://slarse.org/category/tip-of-the-week.html" >
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
     <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
 </ul>
 </div>
@@ -416,61 +416,61 @@ free to use all of these examples as you see fit.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-      <a href="https://slarse.org/tag/totw.html">
+      <a href="https://slar.se/tag/totw.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>totw
       </a>
-      <a href="https://slarse.org/tag/blog.html">
+      <a href="https://slar.se/tag/blog.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>blog
       </a>
-      <a href="https://slarse.org/tag/unit-testing.html">
+      <a href="https://slar.se/tag/unit-testing.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>unit testing
       </a>
-      <a href="https://slarse.org/tag/testing-tips.html">
+      <a href="https://slar.se/tag/testing-tips.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>testing tips
       </a>
-      <a href="https://slarse.org/tag/exposed.html">
+      <a href="https://slar.se/tag/exposed.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>exposed
       </a>
-      <a href="https://slarse.org/tag/kotlin.html">
+      <a href="https://slar.se/tag/kotlin.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>kotlin
       </a>
-      <a href="https://slarse.org/tag/kuizzy.html">
+      <a href="https://slar.se/tag/kuizzy.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>kuizzy
       </a>
-      <a href="https://slarse.org/tag/tornadofx.html">
+      <a href="https://slar.se/tag/tornadofx.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>tornadofx
       </a>
-      <a href="https://slarse.org/tag/html.html">
+      <a href="https://slar.se/tag/html.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>html
       </a>
-      <a href="https://slarse.org/tag/css.html">
+      <a href="https://slar.se/tag/css.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>css
       </a>
-      <a href="https://slarse.org/tag/javascript.html">
+      <a href="https://slar.se/tag/javascript.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>javascript
       </a>
-      <a href="https://slarse.org/tag/bst.html">
+      <a href="https://slar.se/tag/bst.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>bst
       </a>
-      <a href="https://slarse.org/tag/data-structures.html">
+      <a href="https://slar.se/tag/data-structures.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>data structures
       </a>
-      <a href="https://slarse.org/tag/gradle.html">
+      <a href="https://slar.se/tag/gradle.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>gradle
       </a>
-      <a href="https://slarse.org/tag/intellij.html">
+      <a href="https://slar.se/tag/intellij.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>intellij
       </a>
-      <a href="https://slarse.org/tag/python.html">
+      <a href="https://slar.se/tag/python.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>python
       </a>
-      <a href="https://slarse.org/tag/podcast.html">
+      <a href="https://slar.se/tag/podcast.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>podcast
       </a>
 </p>
 <h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
 <ul class="list-unstyled">
-    <li><a href="https://slarse.org/feeds/all.atom.xml" 
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
 		   type="application/atom+xml" rel="alternate">
 		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
 </ul>

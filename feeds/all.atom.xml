@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-09T23:23:00+02:00</updated><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-10T23:20:00+02:00</updated><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
 find a command that's probably waaaay up there? Would you be surprised if I
 told you there's a better way? When you want to re-use a command you've written
 previously, and you know it's not the previous …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
@@ -42,9 +42,17 @@ technology in general. And no, this one does …&lt;/p&gt;</summary><content typ
 a little series: Tip of the Week! Every week, I'll spend 30 minutes or so
 writing a very small article about some tip related to programming, Linux or
 technology in general. And no, this one does not count, so I still have to
-write this week's TotW!&lt;/p&gt;</content><category term="totw"></category></entry><entry><title>Migrating my blog</title><link href="https://slar.se/migrating-my-blog.html" rel="alternate"></link><published>2019-04-06T18:32:00+02:00</published><updated>2019-04-06T18:32:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-06:/migrating-my-blog.html</id><summary type="html">&lt;p&gt;I'm currently in the midst of migrating &lt;a href="https://slar.se"&gt;my old blog&lt;/a&gt; over
-here. Until I'm done, both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</summary><content type="html">&lt;p&gt;I'm currently in the midst of migrating &lt;a href="https://slar.se"&gt;my old blog&lt;/a&gt; over
-here. Until I'm done, both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Testing tips: Tests that don't test</title><link href="https://slar.se/tests-that-dont-test.html" rel="alternate"></link><published>2019-03-05T22:07:56+00:00</published><updated>2019-03-05T22:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-03-05:/tests-that-dont-test.html</id><summary type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
+write this week's TotW!&lt;/p&gt;</content><category term="totw"></category></entry><entry><title>Migrating my blog</title><link href="https://slar.se/migrating-my-blog.html" rel="alternate"></link><published>2019-04-06T18:32:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-06:/migrating-my-blog.html</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; The migration is complete! The Flask-based site has been retired
+and this Pelican-based site is fully fleshed out with the old content :)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I'm currently in the midst of migrating my old blog over here. Until I'm done,
+both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; The migration is complete! The Flask-based site has been retired
+and this Pelican-based site is fully fleshed out with the old content :)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I'm currently in the midst of migrating my old blog over here. Until I'm done,
+both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Testing tips: Tests that don't test</title><link href="https://slar.se/tests-that-dont-test.html" rel="alternate"></link><published>2019-03-05T22:07:56+00:00</published><updated>2019-03-05T22:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-03-05:/tests-that-dont-test.html</id><summary type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
 pitfalls for the beginner. As I've done my fair share of unit testing, and
 taught a lot of students what I know, I've decided to share my top tips of
 things to think about when …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous

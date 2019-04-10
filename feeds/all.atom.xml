@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-09T23:23:00+02:00</updated><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
 find a command that's probably waaaay up there? Would you be surprised if I
-told you theres a better way? When you want to re-use a command you've written
+told you there's a better way? When you want to re-use a command you've written
 previously, and you know it's not the previous …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
 find a command that's probably waaaay up there? Would you be surprised if I
-told you theres a better way? When you want to re-use a command you've written
+told you there's a better way? When you want to re-use a command you've written
 previously, and you know it's not the previous command, or the one before that,
 your first resort should be a &lt;em&gt;reverse search&lt;/em&gt;. This can be accessed with
 &lt;code&gt;ctrl+r&lt;/code&gt;. If you press that button combination, you should see something like this:&lt;/p&gt;

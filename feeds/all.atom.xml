@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-09T23:15:00+02:00</updated><entry><title>Announcing Tip of the Week (TotW)</title><link href="https://slar.se/announcing-tip-of-the-week-totw.html" rel="alternate"></link><published>2019-04-09T23:15:00+02:00</published><updated>2019-04-09T23:15:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/announcing-tip-of-the-week-totw.html</id><summary type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-09T23:23:00+02:00</updated><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
+find a command that's probably waaaay up there? Would you be surprised if I
+told you theres a better way? When you want to re-use a command you've written
+previously, and you know it's not the previous …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
+find a command that's probably waaaay up there? Would you be surprised if I
+told you theres a better way? When you want to re-use a command you've written
+previously, and you know it's not the previous command, or the one before that,
+your first resort should be a &lt;em&gt;reverse search&lt;/em&gt;. This can be accessed with
+&lt;code&gt;ctrl+r&lt;/code&gt;. If you press that button combination, you should see something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;reverse-i-search&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;: 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Just start typing the beginning of the command you're looking for, and most
+often, it will pop up. For example, I sometimes need to re-run the
+previous&lt;code&gt;git&lt;/code&gt; command that I ran a while back. I then press &lt;code&gt;ctrl+r&lt;/code&gt; and type
+&lt;code&gt;git&lt;/code&gt; to get something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;reverse-i-search&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;git&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;: git push
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note how the initial &lt;code&gt;git&lt;/code&gt; before the &lt;code&gt;:&lt;/code&gt; is what I've actually written here,
+and the text after the &lt;code&gt;:&lt;/code&gt; (in this case &lt;code&gt;git push&lt;/code&gt;) is what's been found with
+the reverse search. Pressing &lt;code&gt;tab&lt;/code&gt; now will terminate the search and put the
+result of the search on the command line for editing. Then, simply press
+&lt;code&gt;enter&lt;/code&gt; to execute the command as usual. You can also skip over the editing
+part and press &lt;code&gt;enter&lt;/code&gt; right away to execute the command as-is. Sometimes,
+however, the result you get first isn't what you want (obviously, just typing
+&lt;code&gt;git push&lt;/code&gt; would have been faster in this case).  You can then press &lt;code&gt;ctrl+r&lt;/code&gt;
+again to cycle to the next hit.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(reverse-i-search)`git&amp;#39;: git commit -a -m &amp;#39;Add module docstring to github_api module&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now there's a command that I might not want to have to type out again in its
+entirety, better showing why a reverse search may be useful. That's it for this
+week's TotW, check back next week for more!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Announcing Tip of the Week (TotW)</title><link href="https://slar.se/announcing-tip-of-the-week-totw.html" rel="alternate"></link><published>2019-04-09T23:15:00+02:00</published><updated>2019-04-09T23:15:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/announcing-tip-of-the-week-totw.html</id><summary type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
 a little series: Tip of the Week! Every week, I'll spend 30 minutes or so
 writing a very small article about some tip related to programming, Linux or
 technology in general. And no, this one does …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start

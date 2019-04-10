@@ -84,7 +84,7 @@
 <abbr class="article-header-date">
   Tue 09 April 2019
 </abbr> <h1>
-  <a href="https://slar.se/drafts/reverse-search-in-bash.html" rel="bookmark"
+  <a href="https://slar.se/reverse-search-in-bash.html" rel="bookmark"
      title="Permalink to Reverse search in bash">
     Reverse search in bash
   </a>
@@ -112,15 +112,26 @@ your first resort should be a <em>reverse search</em>. This can be accessed with
 often, it will pop up. For example, I sometimes need to re-run the
 previous<code>git</code> command that I ran a while back. I then press <code>ctrl+r</code> and type
 <code>git</code> to get something like this:</p>
-<div class="highlight"><pre><span></span><span class="o">(</span>reverse-i-search<span class="o">)</span><span class="sb">`</span>xrandr<span class="err">&#39;</span>: xrandr --output DP1 --mode 2560x1440 --pos 0x0 --output DP2 --mode 1920x1080 --pos 2560x0 --output eDP1 --pos 2560x1080
+<div class="highlight"><pre><span></span><span class="o">(</span>reverse-i-search<span class="o">)</span><span class="sb">`</span>git<span class="err">&#39;</span>: git push
 </pre></div>
 
 
-<p>Note how the initial <code>xrandr</code> before the <code>:</code> is what I've actually written
-here. Pressing <code>tab</code> now will terminate the search and put the result of the
-search on the command line for editing. Then, simply press enter to execute the
-command as usual. Sometimes, however, the result you get first isn't what you
-want. You can then press <code>ctrl+r</code> again to cycle to the next hit.</p>
+<p>Note how the initial <code>git</code> before the <code>:</code> is what I've actually written here,
+and the text after the <code>:</code> (in this case <code>git push</code>) is what's been found with
+the reverse search. Pressing <code>tab</code> now will terminate the search and put the
+result of the search on the command line for editing. Then, simply press
+<code>enter</code> to execute the command as usual. You can also skip over the editing
+part and press <code>enter</code> right away to execute the command as-is. Sometimes,
+however, the result you get first isn't what you want (obviously, just typing
+<code>git push</code> would have been faster in this case).  You can then press <code>ctrl+r</code>
+again to cycle to the next hit.</p>
+<div class="highlight"><pre><span></span>(reverse-i-search)`git&#39;: git commit -a -m &#39;Add module docstring to github_api module&#39;
+</pre></div>
+
+
+<p>Now there's a command that I might not want to have to type out again in its
+entirety, better showing why a reverse search may be useful. That's it for this
+week's TotW, check back next week for more!</p>
   </div>
   
 
@@ -165,6 +176,9 @@ want. You can then press <code>ctrl+r</code> again to cycle to the next hit.</p>
 <p class="tag-cloud">
       <a href="https://slar.se/tag/totw.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>totw
+      </a>
+      <a href="https://slar.se/tag/bash.html">
+        <i class="fas fa-tag fa-fw fa-lg"></i>bash
       </a>
       <a href="https://slar.se/tag/blog.html">
         <i class="fas fa-tag fa-fw fa-lg"></i>blog

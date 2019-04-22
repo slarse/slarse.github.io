@@ -1,5 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Tip of the Week</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/tip-of-the-week.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-09T23:23:00+02:00</updated><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Tip of the Week</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/tip-of-the-week.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-22T11:59:00+02:00</updated><entry><title>History and history expansion in bash</title><link href="https://slar.se/history-and-history-expansion-in-bash.html" rel="alternate"></link><published>2019-04-22T11:59:00+02:00</published><updated>2019-04-22T11:59:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-22:/history-and-history-expansion-in-bash.html</id><summary type="html">&lt;p&gt;Admittedly, this TOTW is one day late, so this week there will be 2xTOTW! In
+any case, the tip I want to bring up here is very much related to last week's
+TOTW on &lt;a href="https://slar.se/reverse-search-in-bash.html"&gt;Reverse search in bash&lt;/a&gt;. Sometimes,
+reverse searching just doesn't work out. You may not be quite …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Admittedly, this TOTW is one day late, so this week there will be 2xTOTW! In
+any case, the tip I want to bring up here is very much related to last week's
+TOTW on &lt;a href="https://slar.se/reverse-search-in-bash.html"&gt;Reverse search in bash&lt;/a&gt;. Sometimes,
+reverse searching just doesn't work out. You may not be quite sure what you
+are looking for, or there are just too many recent commands that look samey.
+In such cases, using the &lt;code&gt;history&lt;/code&gt; command is a good alternative. &lt;/p&gt;
+&lt;h3&gt;&lt;code&gt;history&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;history&lt;/code&gt; command will display the last commands that you have entered, and
+looks something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;history&lt;/span&gt;
+ &lt;span class="m"&gt;1009&lt;/span&gt;  &lt;span class="nb"&gt;fg&lt;/span&gt;
+ &lt;span class="m"&gt;1010&lt;/span&gt;  git status
+ &lt;span class="m"&gt;1011&lt;/span&gt;  git commit -a -m &lt;span class="s1"&gt;&amp;#39;Add module docstring to github_api module&amp;#39;&lt;/span&gt;
+ &lt;span class="o"&gt;[&lt;/span&gt;***OUTPUT TRUNCATED***&lt;span class="o"&gt;]&lt;/span&gt;
+ &lt;span class="m"&gt;2007&lt;/span&gt;  &lt;span class="nb"&gt;history&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Each command is called an &lt;em&gt;event&lt;/em&gt;, and the output is formatted as &lt;code&gt;&amp;lt;event_nr&amp;gt;
+&amp;lt;event&amp;gt;&lt;/code&gt;. Precisely how many commands are returned by the &lt;code&gt;history&lt;/code&gt; is
+determined by the &lt;code&gt;HISTSIZE&lt;/code&gt; and &lt;code&gt;HISTFILESIZE&lt;/code&gt; environment variables. Setting
+these to something like &lt;code&gt;5000&lt;/code&gt; and &lt;code&gt;10000&lt;/code&gt;, respectively, should be manageable
+even for the weakest of computers. You can also limit the output of &lt;code&gt;history&lt;/code&gt;
+by providing an integer argument, so e.g. &lt;code&gt;history 5&lt;/code&gt; will display the last 5
+commands. Now, the real power of &lt;code&gt;history&lt;/code&gt; becomes apparent when using it
+with &lt;em&gt;history expansion&lt;/em&gt;.&lt;/p&gt;
+&lt;h3&gt;History expansion&lt;/h3&gt;
+&lt;p&gt;History expansion can be used to expand an event number into the whole command
+it corresponds to. To expand an event, one simply types &lt;code&gt;!&amp;lt;event_nr&amp;gt;&lt;/code&gt;. For
+example, looking at the &lt;code&gt;history&lt;/code&gt; output above I can see that event number 1010
+corresponds to &lt;code&gt;git status&lt;/code&gt;. I can execute the command again with history
+expansion like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ !1010
+git status         &lt;span class="c1"&gt;# Command is echoed&lt;/span&gt;
+On branch master   &lt;span class="c1"&gt;# Output from executing the command&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;***REST OF OUTPUT OMITTED***&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The command is first echoed, and then executed. There are a few other ways to
+specify the event number.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;!&lt;/code&gt;: Execute the last event.&lt;ul&gt;
+&lt;li&gt;I.e. type &lt;code&gt;!!&lt;/code&gt; in the terminal.&lt;/li&gt;
+&lt;li&gt;Can be useful to re-execute a command that you realized you needed &lt;code&gt;sudo&lt;/code&gt;
+  for with &lt;code&gt;sudo !!&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-n&lt;/code&gt;: Execute the nth previous event.&lt;ul&gt;
+&lt;li&gt;E.g. type &lt;code&gt;!-1&lt;/code&gt; to execute the last event, &lt;code&gt;!-2&lt;/code&gt; to execute the one
+  before that, and so on.&lt;/li&gt;
+&lt;li&gt;I personally don't find this very useful.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There is one more very useful feature that I often use, and that is the ability
+to only print the command. This can be achieved by appending &lt;code&gt;:p&lt;/code&gt; to the
+history expansion command. Here is an example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ !1011:p
+git commit -a -m &lt;span class="s1"&gt;&amp;#39;Add module docstring to github_api module&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The command can then be accessed by pressing UP-arrow or &lt;code&gt;ctrl-p&lt;/code&gt;, which is
+very useful if you need to do minor modifications to it. There are tons of
+more ways to use history expansion, and I strongly recommend reading the man-page
+on it. Type &lt;code&gt;man bash&lt;/code&gt; and then search for &lt;code&gt;HISTORY EXPANSION&lt;/code&gt;, or do the same
+in &lt;a href="https://linux.die.net/man/1/bash"&gt;this online bash man page&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Filtering history&lt;/h3&gt;
+&lt;p&gt;A final tip on using history expansion is to filter the output with &lt;code&gt;grep&lt;/code&gt;. For
+example, if I only want to find commands that include the word &lt;code&gt;git&lt;/code&gt;, I can
+filter the output of &lt;code&gt;history&lt;/code&gt; by &lt;em&gt;piping&lt;/em&gt; to &lt;code&gt;grep&lt;/code&gt; with the &lt;code&gt;|&lt;/code&gt; character.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;history&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep git
+ &lt;span class="m"&gt;1010&lt;/span&gt;  git status
+ &lt;span class="m"&gt;1011&lt;/span&gt;  git commit -a -m &lt;span class="s1"&gt;&amp;#39;Add module docstring to github_api module&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I will most likely do another TOTW on piping, but the basic principle is that
+&lt;code&gt;|&lt;/code&gt; takes the output from the command on the left and feeds it as input to the
+command on the right. That's it for this TOTW, stay tuned for the next one
+coming on Sunday the 28th of April!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
 find a command that's probably waaaay up there? Would you be surprised if I
 told you there's a better way? When you want to re-use a command you've written
 previously, and you know it's not the previous …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to

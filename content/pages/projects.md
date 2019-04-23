@@ -16,7 +16,7 @@ it this summer (that I can't yet talk about).
 
 ## Labelbot
 Labelbot is a small GitHub bot that I developed with a classmate for a course
-on [DevOps and Automated Testing](httgs://github.com/kth/devops-course). A
+on [DevOps and Automated Testing](https://github.com/kth/devops-course). A
 problem that occured during the course was that students, who only had read
 access to the course repository, couldn't label issues with labels such as
 `collaboration_wanted` or `question`. The idea of Labelbot is to allow any user

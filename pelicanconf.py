@@ -24,7 +24,7 @@ DEFAULT_LANG = "en"
 # voidy-bootstrap settings begin
 THEME = "voidy-bootstrap"
 SIDEBAR = "sidebar.html"
-CUSTOM_SIDEBAR_MIDDLES = ("sb_taglist.html",)
+CUSTOM_SIDEBAR_MIDDLES = ("sb_tagcloud.html",)
 # voidy-bootstrap settings end
 
 # Feed generation is usually not desired when developing
@@ -56,3 +56,7 @@ DEFAULT_PAGINATION = 5
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
+
+# plugins
+PLUGIN_PATHS = ["../pelican-plugins"]
+PLUGINS = ["tag_cloud"]

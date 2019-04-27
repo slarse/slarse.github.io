@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Simon Larsén - slarse@kth.se" />
   <meta name="author" content="DD2482 DevOps and Automated Testing" />
-  <meta name="dcterms.date" content="2019-04-24" />
+  <meta name="dcterms.date" content="2019-04-27" />
   <title>An Introduction to Graph Databases</title>
   <style>
       code{white-space: pre-wrap;}
@@ -92,7 +92,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">An Introduction to Graph Databases</h1>
 <p class="author">Simon Larsén - slarse@kth.se</p>
 <p class="author">DD2482 DevOps and Automated Testing</p>
-<p class="date">2019-04-24</p>
+<p class="date">2019-04-27</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>

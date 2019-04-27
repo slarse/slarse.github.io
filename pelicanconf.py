@@ -6,13 +6,14 @@ AUTHOR = "Simon Larsén"
 SITENAME = "slar.se"
 SITEURL = ""
 
-STATIC_PATHS = ["extra"]
+STATIC_PATHS = ["extra", "essays"]
 
 EXTRA_PATH_METADATA = {
     "extra/favicon.ico": {"path": "favicon.ico"},  # and this
     "extra/CNAME": {"path": "CNAME"},
     "extra/LICENSE": {"path": "LICENSE"},
     "extra/README": {"path": "README.md"},
+    "essays/graph_db_essay": {"path": "essays/graph_db_essay.html"},
 }
 
 PATH = "content"

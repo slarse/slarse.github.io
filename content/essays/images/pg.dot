@@ -1,0 +1,19 @@
+digraph G {
+    rankdir=LR;
+    node [shape=circle,fixedsize=true,width=1];
+    p1 -> m1 [label=<
+    <TABLE>
+        <TR><TD><B>ACTED_IN</B></TD></TR>
+        <TR><TD>earned = "a lot"</TD></TR>
+    </TABLE>>];
+    m1 -> p2 [label="ACTED_IN",dir=back];
+    m1 -> p1 [label=<
+    <TABLE>
+        <TR><TD><B>DIRECTED_BY</B></TD></TR>
+        <TR><TD>earned = "a lot"</TD></TR>
+    </TABLE>>];
+
+    p1 [label="Clint\nEastwood"];
+    p2 [label="Taissa\nFarmiga "];
+    m1 [label="The Mule"];
+}

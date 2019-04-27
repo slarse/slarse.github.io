@@ -1,0 +1,10 @@
+digraph G {
+    Ben -> Human [label="type"]
+    Ben -> Town [label="actedIn"]
+    Town -> Ben [label="directedBy"]
+    Town -> Movie [label="type"]
+
+    Town [label="The Town"]
+
+    { rank = same; Human; Movie; }
+}

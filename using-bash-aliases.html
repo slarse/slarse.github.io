@@ -8,7 +8,7 @@
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Retaking some integrity: Setting up a mail server - slar.se</title>
+    <title>Using bash aliases - slar.se</title>
 
    
         <link rel="stylesheet"
@@ -85,57 +85,105 @@
 <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
   <header class="article-header">
 <abbr class="article-header-date">
-  Sun 14 April 2019
+  Mon 06 May 2019
 </abbr> <h1>
-  <a href="https://slar.se/drafts/retaking-some-integrity-setting-up-a-mail-server.html" rel="bookmark"
-     title="Permalink to Retaking some integrity: Setting up a mail server">
-    Retaking some integrity: Setting up a mail server
+  <a href="https://slar.se/using-bash-aliases.html" rel="bookmark"
+     title="Permalink to Using bash aliases">
+    Using bash aliases
   </a>
 </h1><div class="article-header-info">
   <p>
       Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
     in 
-    <a href="https://slar.se/category/linux.html">
-      Linux</a>
+    <a href="https://slar.se/category/tip-of-the-week.html">
+      Tip of the Week</a>
     &nbsp;&nbsp;
   </p>
 </div> <!-- /.article-header-info -->  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>As of late, I've been getting more and more concerned with privacy and
-integrity, something of which there is precious little of these days. As a first
-step, I've decided to try my hand at running my own mail server, complete with
-calendar functionality and webmail. It's actually not that hard to get started
-with, there are just a few hoops to jump through, and some things to keep in
-mind. Also, the real trouble with a mail server is not setting it up, but
-keeping it running. Only time will tell if I can keep mine running.</p>
-<ul>
-<li>Setup CentOS 7 image on Linode<ul>
-<li>Create a user</li>
-<li>Disable root login</li>
-<li>Add trusted key</li>
-<li>Disable login with password auth</li>
-</ul>
-</li>
-<li>Install iRedMail<ul>
-<li>Download latest version</li>
-<li>Run install script</li>
-<li>Pick whatever you want (I picked SOGo netdata iRedAdmin Fail2ban)</li>
-<li>For the mail domain, just pick whatever subdomain you own. You'll
-  automatically get a <code>postmaster@domain</code> mail address generated,
-  where <code>domain</code> is the domain you gicked.</li>
-</ul>
-</li>
-<li>Generate a proper TLS cert<ul>
-<li>Install <code>certbot</code></li>
-<li>Generate a new certificate with <code>certbot certonly -d DOMAIN</code></li>
-<li>Accept TOS</li>
-<li>Say whatever you want to the other things</li>
-<li>Follow instructions
-  <a href="https://docs.iredmail.org/use.a.bought.ssl.certificate.html">here</a> to
-  put the new keys in the correct places.</li>
-</ul>
-</li>
-</ul>
+	<p>For this <em>Tip of the Week</em>, I'd like to present something that took me a while
+to figure out why it was useful. That something is bash aliases, and I'll now
+walk you through how to create aliases, and the two main ways in which I use
+them (although I'm sure there are more use cases).</p>
+<h1>Using aliases</h1>
+<p>I think the <code>bash</code> manpage has a very good and concise description of what an
+alias is:</p>
+<blockquote>
+<p>Aliases allow a string to be substituted for a word when it is used as the
+first word of a simple command</p>
+</blockquote>
+<p>In other words, I can define a command that is substituted for some other
+command. Creating an alias is very simple. The syntax looks like this:</p>
+<div class="highlight"><pre><span></span>alias &lt;NAME&gt;=&lt;COMMAND&gt;
+</pre></div>
+
+
+<p>So for example, if I want to have a command <code>hellofile</code> that creates a file with
+the text "Hello, world!", I can achieve that with the following alias.</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">hellofile</span><span class="o">=</span><span class="s1">&#39;echo &quot;Hello, world!&quot; &gt; hellofile.txt&#39;</span>
+</pre></div>
+
+
+<p>Note the single quotes around the command definition. Without them, <code>bash</code>
+would interpret the alias as being only <code>echo</code>, and the rest of the line as
+another command. Now, if I run the command <code>hellofile</code>, it fill be substituted
+with <code>echo "Hello, world!" &gt; hellofile.txt</code>. You should think of aliases as pure
+text substitution: precisely what you put in the alias definition will be put on
+the command line when you invoke it. You can view all of your current aliases
+by running <code>alias</code> without any options. Now, let's have a look at some common
+use cases!</p>
+<h2>Specifying "default" options for commands</h2>
+<p>This is probably the most common use case for aliases, and it's likely that you
+already have some in play. A common one is to have <code>ls</code> aliased to <code>ls
+--color=auto</code>. That is to say, the following alias is defined:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto&#39;</span>
+</pre></div>
+
+
+<p>So if I now run e.g. <code>ls /etc</code>, the resulting command is actually <code>ls
+--color=auto /etc</code>. Note how the alias does not have to be the <em>only</em> word I
+type for the command, it just has to be the first one. Another command that I
+use an alias for is <code>xclip</code>, which is a small utility for copying stuff. I use
+it almost exclusively to copy file contents to the clipboard, but that's not the
+default functionality. In order to copy to the clipboard, I must write this
+rather cumbersome command.</p>
+<div class="highlight"><pre><span></span>$ xclip -selection clipboard &lt;FILEPATH&gt;
+</pre></div>
+
+
+<p>So I have an alias for it so I can just type <code>xclip &lt;FILEPATH&gt;</code> to copy to the
+clipboard.</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">xclip</span><span class="o">=</span><span class="s1">&#39;xclip -selection clipboard&#39;</span>
+</pre></div>
+
+
+<p>As a side note, it may not be the best style to clobber an existing command with
+an alias, but I still tend to do that for some of my most commonly used
+commands. If you want to use the vanilla command, simply put it within single
+quotes, which will hinder the alias from expanding (e.g. type <code>'ls'</code> to run <code>ls</code>
+without <code>--color=auto</code>). Note that just defining an alias in a <code>bash</code> session
+will not persist: it needs to be defined anew for each session. To have it
+permanently defined, put the definition in a startup script (e.g. <code>.bashrc</code> or
+<code>.bash_profile</code>).</p>
+<h2>Creating throwaway commands</h2>
+<p>Now, the aliases I described above are useful to have defined permanently, and
+should be defined in a startup script. The second use case I have for aliases is
+when I have a repetitive command that I need to type over and over in the same
+session, but isn't useful in general. An example would be when I need to run
+some specific Java class in a project. Let's say I need to run the class
+<code>se.slar.awesome.project.Main</code> over and over. Instead of typing <code>java
+se.slar.awesome.project.Main</code> over and over, I define an alias for it.</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">runmain</span><span class="o">=</span><span class="s1">&#39;java se.slar.awesome.project.Main&#39;</span>
+</pre></div>
+
+
+<p>And then, instead of writing all of that out, or having to do some
+<a href="https://slar.se/reverse-search-in-bash.html">reverse searching</a> or
+<a href="https://slar.se/history-and-history-expansion-in-bash.html">history lookups</a>, I can just type <code>runmain</code>.
+As defining an alias is so effortless, I tend to do it even if I know I'm just
+gonna use the complex command a couple of times.</p>
+<p>And that's all I wanted to cover, hope you enjoyed it and stay tuned for the
+next TOTW coming next week!</p>
   </div>
   
 
@@ -178,22 +226,10 @@ keeping it running. Only time will tell if I can keep mine running.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/data-structures.html">
+    <span class="tag-0">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        data structures
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/bash.html">
-          <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
-          <i class="fas fa-tag"></i>
-        podcast
+        kotlin
       </a>
     </span>
     <span class="tag-4">
@@ -202,16 +238,52 @@ keeping it running. Only time will tell if I can keep mine running.</p>
         blog
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/data-structures.html">
           <i class="fas fa-tag"></i>
-        unit testing
+        data structures
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
       </a>
     </span>
     <span class="tag-2">
       <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
         kuizzy
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
       </a>
     </span>
     <span class="tag-4">
@@ -221,39 +293,9 @@ keeping it running. Only time will tell if I can keep mine running.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/unit-testing.html">
           <i class="fas fa-tag"></i>
-        testing tips
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
+        unit testing
       </a>
     </span>
     <span class="tag-4">
@@ -262,10 +304,28 @@ keeping it running. Only time will tell if I can keep mine running.</p>
         gradle
       </a>
     </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
     <span class="tag-1">
       <a href="https://slar.se/tag/totw.html">
           <i class="fas fa-tag"></i>
         totw
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
       </a>
     </span>
     <span class="tag-4">
@@ -275,21 +335,9 @@ keeping it running. Only time will tell if I can keep mine running.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/git.html">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-0">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
+        intellij
       </a>
     </span>
 </p>

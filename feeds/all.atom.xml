@@ -1,5 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-29T22:58:00+02:00</updated><entry><title>Git local</title><link href="https://slar.se/git-local.html" rel="alternate"></link><published>2019-04-29T22:58:00+02:00</published><updated>2019-04-29T22:58:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-29:/git-local.html</id><summary type="html">&lt;p&gt;Nowadays, Git is almost ubiquitous in software development. Most developers also
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-05-06T12:19:00+02:00</updated><entry><title>Using bash aliases</title><link href="https://slar.se/using-bash-aliases.html" rel="alternate"></link><published>2019-05-06T12:19:00+02:00</published><updated>2019-05-06T12:19:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-06:/using-bash-aliases.html</id><summary type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
+to figure out why it was useful. That something is bash aliases, and I'll now
+walk you through how to create aliases, and the two main ways in which I use
+them (although I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
+to figure out why it was useful. That something is bash aliases, and I'll now
+walk you through how to create aliases, and the two main ways in which I use
+them (although I'm sure there are more use cases).&lt;/p&gt;
+&lt;h1&gt;Using aliases&lt;/h1&gt;
+&lt;p&gt;I think the &lt;code&gt;bash&lt;/code&gt; manpage has a very good and concise description of what an
+alias is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Aliases allow a string to be substituted for a word when it is used as the
+first word of a simple command&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In other words, I can define a command that is substituted for some other
+command. Creating an alias is very simple. The syntax looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias &amp;lt;NAME&amp;gt;=&amp;lt;COMMAND&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So for example, if I want to have a command &lt;code&gt;hellofile&lt;/code&gt; that creates a file with
+the text "Hello, world!", I can achieve that with the following alias.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;hellofile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;echo &amp;quot;Hello, world!&amp;quot; &amp;gt; hellofile.txt&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note the single quotes around the command definition. Without them, &lt;code&gt;bash&lt;/code&gt;
+would interpret the alias as being only &lt;code&gt;echo&lt;/code&gt;, and the rest of the line as
+another command. Now, if I run the command &lt;code&gt;hellofile&lt;/code&gt;, it fill be substituted
+with &lt;code&gt;echo "Hello, world!" &amp;gt; hellofile.txt&lt;/code&gt;. You should think of aliases as pure
+text substitution: precisely what you put in the alias definition will be put on
+the command line when you invoke it. You can view all of your current aliases
+by running &lt;code&gt;alias&lt;/code&gt; without any options. Now, let's have a look at some common
+use cases!&lt;/p&gt;
+&lt;h2&gt;Specifying "default" options for commands&lt;/h2&gt;
+&lt;p&gt;This is probably the most common use case for aliases, and it's likely that you
+already have some in play. A common one is to have &lt;code&gt;ls&lt;/code&gt; aliased to &lt;code&gt;ls
+--color=auto&lt;/code&gt;. That is to say, the following alias is defined:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;ls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ls --color=auto&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So if I now run e.g. &lt;code&gt;ls /etc&lt;/code&gt;, the resulting command is actually &lt;code&gt;ls
+--color=auto /etc&lt;/code&gt;. Note how the alias does not have to be the &lt;em&gt;only&lt;/em&gt; word I
+type for the command, it just has to be the first one. Another command that I
+use an alias for is &lt;code&gt;xclip&lt;/code&gt;, which is a small utility for copying stuff. I use
+it almost exclusively to copy file contents to the clipboard, but that's not the
+default functionality. In order to copy to the clipboard, I must write this
+rather cumbersome command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xclip -selection clipboard &amp;lt;FILEPATH&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So I have an alias for it so I can just type &lt;code&gt;xclip &amp;lt;FILEPATH&amp;gt;&lt;/code&gt; to copy to the
+clipboard.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;xclip&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;xclip -selection clipboard&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As a side note, it may not be the best style to clobber an existing command with
+an alias, but I still tend to do that for some of my most commonly used
+commands. If you want to use the vanilla command, simply put it within single
+quotes, which will hinder the alias from expanding (e.g. type &lt;code&gt;'ls'&lt;/code&gt; to run &lt;code&gt;ls&lt;/code&gt;
+without &lt;code&gt;--color=auto&lt;/code&gt;). Note that just defining an alias in a &lt;code&gt;bash&lt;/code&gt; session
+will not persist: it needs to be defined anew for each session. To have it
+permanently defined, put the definition in a startup script (e.g. &lt;code&gt;.bashrc&lt;/code&gt; or
+&lt;code&gt;.bash_profile&lt;/code&gt;).&lt;/p&gt;
+&lt;h2&gt;Creating throwaway commands&lt;/h2&gt;
+&lt;p&gt;Now, the aliases I described above are useful to have defined permanently, and
+should be defined in a startup script. The second use case I have for aliases is
+when I have a repetitive command that I need to type over and over in the same
+session, but isn't useful in general. An example would be when I need to run
+some specific Java class in a project. Let's say I need to run the class
+&lt;code&gt;se.slar.awesome.project.Main&lt;/code&gt; over and over. Instead of typing &lt;code&gt;java
+se.slar.awesome.project.Main&lt;/code&gt; over and over, I define an alias for it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;runmain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;java se.slar.awesome.project.Main&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And then, instead of writing all of that out, or having to do some
+&lt;a href="https://slar.se/reverse-search-in-bash.html"&gt;reverse searching&lt;/a&gt; or
+&lt;a href="https://slar.se/history-and-history-expansion-in-bash.html"&gt;history lookups&lt;/a&gt;, I can just type &lt;code&gt;runmain&lt;/code&gt;.
+As defining an alias is so effortless, I tend to do it even if I know I'm just
+gonna use the complex command a couple of times.&lt;/p&gt;
+&lt;p&gt;And that's all I wanted to cover, hope you enjoyed it and stay tuned for the
+next TOTW coming next week!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Git local</title><link href="https://slar.se/git-local.html" rel="alternate"></link><published>2019-04-29T22:58:00+02:00</published><updated>2019-04-29T22:58:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-29:/git-local.html</id><summary type="html">&lt;p&gt;Nowadays, Git is almost ubiquitous in software development. Most developers also
 know that Git is a &lt;em&gt;decentralized&lt;/em&gt; version control system, meaning that every
 copy of the repository carries the full revision history, and there is no
 "central" repository. A consequence of the decentralized aspect of Git is that

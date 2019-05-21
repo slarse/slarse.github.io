@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-05-06T12:19:00+02:00</updated><entry><title>Using bash aliases</title><link href="https://slar.se/using-bash-aliases.html" rel="alternate"></link><published>2019-05-06T12:19:00+02:00</published><updated>2019-05-06T12:19:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-06:/using-bash-aliases.html</id><summary type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-05-21T00:00:00+02:00</updated><entry><title>Piping commands in bash</title><link href="https://slar.se/piping-commands-in-bash.html" rel="alternate"></link><published>2019-05-21T00:00:00+02:00</published><updated>2019-05-21T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-21:/piping-commands-in-bash.html</id><summary type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
+fundamental feature of the bash shell (actually, most shells), called &lt;em&gt;piping&lt;/em&gt;.
+Put simply, piping takes the output of one command and provides it as input to
+the next. Here's a simple example of running &lt;code&gt;ls&lt;/code&gt; and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
+fundamental feature of the bash shell (actually, most shells), called &lt;em&gt;piping&lt;/em&gt;.
+Put simply, piping takes the output of one command and provides it as input to
+the next. Here's a simple example of running &lt;code&gt;ls&lt;/code&gt; and filtering the result with
+&lt;code&gt;grep&lt;/code&gt; to find all &lt;code&gt;.py&lt;/code&gt; files in the current directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ls &lt;span class="c1"&gt;# just run ls &lt;/span&gt;
+file1.md  file2.md  file3.md  script1.py  script2.py
+$ ls &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s1"&gt;&amp;#39;\.py$&amp;#39;&lt;/span&gt;
+script1.py
+script2.py
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To be precise, the &lt;code&gt;|&lt;/code&gt; (pipe) operator takes the output from the command on the
+left, and provides it as input to the command on the right. Pipes can be chained
+practically as much as you'd like. For example, if we want to get amount of
+&lt;code&gt;.py&lt;/code&gt; files in the current directory, we can pipe the output from &lt;code&gt;grep&lt;/code&gt; to the
+&lt;code&gt;wc&lt;/code&gt; (word count) command, with the &lt;code&gt;-l&lt;/code&gt; option to count lines only.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ls &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s1"&gt;&amp;#39;\.py$&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; wc -l
+&lt;span class="m"&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;wc&lt;/code&gt; counts two lines, which is precisely the amount of &lt;code&gt;.py&lt;/code&gt; files that we
+found. Let's move on to I/O redirection. Piping allows you to easily compose
+powerful programs from simple commands, and is a very intuitive way to work.
+Next week, I'll cover I/O redirection, which is another super useful feature of
+bash that's a bit more complicated.&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Using bash aliases</title><link href="https://slar.se/using-bash-aliases.html" rel="alternate"></link><published>2019-05-06T12:19:00+02:00</published><updated>2019-05-06T12:19:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-06:/using-bash-aliases.html</id><summary type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
 to figure out why it was useful. That something is bash aliases, and I'll now
 walk you through how to create aliases, and the two main ways in which I use
 them (although I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while

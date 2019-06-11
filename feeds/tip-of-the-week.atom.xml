@@ -1,5 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Tip of the Week</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/tip-of-the-week.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-05-21T00:00:00+02:00</updated><entry><title>Piping commands in bash</title><link href="https://slar.se/piping-commands-in-bash.html" rel="alternate"></link><published>2019-05-21T00:00:00+02:00</published><updated>2019-05-21T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-21:/piping-commands-in-bash.html</id><summary type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Tip of the Week</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/tip-of-the-week.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-06-11T23:16:00+02:00</updated><entry><title>I/O redirection in bash</title><link href="https://slar.se/io-redirection-in-bash.html" rel="alternate"></link><published>2019-06-11T23:16:00+02:00</published><updated>2019-06-11T23:16:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-11:/io-redirection-in-bash.html</id><summary type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
+weeks". It turns out that it's pretty difficult to find the time to actually
+write something every week. but I'll keep trying. With that out of the way,
+let's head into the subject matter of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
+weeks". It turns out that it's pretty difficult to find the time to actually
+write something every week. but I'll keep trying. With that out of the way,
+let's head into the subject matter of this post: &lt;em&gt;I/O redirection&lt;/em&gt;. 
+We'll just have a look at the most basic but also most generally applicable use
+of redirection: taking the output from a program and storing it in a file.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; Files will both be created and clobbered in this TOTW. When
+trying this stuff out, first create a new directory and do everything in
+there, so you don't litter your filesystem with strange files, or
+accidentally overwrite something important.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Redirecting output&lt;/h2&gt;
+&lt;p&gt;To set the stage, I'll be working in a directory with the following contents:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls
+file1.txt  file2.txt  image1.png file2.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Redirecting output is fairly simple, and useful when you want to save the
+output of some command in a file. There are two primary ways of redirecting
+output: &lt;em&gt;appending&lt;/em&gt; and &lt;em&gt;truncating&lt;/em&gt;. Appending is the one I use the most,
+so let's start with that one.&lt;/p&gt;
+&lt;h3&gt;Appending output redirection&lt;/h3&gt;
+&lt;p&gt;With &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;, we can make an appending redirect.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls &amp;gt;&amp;gt; ls_output.txt  &lt;span class="c1"&gt;# output from ls saved to output.txt&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ cat ls_output.txt    &lt;span class="c1"&gt;# let&amp;#39;s have a look... &lt;/span&gt;
+file1.txt
+file2.txt
+image1.png
+image2.png
+ls_output.txt
+&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls &amp;gt;&amp;gt; ls_output.txt  &lt;span class="c1"&gt;# append new output&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ cat ls_output.txt    &lt;span class="c1"&gt;# let&amp;#39;s have a look again&lt;/span&gt;
+file1.txt
+file2.txt
+image1.png
+image2.png
+ls_output.txt
+file1.txt
+file2.txt
+image1.png
+image2.png
+ls_output.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There are three things to note here. First, the &lt;code&gt;ls_output.txt&lt;/code&gt; file does not
+exist in the initial directory, and so it is created with the first redirect.
+Note however that &lt;code&gt;ls_output.txt&lt;/code&gt; is present in the first redirected output
+from &lt;code&gt;ls&lt;/code&gt;: &lt;code&gt;ls_output.txt&lt;/code&gt; is actually created &lt;em&gt;before&lt;/em&gt; &lt;code&gt;ls&lt;/code&gt; is run as there
+needs to be an open
+&lt;a href="https://en.wikipedia.org/wiki/File_descriptor"&gt;file descriptor&lt;/a&gt;* to the file
+pass along. &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt; * &lt;/strong&gt; A file descriptor can simply be thought of as a pointer to a file.
+There is no need to understand file descriptors intimately to use basic I/O
+redirection efficiently.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The second redirect is then appended to the file, which at that
+point already exists. And that pretty much sums up how an appending redirect
+functions: it appends output to the specified file if it exists, and creates a
+file with the output if it does not exist. I find that this is most often the
+functionality that I want, but in some cases, you want to re-create the file
+from scratch with each redirect. That can be achieved with a truncating
+redirect.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; You may note that the output of &lt;code&gt;ls&lt;/code&gt; is formatted differently when
+output to the terminal, and when redirected to a file. &lt;code&gt;ls&lt;/code&gt; checks whether
+the stdout file descriptor points to a terminal, or something else, and
+formats the output accordingly. The details are somewhat out of scope.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Truncating output redirection&lt;/h3&gt;
+&lt;p&gt;Let's assume that we start over from the initial state of the directory, before
+&lt;code&gt;ls_output.txt&lt;/code&gt; existed. We can then make a truncating redirect with &lt;code&gt;&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ rm ls_output.txt    &lt;span class="c1"&gt;# restore initial directory state&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls &amp;gt; ls_output.txt  &lt;span class="c1"&gt;# make a truncating redirect&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ cat ls_output.txt   &lt;span class="c1"&gt;# and inspect the results&lt;/span&gt;
+file1.txt
+file2.txt
+image1.png
+image2.png
+ls_output.txt
+&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls &amp;gt; ls_output.txt  &lt;span class="c1"&gt;# another truncating redirect&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ cat ls_output.txt
+file1.txt
+file2.txt
+image1.png
+image2.png
+ls_output.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you did not know what truncating meant before, you can probably figure it out
+now. With a single &lt;code&gt;&amp;gt;&lt;/code&gt;, the specified file is created if it does not exist, just
+like with &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;, but it is entirely overwritten (truncated, clobbered) if it
+already does exist. I rarely use a truncating redirect, as it is an easy thing
+to accidentally truncate a file you did not mean to touch. I recommend to always
+use an appending redirect, unless you have a good reason to truncate the
+targeted file.&lt;/p&gt;
+&lt;p&gt;And that's it for this TOTW!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Piping commands in bash</title><link href="https://slar.se/piping-commands-in-bash.html" rel="alternate"></link><published>2019-05-21T00:00:00+02:00</published><updated>2019-05-21T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-21:/piping-commands-in-bash.html</id><summary type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
 fundamental feature of the bash shell (actually, most shells), called &lt;em&gt;piping&lt;/em&gt;.
 Put simply, piping takes the output of one command and provides it as input to
 the next. Here's a simple example of running &lt;code&gt;ls&lt;/code&gt; and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a

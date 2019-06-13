@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-06-11T23:16:00+02:00</updated><entry><title>I/O redirection in bash</title><link href="https://slar.se/io-redirection-in-bash.html" rel="alternate"></link><published>2019-06-11T23:16:00+02:00</published><updated>2019-06-11T23:16:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-11:/io-redirection-in-bash.html</id><summary type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-06-13T09:12:00+02:00</updated><entry><title>Technical e-books from Humble Bundle</title><link href="https://slar.se/technical-e-books-from-humble-bundle.html" rel="alternate"></link><published>2019-06-13T09:12:00+02:00</published><updated>2019-06-13T09:12:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-13:/technical-e-books-from-humble-bundle.html</id><summary type="html">&lt;p&gt;Another Tip of the Week, in the same week as the previous one (because I've
+been slacking off). This one is very simple, and rather non-technical. I simply
+want to direct attention toward
+&lt;a href="https://www.humblebundle.com/"&gt;humblebundle.com&lt;/a&gt;, and their quite frequent book
+bundles. Many of these book bundles include or are entirely …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Another Tip of the Week, in the same week as the previous one (because I've
+been slacking off). This one is very simple, and rather non-technical. I simply
+want to direct attention toward
+&lt;a href="https://www.humblebundle.com/"&gt;humblebundle.com&lt;/a&gt;, and their quite frequent book
+bundles. Many of these book bundles include or are entirely centered around
+programming topics. I've gotten tons of great books from there over the years,
+and it can really pay off to keep an eye on the new bundles. Typically, the top
+tier of a book bundle is around 15-20 EUR, while most books in it cost more
+alone. There have been general programming bundles, hacking/security bundles,
+Python bundles (a lot of them), Linux bundles, and much more. A few of the best
+books I've gotten from Humble include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.amazon.com/Linux-Programming-Interface-System-Handbook/dp/1593272200"&gt;The Linux Programming Interface&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;Got it in a 20 EUR bundle, while this book alone costs somewhere around 70.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.amazon.com/Fluent-Python-Concise-Effective-Programming-dp-1491946008/dp/1491946008/ref=mt_paperback?_encoding=UTF8&amp;amp;me=&amp;amp;qid="&gt;Fluent Python&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;I actually already owned this book at the time of acquiring it from a
+  bundle, but it's by far the best book on Python I've ever read.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.amazon.com/Flask-Web-Development-Developing-Applications-dp-1491991739/dp/1491991739/ref=mt_paperback?_encoding=UTF8&amp;amp;me=&amp;amp;qid=1560410372"&gt;Flask Web Development&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.amazon.com/CSS-Definitive-Guide-Visual-Presentation-dp-1449393195/dp/1449393195/ref=mt_paperback?_encoding=UTF8&amp;amp;me=&amp;amp;qid=1560410482"&gt;CSS: The Definitive Guide&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And many, many more! Really, all I want to get said with this TOTW is that you
+should really keep an eye on Humble Bundle, as their book bundles contain
+tremendous value, and you can choose to put some (or all) of the money you pay
+toward charity. And that's all there is to it!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; I am not sponsored by Humble in any way, I am simply a
+long-time user of the service.&lt;/p&gt;
+&lt;/blockquote&gt;</content><category term="totw"></category></entry><entry><title>I/O redirection in bash</title><link href="https://slar.se/io-redirection-in-bash.html" rel="alternate"></link><published>2019-06-11T23:16:00+02:00</published><updated>2019-06-11T23:16:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-11:/io-redirection-in-bash.html</id><summary type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
 weeks". It turns out that it's pretty difficult to find the time to actually
 write something every week. but I'll keep trying. With that out of the way,
 let's head into the subject matter of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three

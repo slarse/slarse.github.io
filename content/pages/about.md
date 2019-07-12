@@ -31,3 +31,9 @@ identity/alias nowadays.
 Feel free to send me an email!
 
 * Email: <a href="mailto:slarse@kth.se?subject=Regarding%20slarse.se">slarse@kth.se</a>
+
+#### Need to send a secure message?
+If you need to send a secure message, you can encrypt it with my public GPG
+key.
+
+* [slarse.asc]({static}/extra/slarse.asc)

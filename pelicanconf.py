@@ -14,6 +14,7 @@ EXTRA_PATH_METADATA = {
     "extra/LICENSE": {"path": "LICENSE"},
     "extra/README": {"path": "README.md"},
     "essays/graph_db_essay": {"path": "essays/graph_db_essay.html"},
+    "extra/slarse.asc": {"path": "gpg/slarse.asc"},
 }
 
 PATH = "content"

@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-04-10T23:20:00+02:00</updated><entry><title>Migrating my blog</title><link href="https://slar.se/migrating-my-blog.html" rel="alternate"></link><published>2019-04-06T18:32:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-06:/migrating-my-blog.html</id><summary type="html">&lt;blockquote&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-07-22T23:02:00+02:00</updated><entry><title>RepoBee (and Simon) at ITiCSE 2019!</title><link href="https://slar.se/repobee-and-simon-at-iticse-2019.html" rel="alternate"></link><published>2019-07-22T23:02:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/repobee-and-simon-at-iticse-2019.html</id><summary type="html">&lt;p&gt;I just got home from the &lt;em&gt;Innovation and Technology in Computer Science&lt;/em&gt;
+(ITiCSE) conference in lovely Aberdeen, Scotland. I was there to present a small
+experience paper on developing and using &lt;a href="https://repobee.org"&gt;RepoBee&lt;/a&gt;, an open
+source tool for generating and managing large amounts of Git repositories for
+students in higher education …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I just got home from the &lt;em&gt;Innovation and Technology in Computer Science&lt;/em&gt;
+(ITiCSE) conference in lovely Aberdeen, Scotland. I was there to present a small
+experience paper on developing and using &lt;a href="https://repobee.org"&gt;RepoBee&lt;/a&gt;, an open
+source tool for generating and managing large amounts of Git repositories for
+students in higher education. The paper is available over in the &lt;a href="https://doi.org/10.1145/3304221.3319784"&gt;ACM Digital
+Library&lt;/a&gt;, and it's my very first
+publication outside of school, so I'm quite proud of it!&lt;/p&gt;
+&lt;p&gt;The conference itself was also terrific. The atmosphere was very friendly, there
+were many interesting talks and social activities, and I have a hard time
+imagining how a conference could be more inviting to a first-time
+conference-goer like me. If you have a chance to attend it, I highly recommend
+doing so.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Migrating my blog</title><link href="https://slar.se/migrating-my-blog.html" rel="alternate"></link><published>2019-04-06T18:32:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-06:/migrating-my-blog.html</id><summary type="html">&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; The migration is complete! The Flask-based site has been retired
 and this Pelican-based site is fully fleshed out with the old content :)&lt;/p&gt;
 &lt;/blockquote&gt;

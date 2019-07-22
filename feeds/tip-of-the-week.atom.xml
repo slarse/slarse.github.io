@@ -1,5 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Tip of the Week</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/tip-of-the-week.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-06-23T21:37:00+02:00</updated><entry><title>Redirecting stdout and stderr in bash</title><link href="https://slar.se/redirecting-stdout-and-stderr-in-bash.html" rel="alternate"></link><published>2019-06-23T21:37:00+02:00</published><updated>2019-06-23T21:37:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-23:/redirecting-stdout-and-stderr-in-bash.html</id><summary type="html">&lt;p&gt;A couple of weeks ago I covered some basic I/O redirection in bash (see
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Tip of the Week</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/tip-of-the-week.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-07-22T22:01:00+02:00</updated><entry><title>Git worktrees: work in parallel on multiple versions of a project</title><link href="https://slar.se/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html" rel="alternate"></link><published>2019-07-22T22:01:00+02:00</published><updated>2019-07-22T22:01:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html</id><summary type="html">&lt;p&gt;I've been AWOL for a month due to injury, sickness and conference-going. But
+with all that finally out of the way, I have another Tip of the Week, this time
+relating to Git: the &lt;code&gt;git worktree&lt;/code&gt; command. With &lt;code&gt;git worktree&lt;/code&gt;, you can check
+out &lt;em&gt;multiple&lt;/em&gt; branches at once, which is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been AWOL for a month due to injury, sickness and conference-going. But
+with all that finally out of the way, I have another Tip of the Week, this time
+relating to Git: the &lt;code&gt;git worktree&lt;/code&gt; command. With &lt;code&gt;git worktree&lt;/code&gt;, you can check
+out &lt;em&gt;multiple&lt;/em&gt; branches at once, which is super useful for when working on major
+changes where you need to view multiple versions, or maybe you're just trying a
+few different solutions to a single prodlem. If you've ever found yourself
+frantically switching branches, stashing changes to be able to switch branches,
+and even creating copies of the repository you're working in, then this article
+is for you.&lt;/p&gt;
+&lt;h3&gt;An example repo&lt;/h3&gt;
+&lt;p&gt;Let's first create an example repo. Here's a little terminal session where I
+create a repository, add a README to it on the master branch, add another line
+to the readme on a branch called other, and finally checking out to master.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt; $ mkdir repo
+&lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt; $ &lt;span class="nb"&gt;cd&lt;/span&gt; repo
+&lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git init
+Initialized empty Git repository in /home/slarse/repo/.git/
+&lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello!&amp;quot;&lt;/span&gt; &amp;gt; README.md
+&lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git add README.md &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; git commit -m &lt;span class="s1"&gt;&amp;#39;Add README&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;master &lt;span class="o"&gt;(&lt;/span&gt;root-commit&lt;span class="o"&gt;)&lt;/span&gt; 6094baf&lt;span class="o"&gt;]&lt;/span&gt; Add README
+ &lt;span class="m"&gt;1&lt;/span&gt; file changed, &lt;span class="m"&gt;1&lt;/span&gt; insertion&lt;span class="o"&gt;(&lt;/span&gt;+&lt;span class="o"&gt;)&lt;/span&gt;
+ create mode &lt;span class="m"&gt;100644&lt;/span&gt; README.md
+&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git checkout -b other
+Switched to a new branch &lt;span class="s1"&gt;&amp;#39;other&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;other&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;There!&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; README.md 
+&lt;span class="o"&gt;(&lt;/span&gt;other&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git commit -am &lt;span class="s1"&gt;&amp;#39;Add new line to README&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt;other b779dfb&lt;span class="o"&gt;]&lt;/span&gt; Add new line to README
+ &lt;span class="m"&gt;1&lt;/span&gt; file changed, &lt;span class="m"&gt;1&lt;/span&gt; insertion&lt;span class="o"&gt;(&lt;/span&gt;+&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;other&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git checkout master
+Switched to branch &lt;span class="s1"&gt;&amp;#39;master&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It's not super important how you do it, just make sure to have two branches.&lt;/p&gt;
+&lt;h3&gt;Adding a new worktree&lt;/h3&gt;
+&lt;p&gt;First of all: what is a &lt;em&gt;worktree&lt;/em&gt;? Usually, you only have &lt;em&gt;the&lt;/em&gt; worktree, which
+is the part of a repository where you actually do your work (edit files etc).
+Running &lt;code&gt;git worktree list&lt;/code&gt; on most repos will show the location of this single
+worktree, and what commit/branch it is checked out to.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ &lt;span class="nb"&gt;pwd&lt;/span&gt; &lt;span class="c1"&gt;# just checking the current working directory&lt;/span&gt;
+/home/slarse/repo
+&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree list
+/home/slarse/repo  6094baf &lt;span class="o"&gt;[&lt;/span&gt;master&lt;span class="o"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# points to the cwd, checked out to master&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; When I run &lt;code&gt;git worktree list&lt;/code&gt; after this point, it's just to show
+the results of commands.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;With &lt;code&gt;git worktree add&lt;/code&gt;, you can add additional worktrees checked out to
+different commits. The most basic usage is &lt;code&gt;git worktree add &amp;lt;path&amp;gt;
+&amp;lt;commit-ish&amp;gt;&lt;/code&gt;, where &lt;code&gt;path&lt;/code&gt; is a path to the new worktree (i.e. where you want
+to put it), and &lt;code&gt;commit-ish&lt;/code&gt; is something like a commit or branch (or a few
+other things that are not important for every-day use). Let's check out &lt;code&gt;other&lt;/code&gt;
+in a new worktree. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree add ../repo-other other
+Preparing worktree &lt;span class="o"&gt;(&lt;/span&gt;checking out &lt;span class="s1"&gt;&amp;#39;other&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+HEAD is now at b779dfb Add new line to README
+&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree list
+/home/slarse/repo        6094baf &lt;span class="o"&gt;[&lt;/span&gt;master&lt;span class="o"&gt;]&lt;/span&gt;
+/home/slarse/repo-other  b779dfb &lt;span class="o"&gt;[&lt;/span&gt;other&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ ls -a ../repo-other &lt;span class="c1"&gt;# have a look in the new working tree&lt;/span&gt;
+.  ..  .git  README.md
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As you can see, the new worktree has been created, and can be seen in the list
+of worktrees. &lt;code&gt;.git&lt;/code&gt; is usually a directory, but in the case of a non-primary
+worktree, it's actually just a file with a path to the original &lt;code&gt;.git&lt;/code&gt;
+directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ cat ../repo-other/.git 
+gitdir: /home/slarse/repo/.git/worktrees/repo-other
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Like many things in Git, it's brilliantly simple. You can start working in your
+new worktree like it's an entirely separate repository, with the caveat that you
+can't check out to a branch that is checked out in some other worktree. That
+includes checking out to other commits or branches, and even creating entirely
+new branches.&lt;/p&gt;
+&lt;h3&gt;Moving a worktree&lt;/h3&gt;
+&lt;p&gt;If for some reason you need to move a worktree, you should use &lt;code&gt;git worktree
+move&lt;/code&gt; to make sure that all of the references are correctly changed. It's very
+simple, just type &lt;code&gt;git worktree move &amp;lt;src&amp;gt; &amp;lt;dst&amp;gt;&lt;/code&gt;. For example, if I want to
+move &lt;code&gt;../repo-other&lt;/code&gt; to &lt;code&gt;../repo-work&lt;/code&gt;, I do:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree move ../repo-other ../repo-work
+&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree list
+/home/slarse/repo       6094baf &lt;span class="o"&gt;[&lt;/span&gt;master&lt;span class="o"&gt;]&lt;/span&gt;
+/home/slarse/repo-work  b779dfb &lt;span class="o"&gt;[&lt;/span&gt;other&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That's all there is to moving worktrees. Not very exciting, and I can't recall
+ever actually doing it, but I can see how it could be useful.&lt;/p&gt;
+&lt;h3&gt;Removing a worktree&lt;/h3&gt;
+&lt;p&gt;To remove a worktree, run &lt;code&gt;git worktree remove &amp;lt;path&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree remove ../repo-work/
+&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree list
+/home/slarse/repo  6094baf &lt;span class="o"&gt;[&lt;/span&gt;master&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can also just remove the directory with the worktree and the reference to it
+will be removed automatically (but not necessarily immediately). Run &lt;code&gt;git
+worktree prune&lt;/code&gt; to trigger this removal process.&lt;/p&gt;
+&lt;h3&gt;The other worktree commands&lt;/h3&gt;
+&lt;p&gt;There are a few more &lt;code&gt;git worktree&lt;/code&gt; commands that I've never felt the need to
+use. Have a look at them
+&lt;a href="https://git-scm.com/docs/git-worktree"&gt;in the git-worktree documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;p&gt;In this short article I showcased &lt;code&gt;git worktree&lt;/code&gt;. It's super useful to work in
+parallel on different versions of the same project, without having to create
+copies of the repository and thereby having to deal with synchronizing multiple
+local copies (which can quickly get hard to manage). I find myself using this
+more and more, and if you find it useful yourself I highly recommend reading up
+on it more in its man-page (either with &lt;code&gt;man git-worktree&lt;/code&gt; or
+&lt;a href="https://git-scm.com/docs/git-worktree"&gt;online&lt;/a&gt;).&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category><category term="git"></category></entry><entry><title>Redirecting stdout and stderr in bash</title><link href="https://slar.se/redirecting-stdout-and-stderr-in-bash.html" rel="alternate"></link><published>2019-06-23T21:37:00+02:00</published><updated>2019-06-23T21:37:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-23:/redirecting-stdout-and-stderr-in-bash.html</id><summary type="html">&lt;p&gt;A couple of weeks ago I covered some basic I/O redirection in bash (see
 &lt;a href="https://slar.se/io-redirection-in-bash.html"&gt;I/O redirection in bash&lt;/a&gt;). Well, there's actually
 a lot more to it, so for this TOTW I thought I'd touch on a few more advanced
 usages.&lt;/p&gt;

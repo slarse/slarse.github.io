@@ -30,7 +30,7 @@ identity/alias nowadays.
 ### Contact me
 Feel free to send me an email!
 
-* Email: <a href="mailto:slarse@kth.se?subject=Regarding%20slarse.se">slarse@kth.se</a>
+* Email: <a href="mailto:slarse@slar.se?subject=Regarding%20slar.se">slarse@slar.se</a>
 
 #### Need to send a secure message?
 If you need to send a secure message, you can encrypt it with my public GPG

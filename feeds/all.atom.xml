@@ -1,5 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-07-22T23:02:00+02:00</updated><entry><title>RepoBee (and Simon) at ITiCSE 2019!</title><link href="https://slar.se/repobee-and-simon-at-iticse-2019.html" rel="alternate"></link><published>2019-07-22T23:02:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/repobee-and-simon-at-iticse-2019.html</id><summary type="html">&lt;p&gt;I just got home from the &lt;em&gt;Innovation and Technology in Computer Science&lt;/em&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-10-11T16:57:00+02:00</updated><entry><title>Java's Optional: Why you should prefer it over null</title><link href="https://slar.se/javas-optional-why-you-should-prefer-it-over-null.html" rel="alternate"></link><published>2019-10-11T16:57:00+02:00</published><updated>2019-10-11T16:57:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-10-11:/javas-optional-why-you-should-prefer-it-over-null.html</id><summary type="html">&lt;p&gt;Null references are problematic, to say the least. Tony Hoare (inventor of the
+null reference) even went as far to say call them his &lt;a href="https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions"&gt;"billion dollar
+mistake"&lt;/a&gt;.
+In this article, I first make a cursory exploration of why null references are
+so problematic, and then have a look at Java's …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Null references are problematic, to say the least. Tony Hoare (inventor of the
+null reference) even went as far to say call them his &lt;a href="https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions"&gt;"billion dollar
+mistake"&lt;/a&gt;.
+In this article, I first make a cursory exploration of why null references are
+so problematic, and then have a look at Java's proposed solution: the
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; class&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Why null is problematic&lt;/h1&gt;
+&lt;p&gt;There are many reasons why null is problematic, but there are a few that are
+fairly easy to illustrate. I will be using the
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get(java.lang.Object)"&gt;&lt;code&gt;Map.get&lt;/code&gt;&lt;/a&gt;
+method as an example, as it returns null if the key provided to it is not in
+the map. For all of the examples, assume that there is a variable &lt;code&gt;Map&amp;lt;Integer,
+String&amp;gt; map&lt;/code&gt; in the current scope.&lt;/p&gt;
+&lt;h2&gt;null circumvents the type system&lt;/h2&gt;
+&lt;p&gt;Java has a fairly rigorous type system (although it's not entirely sound, I may
+do an article on that later!). The type system can't help with null, however.
+Any variable of reference type can either contain a reference to an object of
+that type, or null. This leads to a whole lot of code that looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;valueUpper&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;valueUpper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;// else do something different with the knowledge that value is null&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;While you may argue that null checks are pretty ugly, the real problem is that
+they are not enforced by the type system. The could might just as well have been
+written like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;valueUpper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The program could crash with a &lt;code&gt;NullPointerException&lt;/code&gt;. That's not great. But it
+can be even worse. What if the call to &lt;code&gt;value.toUpperCase()&lt;/code&gt; occurs in an
+entirely different part of the program, perhaps hours or even days after
+&lt;code&gt;Map.get&lt;/code&gt; returned null? Then not only do you have a crash, but a crash that
+can potentially be very difficult to diagnose.&lt;/p&gt;
+&lt;h2&gt;It's easy to miss that a method can return null&lt;/h2&gt;
+&lt;p&gt;The cause of the previous problem is often that it's not always obvious that a
+method may return null. If you have a look at the &lt;a href="https://github.com/openjdk/jdk/blob/0dbfc97c05218ffd10242901d73c0715ccb53bf3/src/java.base/share/classes/java/util/Map.java#L217-L242"&gt;documentation for
+Map.get&lt;/a&gt;,
+you'll see that it says that it may return null a little here and there, and
+it's pretty clear about that. But still, a careless developer might miss this,
+and there's also the fact that many methods are &lt;em&gt;not&lt;/em&gt; this well documented.&lt;/p&gt;
+&lt;h2&gt;Why not just throw an exception instead?&lt;/h2&gt;
+&lt;p&gt;One question you may ask is, why even return null, why not just throw an
+exception? Indeed, throwing an exception may be a good solution in many cases,
+but sometimes it just isn't desirable. In the case of &lt;code&gt;Map.get&lt;/code&gt;, it's mostly
+about efficiency. If &lt;code&gt;Map.get&lt;/code&gt; were to throw an exception when the key was
+missing, you'd essentially have two alternatives. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Catch the exception.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;try&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;catch&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NoSuchElementException&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;// handle error&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That's both ugly, and very inefficient if it is often the case that the key is
+missing. Catching an exception involves a whole lot of work for the JVM, so you
+really do not want to do this for an operation that you often perform.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Look before you leap&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;containsKey&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;// else handle missing keys&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is not too ugly, but it is inefficient as the map has to be traversed twice:
+once to check if it contains the key, and once more to fetch the value
+associated with the key. Throwing an exception becomes even more undesirable if
+you're using
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"&gt;Streams&lt;/a&gt;.
+So, I think we can safely conclude that throwing an exception is not the
+be-all-end-all solution.&lt;/p&gt;
+&lt;h1&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; to the rescue&lt;/h1&gt;
+&lt;p&gt;Using &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;
+class&lt;/a&gt;, we
+solve the issues discussed previously. An &lt;code&gt;Optional&lt;/code&gt; is simply a container for
+another object that may or may not be null.
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#get--"&gt;&lt;code&gt;Optional.get&lt;/code&gt;&lt;/a&gt;
+returns the contained object if present, or throws a &lt;code&gt;NoSuchElementException&lt;/code&gt; if
+it is not (i.e. it is null).
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#isPresent--"&gt;&lt;code&gt;Optional.isPresent&lt;/code&gt;&lt;/a&gt;
+lets us check first if the value is present, to avoid an exception if it is not.
+&lt;strong&gt;Let's pretend&lt;/strong&gt; like there's a method &lt;code&gt;Map.getOptional&lt;/code&gt; that returns an
+&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; instead of just &lt;code&gt;T&lt;/code&gt;. We then have several options.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; There is no &lt;code&gt;Map.getOptional&lt;/code&gt; method, this is just
+hypothetical. We'll see toward the end of the article how one can wrap
+&lt;code&gt;Map.get&lt;/code&gt; to create a &lt;code&gt;getOptional&lt;/code&gt; method.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Retrieve the value without checking if it is present&lt;/h2&gt;
+&lt;p&gt;If you're certain that the value will be present, you may simply retrieve it
+immediately.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// `value` will either be non-null, or we crash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This may at first glance just look like more work than previously, two &lt;code&gt;get&lt;/code&gt;
+calls instead of one. The benefit here is that the programmer is extremely
+unlikely to miss the fact that the returned value may not be present, as the
+return value itself has the type &lt;code&gt;Optional&amp;lt;String&amp;gt;&lt;/code&gt;, and the type system will
+scream bloody murder if they try to use the &lt;code&gt;Optional&amp;lt;String&amp;gt;&lt;/code&gt; value like a
+&lt;code&gt;String&lt;/code&gt;. Requiring that extra &lt;code&gt;get&lt;/code&gt; &lt;em&gt;forces&lt;/em&gt; the programmer to make a conscious
+choice of how to handle errors. Now, this may crash with a
+&lt;code&gt;NoSuchElementException&lt;/code&gt;, but as &lt;code&gt;Optional&lt;/code&gt; values typically are not passed
+around, the is unlikely to happen far from where the &lt;code&gt;Optional&lt;/code&gt; was produced.&lt;/p&gt;
+&lt;h2&gt;Check if the object is present&lt;/h2&gt;
+&lt;p&gt;If you're uncertain whether the value will be present, you may simply check for
+it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isPresent&lt;/span&gt;&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is very much like the null check we had before, but it's supported by the
+type system.&lt;/p&gt;
+&lt;h2&gt;Use a fallback value&lt;/h2&gt;
+&lt;p&gt;Often when we don't want the code to crash, we have a fallback value. &lt;code&gt;Optional&lt;/code&gt;
+has a method to handle that.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;).&lt;/span&gt;&lt;span class="na"&gt;orElse&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Nothing here :)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If the value is present, it is returned. Otherwise, we get &lt;code&gt;"Nothing here :)"&lt;/code&gt;.
+This, I think, is one of the cleanest and tidiest uses of &lt;code&gt;Optional&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;What about drawbacks?&lt;/h2&gt;
+&lt;p&gt;Of course, &lt;code&gt;Optional&lt;/code&gt; has drawbacks. As every single object is wrapped in
+another object, there will be an increase in memory consumption. The extra
+method call &lt;em&gt;may&lt;/em&gt; result in a noticeable performance penalty, but I don't dare
+say anything concrete about that without running some tests (the JVM is pretty
+darn good at inlining and optimizing). Perhaps, your most performance critical
+segments of code should not use &lt;code&gt;Optional&lt;/code&gt;. But the vast majority of your code
+is not performance critical, so most often it will be a moot point. Finally,
+there's also a little bit of extra boilerplate to deal with, which also may not
+be desirable.&lt;/p&gt;
+&lt;h1&gt;Alright, I'm sold, how do I &lt;code&gt;Optional&lt;/code&gt;?&lt;/h1&gt;
+&lt;p&gt;We've already had a look at how to consume &lt;code&gt;Optional&lt;/code&gt;s. But how do we produce
+them? It's really quite easy. The three most important methods are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#of-T-"&gt;&lt;code&gt;static &amp;lt;T&amp;gt; Optional.of(T value)&lt;/code&gt;&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;A static method that wraps a value in an &lt;code&gt;Optional&lt;/code&gt; instance. Throws an
+  exception if &lt;code&gt;value&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#empty--"&gt;&lt;code&gt;static &amp;lt;T&amp;gt; Optional.empty()&lt;/code&gt;&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;A static method that returns an empty &lt;code&gt;Optional&lt;/code&gt; instance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#ofNullable-T-"&gt;&lt;code&gt;static &amp;lt;T&amp;gt; Optional.ofNullable(T value)&lt;/code&gt;&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;A static method that wraps a value in an &lt;code&gt;Optional&lt;/code&gt;. The value may be
+  &lt;code&gt;null&lt;/code&gt;, which essentially produces an empty &lt;code&gt;Optional&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The &lt;code&gt;of&lt;/code&gt; and &lt;code&gt;empty&lt;/code&gt; methods are the ones you want to produce &lt;code&gt;Optional&lt;/code&gt; values
+from scratch. Here's a useless but simple example: an identity function for
+integer values that is only defined for &lt;code&gt;n &amp;gt;= 0&lt;/code&gt;. Using null, it would look
+like this.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/**&lt;/span&gt;
+&lt;span class="cm"&gt; * @param n An Integer value.&lt;/span&gt;
+&lt;span class="cm"&gt; * @return n iff n &amp;gt;= 0, otherwise null&lt;/span&gt;
+&lt;span class="cm"&gt; */&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This comes with all of the previously discussed problems associated with null
+return values. Here's the equivalent method using &lt;code&gt;Optional&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/**&lt;/span&gt;
+&lt;span class="cm"&gt; * @param n An Integer value.&lt;/span&gt;
+&lt;span class="cm"&gt; * @return An Optional with n iff n &amp;gt;= 0, otherwise an empty Optional.&lt;/span&gt;
+&lt;span class="cm"&gt; */&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;of&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;empty&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice how both the documentation, and the return value itself, clearly states
+that the value returned from the method may not be present. It is more or less
+impossible to miss that this method may return an empty value (as long as you
+know what &lt;code&gt;Optional&lt;/code&gt; is, that is).&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;ofNullable&lt;/code&gt; method is great for wrapping existing methods that may return
+null. For example, assuming that we have a the &lt;code&gt;Map&amp;lt;Integer, String&amp;gt; map&lt;/code&gt; field
+from earlier, we can wrap its &lt;code&gt;get&lt;/code&gt; method in our own &lt;code&gt;getOptional&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;getOptional&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// might be null!&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ofNullable&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This lets us easily create APIs that contain two versions of, for example, a
+getter method: one that returns &lt;code&gt;T&lt;/code&gt;, and one that returns &lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;. And
+that's all the essentials. Not that hard, right?&lt;/p&gt;
+&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;Optional&lt;/code&gt; solves most of the problems with null references in a mostly
+elegant way. The most important thing with &lt;code&gt;Optional&lt;/code&gt; is that it is a strong
+form of documentation, which states both to the programmer and to the compiler
+that the value asked for may not have been found. There's also the fact that
+&lt;code&gt;Optional&lt;/code&gt; provides both the null-check approach using &lt;code&gt;isPresent&lt;/code&gt;, and the
+exception-throwing approach by calling &lt;code&gt;get&lt;/code&gt; without checking for presence. As
+such, the caller of a method gets to decide which of these approaches to use,
+increasing flexibility. &lt;code&gt;Optional&lt;/code&gt; is also a critical part of the &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"&gt;Stream
+API&lt;/a&gt;,
+which would be forced to throw exceptions left and right without it (and you'd
+be forced to catch them!). And although the use of &lt;code&gt;Optional&lt;/code&gt; may incur a
+performance penalty, it is trivial to provide two versions of performance
+critical methods: one that returns an &lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; and one that just returns
+&lt;code&gt;T&lt;/code&gt;. If you want to learn more about &lt;code&gt;Optional&lt;/code&gt;, I recommend first checking out
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"&gt;the API
+documentation&lt;/a&gt;.
+I also encourage having a look at the &lt;a href="https://github.com/openjdk/jdk/blob/a95a39a04e066548764e15bfc793a6c242a22bb7/src/java.base/share/classes/java/util/Optional.java"&gt;source
+code&lt;/a&gt;,
+it's a surprisingly simple class that provides all of this functionality!&lt;/p&gt;</content><category term="java"></category></entry><entry><title>RepoBee (and Simon) at ITiCSE 2019!</title><link href="https://slar.se/repobee-and-simon-at-iticse-2019.html" rel="alternate"></link><published>2019-07-22T23:02:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/repobee-and-simon-at-iticse-2019.html</id><summary type="html">&lt;p&gt;I just got home from the &lt;em&gt;Innovation and Technology in Computer Science&lt;/em&gt;
 (ITiCSE) conference in lovely Aberdeen, Scotland. I was there to present a small
 experience paper on developing and using &lt;a href="https://repobee.org"&gt;RepoBee&lt;/a&gt;, an open
 source tool for generating and managing large amounts of Git repositories for

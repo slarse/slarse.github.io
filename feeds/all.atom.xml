@@ -1,5 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-10-11T16:57:00+02:00</updated><entry><title>Java's Optional: Why you should prefer it over null</title><link href="https://slar.se/javas-optional-why-you-should-prefer-it-over-null.html" rel="alternate"></link><published>2019-10-11T16:57:00+02:00</published><updated>2019-10-11T16:57:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-10-11:/javas-optional-why-you-should-prefer-it-over-null.html</id><summary type="html">&lt;p&gt;Null references are problematic, to say the least. Tony Hoare (inventor of the
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-11-10T18:56:00+01:00</updated><entry><title>Don't use String for method options, use an enum!</title><link href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html" rel="alternate"></link><published>2019-11-10T18:56:00+01:00</published><updated>2019-11-10T18:56:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-11-10:/dont-use-string-for-method-options-use-an-enum.html</id><summary type="html">&lt;p&gt;In this article, we are going to have a look at a method that accepts an option.
+That is to say, it accepts an argument that somehow decides how it operates. If
+you use a lot of libraries in your day-to-day programming, you're bound to come
+across methods that accept …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this article, we are going to have a look at a method that accepts an option.
+That is to say, it accepts an argument that somehow decides how it operates. If
+you use a lot of libraries in your day-to-day programming, you're bound to come
+across methods that accept &lt;code&gt;String&lt;/code&gt; values as such options, and you've probably
+been infuriated by you misspelling the options, or just trying to figure out
+what options there are in the first place. That suggests that there must be a
+better solution, and as you may have figured out by now,
+&lt;a href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html"&gt;enums&lt;/a&gt; is that
+solution.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This article discusses enums in Java, but the very same arguments
+are valid for any language that has support for enum types, or something
+comparable.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;The problem: What options do I have?&lt;/h2&gt;
+&lt;p&gt;Consider the following method that formats a &lt;code&gt;String&lt;/code&gt; according to an option
+supplied as another &lt;code&gt;String&lt;/code&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Yes, this is a somewhat contrived example, but bear with me!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;upper&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lower&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toLowerCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;IllegalStateException&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Internal errror, unmatched option &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We could then use the method something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;upper&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Can you see any problems with this? Well first of all, if you don't have access
+to the source, how do you know which options can be passed? There are an
+infinite amount of strings, after all. At best, the Javadoc will say precisely
+which values are valid options, &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#getAttribute-java.nio.file.Path-java.lang.String-java.nio.file.LinkOption...-"&gt;but that is not always the case even in the
+Java standard
+library&lt;/a&gt;.
+But even if all of the options are clearly documented at one point, it would be
+so easy for a developer add or remove an option, and forget to enact the
+corresponding change in the Javadoc. It is also difficult to have automatic
+checks that actually verify that all possible options are documented. And even
+assuming that all options are properly documented at all times, the compiler
+can't distinguish which &lt;code&gt;String&lt;/code&gt; values are valid and which are not, so a user
+misspelling an option won't know until runtime.&lt;/p&gt;
+&lt;h2&gt;The solution: enums!&lt;/h2&gt;
+&lt;p&gt;My goal here is not to explain the ins and outs of what enums are, but rather
+show a use case. In short, an enum is a data type with a (typically very)
+limited amount of possible values (&lt;a href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html"&gt;you can read more about it
+here&lt;/a&gt;).
+Now, let's instead define this enum type:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;FormatOption&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And refactor the method with it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FormatOption&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toLowerCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;IllegalStateException&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Internal errror, unmatched option &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This method can then be used like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FormatOption&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With this small alteration, we have eliminated &lt;em&gt;all&lt;/em&gt; of the problems mentioned
+before. The possible values for the &lt;code&gt;option&lt;/code&gt; argument are now self-documented
+in the &lt;code&gt;FormatOption&lt;/code&gt; enum. Additionally, any modern IDE will kindly list the
+possible values when you type &lt;code&gt;FormatOption.&lt;/code&gt;, such that a programmer does not
+even necessarily need to consult the documentation, assuming that the enum
+values have descriptive enough names. The compiler can als distinguish between
+&lt;code&gt;FormatOption.UPPER&lt;/code&gt; and a misspelling such as &lt;code&gt;FormatOption.UPER&lt;/code&gt;, as the
+latter is not defined, so runtime errors due to invalid options is no longer a
+problem.&lt;/p&gt;
+&lt;h2&gt;What's the catch?&lt;/h2&gt;
+&lt;p&gt;So what's the catch? Well, if you have many methods like this, you'll end up
+with a lot of enum types. Personally, I think that's totally worth it, and you
+could also nest the nums inside the classes that use them to reduce their
+overall footprint in the project. The whole thing could then look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Formatter&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toLowerCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+            &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;IllegalStateException&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Internal errror, unmatched option &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Didn't add that much complexity now, did it?&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;If you have a method that you want to pass options to, &lt;em&gt;use enums&lt;/em&gt;.
+That's really all there is to it. Enums are quite widely used in the Java
+standard library as well, such as
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html"&gt;StandardCopyOption&lt;/a&gt;,
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardOpenOption.html"&gt;StandardOpenOption&lt;/a&gt; and
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/LinkOption.html"&gt;LinkOption&lt;/a&gt;
+in the &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/package-summary.html"&gt;&lt;code&gt;java.nio.file&lt;/code&gt;
+API&lt;/a&gt;,
+which are used much in the same way as I used the enum in this article.
+Hopefully, having read this article, you won't be creating any more APIs that
+accept &lt;code&gt;String&lt;/code&gt; options!&lt;/p&gt;</content><category term="java"></category><category term="enums"></category></entry><entry><title>Java's Optional: Why you should prefer it over null</title><link href="https://slar.se/javas-optional-why-you-should-prefer-it-over-null.html" rel="alternate"></link><published>2019-10-11T16:57:00+02:00</published><updated>2019-10-11T16:57:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-10-11:/javas-optional-why-you-should-prefer-it-over-null.html</id><summary type="html">&lt;p&gt;Null references are problematic, to say the least. Tony Hoare (inventor of the
 null reference) even went as far to say call them his &lt;a href="https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions"&gt;"billion dollar
 mistake"&lt;/a&gt;.
 In this article, I first make a cursory exploration of why null references are

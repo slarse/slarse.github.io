@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Don&#39;t use String for method options, use an enum! - slar.se</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/pygment.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="slar.se Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+              <li>
+                <a href="https://slar.se/pages/about.html">About</a>
+              </li>
+              <li>
+                <a href="https://slar.se/pages/essayspublications.html">Essays/Publications</a>
+              </li>
+              <li>
+                <a href="https://slar.se/pages/projects.html">Projects</a>
+              </li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">slar.se</a></h1>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Sun 10 November 2019
+</abbr> <h1>
+  <a href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html" rel="bookmark"
+     title="Permalink to Don&#39;t use String for method options, use an enum!">
+    Don't use String for method options, use an enum!
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>In this article, we are going to have a look at a method that accepts an option.
+That is to say, it accepts an argument that somehow decides how it operates. If
+you use a lot of libraries in your day-to-day programming, you're bound to come
+across methods that accept <code>String</code> values as such options, and you've probably
+been infuriated by you misspelling the options, or just trying to figure out
+what options there are in the first place. That suggests that there must be a
+better solution, and as you may have figured out by now,
+<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html">enums</a> is that
+solution.</p>
+<blockquote>
+<p><strong>Note:</strong> This article discusses enums in Java, but the very same arguments
+are valid for any language that has support for enum types, or something
+comparable.</p>
+</blockquote>
+<h2>The problem: What options do I have?</h2>
+<p>Consider the following method that formats a <code>String</code> according to an option
+supplied as another <code>String</code>:</p>
+<blockquote>
+<p>Yes, this is a somewhat contrived example, but bear with me!</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">format</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">String</span> <span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="s">&quot;upper&quot;</span><span class="o">:</span>
+            <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
+        <span class="k">case</span> <span class="s">&quot;lower&quot;</span><span class="o">:</span>
+            <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">();</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Internal errror, unmatched option &quot;</span> <span class="o">+</span> <span class="n">option</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>We could then use the method something like this:</p>
+<div class="highlight"><pre><span></span><span class="n">format</span><span class="o">(</span><span class="s">&quot;hello&quot;</span><span class="o">,</span> <span class="s">&quot;upper&quot;</span><span class="o">);</span>
+</pre></div>
+
+
+<p>Can you see any problems with this? Well first of all, if you don't have access
+to the source, how do you know which options can be passed? There are an
+infinite amount of strings, after all. At best, the Javadoc will say precisely
+which values are valid options, <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#getAttribute-java.nio.file.Path-java.lang.String-java.nio.file.LinkOption...-">but that is not always the case even in the
+Java standard
+library</a>.
+But even if all of the options are clearly documented at one point, it would be
+so easy for a developer add or remove an option, and forget to enact the
+corresponding change in the Javadoc. It is also difficult to have automatic
+checks that actually verify that all possible options are documented. And even
+assuming that all options are properly documented at all times, the compiler
+can't distinguish which <code>String</code> values are valid and which are not, so a user
+misspelling an option won't know until runtime.</p>
+<h2>The solution: enums!</h2>
+<p>My goal here is not to explain the ins and outs of what enums are, but rather
+show a use case. In short, an enum is a data type with a (typically very)
+limited amount of possible values (<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html">you can read more about it
+here</a>).
+Now, let's instead define this enum type:</p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">enum</span> <span class="n">FormatOption</span> <span class="o">{</span>
+    <span class="n">UPPER</span><span class="o">,</span>
+    <span class="n">LOWER</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>And refactor the method with it:</p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">format</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">FormatOption</span> <span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="n">UPPER</span><span class="o">:</span>
+            <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
+        <span class="k">case</span> <span class="n">LOWER</span><span class="o">:</span>
+            <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">();</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Internal errror, unmatched option &quot;</span> <span class="o">+</span> <span class="n">option</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>This method can then be used like:</p>
+<div class="highlight"><pre><span></span><span class="n">format</span><span class="o">(</span><span class="s">&quot;hello&quot;</span><span class="o">,</span> <span class="n">FormatOption</span><span class="o">.</span><span class="na">UPPER</span><span class="o">);</span>
+</pre></div>
+
+
+<p>With this small alteration, we have eliminated <em>all</em> of the problems mentioned
+before. The possible values for the <code>option</code> argument are now self-documented
+in the <code>FormatOption</code> enum. Additionally, any modern IDE will kindly list the
+possible values when you type <code>FormatOption.</code>, such that a programmer does not
+even necessarily need to consult the documentation, assuming that the enum
+values have descriptive enough names. The compiler can als distinguish between
+<code>FormatOption.UPPER</code> and a misspelling such as <code>FormatOption.UPER</code>, as the
+latter is not defined, so runtime errors due to invalid options is no longer a
+problem.</p>
+<h2>What's the catch?</h2>
+<p>So what's the catch? Well, if you have many methods like this, you'll end up
+with a lot of enum types. Personally, I think that's totally worth it, and you
+could also nest the nums inside the classes that use them to reduce their
+overall footprint in the project. The whole thing could then look like this:</p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Formatter</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">enum</span> <span class="n">Option</span> <span class="o">{</span>
+        <span class="n">UPPER</span><span class="o">,</span>
+        <span class="n">LOWER</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">format</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">Option</span> <span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">result</span><span class="o">;</span>
+        <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="n">UPPER</span><span class="o">:</span>
+                <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
+            <span class="k">case</span> <span class="n">LOWER</span><span class="o">:</span>
+                <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">();</span>
+            <span class="k">default</span><span class="o">:</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Internal errror, unmatched option &quot;</span> <span class="o">+</span> <span class="n">option</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Didn't add that much complexity now, did it?</p>
+<h2>Summary</h2>
+<p>If you have a method that you want to pass options to, <em>use enums</em>.
+That's really all there is to it. Enums are quite widely used in the Java
+standard library as well, such as
+<a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardCopyOption.html">StandardCopyOption</a>,
+<a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/StandardOpenOption.html">StandardOpenOption</a> and
+<a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/LinkOption.html">LinkOption</a>
+in the <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/package-summary.html"><code>java.nio.file</code>
+API</a>,
+which are used much in the same way as I used the enum in this article.
+Hopefully, having read this article, you won't be creating any more APIs that
+accept <code>String</code> options!</p>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>

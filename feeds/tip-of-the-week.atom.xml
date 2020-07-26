@@ -120,7 +120,7 @@ copies of the repository and thereby having to deal with synchronizing multiple
 local copies (which can quickly get hard to manage). I find myself using this
 more and more, and if you find it useful yourself I highly recommend reading up
 on it more in its man-page (either with &lt;code&gt;man git-worktree&lt;/code&gt; or
-&lt;a href="https://git-scm.com/docs/git-worktree"&gt;online&lt;/a&gt;).&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category><category term="git"></category></entry><entry><title>Redirecting stdout and stderr in bash</title><link href="https://slar.se/redirecting-stdout-and-stderr-in-bash.html" rel="alternate"></link><published>2019-06-23T21:37:00+02:00</published><updated>2019-06-23T21:37:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-23:/redirecting-stdout-and-stderr-in-bash.html</id><summary type="html">&lt;p&gt;A couple of weeks ago I covered some basic I/O redirection in bash (see
+&lt;a href="https://git-scm.com/docs/git-worktree"&gt;online&lt;/a&gt;).&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category><category term="git"></category></entry><entry><title>Redirecting stdout and stderr in bash</title><link href="https://slar.se/redirecting-stdout-and-stderr-in-bash.html" rel="alternate"></link><published>2019-06-23T21:37:00+02:00</published><updated>2019-06-23T21:37:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-23:/redirecting-stdout-and-stderr-in-bash.html</id><summary type="html">&lt;p&gt;A couple of weeks ago I covered some basic I/O redirection in bash (see
 &lt;a href="https://slar.se/io-redirection-in-bash.html"&gt;I/O redirection in bash&lt;/a&gt;). Well, there's actually
 a lot more to it, so for this TOTW I thought I'd touch on a few more advanced
 usages.&lt;/p&gt;
@@ -171,8 +171,8 @@ and it's often useful to redirect both. Here's a small Python script &lt;code&gt
 that outputs on line on stdout and one on stderr.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some standard output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some error output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some standard output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some error output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -217,7 +217,7 @@ some error output
 
 &lt;p&gt;And with that and the previous article, I've shared pretty much everything I
 feel is useful with output redirection. In some future Tip of the Week, I'm sure
-I'll get into input redirecton as well, as it's much the same.&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Technical e-books from Humble Bundle</title><link href="https://slar.se/technical-e-books-from-humble-bundle.html" rel="alternate"></link><published>2019-06-13T09:12:00+02:00</published><updated>2019-06-13T09:12:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-13:/technical-e-books-from-humble-bundle.html</id><summary type="html">&lt;p&gt;Another Tip of the Week, in the same week as the previous one (because I've
+I'll get into input redirecton as well, as it's much the same.&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Technical e-books from Humble Bundle</title><link href="https://slar.se/technical-e-books-from-humble-bundle.html" rel="alternate"></link><published>2019-06-13T09:12:00+02:00</published><updated>2019-06-13T09:12:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-13:/technical-e-books-from-humble-bundle.html</id><summary type="html">&lt;p&gt;Another Tip of the Week, in the same week as the previous one (because I've
 been slacking off). This one is very simple, and rather non-technical. I simply
 want to direct attention toward
 &lt;a href="https://www.humblebundle.com/"&gt;humblebundle.com&lt;/a&gt;, and their quite frequent book
@@ -252,7 +252,7 @@ toward charity. And that's all there is to it!&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; I am not sponsored by Humble in any way, I am simply a
 long-time user of the service.&lt;/p&gt;
-&lt;/blockquote&gt;</content><category term="totw"></category></entry><entry><title>I/O redirection in bash</title><link href="https://slar.se/io-redirection-in-bash.html" rel="alternate"></link><published>2019-06-11T23:16:00+02:00</published><updated>2019-06-11T23:16:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-11:/io-redirection-in-bash.html</id><summary type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
+&lt;/blockquote&gt;</content><category term="Tip of the Week"></category><category term="totw"></category></entry><entry><title>I/O redirection in bash</title><link href="https://slar.se/io-redirection-in-bash.html" rel="alternate"></link><published>2019-06-11T23:16:00+02:00</published><updated>2019-06-11T23:16:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-11:/io-redirection-in-bash.html</id><summary type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
 weeks". It turns out that it's pretty difficult to find the time to actually
 write something every week. but I'll keep trying. With that out of the way,
 let's head into the subject matter of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
@@ -355,7 +355,7 @@ already does exist. I rarely use a truncating redirect, as it is an easy thing
 to accidentally truncate a file you did not mean to touch. I recommend to always
 use an appending redirect, unless you have a good reason to truncate the
 targeted file.&lt;/p&gt;
-&lt;p&gt;And that's it for this TOTW!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Piping commands in bash</title><link href="https://slar.se/piping-commands-in-bash.html" rel="alternate"></link><published>2019-05-21T00:00:00+02:00</published><updated>2019-05-21T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-21:/piping-commands-in-bash.html</id><summary type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
+&lt;p&gt;And that's it for this TOTW!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Piping commands in bash</title><link href="https://slar.se/piping-commands-in-bash.html" rel="alternate"></link><published>2019-05-21T00:00:00+02:00</published><updated>2019-05-21T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-21:/piping-commands-in-bash.html</id><summary type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
 fundamental feature of the bash shell (actually, most shells), called &lt;em&gt;piping&lt;/em&gt;.
 Put simply, piping takes the output of one command and provides it as input to
 the next. Here's a simple example of running &lt;code&gt;ls&lt;/code&gt; and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
@@ -385,7 +385,7 @@ practically as much as you'd like. For example, if we want to get amount of
 found. Let's move on to I/O redirection. Piping allows you to easily compose
 powerful programs from simple commands, and is a very intuitive way to work.
 Next week, I'll cover I/O redirection, which is another super useful feature of
-bash that's a bit more complicated.&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Using bash aliases</title><link href="https://slar.se/using-bash-aliases.html" rel="alternate"></link><published>2019-05-06T12:19:00+02:00</published><updated>2019-05-06T12:19:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-06:/using-bash-aliases.html</id><summary type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
+bash that's a bit more complicated.&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Using bash aliases</title><link href="https://slar.se/using-bash-aliases.html" rel="alternate"></link><published>2019-05-06T12:19:00+02:00</published><updated>2019-05-06T12:19:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-06:/using-bash-aliases.html</id><summary type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
 to figure out why it was useful. That something is bash aliases, and I'll now
 walk you through how to create aliases, and the two main ways in which I use
 them (although I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
@@ -401,7 +401,7 @@ first word of a simple command&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;In other words, I can define a command that is substituted for some other
 command. Creating an alias is very simple. The syntax looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias &amp;lt;NAME&amp;gt;=&amp;lt;COMMAND&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;alias &amp;lt;NAME&amp;gt;=&amp;lt;COMMAND&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -470,7 +470,7 @@ se.slar.awesome.project.Main&lt;/code&gt; over and over, I define an alias for i
 As defining an alias is so effortless, I tend to do it even if I know I'm just
 gonna use the complex command a couple of times.&lt;/p&gt;
 &lt;p&gt;And that's all I wanted to cover, hope you enjoyed it and stay tuned for the
-next TOTW coming next week!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Git local</title><link href="https://slar.se/git-local.html" rel="alternate"></link><published>2019-04-29T22:58:00+02:00</published><updated>2019-04-29T22:58:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-29:/git-local.html</id><summary type="html">&lt;p&gt;Nowadays, Git is almost ubiquitous in software development. Most developers also
+next TOTW coming next week!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Git local</title><link href="https://slar.se/git-local.html" rel="alternate"></link><published>2019-04-29T22:58:00+02:00</published><updated>2019-04-29T22:58:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-29:/git-local.html</id><summary type="html">&lt;p&gt;Nowadays, Git is almost ubiquitous in software development. Most developers also
 know that Git is a &lt;em&gt;decentralized&lt;/em&gt; version control system, meaning that every
 copy of the repository carries the full revision history, and there is no
 "central" repository. A consequence of the decentralized aspect of Git is that
@@ -533,7 +533,7 @@ Branch &lt;span class="s1"&gt;&amp;#39;master&amp;#39;&lt;/span&gt; &lt;span cla
 
 &lt;p&gt;Now my previously local-only repo is also in GitHub, and I can push and pull
 from it as usual. That's all for this tip of the week, it's just meant to spark
-an idea that took me quite a while to come up with myself!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category><category term="git"></category></entry><entry><title>History and history expansion in bash</title><link href="https://slar.se/history-and-history-expansion-in-bash.html" rel="alternate"></link><published>2019-04-22T11:59:00+02:00</published><updated>2019-04-22T11:59:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-22:/history-and-history-expansion-in-bash.html</id><summary type="html">&lt;p&gt;Admittedly, this TOTW is one day late, so this week there will be 2xTOTW! In
+an idea that took me quite a while to come up with myself!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category><category term="git"></category></entry><entry><title>History and history expansion in bash</title><link href="https://slar.se/history-and-history-expansion-in-bash.html" rel="alternate"></link><published>2019-04-22T11:59:00+02:00</published><updated>2019-04-22T11:59:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-22:/history-and-history-expansion-in-bash.html</id><summary type="html">&lt;p&gt;Admittedly, this TOTW is one day late, so this week there will be 2xTOTW! In
 any case, the tip I want to bring up here is very much related to last week's
 TOTW on &lt;a href="https://slar.se/reverse-search-in-bash.html"&gt;Reverse search in bash&lt;/a&gt;. Sometimes,
 reverse searching just doesn't work out. You may not be quite …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Admittedly, this TOTW is one day late, so this week there will be 2xTOTW! In
@@ -617,7 +617,7 @@ filter the output of &lt;code&gt;history&lt;/code&gt; by &lt;em&gt;piping&lt;/em
 &lt;p&gt;I will most likely do another TOTW on piping, but the basic principle is that
 &lt;code&gt;|&lt;/code&gt; takes the output from the command on the left and feeds it as input to the
 command on the right. That's it for this TOTW, stay tuned for the next one
-coming on Sunday the 28th of April!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
+coming on Sunday the 28th of April!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
 find a command that's probably waaaay up there? Would you be surprised if I
 told you there's a better way? When you want to re-use a command you've written
 previously, and you know it's not the previous …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
@@ -647,17 +647,17 @@ part and press &lt;code&gt;enter&lt;/code&gt; right away to execute the command 
 however, the result you get first isn't what you want (obviously, just typing
 &lt;code&gt;git push&lt;/code&gt; would have been faster in this case).  You can then press &lt;code&gt;ctrl+r&lt;/code&gt;
 again to cycle to the next hit.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(reverse-i-search)`git&amp;#39;: git commit -a -m &amp;#39;Add module docstring to github_api module&amp;#39;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;(reverse-i-search)`git&amp;#39;: git commit -a -m &amp;#39;Add module docstring to github_api module&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Now there's a command that I might not want to have to type out again in its
 entirety, better showing why a reverse search may be useful. That's it for this
-week's TotW, check back next week for more!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Announcing Tip of the Week (TotW)</title><link href="https://slar.se/announcing-tip-of-the-week-totw.html" rel="alternate"></link><published>2019-04-09T23:15:00+02:00</published><updated>2019-04-09T23:15:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/announcing-tip-of-the-week-totw.html</id><summary type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
+week's TotW, check back next week for more!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Announcing Tip of the Week (TotW)</title><link href="https://slar.se/announcing-tip-of-the-week-totw.html" rel="alternate"></link><published>2019-04-09T23:15:00+02:00</published><updated>2019-04-09T23:15:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/announcing-tip-of-the-week-totw.html</id><summary type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
 a little series: Tip of the Week! Every week, I'll spend 30 minutes or so
 writing a very small article about some tip related to programming, Linux or
 technology in general. And no, this one does …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
 a little series: Tip of the Week! Every week, I'll spend 30 minutes or so
 writing a very small article about some tip related to programming, Linux or
 technology in general. And no, this one does not count, so I still have to
-write this week's TotW!&lt;/p&gt;</content><category term="totw"></category></entry></feed>
+write this week's TotW!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category></entry></feed>

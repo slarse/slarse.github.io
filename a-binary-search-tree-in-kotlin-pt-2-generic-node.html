@@ -190,7 +190,7 @@ us to perform more complex operations in the matchings. And that's it for the
 change the <code>Node</code> class, and do something like this:</p>
 <div class="highlight"><pre><span></span><span class="k">data</span> <span class="k">class</span> <span class="nc">Node</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">val</span> <span class="py">data</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="k">var</span> <span class="py">left</span><span class="p">:</span> <span class="n">ANode</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">,</span> <span class="k">var</span> <span class="py">right</span><span class="p">:</span> <span class="n">ANode</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">)</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">()</span>
 
-<span class="k">fun</span> <span class="err">&lt;</span><span class="nf">T</span> <span class="p">:</span> <span class="n">Comparable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">,</span> <span class="k">data</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="n">Comparable</span><span class="err">&lt;</span><span class="n">T</span><span class="p">&gt;</span><span class="err">&gt; </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">,</span> <span class="k">data</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">is</span> <span class="n">Empty</span> <span class="p">-&gt;</span> <span class="k">false</span>
     <span class="k">is</span> <span class="n">Node</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">-&gt;</span> <span class="k">when</span> <span class="p">{</span>
         <span class="k">data</span> <span class="p">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="k">data</span> <span class="p">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span>
@@ -287,7 +287,7 @@ Here is what the working class hierarchy looks like:</p>
 
 <p><code>contains</code> now looks like this:</p>
 <div class="highlight"><pre><span></span><span class="c1">// check if data is contained in node</span>
-<span class="k">fun</span> <span class="err">&lt;</span><span class="nf">T</span> <span class="p">:</span> <span class="n">Comparable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> <span class="k">data</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="n">Comparable</span><span class="err">&lt;</span><span class="n">T</span><span class="p">&gt;</span><span class="err">&gt; </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> <span class="k">data</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">is</span> <span class="n">Empty</span> <span class="p">-&gt;</span> <span class="k">false</span>
     <span class="k">is</span> <span class="n">Node</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">-&gt;</span> <span class="k">when</span> <span class="p">{</span>
         <span class="k">data</span> <span class="p">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="k">data</span> <span class="p">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span>
@@ -318,7 +318,7 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
         <span class="k">var</span> <span class="py">right</span><span class="p">:</span> <span class="n">ANode</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">Empty</span><span class="p">)</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span>
 
 <span class="c1">// check if data is contained in node</span>
-<span class="k">fun</span> <span class="err">&lt;</span><span class="nf">T</span> <span class="p">:</span> <span class="n">Comparable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> <span class="k">data</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="n">Comparable</span><span class="err">&lt;</span><span class="n">T</span><span class="p">&gt;</span><span class="err">&gt; </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> <span class="k">data</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">is</span> <span class="n">Empty</span> <span class="p">-&gt;</span> <span class="k">false</span>
     <span class="k">is</span> <span class="n">Node</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">-&gt;</span> <span class="k">when</span> <span class="p">{</span>
         <span class="k">data</span> <span class="p">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="k">data</span> <span class="p">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="k">data</span><span class="p">)</span>
@@ -392,21 +392,9 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
     <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
+      <a href="https://slar.se/tag/bst.html">
           <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
+        bst
       </a>
     </span>
     <span class="tag-4">
@@ -415,22 +403,16 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
         gradle
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        javascript
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
+        exposed
       </a>
     </span>
     <span class="tag-3">
@@ -440,63 +422,21 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/podcast.html">
           <i class="fas fa-tag"></i>
         podcast
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
       </a>
     </span>
     <span class="tag-4">
@@ -505,16 +445,76 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
         html
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        kuizzy
+        kotlin
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
       </a>
     </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
       </a>
     </span>
 </p>

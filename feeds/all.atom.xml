@@ -22,21 +22,21 @@ supplied as another &lt;code&gt;String&lt;/code&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Yes, this is a somewhat contrived example, but bear with me!&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;upper&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lower&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toLowerCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-        &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;IllegalStateException&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Internal errror, unmatched option &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;upper&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lower&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toLowerCase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;IllegalStateException&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Internal errror, unmatched option &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;We could then use the method something like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;upper&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;upper&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -59,29 +59,29 @@ show a use case. In short, an enum is a data type with a (typically very)
 limited amount of possible values (&lt;a href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html"&gt;you can read more about it
 here&lt;/a&gt;).
 Now, let's instead define this enum type:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;FormatOption&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;FormatOption&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;And refactor the method with it:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FormatOption&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toLowerCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-        &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;IllegalStateException&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Internal errror, unmatched option &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FormatOption&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toLowerCase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+        &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;IllegalStateException&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Internal errror, unmatched option &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This method can then be used like:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FormatOption&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FormatOption&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;UPPER&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -99,24 +99,24 @@ problem.&lt;/p&gt;
 with a lot of enum types. Personally, I think that's totally worth it, and you
 could also nest the nums inside the classes that use them to reduce their
 overall footprint in the project. The whole thing could then look like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Formatter&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
-        &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Formatter&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
 
-    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-        &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toLowerCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-            &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
-                &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;IllegalStateException&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Internal errror, unmatched option &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-        &lt;span class="o"&gt;}&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;UPPER&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+            &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="n"&gt;LOWER&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toLowerCase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+            &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;throw&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;IllegalStateException&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Internal errror, unmatched option &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;option&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -132,7 +132,7 @@ in the &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/packa
 API&lt;/a&gt;,
 which are used much in the same way as I used the enum in this article.
 Hopefully, having read this article, you won't be creating any more APIs that
-accept &lt;code&gt;String&lt;/code&gt; options!&lt;/p&gt;</content><category term="java"></category><category term="enums"></category></entry><entry><title>Java's Optional: Why you should prefer it over null</title><link href="https://slar.se/javas-optional-why-you-should-prefer-it-over-null.html" rel="alternate"></link><published>2019-10-11T16:57:00+02:00</published><updated>2019-10-11T16:57:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-10-11:/javas-optional-why-you-should-prefer-it-over-null.html</id><summary type="html">&lt;p&gt;Null references are problematic, to say the least. Tony Hoare (inventor of the
+accept &lt;code&gt;String&lt;/code&gt; options!&lt;/p&gt;</content><category term="Programming"></category><category term="java"></category><category term="enums"></category></entry><entry><title>Java's Optional: Why you should prefer it over null</title><link href="https://slar.se/javas-optional-why-you-should-prefer-it-over-null.html" rel="alternate"></link><published>2019-10-11T16:57:00+02:00</published><updated>2019-10-11T16:57:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-10-11:/javas-optional-why-you-should-prefer-it-over-null.html</id><summary type="html">&lt;p&gt;Null references are problematic, to say the least. Tony Hoare (inventor of the
 null reference) even went as far to say call them his &lt;a href="https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions"&gt;"billion dollar
 mistake"&lt;/a&gt;.
 In this article, I first make a cursory exploration of why null references are
@@ -154,11 +154,11 @@ String&amp;gt; map&lt;/code&gt; in the current scope.&lt;/p&gt;
 do an article on that later!). The type system can't help with null, however.
 Any variable of reference type can either contain a reference to an object of
 that type, or null. This leads to a whole lot of code that looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;valueUpper&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;valueUpper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;valueUpper&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;valueUpper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="c1"&gt;// else do something different with the knowledge that value is null&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -166,8 +166,8 @@ that type, or null. This leads to a whole lot of code that looks like this:&lt;/
 &lt;p&gt;While you may argue that null checks are pretty ugly, the real problem is that
 they are not enforced by the type system. The could might just as well have been
 written like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;valueUpper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;valueUpper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -192,12 +192,12 @@ missing, you'd essentially have two alternatives. &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Catch the exception.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;try&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt; &lt;span class="k"&gt;catch&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NoSuchElementException&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;try&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;catch&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;NoSuchElementException&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="c1"&gt;// handle error&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -207,10 +207,10 @@ really do not want to do this for an operation that you often perform.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Look before you leap&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;containsKey&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;containsKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="c1"&gt;// else handle missing keys&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -242,8 +242,8 @@ hypothetical. We'll see toward the end of the article how one can wrap
 &lt;h2&gt;Retrieve the value without checking if it is present&lt;/h2&gt;
 &lt;p&gt;If you're certain that the value will be present, you may simply retrieve it
 immediately.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// `value` will either be non-null, or we crash&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// `value` will either be non-null, or we crash&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -259,11 +259,11 @@ around, the is unlikely to happen far from where the &lt;code&gt;Optional&lt;/co
 &lt;h2&gt;Check if the object is present&lt;/h2&gt;
 &lt;p&gt;If you're uncertain whether the value will be present, you may simply check for
 it:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isPresent&lt;/span&gt;&lt;span class="o"&gt;())&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;isPresent&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -272,7 +272,7 @@ type system.&lt;/p&gt;
 &lt;h2&gt;Use a fallback value&lt;/h2&gt;
 &lt;p&gt;Often when we don't want the code to crash, we have a fallback value. &lt;code&gt;Optional&lt;/code&gt;
 has a method to handle that.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;).&lt;/span&gt;&lt;span class="na"&gt;orElse&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Nothing here :)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="na"&gt;orElse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Nothing here :)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -315,12 +315,12 @@ like this.&lt;/p&gt;
 &lt;span class="cm"&gt; * @param n An Integer value.&lt;/span&gt;
 &lt;span class="cm"&gt; * @return n iff n &amp;gt;= 0, otherwise null&lt;/span&gt;
 &lt;span class="cm"&gt; */&lt;/span&gt;
-&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -330,12 +330,12 @@ return values. Here's the equivalent method using &lt;code&gt;Optional&lt;/code&
 &lt;span class="cm"&gt; * @param n An Integer value.&lt;/span&gt;
 &lt;span class="cm"&gt; * @return An Optional with n iff n &amp;gt;= 0, otherwise an empty Optional.&lt;/span&gt;
 &lt;span class="cm"&gt; */&lt;/span&gt;
-&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;of&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-    &lt;span class="o"&gt;}&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;empty&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nf"&gt;id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;of&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -346,10 +346,10 @@ know what &lt;code&gt;Optional&lt;/code&gt; is, that is).&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;ofNullable&lt;/code&gt; method is great for wrapping existing methods that may return
 null. For example, assuming that we have a the &lt;code&gt;Map&amp;lt;Integer, String&amp;gt; map&lt;/code&gt; field
 from earlier, we can wrap its &lt;code&gt;get&lt;/code&gt; method in our own &lt;code&gt;getOptional&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;getOptional&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// might be null!&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ofNullable&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;getOptional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// might be null!&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ofNullable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -375,7 +375,7 @@ critical methods: one that returns an &lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/
 documentation&lt;/a&gt;.
 I also encourage having a look at the &lt;a href="https://github.com/openjdk/jdk/blob/a95a39a04e066548764e15bfc793a6c242a22bb7/src/java.base/share/classes/java/util/Optional.java"&gt;source
 code&lt;/a&gt;,
-it's a surprisingly simple class that provides all of this functionality!&lt;/p&gt;</content><category term="java"></category></entry><entry><title>RepoBee (and Simon) at ITiCSE 2019!</title><link href="https://slar.se/repobee-and-simon-at-iticse-2019.html" rel="alternate"></link><published>2019-07-22T23:02:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/repobee-and-simon-at-iticse-2019.html</id><summary type="html">&lt;p&gt;I just got home from the &lt;em&gt;Innovation and Technology in Computer Science&lt;/em&gt;
+it's a surprisingly simple class that provides all of this functionality!&lt;/p&gt;</content><category term="Programming"></category><category term="java"></category></entry><entry><title>RepoBee (and Simon) at ITiCSE 2019!</title><link href="https://slar.se/repobee-and-simon-at-iticse-2019.html" rel="alternate"></link><published>2019-07-22T23:02:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/repobee-and-simon-at-iticse-2019.html</id><summary type="html">&lt;p&gt;I just got home from the &lt;em&gt;Innovation and Technology in Computer Science&lt;/em&gt;
 (ITiCSE) conference in lovely Aberdeen, Scotland. I was there to present a small
 experience paper on developing and using &lt;a href="https://repobee.org"&gt;RepoBee&lt;/a&gt;, an open
 source tool for generating and managing large amounts of Git repositories for
@@ -390,7 +390,7 @@ publication outside of school, so I'm quite proud of it!&lt;/p&gt;
 were many interesting talks and social activities, and I have a hard time
 imagining how a conference could be more inviting to a first-time
 conference-goer like me. If you have a chance to attend it, I highly recommend
-doing so.&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Git worktrees: work in parallel on multiple versions of a project</title><link href="https://slar.se/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html" rel="alternate"></link><published>2019-07-22T22:01:00+02:00</published><updated>2019-07-22T22:01:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html</id><summary type="html">&lt;p&gt;I've been AWOL for a month due to injury, sickness and conference-going. But
+doing so.&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>Git worktrees: work in parallel on multiple versions of a project</title><link href="https://slar.se/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html" rel="alternate"></link><published>2019-07-22T22:01:00+02:00</published><updated>2019-07-22T22:01:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html</id><summary type="html">&lt;p&gt;I've been AWOL for a month due to injury, sickness and conference-going. But
 with all that finally out of the way, I have another Tip of the Week, this time
 relating to Git: the &lt;code&gt;git worktree&lt;/code&gt; command. With &lt;code&gt;git worktree&lt;/code&gt;, you can check
 out &lt;em&gt;multiple&lt;/em&gt; branches at once, which is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been AWOL for a month due to injury, sickness and conference-going. But
@@ -511,7 +511,7 @@ copies of the repository and thereby having to deal with synchronizing multiple
 local copies (which can quickly get hard to manage). I find myself using this
 more and more, and if you find it useful yourself I highly recommend reading up
 on it more in its man-page (either with &lt;code&gt;man git-worktree&lt;/code&gt; or
-&lt;a href="https://git-scm.com/docs/git-worktree"&gt;online&lt;/a&gt;).&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category><category term="git"></category></entry><entry><title>Redirecting stdout and stderr in bash</title><link href="https://slar.se/redirecting-stdout-and-stderr-in-bash.html" rel="alternate"></link><published>2019-06-23T21:37:00+02:00</published><updated>2019-06-23T21:37:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-23:/redirecting-stdout-and-stderr-in-bash.html</id><summary type="html">&lt;p&gt;A couple of weeks ago I covered some basic I/O redirection in bash (see
+&lt;a href="https://git-scm.com/docs/git-worktree"&gt;online&lt;/a&gt;).&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category><category term="git"></category></entry><entry><title>Redirecting stdout and stderr in bash</title><link href="https://slar.se/redirecting-stdout-and-stderr-in-bash.html" rel="alternate"></link><published>2019-06-23T21:37:00+02:00</published><updated>2019-06-23T21:37:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-23:/redirecting-stdout-and-stderr-in-bash.html</id><summary type="html">&lt;p&gt;A couple of weeks ago I covered some basic I/O redirection in bash (see
 &lt;a href="https://slar.se/io-redirection-in-bash.html"&gt;I/O redirection in bash&lt;/a&gt;). Well, there's actually
 a lot more to it, so for this TOTW I thought I'd touch on a few more advanced
 usages.&lt;/p&gt;
@@ -562,8 +562,8 @@ and it's often useful to redirect both. Here's a small Python script &lt;code&gt
 that outputs on line on stdout and one on stderr.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some standard output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some error output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some standard output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some error output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -608,7 +608,7 @@ some error output
 
 &lt;p&gt;And with that and the previous article, I've shared pretty much everything I
 feel is useful with output redirection. In some future Tip of the Week, I'm sure
-I'll get into input redirecton as well, as it's much the same.&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Technical e-books from Humble Bundle</title><link href="https://slar.se/technical-e-books-from-humble-bundle.html" rel="alternate"></link><published>2019-06-13T09:12:00+02:00</published><updated>2019-06-13T09:12:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-13:/technical-e-books-from-humble-bundle.html</id><summary type="html">&lt;p&gt;Another Tip of the Week, in the same week as the previous one (because I've
+I'll get into input redirecton as well, as it's much the same.&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Technical e-books from Humble Bundle</title><link href="https://slar.se/technical-e-books-from-humble-bundle.html" rel="alternate"></link><published>2019-06-13T09:12:00+02:00</published><updated>2019-06-13T09:12:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-13:/technical-e-books-from-humble-bundle.html</id><summary type="html">&lt;p&gt;Another Tip of the Week, in the same week as the previous one (because I've
 been slacking off). This one is very simple, and rather non-technical. I simply
 want to direct attention toward
 &lt;a href="https://www.humblebundle.com/"&gt;humblebundle.com&lt;/a&gt;, and their quite frequent book
@@ -643,7 +643,7 @@ toward charity. And that's all there is to it!&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; I am not sponsored by Humble in any way, I am simply a
 long-time user of the service.&lt;/p&gt;
-&lt;/blockquote&gt;</content><category term="totw"></category></entry><entry><title>I/O redirection in bash</title><link href="https://slar.se/io-redirection-in-bash.html" rel="alternate"></link><published>2019-06-11T23:16:00+02:00</published><updated>2019-06-11T23:16:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-11:/io-redirection-in-bash.html</id><summary type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
+&lt;/blockquote&gt;</content><category term="Tip of the Week"></category><category term="totw"></category></entry><entry><title>I/O redirection in bash</title><link href="https://slar.se/io-redirection-in-bash.html" rel="alternate"></link><published>2019-06-11T23:16:00+02:00</published><updated>2019-06-11T23:16:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-06-11:/io-redirection-in-bash.html</id><summary type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
 weeks". It turns out that it's pretty difficult to find the time to actually
 write something every week. but I'll keep trying. With that out of the way,
 let's head into the subject matter of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Alright, so Tip of the Week has turned somewhat into "tip every two or three
@@ -746,7 +746,7 @@ already does exist. I rarely use a truncating redirect, as it is an easy thing
 to accidentally truncate a file you did not mean to touch. I recommend to always
 use an appending redirect, unless you have a good reason to truncate the
 targeted file.&lt;/p&gt;
-&lt;p&gt;And that's it for this TOTW!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Piping commands in bash</title><link href="https://slar.se/piping-commands-in-bash.html" rel="alternate"></link><published>2019-05-21T00:00:00+02:00</published><updated>2019-05-21T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-21:/piping-commands-in-bash.html</id><summary type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
+&lt;p&gt;And that's it for this TOTW!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Piping commands in bash</title><link href="https://slar.se/piping-commands-in-bash.html" rel="alternate"></link><published>2019-05-21T00:00:00+02:00</published><updated>2019-05-21T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-21:/piping-commands-in-bash.html</id><summary type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
 fundamental feature of the bash shell (actually, most shells), called &lt;em&gt;piping&lt;/em&gt;.
 Put simply, piping takes the output of one command and provides it as input to
 the next. Here's a simple example of running &lt;code&gt;ls&lt;/code&gt; and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Many, many bash commands are built around and meant to be used with a
@@ -776,7 +776,7 @@ practically as much as you'd like. For example, if we want to get amount of
 found. Let's move on to I/O redirection. Piping allows you to easily compose
 powerful programs from simple commands, and is a very intuitive way to work.
 Next week, I'll cover I/O redirection, which is another super useful feature of
-bash that's a bit more complicated.&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Using bash aliases</title><link href="https://slar.se/using-bash-aliases.html" rel="alternate"></link><published>2019-05-06T12:19:00+02:00</published><updated>2019-05-06T12:19:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-06:/using-bash-aliases.html</id><summary type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
+bash that's a bit more complicated.&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Using bash aliases</title><link href="https://slar.se/using-bash-aliases.html" rel="alternate"></link><published>2019-05-06T12:19:00+02:00</published><updated>2019-05-06T12:19:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-05-06:/using-bash-aliases.html</id><summary type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
 to figure out why it was useful. That something is bash aliases, and I'll now
 walk you through how to create aliases, and the two main ways in which I use
 them (although I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For this &lt;em&gt;Tip of the Week&lt;/em&gt;, I'd like to present something that took me a while
@@ -792,7 +792,7 @@ first word of a simple command&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;In other words, I can define a command that is substituted for some other
 command. Creating an alias is very simple. The syntax looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;alias &amp;lt;NAME&amp;gt;=&amp;lt;COMMAND&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;alias &amp;lt;NAME&amp;gt;=&amp;lt;COMMAND&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -861,7 +861,7 @@ se.slar.awesome.project.Main&lt;/code&gt; over and over, I define an alias for i
 As defining an alias is so effortless, I tend to do it even if I know I'm just
 gonna use the complex command a couple of times.&lt;/p&gt;
 &lt;p&gt;And that's all I wanted to cover, hope you enjoyed it and stay tuned for the
-next TOTW coming next week!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Git local</title><link href="https://slar.se/git-local.html" rel="alternate"></link><published>2019-04-29T22:58:00+02:00</published><updated>2019-04-29T22:58:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-29:/git-local.html</id><summary type="html">&lt;p&gt;Nowadays, Git is almost ubiquitous in software development. Most developers also
+next TOTW coming next week!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Git local</title><link href="https://slar.se/git-local.html" rel="alternate"></link><published>2019-04-29T22:58:00+02:00</published><updated>2019-04-29T22:58:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-29:/git-local.html</id><summary type="html">&lt;p&gt;Nowadays, Git is almost ubiquitous in software development. Most developers also
 know that Git is a &lt;em&gt;decentralized&lt;/em&gt; version control system, meaning that every
 copy of the repository carries the full revision history, and there is no
 "central" repository. A consequence of the decentralized aspect of Git is that
@@ -924,7 +924,7 @@ Branch &lt;span class="s1"&gt;&amp;#39;master&amp;#39;&lt;/span&gt; &lt;span cla
 
 &lt;p&gt;Now my previously local-only repo is also in GitHub, and I can push and pull
 from it as usual. That's all for this tip of the week, it's just meant to spark
-an idea that took me quite a while to come up with myself!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category><category term="git"></category></entry><entry><title>History and history expansion in bash</title><link href="https://slar.se/history-and-history-expansion-in-bash.html" rel="alternate"></link><published>2019-04-22T11:59:00+02:00</published><updated>2019-04-22T11:59:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-22:/history-and-history-expansion-in-bash.html</id><summary type="html">&lt;p&gt;Admittedly, this TOTW is one day late, so this week there will be 2xTOTW! In
+an idea that took me quite a while to come up with myself!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category><category term="git"></category></entry><entry><title>History and history expansion in bash</title><link href="https://slar.se/history-and-history-expansion-in-bash.html" rel="alternate"></link><published>2019-04-22T11:59:00+02:00</published><updated>2019-04-22T11:59:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-22:/history-and-history-expansion-in-bash.html</id><summary type="html">&lt;p&gt;Admittedly, this TOTW is one day late, so this week there will be 2xTOTW! In
 any case, the tip I want to bring up here is very much related to last week's
 TOTW on &lt;a href="https://slar.se/reverse-search-in-bash.html"&gt;Reverse search in bash&lt;/a&gt;. Sometimes,
 reverse searching just doesn't work out. You may not be quite …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Admittedly, this TOTW is one day late, so this week there will be 2xTOTW! In
@@ -1008,7 +1008,7 @@ filter the output of &lt;code&gt;history&lt;/code&gt; by &lt;em&gt;piping&lt;/em
 &lt;p&gt;I will most likely do another TOTW on piping, but the basic principle is that
 &lt;code&gt;|&lt;/code&gt; takes the output from the command on the left and feeds it as input to the
 command on the right. That's it for this TOTW, stay tuned for the next one
-coming on Sunday the 28th of April!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
+coming on Sunday the 28th of April!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Reverse search in bash</title><link href="https://slar.se/reverse-search-in-bash.html" rel="alternate"></link><published>2019-04-09T23:23:00+02:00</published><updated>2019-04-09T23:23:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/reverse-search-in-bash.html</id><summary type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
 find a command that's probably waaaay up there? Would you be surprised if I
 told you there's a better way? When you want to re-use a command you've written
 previously, and you know it's not the previous …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Have you ever found yourself furiously tapping the UP-arrow (or &lt;code&gt;ctrl+p&lt;/code&gt;) to
@@ -1038,30 +1038,25 @@ part and press &lt;code&gt;enter&lt;/code&gt; right away to execute the command 
 however, the result you get first isn't what you want (obviously, just typing
 &lt;code&gt;git push&lt;/code&gt; would have been faster in this case).  You can then press &lt;code&gt;ctrl+r&lt;/code&gt;
 again to cycle to the next hit.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(reverse-i-search)`git&amp;#39;: git commit -a -m &amp;#39;Add module docstring to github_api module&amp;#39;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;(reverse-i-search)`git&amp;#39;: git commit -a -m &amp;#39;Add module docstring to github_api module&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Now there's a command that I might not want to have to type out again in its
 entirety, better showing why a reverse search may be useful. That's it for this
-week's TotW, check back next week for more!&lt;/p&gt;</content><category term="totw"></category><category term="bash"></category></entry><entry><title>Announcing Tip of the Week (TotW)</title><link href="https://slar.se/announcing-tip-of-the-week-totw.html" rel="alternate"></link><published>2019-04-09T23:15:00+02:00</published><updated>2019-04-09T23:15:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/announcing-tip-of-the-week-totw.html</id><summary type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
+week's TotW, check back next week for more!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category><category term="bash"></category></entry><entry><title>Announcing Tip of the Week (TotW)</title><link href="https://slar.se/announcing-tip-of-the-week-totw.html" rel="alternate"></link><published>2019-04-09T23:15:00+02:00</published><updated>2019-04-09T23:15:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-09:/announcing-tip-of-the-week-totw.html</id><summary type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
 a little series: Tip of the Week! Every week, I'll spend 30 minutes or so
 writing a very small article about some tip related to programming, Linux or
 technology in general. And no, this one does …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In order to actually get around to writing some content, I've decided to start
 a little series: Tip of the Week! Every week, I'll spend 30 minutes or so
 writing a very small article about some tip related to programming, Linux or
 technology in general. And no, this one does not count, so I still have to
-write this week's TotW!&lt;/p&gt;</content><category term="totw"></category></entry><entry><title>Migrating my blog</title><link href="https://slar.se/migrating-my-blog.html" rel="alternate"></link><published>2019-04-06T18:32:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-06:/migrating-my-blog.html</id><summary type="html">&lt;blockquote&gt;
+write this week's TotW!&lt;/p&gt;</content><category term="Tip of the Week"></category><category term="totw"></category></entry><entry><title>Migrating my blog</title><link href="https://slar.se/migrating-my-blog.html" rel="alternate"></link><published>2019-04-06T18:32:00+02:00</published><updated>2019-04-10T23:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-04-06:/migrating-my-blog.html</id><content type="html">&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; The migration is complete! The Flask-based site has been retired
 and this Pelican-based site is fully fleshed out with the old content :)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;I'm currently in the midst of migrating my old blog over here. Until I'm done,
-both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; The migration is complete! The Flask-based site has been retired
-and this Pelican-based site is fully fleshed out with the old content :)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I'm currently in the midst of migrating my old blog over here. Until I'm done,
-both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</content><category term="blog"></category></entry><entry><title>Testing tips: Tests that don't test</title><link href="https://slar.se/tests-that-dont-test.html" rel="alternate"></link><published>2019-03-05T22:07:56+00:00</published><updated>2019-03-05T22:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-03-05:/tests-that-dont-test.html</id><summary type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
+both sites will be a bit half-baked, sorry about that!&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>Testing tips: Tests that don't test</title><link href="https://slar.se/tests-that-dont-test.html" rel="alternate"></link><published>2019-03-05T22:07:56+00:00</published><updated>2019-03-05T22:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-03-05:/tests-that-dont-test.html</id><summary type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
 pitfalls for the beginner. As I've done my fair share of unit testing, and
 taught a lot of students what I know, I've decided to share my top tips of
 things to think about when …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
@@ -1165,7 +1160,7 @@ example would be that the supposedly randomly ordered list is actually
 comprised of duplicates of a single element. Let's have a look at an incorrect
 implementation of the &lt;code&gt;random_list&lt;/code&gt; fixture. Note that &lt;code&gt;_&lt;/code&gt; is used as a
 variable name when we don't care about the value of it.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;random_list&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Generate a randomly ordered list with 100 elements.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
     &lt;span class="n"&gt;lst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
@@ -1263,7 +1258,7 @@ that don't test from manifesting. Copy/pasting test code and then making minor
 changes is for example a common source of most of the discussed errors. But
 ultimately, there is no surefire way of avoiding tests that don't test, so I
 strongly recommend that you actively search for them no matter what precautions
-you take!&lt;/p&gt;</content><category term="unit testing"></category><category term="testing tips"></category></entry><entry><title>TornadoFX+Exposed pt. 3: Adding, editing and removing rows</title><link href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html" rel="alternate"></link><published>2018-12-30T14:50:50+00:00</published><updated>2018-12-30T15:13:57+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-30:/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html</id><summary type="html">&lt;p&gt;Welcome to the third and final part in this article series on using TornadoFX
+you take!&lt;/p&gt;</content><category term="Testing"></category><category term="unit testing"></category><category term="testing tips"></category></entry><entry><title>TornadoFX+Exposed pt. 3: Adding, editing and removing rows</title><link href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html" rel="alternate"></link><published>2018-12-30T14:50:50+00:00</published><updated>2018-12-30T15:13:57+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-30:/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html</id><summary type="html">&lt;p&gt;Welcome to the third and final part in this article series on using TornadoFX
 together with Exposed. In the previous two parts, we set up the database with a
 single table and created a simple TornadoFX view with which we could view its
 contents. Now, we will focus on adding …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Welcome to the third and final part in this article series on using TornadoFX
@@ -1541,7 +1536,7 @@ off the top of my head.&lt;/p&gt;
 &lt;li&gt;The views are completely unstyled and look rather dull.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;And with that, I wish you good fortune in working with this! Of course, you are
-free to use all of these examples as you see fit.&lt;/p&gt;</content><category term="exposed"></category><category term="kotlin"></category><category term="kuizzy"></category><category term="tornadofx"></category></entry><entry><title>TornadoFX+Exposed pt. 2: Showing a database table</title><link href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html" rel="alternate"></link><published>2018-12-26T09:09:47+00:00</published><updated>2018-12-30T15:14:09+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-26:/tornadofxexposed-pt-2-showing-a-database-table.html</id><summary type="html">&lt;p&gt;Welcome to the second part of the TornadoFX+Exposed series of articles. In this
+free to use all of these examples as you see fit.&lt;/p&gt;</content><category term="Programming"></category><category term="exposed"></category><category term="kotlin"></category><category term="kuizzy"></category><category term="tornadofx"></category></entry><entry><title>TornadoFX+Exposed pt. 2: Showing a database table</title><link href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html" rel="alternate"></link><published>2018-12-26T09:09:47+00:00</published><updated>2018-12-30T15:14:09+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-26:/tornadofxexposed-pt-2-showing-a-database-table.html</id><summary type="html">&lt;p&gt;Welcome to the second part of the TornadoFX+Exposed series of articles. In this
 part, we'll take a look at how to create a TornadoFX view for the &lt;code&gt;Categories&lt;/code&gt;
 table. In the next part, we'll expand upon the view and make it possible to
 add, edit and delete rows.&lt;/p&gt;
@@ -1680,7 +1675,7 @@ looks something like this:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Read only view" src="https://slar.se/images/tornado_exposed/read_only_view.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;That's pretty much it for this part. In the next and final part, we'll look
 into how to add, delete and edit rows of the &lt;code&gt;Categories&lt;/code&gt; table. You can find
-&lt;a href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;part 3 here.&lt;/a&gt;&lt;/p&gt;</content><category term="exposed"></category><category term="kotlin"></category><category term="kuizzy"></category><category term="tornadofx"></category></entry><entry><title>TornadoFX+Exposed pt. 1: Project and database setup</title><link href="https://slar.se/tornadofxexposed-pt-1-project-and-database-setup.html" rel="alternate"></link><published>2018-12-25T22:42:36+00:00</published><updated>2018-12-30T14:53:11+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-25:/tornadofxexposed-pt-1-project-and-database-setup.html</id><summary type="html">&lt;p&gt;I recently got it into my head that I'd like to make a quiz game with a GUI,
+&lt;a href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;part 3 here.&lt;/a&gt;&lt;/p&gt;</content><category term="Programming"></category><category term="exposed"></category><category term="kotlin"></category><category term="kuizzy"></category><category term="tornadofx"></category></entry><entry><title>TornadoFX+Exposed pt. 1: Project and database setup</title><link href="https://slar.se/tornadofxexposed-pt-1-project-and-database-setup.html" rel="alternate"></link><published>2018-12-25T22:42:36+00:00</published><updated>2018-12-30T14:53:11+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-25:/tornadofxexposed-pt-1-project-and-database-setup.html</id><summary type="html">&lt;p&gt;I recently got it into my head that I'd like to make a quiz game with a GUI,
 which felt like a simple enough diversion during the holidays. Since I already
 have this site to maintain in terms of web development, I figured that desktop
 app development in Kotlin using …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I recently got it into my head that I'd like to make a quiz game with a GUI,
@@ -1811,7 +1806,7 @@ for categories.&lt;/p&gt;
 background. Along with the table (which is a singleton object), we also need to
 represent rows.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Category&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;EntityID&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Int&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;IntEntity&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;companion&lt;/span&gt; &lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="err"&gt;: &lt;/span&gt;&lt;span class="nc"&gt;IntEntityClass&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;&lt;span class="n"&gt;Categories&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;companion&lt;/span&gt; &lt;span class="k"&gt;object&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;IntEntityClass&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;&lt;span class="n"&gt;Categories&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
     &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;name&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;Categories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
     &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;description&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;Categories&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;description&lt;/span&gt;
@@ -1877,7 +1872,7 @@ Category&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;name&lt;/span
 &lt;code&gt;name&lt;/code&gt; attribute and crash. And that's it for part 1. In the next part, we'll
 look at how to create a read-only view of the &lt;code&gt;Categories&lt;/code&gt; table. You can
 find
-&lt;a href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;part 2 here&lt;/a&gt;.&lt;/p&gt;</content><category term="kotlin"></category><category term="tornadofx"></category><category term="exposed"></category><category term="kuizzy"></category></entry><entry><title>Collapsing and expanding HTML elements using (mostly) CSS</title><link href="https://slar.se/collapsing-and-expanding-html-elements-using-mostly-css.html" rel="alternate"></link><published>2018-11-14T17:57:34+00:00</published><updated>2018-11-14T17:57:34+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-11-14:/collapsing-and-expanding-html-elements-using-mostly-css.html</id><summary type="html">&lt;p&gt;Sections that collapse and expand at the click of a button is fairly ubiquitous
+&lt;a href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;part 2 here&lt;/a&gt;.&lt;/p&gt;</content><category term="Programming"></category><category term="kotlin"></category><category term="tornadofx"></category><category term="exposed"></category><category term="kuizzy"></category></entry><entry><title>Collapsing and expanding HTML elements using (mostly) CSS</title><link href="https://slar.se/collapsing-and-expanding-html-elements-using-mostly-css.html" rel="alternate"></link><published>2018-11-14T17:57:34+00:00</published><updated>2018-11-14T17:57:34+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-11-14:/collapsing-and-expanding-html-elements-using-mostly-css.html</id><summary type="html">&lt;p&gt;Sections that collapse and expand at the click of a button is fairly ubiquitous
 across the web nowadays. It's especially handy for mobile, where the display is
 much smaller than your typical computer monitor. In this article, I'll walk you
 through how to create a basic collapsible content-area using almost …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Sections that collapse and expand at the click of a button is fairly ubiquitous
@@ -2109,7 +2104,7 @@ And that's it, all done!&lt;/p&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 
 &lt;span class="nx"&gt;attachCollapseTriggers&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="html"></category><category term="css"></category><category term="javascript"></category></entry><entry><title>A binary search tree in Kotlin pt. 2: Generic node</title><link href="https://slar.se/a-binary-search-tree-in-kotlin-pt-2-generic-node.html" rel="alternate"></link><published>2018-10-30T08:26:05+00:00</published><updated>2018-10-30T08:26:05+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-30:/a-binary-search-tree-in-kotlin-pt-2-generic-node.html</id><summary type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Programming"></category><category term="html"></category><category term="css"></category><category term="javascript"></category></entry><entry><title>A binary search tree in Kotlin pt. 2: Generic node</title><link href="https://slar.se/a-binary-search-tree-in-kotlin-pt-2-generic-node.html" rel="alternate"></link><published>2018-10-30T08:26:05+00:00</published><updated>2018-10-30T08:26:05+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-30:/a-binary-search-tree-in-kotlin-pt-2-generic-node.html</id><summary type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
 part, we're gonna have a look at how to make the node representation from part 1
 capable of carrying any kind of data (i.e. &lt;em&gt;generic&lt;/em&gt;).&lt;/p&gt;
 &lt;h2&gt;Series index&lt;/h2&gt;
@@ -2204,7 +2199,7 @@ us to perform more complex operations in the matchings. And that's it for the
 change the &lt;code&gt;Node&lt;/code&gt; class, and do something like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;&lt;span class="k"&gt;val&lt;/span&gt; &lt;span class="py"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nf"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comparable&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comparable&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nf"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
     &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -2301,7 +2296,7 @@ Here is what the working class hierarchy looks like:&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;contains&lt;/code&gt; now looks like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// check if data is contained in node&lt;/span&gt;
-&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nf"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comparable&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comparable&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nf"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
     &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -2332,7 +2327,7 @@ can move on to implement the &lt;code&gt;Tree&lt;/code&gt; class in part 3!&lt;/
         &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="py"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;()&lt;/span&gt;
 
 &lt;span class="c1"&gt;// check if data is contained in node&lt;/span&gt;
-&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nf"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comparable&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;fun&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Comparable&lt;/span&gt;&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;gt; &lt;/span&gt;&lt;span class="nf"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="n"&gt;Boolean&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Empty&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
     &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;when&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt; &lt;span class="p"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -2362,7 +2357,7 @@ can move on to implement the &lt;code&gt;Tree&lt;/code&gt; class in part 3!&lt;/
         &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>A binary search tree in Kotlin pt. 1: Representing a node</title><link href="https://slar.se/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html" rel="alternate"></link><published>2018-10-28T15:13:08+00:00</published><updated>2018-10-30T08:27:09+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-28:/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html</id><summary type="html">&lt;p&gt;In my journey to become a somewhat competent Kotlin developer, I've decided to
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Programming"></category><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>A binary search tree in Kotlin pt. 1: Representing a node</title><link href="https://slar.se/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html" rel="alternate"></link><published>2018-10-28T15:13:08+00:00</published><updated>2018-10-30T08:27:09+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-28:/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html</id><summary type="html">&lt;p&gt;In my journey to become a somewhat competent Kotlin developer, I've decided to
 implement a few of the basic data structures that I've picked up during my
 three years of computer science studies. First up, we have a generic binary
 tree. This is an interesting case, because it lets us …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In my journey to become a somewhat competent Kotlin developer, I've decided to
@@ -2553,11 +2548,11 @@ simply replace the &lt;code&gt;abstract&lt;/code&gt; modifier with &lt;code&gt;s
 &lt;p&gt;We can now drop the &lt;code&gt;else&lt;/code&gt; from &lt;code&gt;contains&lt;/code&gt;, because the compiler knows that a
 variable with static type &lt;code&gt;ANode&lt;/code&gt; is either &lt;code&gt;Empty&lt;/code&gt;, or a &lt;code&gt;Node&lt;/code&gt;, there are no
 other possibilities.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;// check if data is contained in node
-fun contains(node: ANode, data: Int): Boolean = when (node) {
-    is Empty -&amp;gt; false
-    is Node -&amp;gt; data == node.data
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;// check if data is contained in node&lt;/span&gt;
+&lt;span class="err"&gt;fun contains(node: ANode, data: Int): Boolean = when (node) {&lt;/span&gt;
+&lt;span class="err"&gt;    is Empty -&amp;gt; false&lt;/span&gt;
+&lt;span class="err"&gt;    is Node -&amp;gt; data == node.data&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -2592,7 +2587,7 @@ preferred way, right off the bat!&lt;/p&gt;
     &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="n"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contains&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>Creating a standalone (runnable) Kotlin .jar file with IntelliJ and Gradle</title><link href="https://slar.se/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html" rel="alternate"></link><published>2018-10-17T20:15:46+00:00</published><updated>2018-10-29T21:02:18+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-17:/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html</id><summary type="html">&lt;p&gt;I've recently started dabbling in some Kotlin, and have found it a very pleasant
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Programming"></category><category term="bst"></category><category term="kotlin"></category><category term="data structures"></category></entry><entry><title>Creating a standalone (runnable) Kotlin .jar file with IntelliJ and Gradle</title><link href="https://slar.se/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html" rel="alternate"></link><published>2018-10-17T20:15:46+00:00</published><updated>2018-10-29T21:02:18+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-17:/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html</id><summary type="html">&lt;p&gt;I've recently started dabbling in some Kotlin, and have found it a very pleasant
 experience. One of the first things I wanted to do was to create a standalone
 &lt;code&gt;.jar&lt;/code&gt; file, including the Kotlin runtime and any other dependencies. This,
 as it turns out, was a bit tricky. In this …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've recently started dabbling in some Kotlin, and have found it a very pleasant
@@ -2775,7 +2770,7 @@ in &lt;code&gt;build/libs/&amp;lt;ArtifactId&amp;gt;-&amp;lt;Version&amp;gt;&lt;
         &lt;span class="err"&gt;configurations.compile.collect&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt; &lt;span class="err"&gt;it.isDirectory()&lt;/span&gt; &lt;span class="err"&gt;?&lt;/span&gt; &lt;span class="err"&gt;it&lt;/span&gt; &lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="err"&gt;zipTree(it)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="err"&gt;}&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="kotlin"></category><category term="gradle"></category><category term="intellij"></category></entry><entry><title>Awesome Python Podcasts</title><link href="https://slar.se/awesome-python-podcasts.html" rel="alternate"></link><published>2018-07-03T07:34:33+00:00</published><updated>2018-10-29T21:03:07+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-07-03:/awesome-python-podcasts.html</id><summary type="html">&lt;p&gt;Whenever I find myself occupied with some monotonous task, I
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Programming"></category><category term="kotlin"></category><category term="gradle"></category><category term="intellij"></category></entry><entry><title>Awesome Python Podcasts</title><link href="https://slar.se/awesome-python-podcasts.html" rel="alternate"></link><published>2018-07-03T07:34:33+00:00</published><updated>2018-10-29T21:03:07+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-07-03:/awesome-python-podcasts.html</id><summary type="html">&lt;p&gt;Whenever I find myself occupied with some monotonous task, I
 very much enjoy listening to podcasts. As programming is my
 number one passion, and Python is my favorite language, I tend
 to listen to podcasts that relate to them. In this post, I'll
@@ -2821,7 +2816,7 @@ post once I've listened to a few more of the episodes, but as it stands I
 recommend listening to the show from the beginning.&lt;/p&gt;
 &lt;h3&gt;Did I miss something?&lt;/h3&gt;
 &lt;p&gt;Those were my 3 top picks for Python podcasts. If you feel like I've missed
-some great podcast(s), feel free to drop a comment!&lt;/p&gt;</content><category term="python"></category><category term="podcast"></category></entry><entry><title>What the self? Python's self demystified!</title><link href="https://slar.se/what-the-self-pythons-self-demystified.html" rel="alternate"></link><published>2018-05-01T16:04:01+00:00</published><updated>2018-05-01T16:04:01+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-05-01:/what-the-self-pythons-self-demystified.html</id><summary type="html">&lt;p&gt;Any Python programmer will sooner or later want to (or have to) write a class.
+some great podcast(s), feel free to drop a comment!&lt;/p&gt;</content><category term="Programming"></category><category term="python"></category><category term="podcast"></category></entry><entry><title>What the self? Python's self demystified!</title><link href="https://slar.se/what-the-self-pythons-self-demystified.html" rel="alternate"></link><published>2018-05-01T16:04:01+00:00</published><updated>2018-05-01T16:04:01+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-05-01:/what-the-self-pythons-self-demystified.html</id><summary type="html">&lt;p&gt;Any Python programmer will sooner or later want to (or have to) write a class.
 With classes come &lt;code&gt;self&lt;/code&gt;, the &lt;em&gt;seemingly&lt;/em&gt; (do note the emphasis there)
 magical keyword that you just have to write out as the first parameter to every
 method. To really understand classes, you need to understand …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Any Python programmer will sooner or later want to (or have to) write a class.
@@ -2834,11 +2829,11 @@ of Python classes!&lt;/p&gt;
 &lt;p&gt;This is pretty easy to prove. Just open a Python interpreter and import the
 &lt;code&gt;keyword&lt;/code&gt; module.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;keyword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iskeyword&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;for&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="bp"&gt;True&lt;/span&gt;                            &lt;span class="c1"&gt;# aha, makes sense&lt;/span&gt;
+&lt;span class="kc"&gt;True&lt;/span&gt;                            &lt;span class="c1"&gt;# aha, makes sense&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;keyword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iskeyword&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;else&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
-&lt;span class="bp"&gt;True&lt;/span&gt;                            &lt;span class="c1"&gt;# seems to be working&lt;/span&gt;
+&lt;span class="kc"&gt;True&lt;/span&gt;                            &lt;span class="c1"&gt;# seems to be working&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;keyword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iskeyword&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;self&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="bp"&gt;False&lt;/span&gt;                           &lt;span class="c1"&gt;# proof!&lt;/span&gt;
+&lt;span class="kc"&gt;False&lt;/span&gt;                           &lt;span class="c1"&gt;# proof!&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -3004,7 +2999,7 @@ more specifically the
 &lt;a href="https://docs.python.org/3.6/howto/descriptor.html#functions-and-methods"&gt;Functions and Methods&lt;/a&gt;
 part of it. It is however somewhat advanced, and I don't find it essential to
 understanding the semantics of method calls in Python. I hope you have found
-this article enlightening, stay tuned for more Python in the coming week!&lt;/p&gt;</content><category term="python"></category></entry><entry><title>Properties as Pythonic setters</title><link href="https://slar.se/properties-as-pythonic-setters.html" rel="alternate"></link><published>2018-04-05T18:26:10+00:00</published><updated>2018-04-05T18:26:10+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-04-05:/properties-as-pythonic-setters.html</id><summary type="html">&lt;p&gt;This is the second part in a two part series on Python properties. In
+this article enlightening, stay tuned for more Python in the coming week!&lt;/p&gt;</content><category term="Programming"></category><category term="python"></category></entry><entry><title>Properties as Pythonic setters</title><link href="https://slar.se/properties-as-pythonic-setters.html" rel="alternate"></link><published>2018-04-05T18:26:10+00:00</published><updated>2018-04-05T18:26:10+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-04-05:/properties-as-pythonic-setters.html</id><summary type="html">&lt;p&gt;This is the second part in a two part series on Python properties. In
 &lt;a href="https://slar.se/properties-as-pythonic-getters.html"&gt;Part 1&lt;/a&gt; (which readers will be assumed to
 have at least skimmed through), we saw how a property can be used to create a
 read-only attribute that can be accessed like any data attribute (i.e …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the second part in a two part series on Python properties. In
@@ -3041,11 +3036,11 @@ within the range &lt;code&gt;[0, _end)&lt;/code&gt; by simple assignment. Fortun
 simple way to expand a property with a setter method using the &lt;code&gt;@&amp;lt;name&amp;gt;.setter&lt;/code&gt;
 decorator, where &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; is replaced with the name of the property. For the
 &lt;code&gt;count&lt;/code&gt; property of the &lt;code&gt;Ticker&lt;/code&gt; class, it looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@count.setter&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@count&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setter&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Set the internal count to val.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_end&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{val} is out of range for attribute count.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{val}&lt;/span&gt;&lt;span class="s2"&gt; is out of range for attribute count.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -3105,13 +3100,13 @@ and usage now looks like this:&lt;/p&gt;
         &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Return the current count.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_count&lt;/span&gt;
 
-    &lt;span class="nd"&gt;@count.setter&lt;/span&gt;
+    &lt;span class="nd"&gt;@count&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setter&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Set the internal count to val.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_end&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{val} is out of range for attribute count.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{val}&lt;/span&gt;&lt;span class="s2"&gt; is out of range for attribute count.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;val&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category></entry><entry><title>Properties as Pythonic getters</title><link href="https://slar.se/properties-as-pythonic-getters.html" rel="alternate"></link><published>2018-04-05T18:25:55+00:00</published><updated>2018-04-05T18:25:55+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-04-05:/properties-as-pythonic-getters.html</id><summary type="html">&lt;p&gt;If you come from either Java or C++, you've probably written your fair
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Programming"></category><category term="python"></category></entry><entry><title>Properties as Pythonic getters</title><link href="https://slar.se/properties-as-pythonic-getters.html" rel="alternate"></link><published>2018-04-05T18:25:55+00:00</published><updated>2018-04-05T18:25:55+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-04-05:/properties-as-pythonic-getters.html</id><summary type="html">&lt;p&gt;If you come from either Java or C++, you've probably written your fair
 share of getter and setter (also called accessor and mutator) methods.
 It is common for programmers that transition from such a language to Python
 to carry over this practice. In many cases in Python, we simply forego …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you come from either Java or C++, you've probably written your fair
@@ -3274,4 +3269,4 @@ result is just assumed to be obvious. Therefore, here is the full listing of
 &lt;p&gt;Now is about the time to move on to
 &lt;a href="https://slar.se/properties-as-pythonic-setters.html"&gt;Part 2&lt;/a&gt;, in which we expand on the &lt;code&gt;count&lt;/code&gt;
 property to allow us to set the internal count, but only within the range &lt;code&gt;[0,
-_end)&lt;/code&gt;!&lt;/p&gt;</content><category term="python"></category></entry></feed>
+_end)&lt;/code&gt;!&lt;/p&gt;</content><category term="Programming"></category><category term="python"></category></entry></feed>

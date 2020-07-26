@@ -202,7 +202,7 @@ example would be that the supposedly randomly ordered list is actually
 comprised of duplicates of a single element. Let's have a look at an incorrect
 implementation of the <code>random_list</code> fixture. Note that <code>_</code> is used as a
 variable name when we don't care about the value of it.</p>
-<div class="highlight"><pre><span></span><span class="nd">@pytest.fixture</span>
+<div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">random_list</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Generate a randomly ordered list with 100 elements.&quot;&quot;&quot;</span>
     <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
@@ -344,21 +344,9 @@ you take!</p>
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
     <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
+      <a href="https://slar.se/tag/bst.html">
           <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
+        bst
       </a>
     </span>
     <span class="tag-4">
@@ -367,22 +355,16 @@ you take!</p>
         gradle
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        javascript
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
+        exposed
       </a>
     </span>
     <span class="tag-3">
@@ -392,63 +374,21 @@ you take!</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/podcast.html">
           <i class="fas fa-tag"></i>
         podcast
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
       </a>
     </span>
     <span class="tag-4">
@@ -457,16 +397,76 @@ you take!</p>
         html
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        kuizzy
+        kotlin
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
       </a>
     </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
       </a>
     </span>
 </p>

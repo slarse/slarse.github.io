@@ -121,21 +121,21 @@ supplied as another <code>String</code>:</p>
 <blockquote>
 <p>Yes, this is a somewhat contrived example, but bear with me!</p>
 </blockquote>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">format</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">String</span> <span class="n">option</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="s">&quot;upper&quot;</span><span class="o">:</span>
-            <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
-        <span class="k">case</span> <span class="s">&quot;lower&quot;</span><span class="o">:</span>
-            <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">();</span>
-        <span class="k">default</span><span class="o">:</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Internal errror, unmatched option &quot;</span> <span class="o">+</span> <span class="n">option</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">format</span><span class="p">(</span><span class="n">String</span> <span class="n">str</span><span class="p">,</span> <span class="n">String</span> <span class="n">option</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">option</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s">&quot;upper&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+        <span class="k">case</span> <span class="s">&quot;lower&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">();</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Internal errror, unmatched option &quot;</span> <span class="o">+</span> <span class="n">option</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>We could then use the method something like this:</p>
-<div class="highlight"><pre><span></span><span class="n">format</span><span class="o">(</span><span class="s">&quot;hello&quot;</span><span class="o">,</span> <span class="s">&quot;upper&quot;</span><span class="o">);</span>
+<div class="highlight"><pre><span></span><span class="n">format</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="s">&quot;upper&quot;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -158,29 +158,29 @@ show a use case. In short, an enum is a data type with a (typically very)
 limited amount of possible values (<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html">you can read more about it
 here</a>).
 Now, let's instead define this enum type:</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">enum</span> <span class="n">FormatOption</span> <span class="o">{</span>
-    <span class="n">UPPER</span><span class="o">,</span>
-    <span class="n">LOWER</span><span class="o">;</span>
-<span class="o">}</span>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">enum</span> <span class="n">FormatOption</span> <span class="p">{</span>
+    <span class="n">UPPER</span><span class="p">,</span>
+    <span class="n">LOWER</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>And refactor the method with it:</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">format</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">FormatOption</span> <span class="n">option</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">case</span> <span class="n">UPPER</span><span class="o">:</span>
-            <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
-        <span class="k">case</span> <span class="n">LOWER</span><span class="o">:</span>
-            <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">();</span>
-        <span class="k">default</span><span class="o">:</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Internal errror, unmatched option &quot;</span> <span class="o">+</span> <span class="n">option</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">format</span><span class="p">(</span><span class="n">String</span> <span class="n">str</span><span class="p">,</span> <span class="n">FormatOption</span> <span class="n">option</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">option</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="n">UPPER</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+        <span class="k">case</span> <span class="n">LOWER</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">str</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">();</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Internal errror, unmatched option &quot;</span> <span class="o">+</span> <span class="n">option</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <p>This method can then be used like:</p>
-<div class="highlight"><pre><span></span><span class="n">format</span><span class="o">(</span><span class="s">&quot;hello&quot;</span><span class="o">,</span> <span class="n">FormatOption</span><span class="o">.</span><span class="na">UPPER</span><span class="o">);</span>
+<div class="highlight"><pre><span></span><span class="n">format</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">,</span> <span class="n">FormatOption</span><span class="p">.</span><span class="na">UPPER</span><span class="p">);</span>
 </pre></div>
 
 
@@ -198,24 +198,24 @@ problem.</p>
 with a lot of enum types. Personally, I think that's totally worth it, and you
 could also nest the nums inside the classes that use them to reduce their
 overall footprint in the project. The whole thing could then look like this:</p>
-<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Formatter</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">enum</span> <span class="n">Option</span> <span class="o">{</span>
-        <span class="n">UPPER</span><span class="o">,</span>
-        <span class="n">LOWER</span><span class="o">;</span>
-    <span class="o">}</span>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Formatter</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">enum</span> <span class="n">Option</span> <span class="p">{</span>
+        <span class="n">UPPER</span><span class="p">,</span>
+        <span class="n">LOWER</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">format</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">Option</span> <span class="n">option</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">result</span><span class="o">;</span>
-        <span class="k">switch</span> <span class="o">(</span><span class="n">option</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">case</span> <span class="n">UPPER</span><span class="o">:</span>
-                <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
-            <span class="k">case</span> <span class="n">LOWER</span><span class="o">:</span>
-                <span class="k">return</span> <span class="n">str</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">();</span>
-            <span class="k">default</span><span class="o">:</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Internal errror, unmatched option &quot;</span> <span class="o">+</span> <span class="n">option</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">format</span><span class="p">(</span><span class="n">String</span> <span class="n">str</span><span class="p">,</span> <span class="n">Option</span> <span class="n">option</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">String</span> <span class="n">result</span><span class="p">;</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="n">option</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="n">UPPER</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">str</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+            <span class="k">case</span> <span class="n">LOWER</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">str</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">();</span>
+            <span class="k">default</span><span class="p">:</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Internal errror, unmatched option &quot;</span> <span class="o">+</span> <span class="n">option</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
@@ -275,21 +275,9 @@ accept <code>String</code> options!</p>
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
     <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
+      <a href="https://slar.se/tag/bst.html">
           <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
+        bst
       </a>
     </span>
     <span class="tag-4">
@@ -298,22 +286,16 @@ accept <code>String</code> options!</p>
         gradle
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        javascript
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
+        exposed
       </a>
     </span>
     <span class="tag-3">
@@ -323,63 +305,21 @@ accept <code>String</code> options!</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/podcast.html">
           <i class="fas fa-tag"></i>
         podcast
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
       </a>
     </span>
     <span class="tag-4">
@@ -388,16 +328,76 @@ accept <code>String</code> options!</p>
         html
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        kuizzy
+        kotlin
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
       </a>
     </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
       </a>
     </span>
 </p>

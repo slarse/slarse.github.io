@@ -103,7 +103,7 @@ example would be that the supposedly randomly ordered list is actually
 comprised of duplicates of a single element. Let's have a look at an incorrect
 implementation of the &lt;code&gt;random_list&lt;/code&gt; fixture. Note that &lt;code&gt;_&lt;/code&gt; is used as a
 variable name when we don't care about the value of it.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@pytest.fixture&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fixture&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;random_list&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Generate a randomly ordered list with 100 elements.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
     &lt;span class="n"&gt;lst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
@@ -201,4 +201,4 @@ that don't test from manifesting. Copy/pasting test code and then making minor
 changes is for example a common source of most of the discussed errors. But
 ultimately, there is no surefire way of avoiding tests that don't test, so I
 strongly recommend that you actively search for them no matter what precautions
-you take!&lt;/p&gt;</content><category term="unit testing"></category><category term="testing tips"></category></entry></feed>
+you take!&lt;/p&gt;</content><category term="Testing"></category><category term="unit testing"></category><category term="testing tips"></category></entry></feed>

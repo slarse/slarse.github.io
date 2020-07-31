@@ -1,5 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-11-10T18:56:00+01:00</updated><entry><title>Don't use String for method options, use an enum!</title><link href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html" rel="alternate"></link><published>2019-11-10T18:56:00+01:00</published><updated>2019-11-10T18:56:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-11-10:/dont-use-string-for-method-options-use-an-enum.html</id><summary type="html">&lt;p&gt;In this article, we are going to have a look at a method that accepts an option.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-07-31T20:07:56+00:00</updated><entry><title>Essential pytest 1: Controlling the verbosity of output</title><link href="https://slar.se/essential-pytest-1.html" rel="alternate"></link><published>2020-07-31T20:07:56+00:00</published><updated>2020-07-31T20:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-07-31:/essential-pytest-1.html</id><summary type="html">&lt;p&gt;This is the first part of a series of small articles detailing some of the
+functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
+framework that I find most essential. The series assumes you know how to run
+tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
+&lt;p&gt;In this first part, we'll take a look at the &lt;code&gt;-v&lt;/code&gt; and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the first part of a series of small articles detailing some of the
+functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
+framework that I find most essential. The series assumes you know how to run
+tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
+&lt;p&gt;In this first part, we'll take a look at the &lt;code&gt;-v&lt;/code&gt; and &lt;code&gt;--tb&lt;/code&gt; options to control
+the verbosity of the output.&lt;/p&gt;
+&lt;h2&gt;The test suite&lt;/h2&gt;
+&lt;p&gt;For the purposes of this article, I've implemented a very simple multiplication
+function called &lt;code&gt;mul&lt;/code&gt;, along with a few tests. Here's the entire thing, in a
+file called &lt;code&gt;mul.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mul.py&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_equal_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_by_zero&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_different_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Obviously, the implementation of &lt;code&gt;mul&lt;/code&gt; is broken, and running &lt;code&gt;pytest&lt;/code&gt; gives
+the following output.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest mul.py 
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
+rootdir: /home/slarse/Documents/github/python/mul
+collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
+
+mul.py .FF                                                         &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;================================&lt;/span&gt; &lt;span class="nv"&gt;FAILURES&lt;/span&gt; &lt;span class="o"&gt;================================&lt;/span&gt;
+_________________________ test_multiply_by_zero __________________________
+
+    def test_multiply_by_zero&lt;span class="o"&gt;()&lt;/span&gt;:
+&amp;gt;       assert mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+E       assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+E        +  where &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+mul.py:8: AssertionError
+____________________ test_multiply_different_numbers _____________________
+
+    def test_multiply_different_numbers&lt;span class="o"&gt;()&lt;/span&gt;:
+&amp;gt;       assert mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;
+E       assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;
+E        +  where &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+mul.py:11: &lt;span class="nv"&gt;AssertionError&lt;/span&gt;
+&lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
+FAILED mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+&lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.08s &lt;span class="o"&gt;=======================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let's learn how to control how much of this we see.&lt;/p&gt;
+&lt;h2&gt;Using the &lt;code&gt;--tb&lt;/code&gt; option to control traceback verbosity&lt;/h2&gt;
+&lt;p&gt;Most of what you're seeing in the output of the previous section is the
+&lt;em&gt;traceback&lt;/em&gt; information. While the traceback shown above is manageable as is,
+consider that it stems from a single-line function and single-line tests. With
+that in mind, it's actually pretty freaking verbose. We can show less of it by
+using the &lt;code&gt;--tb&lt;/code&gt; option. We can even shut it off completely.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest mul.py --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;no&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
+rootdir: /home/slarse/Documents/github/python/mul
+collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
+
+mul.py .FF                                                         &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
+FAILED mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+&lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.02s &lt;span class="o"&gt;=======================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is useful when you're just trying to figure out what tests are failing, and
+when test output is just entirely overwhelming. I find myself using it quite
+frequently. Another useful traceback value is &lt;code&gt;line&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest mul.py --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;line&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
+rootdir: /home/slarse/Documents/github/python/mul
+collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
+
+mul.py .FF                                                         &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;================================&lt;/span&gt; &lt;span class="nv"&gt;FAILURES&lt;/span&gt; &lt;span class="o"&gt;================================&lt;/span&gt;
+/home/slarse/Documents/github/python/mul/mul.py:8: assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+/home/slarse/Documents/github/python/mul/mul.py:11: assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+&lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
+FAILED mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+&lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.03s &lt;span class="o"&gt;=======================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This lets us see the exact lines where the test failures occurred. In this case,
+it shows the lines of the assertions, but it could also for example show the
+line where an exception was raised. There are more ways to manipulate the
+traceback, but these are the two I use the most, aside from the default. To see
+the other options, refer to &lt;code&gt;pytest -h&lt;/code&gt; and look for the &lt;code&gt;--tb&lt;/code&gt; option.&lt;/p&gt;
+&lt;h2&gt;Using &lt;code&gt;-v&lt;/code&gt; to show more verbose test output&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;-v&lt;/code&gt; option controls the verbosity of test output while the tests are
+running. It's really useful when tests take a long time to run, and you want to
+know approximately where you're at.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest mul.py --tb&lt;span class="o"&gt;=&lt;/span&gt;no -v
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python
+cachedir: .pytest_cache
+rootdir: /home/slarse/Documents/github/python/mul
+collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
+
+mul.py::test_multiply_equal_numbers PASSED                         &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;33&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+mul.py::test_multiply_by_zero FAILED                               &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;66&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+mul.py::test_multiply_different_numbers FAILED                     &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
+FAILED mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+&lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.03s &lt;span class="o"&gt;=======================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note how each test is now shown on a line of its own, as opposed to just &lt;code&gt;.&lt;/code&gt; and
+&lt;code&gt;F&lt;/code&gt; in the previous runs. The lines show up as the tests are running, and I find
+it useful to track long-running tests.&lt;/p&gt;
+&lt;p&gt;And that's pretty much it for basic output verbosity control with &lt;code&gt;pytest&lt;/code&gt;, hope
+you learned something!&lt;/p&gt;</content><category term="Testing"></category><category term="python"></category><category term="pytest"></category><category term="testing"></category></entry><entry><title>Don't use String for method options, use an enum!</title><link href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html" rel="alternate"></link><published>2019-11-10T18:56:00+01:00</published><updated>2019-11-10T18:56:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-11-10:/dont-use-string-for-method-options-use-an-enum.html</id><summary type="html">&lt;p&gt;In this article, we are going to have a look at a method that accepts an option.
 That is to say, it accepts an argument that somehow decides how it operates. If
 you use a lot of libraries in your day-to-day programming, you're bound to come
 across methods that accept …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this article, we are going to have a look at a method that accepts an option.

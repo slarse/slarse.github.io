@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Essential pytest 1: Controlling the verbosity of output - slar.se</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous">
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/pygment.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" integrity="sha384-FFgGfda92tXC8nCNOxrCQ3R8x1TNkMFqDZVQdDaaJiiVbjkPBXIJBx0o7ETjy8Bh" crossorigin="anonymous"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="slar.se Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+              <li>
+                <a href="https://slar.se/pages/about.html">About</a>
+              </li>
+              <li>
+                <a href="https://slar.se/pages/essayspublications.html">Essays/Publications</a>
+              </li>
+              <li>
+                <a href="https://slar.se/pages/projects.html">Projects</a>
+              </li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">slar.se</a></h1>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Fri 31 July 2020
+</abbr> <h1>
+  <a href="https://slar.se/essential-pytest-1.html" rel="bookmark"
+     title="Permalink to Essential pytest 1: Controlling the verbosity of output">
+    Essential pytest 1: Controlling the verbosity of output
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/testing.html">
+      Testing</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>This is the first part of a series of small articles detailing some of the
+functionality of the <a href="https://docs.pytest.org/en/latest/">pytest</a> testing
+framework that I find most essential. The series assumes you know how to run
+tests with <code>pytest</code> already.</p>
+<p>In this first part, we'll take a look at the <code>-v</code> and <code>--tb</code> options to control
+the verbosity of the output.</p>
+<h2>The test suite</h2>
+<p>For the purposes of this article, I've implemented a very simple multiplication
+function called <code>mul</code>, along with a few tests. Here's the entire thing, in a
+file called <code>mul.py</code>:</p>
+<div class="highlight"><pre><span></span><span class="c1"># mul.py</span>
+<span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">lhs</span> <span class="o">*</span> <span class="n">lhs</span>
+
+<span class="k">def</span> <span class="nf">test_multiply_equal_numbers</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">mul</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">25</span>
+
+<span class="k">def</span> <span class="nf">test_multiply_by_zero</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">mul</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">test_multiply_different_numbers</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">mul</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">15</span>
+</pre></div>
+
+
+<p>Obviously, the implementation of <code>mul</code> is broken, and running <code>pytest</code> gives
+the following output.</p>
+<div class="highlight"><pre><span></span>$ pytest mul.py 
+<span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
+platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
+rootdir: /home/slarse/Documents/github/python/mul
+collected <span class="m">3</span> items                                                        
+
+mul.py .FF                                                         <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+
+<span class="o">================================</span> <span class="nv">FAILURES</span> <span class="o">================================</span>
+_________________________ test_multiply_by_zero __________________________
+
+    def test_multiply_by_zero<span class="o">()</span>:
+&gt;       assert mul<span class="o">(</span><span class="m">1</span>, <span class="m">0</span><span class="o">)</span> <span class="o">==</span> <span class="m">0</span>
+E       assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
+E        +  where <span class="nv">1</span> <span class="o">=</span> mul<span class="o">(</span><span class="m">1</span>, <span class="m">0</span><span class="o">)</span>
+
+mul.py:8: AssertionError
+____________________ test_multiply_different_numbers _____________________
+
+    def test_multiply_different_numbers<span class="o">()</span>:
+&gt;       assert mul<span class="o">(</span><span class="m">5</span>, <span class="m">3</span><span class="o">)</span> <span class="o">==</span> <span class="m">15</span>
+E       assert <span class="nv">25</span> <span class="o">==</span> <span class="m">15</span>
+E        +  where <span class="nv">25</span> <span class="o">=</span> mul<span class="o">(</span><span class="m">5</span>, <span class="m">3</span><span class="o">)</span>
+
+mul.py:11: <span class="nv">AssertionError</span>
+<span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
+FAILED mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
+FAILED mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
+<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed in <span class="m">0</span>.08s <span class="o">=======================</span>
+</pre></div>
+
+
+<p>Let's learn how to control how much of this we see.</p>
+<h2>Using the <code>--tb</code> option to control traceback verbosity</h2>
+<p>Most of what you're seeing in the output of the previous section is the
+<em>traceback</em> information. While the traceback shown above is manageable as is,
+consider that it stems from a single-line function and single-line tests. With
+that in mind, it's actually pretty freaking verbose. We can show less of it by
+using the <code>--tb</code> option. We can even shut it off completely.</p>
+<div class="highlight"><pre><span></span>$ pytest mul.py --tb<span class="o">=</span><span class="nv">no</span>
+<span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
+platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
+rootdir: /home/slarse/Documents/github/python/mul
+collected <span class="m">3</span> items                                                        
+
+mul.py .FF                                                         <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+
+<span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
+FAILED mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
+FAILED mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
+<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed in <span class="m">0</span>.02s <span class="o">=======================</span>
+</pre></div>
+
+
+<p>This is useful when you're just trying to figure out what tests are failing, and
+when test output is just entirely overwhelming. I find myself using it quite
+frequently. Another useful traceback value is <code>line</code>.</p>
+<div class="highlight"><pre><span></span>$ pytest mul.py --tb<span class="o">=</span><span class="nv">line</span>
+<span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
+platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
+rootdir: /home/slarse/Documents/github/python/mul
+collected <span class="m">3</span> items                                                        
+
+mul.py .FF                                                         <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+
+<span class="o">================================</span> <span class="nv">FAILURES</span> <span class="o">================================</span>
+/home/slarse/Documents/github/python/mul/mul.py:8: assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
+/home/slarse/Documents/github/python/mul/mul.py:11: assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
+<span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
+FAILED mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
+FAILED mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
+<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed in <span class="m">0</span>.03s <span class="o">=======================</span>
+</pre></div>
+
+
+<p>This lets us see the exact lines where the test failures occurred. In this case,
+it shows the lines of the assertions, but it could also for example show the
+line where an exception was raised. There are more ways to manipulate the
+traceback, but these are the two I use the most, aside from the default. To see
+the other options, refer to <code>pytest -h</code> and look for the <code>--tb</code> option.</p>
+<h2>Using <code>-v</code> to show more verbose test output</h2>
+<p>The <code>-v</code> option controls the verbosity of test output while the tests are
+running. It's really useful when tests take a long time to run, and you want to
+know approximately where you're at.</p>
+<div class="highlight"><pre><span></span>$ pytest mul.py --tb<span class="o">=</span>no -v
+<span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
+platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python
+cachedir: .pytest_cache
+rootdir: /home/slarse/Documents/github/python/mul
+collected <span class="m">3</span> items                                                        
+
+mul.py::test_multiply_equal_numbers PASSED                         <span class="o">[</span> <span class="m">33</span>%<span class="o">]</span>
+mul.py::test_multiply_by_zero FAILED                               <span class="o">[</span> <span class="m">66</span>%<span class="o">]</span>
+mul.py::test_multiply_different_numbers FAILED                     <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+
+<span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
+FAILED mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
+FAILED mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
+<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed in <span class="m">0</span>.03s <span class="o">=======================</span>
+</pre></div>
+
+
+<p>Note how each test is now shown on a line of its own, as opposed to just <code>.</code> and
+<code>F</code> in the previous runs. The lines show up as the tests are running, and I find
+it useful to track long-running tests.</p>
+<p>And that's pretty much it for basic output verbosity control with <code>pytest</code>, hope
+you learned something!</p>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+  </body>
+</html>

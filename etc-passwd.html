@@ -114,7 +114,7 @@ user on the system, with different fields being separated by colons as follows:<
 
 
 <p><code>name</code> and <code>password</code> are the username and password of the user, <code>UID</code> is the
-user's numerical ID, <code>GID</code> is the id of the <em>first</em> group the user belongs to,
+user's numerical id, <code>GID</code> is the id of the <em>first</em> group the user belongs to,
 <code>GECOS</code> is an optional comment, <code>directory</code> is the user's home directory, and
 <code>shell</code> is the path to the executable that launches the user's preferred
 shell. As an example, a part of my <code>/etc/passwd</code> file looks like this:</p>
@@ -144,11 +144,11 @@ isn't. An <code>x</code> in the password field means that the password is locate
 slarse, is largely similar to that of the root user.</p>
 <p>The entry for the mysql user is however a bit different. For starters, it has a
 comment in the <code>GECOS</code> field saying <em>MariaDB</em>, which indicates that the mysql
-it actually used by the <code>MariaDB</code> fork of the <code>MySQL</code> database system. It also
-has in interesting login shell, namely <code>/sbin/nologin</code>. The description of the
-<code>nologin</code> program from its manpage simply reads: <em>nologin - politely refuse a
-login</em>. This program simply refuses a login, regardless of what credentials are
-supplied.</p>
+user is actually used by the <code>MariaDB</code> fork of the <code>MySQL</code> database system. It
+also has in interesting login shell, namely <code>/sbin/nologin</code>. The description of
+the <code>nologin</code> program from its manpage simply reads: <em>nologin - politely refuse
+a login</em>. This program simply refuses a login, regardless of what credentials
+are supplied.</p>
 <p>And that's pretty much it for what the <code>/etc/passwd</code> file contains. For more
 details, you can read the <code>passwd (5)</code> manpage. Now, what about that shadow
 file?</p>
@@ -222,82 +222,10 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
-          <i class="fas fa-tag"></i>
-        podcast
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
+        kotlin
       </a>
     </span>
     <span class="tag-4">
@@ -306,10 +234,52 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
         css
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
-        java
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-2">
@@ -319,27 +289,45 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/testing.html">
           <i class="fas fa-tag"></i>
         testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
       </a>
     </span>
     <span class="tag-1">
@@ -349,9 +337,21 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+      <a href="https://slar.se/tag/totw.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-4">
@@ -360,10 +360,10 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
         gradle
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/linux.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
           <i class="fas fa-tag"></i>
-        linux
+        bst
       </a>
     </span>
 </p>

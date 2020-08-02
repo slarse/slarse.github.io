@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Linux</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/linux.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-08-02T11:51:33+00:00</updated><entry><title>The Linux /etc/passwd file, and why it doesn't contain passwords</title><link href="https://slar.se/etc-passwd.html" rel="alternate"></link><published>2020-08-02T11:51:33+00:00</published><updated>2020-08-02T11:51:33+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-08-02:/etc-passwd.html</id><summary type="html">&lt;p&gt;On any Linux distribution, there's a file located at &lt;code&gt;/etc/passwd&lt;/code&gt;. This file
+contains information about users that exist on the system, including their
+username, user id, group id and more. In this short article, I'll outline the
+structure of the &lt;code&gt;/etc/passwd&lt;/code&gt; file, and also illuminate why it doesn't …&lt;/p&gt;</summary><content type="html">&lt;p&gt;On any Linux distribution, there's a file located at &lt;code&gt;/etc/passwd&lt;/code&gt;. This file
+contains information about users that exist on the system, including their
+username, user id, group id and more. In this short article, I'll outline the
+structure of the &lt;code&gt;/etc/passwd&lt;/code&gt; file, and also illuminate why it doesn't
+typically contain any passwords.&lt;/p&gt;
+&lt;h2&gt;Layout of the &lt;code&gt;/etc/passwd&lt;/code&gt; file&lt;/h2&gt;
+&lt;p&gt;The layout of the &lt;code&gt;/etc/passwd&lt;/code&gt; file is fairly simple. Each line represents a
+user on the system, with different fields being separated by colons as follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;UID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;GID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;GECOS&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;name&lt;/code&gt; and &lt;code&gt;password&lt;/code&gt; are the username and password of the user, &lt;code&gt;UID&lt;/code&gt; is the
+user's numerical ID, &lt;code&gt;GID&lt;/code&gt; is the id of the &lt;em&gt;first&lt;/em&gt; group the user belongs to,
+&lt;code&gt;GECOS&lt;/code&gt; is an optional comment, &lt;code&gt;directory&lt;/code&gt; is the user's home directory, and
+&lt;code&gt;shell&lt;/code&gt; is the path to the executable that launches the user's preferred
+shell. As an example, a part of my &lt;code&gt;/etc/passwd&lt;/code&gt; file looks like this:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; You can find the groups users belong to in the &lt;code&gt;/etc/group&lt;/code&gt; file.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;::/&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;span class="n"&gt;slarse&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;985&lt;/span&gt;&lt;span class="o"&gt;::/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="sr"&gt;/slarse:/bin/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;span class="n"&gt;mysql&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;970&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;970&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;MariaDB&lt;/span&gt;&lt;span class="o"&gt;:/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="sr"&gt;/lib/mysql:/sbin/&lt;/span&gt;&lt;span class="n"&gt;nologin&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We can see that the root user has the fields set as follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;password&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;x
+&lt;span class="nv"&gt;UID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="nv"&gt;GID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="nv"&gt;GECOS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="nv"&gt;directory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/root
+&lt;span class="nv"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/bin/bash
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The user and group IDs of the root user are always 0, and it typically has its
+home directory in &lt;code&gt;/root&lt;/code&gt;. But is the password of root user really &lt;code&gt;x&lt;/code&gt;? No, it
+isn't. An &lt;code&gt;x&lt;/code&gt; in the password field means that the password is located in the
+&lt;em&gt;shadow&lt;/em&gt; file. More on that in the next section. The entry for my own user,
+slarse, is largely similar to that of the root user.&lt;/p&gt;
+&lt;p&gt;The entry for the mysql user is however a bit different. For starters, it has a
+comment in the &lt;code&gt;GECOS&lt;/code&gt; field saying &lt;em&gt;MariaDB&lt;/em&gt;, which indicates that the mysql
+it actually used by the &lt;code&gt;MariaDB&lt;/code&gt; fork of the &lt;code&gt;MySQL&lt;/code&gt; database system. It also
+has in interesting login shell, namely &lt;code&gt;/sbin/nologin&lt;/code&gt;. The description of the
+&lt;code&gt;nologin&lt;/code&gt; program from its manpage simply reads: &lt;em&gt;nologin - politely refuse a
+login&lt;/em&gt;. This program simply refuses a login, regardless of what credentials are
+supplied.&lt;/p&gt;
+&lt;p&gt;And that's pretty much it for what the &lt;code&gt;/etc/passwd&lt;/code&gt; file contains. For more
+details, you can read the &lt;code&gt;passwd (5)&lt;/code&gt; manpage. Now, what about that shadow
+file?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Hint:&lt;/strong&gt; To access section &lt;code&gt;Y&lt;/code&gt; of a manpage &lt;code&gt;PAGE&lt;/code&gt;, type &lt;code&gt;man PAGE.Y&lt;/code&gt; into a
+terminal. For example, to access &lt;code&gt;passwd (5)&lt;/code&gt;, you type &lt;code&gt;man passwd.5&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;The &lt;code&gt;/etc/shadow&lt;/code&gt; file&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;/etc/passwd&lt;/code&gt; file is a so-called &lt;em&gt;world-readable&lt;/em&gt;, meaning that any user on
+the system can read it. Many programs use this file to map users to their ids,
+for example, and so its broad accessibility is necessary. A side effect is that
+storing encrypted passwords in the &lt;code&gt;/etc/passwd&lt;/code&gt; file lets any user that has
+access to the system read the encrypted password of any other user. In times
+long past, when cracking encrypted passwords was computationally infeasible,
+this wasn't really a problem. Nowadays however, cracking an encrypted password
+is only a matter of (feasible) time.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;code&gt;/etc/passwd&lt;/code&gt; file is word-readable, but it's only writeable by
+root to avoid other users tampering with it, such as by replacing an &lt;code&gt;x&lt;/code&gt; with
+an actual password.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The &lt;code&gt;/etc/shadow&lt;/code&gt; file presents a solution to this problem. It is readable only
+by the root user, and contains the encrypted passwords of users with an &lt;code&gt;x&lt;/code&gt; in
+the password field of their &lt;code&gt;/etc/passwd&lt;/code&gt; entry. The shadow file is technically
+optional, but you will probably never find a system that doesn't use it.&lt;/p&gt;
+&lt;p&gt;I won't go into detail on how the shadow file is structured, as it's not a file
+that's typically accessed by user space programs. If you want to know more about
+it, you can read the manpage of &lt;code&gt;shadow (5)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;And that's it for this article, hope you learned something!&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category></entry></feed>

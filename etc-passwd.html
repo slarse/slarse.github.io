@@ -8,7 +8,7 @@
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>slar.se - Page 3</title>
+    <title>The Linux /etc/passwd file, and why it doesn&#39;t contain passwords - slar.se</title>
 
    
         <link rel="stylesheet"
@@ -82,181 +82,106 @@
     <div class="container" id="main-container">
       <div class="row">
         <div class="col-md-9" id="content">
-    <article>
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
 <abbr class="article-header-date">
-  Mon 06 May 2019
+  Sun 02 August 2020
 </abbr> <h1>
-  <a href="https://slar.se/using-bash-aliases.html" rel="bookmark"
-     title="Permalink to Using bash aliases">
-    Using bash aliases
+  <a href="https://slar.se/etc-passwd.html" rel="bookmark"
+     title="Permalink to The Linux /etc/passwd file, and why it doesn&#39;t contain passwords">
+    The Linux /etc/passwd file, and why it doesn't contain passwords
   </a>
 </h1><div class="article-header-info">
   <p>
       Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
     in 
-    <a href="https://slar.se/category/tip-of-the-week.html">
-      Tip of the Week</a>
+    <a href="https://slar.se/category/linux.html">
+      Linux</a>
     &nbsp;&nbsp;
   </p>
-</div> <!-- /.article-header-info -->  
-      <div class="summary">
-		<p>For this <em>Tip of the Week</em>, I'd like to present something that took me a while
-to figure out why it was useful. That something is bash aliases, and I'll now
-walk you through how to create aliases, and the two main ways in which I use
-them (although I'm …</p>
-		<p class="content-emphasis"><a href="https://slar.se/using-bash-aliases.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
+</div> <!-- /.article-header-info -->  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>On any Linux distribution, there's a file located at <code>/etc/passwd</code>. This file
+contains information about users that exist on the system, including their
+username, user id, group id and more. In this short article, I'll outline the
+structure of the <code>/etc/passwd</code> file, and also illuminate why it doesn't
+typically contain any passwords.</p>
+<h2>Layout of the <code>/etc/passwd</code> file</h2>
+<p>The layout of the <code>/etc/passwd</code> file is fairly simple. Each line represents a
+user on the system, with different fields being separated by colons as follows:</p>
+<div class="highlight"><pre><span></span><span class="n">name</span><span class="o">:</span><span class="n">password</span><span class="o">:</span><span class="n">UID</span><span class="o">:</span><span class="n">GID</span><span class="o">:</span><span class="n">GECOS</span><span class="o">:</span><span class="n">directory</span><span class="o">:</span><span class="n">shell</span>
+</pre></div>
 
-    <hr />
-    <article>
-<abbr class="article-header-date">
-  Mon 29 April 2019
-</abbr> <h1>
-  <a href="https://slar.se/git-local.html" rel="bookmark"
-     title="Permalink to Git local">
-    Git local
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/tip-of-the-week.html">
-      Tip of the Week</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info -->  
-      <div class="summary">
-		<p>Nowadays, Git is almost ubiquitous in software development. Most developers also
-know that Git is a <em>decentralized</em> version control system, meaning that every
-copy of the repository carries the full revision history, and there is no
-"central" repository. A consequence of the decentralized aspect of Git is that
-you can …</p>
-		<p class="content-emphasis"><a href="https://slar.se/git-local.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
 
-    <hr />
-    <article>
-<abbr class="article-header-date">
-  Mon 22 April 2019
-</abbr> <h1>
-  <a href="https://slar.se/history-and-history-expansion-in-bash.html" rel="bookmark"
-     title="Permalink to History and history expansion in bash">
-    History and history expansion in bash
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/tip-of-the-week.html">
-      Tip of the Week</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info -->  
-      <div class="summary">
-		<p>Admittedly, this TOTW is one day late, so this week there will be 2xTOTW! In
-any case, the tip I want to bring up here is very much related to last week's
-TOTW on <a href="https://slar.se/reverse-search-in-bash.html">Reverse search in bash</a>. Sometimes,
-reverse searching just doesn't work out. You may not be quite …</p>
-		<p class="content-emphasis"><a href="https://slar.se/history-and-history-expansion-in-bash.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
+<p><code>name</code> and <code>password</code> are the username and password of the user, <code>UID</code> is the
+user's numerical ID, <code>GID</code> is the id of the <em>first</em> group the user belongs to,
+<code>GECOS</code> is an optional comment, <code>directory</code> is the user's home directory, and
+<code>shell</code> is the path to the executable that launches the user's preferred
+shell. As an example, a part of my <code>/etc/passwd</code> file looks like this:</p>
+<blockquote>
+<p><strong>Note:</strong> You can find the groups users belong to in the <code>/etc/group</code> file.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="n">root</span><span class="o">:</span><span class="n">x</span><span class="o">:</span><span class="mi">0</span><span class="o">:</span><span class="mi">0</span><span class="o">::/</span><span class="n">root</span><span class="o">:/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
+<span class="n">slarse</span><span class="o">:</span><span class="n">x</span><span class="o">:</span><span class="mi">1000</span><span class="o">:</span><span class="mi">985</span><span class="o">::/</span><span class="n">home</span><span class="sr">/slarse:/bin/</span><span class="n">bash</span>
+<span class="n">mysql</span><span class="o">:</span><span class="n">x</span><span class="o">:</span><span class="mi">970</span><span class="o">:</span><span class="mi">970</span><span class="o">:</span><span class="n">MariaDB</span><span class="o">:/</span><span class="n">var</span><span class="sr">/lib/mysql:/sbin/</span><span class="n">nologin</span>
+</pre></div>
 
-    <hr />
-    <article>
-<abbr class="article-header-date">
-  Tue 09 April 2019
-</abbr> <h1>
-  <a href="https://slar.se/reverse-search-in-bash.html" rel="bookmark"
-     title="Permalink to Reverse search in bash">
-    Reverse search in bash
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/tip-of-the-week.html">
-      Tip of the Week</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info -->  
-      <div class="summary">
-		<p>Have you ever found yourself furiously tapping the UP-arrow (or <code>ctrl+p</code>) to
-find a command that's probably waaaay up there? Would you be surprised if I
-told you there's a better way? When you want to re-use a command you've written
-previously, and you know it's not the previous …</p>
-		<p class="content-emphasis"><a href="https://slar.se/reverse-search-in-bash.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
 
-    <hr />
-    <article>
-<abbr class="article-header-date">
-  Tue 09 April 2019
-</abbr> <h1>
-  <a href="https://slar.se/announcing-tip-of-the-week-totw.html" rel="bookmark"
-     title="Permalink to Announcing Tip of the Week (TotW)">
-    Announcing Tip of the Week (TotW)
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/tip-of-the-week.html">
-      Tip of the Week</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info -->  
-      <div class="summary">
-		<p>In order to actually get around to writing some content, I've decided to start
-a little series: Tip of the Week! Every week, I'll spend 30 minutes or so
-writing a very small article about some tip related to programming, Linux or
-technology in general. And no, this one does …</p>
-		<p class="content-emphasis"><a href="https://slar.se/announcing-tip-of-the-week-totw.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
+<p>We can see that the root user has the fields set as follows:</p>
+<div class="highlight"><pre><span></span><span class="nv">password</span><span class="o">=</span>x
+<span class="nv">UID</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">GID</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">GECOS</span><span class="o">=</span>
+<span class="nv">directory</span><span class="o">=</span>/root
+<span class="nv">shell</span><span class="o">=</span>/bin/bash
+</pre></div>
 
-    <hr />
 
-<nav class="index-pager">
-	<ul class="pagination">
-		<li class="prev">
-		  <a href="https://slar.se/index2.html">
-			<i class="fas fa-chevron-circle-left fa-fw fa-lg"></i> Previous
-		  </a>
-		</li>
+<p>The user and group IDs of the root user are always 0, and it typically has its
+home directory in <code>/root</code>. But is the password of root user really <code>x</code>? No, it
+isn't. An <code>x</code> in the password field means that the password is located in the
+<em>shadow</em> file. More on that in the next section. The entry for my own user,
+slarse, is largely similar to that of the root user.</p>
+<p>The entry for the mysql user is however a bit different. For starters, it has a
+comment in the <code>GECOS</code> field saying <em>MariaDB</em>, which indicates that the mysql
+it actually used by the <code>MariaDB</code> fork of the <code>MySQL</code> database system. It also
+has in interesting login shell, namely <code>/sbin/nologin</code>. The description of the
+<code>nologin</code> program from its manpage simply reads: <em>nologin - politely refuse a
+login</em>. This program simply refuses a login, regardless of what credentials are
+supplied.</p>
+<p>And that's pretty much it for what the <code>/etc/passwd</code> file contains. For more
+details, you can read the <code>passwd (5)</code> manpage. Now, what about that shadow
+file?</p>
+<blockquote>
+<p><strong>Hint:</strong> To access section <code>Y</code> of a manpage <code>PAGE</code>, type <code>man PAGE.Y</code> into a
+terminal. For example, to access <code>passwd (5)</code>, you type <code>man passwd.5</code>.</p>
+</blockquote>
+<h2>The <code>/etc/shadow</code> file</h2>
+<p>The <code>/etc/passwd</code> file is a so-called <em>world-readable</em>, meaning that any user on
+the system can read it. Many programs use this file to map users to their ids,
+for example, and so its broad accessibility is necessary. A side effect is that
+storing encrypted passwords in the <code>/etc/passwd</code> file lets any user that has
+access to the system read the encrypted password of any other user. In times
+long past, when cracking encrypted passwords was computationally infeasible,
+this wasn't really a problem. Nowadays however, cracking an encrypted password
+is only a matter of (feasible) time.</p>
+<blockquote>
+<p><strong>Note:</strong> The <code>/etc/passwd</code> file is word-readable, but it's only writeable by
+root to avoid other users tampering with it, such as by replacing an <code>x</code> with
+an actual password.</p>
+</blockquote>
+<p>The <code>/etc/shadow</code> file presents a solution to this problem. It is readable only
+by the root user, and contains the encrypted passwords of users with an <code>x</code> in
+the password field of their <code>/etc/passwd</code> entry. The shadow file is technically
+optional, but you will probably never find a system that doesn't use it.</p>
+<p>I won't go into detail on how the shadow file is structured, as it's not a file
+that's typically accessed by user space programs. If you want to know more about
+it, you can read the manpage of <code>shadow (5)</code>.</p>
+<p>And that's it for this article, hope you learned something!</p>
+  </div>
+  
 
-        <li>
-          <a href="https://slar.se/index.html">1</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index2.html">2</a>
-        </li>
-        <li class="active"> <span>3</span> </li>
-        <li>
-          <a href="https://slar.se/index4.html">4</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index5.html">5</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index6.html">6</a>
-        </li>
-
-		<li class="next">
-		  <a href="https://slar.se/index4.html">
-			Next <i class="fas fa-chevron-circle-right fa-fw fa-lg"></i>
-		  </a>
-		</li>
-	</ul>
-
-</nav> <!-- /index-pager -->
+</article>
         </div><!-- /content -->
 
         <div class="col-md-3 sidebar-nav" id="sidebar">

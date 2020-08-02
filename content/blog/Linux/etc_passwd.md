@@ -1,5 +1,6 @@
 Title: The Linux /etc/passwd file, and why it doesn't contain passwords
 Date: 2020-08-02T11:51:33Z
+Modified: 2020-08-02T12:15:33Z
 Author: Simon Larsén
 Tags: linux
 Slug: etc-passwd
@@ -19,7 +20,7 @@ name:password:UID:GID:GECOS:directory:shell
 ```
 
 `name` and `password` are the username and password of the user, `UID` is the
-user's numerical ID, `GID` is the id of the _first_ group the user belongs to,
+user's numerical id, `GID` is the id of the _first_ group the user belongs to,
 `GECOS` is an optional comment, `directory` is the user's home directory, and
 `shell` is the path to the executable that launches the user's preferred
 shell. As an example, a part of my `/etc/passwd` file looks like this:
@@ -51,11 +52,11 @@ slarse, is largely similar to that of the root user.
 
 The entry for the mysql user is however a bit different. For starters, it has a
 comment in the `GECOS` field saying _MariaDB_, which indicates that the mysql
-it actually used by the `MariaDB` fork of the `MySQL` database system. It also
-has in interesting login shell, namely `/sbin/nologin`. The description of the
-`nologin` program from its manpage simply reads: _nologin - politely refuse a
-login_. This program simply refuses a login, regardless of what credentials are
-supplied.
+user is actually used by the `MariaDB` fork of the `MySQL` database system. It
+also has in interesting login shell, namely `/sbin/nologin`. The description of
+the `nologin` program from its manpage simply reads: _nologin - politely refuse
+a login_. This program simply refuses a login, regardless of what credentials
+are supplied.
 
 And that's pretty much it for what the `/etc/passwd` file contains. For more
 details, you can read the `passwd (5)` manpage. Now, what about that shadow

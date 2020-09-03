@@ -112,17 +112,24 @@ FAILED mul.py::test_multiply_by_zero - assert 1 == 0
 FAILED mul.py::test_multiply_different_numbers - assert 25 == 15
 ====================== 2 failed, 1 passed in 0.03s =======================
 ```
-
 This lets us see the exact lines where the test failures occurred. In this case,
 it shows the lines of the assertions, but it could also for example show the
-line where an exception was raised. There are more ways to manipulate the
-traceback, but these are the two I use the most, aside from the default. To see
-the other options, refer to `pytest -h` and look for the `--tb` option.
+line where an exception was raised.
+
+Another one that I find really useful is `--tb=short`. It shows the full
+traceback, but with much less context around each function call. It won't
+make much of a difference for this short a traceback, but it makes a world of
+difference for deeply nested function calls.
+
+There are more ways to manipulate the traceback, but these are the two I use the
+most, aside from the default. To see the other options, refer to `pytest -h` and
+look for the `--tb` option.
 
 ## Using `-v` to show more verbose test output
 The `-v` option controls the verbosity of test output while the tests are
-running. It's really useful when tests take a long time to run, and you want to
-know approximately where you're at.
+running, and also the verbosity of single items in the traceback. It's really
+useful when tests take a long time to run, and you want to know approximately
+where you're at.
 
 ```bash
 $ pytest mul.py --tb=no -v
@@ -145,5 +152,77 @@ Note how each test is now shown on a line of its own, as opposed to just `.` and
 `F` in the previous runs. The lines show up as the tests are running, and I find
 it useful to track long-running tests.
 
-And that's pretty much it for basic output verbosity control with `pytest`, hope
-you learned something!
+But what about that "single-item" verbosity that I mentioned? When there are
+single items in the traceback that are very large, such as a list of say 1000
+elements, then pytest will truncate them by default. To demnstrate, consider
+this single (pointless) test:
+
+```python
+# test_truncation.py
+import pytest
+
+def test_truncation_demonstration():
+    assert [0, 1, 2, 3] == list(range(1000))
+```
+
+Running this test will yield a traceback that looks something like this.
+
+```bash
+$ pytest test_truncation.py
+[... OMITTED ...]
+________________________________________________________________________________________
+test_truncation_demonstration
+_________________________________________________________________________________________
+
+    def test_truncation_demonstration():
+    >       assert [0, 1, 2, 3] == list(range(1000))
+    E       assert [0, 1, 2, 3] == [0, 1, 2, 3, 4, 5, ...]
+    E         Right contains 996 more items, first extra item: 4
+    E         Use -v to get the full diff
+
+    truncation.py:4: AssertionError
+```
+
+Note how the long list has been truncated such that only the first few items are
+shown. Note also how pytest is suggesting the use of `-v`. If we supply `-v`, it
+actually still doesn't show the whole list.
+
+```bash
+$ pytest test_truncation.py -v
+[... OMITTED ...]
+________________________________________________________________________________________
+test_truncation_demonstration
+_________________________________________________________________________________________
+
+    def test_truncation_demonstration():
+    >       assert [0, 1, 2, 3] == list(range(1000))
+    E       AssertionError: assert [0, 1, 2, 3] == [0, 1, 2, 3, 4, 5, ...]
+    E         Right contains 996 more items, first extra item: 4
+    E         Full diff:
+    E           [
+    E            0,
+    E            1,
+    E            2,
+    E            3,...
+    E         
+    E         ...Full output truncated (998 lines hidden), use '-vv' to show
+
+    truncation.py:4: AssertionError
+```
+
+In fact, pytest isn't even showing more output here, it just shows the same
+things more verbosely. If we stack `-v` twice, i.e. `-vv` or `-v -v`, then we
+get the full output. I find `-v` on its own to be rather useless, and typically
+always supply `-vv` if I want verbose output. For obvious reasons, I will not
+show what that output looks like.
+
+## Summary
+In this article, we had a look at the `--tb` and `-v` options to control output
+verbosity in pytest. `--tb` controls the overall size of the traceback, and can
+be supplied with values like `no` for no output at all, `line` for just a single
+line of traceback, or `short` for complete traceback with shortened context.
+`-v` controls the verbosity of running tests and single items in the traceback,
+such as very long lists which are truncated by default. Typically, `-vv` is
+required to get fully verbose output.
+
+And that's about it, I hope you learned something!

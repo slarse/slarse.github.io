@@ -235,9 +235,7 @@ this single (pointless) test:&lt;/p&gt;
 &lt;p&gt;Running this test will yield a traceback that looks something like this.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest test_truncation.py
 &lt;span class="o"&gt;[&lt;/span&gt;... OMITTED ...&lt;span class="o"&gt;]&lt;/span&gt;
-________________________________________________________________________________________
-test_truncation_demonstration
-_________________________________________________________________________________________
+______________________ test_truncation_demonstration _____________________
 
     def test_truncation_demonstration&lt;span class="o"&gt;()&lt;/span&gt;:
     &amp;gt;       assert &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; list&lt;span class="o"&gt;(&lt;/span&gt;range&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
@@ -254,9 +252,7 @@ shown. Note also how pytest is suggesting the use of &lt;code&gt;-v&lt;/code&gt;
 actually still doesn't show the whole list.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest test_truncation.py -v
 &lt;span class="o"&gt;[&lt;/span&gt;... OMITTED ...&lt;span class="o"&gt;]&lt;/span&gt;
-________________________________________________________________________________________
-test_truncation_demonstration
-_________________________________________________________________________________________
+______________________ test_truncation_demonstration _____________________
 
     def test_truncation_demonstration&lt;span class="o"&gt;()&lt;/span&gt;:
     &amp;gt;       assert &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; list&lt;span class="o"&gt;(&lt;/span&gt;range&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;

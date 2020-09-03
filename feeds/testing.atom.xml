@@ -107,13 +107,19 @@ FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;2
 
 &lt;p&gt;This lets us see the exact lines where the test failures occurred. In this case,
 it shows the lines of the assertions, but it could also for example show the
-line where an exception was raised. There are more ways to manipulate the
-traceback, but these are the two I use the most, aside from the default. To see
-the other options, refer to &lt;code&gt;pytest -h&lt;/code&gt; and look for the &lt;code&gt;--tb&lt;/code&gt; option.&lt;/p&gt;
+line where an exception was raised.&lt;/p&gt;
+&lt;p&gt;Another one that I find really useful is &lt;code&gt;--tb=short&lt;/code&gt;. It shows the full
+traceback, but with much less context around each function call. It won't
+make much of a difference for this short a traceback, but it makes a world of
+difference for deeply nested function calls.&lt;/p&gt;
+&lt;p&gt;There are more ways to manipulate the traceback, but these are the two I use the
+most, aside from the default. To see the other options, refer to &lt;code&gt;pytest -h&lt;/code&gt; and
+look for the &lt;code&gt;--tb&lt;/code&gt; option.&lt;/p&gt;
 &lt;h2&gt;Using &lt;code&gt;-v&lt;/code&gt; to show more verbose test output&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;-v&lt;/code&gt; option controls the verbosity of test output while the tests are
-running. It's really useful when tests take a long time to run, and you want to
-know approximately where you're at.&lt;/p&gt;
+running, and also the verbosity of single items in the traceback. It's really
+useful when tests take a long time to run, and you want to know approximately
+where you're at.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest mul.py --tb&lt;span class="o"&gt;=&lt;/span&gt;no -v
 &lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python
@@ -135,8 +141,75 @@ FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;2
 &lt;p&gt;Note how each test is now shown on a line of its own, as opposed to just &lt;code&gt;.&lt;/code&gt; and
 &lt;code&gt;F&lt;/code&gt; in the previous runs. The lines show up as the tests are running, and I find
 it useful to track long-running tests.&lt;/p&gt;
-&lt;p&gt;And that's pretty much it for basic output verbosity control with &lt;code&gt;pytest&lt;/code&gt;, hope
-you learned something!&lt;/p&gt;</content><category term="Testing"></category><category term="python"></category><category term="pytest"></category><category term="testing"></category></entry><entry><title>Testing tips: Tests that don't test</title><link href="https://slar.se/tests-that-dont-test.html" rel="alternate"></link><published>2019-03-05T22:07:56+00:00</published><updated>2019-03-05T22:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-03-05:/tests-that-dont-test.html</id><summary type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
+&lt;p&gt;But what about that "single-item" verbosity that I mentioned? When there are
+single items in the traceback that are very large, such as a list of say 1000
+elements, then pytest will truncate them by default. To demnstrate, consider
+this single (pointless) test:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# test_truncation.py&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytest&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_truncation_demonstration&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Running this test will yield a traceback that looks something like this.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest test_truncation.py
+&lt;span class="o"&gt;[&lt;/span&gt;... OMITTED ...&lt;span class="o"&gt;]&lt;/span&gt;
+________________________________________________________________________________________
+test_truncation_demonstration
+_________________________________________________________________________________________
+
+    def test_truncation_demonstration&lt;span class="o"&gt;()&lt;/span&gt;:
+    &amp;gt;       assert &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; list&lt;span class="o"&gt;(&lt;/span&gt;range&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+    E       assert &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="m"&gt;5&lt;/span&gt;, ...&lt;span class="o"&gt;]&lt;/span&gt;
+    E         Right contains &lt;span class="m"&gt;996&lt;/span&gt; more items, first extra item: &lt;span class="m"&gt;4&lt;/span&gt;
+    E         Use -v to get the full diff
+
+    truncation.py:4: AssertionError
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note how the long list has been truncated such that only the first few items are
+shown. Note also how pytest is suggesting the use of &lt;code&gt;-v&lt;/code&gt;. If we supply &lt;code&gt;-v&lt;/code&gt;, it
+actually still doesn't show the whole list.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest test_truncation.py -v
+&lt;span class="o"&gt;[&lt;/span&gt;... OMITTED ...&lt;span class="o"&gt;]&lt;/span&gt;
+________________________________________________________________________________________
+test_truncation_demonstration
+_________________________________________________________________________________________
+
+    def test_truncation_demonstration&lt;span class="o"&gt;()&lt;/span&gt;:
+    &amp;gt;       assert &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; list&lt;span class="o"&gt;(&lt;/span&gt;range&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;
+    E       AssertionError: assert &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;, &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;2&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;, &lt;span class="m"&gt;4&lt;/span&gt;, &lt;span class="m"&gt;5&lt;/span&gt;, ...&lt;span class="o"&gt;]&lt;/span&gt;
+    E         Right contains &lt;span class="m"&gt;996&lt;/span&gt; more items, first extra item: &lt;span class="m"&gt;4&lt;/span&gt;
+    E         Full diff:
+    E           &lt;span class="o"&gt;[&lt;/span&gt;
+    E            &lt;span class="m"&gt;0&lt;/span&gt;,
+    E            &lt;span class="m"&gt;1&lt;/span&gt;,
+    E            &lt;span class="m"&gt;2&lt;/span&gt;,
+    E            &lt;span class="m"&gt;3&lt;/span&gt;,...
+    E         
+    E         ...Full output truncated &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;998&lt;/span&gt; lines hidden&lt;span class="o"&gt;)&lt;/span&gt;, use &lt;span class="s1"&gt;&amp;#39;-vv&amp;#39;&lt;/span&gt; to show
+
+    truncation.py:4: AssertionError
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In fact, pytest isn't even showing more output here, it just shows the same
+things more verbosely. If we stack &lt;code&gt;-v&lt;/code&gt; twice, i.e. &lt;code&gt;-vv&lt;/code&gt; or &lt;code&gt;-v -v&lt;/code&gt;, then we
+get the full output. I find &lt;code&gt;-v&lt;/code&gt; on its own to be rather useless, and typically
+always supply &lt;code&gt;-vv&lt;/code&gt; if I want verbose output. For obvious reasons, I will not
+show what that output looks like.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In this article, we had a look at the &lt;code&gt;--tb&lt;/code&gt; and &lt;code&gt;-v&lt;/code&gt; options to control output
+verbosity in pytest. &lt;code&gt;--tb&lt;/code&gt; controls the overall size of the traceback, and can
+be supplied with values like &lt;code&gt;no&lt;/code&gt; for no output at all, &lt;code&gt;line&lt;/code&gt; for just a single
+line of traceback, or &lt;code&gt;short&lt;/code&gt; for complete traceback with shortened context.
+&lt;code&gt;-v&lt;/code&gt; controls the verbosity of running tests and single items in the traceback,
+such as very long lists which are truncated by default. Typically, &lt;code&gt;-vv&lt;/code&gt; is
+required to get fully verbose output.&lt;/p&gt;
+&lt;p&gt;And that's about it, I hope you learned something!&lt;/p&gt;</content><category term="Testing"></category><category term="python"></category><category term="pytest"></category><category term="testing"></category></entry><entry><title>Testing tips: Tests that don't test</title><link href="https://slar.se/tests-that-dont-test.html" rel="alternate"></link><published>2019-03-05T22:07:56+00:00</published><updated>2019-03-05T22:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-03-05:/tests-that-dont-test.html</id><summary type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous
 pitfalls for the beginner. As I've done my fair share of unit testing, and
 taught a lot of students what I know, I've decided to share my top tips of
 things to think about when …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Unit testing is a skill that takes some time to develop, and there are numerous

@@ -205,13 +205,19 @@ FAILED mul.py::test_multiply_different_numbers - assert <span class="nv">25</spa
 
 <p>This lets us see the exact lines where the test failures occurred. In this case,
 it shows the lines of the assertions, but it could also for example show the
-line where an exception was raised. There are more ways to manipulate the
-traceback, but these are the two I use the most, aside from the default. To see
-the other options, refer to <code>pytest -h</code> and look for the <code>--tb</code> option.</p>
+line where an exception was raised.</p>
+<p>Another one that I find really useful is <code>--tb=short</code>. It shows the full
+traceback, but with much less context around each function call. It won't
+make much of a difference for this short a traceback, but it makes a world of
+difference for deeply nested function calls.</p>
+<p>There are more ways to manipulate the traceback, but these are the two I use the
+most, aside from the default. To see the other options, refer to <code>pytest -h</code> and
+look for the <code>--tb</code> option.</p>
 <h2>Using <code>-v</code> to show more verbose test output</h2>
 <p>The <code>-v</code> option controls the verbosity of test output while the tests are
-running. It's really useful when tests take a long time to run, and you want to
-know approximately where you're at.</p>
+running, and also the verbosity of single items in the traceback. It's really
+useful when tests take a long time to run, and you want to know approximately
+where you're at.</p>
 <div class="highlight"><pre><span></span>$ pytest mul.py --tb<span class="o">=</span>no -v
 <span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
 platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python
@@ -233,8 +239,75 @@ FAILED mul.py::test_multiply_different_numbers - assert <span class="nv">25</spa
 <p>Note how each test is now shown on a line of its own, as opposed to just <code>.</code> and
 <code>F</code> in the previous runs. The lines show up as the tests are running, and I find
 it useful to track long-running tests.</p>
-<p>And that's pretty much it for basic output verbosity control with <code>pytest</code>, hope
-you learned something!</p>
+<p>But what about that "single-item" verbosity that I mentioned? When there are
+single items in the traceback that are very large, such as a list of say 1000
+elements, then pytest will truncate them by default. To demnstrate, consider
+this single (pointless) test:</p>
+<div class="highlight"><pre><span></span><span class="c1"># test_truncation.py</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="k">def</span> <span class="nf">test_truncation_demonstration</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+
+
+<p>Running this test will yield a traceback that looks something like this.</p>
+<div class="highlight"><pre><span></span>$ pytest test_truncation.py
+<span class="o">[</span>... OMITTED ...<span class="o">]</span>
+________________________________________________________________________________________
+test_truncation_demonstration
+_________________________________________________________________________________________
+
+    def test_truncation_demonstration<span class="o">()</span>:
+    &gt;       assert <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span> <span class="o">==</span> list<span class="o">(</span>range<span class="o">(</span><span class="m">1000</span><span class="o">))</span>
+    E       assert <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span> <span class="o">==</span> <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>, ...<span class="o">]</span>
+    E         Right contains <span class="m">996</span> more items, first extra item: <span class="m">4</span>
+    E         Use -v to get the full diff
+
+    truncation.py:4: AssertionError
+</pre></div>
+
+
+<p>Note how the long list has been truncated such that only the first few items are
+shown. Note also how pytest is suggesting the use of <code>-v</code>. If we supply <code>-v</code>, it
+actually still doesn't show the whole list.</p>
+<div class="highlight"><pre><span></span>$ pytest test_truncation.py -v
+<span class="o">[</span>... OMITTED ...<span class="o">]</span>
+________________________________________________________________________________________
+test_truncation_demonstration
+_________________________________________________________________________________________
+
+    def test_truncation_demonstration<span class="o">()</span>:
+    &gt;       assert <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span> <span class="o">==</span> list<span class="o">(</span>range<span class="o">(</span><span class="m">1000</span><span class="o">))</span>
+    E       AssertionError: assert <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span> <span class="o">==</span> <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>, ...<span class="o">]</span>
+    E         Right contains <span class="m">996</span> more items, first extra item: <span class="m">4</span>
+    E         Full diff:
+    E           <span class="o">[</span>
+    E            <span class="m">0</span>,
+    E            <span class="m">1</span>,
+    E            <span class="m">2</span>,
+    E            <span class="m">3</span>,...
+    E         
+    E         ...Full output truncated <span class="o">(</span><span class="m">998</span> lines hidden<span class="o">)</span>, use <span class="s1">&#39;-vv&#39;</span> to show
+
+    truncation.py:4: AssertionError
+</pre></div>
+
+
+<p>In fact, pytest isn't even showing more output here, it just shows the same
+things more verbosely. If we stack <code>-v</code> twice, i.e. <code>-vv</code> or <code>-v -v</code>, then we
+get the full output. I find <code>-v</code> on its own to be rather useless, and typically
+always supply <code>-vv</code> if I want verbose output. For obvious reasons, I will not
+show what that output looks like.</p>
+<h2>Summary</h2>
+<p>In this article, we had a look at the <code>--tb</code> and <code>-v</code> options to control output
+verbosity in pytest. <code>--tb</code> controls the overall size of the traceback, and can
+be supplied with values like <code>no</code> for no output at all, <code>line</code> for just a single
+line of traceback, or <code>short</code> for complete traceback with shortened context.
+<code>-v</code> controls the verbosity of running tests and single items in the traceback,
+such as very long lists which are truncated by default. Typically, <code>-vv</code> is
+required to get fully verbose output.</p>
+<p>And that's about it, I hope you learned something!</p>
   </div>
   
 
@@ -279,22 +352,22 @@ you learned something!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        html
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
+        gradle
       </a>
     </span>
     <span class="tag-3">
@@ -304,9 +377,27 @@ you learned something!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/unit-testing.html">
           <i class="fas fa-tag"></i>
-        intellij
+        unit testing
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
       </a>
     </span>
     <span class="tag-2">
@@ -315,22 +406,10 @@ you learned something!</p>
         kuizzy
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
-          <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
+      <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -346,63 +425,15 @@ you learned something!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
-          <i class="fas fa-tag"></i>
-        podcast
-      </a>
-    </span>
-    <span class="tag-4">
       <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
         pytest
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/linux.html">
-          <i class="fas fa-tag"></i>
-        linux
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
       </a>
     </span>
     <span class="tag-1">
       <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
         python
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
       </a>
     </span>
     <span class="tag-2">
@@ -412,15 +443,57 @@ you learned something!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        gradle
+        enums
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        bst
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
       </a>
     </span>
 </p>

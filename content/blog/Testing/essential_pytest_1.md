@@ -170,9 +170,7 @@ Running this test will yield a traceback that looks something like this.
 ```bash
 $ pytest test_truncation.py
 [... OMITTED ...]
-________________________________________________________________________________________
-test_truncation_demonstration
-_________________________________________________________________________________________
+______________________ test_truncation_demonstration _____________________
 
     def test_truncation_demonstration():
     >       assert [0, 1, 2, 3] == list(range(1000))
@@ -190,9 +188,7 @@ actually still doesn't show the whole list.
 ```bash
 $ pytest test_truncation.py -v
 [... OMITTED ...]
-________________________________________________________________________________________
-test_truncation_demonstration
-_________________________________________________________________________________________
+______________________ test_truncation_demonstration _____________________
 
     def test_truncation_demonstration():
     >       assert [0, 1, 2, 3] == list(range(1000))

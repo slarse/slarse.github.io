@@ -2,9 +2,9 @@ Title: About
 
 ### About me
 Hello! My name is Simon, and I'm a software engineer with an MSc in Computer
-Science and Engineering from [Royal Technical Institute in Stockholm
-(KTH)](https://kth.se). I'm enthusiastic about open-source development, and
-spend much of my free time working on
+Science and Engineering from [KTH Royal Institute of
+Technology](https://kth.se). I'm enthusiastic about open-source development,
+and spend much of my free time working on
 [RepoBee](https://github.com/repobee/repobee). I also contribute to other
 projects, such as [Spork](https://github.com/KTH/spork) and
 [Spoon](https://github.com/inria/spoon).

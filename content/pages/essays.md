@@ -1,4 +1,4 @@
-Title: Essays/Publications
+Title: Publications and Essays
 
 Sometimes, I write essays, and sometimes, they turn out pretty well. I also
 have the odd published work. This is where yoyu can find such things.

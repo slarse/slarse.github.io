@@ -11,6 +11,8 @@ have the odd published work. This is where yoyu can find such things.
     - My BSc degree project.
 * [RepoBee: Developing Tool Support for Courses using Git/GitHub](https://doi.org/10.1145/3304221.3319784)
     - A short conference paper presented at ITiCSE 2019.
+* [Towards Flexible and Extensible Git-based Course Management with RepoBee](https://doi.org/10.1145/3341525.3393999)
+    - A short conference paper presented at ITiCSE 2020.
 
 ### Essays
 

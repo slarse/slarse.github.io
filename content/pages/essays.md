@@ -5,8 +5,10 @@ have the odd published work. This is where yoyu can find such things.
 
 ### Publications
 
+* [Spork: Move-enabled structured merge for Java with GumTree and 3DM](http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-281960)
+    - My MSc degree project.
 * [Sentiment Analysis on Stack Overflow with Respect to Document Type and Programming Language](http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-229785)
-    - My first cycle degree project.
+    - My BSc degree project.
 * [RepoBee: Developing Tool Support for Courses using Git/GitHub](https://doi.org/10.1145/3304221.3319784)
     - A short conference paper presented at ITiCSE 2019.
 

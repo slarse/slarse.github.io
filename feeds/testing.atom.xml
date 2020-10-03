@@ -33,7 +33,6 @@ article&lt;/a&gt;.&lt;/p&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
 
 test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;33&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
@@ -56,7 +55,6 @@ only the failing tests are executed.&lt;/p&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected &lt;span class="m"&gt;2&lt;/span&gt; items                                                        
 run-last-failure: rerun previous &lt;span class="m"&gt;2&lt;/span&gt; failures
 
@@ -105,7 +103,6 @@ the cache.&lt;/p&gt;
 &lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 cachedir: /home/slarse/python/.pytest_cache
 -------------------------- cache values &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt; --------------------------
 cache/lastfailed contains:
@@ -173,7 +170,6 @@ article&lt;/a&gt;.&lt;/p&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
 
 mul.py::test_multiply_equal_numbers PASSED                         &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;33&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
@@ -199,7 +195,6 @@ so.&lt;/p&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;2&lt;/span&gt; deselected / &lt;span class="m"&gt;1&lt;/span&gt; selected                            
 
 test_mul.py::test_multiply_by_zero PASSED                          &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
@@ -216,7 +211,6 @@ any test that does &lt;em&gt;not&lt;/em&gt; match the substring is executed.&lt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;1&lt;/span&gt; deselected / &lt;span class="m"&gt;2&lt;/span&gt; selected                            
 
 test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
@@ -233,7 +227,6 @@ platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0,
 /usr/bin/python
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;1&lt;/span&gt; deselected / &lt;span class="m"&gt;2&lt;/span&gt; selected                            
 
 test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
@@ -250,7 +243,6 @@ platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0,
 /usr/bin/python
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;2&lt;/span&gt; deselected / &lt;span class="m"&gt;1&lt;/span&gt; selected                            
 
 test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
@@ -292,7 +284,6 @@ like so.&lt;/p&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;1&lt;/span&gt; deselected / &lt;span class="m"&gt;2&lt;/span&gt; selected                            
 
 test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
@@ -361,7 +352,6 @@ must be added. This is a little bit annoying, as I rarely if ever use the
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected &lt;span class="m"&gt;4&lt;/span&gt; items / &lt;span class="m"&gt;3&lt;/span&gt; deselected / &lt;span class="m"&gt;1&lt;/span&gt; selected                            
 
 test_arithmetics.py::TestDiv::test_divide_equal_numbers PASSED      &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;

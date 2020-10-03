@@ -3,10 +3,12 @@
 from __future__ import unicode_literals
 
 AUTHOR = "Simon Larsén"
-SITENAME = "slar.se"
+SITENAME = "Programming for fun and profit"
 SITEURL = ""
 
-STATIC_PATHS = ["extra", "essays"]
+SITESUBTITLE = "A blog about software engineering, programming languages and technical tinkering"
+
+STATIC_PATHS = ["extra", "essays", "images"]
 
 EXTRA_PATH_METADATA = {
     "extra/favicon.ico": {"path": "favicon.ico"},  # and this
@@ -27,6 +29,8 @@ DEFAULT_LANG = "en"
 THEME = "voidy-bootstrap"
 SIDEBAR = "sidebar.html"
 CUSTOM_SIDEBAR_MIDDLES = ("sb_tagcloud.html",)
+CUSTOM_ARTICLE_HEADERS = ("article_header.html", "taglist.html", )
+CUSTOM_INDEX_ARTICLE_HEADERS = ("article_header.html", "taglist.html", )
 # voidy-bootstrap settings end
 
 # Feed generation is usually not desired when developing

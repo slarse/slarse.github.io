@@ -47,7 +47,7 @@ which values are valid options, &lt;a href="https://docs.oracle.com/javase/8/doc
 Java standard
 library&lt;/a&gt;.
 But even if all of the options are clearly documented at one point, it would be
-so easy for a developer add or remove an option, and forget to enact the
+so easy for a developer to add or remove an option, and forget to enact the
 corresponding change in the Javadoc. It is also difficult to have automatic
 checks that actually verify that all possible options are documented. And even
 assuming that all options are properly documented at all times, the compiler
@@ -90,14 +90,14 @@ before. The possible values for the &lt;code&gt;option&lt;/code&gt; argument are
 in the &lt;code&gt;FormatOption&lt;/code&gt; enum. Additionally, any modern IDE will kindly list the
 possible values when you type &lt;code&gt;FormatOption.&lt;/code&gt;, such that a programmer does not
 even necessarily need to consult the documentation, assuming that the enum
-values have descriptive enough names. The compiler can als distinguish between
+values have descriptive enough names. The compiler can also distinguish between
 &lt;code&gt;FormatOption.UPPER&lt;/code&gt; and a misspelling such as &lt;code&gt;FormatOption.UPER&lt;/code&gt;, as the
 latter is not defined, so runtime errors due to invalid options is no longer a
 problem.&lt;/p&gt;
 &lt;h2&gt;What's the catch?&lt;/h2&gt;
 &lt;p&gt;So what's the catch? Well, if you have many methods like this, you'll end up
 with a lot of enum types. Personally, I think that's totally worth it, and you
-could also nest the nums inside the classes that use them to reduce their
+could also nest the enums inside the classes that use them to reduce their
 overall footprint in the project. The whole thing could then look like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Formatter&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;enum&lt;/span&gt; &lt;span class="n"&gt;Option&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -144,7 +144,7 @@ so problematic, and then have a look at Java's proposed solution: the
 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; class&lt;/a&gt;.&lt;/p&gt;
 &lt;h1&gt;Why null is problematic&lt;/h1&gt;
 &lt;p&gt;There are many reasons why null is problematic, but there are a few that are
-fairly easy to illustrate. I will be using the
+particularly easy to illustrate. I will be using the
 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get(java.lang.Object)"&gt;&lt;code&gt;Map.get&lt;/code&gt;&lt;/a&gt;
 method as an example, as it returns null if the key provided to it is not in
 the map. For all of the examples, assume that there is a variable &lt;code&gt;Map&amp;lt;Integer,
@@ -164,17 +164,17 @@ that type, or null. This leads to a whole lot of code that looks like this:&lt;/
 
 
 &lt;p&gt;While you may argue that null checks are pretty ugly, the real problem is that
-they are not enforced by the type system. The could might just as well have been
-written like this:&lt;/p&gt;
+they are not enforced by the type system. The above might just as well have
+been written like this, and the type checker would have been none the wiser:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;valueUpper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;toUpperCase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The program could crash with a &lt;code&gt;NullPointerException&lt;/code&gt;. That's not great. But it
-can be even worse. What if the call to &lt;code&gt;value.toUpperCase()&lt;/code&gt; occurs in an
+&lt;p&gt;This program could crash with a &lt;code&gt;NullPointerException&lt;/code&gt;. That's not great. But
+it can be even worse. What if the call to &lt;code&gt;value.toUpperCase()&lt;/code&gt; occurs in an
 entirely different part of the program, perhaps hours or even days after
-&lt;code&gt;Map.get&lt;/code&gt; returned null? Then not only do you have a crash, but a crash that
+&lt;code&gt;Map.get&lt;/code&gt; returned null? Then, not only do you have a crash, but a crash that
 can potentially be very difficult to diagnose.&lt;/p&gt;
 &lt;h2&gt;It's easy to miss that a method can return null&lt;/h2&gt;
 &lt;p&gt;The cause of the previous problem is often that it's not always obvious that a
@@ -189,9 +189,7 @@ exception? Indeed, throwing an exception may be a good solution in many cases,
 but sometimes it just isn't desirable. In the case of &lt;code&gt;Map.get&lt;/code&gt;, it's mostly
 about efficiency. If &lt;code&gt;Map.get&lt;/code&gt; were to throw an exception when the key was
 missing, you'd essentially have two alternatives. &lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Catch the exception.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h3&gt;Ask for forgiveness (catch the exception)&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;try&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -204,9 +202,7 @@ missing, you'd essentially have two alternatives. &lt;/p&gt;
 &lt;p&gt;That's both ugly, and very inefficient if it is often the case that the key is
 missing. Catching an exception involves a whole lot of work for the JVM, so you
 really do not want to do this for an operation that you often perform.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Look before you leap&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h3&gt;Look before you leap&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;containsKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -223,9 +219,9 @@ you're using
 So, I think we can safely conclude that throwing an exception is not the
 be-all-end-all solution.&lt;/p&gt;
 &lt;h1&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; to the rescue&lt;/h1&gt;
-&lt;p&gt;Using &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;
+&lt;p&gt;Using the &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;
 class&lt;/a&gt;, we
-solve the issues discussed previously. An &lt;code&gt;Optional&lt;/code&gt; is simply a container for
+solve the issues discussed previously. &lt;code&gt;Optional&lt;/code&gt; is simply a container for
 another object that may or may not be null.
 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#get--"&gt;&lt;code&gt;Optional.get&lt;/code&gt;&lt;/a&gt;
 returns the contained object if present, or throws a &lt;code&gt;NoSuchElementException&lt;/code&gt; if
@@ -344,7 +340,7 @@ that the value returned from the method may not be present. It is more or less
 impossible to miss that this method may return an empty value (as long as you
 know what &lt;code&gt;Optional&lt;/code&gt; is, that is).&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;ofNullable&lt;/code&gt; method is great for wrapping existing methods that may return
-null. For example, assuming that we have a the &lt;code&gt;Map&amp;lt;Integer, String&amp;gt; map&lt;/code&gt; field
+null. For example, assuming that we have the &lt;code&gt;Map&amp;lt;Integer, String&amp;gt; map&lt;/code&gt; field
 from earlier, we can wrap its &lt;code&gt;get&lt;/code&gt; method in our own &lt;code&gt;getOptional&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="nf"&gt;getOptional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// might be null!&lt;/span&gt;
@@ -360,21 +356,22 @@ that's all the essentials. Not that hard, right?&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Optional&lt;/code&gt; solves most of the problems with null references in a mostly
 elegant way. The most important thing with &lt;code&gt;Optional&lt;/code&gt; is that it is a strong
 form of documentation, which states both to the programmer and to the compiler
-that the value asked for may not have been found. There's also the fact that
+that the value asked for may be present. There's also the fact that
 &lt;code&gt;Optional&lt;/code&gt; provides both the null-check approach using &lt;code&gt;isPresent&lt;/code&gt;, and the
 exception-throwing approach by calling &lt;code&gt;get&lt;/code&gt; without checking for presence. As
 such, the caller of a method gets to decide which of these approaches to use,
 increasing flexibility. &lt;code&gt;Optional&lt;/code&gt; is also a critical part of the &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"&gt;Stream
 API&lt;/a&gt;,
 which would be forced to throw exceptions left and right without it (and you'd
-be forced to catch them!). And although the use of &lt;code&gt;Optional&lt;/code&gt; may incur a
+be forced to catch them!). Although the use of &lt;code&gt;Optional&lt;/code&gt; may incur a
 performance penalty, it is trivial to provide two versions of performance
 critical methods: one that returns an &lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; and one that just returns
 &lt;code&gt;T&lt;/code&gt;. If you want to learn more about &lt;code&gt;Optional&lt;/code&gt;, I recommend first checking out
 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"&gt;the API
 documentation&lt;/a&gt;.
 I also encourage having a look at the &lt;a href="https://github.com/openjdk/jdk/blob/a95a39a04e066548764e15bfc793a6c242a22bb7/src/java.base/share/classes/java/util/Optional.java"&gt;source
-code&lt;/a&gt;,
+code for
+&lt;code&gt;Optional&lt;/code&gt;&lt;/a&gt;,
 it's a surprisingly simple class that provides all of this functionality!&lt;/p&gt;</content><category term="Programming"></category><category term="java"></category></entry><entry><title>TornadoFX+Exposed pt. 3: Adding, editing and removing rows</title><link href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html" rel="alternate"></link><published>2018-12-30T14:50:50+00:00</published><updated>2018-12-30T15:13:57+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-12-30:/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html</id><summary type="html">&lt;p&gt;Welcome to the third and final part in this article series on using TornadoFX
 together with Exposed. In the previous two parts, we set up the database with a
 single table and created a simple TornadoFX view with which we could view its

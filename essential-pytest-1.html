@@ -131,7 +131,7 @@ the following output.</p>
 <div class="highlight"><pre><span></span>$ <span class="nv">pytest</span>
 <span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
 platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/Documents/github/python/mul
+rootdir: /home/slarse/python
 collected <span class="m">3</span> items                                                        
 
 test_mul.py .FF                                                         <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
@@ -170,7 +170,7 @@ using the <code>--tb</code> option. We can even shut it off completely.</p>
 <div class="highlight"><pre><span></span>$ pytest --tb<span class="o">=</span><span class="nv">no</span>
 <span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
 platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/Documents/github/python/mul
+rootdir: /home/slarse/python
 collected <span class="m">3</span> items                                                        
 
 test_mul.py .FF                                                         <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
@@ -188,14 +188,14 @@ frequently. Another useful traceback value is <code>line</code>.</p>
 <div class="highlight"><pre><span></span>$ pytest --tb<span class="o">=</span><span class="nv">line</span>
 <span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
 platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/Documents/github/python/mul
+rootdir: /home/slarse/python
 collected <span class="m">3</span> items                                                        
 
 test_mul.py .FF                                                         <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
 
 <span class="o">================================</span> <span class="nv">FAILURES</span> <span class="o">================================</span>
-/home/slarse/Documents/github/python/mul/test_mul.py:8: assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
-/home/slarse/Documents/github/python/mul/test_mul.py:11: assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
+/home/slarse/python/test_mul.py:8: assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
+/home/slarse/python/test_mul.py:11: assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
 <span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
 FAILED test_mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
 FAILED test_mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
@@ -222,7 +222,7 @@ where you're at.</p>
 <span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
 platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python
 cachedir: .pytest_cache
-rootdir: /home/slarse/Documents/github/python/mul
+rootdir: /home/slarse/python
 collected <span class="m">3</span> items                                                        
 
 test_mul.py::test_multiply_equal_numbers PASSED                         <span class="o">[</span> <span class="m">33</span>%<span class="o">]</span>
@@ -348,10 +348,22 @@ required to get fully verbose output.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-3">
-      <a href="https://slar.se/tag/pytest.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
           <i class="fas fa-tag"></i>
-        pytest
+        podcast
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-4">
@@ -361,9 +373,9 @@ required to get fully verbose output.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
-        intellij
+        linux
       </a>
     </span>
     <span class="tag-4">
@@ -372,10 +384,16 @@ required to get fully verbose output.</p>
         html
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        git
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
       </a>
     </span>
     <span class="tag-2">
@@ -384,16 +402,34 @@ required to get fully verbose output.</p>
         blog
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        unit testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
       </a>
     </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
         css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
     <span class="tag-1">
@@ -408,34 +444,16 @@ required to get fully verbose output.</p>
         bash
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
+      <a href="https://slar.se/tag/testing.html">
           <i class="fas fa-tag"></i>
-        exposed
+        testing
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
+      <a href="https://slar.se/tag/unit-testing.html">
           <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/linux.html">
-          <i class="fas fa-tag"></i>
-        linux
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
+        unit testing
       </a>
     </span>
     <span class="tag-4">
@@ -444,10 +462,16 @@ required to get fully verbose output.</p>
         testing tips
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
           <i class="fas fa-tag"></i>
-        podcast
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
       </a>
     </span>
     <span class="tag-4">
@@ -456,40 +480,16 @@ required to get fully verbose output.</p>
         javascript
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
+        intellij
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        tornadofx
+        exposed
       </a>
     </span>
 </p>

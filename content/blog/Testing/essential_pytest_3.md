@@ -39,7 +39,6 @@ $ pytest -v --tb=no
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected 3 items                                                        
 
 test_mul.py::test_multiply_equal_numbers PASSED                    [ 33%]
@@ -63,7 +62,6 @@ $ pytest -v --lf --tb=short
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected 2 items                                                        
 run-last-failure: rerun previous 2 failures
 
@@ -113,7 +111,6 @@ pytest --cache-show
 ========================== test session starts ===========================
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 cachedir: /home/slarse/python/.pytest_cache
 -------------------------- cache values for '*' --------------------------
 cache/lastfailed contains:

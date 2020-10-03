@@ -39,7 +39,6 @@ $ pytest -v
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected 3 items                                                        
 
 mul.py::test_multiply_equal_numbers PASSED                         [ 33%]
@@ -68,7 +67,6 @@ $ pytest -v -k zero
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected 3 items / 2 deselected / 1 selected                            
 
 test_mul.py::test_multiply_by_zero PASSED                          [100%]
@@ -86,7 +84,6 @@ $ pytest -v -k 'not zero'
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected 3 items / 1 deselected / 2 selected                            
 
 test_mul.py::test_multiply_equal_numbers PASSED                    [ 50%]
@@ -104,7 +101,6 @@ platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 /usr/bin/python
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected 3 items / 1 deselected / 2 selected                            
 
 test_mul.py::test_multiply_equal_numbers PASSED                    [ 50%]
@@ -122,7 +118,6 @@ platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 /usr/bin/python
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected 3 items / 2 deselected / 1 selected                            
 
 test_mul.py::test_multiply_equal_numbers PASSED                    [100%]
@@ -167,7 +162,6 @@ $ pytest -v -m normcase
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected 3 items / 1 deselected / 2 selected                            
 
 test_mul.py::test_multiply_equal_numbers PASSED                    [ 50%]
@@ -241,7 +235,6 @@ $ pytest -v -k TestDiv
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
 rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
 collected 4 items / 3 deselected / 1 selected                            
 
 test_arithmetics.py::TestDiv::test_divide_equal_numbers PASSED      [100%]

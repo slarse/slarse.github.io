@@ -50,7 +50,7 @@ which values are valid options, [but that is not always the case even in the
 Java standard
 library](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#getAttribute-java.nio.file.Path-java.lang.String-java.nio.file.LinkOption...-).
 But even if all of the options are clearly documented at one point, it would be
-so easy for a developer add or remove an option, and forget to enact the
+so easy for a developer to add or remove an option, and forget to enact the
 corresponding change in the Javadoc. It is also difficult to have automatic
 checks that actually verify that all possible options are documented. And even
 assuming that all options are properly documented at all times, the compiler
@@ -97,7 +97,7 @@ before. The possible values for the `option` argument are now self-documented
 in the `FormatOption` enum. Additionally, any modern IDE will kindly list the
 possible values when you type `FormatOption.`, such that a programmer does not
 even necessarily need to consult the documentation, assuming that the enum
-values have descriptive enough names. The compiler can als distinguish between
+values have descriptive enough names. The compiler can also distinguish between
 `FormatOption.UPPER` and a misspelling such as `FormatOption.UPER`, as the
 latter is not defined, so runtime errors due to invalid options is no longer a
 problem.
@@ -105,7 +105,7 @@ problem.
 ## What's the catch?
 So what's the catch? Well, if you have many methods like this, you'll end up
 with a lot of enum types. Personally, I think that's totally worth it, and you
-could also nest the nums inside the classes that use them to reduce their
+could also nest the enums inside the classes that use them to reduce their
 overall footprint in the project. The whole thing could then look like this:
 
 ```java

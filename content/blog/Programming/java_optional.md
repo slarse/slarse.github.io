@@ -12,7 +12,7 @@ so problematic, and then have a look at Java's proposed solution: the
 
 # Why null is problematic
 There are many reasons why null is problematic, but there are a few that are
-fairly easy to illustrate. I will be using the
+particularly easy to illustrate. I will be using the
 [`Map.get`](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get(java.lang.Object))
 method as an example, as it returns null if the key provided to it is not in
 the map. For all of the examples, assume that there is a variable `Map<Integer,
@@ -34,18 +34,18 @@ if (value != null) {
 ```
 
 While you may argue that null checks are pretty ugly, the real problem is that
-they are not enforced by the type system. The could might just as well have been
-written like this:
+they are not enforced by the type system. The above might just as well have
+been written like this, and the type checker would have been none the wiser:
 
 ```java
 String value = map.get(10);
 String valueUpper = value.toUpperCase();
 ```
 
-The program could crash with a `NullPointerException`. That's not great. But it
-can be even worse. What if the call to `value.toUpperCase()` occurs in an
+This program could crash with a `NullPointerException`. That's not great. But
+it can be even worse. What if the call to `value.toUpperCase()` occurs in an
 entirely different part of the program, perhaps hours or even days after
-`Map.get` returned null? Then not only do you have a crash, but a crash that
+`Map.get` returned null? Then, not only do you have a crash, but a crash that
 can potentially be very difficult to diagnose.
 
 ## It's easy to miss that a method can return null
@@ -63,7 +63,7 @@ but sometimes it just isn't desirable. In the case of `Map.get`, it's mostly
 about efficiency. If `Map.get` were to throw an exception when the key was
 missing, you'd essentially have two alternatives. 
 
-1. Catch the exception.
+### Ask for forgiveness (catch the exception)
 
 ```java
 String value;
@@ -78,7 +78,7 @@ That's both ugly, and very inefficient if it is often the case that the key is
 missing. Catching an exception involves a whole lot of work for the JVM, so you
 really do not want to do this for an operation that you often perform.
 
-2. Look before you leap
+### Look before you leap
 
 ```java
 String value;
@@ -97,9 +97,9 @@ So, I think we can safely conclude that throwing an exception is not the
 be-all-end-all solution.
 
 # `Optional<T>` to the rescue
-Using [`Optional<T>`
+Using the [`Optional<T>`
 class](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html), we
-solve the issues discussed previously. An `Optional` is simply a container for
+solve the issues discussed previously. `Optional` is simply a container for
 another object that may or may not be null.
 [`Optional.get`](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html#get--)
 returns the contained object if present, or throws a `NoSuchElementException` if
@@ -222,7 +222,7 @@ impossible to miss that this method may return an empty value (as long as you
 know what `Optional` is, that is).
 
 The `ofNullable` method is great for wrapping existing methods that may return
-null. For example, assuming that we have a the `Map<Integer, String> map` field
+null. For example, assuming that we have the `Map<Integer, String> map` field
 from earlier, we can wrap its `get` method in our own `getOptional`.
 
 ```java
@@ -240,19 +240,20 @@ that's all the essentials. Not that hard, right?
 `Optional` solves most of the problems with null references in a mostly
 elegant way. The most important thing with `Optional` is that it is a strong
 form of documentation, which states both to the programmer and to the compiler
-that the value asked for may not have been found. There's also the fact that
+that the value asked for may be present. There's also the fact that
 `Optional` provides both the null-check approach using `isPresent`, and the
 exception-throwing approach by calling `get` without checking for presence. As
 such, the caller of a method gets to decide which of these approaches to use,
 increasing flexibility. `Optional` is also a critical part of the [Stream
 API](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html),
 which would be forced to throw exceptions left and right without it (and you'd
-be forced to catch them!). And although the use of `Optional` may incur a
+be forced to catch them!). Although the use of `Optional` may incur a
 performance penalty, it is trivial to provide two versions of performance
 critical methods: one that returns an `Optional<T>` and one that just returns
 `T`. If you want to learn more about `Optional`, I recommend first checking out
 [the API
 documentation](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html).
 I also encourage having a look at the [source
-code](https://github.com/openjdk/jdk/blob/a95a39a04e066548764e15bfc793a6c242a22bb7/src/java.base/share/classes/java/util/Optional.java),
+code for
+`Optional`](https://github.com/openjdk/jdk/blob/a95a39a04e066548764e15bfc793a6c242a22bb7/src/java.base/share/classes/java/util/Optional.java),
 it's a surprisingly simple class that provides all of this functionality!

@@ -38,7 +38,7 @@ $ pytest -v
 ========================== test session starts ===========================
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
-rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+rootdir: /home/slarse/python
 plugins: repobee-3.0.0b3
 collected 3 items                                                        
 
@@ -67,7 +67,7 @@ $ pytest -v -k zero
 ========================== test session starts ===========================
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
-rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+rootdir: /home/slarse/python
 plugins: repobee-3.0.0b3
 collected 3 items / 2 deselected / 1 selected                            
 
@@ -85,7 +85,7 @@ $ pytest -v -k 'not zero'
 ========================== test session starts ===========================
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
-rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+rootdir: /home/slarse/python
 plugins: repobee-3.0.0b3
 collected 3 items / 1 deselected / 2 selected                            
 
@@ -103,7 +103,7 @@ $ pytest -v -k 'equal or different'
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 /usr/bin/python
 cachedir: .pytest_cache
-rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+rootdir: /home/slarse/python
 plugins: repobee-3.0.0b3
 collected 3 items / 1 deselected / 2 selected                            
 
@@ -121,7 +121,7 @@ $ pytest -v -k 'multiply and equal'
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 /usr/bin/python
 cachedir: .pytest_cache
-rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+rootdir: /home/slarse/python
 plugins: repobee-3.0.0b3
 collected 3 items / 2 deselected / 1 selected                            
 
@@ -166,7 +166,7 @@ $ pytest -v -m normcase
 ========================== test session starts ===========================
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
-rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+rootdir: /home/slarse/python
 plugins: repobee-3.0.0b3
 collected 3 items / 1 deselected / 2 selected                            
 
@@ -175,7 +175,7 @@ test_mul.py::test_multiply_different_numbers PASSED                [100%]
 
 ============================ warnings summary ============================
 test_mul.py:6
-  /home/slarse/Documents/github/personal/slarse.github.io/test_mul.py:6: PytestUnknownMarkWarning: Unknown pytest.mark.normcase - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/mark.html
+  /home/slarse/python/test_mul.py:6: PytestUnknownMarkWarning: Unknown pytest.mark.normcase - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/mark.html
     @pytest.mark.normcase
 
 [... 2 WARNINGS OMITTED ...]
@@ -240,7 +240,7 @@ $ pytest -v -k TestDiv
 ========================== test session starts ===========================
 platform linux -- Python 3.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
-rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+rootdir: /home/slarse/python
 plugins: repobee-3.0.0b3
 collected 4 items / 3 deselected / 1 selected                            
 

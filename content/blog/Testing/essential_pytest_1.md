@@ -39,7 +39,7 @@ the following output.
 $ pytest
 ========================== test session starts ===========================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/Documents/github/python/mul
+rootdir: /home/slarse/python
 collected 3 items                                                        
 
 test_mul.py .FF                                                         [100%]
@@ -80,7 +80,7 @@ using the `--tb` option. We can even shut it off completely.
 $ pytest --tb=no
 ========================== test session starts ===========================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/Documents/github/python/mul
+rootdir: /home/slarse/python
 collected 3 items                                                        
 
 test_mul.py .FF                                                         [100%]
@@ -99,14 +99,14 @@ frequently. Another useful traceback value is `line`.
 $ pytest --tb=line
 ========================== test session starts ===========================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/Documents/github/python/mul
+rootdir: /home/slarse/python
 collected 3 items                                                        
 
 test_mul.py .FF                                                         [100%]
 
 ================================ FAILURES ================================
-/home/slarse/Documents/github/python/mul/test_mul.py:8: assert 1 == 0
-/home/slarse/Documents/github/python/mul/test_mul.py:11: assert 25 == 15
+/home/slarse/python/test_mul.py:8: assert 1 == 0
+/home/slarse/python/test_mul.py:11: assert 25 == 15
 ======================== short test summary info =========================
 FAILED test_mul.py::test_multiply_by_zero - assert 1 == 0
 FAILED test_mul.py::test_multiply_different_numbers - assert 25 == 15
@@ -136,7 +136,7 @@ $ pytest --tb=no -v
 ========================== test session starts ===========================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python
 cachedir: .pytest_cache
-rootdir: /home/slarse/Documents/github/python/mul
+rootdir: /home/slarse/python
 collected 3 items                                                        
 
 test_mul.py::test_multiply_equal_numbers PASSED                         [ 33%]

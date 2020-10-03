@@ -10,7 +10,7 @@ framework that I find most essential. The series assumes you know how to run
 tests with `pytest` already.
 
 In this second part, we'll take a look at the `-k` and `-m` options to control
-the which tests in the test suite are executed.
+which tests in the test suite are executed.
 
 ## The test suite
 In this article, we'll use the test suite from [the first

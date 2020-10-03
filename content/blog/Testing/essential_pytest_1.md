@@ -1,4 +1,4 @@
-Title: Essential pytest 1: Controlling the verbosity of output
+Title: Essential pytest pt. 1: Controlling the verbosity of output
 Date: 2020-07-31T20:07:56Z
 Author: Simon Larsén
 Slug: essential-pytest-1
@@ -15,10 +15,10 @@ the verbosity of the output.
 ## The test suite
 For the purposes of this article, I've implemented a very simple multiplication
 function called `mul`, along with a few tests. Here's the entire thing, in a
-file called `mul.py`:
+file called `test_mul.py`:
 
 ```python
-# mul.py
+# test_mul.py
 def mul(lhs, rhs):
     return lhs * lhs
 
@@ -36,13 +36,13 @@ Obviously, the implementation of `mul` is broken, and running `pytest` gives
 the following output.
 
 ```bash
-$ pytest mul.py 
+$ pytest
 ========================== test session starts ===========================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
 rootdir: /home/slarse/Documents/github/python/mul
 collected 3 items                                                        
 
-mul.py .FF                                                         [100%]
+test_mul.py .FF                                                         [100%]
 
 ================================ FAILURES ================================
 _________________________ test_multiply_by_zero __________________________
@@ -52,7 +52,7 @@ _________________________ test_multiply_by_zero __________________________
 E       assert 1 == 0
 E        +  where 1 = mul(1, 0)
 
-mul.py:8: AssertionError
+test_mul.py:8: AssertionError
 ____________________ test_multiply_different_numbers _____________________
 
     def test_multiply_different_numbers():
@@ -60,14 +60,14 @@ ____________________ test_multiply_different_numbers _____________________
 E       assert 25 == 15
 E        +  where 25 = mul(5, 3)
 
-mul.py:11: AssertionError
+test_mul.py:11: AssertionError
 ======================== short test summary info =========================
-FAILED mul.py::test_multiply_by_zero - assert 1 == 0
-FAILED mul.py::test_multiply_different_numbers - assert 25 == 15
+FAILED test_mul.py::test_multiply_by_zero - assert 1 == 0
+FAILED test_mul.py::test_multiply_different_numbers - assert 25 == 15
 ====================== 2 failed, 1 passed in 0.08s =======================
 ```
 
-Let's learn how to control how much of this we see.
+Let's learn how to control how much of what we see here.
 
 ## Using the `--tb` option to control traceback verbosity
 Most of what you're seeing in the output of the previous section is the
@@ -77,17 +77,17 @@ that in mind, it's actually pretty freaking verbose. We can show less of it by
 using the `--tb` option. We can even shut it off completely.
 
 ```bash
-$ pytest mul.py --tb=no
+$ pytest --tb=no
 ========================== test session starts ===========================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
 rootdir: /home/slarse/Documents/github/python/mul
 collected 3 items                                                        
 
-mul.py .FF                                                         [100%]
+test_mul.py .FF                                                         [100%]
 
 ======================== short test summary info =========================
-FAILED mul.py::test_multiply_by_zero - assert 1 == 0
-FAILED mul.py::test_multiply_different_numbers - assert 25 == 15
+FAILED test_mul.py::test_multiply_by_zero - assert 1 == 0
+FAILED test_mul.py::test_multiply_different_numbers - assert 25 == 15
 ====================== 2 failed, 1 passed in 0.02s =======================
 ```
 
@@ -96,20 +96,20 @@ when test output is just entirely overwhelming. I find myself using it quite
 frequently. Another useful traceback value is `line`.
 
 ```bash
-$ pytest mul.py --tb=line
+$ pytest --tb=line
 ========================== test session starts ===========================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
 rootdir: /home/slarse/Documents/github/python/mul
 collected 3 items                                                        
 
-mul.py .FF                                                         [100%]
+test_mul.py .FF                                                         [100%]
 
 ================================ FAILURES ================================
-/home/slarse/Documents/github/python/mul/mul.py:8: assert 1 == 0
-/home/slarse/Documents/github/python/mul/mul.py:11: assert 25 == 15
+/home/slarse/Documents/github/python/mul/test_mul.py:8: assert 1 == 0
+/home/slarse/Documents/github/python/mul/test_mul.py:11: assert 25 == 15
 ======================== short test summary info =========================
-FAILED mul.py::test_multiply_by_zero - assert 1 == 0
-FAILED mul.py::test_multiply_different_numbers - assert 25 == 15
+FAILED test_mul.py::test_multiply_by_zero - assert 1 == 0
+FAILED test_mul.py::test_multiply_different_numbers - assert 25 == 15
 ====================== 2 failed, 1 passed in 0.03s =======================
 ```
 This lets us see the exact lines where the test failures occurred. In this case,
@@ -132,20 +132,20 @@ useful when tests take a long time to run, and you want to know approximately
 where you're at.
 
 ```bash
-$ pytest mul.py --tb=no -v
+$ pytest --tb=no -v
 ========================== test session starts ===========================
 platform linux -- Python 3.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python
 cachedir: .pytest_cache
 rootdir: /home/slarse/Documents/github/python/mul
 collected 3 items                                                        
 
-mul.py::test_multiply_equal_numbers PASSED                         [ 33%]
-mul.py::test_multiply_by_zero FAILED                               [ 66%]
-mul.py::test_multiply_different_numbers FAILED                     [100%]
+test_mul.py::test_multiply_equal_numbers PASSED                         [ 33%]
+test_mul.py::test_multiply_by_zero FAILED                               [ 66%]
+test_mul.py::test_multiply_different_numbers FAILED                     [100%]
 
 ======================== short test summary info =========================
-FAILED mul.py::test_multiply_by_zero - assert 1 == 0
-FAILED mul.py::test_multiply_different_numbers - assert 25 == 15
+FAILED test_mul.py::test_multiply_by_zero - assert 1 == 0
+FAILED test_mul.py::test_multiply_different_numbers - assert 25 == 15
 ====================== 2 failed, 1 passed in 0.03s =======================
 ```
 Note how each test is now shown on a line of its own, as opposed to just `.` and
@@ -168,7 +168,7 @@ def test_truncation_demonstration():
 Running this test will yield a traceback that looks something like this.
 
 ```bash
-$ pytest test_truncation.py
+$ pytest
 [... OMITTED ...]
 ______________________ test_truncation_demonstration _____________________
 
@@ -186,7 +186,7 @@ shown. Note also how pytest is suggesting the use of `-v`. If we supply `-v`, it
 actually still doesn't show the whole list.
 
 ```bash
-$ pytest test_truncation.py -v
+$ pytest -v
 [... OMITTED ...]
 ______________________ test_truncation_demonstration _____________________
 

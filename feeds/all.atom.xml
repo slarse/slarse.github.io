@@ -1,5 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-09-29T00:00:00+02:00</updated><entry><title>Thoughts on graduating with an MSc in Computer Science and Engineering</title><link href="https://slar.se/thoughts-on-graduating-with-an-msc-in-computer-science-and-engineering.html" rel="alternate"></link><published>2020-09-29T00:00:00+02:00</published><updated>2020-09-29T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-09-29:/thoughts-on-graduating-with-an-msc-in-computer-science-and-engineering.html</id><summary type="html">&lt;p&gt;After five long years of studies (seven if you include the two years of
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-10-03T00:00:00+02:00</updated><entry><title>Essential pytest pt. 2: Selecting tests to run</title><link href="https://slar.se/essential-pytest-2.html" rel="alternate"></link><published>2020-10-03T00:00:00+02:00</published><updated>2020-10-03T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-03:/essential-pytest-2.html</id><summary type="html">&lt;p&gt;This is the second part of a series of small articles detailing some of the
+functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
+framework that I find most essential. The series assumes you know how to run
+tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
+&lt;p&gt;In this second part, we'll take a look at the &lt;code&gt;-k&lt;/code&gt; and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the second part of a series of small articles detailing some of the
+functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
+framework that I find most essential. The series assumes you know how to run
+tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
+&lt;p&gt;In this second part, we'll take a look at the &lt;code&gt;-k&lt;/code&gt; and &lt;code&gt;-m&lt;/code&gt; options to control
+the which tests in the test suite are executed.&lt;/p&gt;
+&lt;h2&gt;The test suite&lt;/h2&gt;
+&lt;p&gt;In this article, we'll use the test suite from &lt;a href="https://slar.se/essential-pytest-1.html"&gt;the first
+article&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_equal_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_by_zero&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_different_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that &lt;code&gt;mul&lt;/code&gt; is now correctly implemented, so all tests will pass.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+cachedir: .pytest_cache
+rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+plugins: repobee-3.0.0b3
+collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
+
+mul.py::test_multiply_equal_numbers PASSED                         &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;33&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+mul.py::test_multiply_by_zero PASSED                               &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;66&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+mul.py::test_multiply_different_numbers PASSED                     &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;===========================&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.01s &lt;span class="o"&gt;============================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, let's learn how to run subsets of these tests, without modifying the
+source code.&lt;/p&gt;
+&lt;h2&gt;Using the &lt;code&gt;-k&lt;/code&gt; option to select tests by substring matching&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;-k&lt;/code&gt; option is wonderful, and allows us to select a subset of tests to
+execute based on simple substring matching. The simplest use of &lt;code&gt;-k&lt;/code&gt; is to
+provide it with a whitespace-less string. Any test with a name that &lt;em&gt;contains&lt;/em&gt;
+that string will be executed. To be clear, the name of a test is e.g.
+&lt;code&gt;mul.py::test_multiply_equal_numbers&lt;/code&gt;, that is to say, the qualified path to it.&lt;/p&gt;
+&lt;p&gt;As a simple example, we can select only the test that multiplies by zero like
+so.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v -k &lt;span class="nv"&gt;zero&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+cachedir: .pytest_cache
+rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+plugins: repobee-3.0.0b3
+collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;2&lt;/span&gt; deselected / &lt;span class="m"&gt;1&lt;/span&gt; selected                            
+
+test_mul.py::test_multiply_by_zero PASSED                          &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;====================&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; passed, &lt;span class="m"&gt;2&lt;/span&gt; deselected in &lt;span class="m"&gt;0&lt;/span&gt;.05s &lt;span class="o"&gt;=====================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that 2 tests were deselected. It is also possible to create logical
+expressions using &lt;code&gt;not&lt;/code&gt;, &lt;code&gt;or&lt;/code&gt; and &lt;code&gt;and&lt;/code&gt;.  &lt;code&gt;not&lt;/code&gt; simply inverts the condition:
+any test that does &lt;em&gt;not&lt;/em&gt; match the substring is executed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v -k &lt;span class="s1"&gt;&amp;#39;not zero&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+cachedir: .pytest_cache
+rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+plugins: repobee-3.0.0b3
+collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;1&lt;/span&gt; deselected / &lt;span class="m"&gt;2&lt;/span&gt; selected                            
+
+test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py::test_multiply_different_numbers PASSED                &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;====================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; passed, &lt;span class="m"&gt;1&lt;/span&gt; deselected in &lt;span class="m"&gt;0&lt;/span&gt;.05s &lt;span class="o"&gt;=====================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With &lt;code&gt;or&lt;/code&gt;, we can select tests that match any of a number of substrings.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v -k &lt;span class="s1"&gt;&amp;#39;equal or different&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+/usr/bin/python
+cachedir: .pytest_cache
+rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+plugins: repobee-3.0.0b3
+collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;1&lt;/span&gt; deselected / &lt;span class="m"&gt;2&lt;/span&gt; selected                            
+
+test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py::test_multiply_different_numbers PASSED                &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;====================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; passed, &lt;span class="m"&gt;1&lt;/span&gt; deselected in &lt;span class="m"&gt;0&lt;/span&gt;.06s &lt;span class="o"&gt;=====================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Finally, &lt;code&gt;and&lt;/code&gt; allows us to select tests that match multiple substrings.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v -k &lt;span class="s1"&gt;&amp;#39;multiply and equal&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+/usr/bin/python
+cachedir: .pytest_cache
+rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+plugins: repobee-3.0.0b3
+collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;2&lt;/span&gt; deselected / &lt;span class="m"&gt;1&lt;/span&gt; selected                            
+
+test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;====================&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; passed, &lt;span class="m"&gt;2&lt;/span&gt; deselected in &lt;span class="m"&gt;0&lt;/span&gt;.05s &lt;span class="o"&gt;=====================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And that's pretty much all there is to the &lt;code&gt;-k&lt;/code&gt; option. It's extremely useful
+when test suites grow in size, and I use it daily.&lt;/p&gt;
+&lt;h2&gt;Using the &lt;code&gt;-m&lt;/code&gt; option to select by marker&lt;/h2&gt;
+&lt;p&gt;With &lt;code&gt;-m&lt;/code&gt;, we can select tests by &lt;em&gt;markers&lt;/em&gt;. You can mark a test function (or
+class) by placing a decorator above it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytest&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;
+
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;normcase&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_equal_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
+
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;edgecase&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_by_zero&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="nd"&gt;@pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;normcase&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_different_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that we must actually import the &lt;code&gt;pytest&lt;/code&gt; module to be able to mark tests
+with &lt;code&gt;@pytest.mark.x&lt;/code&gt;. Now, we can run all tests marked with e.g. &lt;code&gt;normcase&lt;/code&gt;
+like so.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v -m &lt;span class="nv"&gt;normcase&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+cachedir: .pytest_cache
+rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+plugins: repobee-3.0.0b3
+collected &lt;span class="m"&gt;3&lt;/span&gt; items / &lt;span class="m"&gt;1&lt;/span&gt; deselected / &lt;span class="m"&gt;2&lt;/span&gt; selected                            
+
+test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py::test_multiply_different_numbers PASSED                &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;============================&lt;/span&gt; warnings &lt;span class="nv"&gt;summary&lt;/span&gt; &lt;span class="o"&gt;============================&lt;/span&gt;
+test_mul.py:6
+  /home/slarse/Documents/github/personal/slarse.github.io/test_mul.py:6: PytestUnknownMarkWarning: Unknown pytest.mark.normcase - is this a typo?  You can register custom marks to avoid this warning - &lt;span class="k"&gt;for&lt;/span&gt; details, see https://docs.pytest.org/en/stable/mark.html
+    @pytest.mark.normcase
+
+&lt;span class="o"&gt;[&lt;/span&gt;... &lt;span class="m"&gt;2&lt;/span&gt; WARNINGS OMITTED ...&lt;span class="o"&gt;]&lt;/span&gt;
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+&lt;span class="o"&gt;==============&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; passed, &lt;span class="m"&gt;1&lt;/span&gt; deselected, &lt;span class="m"&gt;3&lt;/span&gt; warnings in &lt;span class="m"&gt;0&lt;/span&gt;.01s &lt;span class="o"&gt;===============&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that this resulted in 3 warnings, one for each of the markings. The reason
+for this is that newer versions of &lt;code&gt;pytest&lt;/code&gt; want you to &lt;em&gt;register&lt;/em&gt; markers, &lt;a href="https://docs.pytest.org/en/stable/example/markers.html#registering-markers"&gt;as
+described
+here&lt;/a&gt;.
+The purpose of this is to avoid users misspelling markers, and registering them
+will make the warnings go away.&lt;/p&gt;
+&lt;p&gt;As might be expected, the &lt;code&gt;-m&lt;/code&gt; option also accepts logical expressions using
+&lt;code&gt;not&lt;/code&gt;, &lt;code&gt;and&lt;/code&gt; and &lt;code&gt;or&lt;/code&gt;, just like the &lt;code&gt;-k&lt;/code&gt; option does. Personally, I very rarely
+use &lt;code&gt;-m&lt;/code&gt; when using &lt;code&gt;pytest&lt;/code&gt;, but some people swear by it, which is why I wanted
+to include it in this article.&lt;/p&gt;
+&lt;h2&gt;Trick: Grouping related tests into classes makes selection easier&lt;/h2&gt;
+&lt;p&gt;A trick that I like to employ is to group related tests into classes. The class
+name is then incorporated into the test's name, and it becomes very easy to
+select tests that are part of the same class. Here's a simple example, where I'm
+testing two functions in the same module &lt;code&gt;test_arithmetics.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# test_arithmetics.py&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;div&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;TestMul&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Tests for the mul function.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_equal_numbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_by_zero&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_different_numbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;TestDiv&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Tests for the div function.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_divide_equal_numbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;div&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that in grouping test functions into test classes, the &lt;code&gt;self&lt;/code&gt; argument
+must be added. This is a little bit annoying, as I rarely if ever use the
+&lt;code&gt;self&lt;/code&gt; argument in a test case, but it's something that has to be done.&lt;/p&gt;
+&lt;p&gt;Now, I can for example run only the tests in &lt;code&gt;TestDiv&lt;/code&gt; like so.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v -k &lt;span class="nv"&gt;TestDiv&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+cachedir: .pytest_cache
+rootdir: /home/slarse/Documents/github/personal/slarse.github.io
+plugins: repobee-3.0.0b3
+collected &lt;span class="m"&gt;4&lt;/span&gt; items / &lt;span class="m"&gt;3&lt;/span&gt; deselected / &lt;span class="m"&gt;1&lt;/span&gt; selected                            
+
+test_arithmetics.py::TestDiv::test_divide_equal_numbers PASSED      &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;====================&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; passed, &lt;span class="m"&gt;3&lt;/span&gt; deselected in &lt;span class="m"&gt;0&lt;/span&gt;.05s &lt;span class="o"&gt;=====================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that the test name that's printed above includes the class name, which is
+why it is possible to select it with &lt;code&gt;-k&lt;/code&gt;. Of course, grouping related tests
+into modules is equally viable, as the module name (here, &lt;code&gt;test_arithmetics.py&lt;/code&gt;)
+is also part of the test name. I typically do both by creating one test module
+per module of production code, and one test class per production code function.
+This allows me to easily select tests at two levels of granularity, which comes
+in very handy.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Selecting a subset of test cases to run is crucial to my development workflow.
+When there are 100s or even 1000s of tests to run, running all of them is often
+not what you want to do. My preferred way of selecting test cases is by using
+the &lt;code&gt;-k&lt;/code&gt; option to match substrings of test names, but the &lt;code&gt;-m&lt;/code&gt; option is also
+there for those that like to put marker decorators in their code. Finally,
+grouping related tests into modules and classes allows for easy selection of
+tests on two levels of granularity, which is something that I exploit daily.&lt;/p&gt;</content><category term="Testing"></category><category term="python"></category><category term="pytest"></category><category term="testing"></category></entry><entry><title>Thoughts on graduating with an MSc in Computer Science and Engineering</title><link href="https://slar.se/thoughts-on-graduating-with-an-msc-in-computer-science-and-engineering.html" rel="alternate"></link><published>2020-09-29T00:00:00+02:00</published><updated>2020-09-29T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-09-29:/thoughts-on-graduating-with-an-msc-in-computer-science-and-engineering.html</id><summary type="html">&lt;p&gt;After five long years of studies (seven if you include the two years of
 materials science), I've finally graduated with an &lt;em&gt;MSc in Computer Science and
 Engineering&lt;/em&gt; from KTH Royal Institute of Technology. I'm still awaiting my
 degree certificates, but the &lt;a href="http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-281960"&gt;thesis is
@@ -170,7 +415,7 @@ optional, but you will probably never find a system that doesn't use it.&lt;/p&g
 &lt;p&gt;I won't go into detail on how the shadow file is structured, as it's not a file
 that's typically accessed by user space programs. If you want to know more about
 it, you can read the manpage of &lt;code&gt;shadow (5)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;And that's it for this article, hope you learned something!&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category></entry><entry><title>Essential pytest 1: Controlling the verbosity of output</title><link href="https://slar.se/essential-pytest-1.html" rel="alternate"></link><published>2020-07-31T20:07:56+00:00</published><updated>2020-07-31T20:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-07-31:/essential-pytest-1.html</id><summary type="html">&lt;p&gt;This is the first part of a series of small articles detailing some of the
+&lt;p&gt;And that's it for this article, hope you learned something!&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category></entry><entry><title>Essential pytest pt. 1: Controlling the verbosity of output</title><link href="https://slar.se/essential-pytest-1.html" rel="alternate"></link><published>2020-07-31T20:07:56+00:00</published><updated>2020-07-31T20:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-07-31:/essential-pytest-1.html</id><summary type="html">&lt;p&gt;This is the first part of a series of small articles detailing some of the
 functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
 framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
@@ -183,8 +428,8 @@ the verbosity of the output.&lt;/p&gt;
 &lt;h2&gt;The test suite&lt;/h2&gt;
 &lt;p&gt;For the purposes of this article, I've implemented a very simple multiplication
 function called &lt;code&gt;mul&lt;/code&gt;, along with a few tests. Here's the entire thing, in a
-file called &lt;code&gt;mul.py&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mul.py&lt;/span&gt;
+file called &lt;code&gt;test_mul.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt;
 
@@ -201,13 +446,13 @@ file called &lt;code&gt;mul.py&lt;/code&gt;:&lt;/p&gt;
 
 &lt;p&gt;Obviously, the implementation of &lt;code&gt;mul&lt;/code&gt; is broken, and running &lt;code&gt;pytest&lt;/code&gt; gives
 the following output.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest mul.py 
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nv"&gt;pytest&lt;/span&gt;
 &lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
 rootdir: /home/slarse/Documents/github/python/mul
 collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
 
-mul.py .FF                                                         &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py .FF                                                         &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
 
 &lt;span class="o"&gt;================================&lt;/span&gt; &lt;span class="nv"&gt;FAILURES&lt;/span&gt; &lt;span class="o"&gt;================================&lt;/span&gt;
 _________________________ test_multiply_by_zero __________________________
@@ -217,7 +462,7 @@ _________________________ test_multiply_by_zero __________________________
 E       assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
 E        +  where &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 
-mul.py:8: AssertionError
+test_mul.py:8: AssertionError
 ____________________ test_multiply_different_numbers _____________________
 
     def test_multiply_different_numbers&lt;span class="o"&gt;()&lt;/span&gt;:
@@ -225,32 +470,32 @@ ____________________ test_multiply_different_numbers _____________________
 E       assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;
 E        +  where &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 
-mul.py:11: &lt;span class="nv"&gt;AssertionError&lt;/span&gt;
+test_mul.py:11: &lt;span class="nv"&gt;AssertionError&lt;/span&gt;
 &lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
-FAILED mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
-FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+FAILED test_mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED test_mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
 &lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.08s &lt;span class="o"&gt;=======================&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Let's learn how to control how much of this we see.&lt;/p&gt;
+&lt;p&gt;Let's learn how to control how much of what we see here.&lt;/p&gt;
 &lt;h2&gt;Using the &lt;code&gt;--tb&lt;/code&gt; option to control traceback verbosity&lt;/h2&gt;
 &lt;p&gt;Most of what you're seeing in the output of the previous section is the
 &lt;em&gt;traceback&lt;/em&gt; information. While the traceback shown above is manageable as is,
 consider that it stems from a single-line function and single-line tests. With
 that in mind, it's actually pretty freaking verbose. We can show less of it by
 using the &lt;code&gt;--tb&lt;/code&gt; option. We can even shut it off completely.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest mul.py --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;no&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;no&lt;/span&gt;
 &lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
 rootdir: /home/slarse/Documents/github/python/mul
 collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
 
-mul.py .FF                                                         &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py .FF                                                         &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
 
 &lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
-FAILED mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
-FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+FAILED test_mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED test_mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
 &lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.02s &lt;span class="o"&gt;=======================&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -258,20 +503,20 @@ FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;2
 &lt;p&gt;This is useful when you're just trying to figure out what tests are failing, and
 when test output is just entirely overwhelming. I find myself using it quite
 frequently. Another useful traceback value is &lt;code&gt;line&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest mul.py --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;line&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;line&lt;/span&gt;
 &lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
 rootdir: /home/slarse/Documents/github/python/mul
 collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
 
-mul.py .FF                                                         &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py .FF                                                         &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
 
 &lt;span class="o"&gt;================================&lt;/span&gt; &lt;span class="nv"&gt;FAILURES&lt;/span&gt; &lt;span class="o"&gt;================================&lt;/span&gt;
-/home/slarse/Documents/github/python/mul/mul.py:8: assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
-/home/slarse/Documents/github/python/mul/mul.py:11: assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+/home/slarse/Documents/github/python/mul/test_mul.py:8: assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+/home/slarse/Documents/github/python/mul/test_mul.py:11: assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
 &lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
-FAILED mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
-FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+FAILED test_mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED test_mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
 &lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.03s &lt;span class="o"&gt;=======================&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -291,20 +536,20 @@ look for the &lt;code&gt;--tb&lt;/code&gt; option.&lt;/p&gt;
 running, and also the verbosity of single items in the traceback. It's really
 useful when tests take a long time to run, and you want to know approximately
 where you're at.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest mul.py --tb&lt;span class="o"&gt;=&lt;/span&gt;no -v
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest --tb&lt;span class="o"&gt;=&lt;/span&gt;no -v
 &lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
 platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python
 cachedir: .pytest_cache
 rootdir: /home/slarse/Documents/github/python/mul
 collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
 
-mul.py::test_multiply_equal_numbers PASSED                         &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;33&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
-mul.py::test_multiply_by_zero FAILED                               &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;66&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
-mul.py::test_multiply_different_numbers FAILED                     &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py::test_multiply_equal_numbers PASSED                         &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;33&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py::test_multiply_by_zero FAILED                               &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;66&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py::test_multiply_different_numbers FAILED                     &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
 
 &lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
-FAILED mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
-FAILED mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+FAILED test_mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED test_mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
 &lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.03s &lt;span class="o"&gt;=======================&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -325,7 +570,7 @@ this single (pointless) test:&lt;/p&gt;
 
 
 &lt;p&gt;Running this test will yield a traceback that looks something like this.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest test_truncation.py
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest
 &lt;span class="o"&gt;[&lt;/span&gt;... OMITTED ...&lt;span class="o"&gt;]&lt;/span&gt;
 ______________________ test_truncation_demonstration _____________________
 
@@ -342,7 +587,7 @@ ______________________ test_truncation_demonstration _____________________
 &lt;p&gt;Note how the long list has been truncated such that only the first few items are
 shown. Note also how pytest is suggesting the use of &lt;code&gt;-v&lt;/code&gt;. If we supply &lt;code&gt;-v&lt;/code&gt;, it
 actually still doesn't show the whole list.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest test_truncation.py -v
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v
 &lt;span class="o"&gt;[&lt;/span&gt;... OMITTED ...&lt;span class="o"&gt;]&lt;/span&gt;
 ______________________ test_truncation_demonstration _____________________
 

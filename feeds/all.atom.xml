@@ -8,7 +8,7 @@ functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&l
 framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
 &lt;p&gt;In this second part, we'll take a look at the &lt;code&gt;-k&lt;/code&gt; and &lt;code&gt;-m&lt;/code&gt; options to control
-the which tests in the test suite are executed.&lt;/p&gt;
+which tests in the test suite are executed.&lt;/p&gt;
 &lt;h2&gt;The test suite&lt;/h2&gt;
 &lt;p&gt;In this article, we'll use the test suite from &lt;a href="https://slar.se/essential-pytest-1.html"&gt;the first
 article&lt;/a&gt;.&lt;/p&gt;

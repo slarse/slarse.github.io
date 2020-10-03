@@ -1,5 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Testing</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/testing.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-10-03T00:00:00+02:00</updated><entry><title>Essential pytest pt. 2: Selecting tests to run</title><link href="https://slar.se/essential-pytest-2.html" rel="alternate"></link><published>2020-10-03T00:00:00+02:00</published><updated>2020-10-03T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-03:/essential-pytest-2.html</id><summary type="html">&lt;p&gt;This is the second part of a series of small articles detailing some of the
+<feed xmlns="http://www.w3.org/2005/Atom"><title>slar.se - Testing</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/testing.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-10-03T19:00:00+02:00</updated><entry><title>Essential pytest pt. 3: Rerunning failed tests (and the pytest cache)</title><link href="https://slar.se/essential-pytest-3.html" rel="alternate"></link><published>2020-10-03T19:00:00+02:00</published><updated>2020-10-03T19:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-03:/essential-pytest-3.html</id><summary type="html">&lt;p&gt;This is the third part of a series of small articles detailing some of the
+functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
+framework that I find most essential. The series assumes you know how to run
+tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
+&lt;p&gt;In this third part, we'll take a super quick look at the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the third part of a series of small articles detailing some of the
+functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
+framework that I find most essential. The series assumes you know how to run
+tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
+&lt;p&gt;In this third part, we'll take a super quick look at the &lt;code&gt;--lf&lt;/code&gt; flag that lets
+us rerun failed tests, as well as the caching mechanism that makes it possible.&lt;/p&gt;
+&lt;h2&gt;Using &lt;code&gt;--lf&lt;/code&gt; to rerun failed tests&lt;/h2&gt;
+&lt;p&gt;In this article, we'll use the test suite from &lt;a href="https://slar.se/essential-pytest-1.html"&gt;the first
+article&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_equal_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_by_zero&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_different_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Just like in that article, the implementation of &lt;code&gt;mul&lt;/code&gt; is broken.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;no&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+cachedir: .pytest_cache
+rootdir: /home/slarse/python
+plugins: repobee-3.0.0b3
+collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
+
+test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;33&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py::test_multiply_by_zero FAILED                          &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;66&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py::test_multiply_different_numbers FAILED                &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
+FAILED test_mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED test_mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+&lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.05s &lt;span class="o"&gt;=======================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note how 2 tests failed. &lt;code&gt;pytest&lt;/code&gt; caches the failed tests from the last run,
+which enables us to rerun them with the &lt;code&gt;--lf|--last-failed&lt;/code&gt; flag. So let's do
+that, and show some more traceback information while we're at it. Note that
+only the failing tests are executed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v --lf --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;short&lt;/span&gt;
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+cachedir: .pytest_cache
+rootdir: /home/slarse/python
+plugins: repobee-3.0.0b3
+collected &lt;span class="m"&gt;2&lt;/span&gt; items                                                        
+run-last-failure: rerun previous &lt;span class="m"&gt;2&lt;/span&gt; failures
+
+test_mul.py::test_multiply_by_zero FAILED                          &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+test_mul.py::test_multiply_different_numbers FAILED                &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="o"&gt;================================&lt;/span&gt; &lt;span class="nv"&gt;FAILURES&lt;/span&gt; &lt;span class="o"&gt;================================&lt;/span&gt;
+_________________________ test_multiply_by_zero __________________________
+test_mul.py:8: in test_multiply_by_zero
+    assert mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+E   assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+E     +1
+E     -0
+____________________ test_multiply_different_numbers _____________________
+test_mul.py:11: in test_multiply_different_numbers
+    assert mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;
+E   assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;
+E     +25
+E     -15
+&lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
+FAILED test_mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+FAILED test_mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
+&lt;span class="o"&gt;===========================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed in &lt;span class="m"&gt;0&lt;/span&gt;.12s &lt;span class="o"&gt;============================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;My primary use case for &lt;code&gt;--lf&lt;/code&gt; is for sorting out bugs. Every time a test
+passes, it is removed from the last-failed cache, and thus does not run the next
+time &lt;code&gt;--lf&lt;/code&gt; is specified. This way, it's easy to quickly target only failing
+tests, and systematically eliminate them one by one.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Pitfall:&lt;/strong&gt; A common mistake is to use &lt;code&gt;--lf&lt;/code&gt; to eliminate the failing tests
+one by one, and then forget to run all tests when the last of the initially
+failing tests passes. It's entirely possible to fix the implementation such
+that a test &lt;code&gt;A&lt;/code&gt; passes, and then subsequently reintroduce the same problem in
+addressing another test, but at that point &lt;code&gt;A&lt;/code&gt; is no longer executing with
+&lt;code&gt;--lf&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Interacting with the cache&lt;/h2&gt;
+&lt;p&gt;I mentioned that the failed tests from the last run are stored in a cache. This
+cache is located in the &lt;code&gt;.pytest_cache&lt;/code&gt; directory of the current working
+directory. There are a few flags to interact with said cache. First, you can
+execute &lt;code&gt;pytest&lt;/code&gt; with the &lt;code&gt;--cache-show&lt;/code&gt; flag to show the current contents of
+the cache.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pytest --cache-show
+&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
+platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
+rootdir: /home/slarse/python
+plugins: repobee-3.0.0b3
+cachedir: /home/slarse/python/.pytest_cache
+-------------------------- cache values &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt; --------------------------
+cache/lastfailed contains:
+  &lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_by_zero&amp;#39;&lt;/span&gt;: True,
+   &lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_different_numbers&amp;#39;&lt;/span&gt;: True&lt;span class="o"&gt;}&lt;/span&gt;
+cache/nodeids contains:
+  &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_by_zero&amp;#39;&lt;/span&gt;,
+   &lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_different_numbers&amp;#39;&lt;/span&gt;,
+   &lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_equal_numbers&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+cache/stepwise contains:
+  &lt;span class="o"&gt;[]&lt;/span&gt;
+
+&lt;span class="o"&gt;=========================&lt;/span&gt; no tests ran in &lt;span class="m"&gt;0&lt;/span&gt;.00s &lt;span class="o"&gt;==========================&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here, we can for example see the contents of the last-failed cache
+(&lt;code&gt;cache/lastfailed&lt;/code&gt;), and the tests currently known by &lt;code&gt;pytest&lt;/code&gt;
+(&lt;code&gt;cache/nodeids&lt;/code&gt;). It's possible to supply &lt;code&gt;--cache-show&lt;/code&gt; with an optional
+value, in order to show only some part of the cache. For example,
+&lt;code&gt;--cache-show=lastfailed&lt;/code&gt; shows only the last-failed cache contents.&lt;/p&gt;
+&lt;p&gt;On occasion, the cache may get into an inconsistent state, typically due to
+strange interactions by the user. This has happened to me on several occasions,
+with tests simply not executing as I expect them to. At that point, supplying
+the &lt;code&gt;--cache-clear&lt;/code&gt; flag to a test run will clear the cache. Alternatively, you
+may simply remove the &lt;code&gt;.pytest_cache&lt;/code&gt; directory.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Being able to execute only the failing tests from the previous test run is a
+very handy feature when addressing bugs, both saving time in test execution and
+limiting the amount of output shown to the user. It's however important to
+remember to execute all tests after the last failing test passes, so as to check
+for regressions. One should also be aware that the functionality hinges on
+caching in the &lt;code&gt;.pytest_cache&lt;/code&gt; directory, which on rare occasions may need to be
+cleared.&lt;/p&gt;</content><category term="Testing"></category><category term="python"></category><category term="pytest"></category><category term="testing"></category></entry><entry><title>Essential pytest pt. 2: Selecting tests to run</title><link href="https://slar.se/essential-pytest-2.html" rel="alternate"></link><published>2020-10-03T14:00:00+02:00</published><updated>2020-10-03T14:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-03:/essential-pytest-2.html</id><summary type="html">&lt;p&gt;This is the second part of a series of small articles detailing some of the
 functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
 framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
@@ -244,147 +384,7 @@ not what you want to do. My preferred way of selecting test cases is by using
 the &lt;code&gt;-k&lt;/code&gt; option to match substrings of test names, but the &lt;code&gt;-m&lt;/code&gt; option is also
 there for those that like to put marker decorators in their code. Finally,
 grouping related tests into modules and classes allows for easy selection of
-tests on two levels of granularity, which is something that I exploit daily.&lt;/p&gt;</content><category term="Testing"></category><category term="python"></category><category term="pytest"></category><category term="testing"></category></entry><entry><title>Essential pytest pt. 3: Rerunning failed tests (and the pytest cache)</title><link href="https://slar.se/essential-pytest-3.html" rel="alternate"></link><published>2020-10-03T00:00:00+02:00</published><updated>2020-10-03T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-03:/essential-pytest-3.html</id><summary type="html">&lt;p&gt;This is the third part of a series of small articles detailing some of the
-functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
-framework that I find most essential. The series assumes you know how to run
-tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
-&lt;p&gt;In this third part, we'll take a super quick look at the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the third part of a series of small articles detailing some of the
-functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
-framework that I find most essential. The series assumes you know how to run
-tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
-&lt;p&gt;In this third part, we'll take a super quick look at the &lt;code&gt;--lf&lt;/code&gt; flag that lets
-us rerun failed tests, as well as the caching mechanism that makes it possible.&lt;/p&gt;
-&lt;h2&gt;Using &lt;code&gt;--lf&lt;/code&gt; to rerun failed tests&lt;/h2&gt;
-&lt;p&gt;In this article, we'll use the test suite from &lt;a href="https://slar.se/essential-pytest-1.html"&gt;the first
-article&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rhs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;lhs&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_equal_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_by_zero&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_multiply_different_numbers&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mul&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Just like in that article, the implementation of &lt;code&gt;mul&lt;/code&gt; is broken.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;no&lt;/span&gt;
-&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
-platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
-cachedir: .pytest_cache
-rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
-collected &lt;span class="m"&gt;3&lt;/span&gt; items                                                        
-
-test_mul.py::test_multiply_equal_numbers PASSED                    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;33&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
-test_mul.py::test_multiply_by_zero FAILED                          &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;66&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
-test_mul.py::test_multiply_different_numbers FAILED                &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
-
-&lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
-FAILED test_mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
-FAILED test_mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
-&lt;span class="o"&gt;======================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed, &lt;span class="m"&gt;1&lt;/span&gt; passed in &lt;span class="m"&gt;0&lt;/span&gt;.05s &lt;span class="o"&gt;=======================&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Note how 2 tests failed. &lt;code&gt;pytest&lt;/code&gt; caches the failed tests from the last run,
-which enables us to rerun them with the &lt;code&gt;--lf|--last-failed&lt;/code&gt; flag. So let's do
-that, and show some more traceback information while we're at it. Note that
-only the failing tests are executed.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pytest -v --lf --tb&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;short&lt;/span&gt;
-&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
-platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
-cachedir: .pytest_cache
-rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
-collected &lt;span class="m"&gt;2&lt;/span&gt; items                                                        
-run-last-failure: rerun previous &lt;span class="m"&gt;2&lt;/span&gt; failures
-
-test_mul.py::test_multiply_by_zero FAILED                          &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="m"&gt;50&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
-test_mul.py::test_multiply_different_numbers FAILED                &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;100&lt;/span&gt;%&lt;span class="o"&gt;]&lt;/span&gt;
-
-&lt;span class="o"&gt;================================&lt;/span&gt; &lt;span class="nv"&gt;FAILURES&lt;/span&gt; &lt;span class="o"&gt;================================&lt;/span&gt;
-_________________________ test_multiply_by_zero __________________________
-test_mul.py:8: in test_multiply_by_zero
-    assert mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
-E   assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
-E     +1
-E     -0
-____________________ test_multiply_different_numbers _____________________
-test_mul.py:11: in test_multiply_different_numbers
-    assert mul&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;
-E   assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;
-E     +25
-E     -15
-&lt;span class="o"&gt;========================&lt;/span&gt; short &lt;span class="nb"&gt;test&lt;/span&gt; summary &lt;span class="nv"&gt;info&lt;/span&gt; &lt;span class="o"&gt;=========================&lt;/span&gt;
-FAILED test_mul.py::test_multiply_by_zero - assert &lt;span class="nv"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
-FAILED test_mul.py::test_multiply_different_numbers - assert &lt;span class="nv"&gt;25&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nv"&gt;15&lt;/span&gt;
-&lt;span class="o"&gt;===========================&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; failed in &lt;span class="m"&gt;0&lt;/span&gt;.12s &lt;span class="o"&gt;============================&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;My primary use case for &lt;code&gt;--lf&lt;/code&gt; is for sorting out bugs. Every time a test
-passes, it is removed from the last-failed cache, and thus does not run the next
-time &lt;code&gt;--lf&lt;/code&gt; is specified. This way, it's easy to quickly target only failing
-tests, and systematically eliminate them one by one.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Pitfall:&lt;/strong&gt; A common mistake is to use &lt;code&gt;--lf&lt;/code&gt; to eliminate the failing tests
-one by one, and then forget to run all tests when the last of the initially
-failing tests passes. It's entirely possible to fix the implementation such
-that a test &lt;code&gt;A&lt;/code&gt; passes, and then subsequently reintroduce the same problem in
-addressing another test, but at that point &lt;code&gt;A&lt;/code&gt; is no longer executing with
-&lt;code&gt;--lf&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2&gt;Interacting with the cache&lt;/h2&gt;
-&lt;p&gt;I mentioned that the failed tests from the last run are stored in a cache. This
-cache is located in the &lt;code&gt;.pytest_cache&lt;/code&gt; directory of the current working
-directory. There are a few flags to interact with said cache. First, you can
-execute &lt;code&gt;pytest&lt;/code&gt; with the &lt;code&gt;--cache-show&lt;/code&gt; flag to show the current contents of
-the cache.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pytest --cache-show
-&lt;span class="o"&gt;==========================&lt;/span&gt; &lt;span class="nb"&gt;test&lt;/span&gt; session &lt;span class="nv"&gt;starts&lt;/span&gt; &lt;span class="o"&gt;===========================&lt;/span&gt;
-platform linux -- Python &lt;span class="m"&gt;3&lt;/span&gt;.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/python
-plugins: repobee-3.0.0b3
-cachedir: /home/slarse/python/.pytest_cache
--------------------------- cache values &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt; --------------------------
-cache/lastfailed contains:
-  &lt;span class="o"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_by_zero&amp;#39;&lt;/span&gt;: True,
-   &lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_different_numbers&amp;#39;&lt;/span&gt;: True&lt;span class="o"&gt;}&lt;/span&gt;
-cache/nodeids contains:
-  &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_by_zero&amp;#39;&lt;/span&gt;,
-   &lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_different_numbers&amp;#39;&lt;/span&gt;,
-   &lt;span class="s1"&gt;&amp;#39;test_mul.py::test_multiply_equal_numbers&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
-cache/stepwise contains:
-  &lt;span class="o"&gt;[]&lt;/span&gt;
-
-&lt;span class="o"&gt;=========================&lt;/span&gt; no tests ran in &lt;span class="m"&gt;0&lt;/span&gt;.00s &lt;span class="o"&gt;==========================&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Here, we can for example see the contents of the last-failed cache
-(&lt;code&gt;cache/lastfailed&lt;/code&gt;), and the tests currently known by &lt;code&gt;pytest&lt;/code&gt;
-(&lt;code&gt;cache/nodeids&lt;/code&gt;). It's possible to supply &lt;code&gt;--cache-show&lt;/code&gt; with an optional
-value, in order to show only some part of the cache. For example,
-&lt;code&gt;--cache-show=lastfailed&lt;/code&gt; shows only the last-failed cache contents.&lt;/p&gt;
-&lt;p&gt;On occasion, the cache may get into an inconsistent state, typically due to
-strange interactions by the user. This has happened to me on several occasions,
-with tests simply not executing as I expect them to. At that point, supplying
-the &lt;code&gt;--cache-clear&lt;/code&gt; flag to a test run will clear the cache. Alternatively, you
-may simply remove the &lt;code&gt;.pytest_cache&lt;/code&gt; directory.&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
-&lt;p&gt;Being able to execute only the failing tests from the previous test run is a
-very handy feature when addressing bugs, both saving time in test execution and
-limiting the amount of output shown to the user. It's however important to
-remember to execute all tests after the last failing test passes, so as to check
-for regressions. One should also be aware that the functionality hinges on
-caching in the &lt;code&gt;.pytest_cache&lt;/code&gt; directory, which on rare occasions may need to be
-cleared.&lt;/p&gt;</content><category term="Testing"></category><category term="python"></category><category term="pytest"></category><category term="testing"></category></entry><entry><title>Essential pytest pt. 1: Controlling the verbosity of output</title><link href="https://slar.se/essential-pytest-1.html" rel="alternate"></link><published>2020-07-31T20:07:56+00:00</published><updated>2020-07-31T20:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-07-31:/essential-pytest-1.html</id><summary type="html">&lt;p&gt;This is the first part of a series of small articles detailing some of the
+tests on two levels of granularity, which is something that I exploit daily.&lt;/p&gt;</content><category term="Testing"></category><category term="python"></category><category term="pytest"></category><category term="testing"></category></entry><entry><title>Essential pytest pt. 1: Controlling the verbosity of output</title><link href="https://slar.se/essential-pytest-1.html" rel="alternate"></link><published>2020-07-31T20:07:56+00:00</published><updated>2020-07-31T20:07:56+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-07-31:/essential-pytest-1.html</id><summary type="html">&lt;p&gt;This is the first part of a series of small articles detailing some of the
 functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
 framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;

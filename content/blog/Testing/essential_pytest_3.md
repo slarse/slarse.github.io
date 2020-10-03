@@ -1,5 +1,5 @@
 Title: Essential pytest pt. 3: Rerunning failed tests (and the pytest cache)
-Date: 2020-10-03
+Date: 2020-10-03 19:00:00
 Author: Simon Larsén
 Slug: essential-pytest-3
 Tags: python,pytest,testing

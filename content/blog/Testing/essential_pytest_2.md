@@ -1,5 +1,5 @@
 Title: Essential pytest pt. 2: Selecting tests to run
-Date: 2020-10-03
+Date: 2020-10-03 14:00:00
 Author: Simon Larsén
 Slug: essential-pytest-2
 Tags: python,pytest,testing

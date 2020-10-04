@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-10-03T19:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Essential pytest pt. 3: Rerunning failed tests (and the pytest cache)</title><link href="https://slar.se/essential-pytest-3.html" rel="alternate"></link><published>2020-10-03T19:00:00+02:00</published><updated>2020-10-03T19:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-03:/essential-pytest-3.html</id><summary type="html">&lt;p&gt;This is the third part of a series of small articles detailing some of the
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-10-04T09:20:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>RepoBee at ITiCSE 2020!</title><link href="https://slar.se/repobee-at-iticse-2020.html" rel="alternate"></link><published>2020-10-04T09:20:00+02:00</published><updated>2020-10-04T09:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-04:/repobee-at-iticse-2020.html</id><summary type="html">&lt;p&gt;In 2019, [I presented RepoBee at the ITiCSE conference] ({filename}iticse.md)
+in Aberdeen. This year, ITiCSE went virtual, but RepoBee still made an
+appearance in the new tools and tricks section with a small, two-page paper.
+Although I let my co-author Ric Glassey deal with the virtual presentation, I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In 2019, [I presented RepoBee at the ITiCSE conference] ({filename}iticse.md)
+in Aberdeen. This year, ITiCSE went virtual, but RepoBee still made an
+appearance in the new tools and tricks section with a small, two-page paper.
+Although I let my co-author Ric Glassey deal with the virtual presentation, I'm
+still quite proud that I had another paper on RepoBee published at one of the
+major tech education conferences.&lt;/p&gt;
+&lt;p&gt;If you're unaware, &lt;a href="https://repobee.org"&gt;RepoBee&lt;/a&gt; is a tool for managing Git
+repositories in an educational context. A basic use case is for a teacher to
+have a template repository, and create copies of it for students or groups of
+students on GitHub or GitLab. If you've heard of &lt;a href="https://classroom.github.com"&gt;GitHub
+Classroom&lt;/a&gt;, it's the same concept, but RepoBee is
+far more powerful and customizable, at the expense of being a little more
+intricate to use.&lt;/p&gt;
+&lt;p&gt;In the paper, Ric and I mostly discuss the need for customizable tools to tailor
+to different teaching methodologies and preferences, and how RepoBee makes this
+possible through plugins and by supporting both GitHub and GitLab. We also
+discuss the two primary modes of RepoBee, and how they can be combined. In
+&lt;em&gt;dictate&lt;/em&gt; mode, RepoBee creates repositories for students based on template
+repositories.  In &lt;em&gt;discovery&lt;/em&gt; mode, RepoBee only sets up student teams/groups,
+and then the students themselves are responsible for creating the repositories,
+which RepoBee can then "discover".&lt;/p&gt;
+&lt;p&gt;The full paper &lt;a href="https://doi.org/10.1145/3341525.3393999"&gt;is available in the ACM digital
+library&lt;/a&gt;.&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>Essential pytest pt. 3: Rerunning failed tests (and the pytest cache)</title><link href="https://slar.se/essential-pytest-3.html" rel="alternate"></link><published>2020-10-03T19:00:00+02:00</published><updated>2020-10-03T19:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-03:/essential-pytest-3.html</id><summary type="html">&lt;p&gt;This is the third part of a series of small articles detailing some of the
 functionality of the &lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt; testing
 framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;

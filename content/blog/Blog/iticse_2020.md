@@ -4,7 +4,7 @@ Author: Simon Larsén
 Category: Blog
 Tags: blog
 
-In 2019, [I presented RepoBee at the ITiCSE conference] ({filename}iticse.md)
+In 2019, [I presented RepoBee at the ITiCSE conference]({filename}iticse.md)
 in Aberdeen. This year, ITiCSE went virtual, but RepoBee still made an
 appearance in the new tools and tricks section with a small, two-page paper.
 Although I let my co-author Ric Glassey deal with the virtual presentation, I'm

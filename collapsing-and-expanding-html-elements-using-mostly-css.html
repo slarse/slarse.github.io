@@ -121,24 +121,22 @@ be just about any element) that can be collapsed and expanded by clicking a
 it inside of another <code>div</code> element, which we'll imagine is a sidebar of a
 website (like the sidebar with recent posts and tags on this site). Here's the
 markup for the sidebar:</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
     <span class="cp">&lt;!- our content goes in here! --&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>And the CSS:</p>
-<div class="highlight"><pre><span></span>.sidebar {
+<div class="highlight"><pre><span></span><code>.sidebar {
   width: 30%;
   border: black solid 2px;
 }
-</pre></div>
-
+</code></pre></div>
 
 <p>This is really <em>not</em> important for this demo, I just mention it so that you
 don't wonder about some unknown HTML and CSS in the final demo. Now, let's fill
 that sidebar up with some content.</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;trigger&quot;</span><span class="p">&gt;</span>Cool content heading<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
@@ -146,8 +144,7 @@ that sidebar up with some content.</p>
     <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We have 3 <code>div</code> tags in total: one is the container (sidebar) which really has
 little to do with this article. The second is a heading for the content, which
@@ -166,7 +163,7 @@ and <code>collapse</code>. The basic idea is this:</p>
    the <code>active</code> classes, the <code>collapse</code> is visible.</li>
 </ol>
 <p>You can probably guess where to put the classes in the markup already:</p>
-<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;trigger&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapse-trigger&quot;</span><span class="p">&gt;</span>Cool content heading<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapsible&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
@@ -174,16 +171,14 @@ and <code>collapse</code>. The basic idea is this:</p>
     <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>For the CSS, fulfilling point 1 above (<code>collapsible</code> hidden by default) is
 simple:</p>
-<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
     <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>This will simply not display the element.  But how do we fulfill the second
 requirement? We can use the
@@ -191,18 +186,16 @@ requirement? We can use the
 (<code>+</code>). It's a selector combinator that allows us to match some element, only if
 it is immediately preceded by some other element. For example, the selector <code>h1
 + p</code> will match any <code>p</code> tag that is immediately preceded by an <code>h1</code> tag:</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;h1&gt;</span>This is a heading<span class="nt">&lt;/h1&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;h1&gt;</span>This is a heading<span class="nt">&lt;/h1&gt;</span>
 <span class="nt">&lt;p&gt;</span>This paragraph will be matched by &quot;h1 + p&quot;<span class="nt">&lt;/p&gt;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>So, to show our <code>collapsible</code> when it is directly preceded by a
 <code>collapse-trigger</code> AND <code>active</code> element, we do this:</p>
-<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span> <span class="o">+</span> <span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span> <span class="o">+</span> <span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
     <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We display it as a <code>block</code> here, but one could use other display modes as well,
 depending on what visual effect is sought.  Note that we are chaining two
@@ -222,7 +215,7 @@ there is no way to change the class of an element with only CSS. For every
 <code>collapse-trigger</code> in the page, we need to attach an event listener that
 toggles the <code>active</code> class every time the element is clicked. It can be done
 like this:</p>
-<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">colTriggers</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colTrig</span> <span class="k">of</span> <span class="nx">colTriggers</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span>  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -230,8 +223,7 @@ like this:</p>
         <span class="p">});</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Essentially, we use the <code>getElementsByClassName</code> DOM method to find all
 elements with the <code>collapse-trigger</code> class. Then, we iterate over those
@@ -240,7 +232,7 @@ elements, and add an event listener to it. The first argument to
 argument is a callback function, for which we provide an anonymous function. If
 you have a hard time wrapping your head around anonymous functions, this will
 accomplish the same thing:</p>
-<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">collapseTrigger</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">collapseTrigger</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -250,8 +242,7 @@ accomplish the same thing:</p>
         <span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">collapseTrigger</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>When the element is clicked, the <code>collapseTrigger</code> function is called.  Of
 course, we need to call <code>attachCollapseTriggers</code> sometime after the page has
@@ -265,7 +256,7 @@ An up-triangle (▲) is as recognizable a cue that a menu can be collapsed. The
 down-triangle should be appended to any <code>collapse-trigger</code> that is not active,
 while the up-triangle should be appended to any <code>collapse-trigger</code> that also
 has the <code>active</code> class. We can do that simply use the <code>::after</code> pseudo class.</p>
-<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
     <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▼&quot;</span><span class="p">;</span>
     <span class="k">float</span><span class="p">:</span> <span class="kc">right</span><span class="p">;</span> <span class="c">/* float to the right-hand side of the content box */</span>
 <span class="p">}</span>
@@ -273,8 +264,7 @@ has the <code>active</code> class. We can do that simply use the <code>::after</
 <span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
     <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▲&quot;</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>So, what happens here, exactly? When a <code>collapse-trigger</code> is not <code>active</code>, it
 doesn't match the <code>.collapse-trigger.active</code> selector, so the content will
@@ -286,7 +276,7 @@ And that's it, all done!</p>
 <p>The full code is available in the following subsections, and you can find a
 <a href="https://jsfiddle.net/p3qtev5w/">JSFiddle here</a>.</p>
 <h3>Markup</h3>
-<div class="highlight"><pre><span></span><span class="cp">&lt;!- the outer div with the class &quot;sidebar&quot; isn&#39;t important, it&#39;s just any container --&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!- the outer div with the class &quot;sidebar&quot; isn&#39;t important, it&#39;s just any container --&gt;</span>
 <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapse-trigger&quot;</span><span class="p">&gt;</span>Cool content heading<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapsible&quot;</span><span class="p">&gt;</span>
@@ -295,11 +285,10 @@ And that's it, all done!</p>
     <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>CSS</h3>
-<div class="highlight"><pre><span></span><span class="c">/* the sidebar class is just an arbitrary container for this example */</span>
+<div class="highlight"><pre><span></span><code><span class="c">/* the sidebar class is just an arbitrary container for this example */</span>
 <span class="p">.</span><span class="nc">sidebar</span> <span class="p">{</span>
   <span class="k">width</span><span class="p">:</span> <span class="mi">30</span><span class="kt">%</span><span class="p">;</span>
   <span class="k">padding</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
@@ -322,11 +311,10 @@ And that's it, all done!</p>
 <span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span> <span class="o">+</span> <span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
     <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>JavaScript</h3>
-<div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">colTriggers</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colTrig</span> <span class="k">of</span> <span class="nx">colTriggers</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span>  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -336,7 +324,7 @@ And that's it, all done!</p>
 <span class="p">}</span>
 
 <span class="nx">attachCollapseTriggers</span><span class="p">();</span>
-</pre></div>
+</code></pre></div>
   </div>
   
 
@@ -381,70 +369,28 @@ And that's it, all done!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -453,16 +399,10 @@ And that's it, all done!</p>
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -472,15 +412,39 @@ And that's it, all done!</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -489,22 +453,22 @@ And that's it, all done!</p>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -514,15 +478,45 @@ And that's it, all done!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

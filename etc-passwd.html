@@ -113,9 +113,8 @@ typically contain any passwords.</p>
 <h2>Layout of the <code>/etc/passwd</code> file</h2>
 <p>The layout of the <code>/etc/passwd</code> file is fairly simple. Each line represents a
 user on the system, with different fields being separated by colons as follows:</p>
-<div class="highlight"><pre><span></span><span class="n">name</span><span class="o">:</span><span class="n">password</span><span class="o">:</span><span class="n">UID</span><span class="o">:</span><span class="n">GID</span><span class="o">:</span><span class="n">GECOS</span><span class="o">:</span><span class="n">directory</span><span class="o">:</span><span class="n">shell</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">name</span><span class="o">:</span><span class="n">password</span><span class="o">:</span><span class="n">UID</span><span class="o">:</span><span class="n">GID</span><span class="o">:</span><span class="n">GECOS</span><span class="o">:</span><span class="n">directory</span><span class="o">:</span><span class="n">shell</span>
+</code></pre></div>
 
 <p><code>name</code> and <code>password</code> are the username and password of the user, <code>UID</code> is the
 user's numerical id, <code>GID</code> is the id of the <em>first</em> group the user belongs to,
@@ -125,21 +124,19 @@ shell. As an example, a part of my <code>/etc/passwd</code> file looks like this
 <blockquote>
 <p><strong>Note:</strong> You can find the groups users belong to in the <code>/etc/group</code> file.</p>
 </blockquote>
-<div class="highlight"><pre><span></span><span class="n">root</span><span class="o">:</span><span class="n">x</span><span class="o">:</span><span class="mi">0</span><span class="o">:</span><span class="mi">0</span><span class="o">::/</span><span class="n">root</span><span class="o">:/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
+<div class="highlight"><pre><span></span><code><span class="n">root</span><span class="o">:</span><span class="n">x</span><span class="o">:</span><span class="mi">0</span><span class="o">:</span><span class="mi">0</span><span class="o">::/</span><span class="n">root</span><span class="o">:/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
 <span class="n">slarse</span><span class="o">:</span><span class="n">x</span><span class="o">:</span><span class="mi">1000</span><span class="o">:</span><span class="mi">985</span><span class="o">::/</span><span class="n">home</span><span class="sr">/slarse:/bin/</span><span class="n">bash</span>
 <span class="n">mysql</span><span class="o">:</span><span class="n">x</span><span class="o">:</span><span class="mi">970</span><span class="o">:</span><span class="mi">970</span><span class="o">:</span><span class="n">MariaDB</span><span class="o">:/</span><span class="n">var</span><span class="sr">/lib/mysql:/sbin/</span><span class="n">nologin</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>We can see that the root user has the fields set as follows:</p>
-<div class="highlight"><pre><span></span><span class="nv">password</span><span class="o">=</span>x
+<div class="highlight"><pre><span></span><code><span class="nv">password</span><span class="o">=</span>x
 <span class="nv">UID</span><span class="o">=</span><span class="m">0</span>
 <span class="nv">GID</span><span class="o">=</span><span class="m">0</span>
 <span class="nv">GECOS</span><span class="o">=</span>
 <span class="nv">directory</span><span class="o">=</span>/root
 <span class="nv">shell</span><span class="o">=</span>/bin/bash
-</pre></div>
-
+</code></pre></div>
 
 <p>The user and group IDs of the root user are always 0, and it typically has its
 home directory in <code>/root</code>. But is the password of root user really <code>x</code>? No, it
@@ -226,70 +223,28 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -298,16 +253,10 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -317,15 +266,39 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -334,22 +307,22 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -359,15 +332,45 @@ it, you can read the manpage of <code>shadow (5)</code>.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

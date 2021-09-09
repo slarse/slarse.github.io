@@ -119,15 +119,13 @@ first word of a simple command</p>
 </blockquote>
 <p>In other words, I can define a command that is substituted for some other
 command. Creating an alias is very simple. The syntax looks like this:</p>
-<div class="highlight"><pre><span></span><span class="err">alias &lt;NAME&gt;=&lt;COMMAND&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>alias &lt;NAME&gt;=&lt;COMMAND&gt;
+</code></pre></div>
 
 <p>So for example, if I want to have a command <code>hellofile</code> that creates a file with
 the text "Hello, world!", I can achieve that with the following alias.</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">hellofile</span><span class="o">=</span><span class="s1">&#39;echo &quot;Hello, world!&quot; &gt; hellofile.txt&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$ <span class="nb">alias</span> <span class="nv">hellofile</span><span class="o">=</span><span class="s1">&#39;echo &quot;Hello, world!&quot; &gt; hellofile.txt&#39;</span>
+</code></pre></div>
 
 <p>Note the single quotes around the command definition. Without them, <code>bash</code>
 would interpret the alias as being only <code>echo</code>, and the rest of the line as
@@ -141,9 +139,8 @@ use cases!</p>
 <p>This is probably the most common use case for aliases, and it's likely that you
 already have some in play. A common one is to have <code>ls</code> aliased to <code>ls
 --color=auto</code>. That is to say, the following alias is defined:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$ <span class="nb">alias</span> <span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto&#39;</span>
+</code></pre></div>
 
 <p>So if I now run e.g. <code>ls /etc</code>, the resulting command is actually <code>ls
 --color=auto /etc</code>. Note how the alias does not have to be the <em>only</em> word I
@@ -152,15 +149,13 @@ use an alias for is <code>xclip</code>, which is a small utility for copying stu
 it almost exclusively to copy file contents to the clipboard, but that's not the
 default functionality. In order to copy to the clipboard, I must write this
 rather cumbersome command.</p>
-<div class="highlight"><pre><span></span>$ xclip -selection clipboard &lt;FILEPATH&gt;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$ xclip -selection clipboard &lt;FILEPATH&gt;
+</code></pre></div>
 
 <p>So I have an alias for it so I can just type <code>xclip &lt;FILEPATH&gt;</code> to copy to the
 clipboard.</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">xclip</span><span class="o">=</span><span class="s1">&#39;xclip -selection clipboard&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$ <span class="nb">alias</span> <span class="nv">xclip</span><span class="o">=</span><span class="s1">&#39;xclip -selection clipboard&#39;</span>
+</code></pre></div>
 
 <p>As a side note, it may not be the best style to clobber an existing command with
 an alias, but I still tend to do that for some of my most commonly used
@@ -178,9 +173,8 @@ session, but isn't useful in general. An example would be when I need to run
 some specific Java class in a project. Let's say I need to run the class
 <code>se.slar.awesome.project.Main</code> over and over. Instead of typing <code>java
 se.slar.awesome.project.Main</code> over and over, I define an alias for it.</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">runmain</span><span class="o">=</span><span class="s1">&#39;java se.slar.awesome.project.Main&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$ <span class="nb">alias</span> <span class="nv">runmain</span><span class="o">=</span><span class="s1">&#39;java se.slar.awesome.project.Main&#39;</span>
+</code></pre></div>
 
 <p>And then, instead of writing all of that out, or having to do some
 <a href="https://slar.se/reverse-search-in-bash.html">reverse searching</a> or
@@ -233,70 +227,28 @@ next TOTW coming next week!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -305,16 +257,10 @@ next TOTW coming next week!</p>
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -324,15 +270,39 @@ next TOTW coming next week!</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -341,22 +311,22 @@ next TOTW coming next week!</p>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -366,15 +336,45 @@ next TOTW coming next week!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

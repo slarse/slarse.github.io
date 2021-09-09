@@ -117,19 +117,18 @@ validation.</p>
 <p>Using the <code>Ticker</code> class version from the final listing in 
 <a href="https://slar.se/properties-as-pythonic-getters.html">Part 1</a>, we are unable to set the <code>count</code>
 attribute to <em>any</em> value.</p>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; <span class="nv">t</span> <span class="o">=</span> Ticker<span class="o">(</span><span class="m">24</span><span class="o">)</span>  <span class="c1"># valid range for count is thus [0, 23]</span>
+<div class="highlight"><pre><span></span><code>&gt;&gt;&gt; <span class="nv">t</span> <span class="o">=</span> Ticker<span class="o">(</span><span class="m">24</span><span class="o">)</span>  <span class="c1"># valid range for count is thus [0, 23]</span>
 &gt;&gt;&gt; t.count <span class="o">=</span> <span class="m">11</span>    <span class="c1"># this is well within that range</span>
 Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
-  File <span class="s2">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in &lt;module&gt;
+  File <span class="s2">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, <span class="k">in</span> &lt;module&gt;
 AttributeError: can<span class="s1">&#39;t set attribute</span>
 <span class="s1">can&#39;</span>t <span class="nb">set</span> attribute
 
-&gt;&gt;&gt; <span class="k">for</span> _ in range<span class="o">(</span><span class="m">11</span><span class="o">)</span>: <span class="c1"># doing it the hard way ...</span>
+&gt;&gt;&gt; <span class="k">for</span> _ <span class="k">in</span> range<span class="o">(</span><span class="m">11</span><span class="o">)</span>: <span class="c1"># doing it the hard way ...</span>
 ...     t.tick<span class="o">()</span>
 &gt;&gt;&gt; t.count
 <span class="m">11</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>This presents something of a usability issue, as the only way to set the
 <code>Ticker</code>'s internal count to a specific value (using the public API) is by
@@ -139,14 +138,13 @@ within the range <code>[0, _end)</code> by simple assignment. Fortunately, there
 simple way to expand a property with a setter method using the <code>@&lt;name&gt;.setter</code>
 decorator, where <code>&lt;name&gt;</code> is replaced with the name of the property. For the
 <code>count</code> property of the <code>Ticker</code> class, it looks like this:</p>
-<div class="highlight"><pre><span></span><span class="nd">@count</span><span class="o">.</span><span class="n">setter</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@count</span><span class="o">.</span><span class="n">setter</span>
 <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set the internal count to val.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">val</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_end</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{val}</span><span class="s2"> is out of range for attribute count.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2"> is out of range for attribute count.&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_count</span> <span class="o">=</span> <span class="n">val</span>
-</pre></div>
-
+</code></pre></div>
 
 <blockquote>
 <p><strong>Note:</strong> A string literal preceeded with an <code>f</code> is an <em>f-string</em>. This is a
@@ -160,7 +158,7 @@ an argument. If <code>val</code> is outside of the allowed range <code>[0, _end)
 could be more informative, but I did not want to obscure the important parts
 with a lot of text. We have thus defeated the aforementioned usability issue,
 and usage now looks like this:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Ticker</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Ticker</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">count</span>
 <span class="mi">0</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
@@ -178,13 +176,12 @@ and usage now looks like this:</p>
   <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">23</span><span class="p">,</span> <span class="ow">in</span> <span class="n">count</span>
 <span class="ne">ValueError</span><span class="p">:</span> <span class="mi">24</span> <span class="ow">is</span> <span class="n">out</span> <span class="n">of</span> <span class="nb">range</span> <span class="k">for</span> <span class="n">attribute</span> <span class="n">count</span><span class="o">.</span>
 <span class="mi">24</span> <span class="ow">is</span> <span class="n">out</span> <span class="n">of</span> <span class="nb">range</span> <span class="k">for</span> <span class="n">attribute</span> <span class="n">count</span><span class="o">.</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Seems to work just the way we want it to!</p>
 <h3>Ticker full listing (with getter/setter property)</h3>
 <p>Here is the full listing of the <code>Ticker</code> class.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Ticker</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Ticker</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;A Ticker ticks from 0 to an upper limit, and then starts over.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
@@ -207,9 +204,9 @@ and usage now looks like this:</p>
     <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the internal count to val.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">val</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_end</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{val}</span><span class="s2"> is out of range for attribute count.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2"> is out of range for attribute count.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_count</span> <span class="o">=</span> <span class="n">val</span>
-</pre></div>
+</code></pre></div>
   </div>
   
 
@@ -254,70 +251,28 @@ and usage now looks like this:</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -326,16 +281,10 @@ and usage now looks like this:</p>
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -345,15 +294,39 @@ and usage now looks like this:</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -362,22 +335,22 @@ and usage now looks like this:</p>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -387,15 +360,45 @@ and usage now looks like this:</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

@@ -114,27 +114,25 @@ of Python classes!</p>
 <h2><code>self</code> is not a keyword</h2>
 <p>This is pretty easy to prove. Just open a Python interpreter and import the
 <code>keyword</code> module.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">keyword</span><span class="o">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="s2">&quot;for&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">keyword</span><span class="o">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="s2">&quot;for&quot;</span><span class="p">)</span>
 <span class="kc">True</span>                            <span class="c1"># aha, makes sense</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">keyword</span><span class="o">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="s2">&quot;else&quot;</span><span class="p">)</span> 
 <span class="kc">True</span>                            <span class="c1"># seems to be working</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">keyword</span><span class="o">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="s2">&quot;self&quot;</span><span class="p">)</span>
 <span class="kc">False</span>                           <span class="c1"># proof!</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Alternatively, one can always consult the
 <a href="https://docs.python.org/3/reference/lexical_analysis.html#keywords">list of keywords in the Python docs</a>.
 Since <code>self</code> is not a keyword, it has no special significance in the language
 itself. We can also verify that it's not some funky builtin by simply typing
 it out in the interpreter.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="bp">self</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="bp">self</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
     <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;self&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
 <span class="n">name</span> <span class="s1">&#39;self&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>This can <a href="https://docs.python.org/3.6/library/constants.html">verified here</a>).
 So, what in the world is <code>self</code>? Actually, it's just a variable name.</p>
@@ -151,7 +149,7 @@ False, True</code> being possible. In Python3, the keyword status of <code>True<
 <p>Consider the following code snippet of a (pretty useless) class that just
 stores two values (that are just assumed to be addable with each other),
 and defines a method that returns the sum of the values.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Tuple</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Tuple</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;A class for storing two values.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">):</span>
@@ -161,22 +159,20 @@ and defines a method that returns the sum of the values.</p>
     <span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the sum of &#39;first` and &#39;second&#39;.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Okay, so the class is terrible, but that really doesn't matter for the
 purposes of this article. Now we see <code>self</code> in action for the first time.
 From the code, it's purpose is quite clear: it refers to the object instance
 on which the method is called. Usage looks something like this:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">first</span>
 <span class="mi">4</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">second</span>
 <span class="mi">3</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>  <span class="c1"># `self` in `sum` refers to `t`</span>
 <span class="mi">7</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>So, <code>self</code> is just a reference to the object on which the method is called (in
 this case, <code>t</code>). This will probably become more apparent when reading
@@ -184,7 +180,7 @@ this case, <code>t</code>). This will probably become more apparent when reading
 suspend your disbelief for moment and assume it is so.
 But, considering the <code>self</code> is just a variable to which <code>t</code> is assigned, what
 happens if we replace <code>self</code> with, say, <code>donkey</code>?</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Tuple</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Tuple</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;A class for storing two values.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">donkey</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">):</span>
@@ -194,20 +190,18 @@ happens if we replace <code>self</code> with, say, <code>donkey</code>?</p>
     <span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">donkey</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the sum of &#39;first&#39; and &#39;second&#39;.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">donkey</span><span class="o">.</span><span class="n">first</span> <span class="o">+</span> <span class="n">donkey</span><span class="o">.</span><span class="n">second</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>In fact, this will work exactly the same as when the first parameter was called
 <code>self</code>, and usage is unchanged:</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">first</span>
 <span class="mi">4</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">second</span>
 <span class="mi">3</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="mi">7</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>To summarize, the first parameter in a method is simply a variable that refers to
 the instance on which the method was called. Naming it <code>self</code> is
@@ -216,7 +210,7 @@ the instance on which the method was called. Naming it <code>self</code> is
 need for consistency across methods, we could name the first parameter to the
 <code>__init__</code> method <code>donkey</code>, and the first (only) parameter to the <code>sum</code> method
 <code>shrek</code>, and it'd still work.</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Tuple</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Tuple</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;A class for storing two values.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">donkey</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">):</span>
@@ -226,8 +220,7 @@ need for consistency across methods, we could name the first parameter to the
     <span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">shrek</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the sum of &#39;first&#39; and &#39;second&#39;.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">shrek</span><span class="o">.</span><span class="n">first</span> <span class="o">+</span> <span class="n">shrek</span><span class="o">.</span><span class="n">second</span>
-</pre></div>
-
+</code></pre></div>
 
 <blockquote>
 <p><strong>IMPORTANT:</strong> <em>Always</em> name the first parameter to a method <code>self</code>. The
@@ -241,13 +234,12 @@ comes from will prove fruitful.</p>
 <p>Methods are defined on the class itself, and not on the instance. There is
 actually a way to call a method directly on the class, that is equivalent to
 the way we usually call methods on the instance.</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>         <span class="c1"># regular method call</span>
 <span class="mi">11</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">Tuple</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>    <span class="c1"># calling the method on the class itself, and passing</span>
 <span class="mi">11</span>                  <span class="c1"># `t` as the `self` argument</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The second way of calling <code>sum</code> is explicit about where <code>self</code> comes from: it's
 passed in as the first argument. If we think of the first, "regular" way of
@@ -256,20 +248,18 @@ the first argument actually is (the instance itself). Calling a method that has
 more parameters than just <code>self</code> works as expected: simply pass in the
 additional arguments. To be super clear, with the following method added to
 <code>Tuple</code></p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sum_mod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mod</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sum_mod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mod</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the sum of the members modulo &#39;mod&#39;.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>the following two method calls are equivalent</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">sum_mod</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="mi">2</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">Tuple</span><span class="o">.</span><span class="n">sum_mod</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="mi">2</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>And that pretty much concludes what I wanted to cover in this article!</p>
 <h2>Summary</h2>
@@ -330,70 +320,28 @@ this article enlightening, stay tuned for more Python in the coming week!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -402,16 +350,10 @@ this article enlightening, stay tuned for more Python in the coming week!</p>
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -421,15 +363,39 @@ this article enlightening, stay tuned for more Python in the coming week!</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -438,22 +404,22 @@ this article enlightening, stay tuned for more Python in the coming week!</p>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -463,15 +429,45 @@ this article enlightening, stay tuned for more Python in the coming week!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

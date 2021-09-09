@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Tip of the Week</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/tip-of-the-week.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-07-22T22:01:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Git worktrees: work in parallel on multiple versions of a project</title><link href="https://slar.se/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html" rel="alternate"></link><published>2019-07-22T22:01:00+02:00</published><updated>2019-07-22T22:01:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html</id><summary type="html">&lt;p&gt;I've been AWOL for a month due to injury, sickness and conference-going. But
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Tip of the Week</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/tip-of-the-week.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2019-07-22T22:01:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Git worktrees: work in parallel on multiple versions of a project</title><link href="https://slar.se/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html" rel="alternate"></link><published>2019-07-22T22:01:00+02:00</published><updated>2019-07-22T22:01:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2019-07-22:/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html</id><summary type="html">&lt;p&gt;I've been AWOL for a month due to injury, sickness and conference-going. But
 with all that finally out of the way, I have another Tip of the Week, this time
 relating to Git: the &lt;code&gt;git worktree&lt;/code&gt; command. With &lt;code&gt;git worktree&lt;/code&gt;, you can check
 out &lt;em&gt;multiple&lt;/em&gt; branches at once, which is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been AWOL for a month due to injury, sickness and conference-going. But
@@ -15,10 +15,10 @@ is for you.&lt;/p&gt;
 &lt;p&gt;Let's first create an example repo. Here's a little terminal session where I
 create a repository, add a README to it on the master branch, add another line
 to the readme on a branch called other, and finally checking out to master.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt; $ mkdir repo
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt; $ mkdir repo
 &lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt; $ &lt;span class="nb"&gt;cd&lt;/span&gt; repo
 &lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git init
-Initialized empty Git repository in /home/slarse/repo/.git/
+Initialized empty Git repository &lt;span class="k"&gt;in&lt;/span&gt; /home/slarse/repo/.git/
 &lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello!&amp;quot;&lt;/span&gt; &amp;gt; README.md
 &lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git add README.md &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; git commit -m &lt;span class="s1"&gt;&amp;#39;Add README&amp;#39;&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;master &lt;span class="o"&gt;(&lt;/span&gt;root-commit&lt;span class="o"&gt;)&lt;/span&gt; 6094baf&lt;span class="o"&gt;]&lt;/span&gt; Add README
@@ -33,8 +33,7 @@ Switched to a new branch &lt;span class="s1"&gt;&amp;#39;other&amp;#39;&lt;/span
 &lt;span class="o"&gt;(&lt;/span&gt;other&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git checkout master
 Switched to branch &lt;span class="s1"&gt;&amp;#39;master&amp;#39;&lt;/span&gt;
 &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ 
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;It's not super important how you do it, just make sure to have two branches.&lt;/p&gt;
 &lt;h3&gt;Adding a new worktree&lt;/h3&gt;
@@ -42,12 +41,11 @@ Switched to branch &lt;span class="s1"&gt;&amp;#39;master&amp;#39;&lt;/span&gt;
 is the part of a repository where you actually do your work (edit files etc).
 Running &lt;code&gt;git worktree list&lt;/code&gt; on most repos will show the location of this single
 worktree, and what commit/branch it is checked out to.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ &lt;span class="nb"&gt;pwd&lt;/span&gt; &lt;span class="c1"&gt;# just checking the current working directory&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ &lt;span class="nb"&gt;pwd&lt;/span&gt; &lt;span class="c1"&gt;# just checking the current working directory&lt;/span&gt;
 /home/slarse/repo
 &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree list
 /home/slarse/repo  6094baf &lt;span class="o"&gt;[&lt;/span&gt;master&lt;span class="o"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# points to the cwd, checked out to master&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; When I run &lt;code&gt;git worktree list&lt;/code&gt; after this point, it's just to show
@@ -59,7 +57,7 @@ different commits. The most basic usage is &lt;code&gt;git worktree add &amp;lt;
 to put it), and &lt;code&gt;commit-ish&lt;/code&gt; is something like a commit or branch (or a few
 other things that are not important for every-day use). Let's check out &lt;code&gt;other&lt;/code&gt;
 in a new worktree. &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree add ../repo-other other
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree add ../repo-other other
 Preparing worktree &lt;span class="o"&gt;(&lt;/span&gt;checking out &lt;span class="s1"&gt;&amp;#39;other&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 HEAD is now at b779dfb Add new line to README
 &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree list
@@ -67,17 +65,15 @@ HEAD is now at b779dfb Add new line to README
 /home/slarse/repo-other  b779dfb &lt;span class="o"&gt;[&lt;/span&gt;other&lt;span class="o"&gt;]&lt;/span&gt;
 &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ ls -a ../repo-other &lt;span class="c1"&gt;# have a look in the new working tree&lt;/span&gt;
 .  ..  .git  README.md
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;As you can see, the new worktree has been created, and can be seen in the list
 of worktrees. &lt;code&gt;.git&lt;/code&gt; is usually a directory, but in the case of a non-primary
 worktree, it's actually just a file with a path to the original &lt;code&gt;.git&lt;/code&gt;
 directory.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ cat ../repo-other/.git 
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ cat ../repo-other/.git 
 gitdir: /home/slarse/repo/.git/worktrees/repo-other
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Like many things in Git, it's brilliantly simple. You can start working in your
 new worktree like it's an entirely separate repository, with the caveat that you
@@ -89,22 +85,20 @@ new branches.&lt;/p&gt;
 move&lt;/code&gt; to make sure that all of the references are correctly changed. It's very
 simple, just type &lt;code&gt;git worktree move &amp;lt;src&amp;gt; &amp;lt;dst&amp;gt;&lt;/code&gt;. For example, if I want to
 move &lt;code&gt;../repo-other&lt;/code&gt; to &lt;code&gt;../repo-work&lt;/code&gt;, I do:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree move ../repo-other ../repo-work
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree move ../repo-other ../repo-work
 &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree list
 /home/slarse/repo       6094baf &lt;span class="o"&gt;[&lt;/span&gt;master&lt;span class="o"&gt;]&lt;/span&gt;
 /home/slarse/repo-work  b779dfb &lt;span class="o"&gt;[&lt;/span&gt;other&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;That's all there is to moving worktrees. Not very exciting, and I can't recall
 ever actually doing it, but I can see how it could be useful.&lt;/p&gt;
 &lt;h3&gt;Removing a worktree&lt;/h3&gt;
 &lt;p&gt;To remove a worktree, run &lt;code&gt;git worktree remove &amp;lt;path&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree remove ../repo-work/
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree remove ../repo-work/
 &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git worktree list
 /home/slarse/repo  6094baf &lt;span class="o"&gt;[&lt;/span&gt;master&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You can also just remove the directory with the worktree and the reference to it
 will be removed automatically (but not necessarily immediately). Run &lt;code&gt;git
@@ -133,19 +127,17 @@ usages.&lt;/p&gt;
 &lt;p&gt;Sometimes, you may find that part or all of the output of a command isn't
 properly redirected. As a quick example, navigate to any directory that is &lt;em&gt;not&lt;/em&gt;
 a Git repository, and run &lt;code&gt;git status&lt;/code&gt;. You should see something like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git status
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ git status
 fatal: not a git repository &lt;span class="o"&gt;(&lt;/span&gt;or any of the parent directories&lt;span class="o"&gt;)&lt;/span&gt;: .git
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Yet, if you try to redirect it with a standard redirect, the output
 is still displayed, and the file you redirect to remains empty.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git status &amp;gt; output
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ git status &amp;gt; output
 fatal: not a git repository &lt;span class="o"&gt;(&lt;/span&gt;or any of the parent directories&lt;span class="o"&gt;)&lt;/span&gt;: .git
 $ cat output
 $ 
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The reason is quite simple: the output from &lt;code&gt;git status&lt;/code&gt; is an error message,
 which is typically output on &lt;em&gt;standard error&lt;/em&gt; (stderr), while I/O redirection
@@ -154,11 +146,10 @@ input, for that matter), one can optionally provide a file descriptor specifying
 which output stream to redirect. On a typical UNIX-like system, stdout is file
 descriptor 1, and stderr is file descriptor 2. So if we want to catch that
 stderr output, we just need to prepend  a 2 to the redirection operator.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git status &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt; output
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ git status &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt; output
 $ cat output
 fatal: not a git repository &lt;span class="o"&gt;(&lt;/span&gt;or any of the parent directories&lt;span class="o"&gt;)&lt;/span&gt;: .git
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You can probably guess that if you leave the file descriptor out, it will
 default to 1. In some cases, you may want to redirect both stderr and stdout to
@@ -169,51 +160,46 @@ want to redirect both of them.&lt;/p&gt;
 file descriptor, really), but many programs output on both stderr and stdout,
 and it's often useful to redirect both. Here's a small Python script &lt;code&gt;print.py&lt;/code&gt;
 that outputs on line on stdout and one on stderr.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 
 &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some standard output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;some error output&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; That's Python as in Python 3.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;If we redirect stdout only, then the stderr line is still printed to the
 terminal.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ python3 print.py &lt;span class="m"&gt;1&lt;/span&gt;&amp;gt; stdout_output &lt;span class="c1"&gt;# recall that the 1 can be omitted&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ python3 print.py &lt;span class="m"&gt;1&lt;/span&gt;&amp;gt; stdout_output &lt;span class="c1"&gt;# recall that the 1 can be omitted&lt;/span&gt;
 some error output
 $ cat stdout_output
 some standard output
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Similarly, redirecting only stderr leaves the stdout output on the terminal.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ python3 print.py &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt; stderr_output
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ python3 print.py &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt; stderr_output
 some standard output
 $ cat stderr_output
 some error output
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Quite intuitively, if we want to redirect both stderr and stdout to one file
 each, we can simply do two redirections following one another.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ python3 print.py &lt;span class="m"&gt;1&lt;/span&gt;&amp;gt; stdout_output &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt; stderr_output
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ python3 print.py &lt;span class="m"&gt;1&lt;/span&gt;&amp;gt; stdout_output &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt; stderr_output
 $ cat stdout_output
 some standard output
 $ cat stderr_output
 some error output
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;There's also the possibility to redirect both stdout and stderr to the same file
 using the special &lt;code&gt;&amp;amp;&lt;/code&gt; character in place of a file descriptor.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ python3 print.py &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; output
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ python3 print.py &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; output
 $ cat output
 some standard output
 some error output
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And with that and the previous article, I've shared pretty much everything I
 feel is useful with output redirection. In some future Tip of the Week, I'm sure
@@ -269,10 +255,9 @@ accidentally overwrite something important.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;Redirecting output&lt;/h2&gt;
 &lt;p&gt;To set the stage, I'll be working in a directory with the following contents:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls
 file1.txt  file2.txt  image1.png file2.txt
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Redirecting output is fairly simple, and useful when you want to save the
 output of some command in a file. There are two primary ways of redirecting
@@ -280,7 +265,7 @@ output: &lt;em&gt;appending&lt;/em&gt; and &lt;em&gt;truncating&lt;/em&gt;. Appe
 so let's start with that one.&lt;/p&gt;
 &lt;h3&gt;Appending output redirection&lt;/h3&gt;
 &lt;p&gt;With &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;, we can make an appending redirect.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls &amp;gt;&amp;gt; ls_output.txt  &lt;span class="c1"&gt;# output from ls saved to output.txt&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls &amp;gt;&amp;gt; ls_output.txt  &lt;span class="c1"&gt;# output from ls saved to output.txt&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ cat ls_output.txt    &lt;span class="c1"&gt;# let&amp;#39;s have a look... &lt;/span&gt;
 file1.txt
 file2.txt
@@ -299,8 +284,7 @@ file2.txt
 image1.png
 image2.png
 ls_output.txt
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;There are three things to note here. First, the &lt;code&gt;ls_output.txt&lt;/code&gt; file does not
 exist in the initial directory, and so it is created with the first redirect.
@@ -330,7 +314,7 @@ formats the output accordingly. The details are somewhat out of scope.&lt;/p&gt;
 &lt;h3&gt;Truncating output redirection&lt;/h3&gt;
 &lt;p&gt;Let's assume that we start over from the initial state of the directory, before
 &lt;code&gt;ls_output.txt&lt;/code&gt; existed. We can then make a truncating redirect with &lt;code&gt;&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ rm ls_output.txt    &lt;span class="c1"&gt;# restore initial directory state&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ rm ls_output.txt    &lt;span class="c1"&gt;# restore initial directory state&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ ls &amp;gt; ls_output.txt  &lt;span class="c1"&gt;# make a truncating redirect&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt; $ cat ls_output.txt   &lt;span class="c1"&gt;# and inspect the results&lt;/span&gt;
 file1.txt
@@ -345,8 +329,7 @@ file2.txt
 image1.png
 image2.png
 ls_output.txt
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;If you did not know what truncating meant before, you can probably figure it out
 now. With a single &lt;code&gt;&amp;gt;&lt;/code&gt;, the specified file is created if it does not exist, just
@@ -363,23 +346,21 @@ fundamental feature of the bash shell (actually, most shells), called &lt;em&gt;
 Put simply, piping takes the output of one command and provides it as input to
 the next. Here's a simple example of running &lt;code&gt;ls&lt;/code&gt; and filtering the result with
 &lt;code&gt;grep&lt;/code&gt; to find all &lt;code&gt;.py&lt;/code&gt; files in the current directory.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ls &lt;span class="c1"&gt;# just run ls &lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ls &lt;span class="c1"&gt;# just run ls &lt;/span&gt;
 file1.md  file2.md  file3.md  script1.py  script2.py
 $ ls &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s1"&gt;&amp;#39;\.py$&amp;#39;&lt;/span&gt;
 script1.py
 script2.py
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;To be precise, the &lt;code&gt;|&lt;/code&gt; (pipe) operator takes the output from the command on the
 left, and provides it as input to the command on the right. Pipes can be chained
 practically as much as you'd like. For example, if we want to get amount of
 &lt;code&gt;.py&lt;/code&gt; files in the current directory, we can pipe the output from &lt;code&gt;grep&lt;/code&gt; to the
 &lt;code&gt;wc&lt;/code&gt; (word count) command, with the &lt;code&gt;-l&lt;/code&gt; option to count lines only.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ ls &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s1"&gt;&amp;#39;\.py$&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; wc -l
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ ls &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s1"&gt;&amp;#39;\.py$&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; wc -l
 &lt;span class="m"&gt;2&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code&gt;wc&lt;/code&gt; counts two lines, which is precisely the amount of &lt;code&gt;.py&lt;/code&gt; files that we
 found. Let's move on to I/O redirection. Piping allows you to easily compose
@@ -401,15 +382,13 @@ first word of a simple command&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;In other words, I can define a command that is substituted for some other
 command. Creating an alias is very simple. The syntax looks like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;alias &amp;lt;NAME&amp;gt;=&amp;lt;COMMAND&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;alias &amp;lt;NAME&amp;gt;=&amp;lt;COMMAND&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;So for example, if I want to have a command &lt;code&gt;hellofile&lt;/code&gt; that creates a file with
 the text "Hello, world!", I can achieve that with the following alias.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;hellofile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;echo &amp;quot;Hello, world!&amp;quot; &amp;gt; hellofile.txt&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;hellofile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;echo &amp;quot;Hello, world!&amp;quot; &amp;gt; hellofile.txt&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Note the single quotes around the command definition. Without them, &lt;code&gt;bash&lt;/code&gt;
 would interpret the alias as being only &lt;code&gt;echo&lt;/code&gt;, and the rest of the line as
@@ -423,9 +402,8 @@ use cases!&lt;/p&gt;
 &lt;p&gt;This is probably the most common use case for aliases, and it's likely that you
 already have some in play. A common one is to have &lt;code&gt;ls&lt;/code&gt; aliased to &lt;code&gt;ls
 --color=auto&lt;/code&gt;. That is to say, the following alias is defined:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;ls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ls --color=auto&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;ls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ls --color=auto&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;So if I now run e.g. &lt;code&gt;ls /etc&lt;/code&gt;, the resulting command is actually &lt;code&gt;ls
 --color=auto /etc&lt;/code&gt;. Note how the alias does not have to be the &lt;em&gt;only&lt;/em&gt; word I
@@ -434,15 +412,13 @@ use an alias for is &lt;code&gt;xclip&lt;/code&gt;, which is a small utility for
 it almost exclusively to copy file contents to the clipboard, but that's not the
 default functionality. In order to copy to the clipboard, I must write this
 rather cumbersome command.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xclip -selection clipboard &amp;lt;FILEPATH&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ xclip -selection clipboard &amp;lt;FILEPATH&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;So I have an alias for it so I can just type &lt;code&gt;xclip &amp;lt;FILEPATH&amp;gt;&lt;/code&gt; to copy to the
 clipboard.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;xclip&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;xclip -selection clipboard&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;xclip&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;xclip -selection clipboard&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;As a side note, it may not be the best style to clobber an existing command with
 an alias, but I still tend to do that for some of my most commonly used
@@ -460,9 +436,8 @@ session, but isn't useful in general. An example would be when I need to run
 some specific Java class in a project. Let's say I need to run the class
 &lt;code&gt;se.slar.awesome.project.Main&lt;/code&gt; over and over. Instead of typing &lt;code&gt;java
 se.slar.awesome.project.Main&lt;/code&gt; over and over, I define an alias for it.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;runmain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;java se.slar.awesome.project.Main&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ &lt;span class="nb"&gt;alias&lt;/span&gt; &lt;span class="nv"&gt;runmain&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;java se.slar.awesome.project.Main&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And then, instead of writing all of that out, or having to do some
 &lt;a href="https://slar.se/reverse-search-in-bash.html"&gt;reverse searching&lt;/a&gt; or
@@ -494,16 +469,15 @@ other prominent services which host Git repositories.&lt;/p&gt;
 &lt;p&gt;How do you use Git locally, then? It's simple. Just create a directory and run
 &lt;code&gt;git init&lt;/code&gt; to initialize it as a Git repository. Here's an example command line
 session of what it looks like.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt; $ mkdir repo
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt; $ mkdir repo
 &lt;span class="o"&gt;[&lt;/span&gt;~&lt;span class="o"&gt;]&lt;/span&gt; $ &lt;span class="nb"&gt;cd&lt;/span&gt; repo
 &lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ ls -a
 . ..            &lt;span class="c1"&gt;# repo is empty&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git init
-Initialized empty Git repository in /home/slarse/repo/.git/
+Initialized empty Git repository &lt;span class="k"&gt;in&lt;/span&gt; /home/slarse/repo/.git/
 &lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ ls -a
 .  ..  .git     &lt;span class="c1"&gt;# the .git directory indicates that this is now a Git repo&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I often use Git to version control stuff that I have no intention of ever
 putting up in a remote repository. This is useful for when you accidentally
@@ -517,7 +491,7 @@ empty, don't initialize it with a README or license). Then copy the address to
 the repository (I prefer to use SSH). Let's say I have a repo at
 &lt;code&gt;git@github.com:slarse/superrepo.git&lt;/code&gt;. I can then add it as a remote to my local
 repo, and push my master branch to it.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git remote add origin git@github.com:slarse/superrepo.git
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git remote add origin git@github.com:slarse/superrepo.git
 &lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git branch
 * master  &lt;span class="c1"&gt;# I&amp;#39;m on the master branch, which is what I want to push&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt; $ git push --set-upstream origin master
@@ -528,8 +502,7 @@ Total &lt;span class="m"&gt;3&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;d
 To github.com:slarse/superrepo.git
  * &lt;span class="o"&gt;[&lt;/span&gt;new branch&lt;span class="o"&gt;]&lt;/span&gt;      master -&amp;gt; master
 Branch &lt;span class="s1"&gt;&amp;#39;master&amp;#39;&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt; up to track remote branch &lt;span class="s1"&gt;&amp;#39;master&amp;#39;&lt;/span&gt; from &lt;span class="s1"&gt;&amp;#39;origin&amp;#39;&lt;/span&gt;.
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Now my previously local-only repo is also in GitHub, and I can push and pull
 from it as usual. That's all for this tip of the week, it's just meant to spark
@@ -545,14 +518,13 @@ In such cases, using the &lt;code&gt;history&lt;/code&gt; command is a good alte
 &lt;h3&gt;&lt;code&gt;history&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;history&lt;/code&gt; command will display the last commands that you have entered, and
 looks something like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;history&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ &lt;span class="nb"&gt;history&lt;/span&gt;
  &lt;span class="m"&gt;1009&lt;/span&gt;  &lt;span class="nb"&gt;fg&lt;/span&gt;
  &lt;span class="m"&gt;1010&lt;/span&gt;  git status
  &lt;span class="m"&gt;1011&lt;/span&gt;  git commit -a -m &lt;span class="s1"&gt;&amp;#39;Add module docstring to github_api module&amp;#39;&lt;/span&gt;
  &lt;span class="o"&gt;[&lt;/span&gt;***OUTPUT TRUNCATED***&lt;span class="o"&gt;]&lt;/span&gt;
  &lt;span class="m"&gt;2007&lt;/span&gt;  &lt;span class="nb"&gt;history&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Each command is called an &lt;em&gt;event&lt;/em&gt;, and the output is formatted as &lt;code&gt;&amp;lt;event_nr&amp;gt;
 &amp;lt;event&amp;gt;&lt;/code&gt;. Precisely how many commands are returned by the &lt;code&gt;history&lt;/code&gt; is
@@ -568,12 +540,11 @@ it corresponds to. To expand an event, one simply types &lt;code&gt;!&amp;lt;eve
 example, looking at the &lt;code&gt;history&lt;/code&gt; output above I can see that event number 1010
 corresponds to &lt;code&gt;git status&lt;/code&gt;. I can execute the command again with history
 expansion like so:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ !1010
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ !1010
 git status         &lt;span class="c1"&gt;# Command is echoed&lt;/span&gt;
 On branch master   &lt;span class="c1"&gt;# Output from executing the command&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;***REST OF OUTPUT OMITTED***&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The command is first echoed, and then executed. There are a few other ways to
 specify the event number.&lt;/p&gt;
@@ -594,10 +565,9 @@ specify the event number.&lt;/p&gt;
 &lt;p&gt;There is one more very useful feature that I often use, and that is the ability
 to only print the command. This can be achieved by appending &lt;code&gt;:p&lt;/code&gt; to the
 history expansion command. Here is an example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ !1011:p
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ !1011:p
 git commit -a -m &lt;span class="s1"&gt;&amp;#39;Add module docstring to github_api module&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The command can then be accessed by pressing UP-arrow or &lt;code&gt;ctrl-p&lt;/code&gt;, which is
 very useful if you need to do minor modifications to it. There are tons of
@@ -608,11 +578,10 @@ in &lt;a href="https://linux.die.net/man/1/bash"&gt;this online bash man page&lt
 &lt;p&gt;A final tip on using history expansion is to filter the output with &lt;code&gt;grep&lt;/code&gt;. For
 example, if I only want to find commands that include the word &lt;code&gt;git&lt;/code&gt;, I can
 filter the output of &lt;code&gt;history&lt;/code&gt; by &lt;em&gt;piping&lt;/em&gt; to &lt;code&gt;grep&lt;/code&gt; with the &lt;code&gt;|&lt;/code&gt; character.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;history&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep git
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ &lt;span class="nb"&gt;history&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep git
  &lt;span class="m"&gt;1010&lt;/span&gt;  git status
  &lt;span class="m"&gt;1011&lt;/span&gt;  git commit -a -m &lt;span class="s1"&gt;&amp;#39;Add module docstring to github_api module&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I will most likely do another TOTW on piping, but the basic principle is that
 &lt;code&gt;|&lt;/code&gt; takes the output from the command on the left and feeds it as input to the
@@ -626,17 +595,15 @@ told you there's a better way? When you want to re-use a command you've written
 previously, and you know it's not the previous command, or the one before that,
 your first resort should be a &lt;em&gt;reverse search&lt;/em&gt;. This can be accessed with
 &lt;code&gt;ctrl+r&lt;/code&gt;. If you press that button combination, you should see something like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;reverse-i-search&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;: 
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;reverse-i-search&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;: 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Just start typing the beginning of the command you're looking for, and most
 often, it will pop up. For example, I sometimes need to re-run the
 previous&lt;code&gt;git&lt;/code&gt; command that I ran a while back. I then press &lt;code&gt;ctrl+r&lt;/code&gt; and type
 &lt;code&gt;git&lt;/code&gt; to get something like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;reverse-i-search&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;git&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;: git push
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;reverse-i-search&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;git&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;: git push
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Note how the initial &lt;code&gt;git&lt;/code&gt; before the &lt;code&gt;:&lt;/code&gt; is what I've actually written here,
 and the text after the &lt;code&gt;:&lt;/code&gt; (in this case &lt;code&gt;git push&lt;/code&gt;) is what's been found with
@@ -647,9 +614,8 @@ part and press &lt;code&gt;enter&lt;/code&gt; right away to execute the command 
 however, the result you get first isn't what you want (obviously, just typing
 &lt;code&gt;git push&lt;/code&gt; would have been faster in this case).  You can then press &lt;code&gt;ctrl+r&lt;/code&gt;
 again to cycle to the next hit.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;(reverse-i-search)`git&amp;#39;: git commit -a -m &amp;#39;Add module docstring to github_api module&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;(reverse-i-search)`git&amp;#39;: git commit -a -m &amp;#39;Add module docstring to github_api module&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Now there's a command that I might not want to have to type out again in its
 entirety, better showing why a reverse search may be useful. That's it for this

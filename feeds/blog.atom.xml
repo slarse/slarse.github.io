@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-10-04T09:20:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>RepoBee at ITiCSE 2020!</title><link href="https://slar.se/repobee-at-iticse-2020.html" rel="alternate"></link><published>2020-10-04T09:20:00+02:00</published><updated>2020-10-04T09:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-04:/repobee-at-iticse-2020.html</id><summary type="html">&lt;p&gt;In 2019, &lt;a href="https://slar.se/repobee-and-simon-at-iticse-2019.html"&gt;I presented RepoBee at the ITiCSE conference&lt;/a&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2020-10-14T17:31:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Starting as a research engineer at KTH</title><link href="https://slar.se/starting-as-a-research-engineer-at-kth.html" rel="alternate"></link><published>2020-10-14T17:31:00+02:00</published><updated>2020-10-14T17:31:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-14:/starting-as-a-research-engineer-at-kth.html</id><summary type="html">&lt;p&gt;As I &lt;a href="https://slar.se/thoughts-on-graduating-with-an-msc-in-computer-science-and-engineering.html"&gt;recently graduated&lt;/a&gt;, I was in need of a job.
+Thankfully, even in times like these, there's no shortage of work for someone
+with a master's degree in computer science. It's not all sunshine and rainbows,
+however, as the IT industry is something of a minefield when it comes …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As I &lt;a href="https://slar.se/thoughts-on-graduating-with-an-msc-in-computer-science-and-engineering.html"&gt;recently graduated&lt;/a&gt;, I was in need of a job.
+Thankfully, even in times like these, there's no shortage of work for someone
+with a master's degree in computer science. It's not all sunshine and rainbows,
+however, as the IT industry is something of a minefield when it comes to finding
+a job that's ethically and morally defensible. That goes double when you have
+strong opinions about privacy and data collection. I did however land a
+fantastic first job as a research engineer at &lt;a href="https://kth.se"&gt;KTH Royal Institute of
+Technology&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Getting paid to work on open-source software&lt;/h2&gt;
+&lt;p&gt;I just started my new job as a research engineer this week, and apart from
+having a minor cold such that I can't actually go to the office, I think I've
+been off to a really good start. What's so great about the job is that I'm
+primarily working on open-source software, which is a huge passion of mine. I
+typically spend dozens of hours of my free time working on open source, and so
+getting paid to do it is like a dream come true.&lt;/p&gt;
+&lt;p&gt;The project I've been tasked to maintain is called
+&lt;a href="https://github.com/SpoonLabs/sorald"&gt;sorald&lt;/a&gt;. It's a really cool project for
+automatically repairing &lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>RepoBee at ITiCSE 2020!</title><link href="https://slar.se/repobee-at-iticse-2020.html" rel="alternate"></link><published>2020-10-04T09:20:00+02:00</published><updated>2020-10-04T09:20:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-10-04:/repobee-at-iticse-2020.html</id><summary type="html">&lt;p&gt;In 2019, &lt;a href="https://slar.se/repobee-and-simon-at-iticse-2019.html"&gt;I presented RepoBee at the ITiCSE conference&lt;/a&gt;
 in Aberdeen. This year, ITiCSE went virtual, but RepoBee still made an
 appearance in the new tools and tricks section with a small, two-page paper.
 Although I let my co-author Ric Glassey deal with the virtual presentation, I'm

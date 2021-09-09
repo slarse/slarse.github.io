@@ -124,39 +124,37 @@ project is created.</p>
 <h3>Initial Gradle configuration</h3>
 <p>In the project root, you should now have a file called <code>build.gradle</code>, which
 looks something like this:</p>
-<div class="highlight"><pre><span></span><span class="err">plugins</span> <span class="p">{</span>
-    <span class="err">id</span> <span class="err">&#39;org.jetbrains.kotlin.jvm&#39;</span> <span class="err">version</span> <span class="err">&#39;1.2.51&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="err">plugi</span><span class="kc">ns</span> <span class="p">{</span>
+    <span class="err">id</span> <span class="err">&#39;org.je</span><span class="kc">t</span><span class="err">brai</span><span class="kc">ns</span><span class="err">.ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">.jvm&#39;</span> <span class="err">versio</span><span class="kc">n</span> <span class="err">&#39;</span><span class="mf">1.2.51</span><span class="err">&#39;</span>
 <span class="p">}</span>
 
 <span class="err">group</span> <span class="err">&#39;slarse&#39;</span>
-<span class="err">version</span> <span class="err">&#39;</span><span class="mf">0.1</span><span class="err">&#39;</span>
+<span class="err">versio</span><span class="kc">n</span> <span class="err">&#39;</span><span class="mf">0.1</span><span class="err">&#39;</span>
 
-<span class="err">repositories</span> <span class="p">{</span>
-    <span class="err">mavenCentral()</span>
+<span class="err">reposi</span><span class="kc">t</span><span class="err">ories</span> <span class="p">{</span>
+    <span class="err">mave</span><span class="kc">n</span><span class="err">Ce</span><span class="kc">ntral</span><span class="err">()</span>
 <span class="p">}</span>
 
-<span class="err">dependencies</span> <span class="p">{</span>
-    <span class="err">compile</span> <span class="nt">&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&quot;</span>
+<span class="err">depe</span><span class="kc">n</span><span class="err">de</span><span class="kc">n</span><span class="err">cies</span> <span class="p">{</span>
+    <span class="err">compile</span> <span class="s2">&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&quot;</span>
 <span class="p">}</span>
 
-<span class="err">compileKotlin</span> <span class="p">{</span>
-    <span class="err">kotlinOptions.jvmTarget</span> <span class="err">=</span> <span class="nt">&quot;1.8&quot;</span>
+<span class="err">compileKo</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span> <span class="p">{</span>
+    <span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.jvmTarge</span><span class="kc">t</span> <span class="err">=</span> <span class="s2">&quot;1.8&quot;</span>
 <span class="p">}</span>
-<span class="err">compileTestKotlin</span> <span class="p">{</span>
-    <span class="err">kotlinOptions.jvmTarget</span> <span class="err">=</span> <span class="nt">&quot;1.8&quot;</span>
+<span class="err">compileTes</span><span class="kc">t</span><span class="err">Ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span> <span class="p">{</span>
+    <span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.jvmTarge</span><span class="kc">t</span> <span class="err">=</span> <span class="s2">&quot;1.8&quot;</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Before we can compile a project with <code>clikt</code>, we need to add it as a dependency.
 We can do that by adding <code>compile "com.github.ajalt:clikt:1.5.0"</code> in the
 dependencies section. It should now look like this:</p>
-<div class="highlight"><pre><span></span><span class="err">dependencies</span> <span class="p">{</span>
-    <span class="err">compile</span> <span class="nt">&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="err">depe</span><span class="kc">n</span><span class="err">de</span><span class="kc">n</span><span class="err">cies</span> <span class="p">{</span>
+    <span class="err">compile</span> <span class="s2">&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&quot;</span>
     <span class="err">compile</span> <span class="s2">&quot;com.github.ajalt:clikt:1.5.0&quot;</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Then hit the little refresh symbol in the bottom left corner
 (should say <code>Refresh Gradle Project</code> when you hover your mouse over it) to
@@ -166,32 +164,30 @@ want to configure our <code>jar</code> task, but let's create the app first!</p>
 <h2>Creating the application</h2>
 <p>Let's make this easy: we'll just use the sample application available from the
 <a href="https://ajalt.github.io/clikt/"><code>clikt</code> documentation</a>. It looks like this:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Hello</span> <span class="p">:</span> <span class="n">CliktCommand</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">count</span><span class="p">:</span> <span class="n">Int</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="p">=</span><span class="s">&quot;Number of greetings&quot;</span><span class="p">).</span><span class="n">int</span><span class="p">().</span><span class="n">default</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="p">=</span><span class="s">&quot;The person to greet&quot;</span><span class="p">).</span><span class="n">prompt</span><span class="p">(</span><span class="s">&quot;Your name&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Hello</span> <span class="p">:</span> <span class="n">CliktCommand</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s">&quot;Number of greetings&quot;</span><span class="p">).</span><span class="na">int</span><span class="p">().</span><span class="na">default</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s">&quot;The person to greet&quot;</span><span class="p">).</span><span class="na">prompt</span><span class="p">(</span><span class="s">&quot;Your name&quot;</span><span class="p">)</span>
 
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">echo</span><span class="p">(</span><span class="s">&quot;Hello $name!&quot;</span><span class="p">)</span>
+    <span class="kd">override</span> <span class="kd">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="na">count</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">echo</span><span class="p">(</span><span class="s">&quot;Hello </span><span class="si">$</span><span class="n">name</span><span class="s">!&quot;</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">=</span> <span class="n">Hello</span><span class="p">().</span><span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-</pre></div>
-
+<span class="kd">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">=</span> <span class="n">Hello</span><span class="p">().</span><span class="na">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Create a Kotlin file called <code>main.kt</code> at <code>src/main/kotlin/main.kt</code> and paste
 the above code into it. Note that we are using the default package here
 (i.e. not defining a package) for the sake of simplicity.</p>
 <p>For this to compile, we will need to add the following imports at the top:</p>
-<div class="highlight"><pre><span></span><span class="k">import</span> <span class="nn">com.github.ajalt.clikt.core.CliktCommand</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nn">com.github.ajalt.clikt.core.CliktCommand</span>
 <span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.default</span>
 <span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.option</span>
 <span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.prompt</span>
 <span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.types.int</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>And that's it for the application, you should now be able to run it as usual.
 When running it, there should appear a prompt in the terminal saying <code>Your name:</code>.
@@ -201,16 +197,15 @@ fantastic application into a standalone <code>.jar</code> file.</p>
 <p>This is actually not very difficult, but you need to know what to do. We need
 to create a so-called "fat" jar, which includes both the Kotlin runtime and the
 <code>clikt</code> library. We also need to specify the name of our main class.</p>
-<div class="highlight"><pre><span></span><span class="err">jar</span> <span class="p">{</span>
-    <span class="err">manifest</span> <span class="err">{</span>
-        <span class="err">attributes</span> <span class="err">&#39;Main-Class&#39;:</span> <span class="err">&#39;MainKt&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="err">jar</span> <span class="p">{</span>
+    <span class="err">ma</span><span class="kc">n</span><span class="err">i</span><span class="kc">fest</span> <span class="p">{</span>
+        <span class="err">a</span><span class="kc">ttr</span><span class="err">ibu</span><span class="kc">tes</span> <span class="err">&#39;Mai</span><span class="kc">n</span><span class="mi">-</span><span class="err">Class&#39;</span><span class="p">:</span> <span class="err">&#39;Mai</span><span class="kc">n</span><span class="err">K</span><span class="kc">t</span><span class="err">&#39;</span>
     <span class="p">}</span>
-    <span class="err">from</span> <span class="p">{</span>
-        <span class="err">configurations.compile.collect</span> <span class="err">{</span> <span class="err">it.isDirectory()</span> <span class="err">?</span> <span class="err">it</span> <span class="err">:</span> <span class="err">zipTree(it)</span> <span class="p">}</span>
-    <span class="err">}</span>
-<span class="err">}</span>
-</pre></div>
-
+    <span class="kc">fr</span><span class="err">om</span> <span class="p">{</span>
+        <span class="err">co</span><span class="kc">nf</span><span class="err">igura</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.compile.collec</span><span class="kc">t</span> <span class="p">{</span> <span class="err">i</span><span class="kc">t</span><span class="err">.isDirec</span><span class="kc">t</span><span class="err">ory()</span> <span class="err">?</span> <span class="err">i</span><span class="kc">t</span> <span class="p">:</span> <span class="err">zipTree(i</span><span class="kc">t</span><span class="err">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>Note that the class file generated by Kotlin for a file called <code>something.kt</code>
 will be <code>SomethingKt.class</code>, which is why our main class is called <code>MainKt</code>.
@@ -232,62 +227,61 @@ in <code>build/libs/&lt;ArtifactId&gt;-&lt;Version&gt;</code> (so in my case it 
 <code>build/libs/app-0.1.jar</code>). And that's it, hope it helped someone!</p>
 <h1>Full source code and <code>build.gradle</code></h1>
 <p>Here are both of the files we wrote in this tutorial, in their entirety.</p>
-<div class="highlight"><pre><span></span><span class="c1">// main.kt</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// main.kt</span>
 <span class="k">import</span> <span class="nn">com.github.ajalt.clikt.core.CliktCommand</span>
 <span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.default</span>
 <span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.option</span>
 <span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.options.prompt</span>
 <span class="k">import</span> <span class="nn">com.github.ajalt.clikt.parameters.types.int</span>
 
-<span class="k">class</span> <span class="nc">Hello</span> <span class="p">:</span> <span class="n">CliktCommand</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">count</span><span class="p">:</span> <span class="n">Int</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="p">=</span><span class="s">&quot;Number of greetings&quot;</span><span class="p">).</span><span class="n">int</span><span class="p">().</span><span class="n">default</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="p">=</span><span class="s">&quot;The person to greet&quot;</span><span class="p">).</span><span class="n">prompt</span><span class="p">(</span><span class="s">&quot;Your name&quot;</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">Hello</span> <span class="p">:</span> <span class="n">CliktCommand</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s">&quot;Number of greetings&quot;</span><span class="p">).</span><span class="na">int</span><span class="p">().</span><span class="na">default</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="k">by</span> <span class="n">option</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s">&quot;The person to greet&quot;</span><span class="p">).</span><span class="na">prompt</span><span class="p">(</span><span class="s">&quot;Your name&quot;</span><span class="p">)</span>
 
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">echo</span><span class="p">(</span><span class="s">&quot;Hello $name!&quot;</span><span class="p">)</span>
+    <span class="kd">override</span> <span class="kd">fun</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="na">count</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">echo</span><span class="p">(</span><span class="s">&quot;Hello </span><span class="si">$</span><span class="n">name</span><span class="s">!&quot;</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">=</span> <span class="n">Hello</span><span class="p">().</span><span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-</pre></div>
-
+<span class="kd">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">=</span> <span class="n">Hello</span><span class="p">().</span><span class="na">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
 
 <hr>
-<div class="highlight"><pre><span></span><span class="err">//</span> <span class="err">build.gradle</span>
-<span class="err">plugins</span> <span class="p">{</span>
-    <span class="err">id</span> <span class="err">&#39;org.jetbrains.kotlin.jvm&#39;</span> <span class="err">version</span> <span class="err">&#39;1.2.51&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="err">//</span> <span class="err">build.gradle</span>
+<span class="err">plugi</span><span class="kc">ns</span> <span class="p">{</span>
+    <span class="err">id</span> <span class="err">&#39;org.je</span><span class="kc">t</span><span class="err">brai</span><span class="kc">ns</span><span class="err">.ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">.jvm&#39;</span> <span class="err">versio</span><span class="kc">n</span> <span class="err">&#39;</span><span class="mf">1.2.51</span><span class="err">&#39;</span>
 <span class="p">}</span>
 
 <span class="err">group</span> <span class="err">&#39;se.slarse&#39;</span>
-<span class="err">version</span> <span class="err">&#39;</span><span class="mf">0.1</span><span class="err">&#39;</span>
+<span class="err">versio</span><span class="kc">n</span> <span class="err">&#39;</span><span class="mf">0.1</span><span class="err">&#39;</span>
 
-<span class="err">repositories</span> <span class="p">{</span>
-    <span class="err">mavenCentral()</span>
+<span class="err">reposi</span><span class="kc">t</span><span class="err">ories</span> <span class="p">{</span>
+    <span class="err">mave</span><span class="kc">n</span><span class="err">Ce</span><span class="kc">ntral</span><span class="err">()</span>
 <span class="p">}</span>
 
-<span class="err">dependencies</span> <span class="p">{</span>
-    <span class="err">compile</span> <span class="nt">&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&quot;</span>
+<span class="err">depe</span><span class="kc">n</span><span class="err">de</span><span class="kc">n</span><span class="err">cies</span> <span class="p">{</span>
+    <span class="err">compile</span> <span class="s2">&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk8&quot;</span>
     <span class="err">compile</span> <span class="s2">&quot;com.github.ajalt:clikt:1.5.0&quot;</span>
 <span class="p">}</span>
 
-<span class="err">compileKotlin</span> <span class="p">{</span>
-    <span class="err">kotlinOptions.jvmTarget</span> <span class="err">=</span> <span class="nt">&quot;1.8&quot;</span>
+<span class="err">compileKo</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span> <span class="p">{</span>
+    <span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.jvmTarge</span><span class="kc">t</span> <span class="err">=</span> <span class="s2">&quot;1.8&quot;</span>
 <span class="p">}</span>
-<span class="err">compileTestKotlin</span> <span class="p">{</span>
-    <span class="err">kotlinOptions.jvmTarget</span> <span class="err">=</span> <span class="nt">&quot;1.8&quot;</span>
+<span class="err">compileTes</span><span class="kc">t</span><span class="err">Ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span> <span class="p">{</span>
+    <span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.jvmTarge</span><span class="kc">t</span> <span class="err">=</span> <span class="s2">&quot;1.8&quot;</span>
 <span class="p">}</span>
 
 <span class="err">jar</span> <span class="p">{</span>
-    <span class="err">manifest</span> <span class="err">{</span>
-        <span class="err">attributes</span> <span class="err">&#39;Main-Class&#39;:</span> <span class="err">&#39;MainKt&#39;</span>
+    <span class="err">ma</span><span class="kc">n</span><span class="err">i</span><span class="kc">fest</span> <span class="p">{</span>
+        <span class="err">a</span><span class="kc">ttr</span><span class="err">ibu</span><span class="kc">tes</span> <span class="err">&#39;Mai</span><span class="kc">n</span><span class="mi">-</span><span class="err">Class&#39;</span><span class="p">:</span> <span class="err">&#39;Mai</span><span class="kc">n</span><span class="err">K</span><span class="kc">t</span><span class="err">&#39;</span>
     <span class="p">}</span>
-    <span class="err">from</span> <span class="p">{</span>
-        <span class="err">configurations.compile.collect</span> <span class="err">{</span> <span class="err">it.isDirectory()</span> <span class="err">?</span> <span class="err">it</span> <span class="err">:</span> <span class="err">zipTree(it)</span> <span class="p">}</span>
-    <span class="err">}</span>
-<span class="err">}</span>
-</pre></div>
+    <span class="kc">fr</span><span class="err">om</span> <span class="p">{</span>
+        <span class="err">co</span><span class="kc">nf</span><span class="err">igura</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.compile.collec</span><span class="kc">t</span> <span class="p">{</span> <span class="err">i</span><span class="kc">t</span><span class="err">.isDirec</span><span class="kc">t</span><span class="err">ory()</span> <span class="err">?</span> <span class="err">i</span><span class="kc">t</span> <span class="p">:</span> <span class="err">zipTree(i</span><span class="kc">t</span><span class="err">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
   </div>
   
 
@@ -332,70 +326,28 @@ in <code>build/libs/&lt;ArtifactId&gt;-&lt;Version&gt;</code> (so in my case it 
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -404,16 +356,10 @@ in <code>build/libs/&lt;ArtifactId&gt;-&lt;Version&gt;</code> (so in my case it 
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -423,15 +369,39 @@ in <code>build/libs/&lt;ArtifactId&gt;-&lt;Version&gt;</code> (so in my case it 
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -440,22 +410,22 @@ in <code>build/libs/&lt;ArtifactId&gt;-&lt;Version&gt;</code> (so in my case it 
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -465,15 +435,45 @@ in <code>build/libs/&lt;ArtifactId&gt;-&lt;Version&gt;</code> (so in my case it 
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

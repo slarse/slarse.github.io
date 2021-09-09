@@ -115,14 +115,13 @@ In such cases, using the <code>history</code> command is a good alternative. </p
 <h3><code>history</code></h3>
 <p>The <code>history</code> command will display the last commands that you have entered, and
 looks something like this:</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">history</span>
+<div class="highlight"><pre><span></span><code>$ <span class="nb">history</span>
  <span class="m">1009</span>  <span class="nb">fg</span>
  <span class="m">1010</span>  git status
  <span class="m">1011</span>  git commit -a -m <span class="s1">&#39;Add module docstring to github_api module&#39;</span>
  <span class="o">[</span>***OUTPUT TRUNCATED***<span class="o">]</span>
  <span class="m">2007</span>  <span class="nb">history</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Each command is called an <em>event</em>, and the output is formatted as <code>&lt;event_nr&gt;
 &lt;event&gt;</code>. Precisely how many commands are returned by the <code>history</code> is
@@ -138,12 +137,11 @@ it corresponds to. To expand an event, one simply types <code>!&lt;event_nr&gt;<
 example, looking at the <code>history</code> output above I can see that event number 1010
 corresponds to <code>git status</code>. I can execute the command again with history
 expansion like so:</p>
-<div class="highlight"><pre><span></span>$ !1010
+<div class="highlight"><pre><span></span><code>$ !1010
 git status         <span class="c1"># Command is echoed</span>
 On branch master   <span class="c1"># Output from executing the command</span>
 <span class="o">[</span>***REST OF OUTPUT OMITTED***<span class="o">]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The command is first echoed, and then executed. There are a few other ways to
 specify the event number.</p>
@@ -164,10 +162,9 @@ specify the event number.</p>
 <p>There is one more very useful feature that I often use, and that is the ability
 to only print the command. This can be achieved by appending <code>:p</code> to the
 history expansion command. Here is an example:</p>
-<div class="highlight"><pre><span></span>$ !1011:p
+<div class="highlight"><pre><span></span><code>$ !1011:p
 git commit -a -m <span class="s1">&#39;Add module docstring to github_api module&#39;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>The command can then be accessed by pressing UP-arrow or <code>ctrl-p</code>, which is
 very useful if you need to do minor modifications to it. There are tons of
@@ -178,11 +175,10 @@ in <a href="https://linux.die.net/man/1/bash">this online bash man page</a>.</p>
 <p>A final tip on using history expansion is to filter the output with <code>grep</code>. For
 example, if I only want to find commands that include the word <code>git</code>, I can
 filter the output of <code>history</code> by <em>piping</em> to <code>grep</code> with the <code>|</code> character.</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">history</span> <span class="p">|</span> grep git
+<div class="highlight"><pre><span></span><code>$ <span class="nb">history</span> <span class="p">|</span> grep git
  <span class="m">1010</span>  git status
  <span class="m">1011</span>  git commit -a -m <span class="s1">&#39;Add module docstring to github_api module&#39;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>I will most likely do another TOTW on piping, but the basic principle is that
 <code>|</code> takes the output from the command on the left and feeds it as input to the
@@ -232,70 +228,28 @@ coming on Sunday the 28th of April!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -304,16 +258,10 @@ coming on Sunday the 28th of April!</p>
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -323,15 +271,39 @@ coming on Sunday the 28th of April!</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -340,22 +312,22 @@ coming on Sunday the 28th of April!</p>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -365,15 +337,45 @@ coming on Sunday the 28th of April!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

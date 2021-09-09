@@ -114,19 +114,17 @@ usages.</p>
 <p>Sometimes, you may find that part or all of the output of a command isn't
 properly redirected. As a quick example, navigate to any directory that is <em>not</em>
 a Git repository, and run <code>git status</code>. You should see something like this:</p>
-<div class="highlight"><pre><span></span>$ git status
+<div class="highlight"><pre><span></span><code>$ git status
 fatal: not a git repository <span class="o">(</span>or any of the parent directories<span class="o">)</span>: .git
-</pre></div>
-
+</code></pre></div>
 
 <p>Yet, if you try to redirect it with a standard redirect, the output
 is still displayed, and the file you redirect to remains empty.</p>
-<div class="highlight"><pre><span></span>$ git status &gt; output
+<div class="highlight"><pre><span></span><code>$ git status &gt; output
 fatal: not a git repository <span class="o">(</span>or any of the parent directories<span class="o">)</span>: .git
 $ cat output
 $ 
-</pre></div>
-
+</code></pre></div>
 
 <p>The reason is quite simple: the output from <code>git status</code> is an error message,
 which is typically output on <em>standard error</em> (stderr), while I/O redirection
@@ -135,11 +133,10 @@ input, for that matter), one can optionally provide a file descriptor specifying
 which output stream to redirect. On a typical UNIX-like system, stdout is file
 descriptor 1, and stderr is file descriptor 2. So if we want to catch that
 stderr output, we just need to prepend  a 2 to the redirection operator.</p>
-<div class="highlight"><pre><span></span>$ git status <span class="m">2</span>&gt; output
+<div class="highlight"><pre><span></span><code>$ git status <span class="m">2</span>&gt; output
 $ cat output
 fatal: not a git repository <span class="o">(</span>or any of the parent directories<span class="o">)</span>: .git
-</pre></div>
-
+</code></pre></div>
 
 <p>You can probably guess that if you leave the file descriptor out, it will
 default to 1. In some cases, you may want to redirect both stderr and stdout to
@@ -150,51 +147,46 @@ want to redirect both of them.</p>
 file descriptor, really), but many programs output on both stderr and stdout,
 and it's often useful to redirect both. Here's a small Python script <code>print.py</code>
 that outputs on line on stdout and one on stderr.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;some standard output&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;some error output&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <blockquote>
 <p><strong>Note:</strong> That's Python as in Python 3.</p>
 </blockquote>
 <p>If we redirect stdout only, then the stderr line is still printed to the
 terminal.</p>
-<div class="highlight"><pre><span></span>$ python3 print.py <span class="m">1</span>&gt; stdout_output <span class="c1"># recall that the 1 can be omitted</span>
+<div class="highlight"><pre><span></span><code>$ python3 print.py <span class="m">1</span>&gt; stdout_output <span class="c1"># recall that the 1 can be omitted</span>
 some error output
 $ cat stdout_output
 some standard output
-</pre></div>
-
+</code></pre></div>
 
 <p>Similarly, redirecting only stderr leaves the stdout output on the terminal.</p>
-<div class="highlight"><pre><span></span>$ python3 print.py <span class="m">2</span>&gt; stderr_output
+<div class="highlight"><pre><span></span><code>$ python3 print.py <span class="m">2</span>&gt; stderr_output
 some standard output
 $ cat stderr_output
 some error output
-</pre></div>
-
+</code></pre></div>
 
 <p>Quite intuitively, if we want to redirect both stderr and stdout to one file
 each, we can simply do two redirections following one another.</p>
-<div class="highlight"><pre><span></span>$ python3 print.py <span class="m">1</span>&gt; stdout_output <span class="m">2</span>&gt; stderr_output
+<div class="highlight"><pre><span></span><code>$ python3 print.py <span class="m">1</span>&gt; stdout_output <span class="m">2</span>&gt; stderr_output
 $ cat stdout_output
 some standard output
 $ cat stderr_output
 some error output
-</pre></div>
-
+</code></pre></div>
 
 <p>There's also the possibility to redirect both stdout and stderr to the same file
 using the special <code>&amp;</code> character in place of a file descriptor.</p>
-<div class="highlight"><pre><span></span>$ python3 print.py <span class="p">&amp;</span>&gt; output
+<div class="highlight"><pre><span></span><code>$ python3 print.py <span class="p">&amp;</span>&gt; output
 $ cat output
 some standard output
 some error output
-</pre></div>
-
+</code></pre></div>
 
 <p>And with that and the previous article, I've shared pretty much everything I
 feel is useful with output redirection. In some future Tip of the Week, I'm sure
@@ -243,70 +235,28 @@ I'll get into input redirecton as well, as it's much the same.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -315,16 +265,10 @@ I'll get into input redirecton as well, as it's much the same.</p>
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -334,15 +278,39 @@ I'll get into input redirecton as well, as it's much the same.</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -351,22 +319,22 @@ I'll get into input redirecton as well, as it's much the same.</p>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -376,15 +344,45 @@ I'll get into input redirecton as well, as it's much the same.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

@@ -116,7 +116,7 @@ us rerun failed tests, as well as the caching mechanism that makes it possible.<
 <h2>Using <code>--lf</code> to rerun failed tests</h2>
 <p>In this article, we'll use the test suite from <a href="https://slar.se/essential-pytest-1.html">the first
 article</a>.</p>
-<div class="highlight"><pre><span></span><span class="c1"># test_mul.py</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># test_mul.py</span>
 <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">lhs</span> <span class="o">*</span> <span class="n">lhs</span>
 
@@ -128,11 +128,10 @@ article</a>.</p>
 
 <span class="k">def</span> <span class="nf">test_multiply_different_numbers</span><span class="p">():</span>
     <span class="k">assert</span> <span class="n">mul</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">15</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Just like in that article, the implementation of <code>mul</code> is broken.</p>
-<div class="highlight"><pre><span></span>$ pytest -v --tb<span class="o">=</span><span class="nv">no</span>
+<div class="highlight"><pre><span></span><code>$ pytest -v --tb<span class="o">=</span><span class="nv">no</span>
 <span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
 platform linux -- Python <span class="m">3</span>.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
@@ -146,15 +145,14 @@ test_mul.py::test_multiply_different_numbers FAILED                <span class="
 <span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
 FAILED test_mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
 FAILED test_mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
-<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed in <span class="m">0</span>.05s <span class="o">=======================</span>
-</pre></div>
-
+<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.05s <span class="o">=======================</span>
+</code></pre></div>
 
 <p>Note how 2 tests failed. <code>pytest</code> caches the failed tests from the last run,
 which enables us to rerun them with the <code>--lf|--last-failed</code> flag. So let's do
 that, and show some more traceback information while we're at it. Note that
 only the failing tests are executed.</p>
-<div class="highlight"><pre><span></span>$ pytest -v --lf --tb<span class="o">=</span><span class="nv">short</span>
+<div class="highlight"><pre><span></span><code>$ pytest -v --lf --tb<span class="o">=</span><span class="nv">short</span>
 <span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
 platform linux -- Python <span class="m">3</span>.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 cachedir: .pytest_cache
@@ -167,13 +165,13 @@ test_mul.py::test_multiply_different_numbers FAILED                <span class="
 
 <span class="o">================================</span> <span class="nv">FAILURES</span> <span class="o">================================</span>
 _________________________ test_multiply_by_zero __________________________
-test_mul.py:8: in test_multiply_by_zero
+test_mul.py:8: <span class="k">in</span> test_multiply_by_zero
     assert mul<span class="o">(</span><span class="m">1</span>, <span class="m">0</span><span class="o">)</span> <span class="o">==</span> <span class="m">0</span>
 E   assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
 E     +1
 E     -0
 ____________________ test_multiply_different_numbers _____________________
-test_mul.py:11: in test_multiply_different_numbers
+test_mul.py:11: <span class="k">in</span> test_multiply_different_numbers
     assert mul<span class="o">(</span><span class="m">5</span>, <span class="m">3</span><span class="o">)</span> <span class="o">==</span> <span class="m">15</span>
 E   assert <span class="nv">25</span> <span class="o">==</span> <span class="m">15</span>
 E     +25
@@ -181,9 +179,8 @@ E     -15
 <span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
 FAILED test_mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
 FAILED test_mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
-<span class="o">===========================</span> <span class="m">2</span> failed in <span class="m">0</span>.12s <span class="o">============================</span>
-</pre></div>
-
+<span class="o">===========================</span> <span class="m">2</span> failed <span class="k">in</span> <span class="m">0</span>.12s <span class="o">============================</span>
+</code></pre></div>
 
 <p>My primary use case for <code>--lf</code> is for sorting out bugs. Every time a test
 passes, it is removed from the last-failed cache, and thus does not run the next
@@ -203,7 +200,7 @@ cache is located in the <code>.pytest_cache</code> directory of the current work
 directory. There are a few flags to interact with said cache. First, you can
 execute <code>pytest</code> with the <code>--cache-show</code> flag to show the current contents of
 the cache.</p>
-<div class="highlight"><pre><span></span>pytest --cache-show
+<div class="highlight"><pre><span></span><code>pytest --cache-show
 <span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
 platform linux -- Python <span class="m">3</span>.8.5, pytest-6.1.0, py-1.9.0, pluggy-0.13.1
 rootdir: /home/slarse/python
@@ -219,9 +216,8 @@ cache/nodeids contains:
 cache/stepwise contains:
   <span class="o">[]</span>
 
-<span class="o">=========================</span> no tests ran in <span class="m">0</span>.00s <span class="o">==========================</span>
-</pre></div>
-
+<span class="o">=========================</span> no tests ran <span class="k">in</span> <span class="m">0</span>.00s <span class="o">==========================</span>
+</code></pre></div>
 
 <p>Here, we can for example see the contents of the last-failed cache
 (<code>cache/lastfailed</code>), and the tests currently known by <code>pytest</code>
@@ -285,70 +281,28 @@ cleared.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -357,16 +311,10 @@ cleared.</p>
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -376,15 +324,39 @@ cleared.</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -393,22 +365,22 @@ cleared.</p>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -418,15 +390,45 @@ cleared.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

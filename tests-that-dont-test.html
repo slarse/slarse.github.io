@@ -140,12 +140,11 @@ but most problems and solutions are easily transferable to many other languages
 and testing frameworks (e.g. JUnit in Java). Here is the test header and
 docstring. Note the inclusion of the <code>random_list</code> fixture as a parameter. In the test,
 it can simply be used as a list.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_sort_randomly_ordered_list</span><span class="p">(</span><span class="n">random_list</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_sort_randomly_ordered_list</span><span class="p">(</span><span class="n">random_list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Sort a randomly ordered list and ensure that the result for</span>
 <span class="sd">    ``mysort`` is the same as the built-in ``list.sort``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>For brevity, the docstring will be excluded from now on.  Let's get to it the,
 shall we?</p>
@@ -156,7 +155,7 @@ oracle. That is, using some other implementation of the function under test to
 compute the expected result. What I've seen happen many times is that the
 student by mistake uses the other implementation for both the expected value,
 and the actual value. Here's an example.</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_sort_randomly_ordered_list</span><span class="p">(</span><span class="n">random_list</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_sort_randomly_ordered_list</span><span class="p">(</span><span class="n">random_list</span><span class="p">):</span>
     <span class="c1"># calculate test oracle</span>
     <span class="n">expected</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">random_list</span><span class="p">)</span> <span class="c1"># note the copy for later!</span>
     <span class="n">expected</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -166,8 +165,7 @@ and the actual value. Here's an example.</p>
     <span class="n">random_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
     <span class="k">assert</span> <span class="n">random_list</span> <span class="o">==</span> <span class="n">expected</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Obviously, this test will always pass as <code>list.sort</code> is used for both
 computations. This is a very common mistake, and if made once in a test suite, I
@@ -180,7 +178,7 @@ the redundant function and the function under test have similar names and usage
 failing to make a proper copy of a data structure. If you have a look at the
 previous example, there is comment telling you to note the copy. Compare that
 with this example:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_sort_randomly_ordered_list</span><span class="p">(</span><span class="n">random_list</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">test_sort_randomly_ordered_list</span><span class="p">(</span><span class="n">random_list</span><span class="p">):</span>
     <span class="c1"># calculate test oracle</span>
     <span class="n">expected</span> <span class="o">=</span> <span class="n">random_list</span> <span class="c1"># this is not a copy!</span>
     <span class="n">expected</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -189,8 +187,7 @@ with this example:</p>
     <span class="n">mysort</span><span class="p">(</span><span class="n">random_list</span><span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">random_list</span> <span class="o">==</span> <span class="n">expected</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Just assigning <code>expected = random_list</code> will not create a copy of <code>random_list</code>,
 but copy the reference to the list. Therefore, both <code>expected</code> and <code>random_list</code>
@@ -207,7 +204,7 @@ example would be that the supposedly randomly ordered list is actually
 comprised of duplicates of a single element. Let's have a look at an incorrect
 implementation of the <code>random_list</code> fixture. Note that <code>_</code> is used as a
 variable name when we don't care about the value of it.</p>
-<div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">random_list</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Generate a randomly ordered list with 100 elements.&quot;&quot;&quot;</span>
     <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
@@ -215,8 +212,7 @@ variable name when we don't care about the value of it.</p>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">5234</span><span class="p">)</span> <span class="c1"># seed to make list generation deterministic</span>
         <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">lst</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>It is good practice to <em>seed</em> the pseudo-random generator (PRG) when testing to
 make tests reproducible. A PRG is actually a deterministic function that, given
@@ -350,70 +346,28 @@ you take!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
+        bash
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-3">
       <a href="https://slar.se/tag/java.html">
           <i class="fas fa-tag"></i>
         java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
       </a>
     </span>
     <span class="tag-3">
@@ -422,16 +376,10 @@ you take!</p>
         data structures
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        intellij
+        javascript
       </a>
     </span>
     <span class="tag-4">
@@ -441,15 +389,39 @@ you take!</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-2">
       <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
         exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
       </a>
     </span>
     <span class="tag-1">
@@ -458,22 +430,22 @@ you take!</p>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        bash
+        gradle
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        tornadofx
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        totw
+        css
       </a>
     </span>
     <span class="tag-4">
@@ -483,15 +455,45 @@ you take!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        enums
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/kuizzy.html">
           <i class="fas fa-tag"></i>
-        testing
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/generics.html">
+          <i class="fas fa-tag"></i>
+        generics
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
 </p>

@@ -6,6 +6,9 @@ projects. This is where you find link to such things.
 ### Publications
 
 * [Automate, Alter & Extend Git Repository Workflow with RepoBee (2021)](https://doi.org/10.1145/3408877.3439540)
+    - A 20-minute demo held at [SIGCSE 2021](https://sigcse2021.sigcse.org/schedule/demos/)
+    - A summarizing video of the demo [is available here](https://repobee.org/media/repobee-demo.mp4)
+* [Double-blind Peer Review using RepoBee for Git-based Assignments (2021)](https://dl.acm.org/doi/abs/10.1145/3456565.3460031)
     - A short conference paper presented at ITiCSE 2021
     - Won best presentation in the [Tips, Techniques and Courseware
       category](https://iticse.acm.org/best-paper-award/)

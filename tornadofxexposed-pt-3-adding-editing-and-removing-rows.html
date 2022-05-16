@@ -137,12 +137,12 @@ and edit its contents. What this article will address is how to:</p>
 <h2>Deleting rows</h2>
 <p>Deleting a row is pretty easy. First, we'll add the desired functionality to
 the controller.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">fun</span> <span class="nf">deleteCategory</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">CategoryModel</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">transaction</span> <span class="p">{</span>
-        <span class="n">model</span><span class="p">.</span><span class="na">item</span><span class="p">.</span><span class="na">delete</span><span class="p">()</span>
-    <span class="p">}</span>
-    <span class="n">categories</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">deleteCategory</span><span class="p">(</span><span class="n">model</span><span class="p">:</span><span class="w"> </span><span class="n">CategoryModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">transaction</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="na">item</span><span class="p">.</span><span class="na">delete</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">categories</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Note that <code>model.item</code> returns the backing <code>Category</code> object, on which we
@@ -153,44 +153,44 @@ bold assumption that you probably should not make in a real application. Now,
 let's put this new functionality to work: we need to add a button to the view
 that calls the delete function on the currently selected row. We will slightly
 alter the layout to make this happen. We change this:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">override</span> <span class="kd">val</span> <span class="nv">root</span> <span class="o">=</span> <span class="n">borderpane</span> <span class="p">{</span>
-    <span class="n">categories</span> <span class="o">=</span> <span class="n">dbController</span><span class="p">.</span><span class="na">categories</span>
+<div class="highlight"><pre><span></span><code><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">borderpane</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbController</span><span class="p">.</span><span class="na">categories</span><span class="w"></span>
 
-    <span class="n">center</span> <span class="o">=</span> <span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="n">categoryTable</span> <span class="o">=</span> <span class="n">editModel</span>
-        <span class="n">items</span> <span class="o">=</span> <span class="n">categories</span>
+<span class="w">    </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">categoryTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">editModel</span><span class="w"></span>
+<span class="w">        </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">categories</span><span class="w"></span>
 
-        <span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span> <span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span> <span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">        </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>to this:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">override</span> <span class="kd">val</span> <span class="nv">root</span> <span class="o">=</span> <span class="n">borderpane</span> <span class="p">{</span>
-    <span class="n">categories</span> <span class="o">=</span> <span class="n">dbController</span><span class="p">.</span><span class="na">categories</span>
+<div class="highlight"><pre><span></span><code><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">borderpane</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbController</span><span class="p">.</span><span class="na">categories</span><span class="w"></span>
 
-    <span class="n">center</span> <span class="o">=</span> <span class="n">vbox</span> <span class="p">{</span>
-        <span class="n">buttonbar</span> <span class="p">{</span>
-            <span class="n">button</span><span class="p">(</span><span class="s">&quot;DELETE SELECTED&quot;</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">action</span> <span class="p">{</span>
-                    <span class="kd">val</span> <span class="nv">model</span> <span class="o">=</span> <span class="n">categoryTable</span><span class="p">.</span><span class="na">tableView</span><span class="p">.</span><span class="na">selectedItem</span>
-                    <span class="k">when</span> <span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="kc">null</span> <span class="o">-&gt;</span> <span class="k">return</span><span class="nd">@action</span>
-                        <span class="k">else</span> <span class="o">-&gt;</span> <span class="n">dbController</span><span class="p">.</span><span class="na">deleteCategory</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span> <span class="p">{</span>
-            <span class="n">categoryTable</span> <span class="o">=</span> <span class="n">editModel</span>
-            <span class="n">items</span> <span class="o">=</span> <span class="n">categories</span>
+<span class="w">    </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vbox</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">buttonbar</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">button</span><span class="p">(</span><span class="s">&quot;DELETE SELECTED&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">action</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="kd">val</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">categoryTable</span><span class="p">.</span><span class="na">tableView</span><span class="p">.</span><span class="na">selectedItem</span><span class="w"></span>
+<span class="w">                    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="kc">null</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">return</span><span class="nd">@action</span><span class="w"></span>
+<span class="w">                        </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">dbController</span><span class="p">.</span><span class="na">deleteCategory</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">categoryTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">editModel</span><span class="w"></span>
+<span class="w">            </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">categories</span><span class="w"></span>
 
-            <span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span> <span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">)</span>
-            <span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span> <span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">            </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>We use a <code>buttonbar</code> as we will be adding more buttons later on. The code should
@@ -205,57 +205,57 @@ Now that we can delete rows, let's turn our attention to adding new rows.</p>
 <p>For this, we're going to add a small form to the right of the table which will
 allow us to enter new rows. As before, we'll start with the controller, adding
 the following method to it:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">fun</span> <span class="nf">addCategory</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">transaction</span> <span class="p">{</span>
-        <span class="kd">val</span> <span class="nv">category</span> <span class="o">=</span> <span class="n">Category</span><span class="p">.</span><span class="na">new</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span>
-        <span class="p">}</span>
-        <span class="n">categories</span><span class="p">.</span><span class="na">add</span><span class="p">(</span>
-            <span class="n">CategoryModel</span><span class="p">().</span><span class="na">apply</span> <span class="p">{</span>
-                <span class="n">item</span> <span class="o">=</span> <span class="n">category</span>
-            <span class="p">})</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">addCategory</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">transaction</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Category</span><span class="p">.</span><span class="na">new</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">description</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">categories</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="n">CategoryModel</span><span class="p">().</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">category</span><span class="w"></span>
+<span class="w">            </span><span class="p">})</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Here, we first create a new <code>Category</code>, and then add it to the <code>categories</code>
 list (wrapped in a <code>CategoryModel</code>). Now, we need to add the form to the view
 so we can submit the values for <code>name</code> and <code>description</code>. First, we need to add
 two new properties to the <code>CategoryEditor</code> view:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nv">nameField</span><span class="p">:</span> <span class="n">TextField</span> <span class="k">by</span> <span class="n">singleAssign</span><span class="p">()</span>
-<span class="kd">var</span> <span class="nv">descriptionField</span><span class="p">:</span> <span class="n">TextField</span> <span class="k">by</span> <span class="n">singleAssign</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nv">nameField</span><span class="p">:</span><span class="w"> </span><span class="n">TextField</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">singleAssign</span><span class="p">()</span><span class="w"></span>
+<span class="kd">var</span><span class="w"> </span><span class="nv">descriptionField</span><span class="p">:</span><span class="w"> </span><span class="n">TextField</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">singleAssign</span><span class="p">()</span><span class="w"></span>
 </code></pre></div>
 
 <p>We need these to be able to access what we put in the form fields.  We also
 need to import <code>TextField</code></p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nn">javafx.scene.control.TextField</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">javafx.scene.control.TextField</span><span class="w"></span>
 </code></pre></div>
 
 <p>To add the actual form, we put the following <em>after</em> the <code>center</code> element:</p>
-<div class="highlight"><pre><span></span><code><span class="n">right</span> <span class="o">=</span> <span class="n">form</span> <span class="p">{</span>
-    <span class="n">fieldset</span> <span class="p">{</span>
-        <span class="n">field</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">textfield</span> <span class="p">{</span>
-                <span class="n">nameField</span> <span class="o">=</span> <span class="k">this</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">fieldset</span> <span class="p">{</span>
-        <span class="n">field</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">textfield</span> <span class="p">{</span>
-                <span class="n">descriptionField</span> <span class="o">=</span> <span class="k">this</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">button</span><span class="p">(</span><span class="s">&quot;ADD CATEGORY&quot;</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">action</span> <span class="p">{</span>
-            <span class="n">dbController</span><span class="p">.</span><span class="na">addCategory</span><span class="p">(</span><span class="n">nameField</span><span class="p">.</span><span class="na">text</span><span class="p">,</span> <span class="n">descriptionField</span><span class="p">.</span><span class="na">text</span><span class="p">)</span>
-            <span class="n">nameField</span><span class="p">.</span><span class="na">text</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-            <span class="n">descriptionField</span><span class="p">.</span><span class="na">text</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">form</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">fieldset</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">field</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">textfield</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">nameField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">fieldset</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">field</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">textfield</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">descriptionField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">button</span><span class="p">(</span><span class="s">&quot;ADD CATEGORY&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">action</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">dbController</span><span class="p">.</span><span class="na">addCategory</span><span class="p">(</span><span class="n">nameField</span><span class="p">.</span><span class="na">text</span><span class="p">,</span><span class="w"> </span><span class="n">descriptionField</span><span class="p">.</span><span class="na">text</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">nameField</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="n">descriptionField</span><span class="p">.</span><span class="na">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>This will result in a view looking something like this:</p>
@@ -269,28 +269,28 @@ feature to add, namely editing rows.</p>
 <code>TableView</code>: the former allows us to edit rows directly in the table. To allow
 for inline editing, we need to add some stuff to the view itself. Our table
 view currently looks like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="n">categoryTable</span> <span class="o">=</span> <span class="n">editModel</span>
-    <span class="n">items</span> <span class="o">=</span> <span class="n">categories</span>
+<div class="highlight"><pre><span></span><code><span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">categoryTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">editModel</span><span class="w"></span>
+<span class="w">    </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">categories</span><span class="w"></span>
 
-    <span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span> <span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span> <span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>To enable editing, we simply add a call to <code>enableCellEditing()</code>, and call
 <code>makeEditable()</code> on the columns. We'll also add <code>enableDirtyTracking()</code> to
 allow us to see which cells have been edited, but not saved.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="n">categoryTable</span> <span class="o">=</span> <span class="n">editModel</span>
-    <span class="n">items</span> <span class="o">=</span> <span class="n">categories</span>
+<div class="highlight"><pre><span></span><code><span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">categoryTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">editModel</span><span class="w"></span>
+<span class="w">    </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">categories</span><span class="w"></span>
 
-    <span class="n">enableCellEditing</span><span class="p">()</span>
-    <span class="n">enableDirtyTracking</span><span class="p">()</span>
+<span class="w">    </span><span class="n">enableCellEditing</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">enableDirtyTracking</span><span class="p">()</span><span class="w"></span>
 
-    <span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span> <span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">).</span><span class="na">makeEditable</span><span class="p">()</span>
-    <span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span> <span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">).</span><span class="na">makeEditable</span><span class="p">()</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">).</span><span class="na">makeEditable</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">).</span><span class="na">makeEditable</span><span class="p">()</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Now, we can edit cells by clicking them:</p>
@@ -303,14 +303,14 @@ be back to what it was before we edited the cell. The reason is that the change
 was never committed to the database, it was just stored in the model. Thus,
 what we need now is to commit any dirty rows to the database. As always, we
 start with adding the functionality we need from the controller.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">fun</span> <span class="nf">commitDirty</span><span class="p">(</span><span class="n">modelDirtyMappings</span><span class="p">:</span> <span class="n">Sequence</span><span class="o">&lt;</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="p">,</span> <span class="n">TableColumnDirtyState</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;&gt;&gt;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">transaction</span> <span class="p">{</span>
-        <span class="n">modelDirtyMappings</span><span class="p">.</span><span class="na">filter</span> <span class="p">{</span> <span class="nb">it</span><span class="p">.</span><span class="na">value</span><span class="p">.</span><span class="na">isDirty</span> <span class="p">}.</span><span class="na">forEach</span> <span class="p">{</span>
-            <span class="nb">it</span><span class="p">.</span><span class="na">key</span><span class="p">.</span><span class="na">commit</span><span class="p">()</span>     <span class="c1">// commit value to database</span>
-            <span class="nb">it</span><span class="p">.</span><span class="na">value</span><span class="p">.</span><span class="na">commit</span><span class="p">()</span>   <span class="c1">// clear dirty state</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">commitDirty</span><span class="p">(</span><span class="n">modelDirtyMappings</span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="o">&lt;</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="p">,</span><span class="w"> </span><span class="n">TableColumnDirtyState</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;&gt;&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">transaction</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">modelDirtyMappings</span><span class="p">.</span><span class="na">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">value</span><span class="p">.</span><span class="na">isDirty</span><span class="w"> </span><span class="p">}.</span><span class="na">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nb">it</span><span class="p">.</span><span class="na">key</span><span class="p">.</span><span class="na">commit</span><span class="p">()</span><span class="w">     </span><span class="c1">// commit value to database</span><span class="w"></span>
+<span class="w">            </span><span class="nb">it</span><span class="p">.</span><span class="na">value</span><span class="p">.</span><span class="na">commit</span><span class="p">()</span><span class="w">   </span><span class="c1">// clear dirty state</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>This function iterates over a sequence of map entries that map a model (key) to
@@ -318,31 +318,31 @@ a dirty state (value). We'll soon see that we can get such a map from the table
 view. Note that committing the key <em>must</em> be done in a transaction, as it will
 write to the database. The type is a bit of a mouthful, though, so let's define
 a type alias for it.</p>
-<div class="highlight"><pre><span></span><code><span class="k">typealias</span> <span class="n">ModelToDirtyState</span> <span class="o">=</span> <span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="p">,</span> <span class="n">TableColumnDirtyState</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="k">typealias</span><span class="w"> </span><span class="n">ModelToDirtyState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="p">,</span><span class="w"> </span><span class="n">TableColumnDirtyState</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;&gt;</span><span class="w"></span>
 </code></pre></div>
 
 <p>Note that the <code>typealias</code> must be a top level declaration (i.e. you can't put
 it in a class or function). And rewrite the header of <code>commitDirty</code> like this:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">fun</span> <span class="nf">commitDirty</span><span class="p">(</span><span class="n">modelDirtyMappings</span><span class="p">:</span> <span class="n">Sequence</span><span class="o">&lt;</span><span class="n">ModelToDirtyState</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">commitDirty</span><span class="p">(</span><span class="n">modelDirtyMappings</span><span class="p">:</span><span class="w"> </span><span class="n">Sequence</span><span class="o">&lt;</span><span class="n">ModelToDirtyState</span><span class="o">&gt;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 <p>Slightly more readable, right? Now, let's put it to use. We'll add a new button
 in the button bar to execute the commit.</p>
-<div class="highlight"><pre><span></span><code><span class="n">button</span><span class="p">(</span><span class="s">&quot;COMMIT&quot;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">action</span> <span class="p">{</span>
-        <span class="n">dbController</span><span class="p">.</span><span class="na">commitDirty</span><span class="p">(</span><span class="n">categoryTable</span><span class="p">.</span><span class="na">items</span><span class="p">.</span><span class="na">asSequence</span><span class="p">())</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">button</span><span class="p">(</span><span class="s">&quot;COMMIT&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">action</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">dbController</span><span class="p">.</span><span class="na">commitDirty</span><span class="p">(</span><span class="n">categoryTable</span><span class="p">.</span><span class="na">items</span><span class="p">.</span><span class="na">asSequence</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Clicking this button when there are dirty cells will allow us to commit these
 to the database. As a finishing touch, we'll add a button to reset (rollback)
 dirty cells to their previous state.</p>
-<div class="highlight"><pre><span></span><code><span class="n">button</span><span class="p">(</span><span class="s">&quot;ROLLBACK&quot;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">action</span> <span class="p">{</span>
-        <span class="n">categoryTable</span><span class="p">.</span><span class="na">rollback</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">button</span><span class="p">(</span><span class="s">&quot;ROLLBACK&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">action</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">categoryTable</span><span class="p">.</span><span class="na">rollback</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Note that this does not require a transaction, as all that happens is that the
@@ -414,16 +414,64 @@ free to use all of these examples as you see fit.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
         testing tips
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        pytest
+        javascript
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
     <span class="tag-4">
@@ -433,87 +481,9 @@ free to use all of these examples as you see fit.</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/linux.html">
-          <i class="fas fa-tag"></i>
-        linux
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/generics.html">
-          <i class="fas fa-tag"></i>
-        generics
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
-          <i class="fas fa-tag"></i>
-        podcast
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
+        pytest
       </a>
     </span>
     <span class="tag-1">
@@ -522,28 +492,10 @@ free to use all of these examples as you see fit.</p>
         bash
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
           <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
+        repobee
       </a>
     </span>
     <span class="tag-2">
@@ -553,9 +505,51 @@ free to use all of these examples as you see fit.</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
         css
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
       </a>
     </span>
     <span class="tag-4">
@@ -565,9 +559,9 @@ free to use all of these examples as you see fit.</p>
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        blog
+        python
       </a>
     </span>
 </p>

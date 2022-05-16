@@ -123,19 +123,19 @@ String&gt; map</code> in the current scope.</p>
 do an article on that later!). The type system can't help with null, however.
 Any variable of reference type can either contain a reference to an object of
 that type, or null. This leads to a whole lot of code that looks like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="n">String</span> <span class="n">valueUpper</span><span class="p">;</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">valueUpper</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="c1">// else do something different with the knowledge that value is null</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">String</span><span class="w"> </span><span class="n">valueUpper</span><span class="p">;</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">valueUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="c1">// else do something different with the knowledge that value is null</span><span class="w"></span>
 </code></pre></div>
 
 <p>While you may argue that null checks are pretty ugly, the real problem is that
 they are not enforced by the type system. The above might just as well have
 been written like this, and the type checker would have been none the wiser:</p>
-<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="n">String</span> <span class="n">valueUpper</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">String</span><span class="w"> </span><span class="n">valueUpper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">();</span><span class="w"></span>
 </code></pre></div>
 
 <p>This program could crash with a <code>NullPointerException</code>. That's not great. But
@@ -157,23 +157,23 @@ but sometimes it just isn't desirable. In the case of <code>Map.get</code>, it's
 about efficiency. If <code>Map.get</code> were to throw an exception when the key was
 missing, you'd essentially have two alternatives. </p>
 <h3>Ask for forgiveness (catch the exception)</h3>
-<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">value</span><span class="p">;</span>
-<span class="k">try</span> <span class="p">{</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">NoSuchElementException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// handle error</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NoSuchElementException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// handle error</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>That's both ugly, and very inefficient if it is often the case that the key is
 missing. Catching an exception involves a whole lot of work for the JVM, so you
 really do not want to do this for an operation that you often perform.</p>
 <h3>Look before you leap</h3>
-<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">value</span><span class="p">;</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="p">{</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">// else handle missing keys</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="c1">// else handle missing keys</span><span class="w"></span>
 </code></pre></div>
 
 <p>This is not too ugly, but it is inefficient as the map has to be traversed twice:
@@ -203,8 +203,8 @@ hypothetical. We'll see toward the end of the article how one can wrap
 <h2>Retrieve the value without checking if it is present</h2>
 <p>If you're certain that the value will be present, you may simply retrieve it
 immediately.</p>
-<div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">getOptional</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="n">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">opt</span><span class="p">.</span><span class="na">get</span><span class="p">();</span> <span class="c1">// `value` will either be non-null, or we crash</span>
+<div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">getOptional</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w"> </span><span class="c1">// `value` will either be non-null, or we crash</span><span class="w"></span>
 </code></pre></div>
 
 <p>This may at first glance just look like more work than previously, two <code>get</code>
@@ -219,11 +219,11 @@ around, the is unlikely to happen far from where the <code>Optional</code> was p
 <h2>Check if the object is present</h2>
 <p>If you're uncertain whether the value will be present, you may simply check for
 it:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">getOptional</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="n">String</span> <span class="n">value</span><span class="p">;</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span> <span class="p">{</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">opt</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">getOptional</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">opt</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>This is very much like the null check we had before, but it's supported by the
@@ -231,7 +231,7 @@ type system.</p>
 <h2>Use a fallback value</h2>
 <p>Often when we don't want the code to crash, we have a fallback value. <code>Optional</code>
 has a method to handle that.</p>
-<div class="highlight"><pre><span></span><code><span class="n">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">getOptional</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="s">&quot;Nothing here :)&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">getOptional</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="s">&quot;Nothing here :)&quot;</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
 
 <p>If the value is present, it is returned. Otherwise, we get <code>"Nothing here :)"</code>.
@@ -272,13 +272,13 @@ like this.</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * @param n An Integer value.</span>
 <span class="cm"> * @return n iff n &gt;= 0, otherwise null</span>
-<span class="cm"> */</span>
-<span class="kd">public</span> <span class="n">Integer</span> <span class="nf">id</span><span class="p">(</span><span class="n">Integer</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="nf">id</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>This comes with all of the previously discussed problems associated with null
@@ -286,13 +286,13 @@ return values. Here's the equivalent method using <code>Optional</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * @param n An Integer value.</span>
 <span class="cm"> * @return An Optional with n iff n &gt;= 0, otherwise an empty Optional.</span>
-<span class="cm"> */</span>
-<span class="kd">public</span> <span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">id</span><span class="p">(</span><span class="n">Integer</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">id</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Notice how both the documentation, and the return value itself, clearly states
@@ -302,10 +302,10 @@ know what <code>Optional</code> is, that is).</p>
 <p>The <code>ofNullable</code> method is great for wrapping existing methods that may return
 null. For example, assuming that we have the <code>Map&lt;Integer, String&gt; map</code> field
 from earlier, we can wrap its <code>get</code> method in our own <code>getOptional</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="nf">getOptional</span><span class="p">(</span><span class="n">Integer</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">key</span><span class="p">);</span> <span class="c1">// might be null!</span>
-    <span class="k">return</span> <span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="nf">getOptional</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">key</span><span class="p">);</span><span class="w"> </span><span class="c1">// might be null!</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>This lets us easily create APIs that contain two versions of, for example, a
@@ -376,16 +376,64 @@ it's a surprisingly simple class that provides all of this functionality!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
         testing tips
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        pytest
+        javascript
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
     <span class="tag-4">
@@ -395,87 +443,9 @@ it's a surprisingly simple class that provides all of this functionality!</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/linux.html">
-          <i class="fas fa-tag"></i>
-        linux
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/generics.html">
-          <i class="fas fa-tag"></i>
-        generics
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
-          <i class="fas fa-tag"></i>
-        podcast
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
+        pytest
       </a>
     </span>
     <span class="tag-1">
@@ -484,28 +454,10 @@ it's a surprisingly simple class that provides all of this functionality!</p>
         bash
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
           <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
+        repobee
       </a>
     </span>
     <span class="tag-2">
@@ -515,9 +467,51 @@ it's a surprisingly simple class that provides all of this functionality!</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
         css
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
       </a>
     </span>
     <span class="tag-4">
@@ -527,9 +521,9 @@ it's a surprisingly simple class that provides all of this functionality!</p>
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        blog
+        python
       </a>
     </span>
 </p>

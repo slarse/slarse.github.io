@@ -128,11 +128,11 @@ you sift through that article before continuing with this one.</p>
 start working on generics, I want us to complete this function. It will make
 some of the decisions about generics much more apparent. Anyway, here's
 <code>contains</code> as we wrote it in part 1.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span>
-<span class="kd">fun</span> <span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kt">Int</span><span class="p">):</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">is</span> <span class="n">Empty</span> <span class="o">-&gt;</span> <span class="kc">false</span>
-    <span class="k">is</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="n">data</span> <span class="o">==</span> <span class="n">node</span><span class="p">.</span><span class="na">data</span> <span class="c1">// note implicit cast</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span><span class="w"></span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="c1">// note implicit cast</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>It's not a particularly useful function, as it only checks the current node.
@@ -149,58 +149,58 @@ specific, but it is <em>highly</em> recommended that ordering is consistent with
 <code>equals</code>. We will assume that this is the case.</li>
 </ol>
 <p>As we have three distinct cases, we can again use a <code>when</code> expression.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in the tree rooted in node</span>
-<span class="kd">fun</span> <span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="kt">Int</span><span class="p">):</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">is</span> <span class="n">Empty</span> <span class="o">-&gt;</span> <span class="kc">false</span>
-    <span class="k">is</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="k">when</span> <span class="p">{</span> <span class="c1">// no-argument when so we can do arbitrary comparisons</span>
-        <span class="n">data</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="na">data</span> <span class="o">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">&gt;</span> <span class="n">node</span><span class="p">.</span><span class="na">data</span> <span class="o">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="k">else</span> <span class="o">-&gt;</span> <span class="kc">true</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in the tree rooted in node</span><span class="w"></span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// no-argument when so we can do arbitrary comparisons</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Note that the nested <code>when</code> expression has no argument in parentheses, allowing
 us to perform more complex operations in the matchings. And that's it for the
 <code>contains</code> operation. It's really quite elegant. We can quickly ammend the
 <code>main</code> function to try it out:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// create the tree</span>
-    <span class="c1">//          6</span>
-    <span class="c1">//         / \</span>
-    <span class="c1">//        3   9</span>
-    <span class="c1">//         \</span>
-    <span class="c1">//          4</span>
-    <span class="kd">val</span> <span class="nv">root</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="m">6</span><span class="p">,</span>
-            <span class="n">left</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="m">3</span><span class="p">,</span>
-                    <span class="n">right</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="m">4</span><span class="p">)),</span>
-            <span class="n">right</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="m">9</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// create the tree</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//          6</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//         / \</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//        3   9</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//         \</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//          4</span><span class="w"></span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="m">6</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="m">4</span><span class="p">)),</span><span class="w"></span>
+<span class="w">            </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="m">9</span><span class="p">))</span><span class="w"></span>
 
-    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Search for elements in the tree&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">data</span> <span class="k">in</span> <span class="n">listOf</span><span class="p">(</span><span class="m">6</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">9</span><span class="p">))</span> <span class="p">{</span>
-        <span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
-    <span class="p">}</span>
-    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Search for elements not in the tree&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">data</span> <span class="k">in</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="o">-</span><span class="m">12</span><span class="p">))</span> <span class="p">{</span>
-        <span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Search for elements in the tree&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">9</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Search for elements not in the tree&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="m">12</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>With that out of the way, let's dive into making the whole thing generic!</p>
 <h2>Getting generic</h2>
 <p>Now, how do we make the node classes generic? A first attempt might be to just
 change the <code>Node</code> class, and do something like this:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">data</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kd">val</span> <span class="nv">data</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="kd">var</span> <span class="nv">left</span><span class="p">:</span> <span class="n">ANode</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">,</span> <span class="kd">var</span> <span class="nv">right</span><span class="p">:</span> <span class="n">ANode</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">)</span> <span class="p">:</span> <span class="n">ANode</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span><span class="w"></span>
 
-<span class="kd">fun</span> <span class="o">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="n">Comparable</span><span class="err">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="err">&gt; </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">is</span> <span class="n">Empty</span> <span class="o">-&gt;</span> <span class="kc">false</span>
-    <span class="k">is</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">-&gt;</span> <span class="k">when</span> <span class="p">{</span>
-        <span class="n">data</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="na">data</span> <span class="o">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">&gt;</span> <span class="n">node</span><span class="p">.</span><span class="na">data</span> <span class="o">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="k">else</span> <span class="o">-&gt;</span> <span class="kc">true</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="kd">fun</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Comparable</span><span class="err">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="err">&gt; </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>This is a reasonable attempt. Before we dive into the problems, let's analyze
@@ -226,10 +226,10 @@ parameter <code>T</code> higher up in the inheritance chain. </p>
 <p>Since <code>ANode</code> is the only class higher up in the inheritance chain (apart from
 <code>Any</code>), this is where we need to put our type parameter. For <code>ANode</code> and <code>Node</code>,
 it is straightforward.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">sealed</span> <span class="kd">class</span> <span class="nc">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"></span>
 
-<span class="kd">data</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kd">val</span> <span class="nv">data</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="kd">var</span> <span class="nv">left</span><span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">,</span> <span class="kd">var</span> <span class="nv">right</span><span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">)</span> <span class="p">:</span> 
-        <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span>
+<span class="w">        </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
 </code></pre></div>
 
 <p>Note that <code>Node&lt;T&gt;</code> is inheriting from <code>ANode&lt;T&gt;</code>. We cannot (and wouldn't want
@@ -239,7 +239,7 @@ parameter with a concrete type, what do we put there for <code>Empty</code>? In 
 <code>Node&lt;T&gt;</code>, we simply inherit from <code>ANode&lt;T&gt;</code>, because <code>T</code> is declared as a
 parameter to <code>Node&lt;T&gt;</code> and is therefore concrete for for <code>ANode</code>. We can't
 however just do something like</p>
-<div class="highlight"><pre><span></span><code><span class="kd">object</span> <span class="nc">Empty</span> <span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">object</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
 </code></pre></div>
 
 <p>because <code>T</code> is not declared in that scope. We also can't give <code>Empty</code> a type
@@ -248,7 +248,7 @@ don't work with singletons (it wouldn't make much sense, if you stop to think
 about it for a while). What we actually want to put as the type parameter, is
 nothing. Literally. We wan't <code>Nothing</code>, a concrete type in Kotlin which is a
 subtype of every non-nullable type. </p>
-<div class="highlight"><pre><span></span><code><span class="kd">object</span> <span class="nc">Empty</span> <span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">Nothing</span><span class="o">&gt;</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">object</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">Nothing</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
 </code></pre></div>
 
 <p>Note that we don't want to put <code>Any</code> (which is the supertype of every
@@ -273,26 +273,26 @@ confusing (I sure did the first time I read about it), you can read more about
 variance in the
 <a href="https://kotlinlang.org/docs/reference/generics.html">Kotlin docs on generics</a>.
 Here is what the working class hierarchy looks like:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">sealed</span> <span class="kd">class</span> <span class="nc">ANode</span><span class="o">&lt;</span><span class="k">out</span> <span class="n">T</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ANode</span><span class="o">&lt;</span><span class="k">out</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"></span>
 
-<span class="kd">object</span> <span class="nc">Empty</span> <span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">Nothing</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="kd">object</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">Nothing</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
 
-<span class="kd">data</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span>
-        <span class="kd">val</span> <span class="nv">data</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>
-        <span class="kd">var</span> <span class="nv">left</span><span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">,</span>
-            <span class="kd">var</span> <span class="nv">right</span><span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">)</span> <span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
 </code></pre></div>
 
 <p><code>contains</code> now looks like this:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span>
-<span class="kd">fun</span> <span class="o">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="n">Comparable</span><span class="err">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="err">&gt; </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">is</span> <span class="n">Empty</span> <span class="o">-&gt;</span> <span class="kc">false</span>
-    <span class="k">is</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">-&gt;</span> <span class="k">when</span> <span class="p">{</span>
-        <span class="n">data</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="na">data</span> <span class="o">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">&gt;</span> <span class="n">node</span><span class="p">.</span><span class="na">data</span> <span class="o">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="k">else</span> <span class="o">-&gt;</span> <span class="kc">true</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span><span class="w"></span>
+<span class="kd">fun</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Comparable</span><span class="err">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="err">&gt; </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Now, you may be asking yourself why in the world we can do the <code>is Node&lt;T&gt;</code>
@@ -305,46 +305,46 @@ no other possibilities. As the compiler knows this, we can in fact skip the
 can move on to implement the <code>Tree</code> class in part 3!</p>
 <h2>Final code listing</h2>
 <p>This is the final state of the code that we'll be using for part 3.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">sealed</span> <span class="kd">class</span> <span class="nc">ANode</span><span class="o">&lt;</span><span class="k">out</span> <span class="n">T</span><span class="o">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ANode</span><span class="o">&lt;</span><span class="k">out</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"></span>
 
-<span class="kd">object</span> <span class="nc">Empty</span> <span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">Nothing</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="kd">object</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">Nothing</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
 
-<span class="kd">data</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span>
-        <span class="kd">val</span> <span class="nv">data</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>
-        <span class="kd">var</span> <span class="nv">left</span><span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">,</span>
-        <span class="kd">var</span> <span class="nv">right</span><span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">Empty</span><span class="p">)</span> <span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span><span class="w"></span>
 
-<span class="c1">// check if data is contained in node</span>
-<span class="kd">fun</span> <span class="o">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="n">Comparable</span><span class="err">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="err">&gt; </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">is</span> <span class="n">Empty</span> <span class="o">-&gt;</span> <span class="kc">false</span>
-    <span class="k">is</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">-&gt;</span> <span class="k">when</span> <span class="p">{</span>
-        <span class="n">data</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="na">data</span> <span class="o">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">&gt;</span> <span class="n">node</span><span class="p">.</span><span class="na">data</span> <span class="o">-&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-        <span class="k">else</span> <span class="o">-&gt;</span> <span class="kc">true</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="c1">// check if data is contained in node</span><span class="w"></span>
+<span class="kd">fun</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Comparable</span><span class="err">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="err">&gt; </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">data</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kd">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// create the tree</span>
-    <span class="c1">//          6</span>
-    <span class="c1">//         / \</span>
-    <span class="c1">//        3   9</span>
-    <span class="c1">//         \</span>
-    <span class="c1">//          4</span>
-    <span class="kd">val</span> <span class="nv">root</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="m">6</span><span class="p">,</span>
-            <span class="n">left</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="m">3</span><span class="p">,</span>
-                    <span class="n">right</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="m">4</span><span class="p">)),</span>
-            <span class="n">right</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="m">9</span><span class="p">))</span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// create the tree</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//          6</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//         / \</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//        3   9</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//         \</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//          4</span><span class="w"></span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="m">6</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="m">4</span><span class="p">)),</span><span class="w"></span>
+<span class="w">            </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="m">9</span><span class="p">))</span><span class="w"></span>
 
-    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Search for elements in the tree&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">data</span> <span class="k">in</span> <span class="n">listOf</span><span class="p">(</span><span class="m">6</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">9</span><span class="p">))</span> <span class="p">{</span>
-        <span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
-    <span class="p">}</span>
-    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Search for elements not in the tree&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">data</span> <span class="k">in</span> <span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="o">-</span><span class="m">12</span><span class="p">))</span> <span class="p">{</span>
-        <span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Search for elements in the tree&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">9</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Search for elements not in the tree&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="m">12</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
   </div>
   
@@ -390,16 +390,64 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
         testing tips
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        pytest
+        javascript
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
     <span class="tag-4">
@@ -409,87 +457,9 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/linux.html">
-          <i class="fas fa-tag"></i>
-        linux
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/generics.html">
-          <i class="fas fa-tag"></i>
-        generics
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
-          <i class="fas fa-tag"></i>
-        podcast
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
+        pytest
       </a>
     </span>
     <span class="tag-1">
@@ -498,28 +468,10 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
         bash
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
           <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
+        repobee
       </a>
     </span>
     <span class="tag-2">
@@ -529,9 +481,51 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
         css
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
       </a>
     </span>
     <span class="tag-4">
@@ -541,9 +535,9 @@ can move on to implement the <code>Tree</code> class in part 3!</p>
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        blog
+        python
       </a>
     </span>
 </p>

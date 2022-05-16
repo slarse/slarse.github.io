@@ -175,9 +175,9 @@ and <code>collapse</code>. The basic idea is this:</p>
 
 <p>For the CSS, fulfilling point 1 above (<code>collapsible</code> hidden by default) is
 simple:</p>
-<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
-    <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">collapsible</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>This will simply not display the element.  But how do we fulfill the second
@@ -192,9 +192,9 @@ it is immediately preceded by some other element. For example, the selector <cod
 
 <p>So, to show our <code>collapsible</code> when it is directly preceded by a
 <code>collapse-trigger</code> AND <code>active</code> element, we do this:</p>
-<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span> <span class="o">+</span> <span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
-    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">.</span><span class="nc">collapsible</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>We display it as a <code>block</code> here, but one could use other display modes as well,
@@ -215,14 +215,14 @@ there is no way to change the class of an element with only CSS. For every
 <code>collapse-trigger</code> in the page, we need to attach an event listener that
 toggles the <code>active</code> class every time the element is clicked. It can be done
 like this:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">colTriggers</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colTrig</span> <span class="k">of</span> <span class="nx">colTriggers</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span>  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">attachCollapseTriggers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">colTriggers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">colTrig</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">colTriggers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w">  </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Essentially, we use the <code>getElementsByClassName</code> DOM method to find all
@@ -232,16 +232,16 @@ elements, and add an event listener to it. The first argument to
 argument is a callback function, for which we provide an anonymous function. If
 you have a hard time wrapping your head around anonymous functions, this will
 accomplish the same thing:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">collapseTrigger</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">collapseTrigger</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">colTriggers</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colTrig</span> <span class="k">of</span> <span class="nx">colTriggers</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">collapseTrigger</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">attachCollapseTriggers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">colTriggers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">colTrig</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">colTriggers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">collapseTrigger</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>When the element is clicked, the <code>collapseTrigger</code> function is called.  Of
@@ -256,14 +256,14 @@ An up-triangle (▲) is as recognizable a cue that a menu can be collapsed. The
 down-triangle should be appended to any <code>collapse-trigger</code> that is not active,
 while the up-triangle should be appended to any <code>collapse-trigger</code> that also
 has the <code>active</code> class. We can do that simply use the <code>::after</code> pseudo class.</p>
-<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
-    <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▼&quot;</span><span class="p">;</span>
-    <span class="k">float</span><span class="p">:</span> <span class="kc">right</span><span class="p">;</span> <span class="c">/* float to the right-hand side of the content box */</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;▼&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">float</span><span class="p">:</span><span class="w"> </span><span class="kc">right</span><span class="p">;</span><span class="w"> </span><span class="c">/* float to the right-hand side of the content box */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
-    <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▲&quot;</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;▲&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>So, what happens here, exactly? When a <code>collapse-trigger</code> is not <code>active</code>, it
@@ -288,42 +288,42 @@ And that's it, all done!</p>
 </code></pre></div>
 
 <h3>CSS</h3>
-<div class="highlight"><pre><span></span><code><span class="c">/* the sidebar class is just an arbitrary container for this example */</span>
-<span class="p">.</span><span class="nc">sidebar</span> <span class="p">{</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">30</span><span class="kt">%</span><span class="p">;</span>
-  <span class="k">padding</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="kc">black</span> <span class="kc">solid</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="c">/* the sidebar class is just an arbitrary container for this example */</span><span class="w"></span>
+<span class="p">.</span><span class="nc">sidebar</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">em</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="kc">black</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
-    <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▼&quot;</span><span class="p">;</span>
-    <span class="k">float</span><span class="p">:</span> <span class="kc">right</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;▼&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">float</span><span class="p">:</span><span class="w"> </span><span class="kc">right</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
-    <span class="k">content</span><span class="p">:</span> <span class="s2">&quot;▲&quot;</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;▲&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
-    <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">.</span><span class="nc">collapsible</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span> <span class="o">+</span> <span class="p">.</span><span class="nc">collapsible</span> <span class="p">{</span>
-    <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">.</span><span class="nc">collapse-trigger</span><span class="p">.</span><span class="nc">active</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">.</span><span class="nc">collapsible</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <h3>JavaScript</h3>
-<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">attachCollapseTriggers</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">colTriggers</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colTrig</span> <span class="k">of</span> <span class="nx">colTriggers</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span>  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">attachCollapseTriggers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">colTriggers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;collapse-trigger&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">colTrig</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">colTriggers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">colTrig</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span><span class="w">  </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="nx">attachCollapseTriggers</span><span class="p">();</span>
+<span class="nx">attachCollapseTriggers</span><span class="p">();</span><span class="w"></span>
 </code></pre></div>
   </div>
   
@@ -369,16 +369,64 @@ And that's it, all done!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
         testing tips
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        pytest
+        javascript
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
     <span class="tag-4">
@@ -388,87 +436,9 @@ And that's it, all done!</p>
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/linux.html">
-          <i class="fas fa-tag"></i>
-        linux
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/generics.html">
-          <i class="fas fa-tag"></i>
-        generics
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
-          <i class="fas fa-tag"></i>
-        podcast
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
+        pytest
       </a>
     </span>
     <span class="tag-1">
@@ -477,28 +447,10 @@ And that's it, all done!</p>
         bash
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
           <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
+        repobee
       </a>
     </span>
     <span class="tag-2">
@@ -508,9 +460,51 @@ And that's it, all done!</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
         css
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
       </a>
     </span>
     <span class="tag-4">
@@ -520,9 +514,9 @@ And that's it, all done!</p>
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        blog
+        python
       </a>
     </span>
 </p>

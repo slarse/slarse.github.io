@@ -181,32 +181,32 @@ throughout this series:</p>
 </li>
 </ul>
 <p>Here's my <code>build.gradle</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="err">plugi</span><span class="kc">ns</span> <span class="p">{</span>
-    <span class="err">id</span> <span class="err">&#39;org.je</span><span class="kc">t</span><span class="err">brai</span><span class="kc">ns</span><span class="err">.ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">.jvm&#39;</span> <span class="err">versio</span><span class="kc">n</span> <span class="err">&#39;</span><span class="mf">1.3.0</span><span class="err">&#39;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="err">plugi</span><span class="kc">ns</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">id</span><span class="w"> </span><span class="err">&#39;org.je</span><span class="kc">t</span><span class="err">brai</span><span class="kc">ns</span><span class="err">.ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">.jvm&#39;</span><span class="w"> </span><span class="err">versio</span><span class="kc">n</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">1.3.0</span><span class="err">&#39;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="err">group</span> <span class="err">&#39;se.slarse&#39;</span>
-<span class="err">versio</span><span class="kc">n</span> <span class="err">&#39;</span><span class="mf">0.0.1</span><span class="err">&#39;</span>
+<span class="err">group</span><span class="w"> </span><span class="err">&#39;se.slarse&#39;</span><span class="w"></span>
+<span class="err">versio</span><span class="kc">n</span><span class="w"> </span><span class="err">&#39;</span><span class="mf">0.0.1</span><span class="err">&#39;</span><span class="w"></span>
 
-<span class="err">reposi</span><span class="kc">t</span><span class="err">ories</span> <span class="p">{</span>
-    <span class="err">mave</span><span class="kc">n</span><span class="err">Ce</span><span class="kc">ntral</span><span class="err">()</span>
-    <span class="err">jce</span><span class="kc">nter</span><span class="err">()</span>
-<span class="p">}</span>
+<span class="err">reposi</span><span class="kc">t</span><span class="err">ories</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">mave</span><span class="kc">n</span><span class="err">Ce</span><span class="kc">ntral</span><span class="err">()</span><span class="w"></span>
+<span class="w">    </span><span class="err">jce</span><span class="kc">nter</span><span class="err">()</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="err">depe</span><span class="kc">n</span><span class="err">de</span><span class="kc">n</span><span class="err">cies</span> <span class="p">{</span>
-    <span class="err">compile</span> <span class="err">&#39;org.je</span><span class="kc">t</span><span class="err">brai</span><span class="kc">ns</span><span class="err">.ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="p">:</span><span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="mi">-</span><span class="err">s</span><span class="kc">t</span><span class="err">dlib</span><span class="mi">-</span><span class="err">jdk</span><span class="mi">8</span><span class="err">&#39;</span>
-    <span class="err">compile</span> <span class="err">&#39;</span><span class="kc">n</span><span class="err">o.</span><span class="kc">t</span><span class="err">or</span><span class="kc">na</span><span class="err">do</span><span class="p">:</span><span class="kc">t</span><span class="err">or</span><span class="kc">na</span><span class="err">do</span><span class="kc">f</span><span class="err">x</span><span class="p">:</span><span class="mf">1.7.17</span><span class="err">&#39;</span>
-    <span class="err">compile</span> <span class="err">&#39;org.je</span><span class="kc">t</span><span class="err">brai</span><span class="kc">ns</span><span class="err">.exposed</span><span class="p">:</span><span class="err">exposed</span><span class="p">:</span><span class="mf">0.11.2</span><span class="err">&#39;</span>
-    <span class="err">compile</span> <span class="err">&#39;org.xerial</span><span class="p">:</span><span class="err">sqli</span><span class="kc">te</span><span class="mi">-</span><span class="err">jdbc</span><span class="p">:</span><span class="mf">3.25.2</span><span class="err">&#39;</span>
-<span class="p">}</span>
+<span class="err">depe</span><span class="kc">n</span><span class="err">de</span><span class="kc">n</span><span class="err">cies</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">compile</span><span class="w"> </span><span class="err">&#39;org.je</span><span class="kc">t</span><span class="err">brai</span><span class="kc">ns</span><span class="err">.ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="p">:</span><span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="mi">-</span><span class="err">s</span><span class="kc">t</span><span class="err">dlib</span><span class="mi">-</span><span class="err">jdk</span><span class="mi">8</span><span class="err">&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="err">compile</span><span class="w"> </span><span class="err">&#39;</span><span class="kc">n</span><span class="err">o.</span><span class="kc">t</span><span class="err">or</span><span class="kc">na</span><span class="err">do</span><span class="p">:</span><span class="kc">t</span><span class="err">or</span><span class="kc">na</span><span class="err">do</span><span class="kc">f</span><span class="err">x</span><span class="p">:</span><span class="mf">1.7.17</span><span class="err">&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="err">compile</span><span class="w"> </span><span class="err">&#39;org.je</span><span class="kc">t</span><span class="err">brai</span><span class="kc">ns</span><span class="err">.exposed</span><span class="p">:</span><span class="err">exposed</span><span class="p">:</span><span class="mf">0.11.2</span><span class="err">&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="err">compile</span><span class="w"> </span><span class="err">&#39;org.xerial</span><span class="p">:</span><span class="err">sqli</span><span class="kc">te</span><span class="mi">-</span><span class="err">jdbc</span><span class="p">:</span><span class="mf">3.25.2</span><span class="err">&#39;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="err">compileKo</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span> <span class="p">{</span>
-    <span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.jvmTarge</span><span class="kc">t</span> <span class="err">=</span> <span class="s2">&quot;1.8&quot;</span>
-<span class="p">}</span>
+<span class="err">compileKo</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.jvmTarge</span><span class="kc">t</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">&quot;1.8&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="err">compileTes</span><span class="kc">t</span><span class="err">Ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span> <span class="p">{</span>
-    <span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.jvmTarge</span><span class="kc">t</span> <span class="err">=</span> <span class="s2">&quot;1.8&quot;</span>
-<span class="p">}</span>
+<span class="err">compileTes</span><span class="kc">t</span><span class="err">Ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="err">ko</span><span class="kc">tl</span><span class="err">i</span><span class="kc">n</span><span class="err">Op</span><span class="kc">t</span><span class="err">io</span><span class="kc">ns</span><span class="err">.jvmTarge</span><span class="kc">t</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="s2">&quot;1.8&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <h2>Setting up the database</h2>
@@ -218,66 +218,66 @@ meshed nicely with TornadoFX. You can read about both of them on the
 <a href="https://github.com/JetBrains/Exposed">Exposed GitHub page</a>. We will put all of
 the database code in a file called <code>database.kt</code>. Let's first define the table
 for categories.</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nn">org.jetbrains.exposed.dao.*</span>
-<span class="k">import</span> <span class="nn">org.jetbrains.exposed.sql.*</span>
-<span class="k">import</span> <span class="nn">org.jetbrains.exposed.sql.transactions.TransactionManager</span>
-<span class="k">import</span> <span class="nn">org.jetbrains.exposed.sql.transactions.transaction</span>
-<span class="k">import</span> <span class="nn">java.sql.Connection</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.dao.*</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.sql.*</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.sql.transactions.TransactionManager</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.sql.transactions.transaction</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="w"></span>
 
-<span class="kd">object</span> <span class="nc">Categories</span> <span class="p">:</span> <span class="n">IntIdTable</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="nv">name</span> <span class="o">=</span> <span class="n">varchar</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="m">64</span><span class="p">).</span><span class="na">uniqueIndex</span><span class="p">()</span>
-    <span class="kd">val</span> <span class="nv">description</span> <span class="o">=</span> <span class="n">varchar</span><span class="p">(</span><span class="s">&quot;description&quot;</span><span class="p">,</span> <span class="m">128</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="kd">object</span><span class="w"> </span><span class="nc">Categories</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IntIdTable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">64</span><span class="p">).</span><span class="na">uniqueIndex</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">varchar</span><span class="p">(</span><span class="s">&quot;description&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">128</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Note that we don't explicitly define the primary key, that's all handled in the
 background. Along with the table (which is a singleton object), we also need to
 represent rows.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Category</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">EntityID</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">:</span> <span class="n">IntEntity</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">companion</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">IntEntityClass</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Categories</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">Category</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">EntityID</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IntEntity</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">: </span><span class="nc">IntEntityClass</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Categories</span><span class="p">)</span><span class="w"></span>
 
-    <span class="kd">var</span> <span class="nv">name</span> <span class="k">by</span> <span class="n">Categories</span><span class="p">.</span><span class="na">name</span>
-    <span class="kd">var</span> <span class="nv">description</span> <span class="k">by</span> <span class="n">Categories</span><span class="p">.</span><span class="na">description</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">Categories</span><span class="p">.</span><span class="na">name</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">description</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">Categories</span><span class="p">.</span><span class="na">description</span><span class="w"></span>
 
-    <span class="kd">override</span> <span class="kd">fun</span> <span class="nf">toString</span><span class="p">():</span> <span class="kt">String</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="s">&quot;Category(name=\&quot;</span><span class="si">$</span><span class="n">name</span><span class="s">\&quot;, description=\&quot;</span><span class="si">$</span><span class="n">description</span><span class="s">\&quot;)&quot;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">toString</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Category(name=\&quot;</span><span class="si">$</span><span class="n">name</span><span class="s">\&quot;, description=\&quot;</span><span class="si">$</span><span class="n">description</span><span class="s">\&quot;)&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>The <code>Category</code> class is what we'll use to create DAOs, with which we can
 create, modify and delete rows in the <code>Categories</code> table. Finally, let's create
 the table and add some rows to it. We won't actually touch the <code>Categories</code>
 object directly at all.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// &quot;connect&quot; to database file called data.sqlite in the current working directory</span>
-    <span class="c1">// (creates the file if it does not exist)</span>
-    <span class="n">Database</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="s">&quot;jdbc:sqlite:file:data.sqlite&quot;</span><span class="p">,</span> <span class="n">driver</span> <span class="o">=</span> <span class="s">&quot;org.sqlite.JDBC&quot;</span><span class="p">)</span>
-    <span class="c1">// this isolation level is required for sqlite, may not be applicable to other DBMS</span>
-    <span class="n">TransactionManager</span><span class="p">.</span><span class="na">manager</span><span class="p">.</span><span class="na">defaultIsolationLevel</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">.</span><span class="na">TRANSACTION_SERIALIZABLE</span>
+<div class="highlight"><pre><span></span><code><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// &quot;connect&quot; to database file called data.sqlite in the current working directory</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// (creates the file if it does not exist)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Database</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="s">&quot;jdbc:sqlite:file:data.sqlite&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;org.sqlite.JDBC&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// this isolation level is required for sqlite, may not be applicable to other DBMS</span><span class="w"></span>
+<span class="w">    </span><span class="n">TransactionManager</span><span class="p">.</span><span class="na">manager</span><span class="p">.</span><span class="na">defaultIsolationLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Connection</span><span class="p">.</span><span class="na">TRANSACTION_SERIALIZABLE</span><span class="w"></span>
 
-    <span class="n">transaction</span> <span class="p">{</span>
-        <span class="n">addLogger</span><span class="p">(</span><span class="n">StdOutSqlLogger</span><span class="p">)</span>
-        <span class="c1">// create the table</span>
-        <span class="n">SchemaUtils</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">Categories</span><span class="p">)</span>
+<span class="w">    </span><span class="n">transaction</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">addLogger</span><span class="p">(</span><span class="n">StdOutSqlLogger</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// create the table</span><span class="w"></span>
+<span class="w">        </span><span class="n">SchemaUtils</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">Categories</span><span class="p">)</span><span class="w"></span>
 
-        <span class="c1">// add some entries</span>
-        <span class="n">Category</span><span class="p">.</span><span class="na">new</span> <span class="p">{</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;java&quot;</span>
-            <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;The Java programming language&quot;</span>
-        <span class="p">}</span>
+<span class="w">        </span><span class="c1">// add some entries</span><span class="w"></span>
+<span class="w">        </span><span class="n">Category</span><span class="p">.</span><span class="na">new</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;java&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;The Java programming language&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-        <span class="n">Category</span><span class="p">.</span><span class="na">new</span> <span class="p">{</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;cpp&quot;</span>
-            <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;The C++ programming language&quot;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="n">Category</span><span class="p">.</span><span class="na">new</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cpp&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;The C++ programming language&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// new transaction to check the results</span>
-    <span class="n">transaction</span> <span class="p">{</span>
-        <span class="n">Category</span><span class="p">.</span><span class="na">all</span><span class="p">().</span><span class="na">forEach</span> <span class="p">{</span> <span class="n">println</span><span class="p">(</span><span class="nb">it</span><span class="p">)</span> <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// new transaction to check the results</span><span class="w"></span>
+<span class="w">    </span><span class="n">transaction</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Category</span><span class="p">.</span><span class="na">all</span><span class="p">().</span><span class="na">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="nb">it</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 
 <p>Note how all interactions with the database are conducted inside of a
@@ -342,16 +342,64 @@ find
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
         testing tips
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        pytest
+        javascript
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
     <span class="tag-4">
@@ -361,87 +409,9 @@ find
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/kuizzy.html">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/linux.html">
-          <i class="fas fa-tag"></i>
-        linux
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/generics.html">
-          <i class="fas fa-tag"></i>
-        generics
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
-          <i class="fas fa-tag"></i>
-        podcast
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
+        pytest
       </a>
     </span>
     <span class="tag-1">
@@ -450,28 +420,10 @@ find
         bash
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
           <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
+        repobee
       </a>
     </span>
     <span class="tag-2">
@@ -481,9 +433,51 @@ find
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
         css
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
       </a>
     </span>
     <span class="tag-4">
@@ -493,9 +487,9 @@ find
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        blog
+        python
       </a>
     </span>
 </p>

@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-06-12T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Learning a new programming language as a practicing software engineer</title><link href="https://slar.se/learning-a-new-programming-language.html" rel="alternate"></link><published>2022-06-12T00:00:00+02:00</published><updated>2022-06-12T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-06-12:/learning-a-new-programming-language.html</id><summary type="html">&lt;p&gt;When it comes to programming languages, I consider myself something of a
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-06-12T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Eleven Table Tennis: A VR masterpiece</title><link href="https://slar.se/eleven-table-tennis-a-vr-masterpiece.html" rel="alternate"></link><published>2022-06-12T00:00:00+02:00</published><updated>2022-06-12T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-06-12:/eleven-table-tennis-a-vr-masterpiece.html</id><summary type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.
+Unfortunately, I'm also a big fan of playing video games, which traditionally
+falls into the same category of physical exercise. Much to avoid repetitive
+stress injury and everything else that comes along with sitting at …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.
+Unfortunately, I'm also a big fan of playing video games, which traditionally
+falls into the same category of physical exercise. Much to avoid repetitive
+stress injury and everything else that comes along with sitting at a computer
+day in and day out, I've in the past year started to devote more time to
+virtual reality (VR) gaming. In some VR games you actually get to move around,
+and I'm writing this article to fawn over my favorite experience yet: &lt;a href="https://elevenvr.com/en/"&gt;Eleven
+Table Tennis&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Table tennis is an excellent fit for VR&lt;/h3&gt;
+&lt;p&gt;There are two things about table tennis that makes it very well suited to
+VR. First, the playing field is small enough that it can fit into a
+fair-sized living room. Granted, fitting a full-sized table tennis table into
+a smaller apartment can be somewhat inconvenient, but when playing in VR you
+actually only need the space for &lt;em&gt;half&lt;/em&gt; of the table. That is not to say that
+I don't occasionally physically assault some furniture that was unfortunate
+enough to come in my way, but most of the time it works well even though my
+playing space is only roughly 2.5x2.5 meters.&lt;/p&gt;
+&lt;p&gt;Second, the real-life feedback of hitting a table tennis
+ball with a racket is rather realistically reproduced by a vibration in a
+motion controller. There's just not a lot of feedback from those tiny and
+hollow table tennis balls, so even though most motion controllers can't produce
+particularly strong vibrations, it's still enough. I've played both with
+a Valve Index and an Oculus Rift CV1, and both provide a perfectly serviceable
+experience.&lt;/p&gt;
+&lt;h3&gt;Eleven Table Tennis delivers on that premise&lt;/h3&gt;
+&lt;p&gt;So the actual game of table tennis is really well suited to a VR treatment.
+Eleven Table Tennis takes this premise and delivers an almost realistic physics
+engine that for the most part just &lt;em&gt;feels right&lt;/em&gt;. Granted, there are the odd
+"wait, what?..." moments from time to time, and I especially feel like some
+serves can be delivered in a way that's not really possible in real life. But
+overall, it feels true to life.&lt;/p&gt;
+&lt;p&gt;While playing against bots in Eleven Table Tennis is a perfectly fine challenge,
+what really sets the game apart is a stellar online multiplayer. I jump into the
+game both in early mornings before work and in late evenings before bed, and
+it rarely takes me more than 30 seconds to find an opponent. While waiting,
+you can keep playing against the bots as well, so there's never an idle moment.&lt;/p&gt;
+&lt;p&gt;As icing on the cake, playing table tennis in VR is a really decent workout. I'm
+over the moon about how I can combine my love for video games with physical
+exercise. There are games that do that even better, such as &lt;a href="https://www.beatsaber.com/"&gt;Beat
+Saber&lt;/a&gt;, but I find the competitive nature of table
+tennis to be much more engaging and worthwhile.&lt;/p&gt;
+&lt;p&gt;If you're a VR fan and don't have this game yet, do yourself a favor and get
+it. Just ensure that you don't have any expensive furniture in your immediate
+play area.&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>Learning a new programming language as a practicing software engineer</title><link href="https://slar.se/learning-a-new-programming-language.html" rel="alternate"></link><published>2022-06-12T00:00:00+02:00</published><updated>2022-06-12T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-06-12:/learning-a-new-programming-language.html</id><summary type="html">&lt;p&gt;When it comes to programming languages, I consider myself something of a
 polyglot. To me, learning a new language is one of the most enjoyable
 things in all of software engineering. This is especially true when you
 start to venture into new paradigms; going from procedural to functional,

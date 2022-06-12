@@ -1,5 +1,5 @@
 Title: Learning a new programming language as a practicing software engineer
-Date: 2022-11-06
+Date: 2022-06-12
 Author: Simon Larsén
 Tags: rust,programming languages,learning
 Slug: learning-a-new-programming-language

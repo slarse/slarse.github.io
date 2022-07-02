@@ -3,6 +3,7 @@ Date: 2022-07-02T13:00:48.655812
 Author: Simon Larsén
 Tags: book review,software engineering
 Slug: book-review-apprenticeship-patterns
+Category: Book reviews
 
 _Apprenticeship Patterns: Guidance for the Aspiring Software Craftsman_ is
 fundamentally a book about lifelong learning. It is about treating software

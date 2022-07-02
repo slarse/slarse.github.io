@@ -1,5 +1,6 @@
 Title: Book Review: Apprenticeship Patterns
 Date: 2022-07-02T13:00:48.655812
+Modified: 2022-07-02T13:27:48.655812
 Author: Simon Larsén
 Tags: book review,software engineering
 Slug: book-review-apprenticeship-patterns
@@ -113,10 +114,10 @@ approach is potentially unhealthy if applied without moderation. I have
 personally struggled a lot with finding a balance between improving my skills as
 a software and just living a life separate from software engineering. Or
 computers and technology in general. I found the book truly inspirational, so
-much so that it prompted be to spend two hours of my Saturday morning. To be
-completely honest, I am still tweaking the aforementioned balance. I would not
-say that I am struggling anymore, but I cannot deny that it is still a work in
-progress.
+much so that it prompted be to spend two hours of my Saturday morning writing
+this book review. To be completely honest, I am still tweaking the
+aforementioned balance. I would not say that I am struggling anymore, but I
+cannot deny that it is still a work in progress.
 
 # Conclusions
 This book struck home with me, and I wholeheartedly recommend it. But that is a

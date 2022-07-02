@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-07-02T13:00:48+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Awesome Python Podcasts</title><link href="https://slar.se/book-review-apprenticeship-patterns.html" rel="alternate"></link><published>2022-07-02T13:00:48+02:00</published><updated>2022-07-02T13:00:48+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-02:/book-review-apprenticeship-patterns.html</id><summary type="html">&lt;p&gt;&lt;em&gt;Apprenticeship Patterns: Guidance for the Aspiring Software Craftsman&lt;/em&gt; is
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-07-02T13:00:48+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Book Review: Apprenticeship Patterns</title><link href="https://slar.se/book-review-apprenticeship-patterns.html" rel="alternate"></link><published>2022-07-02T13:00:48+02:00</published><updated>2022-07-02T13:00:48+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-02:/book-review-apprenticeship-patterns.html</id><summary type="html">&lt;p&gt;&lt;em&gt;Apprenticeship Patterns: Guidance for the Aspiring Software Craftsman&lt;/em&gt; is
 fundamentally a book about lifelong learning. It is about treating software
 engineering as a craft you may never master; in fact it may never have been
 mastered before. Perhaps it simply cannot be mastered in the traditional sense
@@ -9,6 +9,13 @@ engineering as a craft you may never master; in fact it may never have been
 mastered before. Perhaps it simply cannot be mastered in the traditional sense
 of the word. But that doesn't mean that we should not aspire to master it, that
 we should not embark on &lt;em&gt;The Long Road&lt;/em&gt;. So how can a book help with that?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;Apprenticeship&lt;/span&gt; &lt;span class="nv"&gt;Patterns&lt;/span&gt;: &lt;span class="nv"&gt;Guidance&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;Aspiring&lt;/span&gt; &lt;span class="nv"&gt;Software&lt;/span&gt; &lt;span class="nv"&gt;Craftsman&lt;/span&gt;
+&lt;span class="nv"&gt;by&lt;/span&gt; &lt;span class="nv"&gt;Dave&lt;/span&gt; &lt;span class="nv"&gt;Hoover&lt;/span&gt;, &lt;span class="nv"&gt;Adewale&lt;/span&gt; &lt;span class="nv"&gt;Oshineye&lt;/span&gt;
+&lt;span class="nv"&gt;Released&lt;/span&gt; &lt;span class="nv"&gt;October&lt;/span&gt; &lt;span class="mi"&gt;2009&lt;/span&gt;
+&lt;span class="nv"&gt;Publisher&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;s&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;: &lt;span class="nv"&gt;O&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;Reilly Media, Inc.&lt;/span&gt;
+&lt;span class="nv"&gt;ISBN&lt;/span&gt;: &lt;span class="mi"&gt;9780596518387&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h1&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;The core tenet of the book is that software engineering is a &lt;em&gt;craft&lt;/em&gt;. A craft in
 the same sense that blacksmithing is, or carpentry, or the construction of
@@ -102,13 +109,14 @@ progress.&lt;/p&gt;
 &lt;h1&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This book struck home with me, and I wholeheartedly recommend it. But that is a
 recommendation with a caveat, as I don't think this is a book for everyone.
-I don't think you &lt;em&gt;have&lt;/em&gt; to approach software engineering as a craft that you
-devote yourself to, and the authors actually allude to this as well. It's one
-approach, and it's a great boon to the field that some take it. But for others,
-working with software can be "just a job", and not their passion. That is fine,
-a job can be just a means to provide for yourself. And if that's you, then I say
-skip this book. But if you do have a passion for building great software, I
-think this is a book you don't want to miss.&lt;/p&gt;</content><category term="book_reviews"></category><category term="book review"></category><category term="software engineering"></category></entry><entry><title>Eleven Table Tennis: A VR masterpiece</title><link href="https://slar.se/eleven-table-tennis-a-vr-masterpiece.html" rel="alternate"></link><published>2022-06-12T00:00:00+02:00</published><updated>2022-06-12T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-06-12:/eleven-table-tennis-a-vr-masterpiece.html</id><summary type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.
+It's really all in the title, this book is for the aspiring software
+&lt;em&gt;craftsman&lt;/em&gt;. I don't think you &lt;em&gt;have&lt;/em&gt; to approach software engineering as a
+craft that you devote yourself to, and the authors actually allude to this as
+well. It's one approach, and it's a great boon to the field that some take it.
+But for others, working with software can be "just a job", and not their
+passion. That is fine, a job can be just a means to provide for yourself. And
+if that's you, then I say skip this book. But if you do have a passion for
+building great software, I think this is a book you don't want to miss.&lt;/p&gt;</content><category term="book_reviews"></category><category term="book review"></category><category term="software engineering"></category></entry><entry><title>Eleven Table Tennis: A VR masterpiece</title><link href="https://slar.se/eleven-table-tennis-a-vr-masterpiece.html" rel="alternate"></link><published>2022-06-12T00:00:00+02:00</published><updated>2022-06-12T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-06-12:/eleven-table-tennis-a-vr-masterpiece.html</id><summary type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.
 Unfortunately, I'm also a big fan of playing video games, which traditionally
 falls into the same category of physical exercise. Much to avoid repetitive
 stress injury and everything else that comes along with sitting at …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.

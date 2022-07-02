@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Book reviews</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/book-reviews.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-07-02T13:00:48+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Book Review: Apprenticeship Patterns</title><link href="https://slar.se/book-review-apprenticeship-patterns.html" rel="alternate"></link><published>2022-07-02T13:00:48+02:00</published><updated>2022-07-02T13:00:48+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-02:/book-review-apprenticeship-patterns.html</id><summary type="html">&lt;p&gt;&lt;em&gt;Apprenticeship Patterns: Guidance for the Aspiring Software Craftsman&lt;/em&gt; is
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Book reviews</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/book-reviews.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-07-02T13:27:48+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Book Review: Apprenticeship Patterns</title><link href="https://slar.se/book-review-apprenticeship-patterns.html" rel="alternate"></link><published>2022-07-02T13:00:48+02:00</published><updated>2022-07-02T13:27:48+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-02:/book-review-apprenticeship-patterns.html</id><summary type="html">&lt;p&gt;&lt;em&gt;Apprenticeship Patterns: Guidance for the Aspiring Software Craftsman&lt;/em&gt; is
 fundamentally a book about lifelong learning. It is about treating software
 engineering as a craft you may never master; in fact it may never have been
 mastered before. Perhaps it simply cannot be mastered in the traditional sense
@@ -102,10 +102,10 @@ approach is potentially unhealthy if applied without moderation. I have
 personally struggled a lot with finding a balance between improving my skills as
 a software and just living a life separate from software engineering. Or
 computers and technology in general. I found the book truly inspirational, so
-much so that it prompted be to spend two hours of my Saturday morning. To be
-completely honest, I am still tweaking the aforementioned balance. I would not
-say that I am struggling anymore, but I cannot deny that it is still a work in
-progress.&lt;/p&gt;
+much so that it prompted be to spend two hours of my Saturday morning writing
+this book review. To be completely honest, I am still tweaking the
+aforementioned balance. I would not say that I am struggling anymore, but I
+cannot deny that it is still a work in progress.&lt;/p&gt;
 &lt;h1&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This book struck home with me, and I wholeheartedly recommend it. But that is a
 recommendation with a caveat, as I don't think this is a book for everyone.

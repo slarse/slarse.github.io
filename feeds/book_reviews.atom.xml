@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - book_reviews</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/book_reviews.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-07-02T13:00:48+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Awesome Python Podcasts</title><link href="https://slar.se/book-review-apprenticeship-patterns.html" rel="alternate"></link><published>2022-07-02T13:00:48+02:00</published><updated>2022-07-02T13:00:48+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-02:/book-review-apprenticeship-patterns.html</id><summary type="html">&lt;p&gt;&lt;em&gt;Apprenticeship Patterns: Guidance for the Aspiring Software Craftsman&lt;/em&gt; is
+fundamentally a book about lifelong learning. It is about treating software
+engineering as a craft you may never master; in fact it may never have been
+mastered before. Perhaps it simply cannot be mastered in the traditional sense
+of the word …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;Apprenticeship Patterns: Guidance for the Aspiring Software Craftsman&lt;/em&gt; is
+fundamentally a book about lifelong learning. It is about treating software
+engineering as a craft you may never master; in fact it may never have been
+mastered before. Perhaps it simply cannot be mastered in the traditional sense
+of the word. But that doesn't mean that we should not aspire to master it, that
+we should not embark on &lt;em&gt;The Long Road&lt;/em&gt;. So how can a book help with that?&lt;/p&gt;
+&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;p&gt;The core tenet of the book is that software engineering is a &lt;em&gt;craft&lt;/em&gt;. A craft in
+the same sense that blacksmithing is, or carpentry, or the construction of
+musical instruments. The authors provide a concise reasoning for why this is so.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Software engineering is a craft precisely because we don't understand it well
+enough to make it a codified discipline like science or engineering.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;One can agree or disagree with this statement, but it is hard to argue against
+the notion that software engineering is something that requires a high degree of
+&lt;em&gt;skill&lt;/em&gt;. That's not skill as in technical proficiency, although that is part of
+it. It's skill as in everything that encompasses a successful software engineer,
+of which technical proficiency is important but far from being the skill in it's
+own right.&lt;/p&gt;
+&lt;p&gt;As the title suggests, &lt;em&gt;Apprenticeship Patterns&lt;/em&gt; is comprised of a series of
+&lt;em&gt;patterns&lt;/em&gt;. These are meant to help you hone your skill as a software craftsman.
+Each pattern is composed of four parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Context: A generalized context to put the pattern in perspective.&lt;/li&gt;
+&lt;li&gt;Problem: A concrete problem statement.&lt;/li&gt;
+&lt;li&gt;Solution: One or more suggestions for solving or alleviating the problem.&lt;/li&gt;
+&lt;li&gt;Action: A concrete exercise to practice the solution.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The patterns are really &lt;em&gt;contextual habits&lt;/em&gt;; given a situation X it is
+appropriate to do Y. A (perhaps &lt;em&gt;the&lt;/em&gt;) core pattern is &lt;em&gt;The Long Road&lt;/em&gt;, which
+boils down to the fact that mastering a craft is a lifelong process. It
+challenges the notion that the quickest way to success as measured in notoriety
+or material wealth is what one should aspire for. The solution is a lengthy
+affair, but it importantly suggests that climbing the corporate ladder through
+quick promotions or similar easily takes you away from the actual crafting of
+software, thus diverting you from The Long Road. You should be prepared to work
+as a developer for many years to come. Many of the other patterns of the book
+complement The Long Road, such as &lt;em&gt;Stay In The Trenches&lt;/em&gt; which specifically
+deals with the problem of success being rewarded with promotions.&lt;/p&gt;
+&lt;p&gt;Another pattern that struck home with me is &lt;em&gt;Record What You Learn&lt;/em&gt;. Quite
+unsurprisingly, it simply suggests that one should keep a record of the things
+you have learned and plan to learn in the future. This book review is in fact a
+direct application of that pattern.&lt;/p&gt;
+&lt;p&gt;There are many, many more patterns in the book. Some of my favorite ones include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Be The Worst&lt;/em&gt;: Place yourself in situations where you are surrounded by
+  craftsmen that are more skilled than you in some area, and that you can learn
+  from. Avoid becoming complacent.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Share What You Learn&lt;/em&gt;: Put your learning experiences out in the open, for
+  anyone to find.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Kindred Spirits&lt;/em&gt;: Surround yourself with others passionate to learn the
+  things you wish to dive into.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Use The Source&lt;/em&gt;: Read open source code. A lot.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Read Constantly&lt;/em&gt;: Read books. A lot.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I'm not going to list all the patterns that resonated with me, and I can't even
+do these few ones justice with just this brief explanation of them. You really
+need to read the book with each context, problem, solution and action for the
+respective patterns to get the full picture.&lt;/p&gt;
+&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;p&gt;This book is a very easy read. I like to have at least one &lt;em&gt;soft&lt;/em&gt; book to read
+when my mind wanders too much for me to take in a technical book, and
+&lt;em&gt;Apprenticeship Patterns&lt;/em&gt; perfectly fits that bill. It took me a couple of weeks
+with a few pages a night to get through it. It's easy to pick it up, read about
+a pattern or two, and then put it down. It's well organized and easy to refer
+back to after completion. The patterns are presented with just enough context to
+make them understandable, yet the authors do not dwell on things for too long.
+It is a concise book that is still easy to comprehend.&lt;/p&gt;
+&lt;p&gt;I also found that it is a highly inspirational book, and approaching software
+engineering as a craft really speaks to me. Many of the patterns of this book
+are quite obvious to me and I practice several of them already, yet there are
+many patterns I think I should practice that I don't. Record What You Learn is
+the perfect example. I've been thinking for years that I should do so, but never
+really got around to doing it other than a sporadic blog post once or twice a
+year. After reading the book, I have newfound motivation to apply many of
+the patterns, as this book review is tangible evidence of. In the future, I
+intend to always finish up a book with a book review. Hopefully I will improve
+in writing them with time, as I am not all that happy with how this review
+turned out. But Share What You Learn tells me I should post this anyway, and I
+really do agree with that.&lt;/p&gt;
+&lt;p&gt;I also think this is a terrific book to read as a budding software engineer. It
+is called &lt;em&gt;Apprenticeship Patterns&lt;/em&gt;, after all. I wish I would have read it
+years ago, and I wish I was already practicing many of the patterns. But better
+late than never, and as I will discuss in the next section there is a reason for
+me to be somewhat thankful for not reading it earlier.&lt;/p&gt;
+&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;p&gt;While I think this is a good handbook for mastering a craft, I also think the
+approach is potentially unhealthy if applied without moderation. I have
+personally struggled a lot with finding a balance between improving my skills as
+a software and just living a life separate from software engineering. Or
+computers and technology in general. I found the book truly inspirational, so
+much so that it prompted be to spend two hours of my Saturday morning. To be
+completely honest, I am still tweaking the aforementioned balance. I would not
+say that I am struggling anymore, but I cannot deny that it is still a work in
+progress.&lt;/p&gt;
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;p&gt;This book struck home with me, and I wholeheartedly recommend it. But that is a
+recommendation with a caveat, as I don't think this is a book for everyone.
+I don't think you &lt;em&gt;have&lt;/em&gt; to approach software engineering as a craft that you
+devote yourself to, and the authors actually allude to this as well. It's one
+approach, and it's a great boon to the field that some take it. But for others,
+working with software can be "just a job", and not their passion. That is fine,
+a job can be just a means to provide for yourself. And if that's you, then I say
+skip this book. But if you do have a passion for building great software, I
+think this is a book you don't want to miss.&lt;/p&gt;</content><category term="book_reviews"></category><category term="book review"></category><category term="software engineering"></category></entry></feed>

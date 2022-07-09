@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Programming</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/programming.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-07-07T22:31:50+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>The art of learning from the less experienced</title><link href="https://slar.se/learning-from-the-less-experienced.html" rel="alternate"></link><published>2022-07-07T22:31:50+02:00</published><updated>2022-07-07T22:31:50+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-07:/learning-from-the-less-experienced.html</id><summary type="html">&lt;p&gt;Software engineering is a lifelong journey of learning. Regardless of how
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Programming</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/programming.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-08-07T23:59:50+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>The art of learning from the less experienced</title><link href="https://slar.se/learning-from-the-less-experienced.html" rel="alternate"></link><published>2022-07-07T22:31:50+02:00</published><updated>2022-08-07T23:59:50+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-07:/learning-from-the-less-experienced.html</id><summary type="html">&lt;p&gt;Software engineering is a lifelong journey of learning. Regardless of how
 dedicated you are in your learning, there will never come a point where you
 have learned it all. As such, it's important to use all learning resources
 available to us. As is evident from the themes on my blog …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Software engineering is a lifelong journey of learning. Regardless of how
@@ -34,8 +34,8 @@ if &lt;code&gt;isOdd&lt;/code&gt; is &lt;code&gt;true&lt;/code&gt;. One student 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Being an enthusiastic but still rather fresh teaching assistant with not all
-that much programming experience (but more than the students), I said it was a
-viable solution but it would be more concise to use a ternary operator.&lt;/p&gt;
+that much programming experience, I said it was a viable solution but it would
+be more concise to use a ternary operator.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kt"&gt;boolean&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;isEven&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;isOdd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 

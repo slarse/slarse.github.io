@@ -1,5 +1,6 @@
 Title: The art of learning from the less experienced
 Date: 2022-07-07T22:31:50.112260
+Modified: 2022-08-07T23:59:50.112260
 Author: Simon Larsén
 Tags: learning,software engineering
 Slug: learning-from-the-less-experienced
@@ -40,8 +41,8 @@ if (isOdd == true) {
 ```
 
 Being an enthusiastic but still rather fresh teaching assistant with not all
-that much programming experience (but more than the students), I said it was a
-viable solution but it would be more concise to use a ternary operator.
+that much programming experience, I said it was a viable solution but it would
+be more concise to use a ternary operator.
 
 ```java
 boolean isEven = isOdd ? false : true;

@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A Page in : Projects" />
+    <meta name="description" content="" />
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Projects - Programming for fun and profit</title>
+    <title>Full text search with pelican-search! - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -57,7 +57,7 @@
               <li>
                 <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
               </li>
-              <li class="active">
+              <li>
                 <a href="https://slar.se/pages/projects.html">Projects</a>
               </li>
             <li class="divider"></li>
@@ -83,49 +83,41 @@
     <div class="container" id="main-container">
       <div class="row">
         <div class="col-md-9" id="content">
-<article itemscope="itemscope" 
-         itemtype="http://schema.org/WebPage">
-  <header>
-    <h1 itemprop="name headline">Projects</h1>
-  </header>
-  <div class="content-body" itemprop="text">
-    <p>I always have a few side projects going. You can find an exhaustive list on my
-GitHub page, but here are a few highlights.</p>
-<h2>RepoBee</h2>
-<p>RepoBee is a tool for managing Git repositories on GitHub for education. It can
-do things like generate repositories for students, clone student repositories
-in batches, run tasks on the cloned repositories as defined by plugins, and
-more. I'm really quite proud of it, and have some exciting things coming up for
-it this summer (that I can't yet talk about).</p>
-<ul>
-<li><a href="https://repobee.org">RepoBee's website</a></li>
-<li><a href="https://github.com/repobee/repobee">RepoBee on GitHub</a></li>
-<li><a href="https://repobee.readthedocs.io">RepoBee's documentation</a></li>
-</ul>
-<h2>Spoon</h2>
-<p>Spoon is a popular metaprogramming library for Java. It allows you to parse
-source code into a rich AST, analyze and/or transform the AST and print it
-back to source code. I'm one of a handful of maintainers on the project.</p>
-<ul>
-<li><a href="https://spoon.gforge.inria.fr/">Spoon's website</a></li>
-<li><a href="https://github.com/inria/spoon">Spoon on GitHub</a></li>
-</ul>
-<h2>Spork</h2>
-<p>Spork is an AST based structured merge tool for Java. This means that instead
-of merging Java files by their raw text, it resolves the abstract syntax trees
-and merges based on them instead. It is built on top of Spoon.</p>
-<ul>
-<li><a href="https://github.com/kth/spork">Spork on GitHub</a></li>
-</ul>
-<h2>Rusthon</h2>
-<p>Rusthon is a Python-like programming language implemented in Rust. It is a work
-in progress that serves as my learning project to learn the ins and outs of the
-Rust programming language.</p>
-<ul>
-<li><a href="https://github.com/slarse/rusthon">Rusthon on GitHub</a></li>
-</ul>
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Sun 10 July 2022
+</abbr> <h1>
+  <a href="https://slar.se/pelican-search.html" rel="bookmark"
+     title="Permalink to Full text search with pelican-search!">
+    Full text search with pelican-search!
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/blog.html">
+      Blog</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/blog.html"><i class="fas fa-tag"></i>blog</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>I've been meaning to take this blog into more of the Wiki direction. Or rather
+some unholy mixture of a Wiki and a blog. An important step in that direction is
+full text search, which I've now got!</p>
+<p>This blog is powered by <a href="https://blog.getpelican.com/">Pelican</a>, and quite
+recently a new plugin called
+<a href="https://github.com/pelican-plugins/search">pelican-search</a> popped up.
+It's quite simple: it adds the search bar you see on the <a href="https://slar.se/index.html">home
+page</a>, which taps into the powerful <a href="https://stork-search.net/">Stork</a>
+search library.</p>
+<p>It all sums up to the super fast search bar that all visitors of this website
+now have at their disposal. Pretty neat!</p>
   </div>
-
+  
 
 </article>
         </div><!-- /content -->

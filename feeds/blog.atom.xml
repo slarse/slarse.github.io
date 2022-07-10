@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-06-12T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Eleven Table Tennis: A VR masterpiece</title><link href="https://slar.se/eleven-table-tennis-a-vr-masterpiece.html" rel="alternate"></link><published>2022-06-12T00:00:00+02:00</published><updated>2022-06-12T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-06-12:/eleven-table-tennis-a-vr-masterpiece.html</id><summary type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-07-10T21:58:53+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Full text search with pelican-search!</title><link href="https://slar.se/pelican-search.html" rel="alternate"></link><published>2022-07-10T21:58:53+02:00</published><updated>2022-07-10T21:58:53+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-10:/pelican-search.html</id><summary type="html">&lt;p&gt;I've been meaning to take this blog into more of the Wiki direction. Or rather
+some unholy mixture of a Wiki and a blog. An important step in that direction is
+full text search, which I've now got!&lt;/p&gt;
+&lt;p&gt;This blog is powered by &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, and quite
+recently a new plugin …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been meaning to take this blog into more of the Wiki direction. Or rather
+some unholy mixture of a Wiki and a blog. An important step in that direction is
+full text search, which I've now got!&lt;/p&gt;
+&lt;p&gt;This blog is powered by &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, and quite
+recently a new plugin called
+&lt;a href="https://github.com/pelican-plugins/search"&gt;pelican-search&lt;/a&gt; popped up.
+It's quite simple: it adds the search bar you see on the &lt;a href="https://slar.se/index.html"&gt;home
+page&lt;/a&gt;, which taps into the powerful &lt;a href="https://stork-search.net/"&gt;Stork&lt;/a&gt;
+search library.&lt;/p&gt;
+&lt;p&gt;It all sums up to the super fast search bar that all visitors of this website
+now have at their disposal. Pretty neat!&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>Eleven Table Tennis: A VR masterpiece</title><link href="https://slar.se/eleven-table-tennis-a-vr-masterpiece.html" rel="alternate"></link><published>2022-06-12T00:00:00+02:00</published><updated>2022-06-12T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-06-12:/eleven-table-tennis-a-vr-masterpiece.html</id><summary type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.
 Unfortunately, I'm also a big fan of playing video games, which traditionally
 falls into the same category of physical exercise. Much to avoid repetitive
 stress injury and everything else that comes along with sitting at …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.

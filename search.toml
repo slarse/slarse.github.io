@@ -18,6 +18,11 @@ url = "pages/projects.html"
 title = "Projects"
 
 [[input.files]]
+path = "pelican-search.html"
+url = "pelican-search.html"
+title = "Full text search with pelican-search!"
+
+[[input.files]]
 path = "learning-from-the-less-experienced.html"
 url = "learning-from-the-less-experienced.html"
 title = "The art of learning from the less experienced"

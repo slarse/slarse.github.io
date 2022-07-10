@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-08-07T23:59:50+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>The art of learning from the less experienced</title><link href="https://slar.se/learning-from-the-less-experienced.html" rel="alternate"></link><published>2022-07-07T22:31:50+02:00</published><updated>2022-08-07T23:59:50+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-07:/learning-from-the-less-experienced.html</id><summary type="html">&lt;p&gt;Software engineering is a lifelong journey of learning. Regardless of how
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-08-07T23:59:50+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Full text search with pelican-search!</title><link href="https://slar.se/pelican-search.html" rel="alternate"></link><published>2022-07-10T21:58:53+02:00</published><updated>2022-07-10T21:58:53+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-10:/pelican-search.html</id><summary type="html">&lt;p&gt;I've been meaning to take this blog into more of the Wiki direction. Or rather
+some unholy mixture of a Wiki and a blog. An important step in that direction is
+full text search, which I've now got!&lt;/p&gt;
+&lt;p&gt;This blog is powered by &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, and quite
+recently a new plugin …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been meaning to take this blog into more of the Wiki direction. Or rather
+some unholy mixture of a Wiki and a blog. An important step in that direction is
+full text search, which I've now got!&lt;/p&gt;
+&lt;p&gt;This blog is powered by &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, and quite
+recently a new plugin called
+&lt;a href="https://github.com/pelican-plugins/search"&gt;pelican-search&lt;/a&gt; popped up.
+It's quite simple: it adds the search bar you see on the &lt;a href="https://slar.se/index.html"&gt;home
+page&lt;/a&gt;, which taps into the powerful &lt;a href="https://stork-search.net/"&gt;Stork&lt;/a&gt;
+search library.&lt;/p&gt;
+&lt;p&gt;It all sums up to the super fast search bar that all visitors of this website
+now have at their disposal. Pretty neat!&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>The art of learning from the less experienced</title><link href="https://slar.se/learning-from-the-less-experienced.html" rel="alternate"></link><published>2022-07-07T22:31:50+02:00</published><updated>2022-08-07T23:59:50+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-07:/learning-from-the-less-experienced.html</id><summary type="html">&lt;p&gt;Software engineering is a lifelong journey of learning. Regardless of how
 dedicated you are in your learning, there will never come a point where you
 have learned it all. As such, it's important to use all learning resources
 available to us. As is evident from the themes on my blog …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Software engineering is a lifelong journey of learning. Regardless of how

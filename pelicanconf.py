@@ -6,7 +6,9 @@ AUTHOR = "Simon Larsén"
 SITENAME = "Programming for fun and profit"
 SITEURL = ""
 
-SITESUBTITLE = "A blog about software engineering, programming languages and technical tinkering"
+SITESUBTITLE = (
+    "A blog about software engineering, programming languages and technical tinkering"
+)
 
 STATIC_PATHS = ["extra", "essays", "images"]
 
@@ -29,8 +31,14 @@ DEFAULT_LANG = "en"
 THEME = "voidy-bootstrap"
 SIDEBAR = "sidebar.html"
 CUSTOM_SIDEBAR_MIDDLES = ("sb_tagcloud.html",)
-CUSTOM_ARTICLE_HEADERS = ("article_header.html", "taglist.html", )
-CUSTOM_INDEX_ARTICLE_HEADERS = ("article_header.html", "taglist.html", )
+CUSTOM_ARTICLE_HEADERS = (
+    "article_header.html",
+    "taglist.html",
+)
+CUSTOM_INDEX_ARTICLE_HEADERS = (
+    "article_header.html",
+    "taglist.html",
+)
 # voidy-bootstrap settings end
 
 # Feed generation is usually not desired when developing
@@ -56,7 +64,13 @@ SOCIAL = (
     ("GitHub", "https://github.com/slarse", "fab fa-github-square fa-fw fa-lg"),
 )
 
-STYLESHEET_FILES = ("pygment.css", "voidybootstrap.css")
+FONT_AWESOME_CDN_LINK = {
+    "href": "https://use.fontawesome.com/releases/v5.0.13/css/all.css",
+    "integrity": "sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp",
+    "crossorigin": "anonymous",
+}
+
+STYLESHEET_FILES = ("pygment.css", "voidybootstrap.css", "search.css")
 
 DEFAULT_PAGINATION = 5
 
@@ -65,4 +79,9 @@ RELATIVE_URLS = True
 
 # plugins
 PLUGIN_PATHS = ["../pelican-plugins"]
-PLUGINS = ["tag_cloud"]
+PLUGINS = ["tag_cloud", "search"]
+
+CUSTOM_CONTAINER_TOP_INDEX = "custom/search.html"
+CUSTOM_HTML_HEAD = "custom/head.html"
+CUSTOM_SCRIPTS_BASE = "custom/scripts.html"
+SEARCH_HTML_SELECTOR = "div#main-container"

@@ -81,7 +81,7 @@ RELATIVE_URLS = True
 PLUGIN_PATHS = ["../pelican-plugins"]
 PLUGINS = ["tag_cloud", "search"]
 
-CUSTOM_CONTAINER_TOP_INDEX = "custom/search.html"
+CUSTOM_CONTENT_TOP_INDEX = "custom/search.html"
 CUSTOM_HTML_HEAD = "custom/head.html"
 CUSTOM_SCRIPTS_BASE = "custom/scripts.html"
 SEARCH_HTML_SELECTOR = "div#main-container"

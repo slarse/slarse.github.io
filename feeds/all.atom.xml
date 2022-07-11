@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-08-07T23:59:50+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Full text search with pelican-search!</title><link href="https://slar.se/pelican-search.html" rel="alternate"></link><published>2022-07-10T21:58:53+02:00</published><updated>2022-07-10T21:58:53+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-10:/pelican-search.html</id><summary type="html">&lt;p&gt;I've been meaning to take this blog into more of the Wiki direction. Or rather
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-08-07T23:59:50+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Book Review: 97 Things Every Programmer Should Know</title><link href="https://slar.se/book-review-97-things.html" rel="alternate"></link><published>2022-07-11T21:00:48+02:00</published><updated>2022-07-11T21:00:48+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-11:/book-review-97-things.html</id><summary type="html">&lt;p&gt;&lt;em&gt;97 Things Every Programmer Should Know&lt;/em&gt; is a collection of short essays by
+experienced programmers. And by short, I mean &lt;em&gt;short&lt;/em&gt;: 1-3 fairly tiny pages a
+piece. If you're on a journey to become a software engineer then this book will
+give you a crash course in terminology you should …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;97 Things Every Programmer Should Know&lt;/em&gt; is a collection of short essays by
+experienced programmers. And by short, I mean &lt;em&gt;short&lt;/em&gt;: 1-3 fairly tiny pages a
+piece. If you're on a journey to become a software engineer then this book will
+give you a crash course in terminology you should be familiar with. Even as a
+practicing software engineer there is wisdom to be found in this book, but a
+novice will undoubtedly get more out of reading it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mf"&gt;97&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Things&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Every&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Programmer&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Should&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Know&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Kevlin&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Henney&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Released&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;February&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;2010&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Publisher&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;Reilly&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Media&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Inc&lt;/span&gt;&lt;span class="mf"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;ISBN&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;9780596809485&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;p&gt;As I mentioned in the introduction, &lt;em&gt;97 Things Every Programmer Should Know&lt;/em&gt; is
+a collection of very short essays by practicing professionals. The essays treat
+a wide variety of themes that are relevant to a practicing software engineer,
+ranging from hard technical skills such as the &lt;em&gt;Don't Repeat Yourself&lt;/em&gt; principle
+and &lt;em&gt;Single Responsibility Principle&lt;/em&gt;, to softer skills such as interacting with
+managers and fostering good relationships with your colleagues. Most of the
+essays are focused on the technical side of things, however, and there is good
+variety in the technical topics. While a lot of the essays are about how to
+write good code, there is also a healthy amount of recommendations for tooling
+to use, such as static code analysers, automated test suites, version control
+systems and more.&lt;/p&gt;
+&lt;p&gt;There really isn't much more to say regarding what the book is about. It's like
+a collection of very well-written blog posts on programming-related topics. So
+if you're reading this blog, chances are good you're going to enjoy this book.&lt;/p&gt;
+&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;p&gt;In some ways, &lt;em&gt;97 Things&lt;/em&gt; has a lot in common with &lt;a href="https://slar.se/book-review-apprenticeship-patterns.html"&gt;Apprenticeship
+Patterns&lt;/a&gt; that I reviewed last week.
+They're both about how you improve as a software engineer. The difference is
+that &lt;em&gt;97 Things&lt;/em&gt; is a lot more to the point and more concrete. For the most
+part, it presents tips and tricks that you can apply immediately and see
+benefits from just as fast. For the budding software engineer, it's an excellent
+pool of topics to diversify your skill set. That's with an emphasis on &lt;em&gt;topics&lt;/em&gt;,
+though. This book presents a brief introduction to a wide variety of topics, but
+it dives deeply into none of them. I think this is a great strength of the book,
+as it means you will never get stuck on some "boring" topic that doesn't
+interest you.&lt;/p&gt;
+&lt;p&gt;While you can absolutely draw connections between the essays, they are written
+as standalone pieces of work. This makes &lt;em&gt;97 Things&lt;/em&gt; a perfect book to read on
+the go, when you might just have a few minutes or so to read.&lt;/p&gt;
+&lt;p&gt;Out of all 97 things, I recall only a handful that I didn't find genuinely
+helpful or insightful. Some essays even contradict each other, which actually
+gives a nice perspective on the fact that a &lt;em&gt;lot&lt;/em&gt; of best practices are, to a
+large degree, opinions. A notable example I recall is about automatic code
+formatting, where one essay discourages its use and a few others encourage it.
+I think this is a great benefit of having so many different authors. You don't
+just get one person's opinion.&lt;/p&gt;
+&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;p&gt;As with many other books on how to be a good software engineer, there is a slight
+tint of workaholism over some of the essays. I especially found an essay by
+Robert C. Martin on what it means to be a professional programmer to send this
+message. It's the same theme I found a little bit disturbing with
+&lt;a href="https://slar.se/book-review-apprenticeship-patterns.html"&gt;Apprenticeship Patterns&lt;/a&gt;. I can't say I
+disagree with the message; I truly believe in the craftsmanship approach to
+software engineering, the path of lifelong learning. But at the same time I
+don't think it is for everyone, and I think it should be possible to treat
+programming as "just a job".&lt;/p&gt;
+&lt;p&gt;A minor inconvenience is that the essays are ordered alphabetically, where I
+would have preferred them to be ordered by theme. Finding a particular essay of
+which you recall the theme but not the title is needlessly difficult. I just now
+suffered through it trying to find the aforementioned essay by Robert C. Martin.&lt;/p&gt;
+&lt;p&gt;But as a package, I find little to dislike about the book. Even the workaholism
+part is effectively counteracted by an entire essay dedicated to sending the
+message "work smarter not harder".&lt;/p&gt;
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;p&gt;This is another book that I wish I'd read years ago. I strongly recommend it as
+a read for &lt;em&gt;any&lt;/em&gt; software engineer at the beginning of their career or student
+(self-taught or at a seat of learning) who is preparing for their career. Being
+such a light and quick read, I find no good reason not to spend the few hours it
+takes to read through the book and be exposed to a whole lot of different ideas.&lt;/p&gt;</content><category term="Reviews"></category><category term="book review"></category><category term="software engineering"></category></entry><entry><title>Full text search with pelican-search!</title><link href="https://slar.se/pelican-search.html" rel="alternate"></link><published>2022-07-10T21:58:53+02:00</published><updated>2022-07-10T21:58:53+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-10:/pelican-search.html</id><summary type="html">&lt;p&gt;I've been meaning to take this blog into more of the Wiki direction. Or rather
 some unholy mixture of a Wiki and a blog. An important step in that direction is
 full text search, which I've now got!&lt;/p&gt;
 &lt;p&gt;This blog is powered by &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, and quite
@@ -216,7 +291,7 @@ well. It's one approach, and it's a great boon to the field that some take it.
 But for others, working with software can be "just a job", and not their
 passion. That is fine, a job can be just a means to provide for yourself. And
 if that's you, then I say skip this book. But if you do have a passion for
-building great software, I think this is a book you don't want to miss.&lt;/p&gt;</content><category term="Book reviews"></category><category term="book review"></category><category term="software engineering"></category></entry><entry><title>Eleven Table Tennis: A VR masterpiece</title><link href="https://slar.se/eleven-table-tennis-a-vr-masterpiece.html" rel="alternate"></link><published>2022-06-12T00:00:00+02:00</published><updated>2022-06-12T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-06-12:/eleven-table-tennis-a-vr-masterpiece.html</id><summary type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.
+building great software, I think this is a book you don't want to miss.&lt;/p&gt;</content><category term="Reviews"></category><category term="book review"></category><category term="software engineering"></category></entry><entry><title>Eleven Table Tennis: A VR masterpiece</title><link href="https://slar.se/eleven-table-tennis-a-vr-masterpiece.html" rel="alternate"></link><published>2022-06-12T00:00:00+02:00</published><updated>2022-06-12T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-06-12:/eleven-table-tennis-a-vr-masterpiece.html</id><summary type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.
 Unfortunately, I'm also a big fan of playing video games, which traditionally
 falls into the same category of physical exercise. Much to avoid repetitive
 stress injury and everything else that comes along with sitting at …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a software engineer, I sit and stand still for large chunks of the day.

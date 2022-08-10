@@ -4,210 +4,215 @@ html_selector = "div#main-container"
 
 [[input.files]]
 path = "pages/about.html"
-url = "pages/about.html"
+url = "/pages/about.html"
 title = "About"
 
 [[input.files]]
 path = "pages/publications-and-essays.html"
-url = "pages/publications-and-essays.html"
+url = "/pages/publications-and-essays.html"
 title = "Publications and Essays"
 
 [[input.files]]
 path = "pages/projects.html"
-url = "pages/projects.html"
+url = "/pages/projects.html"
 title = "Projects"
 
 [[input.files]]
+path = "book-review-the-rust-programming-language.html"
+url = "/book-review-the-rust-programming-language.html"
+title = "Book Review: The Rust Programming Language"
+
+[[input.files]]
 path = "book-review-97-things.html"
-url = "book-review-97-things.html"
+url = "/book-review-97-things.html"
 title = "Book Review: 97 Things Every Programmer Should Know"
 
 [[input.files]]
 path = "pelican-search.html"
-url = "pelican-search.html"
+url = "/pelican-search.html"
 title = "Full text search with pelican-search!"
 
 [[input.files]]
 path = "learning-from-the-less-experienced.html"
-url = "learning-from-the-less-experienced.html"
+url = "/learning-from-the-less-experienced.html"
 title = "The art of learning from the less experienced"
 
 [[input.files]]
 path = "book-review-apprenticeship-patterns.html"
-url = "book-review-apprenticeship-patterns.html"
+url = "/book-review-apprenticeship-patterns.html"
 title = "Book Review: Apprenticeship Patterns"
 
 [[input.files]]
 path = "eleven-table-tennis-a-vr-masterpiece.html"
-url = "eleven-table-tennis-a-vr-masterpiece.html"
+url = "/eleven-table-tennis-a-vr-masterpiece.html"
 title = "Eleven Table Tennis: A VR masterpiece"
 
 [[input.files]]
 path = "learning-a-new-programming-language.html"
-url = "learning-a-new-programming-language.html"
+url = "/learning-a-new-programming-language.html"
 title = "Learning a new programming language as a practicing software engineer"
 
 [[input.files]]
 path = "repobee-at-iticse-and-sigcse-2021.html"
-url = "repobee-at-iticse-and-sigcse-2021.html"
+url = "/repobee-at-iticse-and-sigcse-2021.html"
 title = "RepoBee at ITiCSE and SIGCSE 2021!"
 
 [[input.files]]
 path = "repobee-at-iticse-2020.html"
-url = "repobee-at-iticse-2020.html"
+url = "/repobee-at-iticse-2020.html"
 title = "RepoBee at ITiCSE 2020!"
 
 [[input.files]]
 path = "essential-pytest-3.html"
-url = "essential-pytest-3.html"
+url = "/essential-pytest-3.html"
 title = "Essential pytest pt. 3: Rerunning failed tests (and the pytest cache)"
 
 [[input.files]]
 path = "essential-pytest-2.html"
-url = "essential-pytest-2.html"
+url = "/essential-pytest-2.html"
 title = "Essential pytest pt. 2: Selecting tests to run"
 
 [[input.files]]
 path = "thoughts-on-graduating-with-an-msc-in-computer-science-and-engineering.html"
-url = "thoughts-on-graduating-with-an-msc-in-computer-science-and-engineering.html"
+url = "/thoughts-on-graduating-with-an-msc-in-computer-science-and-engineering.html"
 title = "Thoughts on graduating with an MSc in Computer Science and Engineering"
 
 [[input.files]]
 path = "etc-passwd.html"
-url = "etc-passwd.html"
+url = "/etc-passwd.html"
 title = "The Linux /etc/passwd file, and why it doesn't contain passwords"
 
 [[input.files]]
 path = "essential-pytest-1.html"
-url = "essential-pytest-1.html"
+url = "/essential-pytest-1.html"
 title = "Essential pytest pt. 1: Controlling the verbosity of output"
 
 [[input.files]]
 path = "dont-use-string-for-method-options-use-an-enum.html"
-url = "dont-use-string-for-method-options-use-an-enum.html"
+url = "/dont-use-string-for-method-options-use-an-enum.html"
 title = "Don't use String for method options, use an enum!"
 
 [[input.files]]
 path = "javas-optional-why-you-should-prefer-it-over-null.html"
-url = "javas-optional-why-you-should-prefer-it-over-null.html"
+url = "/javas-optional-why-you-should-prefer-it-over-null.html"
 title = "Java's Optional: Why you should prefer it over null"
 
 [[input.files]]
 path = "repobee-and-simon-at-iticse-2019.html"
-url = "repobee-and-simon-at-iticse-2019.html"
+url = "/repobee-and-simon-at-iticse-2019.html"
 title = "RepoBee (and Simon) at ITiCSE 2019!"
 
 [[input.files]]
 path = "git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html"
-url = "git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html"
+url = "/git-worktrees-work-in-parallel-on-multiple-versions-of-a-project.html"
 title = "Git worktrees: work in parallel on multiple versions of a project"
 
 [[input.files]]
 path = "redirecting-stdout-and-stderr-in-bash.html"
-url = "redirecting-stdout-and-stderr-in-bash.html"
+url = "/redirecting-stdout-and-stderr-in-bash.html"
 title = "Redirecting stdout and stderr in bash"
 
 [[input.files]]
 path = "technical-e-books-from-humble-bundle.html"
-url = "technical-e-books-from-humble-bundle.html"
+url = "/technical-e-books-from-humble-bundle.html"
 title = "Technical e-books from Humble Bundle"
 
 [[input.files]]
 path = "io-redirection-in-bash.html"
-url = "io-redirection-in-bash.html"
+url = "/io-redirection-in-bash.html"
 title = "I/O redirection in bash"
 
 [[input.files]]
 path = "piping-commands-in-bash.html"
-url = "piping-commands-in-bash.html"
+url = "/piping-commands-in-bash.html"
 title = "Piping commands in bash"
 
 [[input.files]]
 path = "using-bash-aliases.html"
-url = "using-bash-aliases.html"
+url = "/using-bash-aliases.html"
 title = "Using bash aliases"
 
 [[input.files]]
 path = "git-local.html"
-url = "git-local.html"
+url = "/git-local.html"
 title = "Git local"
 
 [[input.files]]
 path = "history-and-history-expansion-in-bash.html"
-url = "history-and-history-expansion-in-bash.html"
+url = "/history-and-history-expansion-in-bash.html"
 title = "History and history expansion in bash"
 
 [[input.files]]
 path = "reverse-search-in-bash.html"
-url = "reverse-search-in-bash.html"
+url = "/reverse-search-in-bash.html"
 title = "Reverse search in bash"
 
 [[input.files]]
 path = "announcing-tip-of-the-week-totw.html"
-url = "announcing-tip-of-the-week-totw.html"
+url = "/announcing-tip-of-the-week-totw.html"
 title = "Announcing Tip of the Week (TotW)"
 
 [[input.files]]
 path = "migrating-my-blog.html"
-url = "migrating-my-blog.html"
+url = "/migrating-my-blog.html"
 title = "Migrating my blog"
 
 [[input.files]]
 path = "tests-that-dont-test.html"
-url = "tests-that-dont-test.html"
+url = "/tests-that-dont-test.html"
 title = "Testing tips: Tests that don't test"
 
 [[input.files]]
 path = "tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"
-url = "tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"
+url = "/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"
 title = "TornadoFX+Exposed pt. 3: Adding, editing and removing rows"
 
 [[input.files]]
 path = "tornadofxexposed-pt-2-showing-a-database-table.html"
-url = "tornadofxexposed-pt-2-showing-a-database-table.html"
+url = "/tornadofxexposed-pt-2-showing-a-database-table.html"
 title = "TornadoFX+Exposed pt. 2: Showing a database table"
 
 [[input.files]]
 path = "tornadofxexposed-pt-1-project-and-database-setup.html"
-url = "tornadofxexposed-pt-1-project-and-database-setup.html"
+url = "/tornadofxexposed-pt-1-project-and-database-setup.html"
 title = "TornadoFX+Exposed pt. 1: Project and database setup"
 
 [[input.files]]
 path = "collapsing-and-expanding-html-elements-using-mostly-css.html"
-url = "collapsing-and-expanding-html-elements-using-mostly-css.html"
+url = "/collapsing-and-expanding-html-elements-using-mostly-css.html"
 title = "Collapsing and expanding HTML elements using (mostly) CSS"
 
 [[input.files]]
 path = "a-binary-search-tree-in-kotlin-pt-2-generic-node.html"
-url = "a-binary-search-tree-in-kotlin-pt-2-generic-node.html"
+url = "/a-binary-search-tree-in-kotlin-pt-2-generic-node.html"
 title = "A binary search tree in Kotlin pt. 2: Generic node"
 
 [[input.files]]
 path = "a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"
-url = "a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"
+url = "/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"
 title = "A binary search tree in Kotlin pt. 1: Representing a node"
 
 [[input.files]]
 path = "creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html"
-url = "creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html"
+url = "/creating-a-standalone-runnable-kotlin-jar-file-with-intellij-and-gradle.html"
 title = "Creating a standalone (runnable) Kotlin .jar file with IntelliJ and Gradle"
 
 [[input.files]]
 path = "awesome-python-podcasts.html"
-url = "awesome-python-podcasts.html"
+url = "/awesome-python-podcasts.html"
 title = "Awesome Python Podcasts"
 
 [[input.files]]
 path = "what-the-self-pythons-self-demystified.html"
-url = "what-the-self-pythons-self-demystified.html"
+url = "/what-the-self-pythons-self-demystified.html"
 title = "What the self? Python's self demystified!"
 
 [[input.files]]
 path = "properties-as-pythonic-setters.html"
-url = "properties-as-pythonic-setters.html"
+url = "/properties-as-pythonic-setters.html"
 title = "Properties as Pythonic setters"
 
 [[input.files]]
 path = "properties-as-pythonic-getters.html"
-url = "properties-as-pythonic-getters.html"
+url = "/properties-as-pythonic-getters.html"
 title = "Properties as Pythonic getters"

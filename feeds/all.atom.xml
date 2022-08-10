@@ -1,5 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-08-07T23:59:50+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Book Review: 97 Things Every Programmer Should Know</title><link href="https://slar.se/book-review-97-things.html" rel="alternate"></link><published>2022-07-11T21:00:48+02:00</published><updated>2022-07-11T21:00:48+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-11:/book-review-97-things.html</id><summary type="html">&lt;p&gt;&lt;em&gt;97 Things Every Programmer Should Know&lt;/em&gt; is a collection of short essays by
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-08-10T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Book Review: The Rust Programming Language</title><link href="https://slar.se/book-review-the-rust-programming-language.html" rel="alternate"></link><published>2022-08-10T00:00:00+02:00</published><updated>2022-08-10T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-08-10:/book-review-the-rust-programming-language.html</id><summary type="html">&lt;p&gt;I've been learning Rust on and off for the past few months, and &lt;em&gt;The Rust
+Programming Language&lt;/em&gt; has been my &lt;a href="https://slar.se/learning-a-new-programming-language.html"&gt;primary learning
+resource&lt;/a&gt; during this time.
+It's a great introduction to the language, and is even &lt;a href="https://doc.rust-lang.org/stable/book/"&gt;freely available
+online&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here, I'm reviewing the 2018 print version. Although a little bit …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been learning Rust on and off for the past few months, and &lt;em&gt;The Rust
+Programming Language&lt;/em&gt; has been my &lt;a href="https://slar.se/learning-a-new-programming-language.html"&gt;primary learning
+resource&lt;/a&gt; during this time.
+It's a great introduction to the language, and is even &lt;a href="https://doc.rust-lang.org/stable/book/"&gt;freely available
+online&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here, I'm reviewing the 2018 print version. Although a little bit out of date by
+now, there's nothing that's become obsolete, so I can still recommend even this
+version. For the most up to date version, the online one is however the way to
+go.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;The Rust Programming Language
+by Steve Klabnik, Carol Nichols
+Released June 2018
+Publisher(s): No Starch Press
+ISBN: 9781593278281
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;The Rust Programming Language&lt;/em&gt; is really a book where the title perfectly
+captures what the book is about. It teaches Rust mostly by practical examples,
+and for the most part the examples are self-contained and executable. For some
+concepts, examples are either missing or more illustrative than executable, but
+these are few and far between.&lt;/p&gt;
+&lt;p&gt;The book also to a large extent explains programming concepts, and has a rather
+elaborate section on concurrency. It however isn't on a beginner level, and
+doesn't go out of its way to intuitively describe what a variable is, or how
+looping works. I would rate this a great book for someone who is already
+somewhat familiar with programming concepts, but it's not the best resource for
+getting started with programming as a whole. It's the perfect "second language
+book".&lt;/p&gt;
+&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;p&gt;This book is incredibly well written and organized. Concepts to be learned are
+first presented on a high level, and then the authors drill into the details.
+But not too far into the details; at several points we are referred to other
+resources to acquire a deeper understanding for certain concepts. It's also a
+great standalone resource for learning Rust as it covers surrounding tooling
+like &lt;code&gt;rustup&lt;/code&gt; and &lt;code&gt;cargo&lt;/code&gt; in addition to the language itself. You can learn Rust
+to a decent level of proficiency from this book alone.&lt;/p&gt;
+&lt;p&gt;The well thought out pacing of the book carries over to the code samples, which
+are excellent through-and-through. There are some rather tricky concepts to get
+your head around in Rust compared to other programming languages, and the code
+samples are crucial in getting the point across. These are also presented in a
+top down fashion. By that, I mean that the higher level code is presented first
+containing calls to yet to be defined functions that are presented later. &lt;/p&gt;
+&lt;p&gt;As a crude example, imagine that we want to present a program that adds two
+numbers and prints the result. That may look like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;fn&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="kd"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="fm"&gt;println!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;{}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And then we define the &lt;code&gt;add&lt;/code&gt; function after having presented the high-level idea
+we want to implement:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;fn&lt;/span&gt; &lt;span class="nf"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;: &lt;span class="kt"&gt;i32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;rhs&lt;/span&gt;: &lt;span class="kt"&gt;i32&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&amp;gt; &lt;span class="kt"&gt;i32&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;lhs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;rhs&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This top down approach to presenting code samples really helps in getting a good
+idea for &lt;em&gt;what&lt;/em&gt; needs to be done before &lt;em&gt;how&lt;/em&gt; it is actually implemented. I
+strongly prefer this approach to a bottom up one, where you start with the low
+level &lt;em&gt;how&lt;/em&gt; before getting to the high level &lt;em&gt;what&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The book ends with a project on building a multithreaded web server, which is
+meant to solidify many of the concepts taught throughout the book. It's a great
+way to close out a great book.&lt;/p&gt;
+&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;p&gt;This is my first book review where I can't come up with something that I overtly
+did not like about a book. There are things the book lacks, such as more
+beginner-friendly introductions to core programming concepts, but I feel that's
+by design rather than thoughtless omission. The book would simply be way too
+long if it had to include such things as well.&lt;/p&gt;
+&lt;p&gt;Perhaps I will find something to be annoyed with as I revisit this in the
+future, but as it stands I am completely pleased with my reading experience.&lt;/p&gt;
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;p&gt;This is a great book to learn the Rust programming language. It's not
+appropriate for absolute beginners, but I think that may be simply a consequence
+of Rust being designed to tackle rather advanced problems. I would not
+recommend a budding programmer to start out with Rust, and so it seems
+completely natural to me that the official learning resource doesn't cater toward
+such a crowd. That being said, you don't need to be a seasoned programmer
+to get value out of this book, as concepts are explained with quite a lot of
+"backstory". You don't need to be overly familiar with the problems Rust
+attempts to solve (memory safety, for example) as the book clearly exemplifies
+the problems before outlining the solutions.&lt;/p&gt;
+&lt;p&gt;As &lt;em&gt;The Rust Programming Language&lt;/em&gt; is &lt;a href="https://doc.rust-lang.org/stable/book/"&gt;freely available
+online&lt;/a&gt;, I whole-heartedly recommend it
+for those looking to dive into Rust. I see no good reason to go looking
+elsewhere for resources when there's such a great one staring you right in the
+face. This is &lt;em&gt;the&lt;/em&gt; starting place for a prospective Rustacean!&lt;/p&gt;</content><category term="Reviews"></category><category term="book review"></category><category term="software engineering"></category><category term="rust"></category></entry><entry><title>Book Review: 97 Things Every Programmer Should Know</title><link href="https://slar.se/book-review-97-things.html" rel="alternate"></link><published>2022-07-11T21:00:48+02:00</published><updated>2022-07-11T21:00:48+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-11:/book-review-97-things.html</id><summary type="html">&lt;p&gt;&lt;em&gt;97 Things Every Programmer Should Know&lt;/em&gt; is a collection of short essays by
 experienced programmers. And by short, I mean &lt;em&gt;short&lt;/em&gt;: 1-3 fairly tiny pages a
 piece. If you're on a journey to become a software engineer then this book will
 give you a crash course in terminology you should …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;97 Things Every Programmer Should Know&lt;/em&gt; is a collection of short essays by

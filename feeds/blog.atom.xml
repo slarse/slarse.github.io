@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-07-10T21:58:53+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Full text search with pelican-search!</title><link href="https://slar.se/pelican-search.html" rel="alternate"></link><published>2022-07-10T21:58:53+02:00</published><updated>2022-07-10T21:58:53+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-10:/pelican-search.html</id><summary type="html">&lt;p&gt;I've been meaning to take this blog into more of the Wiki direction. Or rather
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-10-24T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Introducing my Wiki!</title><link href="https://slar.se/introducing-my-wiki.html" rel="alternate"></link><published>2022-10-24T00:00:00+02:00</published><updated>2022-10-24T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-10-24:/introducing-my-wiki.html</id><summary type="html">&lt;p&gt;A while ago, I decided that I wanted to have a low-effort way of recording what
+I learn out in the open. When I publish a blog post I feel compelled to keep
+the standard of the writing on a fairly high level. I've started dozens of
+articles that I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;A while ago, I decided that I wanted to have a low-effort way of recording what
+I learn out in the open. When I publish a blog post I feel compelled to keep
+the standard of the writing on a fairly high level. I've started dozens of
+articles that I never published because I couldn't massage them into a state
+that meeting my own standards. And that's not even counting the hundreds
+of articles that I never even started because it seemed like too much of an
+effort to record a tiny learning experience.&lt;/p&gt;
+&lt;p&gt;This strongly goes against the &lt;em&gt;Record What You Learn&lt;/em&gt; an &lt;em&gt;Share What You
+Learn&lt;/em&gt; patterns from &lt;a href="https://slar.se/book-review-apprenticeship-patterns.html"&gt;Apprenticeship
+Patterns&lt;/a&gt;; two patterns
+that I value highly. Enter the Wiki!&lt;/p&gt;
+&lt;h1&gt;My public Wiki&lt;/h1&gt;
+&lt;p&gt;The &lt;a href="https://slar.se/pages/wiki.html"&gt;Wiki&lt;/a&gt; can be reached from the menu bar at the
+top of the page. Here, I jot down quick notes about what I learn, what I have
+yet to learn and anything else that I feel is worth recording. The quality of
+the writing will range from poor to worse, and it'll be haphazardly organized,
+at least initially. I hope to turn this into a wealth of knowledge both for
+myself and for others in the coming years.&lt;/p&gt;
+&lt;h2&gt;Why not use an established Wiki software?&lt;/h2&gt;
+&lt;p&gt;Although there are several open source Wikis out there, such as
+&lt;a href="https://xwiki.org"&gt;XWiki&lt;/a&gt;, they're usually quite heavy and require a backend.
+This site is a &lt;a href="https://en.wikipedia.org/wiki/Static_web_page"&gt;static site&lt;/a&gt;,
+which is very cheap to host and requires no particular security considerations
+due to the lack of a backend. I quite like those properties, and I'm currently
+adapting the templates for this site to better suit my Wiki ambitions. This
+first rendition is &lt;em&gt;rough&lt;/em&gt;, but it suits my current needs, and improving upon
+it as my Wiki grows wll be an interesting challenge.&lt;/p&gt;
+&lt;h2&gt;Searching the Wiki&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://slar.se/pages/wiki.html"&gt;Wiki&lt;/a&gt; is indexed along with the rest of the site
+and can be searched using the &lt;a href="https://slar.se/pelican-search.html"&gt;search bar&lt;/a&gt; on
+the &lt;a href="https://slar.se/index.html"&gt;home page&lt;/a&gt;. In other words, you can search for anything on
+this website through that single search bar!&lt;/p&gt;
+&lt;h2&gt;Going forward&lt;/h2&gt;
+&lt;p&gt;I intend to keep improving the wiki. As the amount of content grows, I expect to
+have to improve the layout, cross-document linking and other related features.
+I'm very excited to finally get around to this as I've been thinking about it
+for a long time. Even though I do hope others will find it useful, it's mostly
+for my own gain, and I'm confident it will serve me well.&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>Full text search with pelican-search!</title><link href="https://slar.se/pelican-search.html" rel="alternate"></link><published>2022-07-10T21:58:53+02:00</published><updated>2022-07-10T21:58:53+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-07-10:/pelican-search.html</id><summary type="html">&lt;p&gt;I've been meaning to take this blog into more of the Wiki direction. Or rather
 some unholy mixture of a Wiki and a blog. An important step in that direction is
 full text search, which I've now got!&lt;/p&gt;
 &lt;p&gt;This blog is powered by &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, and quite

@@ -33,6 +33,11 @@ url = "/pages/projects.html"
 title = "Projects"
 
 [[input.files]]
+path = "introducing-my-wiki.html"
+url = "/introducing-my-wiki.html"
+title = "Introducing my Wiki!"
+
+[[input.files]]
 path = "book-review-the-rust-programming-language.html"
 url = "/book-review-the-rust-programming-language.html"
 title = "Book Review: The Rust Programming Language"

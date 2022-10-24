@@ -1,5 +1,5 @@
 Title: Awesome Media
-Status: Hidden
+Slug: wiki/media
 
 A collection of awsome media resources (videos, books, podcasts, etc).
 

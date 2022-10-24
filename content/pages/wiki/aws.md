@@ -1,5 +1,5 @@
 Title: AWS
-Status: Hidden
+Slug: wiki/aws
 
 # Using an EventSourceMapping to feed Kinesis records into a Lambda function
 

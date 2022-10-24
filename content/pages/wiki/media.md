@@ -5,9 +5,12 @@ A collection of awsome media resources (videos, books, podcasts, etc).
 
 # Videos
 
-* [Plain Text - Dylan Beatle - NDC Copenhagen 2022](https://youtu.be/gd5uJ7Nlvvo)
+* [Plain Text - Dylan Beattie - NDC Copenhagen 2022](https://youtu.be/gd5uJ7Nlvvo)
     - Incredibly entertaining talk on text encodings and related shenanigans
 * [Keynote: Why web tech is like this - Steve Sanderson - NDC Copenhagen 2022](https://youtu.be/3QEoJRjxnxQ)
+* [Keynote: Apps, Algorithms and Abstractions: Decoding our Digital World - Dylan Beattie - NDC 2018](https://youtu.be/TPS-eFmdepw)
+* [No Nonsense Monad & Functor - The foundation of Functional Programming by César Tron-Lozai](https://youtu.be/e6tWJD5q8uw)
+    - Practical description of Functors and Monads, without (most of) the math
 
 # Podcasts
 

@@ -3,6 +3,34 @@ Slug: wiki/media
 
 A collection of awsome media resources (videos, books, podcasts, etc).
 
+# Books
+Books are great, and my absolute favorite way to learn something new.
+
+## Books I've read
+This is a forever incomplete list of books that I've read. I aspire to review
+every book I read nowadays.
+
+* Apprenticeship Patterns: Guidance for the Aspiring Software Craftsman
+    - By Dave Hoover, Adewale Oshineye, 2009
+    - ISBN: 9780596518387
+    - [Book review]({filename}/blog/Reviews/apprenticeship_patterns.md)
+* The Rust Programming Language
+    - By Steve Klabnik, Carol Nichols, 2018
+    - ISBN: 9781593278281
+    - [Book review]({filename}/blog/Reviews/the_rust_programming_language.md)
+* 97 Things Every Programmer Should Know
+    - By Kevlin Henney, 2010
+    - ISBN: 9780596809485
+    - [Book review]({filename}/blog/Reviews/97_things.md)
+
+## Books I'm currently reading
+These are the books I'm currently reading, which I aspire to move over to the
+books I've read (along with a review).
+
+* Building Git
+    - By James Coglan, 2019
+    - [Website](https://shop.jcoglan.com/building-git/)
+
 # Videos
 
 * [Plain Text - Dylan Beattie - NDC Copenhagen 2022](https://youtu.be/gd5uJ7Nlvvo)

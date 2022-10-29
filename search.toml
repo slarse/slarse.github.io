@@ -33,6 +33,11 @@ url = "/pages/projects.html"
 title = "Projects"
 
 [[input.files]]
+path = "why-i-write-a-blog-that-nobody-reads-and-you-should-too.html"
+url = "/why-i-write-a-blog-that-nobody-reads-and-you-should-too.html"
+title = "Why I write a blog that nobody reads (and you should, too)"
+
+[[input.files]]
 path = "introducing-my-wiki.html"
 url = "/introducing-my-wiki.html"
 title = "Introducing my Wiki!"

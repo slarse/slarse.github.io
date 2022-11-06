@@ -33,6 +33,11 @@ url = "/pages/projects.html"
 title = "Projects"
 
 [[input.files]]
+path = "python-24-ternary.html"
+url = "/python-24-ternary.html"
+title = "The pre Python 2.5 ternary operator hack"
+
+[[input.files]]
 path = "why-i-write-a-blog-that-nobody-reads-and-you-should-too.html"
 url = "/why-i-write-a-blog-that-nobody-reads-and-you-should-too.html"
 title = "Why I write a blog that nobody reads (and you should, too)"

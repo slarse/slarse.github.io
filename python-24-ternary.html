@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A Page in : Publications and Essays" />
+    <meta name="description" content="" />
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Publications and Essays - Programming for fun and profit</title>
+    <title>The pre Python 2.5 ternary operator hack - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -54,7 +54,7 @@
                   <li>
                     <a href="https://slar.se/pages/about.html">About</a>
                   </li>
-                  <li class="active">
+                  <li>
                     <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
                   </li>
                   <li>
@@ -86,69 +86,104 @@
     <div class="container" id="main-container">
       <div class="row">
         <div class="col-md-9" id="content">
-<article itemscope="itemscope" 
-         itemtype="http://schema.org/WebPage">
-  <header>
-    <h1 itemprop="name headline">Publications and Essays</h1>
-  </header>
-  <div class="content-body" itemprop="text">
-    <p>I have a few conference and journal papers under my belt, along with my BSc and
-MSc degree projects. This is where you find link to such things.</p>
-<h3>Publications</h3>
-<ul>
-<li><a href="https://ieeexplore.ieee.org/abstract/document/9684709">Spork: Structured merge with formatting preservation</a><ul>
-<li>I'm very proud of this one, I'm the first author and it's published in IEEE Transactions on Software Engineering</li>
-<li>A follow-up on my MSc degree project (see below)</li>
-</ul>
-</li>
-<li><a href="https://ieeexplore.ieee.org/document/9756950">Sorald: Automatic Patch Suggestions for SonarQube Static Analysis Violations</a><ul>
-<li>I'm proud of this one as will, I'm a co-author and it's published in IEEE Transactions on Dependable and Secure Computing</li>
-</ul>
-</li>
-<li><a href="http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-281960">Spork: Move-enabled structured merge for Java with GumTree and 3DM (2020)</a><ul>
-<li>My MSc degree project.</li>
-</ul>
-</li>
-<li><a href="https://doi.org/10.1145/3408877.3439540">Automate, Alter &amp; Extend Git Repository Workflow with RepoBee (2021)</a><ul>
-<li>A 20-minute demo held at <a href="https://sigcse2021.sigcse.org/schedule/demos/">SIGCSE 2021</a></li>
-<li>A summarizing video of the demo <a href="https://repobee.org/media/repobee-demo.mp4">is available here</a></li>
-</ul>
-</li>
-<li><a href="https://dl.acm.org/doi/abs/10.1145/3456565.3460031">Double-blind Peer Review using RepoBee for Git-based Assignments (2021)</a><ul>
-<li>A short conference paper presented at ITiCSE 2021</li>
-<li>Won best presentation in the <a href="https://iticse.acm.org/best-paper-award/">Tips, Techniques and Courseware
-  category</a></li>
-</ul>
-</li>
-<li><a href="https://doi.org/10.1145/3456565.3460036">Sanitize This! Sharing Assignments and Solutions Safely in a Single Git Repository (2021)</a><ul>
-<li>A short conference paper presented at ITiCSE 2021</li>
-<li>Also won best presentation in the <a href="https://iticse.acm.org/best-paper-award/">Tips, Techniques and Courseware
-  category</a></li>
-</ul>
-</li>
-<li><a href="https://doi.org/10.1145/3341525.3393999">Towards Flexible and Extensible Git-based Course Management with RepoBee (2020)</a><ul>
-<li>A short conference paper presented at ITiCSE 2020.</li>
-</ul>
-</li>
-<li><a href="https://doi.org/10.1145/3304221.3319784">RepoBee: Developing Tool Support for Courses using Git/GitHub (2019)</a><ul>
-<li>A short conference paper presented at ITiCSE 2019.</li>
-</ul>
-</li>
-<li><a href="http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-229785">Sentiment Analysis on Stack Overflow with Respect to Document Type and Programming Language (2018)</a><ul>
-<li>My BSc degree project.</li>
-</ul>
-</li>
-</ul>
-<h3>Essays</h3>
-<ul>
-<li><a href="https://slar.se/essays/graph_db_essay.html">Introduction to Graph Databases</a><ul>
-<li>A fairly comprehensive introduction to graph databases, primarily
-  focusing on so-called <em>Labeled Property Graphs</em>.</li>
-</ul>
-</li>
-</ul>
-  </div>
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Sun 06 November 2022
+</abbr> <h1>
+  <a href="https://slar.se/python-24-ternary.html" rel="bookmark"
+     title="Permalink to The pre Python 2.5 ternary operator hack">
+    The pre Python 2.5 ternary operator hack
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/python.html"><i class="fas fa-tag"></i>python</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>The modern day ternary operator is well-known to most Pythonistas:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">expr_if_true</span><span class="o">&gt;</span> <span class="k">if</span> <span class="o">&lt;</span><span class="n">condition</span><span class="o">&gt;</span> <span class="k">else</span> <span class="o">&lt;</span><span class="n">expr_if_false</span><span class="o">&gt;</span>
+</code></pre></div>
 
+<p>It's officially known as a <em>conditional expression</em> and was introduced
+back in Python 2.5 with <a href="https://www.regular-expressions.info/atomic.html">PEP
+308</a>. Some like it, some
+don't, and while discussing it with a colleague of mine he mentioned that there
+"used to be something a whole lot worse" around the code bases written by
+developers favoring ternary operators. He couldn't remember what it looked like
+as these events are <a href="https://peps.python.org/pep-0356/">15 years in the past</a>,
+but a few days later he came back to me with a code snippet like this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">&quot;nope&quot;</span><span class="p">,</span> <span class="s2">&quot;yep&quot;</span><span class="p">][</span><span class="kc">False</span><span class="p">]</span>
+</code></pre></div>
+
+<p>What?</p>
+<h2>No ternary operator you say?</h2>
+<p>Developers are creative and opinionated. Sometimes this mix leads to
+monstrosities, such as when creative developers who really liked ternaries
+created this pattern:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="o">&lt;</span><span class="n">expr_if_false</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">expr_if_true</span><span class="o">&gt;</span><span class="p">][</span><span class="o">&lt;</span><span class="n">condition</span><span class="o">&gt;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>You're reading that right. It's a list with two elements, the first of which
+is returned if the condition is <code>False</code> and the second if it's <code>True</code>. Here is
+an example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">condition</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">message_modern</span> <span class="o">=</span> <span class="s2">&quot;success&quot;</span> <span class="k">if</span> <span class="n">condition</span> <span class="k">else</span> <span class="s2">&quot;failure&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message_modern</span><span class="p">)</span>   <span class="c1"># success</span>
+
+<span class="n">message_old</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;failure&quot;</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">][</span><span class="n">condition</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message_old</span><span class="p">)</span>      <span class="c1"># success</span>
+</code></pre></div>
+
+<p>This will make perfect sense to a C programmer: <code>True</code> and <code>1</code> are
+interchangeable, as are <code>False</code> and <code>0</code>. And that's precisely how this works,
+the underlying <a href="https://github.com/python/cpython/blob/2db55e0c0069a928775fa819973a76f840c5ab5a/Objects/listobject.c#L242-L255">function that implements the list index
+access</a>
+performs some rudimentary checks and then just uses the provided index as an
+offset to the base pointer of the list.</p>
+<h2>But the hack isn't quite the same</h2>
+<p>At first glance, it may seem like the old hack with the list is functionally
+equivalent to the modern ternary operator. It isn't quite, though, because it
+lacks one very important property: lazy evaluation of the branches. In short,
+the ternary operator only evaluates the branch that it returns. Here's an
+example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">condition</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">result_modern</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">condition</span> <span class="k">else</span> <span class="mi">42</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_modern</span><span class="p">)</span> <span class="c1"># 42</span>
+
+<span class="n">result_old</span> <span class="o">=</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span><span class="p">][</span><span class="n">condition</span><span class="p">]</span> <span class="c1"># raises ZeroDivisionError: division by zero</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_old</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The ternary operator does not result in a crash on division by zero as it does
+not evaluate the expression in the true-branch, whereas the old hack crashes
+immediately as it first evaluates both expressions and then returns one of them.
+To fully emulate the modern behavior we'd need something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">condition</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">result_old</span> <span class="o">=</span> <span class="p">[</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span><span class="p">][</span><span class="n">condition</span><span class="p">]()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_old</span><span class="p">)</span> <span class="c1"># 42</span>
+</code></pre></div>
+
+<p>Here we get lazy evaluation by virtue of wrapping the two branches in lambdas,
+and then executing the lambda that's returned. I think we can all agree that's
+not a pretty sight.</p>
+<h2>Conditional expressions are a good thing</h2>
+<p>Regardless of your stance on using ternary operators (or conditional
+expressions, as they're called in Python), it's probably a good thing they
+exist. Otherwise creative and opinionated programmers get around to hacks to
+emulate the behavior that end up being completely unreadable to others.</p>
+  </div>
+  
 
 </article>
         </div><!-- /content -->

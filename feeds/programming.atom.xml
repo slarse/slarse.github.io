@@ -1,5 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Programming</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/programming.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-11-06T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>The pre Python 2.5 ternary operator hack</title><link href="https://slar.se/python-24-ternary.html" rel="alternate"></link><published>2022-11-06T00:00:00+01:00</published><updated>2022-11-06T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-11-06:/python-24-ternary.html</id><summary type="html">&lt;p&gt;The modern day ternary operator is well-known to most Pythonistas:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Programming</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/programming.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-11-19T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>The difference between Python and CPython</title><link href="https://slar.se/the-difference-between-python-and-cpython.html" rel="alternate"></link><published>2022-11-19T00:00:00+01:00</published><updated>2022-11-19T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-11-19:/the-difference-between-python-and-cpython.html</id><summary type="html">&lt;p&gt;At one point or another, every Python developer or hobbyist encounters the word
+&lt;em&gt;CPython&lt;/em&gt;. For example, the &lt;a href="https://docs.python.org/3/library/dis.html"&gt;dis
+module&lt;/a&gt; states that it exposes an
+"implementation detail of the CPython interpreter". What does that mean?
+Some ask themselves how CPython differs from Python, and then
+they move on with their lives …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At one point or another, every Python developer or hobbyist encounters the word
+&lt;em&gt;CPython&lt;/em&gt;. For example, the &lt;a href="https://docs.python.org/3/library/dis.html"&gt;dis
+module&lt;/a&gt; states that it exposes an
+"implementation detail of the CPython interpreter". What does that mean?
+Some ask themselves how CPython differs from Python, and then
+they move on with their lives without ever getting to the bottom of it. But if
+you're one of the curious ones who couldn't put that thought down, this article
+is for you.&lt;/p&gt;
+&lt;h1&gt;Python is a language specification&lt;/h1&gt;
+&lt;p&gt;Python is a programming language. A programming language is an abstract concept.
+It's fundamentally a set of rules saying what you're allowed to write in the
+language, the &lt;em&gt;syntax&lt;/em&gt; of the language, and another set of rules saying what
+should happen if you execute some (syntactically valid) code, the &lt;em&gt;semantics&lt;/em&gt; of
+the language.&lt;/p&gt;
+&lt;p&gt;For example, take the &lt;a href="https://docs.python.org/3/reference/simple_stmts.html#the-pass-statement"&gt;&lt;code&gt;pass&lt;/code&gt;
+statement&lt;/a&gt;.
+The syntax of the &lt;code&gt;pass&lt;/code&gt; statement is incredibly simple, it's just the keyword
+&lt;code&gt;pass&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;pass_stmt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;::=&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;pass&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The semantics are equally simple.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;pass is a null operation — when it is executed, nothing happens. It is useful
+as a placeholder when a statement is required syntactically, but no code needs
+to be executed, [...]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;funtion_that_does_nothing&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The pass statement could be &lt;em&gt;implemented&lt;/em&gt; in any number of ways. It could
+correspond to a NOOP instruction that when executed does nothing. It could also
+correspond to &lt;em&gt;nothing&lt;/em&gt;, i.e. no instruction is generated for it. There are
+really endless possibilities in producing the semantic behavior described by the
+Python language reference.&lt;/p&gt;
+&lt;h1&gt;CPython is an implementation of the Python language specification&lt;/h1&gt;
+&lt;p&gt;CPython is an implementation of the Python language specification. In fact, it
+is the &lt;a href="https://wiki.python.org/moin/CPython"&gt;&lt;em&gt;reference&lt;/em&gt; implementation&lt;/a&gt;,
+meaning that its runtime semantics are the law. It is necessarily the case that
+not all runtime semantics are precisely described in the Python documentation,
+and then whatever CPython does is considered the desired behavior. Unless, of
+course, it is identified as a bug in the runtime.&lt;/p&gt;
+&lt;p&gt;When it comes to the &lt;code&gt;pass&lt;/code&gt; statement, CPython takes the "nothing" approach of
+not generating an instruction. This has less overhead than generating and
+executing a NOOP instruction. However, as the &lt;em&gt;effect&lt;/em&gt; of those two approaches
+are the same, it would be equally correct to take the NOOP instruction approach.
+So CPython is a reference for what happens when you execute some code, not &lt;em&gt;how&lt;/em&gt;
+that happens.&lt;/p&gt;
+&lt;p&gt;There are &lt;a href="https://wiki.python.org/moin/PythonImplementations?action=show&amp;amp;redirect=implementation"&gt;other
+implementations&lt;/a&gt;
+of the Python programming language, such as &lt;a href="https://www.pypy.org/"&gt;PyPy&lt;/a&gt;. It is fundamentally different
+to CPython in a variety of ways. For one, PyPy is implemented in Python, whereas
+CPython is to a large extent implemented in C. PyPy also employs a JIT
+(just-in-time) compiler that can compile hot code to machine code to
+substantially speed up running times, often making it &lt;a href="https://speed.pypy.org/"&gt;substantially faster than
+CPython&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Closing words&lt;/h1&gt;
+&lt;p&gt;The difference between Python and CPython is that the former is a language
+specification while the latter is an implementation of said language
+specification. However, in most everyday conversations among developers, they
+are one and the same. There is also the fact that CPython being the reference
+implementation makes it part of the specification of the language. Python as a
+programming language and CPython as an implementation are to some extent
+mutually dependent: you can't really define one without the other.&lt;/p&gt;
+&lt;p&gt;Distinguishing at all between the two may seem nit-picky, and in the vast
+majority of cases I'd argue it is. But when module documentation mentions
+implementation details of CPython or you find mentions of other implementations
+altogether, the distinction becomes important for it all to make sense.
+For me personally, just the urge to understand why two different words were used
+for seemingly the same thing was enough of a justification to dig into it, but
+I'm also hoping that this article brings more sense into the Python worlds of
+others.&lt;/p&gt;</content><category term="Programming"></category><category term="python"></category></entry><entry><title>The pre Python 2.5 ternary operator hack</title><link href="https://slar.se/python-24-ternary.html" rel="alternate"></link><published>2022-11-06T00:00:00+01:00</published><updated>2022-11-06T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-11-06:/python-24-ternary.html</id><summary type="html">&lt;p&gt;The modern day ternary operator is well-known to most Pythonistas:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;expr_if_true&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;expr_if_false&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 

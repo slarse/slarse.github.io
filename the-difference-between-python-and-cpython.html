@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content=" Posts tagged with enums" />
+    <meta name="description" content="" />
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Tag:enums - Programming for fun and profit</title>
+    <title>The difference between Python and CPython - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -86,19 +86,14 @@
     <div class="container" id="main-container">
       <div class="row">
         <div class="col-md-9" id="content">
-<ol class="breadcrumb">
-    <li><a href="https://slar.se/" title="Home" rel="home">
-		<i class="fas fa-home fa-fw fa-lg"></i> </a></li>
-    <li>Tags </li>
-    <li class="active">enums</li>
-</ol>
-    <article>
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
 <abbr class="article-header-date">
-  Sun 10 November 2019
+  Sat 19 November 2022
 </abbr> <h1>
-  <a href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html" rel="bookmark"
-     title="Permalink to Don&#39;t use String for method options, use an enum!">
-    Don't use String for method options, use an enum!
+  <a href="https://slar.se/the-difference-between-python-and-cpython.html" rel="bookmark"
+     title="Permalink to The difference between Python and CPython">
+    The difference between Python and CPython
   </a>
 </h1><div class="article-header-info">
   <p>
@@ -110,23 +105,87 @@
   </p>
 </div> <!-- /.article-header-info --><div class="article-tag-list">
 <span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/java.html"><i class="fas fa-tag"></i>java</a>&nbsp;
-	<a href="https://slar.se/tag/enums.html"><i class="fas fa-tag"></i>enums</a>&nbsp;
-</div>
-      <div class="summary">
-		<p>In this article, we are going to have a look at a method that accepts an option.
-That is to say, it accepts an argument that somehow decides how it operates. If
-you use a lot of libraries in your day-to-day programming, you're bound to come
-across methods that accept …</p>
-		<p class="content-emphasis"><a href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
-    <hr />
+	<a href="https://slar.se/tag/python.html"><i class="fas fa-tag"></i>python</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>At one point or another, every Python developer or hobbyist encounters the word
+<em>CPython</em>. For example, the <a href="https://docs.python.org/3/library/dis.html">dis
+module</a> states that it exposes an
+"implementation detail of the CPython interpreter". What does that mean?
+Some ask themselves how CPython differs from Python, and then
+they move on with their lives without ever getting to the bottom of it. But if
+you're one of the curious ones who couldn't put that thought down, this article
+is for you.</p>
+<h1>Python is a language specification</h1>
+<p>Python is a programming language. A programming language is an abstract concept.
+It's fundamentally a set of rules saying what you're allowed to write in the
+language, the <em>syntax</em> of the language, and another set of rules saying what
+should happen if you execute some (syntactically valid) code, the <em>semantics</em> of
+the language.</p>
+<p>For example, take the <a href="https://docs.python.org/3/reference/simple_stmts.html#the-pass-statement"><code>pass</code>
+statement</a>.
+The syntax of the <code>pass</code> statement is incredibly simple, it's just the keyword
+<code>pass</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">pass_stmt</span><span class="w"> </span><span class="o">::=</span><span class="w">  </span><span class="s">&quot;pass&quot;</span><span class="w"></span>
+</code></pre></div>
 
-<nav class="index-pager">
+<p>The semantics are equally simple.</p>
+<blockquote>
+<p>pass is a null operation — when it is executed, nothing happens. It is useful
+as a placeholder when a statement is required syntactically, but no code needs
+to be executed, [...]</p>
+</blockquote>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">funtion_that_does_nothing</span><span class="p">():</span>
+    <span class="k">pass</span>
+</code></pre></div>
 
-</nav> <!-- /index-pager -->
+<p>The pass statement could be <em>implemented</em> in any number of ways. It could
+correspond to a NOOP instruction that when executed does nothing. It could also
+correspond to <em>nothing</em>, i.e. no instruction is generated for it. There are
+really endless possibilities in producing the semantic behavior described by the
+Python language reference.</p>
+<h1>CPython is an implementation of the Python language specification</h1>
+<p>CPython is an implementation of the Python language specification. In fact, it
+is the <a href="https://wiki.python.org/moin/CPython"><em>reference</em> implementation</a>,
+meaning that its runtime semantics are the law. It is necessarily the case that
+not all runtime semantics are precisely described in the Python documentation,
+and then whatever CPython does is considered the desired behavior. Unless, of
+course, it is identified as a bug in the runtime.</p>
+<p>When it comes to the <code>pass</code> statement, CPython takes the "nothing" approach of
+not generating an instruction. This has less overhead than generating and
+executing a NOOP instruction. However, as the <em>effect</em> of those two approaches
+are the same, it would be equally correct to take the NOOP instruction approach.
+So CPython is a reference for what happens when you execute some code, not <em>how</em>
+that happens.</p>
+<p>There are <a href="https://wiki.python.org/moin/PythonImplementations?action=show&amp;redirect=implementation">other
+implementations</a>
+of the Python programming language, such as <a href="https://www.pypy.org/">PyPy</a>. It is fundamentally different
+to CPython in a variety of ways. For one, PyPy is implemented in Python, whereas
+CPython is to a large extent implemented in C. PyPy also employs a JIT
+(just-in-time) compiler that can compile hot code to machine code to
+substantially speed up running times, often making it <a href="https://speed.pypy.org/">substantially faster than
+CPython</a>.</p>
+<h1>Closing words</h1>
+<p>The difference between Python and CPython is that the former is a language
+specification while the latter is an implementation of said language
+specification. However, in most everyday conversations among developers, they
+are one and the same. There is also the fact that CPython being the reference
+implementation makes it part of the specification of the language. Python as a
+programming language and CPython as an implementation are to some extent
+mutually dependent: you can't really define one without the other.</p>
+<p>Distinguishing at all between the two may seem nit-picky, and in the vast
+majority of cases I'd argue it is. But when module documentation mentions
+implementation details of CPython or you find mentions of other implementations
+altogether, the distinction becomes important for it all to make sense.
+For me personally, just the urge to understand why two different words were used
+for seemingly the same thing was enough of a justification to dig into it, but
+I'm also hoping that this article brings more sense into the Python worlds of
+others.</p>
+  </div>
+  
+
+</article>
         </div><!-- /content -->
 
         <div class="col-md-3 sidebar-nav" id="sidebar">

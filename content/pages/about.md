@@ -20,7 +20,7 @@ evident by this website, I also occasionally write an article or two.
 This site serves primarily as my private blog. I sometimes write lengthy
 articles and even series of articles on topics related to programming,
 mostly within the Python programming language. I find that it's a good way to
-retain newly aquired knowledge. I also have a [Wiki]({filename}/wiki/index.md)
+retain newly aquired knowledge. I also have a [Wiki]({filename}wiki/index.md)
 where I gather knowlegde that I don't have the time to write a full-fledged
 article about.
 
@@ -34,9 +34,6 @@ provided with when I started studying at KTH. It just kind of stuck. When I
 started working as a TA, one of my colleagues even called me slarse for over a
 year because that's what came to mind first for him. It's more or less my online
 identity nowadays.
-
-> Note: slarse sounds less like "arse" in Swedish than it does in English. I
-> regret nothing.
 
 ## Contact me
 Feel free to send me an email!

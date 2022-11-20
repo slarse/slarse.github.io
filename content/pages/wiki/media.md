@@ -14,6 +14,10 @@ every book I read nowadays.
     - By Dave Hoover, Adewale Oshineye, 2009
     - ISBN: 9780596518387
     - [Book review]({filename}/blog/Reviews/apprenticeship_patterns.md)
+* CPython Internals
+    - By Anthony Shaw
+    - ISBN: 9781775093344
+    - [Book review]({filename}/blog/Reviews/cpython_internals.md)
 * The Rust Programming Language
     - By Steve Klabnik, Carol Nichols, 2018
     - ISBN: 9781593278281

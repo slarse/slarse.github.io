@@ -8,7 +8,7 @@
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Book Review: The Rust Programming Language - Programming for fun and profit</title>
+    <title>Book Review: CPython Internals - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -89,11 +89,11 @@
 <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
   <header class="article-header">
 <abbr class="article-header-date">
-  Wed 10 August 2022
+  Sun 20 November 2022
 </abbr> <h1>
-  <a href="https://slar.se/drafts/book-review-cpython-internals.html" rel="bookmark"
-     title="Permalink to Book Review: The Rust Programming Language">
-    Book Review: The Rust Programming Language
+  <a href="https://slar.se/book-review-cpython-internals.html" rel="bookmark"
+     title="Permalink to Book Review: CPython Internals">
+    Book Review: CPython Internals
   </a>
 </h1><div class="article-header-info">
   <p>
@@ -110,23 +110,14 @@
 	<a href="https://slar.se/tag/python.html"><i class="fas fa-tag"></i>python</a>&nbsp;
 </div>  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>CPython is the <a href="https://wiki.python.org/moin/CPython">reference implementation of the Python programming
-language</a>. When we say "Python",
-we most often mean CPython. There are <a href="https://wiki.python.org/moin/PythonImplementations?action=show&amp;redirect=implementation">other
-implementations</a>
-which leads to the conclusion that there is a distinction between the
-specification of a language (e.g. Python) and an implementation of that
-specification (CPython). However, in the Python community CPython is so
-ubiquitous that the distinction is only required if you're talking about
-something other than CPython.</p>
-<p>About a month ago I signed myself up to do a talk at a Python meetup hosted by
-<a href="https://hiq.se/">HiQ</a>. I brazenly set my topic as <em>Under the hood of CPython</em>,
+	<p>About a month ago I signed myself up to do a talk at a Python meetup hosted by
+<a href="https://hiq.se/">HiQ</a>. I brazenly set my topic as <em>Under the Hood of CPython</em>,
 thinking I had sufficient understanding of its inner workings to produce a
 riveting talk. As I started preparing the talk, I came to the gut-wrenching
-conclusion that my knowledge was fairly accurate, but rather imprecise, I simply
-didn't know enough of the details.</p>
-<p>Thankfully, I knew where to turn to for the details I needed: Anthony Shaw's
-<em>CPython Internals</em> book. Here's what I think of it.</p>
+conclusion that my knowledge was too shallow, I simply didn't know enough of
+the details to put together an in-depth talk on the subject. Thankfully, I knew
+where to turn to for the details I needed: Anthony Shaw's <em>CPython Internals</em>
+book. Here's what I think of it.</p>
 <div class="highlight"><pre><span></span><code>CPython Internals
 by Anthony Shaw
 Released May 2021
@@ -134,8 +125,78 @@ Publisher(s): Real Python (realpython.com)
 ISBN: 9781775093344
 </code></pre></div>
 
+<blockquote>
+<p>Confused about the difference between Python and CPython? See <a href="https://slar.se/the-difference-between-python-and-cpython.html">The difference
+between Python and
+CPython</a>.</p>
+</blockquote>
 <h1>The book in a nutshell</h1>
-<p><em>CPython Internals</em> takes you through the entire C</p>
+<p><em>CPython Internals</em> gives you a guided tour of the CPython project, from
+parsing source code to compiling bytecode to interpreting said bytecode. The
+book is meant to serve as a starting point for budding CPython contributors or
+Python developers that simply want to learn a bit more about the reference
+implementation. It highlights the most important files in the project for each
+of the respective parts and guides you through their execution. Throughout the
+book we also get to follow along with a worked example of extending the language
+with an "almost equal" operator, written as <code>~=</code>.</p>
+<p>The book concludes with three concrete ways in which you can use the knowledge
+you've attained: 1) creating C extensions, 2) improving existing Python programs
+by leveraging knowledge of the internals and 3) contributing to the CPython
+project. While point 2) is potentially a little bit vague, points 1) and 3) are
+concrete and well described.</p>
+<p>Before writing the book, Anthony wrote an in-depth article on the same topic.
+You can find it over on <a href="https://realpython.com/cpython-source-code-guide/">Real
+Python</a>. It is something of
+an appetizer for the book, but stands strong on its own. Having a brief look at
+that article will give you a better understanding of what the book is about
+than anything I could write here.</p>
+<h1>What I liked</h1>
+<p>I went from surface-level understanding of the CPython project to being pretty
+confident about where to poke around to do what just from reading this book.
+It's comprehensive in scope and the worked example of the <code>~=</code> operator helps <em>a
+lot</em> in facilitating an understanding for how to extend CPython with your own
+silly things.</p>
+<p>I also appreciated the nods to other respectable sources. The <a href="https://devguide.python.org/">Python
+Developer's Guide</a> is a great resource for quickly
+refreshing how to do something (but going from 0 knowledge about the project
+it's a bit to terse). Luciano Ramalho's book <a href="https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/">Fluent Python 2nd
+ed</a> is
+also noted as an excellent reference on the Python object model, which I
+absolutely agree with.</p>
+<p>There is enough context in each chapter that you don't really need much
+pre-existing understanding of any of the subjects. If you can read Python code
+and have a little bit of experience with reading C code, you're all good to go.
+Concepts relevant to the book such as parallelism and memory management are
+explained both on an abstract level and in how they are implemented in CPython.
+The book is to a great extent a standalone resource and it should be very
+approachable even to developers without much experience. There's even an
+appendix at the end to explain what little you need to know about the C
+programming language to be able to understand the code samples.</p>
+<h1>What I didn't like</h1>
+<p>There was nothing about the book that I thought was <em>bad</em>, but for me
+personally, I would have preferred less explanation of fundamental concepts
+(such as threading), and more in-depth details on CPython itself. That being
+said, I think Anthony overall has made good calls on the tradeoffs between depth
+and approachability. Given that the book is meant to be a starting point for
+CPython development as opposed to a complete reference, I think that this
+nit-pick of mine is nothing more than personal preference, and perhaps that I'm
+slightly outside the target audience of the book. It's clearly meant to contain
+everything you'd need to know to go from zero to hero, and it's a lot easier to
+skip over content you feel is redundant than it is to find content you didn't
+know you needed.</p>
+<h1>Conclusions</h1>
+<p>CPython Internals saved my neck. I had three weeks to go from a shallow
+understanding of the CPython project to being able to explain it to others in a
+~30-minute talk, and <a href="https://github.com/slarse/talks/tree/80503786d4587abdadba9913c55c7d133269f3a2/under-the-hood-of-cpython">I made
+it</a>.
+Without this book I wouldn't have. It was so approachable that I could use it
+for "Sunday reading" before bedtime and in spare minutes on public transport.</p>
+<p>I highly recommend this book to anyone who's interested in the CPython project.
+It's not necessary to have future CPython contributions as a goal to get a lot
+out of this book, I found it incredibly interesting in its own right. The fact
+that Anthony has managed to pack so much information, with so much context
+(recall that I thought there was too much of that) in less than 400 pages is
+nothing short of spectacular.</p>
   </div>
   
 
@@ -183,15 +244,39 @@ ISBN: 9781775093344
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
     <span class="tag-1">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-1">
       <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
         python
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
           <i class="fas fa-tag"></i>
-        totw
+        programming languages
       </a>
     </span>
     <span class="tag-3">
@@ -201,9 +286,57 @@ ISBN: 9781775093344
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        podcast
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
       </a>
     </span>
     <span class="tag-4">
@@ -218,58 +351,16 @@ ISBN: 9781775093344
         linux
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
-        learning
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
+        testing tips
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/programming-languages.html">
+      <a href="https://slar.se/tag/podcast.html">
           <i class="fas fa-tag"></i>
-        programming languages
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
-          <i class="fas fa-tag"></i>
-        rust
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/software-engineering.html">
-          <i class="fas fa-tag"></i>
-        software engineering
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
-          <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
+        podcast
       </a>
     </span>
     <span class="tag-4">
@@ -278,22 +369,10 @@ ISBN: 9781775093344
         enums
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/exposed.html">
+      <a href="https://slar.se/tag/book-review.html">
           <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
+        book review
       </a>
     </span>
     <span class="tag-2">
@@ -302,22 +381,10 @@ ISBN: 9781775093344
         kuizzy
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
+        pytest
       </a>
     </span>
     <span class="tag-3">
@@ -326,40 +393,34 @@ ISBN: 9781775093344
         java
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
     <span class="tag-2">
       <a href="https://slar.se/tag/tornadofx.html">
           <i class="fas fa-tag"></i>
         tornadofx
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        book review
+        javascript
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
       </a>
     </span>
     <span class="tag-4">
       <a href="https://slar.se/tag/unit-testing.html">
           <i class="fas fa-tag"></i>
         unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
       </a>
     </span>
 </p>

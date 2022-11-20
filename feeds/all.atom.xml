@@ -1,5 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-11-19T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>The difference between Python and CPython</title><link href="https://slar.se/the-difference-between-python-and-cpython.html" rel="alternate"></link><published>2022-11-19T00:00:00+01:00</published><updated>2022-11-19T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-11-19:/the-difference-between-python-and-cpython.html</id><summary type="html">&lt;p&gt;At one point or another, every Python developer or hobbyist encounters the word
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-11-20T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Book Review: CPython Internals</title><link href="https://slar.se/book-review-cpython-internals.html" rel="alternate"></link><published>2022-11-20T00:00:00+01:00</published><updated>2022-11-20T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-11-20:/book-review-cpython-internals.html</id><summary type="html">&lt;p&gt;About a month ago I signed myself up to do a talk at a Python meetup hosted by
+&lt;a href="https://hiq.se/"&gt;HiQ&lt;/a&gt;. I brazenly set my topic as &lt;em&gt;Under the Hood of CPython&lt;/em&gt;,
+thinking I had sufficient understanding of its inner workings to produce a
+riveting talk. As I started preparing the talk …&lt;/p&gt;</summary><content type="html">&lt;p&gt;About a month ago I signed myself up to do a talk at a Python meetup hosted by
+&lt;a href="https://hiq.se/"&gt;HiQ&lt;/a&gt;. I brazenly set my topic as &lt;em&gt;Under the Hood of CPython&lt;/em&gt;,
+thinking I had sufficient understanding of its inner workings to produce a
+riveting talk. As I started preparing the talk, I came to the gut-wrenching
+conclusion that my knowledge was too shallow, I simply didn't know enough of
+the details to put together an in-depth talk on the subject. Thankfully, I knew
+where to turn to for the details I needed: Anthony Shaw's &lt;em&gt;CPython Internals&lt;/em&gt;
+book. Here's what I think of it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;CPython Internals
+by Anthony Shaw
+Released May 2021
+Publisher(s): Real Python (realpython.com)
+ISBN: 9781775093344
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Confused about the difference between Python and CPython? See &lt;a href="https://slar.se/the-difference-between-python-and-cpython.html"&gt;The difference
+between Python and
+CPython&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;p&gt;&lt;em&gt;CPython Internals&lt;/em&gt; gives you a guided tour of the CPython project, from
+parsing source code to compiling bytecode to interpreting said bytecode. The
+book is meant to serve as a starting point for budding CPython contributors or
+Python developers that simply want to learn a bit more about the reference
+implementation. It highlights the most important files in the project for each
+of the respective parts and guides you through their execution. Throughout the
+book we also get to follow along with a worked example of extending the language
+with an "almost equal" operator, written as &lt;code&gt;~=&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The book concludes with three concrete ways in which you can use the knowledge
+you've attained: 1) creating C extensions, 2) improving existing Python programs
+by leveraging knowledge of the internals and 3) contributing to the CPython
+project. While point 2) is potentially a little bit vague, points 1) and 3) are
+concrete and well described.&lt;/p&gt;
+&lt;p&gt;Before writing the book, Anthony wrote an in-depth article on the same topic.
+You can find it over on &lt;a href="https://realpython.com/cpython-source-code-guide/"&gt;Real
+Python&lt;/a&gt;. It is something of
+an appetizer for the book, but stands strong on its own. Having a brief look at
+that article will give you a better understanding of what the book is about
+than anything I could write here.&lt;/p&gt;
+&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;p&gt;I went from surface-level understanding of the CPython project to being pretty
+confident about where to poke around to do what just from reading this book.
+It's comprehensive in scope and the worked example of the &lt;code&gt;~=&lt;/code&gt; operator helps &lt;em&gt;a
+lot&lt;/em&gt; in facilitating an understanding for how to extend CPython with your own
+silly things.&lt;/p&gt;
+&lt;p&gt;I also appreciated the nods to other respectable sources. The &lt;a href="https://devguide.python.org/"&gt;Python
+Developer's Guide&lt;/a&gt; is a great resource for quickly
+refreshing how to do something (but going from 0 knowledge about the project
+it's a bit to terse). Luciano Ramalho's book &lt;a href="https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/"&gt;Fluent Python 2nd
+ed&lt;/a&gt; is
+also noted as an excellent reference on the Python object model, which I
+absolutely agree with.&lt;/p&gt;
+&lt;p&gt;There is enough context in each chapter that you don't really need much
+pre-existing understanding of any of the subjects. If you can read Python code
+and have a little bit of experience with reading C code, you're all good to go.
+Concepts relevant to the book such as parallelism and memory management are
+explained both on an abstract level and in how they are implemented in CPython.
+The book is to a great extent a standalone resource and it should be very
+approachable even to developers without much experience. There's even an
+appendix at the end to explain what little you need to know about the C
+programming language to be able to understand the code samples.&lt;/p&gt;
+&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;p&gt;There was nothing about the book that I thought was &lt;em&gt;bad&lt;/em&gt;, but for me
+personally, I would have preferred less explanation of fundamental concepts
+(such as threading), and more in-depth details on CPython itself. That being
+said, I think Anthony overall has made good calls on the tradeoffs between depth
+and approachability. Given that the book is meant to be a starting point for
+CPython development as opposed to a complete reference, I think that this
+nit-pick of mine is nothing more than personal preference, and perhaps that I'm
+slightly outside the target audience of the book. It's clearly meant to contain
+everything you'd need to know to go from zero to hero, and it's a lot easier to
+skip over content you feel is redundant than it is to find content you didn't
+know you needed.&lt;/p&gt;
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;p&gt;CPython Internals saved my neck. I had three weeks to go from a shallow
+understanding of the CPython project to being able to explain it to others in a
+~30-minute talk, and &lt;a href="https://github.com/slarse/talks/tree/80503786d4587abdadba9913c55c7d133269f3a2/under-the-hood-of-cpython"&gt;I made
+it&lt;/a&gt;.
+Without this book I wouldn't have. It was so approachable that I could use it
+for "Sunday reading" before bedtime and in spare minutes on public transport.&lt;/p&gt;
+&lt;p&gt;I highly recommend this book to anyone who's interested in the CPython project.
+It's not necessary to have future CPython contributions as a goal to get a lot
+out of this book, I found it incredibly interesting in its own right. The fact
+that Anthony has managed to pack so much information, with so much context
+(recall that I thought there was too much of that) in less than 400 pages is
+nothing short of spectacular.&lt;/p&gt;</content><category term="Reviews"></category><category term="book review"></category><category term="software engineering"></category><category term="python"></category></entry><entry><title>The difference between Python and CPython</title><link href="https://slar.se/the-difference-between-python-and-cpython.html" rel="alternate"></link><published>2022-11-19T00:00:00+01:00</published><updated>2022-11-19T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-11-19:/the-difference-between-python-and-cpython.html</id><summary type="html">&lt;p&gt;At one point or another, every Python developer or hobbyist encounters the word
 &lt;em&gt;CPython&lt;/em&gt;. For example, the &lt;a href="https://docs.python.org/3/library/dis.html"&gt;dis
 module&lt;/a&gt; states that it exposes an
 "implementation detail of the CPython interpreter". What does that mean?

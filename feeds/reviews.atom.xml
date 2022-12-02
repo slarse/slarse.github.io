@@ -1,45 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Reviews</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/reviews.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-12-01T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Device Review: Kobo Elipsa e-reader</title><link href="https://slar.se/device-review-kobo-elipsa-e-reader.html" rel="alternate"></link><published>2022-12-01T00:00:00+01:00</published><updated>2022-12-01T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-12-01:/device-review-kobo-elipsa-e-reader.html</id><summary type="html">&lt;p&gt;I read a lot, or at least I aspire to. I usually try to read before bed instead
-of watching YouTube, and sometimes I read in the morning before work (I did
-today). Something that has significantly helped my reading habit along is
-e-readers. I bought my first e-reader back …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I read a lot, or at least I aspire to. I usually try to read before bed instead
-of watching YouTube, and sometimes I read in the morning before work (I did
-today). Something that has significantly helped my reading habit along is
-e-readers. I bought my first e-reader back in 2015, a 6" Kindle Paperwhite that
-I still have around. It's still a fantastic e-reader and fulfills most of my
-needs, except one: reading technical books on it is terrible due to the tiny 6"
-screen. PDFs are especially terrible. Plain text is of course fine but source
-code almost always line wraps into an unreadable mess and illustrations are
-often simply too small to be intelligible.&lt;/p&gt;
-&lt;p&gt;This summer I went hunting for a larger e-reader to remedy these problems, and I
-landed on the roughly &lt;a href="https://us.kobobooks.com/products/kobo-elipsa"&gt;Kobo
-Elipsa&lt;/a&gt;. It retails for around
-400 USD (or 400 EUR) making it one of the most affordable 10" e-readers on the
-market. On paper it checks all of my boxes with its spacious 10" screen, an
-included stylus to take notes and support for PDF and EPUB formats. I've been
-using it for about 6 months now, and while it's not without it's flaws, I'm
-it's a huge upgrade from the 2015 Kindle Paperwhite when it comes to reading
-technical books. Let's dive into it.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
-&lt;p&gt;I like a lot about this device. So much so that I will forego my usual blob of
-"What I liked" text with a subdivision of sections to describe the different
-parts that I really like.&lt;/p&gt;
-&lt;h2&gt;Look at that screen!&lt;/h2&gt;
-&lt;p&gt;The 10" screen is far and away the thing I like most about this device. It is
-very close to the size of most paperback releases of software engineering books
-(they tend to be a tad bit larger, but not by much), while of course being
-significantly thinner. This translates into source code examples of my
-programming books and illustrations of my software system design books finally
-fitting comfortably within a page. The difference in reading comfort to a
-smaller display cannot be understated.&lt;/p&gt;
-&lt;p&gt;Something that had me a bit anxious when ordering the Elipsa was the resolution
-of the screen, which at 1404 x 1872 brings in a pixel density of 227 ppi. That's
-quite a far cry from the 300 ppi of my 2015 Kindle Paperwhite, and I was
-concerned that text would not look sharp enough. After 6 months of usage I can
-confidently say that has been a non-issue for me. At no point have I found text
-or illustrations blurry.&lt;/p&gt;
-&lt;h2&gt;&lt;/h2&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;</content><category term="Reviews"></category><category term="device review"></category></entry><entry><title>Book Review: CPython Internals</title><link href="https://slar.se/book-review-cpython-internals.html" rel="alternate"></link><published>2022-11-20T00:00:00+01:00</published><updated>2022-11-20T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-11-20:/book-review-cpython-internals.html</id><summary type="html">&lt;p&gt;About a month ago I signed myself up to do a talk at a Python meetup hosted by
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Reviews</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/reviews.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-11-20T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Book Review: CPython Internals</title><link href="https://slar.se/book-review-cpython-internals.html" rel="alternate"></link><published>2022-11-20T00:00:00+01:00</published><updated>2022-11-20T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-11-20:/book-review-cpython-internals.html</id><summary type="html">&lt;p&gt;About a month ago I signed myself up to do a talk at a Python meetup hosted by
 &lt;a href="https://hiq.se/"&gt;HiQ&lt;/a&gt;. I brazenly set my topic as &lt;em&gt;Under the Hood of CPython&lt;/em&gt;,
 thinking I had sufficient understanding of its inner workings to produce a
 riveting talk. As I started preparing the talk …&lt;/p&gt;</summary><content type="html">&lt;p&gt;About a month ago I signed myself up to do a talk at a Python meetup hosted by

@@ -34,6 +34,9 @@ books I've read (along with a review).
 * Building Git
     - By James Coglan, 2019
     - [Website](https://shop.jcoglan.com/building-git/)
+* [Designing Data-Intensive Applications](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
+    - By Martin Kleppman
+    - ISBN: 9781449373320
 
 # Videos
 

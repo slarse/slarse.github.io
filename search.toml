@@ -33,6 +33,11 @@ url = "/pages/projects.html"
 title = "Projects"
 
 [[input.files]]
+path = "device-review-kobo-elipsa-e-reader.html"
+url = "/device-review-kobo-elipsa-e-reader.html"
+title = "Device Review: Kobo Elipsa e-reader"
+
+[[input.files]]
 path = "book-review-cpython-internals.html"
 url = "/book-review-cpython-internals.html"
 title = "Book Review: CPython Internals"

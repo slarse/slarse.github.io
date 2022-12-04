@@ -33,6 +33,12 @@ tools.
 I don't use a whole lot of GUI utilities, but I've found a few really neat ones
 over the years.
 
+### [i3](https://i3wm.org/) - Improved tiling window manager
+* A tiling window manager - once you go tiling, you never go back!
+    - Seriously, try it. You'll wonder why you ever had floating windows.
+* Relatively easy to get started with
+* Highly customizable
+
 ### [warpd](https://github.com/rvaiya/warpd) - Navigate GUIs with your keyboard
 * Navigate your GUIs using your keyboard
 * Fantastic for use with a laptop

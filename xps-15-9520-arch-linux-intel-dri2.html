@@ -8,7 +8,7 @@
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Book Review: 97 Things Every Programmer Should Know - Programming for fun and profit</title>
+    <title>Fix 3D graphics in Arch Linux on Dell XPS 15 9520 - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -89,99 +89,62 @@
 <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
   <header class="article-header">
 <abbr class="article-header-date">
-  Mon 11 July 2022
+  Mon 26 December 2022
 </abbr> <h1>
-  <a href="https://slar.se/book-review-97-things.html" rel="bookmark"
-     title="Permalink to Book Review: 97 Things Every Programmer Should Know">
-    Book Review: 97 Things Every Programmer Should Know
+  <a href="https://slar.se/xps-15-9520-arch-linux-intel-dri2.html" rel="bookmark"
+     title="Permalink to Fix 3D graphics in Arch Linux on Dell XPS 15 9520">
+    Fix 3D graphics in Arch Linux on Dell XPS 15 9520
   </a>
 </h1><div class="article-header-info">
   <p>
       Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
     in 
-    <a href="https://slar.se/category/reviews.html">
-      Reviews</a>
+    <a href="https://slar.se/category/blog.html">
+      Blog</a>
     &nbsp;&nbsp;
   </p>
 </div> <!-- /.article-header-info --><div class="article-tag-list">
 <span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/book-review.html"><i class="fas fa-tag"></i>book review</a>&nbsp;
-	<a href="https://slar.se/tag/software-engineering.html"><i class="fas fa-tag"></i>software engineering</a>&nbsp;
+	<a href="https://slar.se/tag/blog.html"><i class="fas fa-tag"></i>blog</a>&nbsp;
+	<a href="https://slar.se/tag/linux.html"><i class="fas fa-tag"></i>linux</a>&nbsp;
+	<a href="https://slar.se/tag/xps15.html"><i class="fas fa-tag"></i>xps15</a>&nbsp;
 </div>  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p><em>97 Things Every Programmer Should Know</em> is a collection of short essays by
-experienced programmers. And by short, I mean <em>short</em>: 1-3 fairly tiny pages a
-piece. If you're on a journey to become a software engineer then this book will
-give you a crash course in terminology you should be familiar with. Even as a
-practicing software engineer there is wisdom to be found in this book, but a
-novice will undoubtedly get more out of reading it.</p>
-<div class="highlight"><pre><span></span><code><span class="mf">97</span><span class="w"> </span><span class="n">Things</span><span class="w"> </span><span class="n">Every</span><span class="w"> </span><span class="n">Programmer</span><span class="w"> </span><span class="n">Should</span><span class="w"> </span><span class="n">Know</span><span class="w"></span>
-<span class="n">by</span><span class="w"> </span><span class="n">Kevlin</span><span class="w"> </span><span class="n">Henney</span><span class="w"></span>
-<span class="n">Released</span><span class="w"> </span><span class="n">February</span><span class="w"> </span><span class="mf">2010</span><span class="w"></span>
-<span class="n">Publisher</span><span class="p">(</span><span class="n">s</span><span class="p">):</span><span class="w"> </span><span class="n">O</span><span class="err">&#39;</span><span class="n">Reilly</span><span class="w"> </span><span class="n">Media</span><span class="p">,</span><span class="w"> </span><span class="n">Inc</span><span class="mf">.</span><span class="w"></span>
-<span class="n">ISBN</span><span class="p">:</span><span class="w"> </span><span class="mf">9780596809485</span><span class="w"></span>
+	<p>I recently got myself a Dell XPS 15 9520 to replace my aging laptop. it's
+highly Linux-compatible and just following the <a href="https://wiki.archlinux.org/title/Installation_guide">official installation
+guide</a> got me 90% of the
+way of having a well-behaved Arch Linux laptop, but the final 10% took me quite
+a while to iron out. One big thing wasn't working, though: 3D graphics!</p>
+<h2>Symptoms: glitchy 2D graphics and unusable 3D graphics</h2>
+<p>2D graphics worked mostly fine after installing <code>xf86-video-intel</code>, <code>nvidia</code> and
+<code>nvidia-prime</code>. Websites, most desktop applications as well as 2D games like
+Terraria worked without issue. Anything with the slightest hint of 3D would
+however glitch out terribly with Intel graphics and just be completely black
+with 3D graphics.</p>
+<p>Some applications, such as Steam, wouldn't render properly unless in fullscreen.
+3D benchmark software like <code>fire</code> (from <code>mesa-demo</code>) and <code>glmark2</code> wouldn't
+update properly with Intel and would again be black with NVIDIA.</p>
+<h2>Solution: Using DRI2 for the Intel driver</h2>
+<p>The solution I found to this problem was to <a href="https://wiki.archlinux.org/title/Intel_graphics#DRI3_issues">use
+DRI2 for the Intel
+driver</a>. I have no
+idea of why this works, but it does. You can configure the Intel driver to use
+DRI2 by creating a configuration file for X.</p>
+<div class="highlight"><pre><span></span><code># /etc/X11/xorg.conf.d/20-intel.conf
+Section &quot;Device&quot;
+  Identifier &quot;Intel Graphics&quot;
+  Driver &quot;intel&quot;
+  Option &quot;DRI&quot; &quot;2&quot;
+EndSection
 </code></pre></div>
 
-<h1>The book in a nutshell</h1>
-<p>As I mentioned in the introduction, <em>97 Things Every Programmer Should Know</em> is
-a collection of very short essays by practicing professionals. The essays treat
-a wide variety of themes that are relevant to a practicing software engineer,
-ranging from hard technical skills such as the <em>Don't Repeat Yourself</em> principle
-and <em>Single Responsibility Principle</em>, to softer skills such as interacting with
-managers and fostering good relationships with your colleagues. Most of the
-essays are focused on the technical side of things, however, and there is good
-variety in the technical topics. While a lot of the essays are about how to
-write good code, there is also a healthy amount of recommendations for tooling
-to use, such as static code analysers, automated test suites, version control
-systems and more.</p>
-<p>There really isn't much more to say regarding what the book is about. It's like
-a collection of very well-written blog posts on programming-related topics. So
-if you're reading this blog, chances are good you're going to enjoy this book.</p>
-<h1>What I liked</h1>
-<p>In some ways, <em>97 Things</em> has a lot in common with <a href="https://slar.se/book-review-apprenticeship-patterns.html">Apprenticeship
-Patterns</a> that I reviewed last week.
-They're both about how you improve as a software engineer. The difference is
-that <em>97 Things</em> is a lot more to the point and more concrete. For the most
-part, it presents tips and tricks that you can apply immediately and see
-benefits from just as fast. For the budding software engineer, it's an excellent
-pool of topics to diversify your skill set. That's with an emphasis on <em>topics</em>,
-though. This book presents a brief introduction to a wide variety of topics, but
-it dives deeply into none of them. I think this is a great strength of the book,
-as it means you will never get stuck on some "boring" topic that doesn't
-interest you.</p>
-<p>While you can absolutely draw connections between the essays, they are written
-as standalone pieces of work. This makes <em>97 Things</em> a perfect book to read on
-the go, when you might just have a few minutes or so to read.</p>
-<p>Out of all 97 things, I recall only a handful that I didn't find genuinely
-helpful or insightful. Some essays even contradict each other, which actually
-gives a nice perspective on the fact that a <em>lot</em> of best practices are, to a
-large degree, opinions. A notable example I recall is about automatic code
-formatting, where one essay discourages its use and a few others encourage it.
-I think this is a great benefit of having so many different authors. You don't
-just get one person's opinion.</p>
-<h1>What I didn't like</h1>
-<p>As with many other books on how to be a good software engineer, there is a slight
-tint of workaholism over some of the essays. I especially found an essay by
-Robert C. Martin on what it means to be a professional programmer to send this
-message. It's the same theme I found a little bit disturbing with
-<a href="https://slar.se/book-review-apprenticeship-patterns.html">Apprenticeship Patterns</a>. I can't say I
-disagree with the message; I truly believe in the craftsmanship approach to
-software engineering, the path of lifelong learning. But at the same time I
-don't think it is for everyone, and I think it should be possible to treat
-programming as "just a job".</p>
-<p>A minor inconvenience is that the essays are ordered alphabetically, where I
-would have preferred them to be ordered by theme. Finding a particular essay of
-which you recall the theme but not the title is needlessly difficult. I just now
-suffered through it trying to find the aforementioned essay by Robert C. Martin.</p>
-<p>But as a package, I find little to dislike about the book. Even the workaholism
-part is effectively counteracted by an entire essay dedicated to sending the
-message "work smarter not harder".</p>
-<h1>Conclusions</h1>
-<p>This is another book that I wish I'd read years ago. I strongly recommend it as
-a read for <em>any</em> software engineer at the beginning of their career or student
-(self-taught or at a seat of learning) who is preparing for their career. Being
-such a light and quick read, I find no good reason not to spend the few hours it
-takes to read through the book and be exposed to a whole lot of different ideas.</p>
+<blockquote>
+<p><strong>Note:</strong> The <a href="https://wiki.archlinux.org/title/Intel_graphics#Issues_with_selecting_Qt_elements_within_Plasma_Desktop_on_Alder_Lake.2FUHD_770">modesetting driver also works</a>, but it interferes with PRIME offloading s.t. the NVIDIA GPU is always active. This butchers battery life and so wasn't acceptable to me.</p>
+</blockquote>
+<h2>Need more tweaks?</h2>
+<p>This wasn't the only tweak I put in to get my XPS 15 in tip-top shape, although
+it was the most crucial one. I've got a bunch of other tweaks listed <a href="https://slar.se/pages/wiki/arch-linux-on-xps-15-9520.html">over on
+my Wiki page for the XPS 15</a>.</p>
   </div>
   
 

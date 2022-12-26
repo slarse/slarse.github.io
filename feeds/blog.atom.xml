@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-10-29T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Why I write a blog that nobody reads (and you should, too)</title><link href="https://slar.se/why-i-write-a-blog-that-nobody-reads-and-you-should-too.html" rel="alternate"></link><published>2022-10-29T00:00:00+02:00</published><updated>2022-10-29T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-10-29:/why-i-write-a-blog-that-nobody-reads-and-you-should-too.html</id><summary type="html">&lt;p&gt;I don't write this blog in hopes that it will get a lot of traction. I don't
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-12-26T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Fix 3D graphics in Arch Linux on Dell XPS 15 9520</title><link href="https://slar.se/xps-15-9520-arch-linux-intel-dri2.html" rel="alternate"></link><published>2022-12-26T00:00:00+01:00</published><updated>2022-12-26T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-12-26:/xps-15-9520-arch-linux-intel-dri2.html</id><summary type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. it's
+highly Linux-compatible and just following the &lt;a href="https://wiki.archlinux.org/title/Installation_guide"&gt;official installation
+guide&lt;/a&gt; got me 90% of the
+way of having a well-behaved Arch Linux laptop, but the final 10% took me quite
+a while to iron out. One …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. it's
+highly Linux-compatible and just following the &lt;a href="https://wiki.archlinux.org/title/Installation_guide"&gt;official installation
+guide&lt;/a&gt; got me 90% of the
+way of having a well-behaved Arch Linux laptop, but the final 10% took me quite
+a while to iron out. One big thing wasn't working, though: 3D graphics!&lt;/p&gt;
+&lt;h2&gt;Symptoms: glitchy 2D graphics and unusable 3D graphics&lt;/h2&gt;
+&lt;p&gt;2D graphics worked mostly fine after installing &lt;code&gt;xf86-video-intel&lt;/code&gt;, &lt;code&gt;nvidia&lt;/code&gt; and
+&lt;code&gt;nvidia-prime&lt;/code&gt;. Websites, most desktop applications as well as 2D games like
+Terraria worked without issue. Anything with the slightest hint of 3D would
+however glitch out terribly with Intel graphics and just be completely black
+with 3D graphics.&lt;/p&gt;
+&lt;p&gt;Some applications, such as Steam, wouldn't render properly unless in fullscreen.
+3D benchmark software like &lt;code&gt;fire&lt;/code&gt; (from &lt;code&gt;mesa-demo&lt;/code&gt;) and &lt;code&gt;glmark2&lt;/code&gt; wouldn't
+update properly with Intel and would again be black with NVIDIA.&lt;/p&gt;
+&lt;h2&gt;Solution: Using DRI2 for the Intel driver&lt;/h2&gt;
+&lt;p&gt;The solution I found to this problem was to &lt;a href="https://wiki.archlinux.org/title/Intel_graphics#DRI3_issues"&gt;use
+DRI2 for the Intel
+driver&lt;/a&gt;. I have no
+idea of why this works, but it does. You can configure the Intel driver to use
+DRI2 by creating a configuration file for X.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;# /etc/X11/xorg.conf.d/20-intel.conf
+Section &amp;quot;Device&amp;quot;
+  Identifier &amp;quot;Intel Graphics&amp;quot;
+  Driver &amp;quot;intel&amp;quot;
+  Option &amp;quot;DRI&amp;quot; &amp;quot;2&amp;quot;
+EndSection
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;a href="https://wiki.archlinux.org/title/Intel_graphics#Issues_with_selecting_Qt_elements_within_Plasma_Desktop_on_Alder_Lake.2FUHD_770"&gt;modesetting driver also works&lt;/a&gt;, but it interferes with PRIME offloading s.t. the NVIDIA GPU is always active. This butchers battery life and so wasn't acceptable to me.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Need more tweaks?&lt;/h2&gt;
+&lt;p&gt;This wasn't the only tweak I put in to get my XPS 15 in tip-top shape, although
+it was the most crucial one. I've got a bunch of other tweaks listed &lt;a href="https://slar.se/pages/wiki/arch-linux-on-xps-15-9520.html"&gt;over on
+my Wiki page for the XPS 15&lt;/a&gt;.&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category><category term="linux"></category><category term="xps15"></category></entry><entry><title>Why I write a blog that nobody reads (and you should, too)</title><link href="https://slar.se/why-i-write-a-blog-that-nobody-reads-and-you-should-too.html" rel="alternate"></link><published>2022-10-29T00:00:00+02:00</published><updated>2022-10-29T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-10-29:/why-i-write-a-blog-that-nobody-reads-and-you-should-too.html</id><summary type="html">&lt;p&gt;I don't write this blog in hopes that it will get a lot of traction. I don't
 market it, I don't try to optimize it for SEO and I I don't even tell my
 friends and coworkers about it. Although I would of course be delighted to hear
 someone who …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I don't write this blog in hopes that it will get a lot of traction. I don't

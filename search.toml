@@ -43,6 +43,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "xps-15-9520-arch-linux-intel-dri2.html"
+url = "/xps-15-9520-arch-linux-intel-dri2.html"
+title = "Fix 3D graphics in Arch Linux on Dell XPS 15 9520"
+
+[[input.files]]
 path = "book-review-cpython-internals.html"
 url = "/book-review-cpython-internals.html"
 title = "Book Review: CPython Internals"

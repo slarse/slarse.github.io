@@ -1,5 +1,5 @@
 [input]
-base_directory = "/home/slarse/Documents/github/personal/slarse.github.io/output"
+base_directory = "/home/slarse/projects/personal/slarse.github.io/output"
 html_selector = "div#main-container"
 
 [[input.files]]
@@ -36,6 +36,11 @@ title = "Projects"
 path = "pages/wiki/tools.html"
 url = "/pages/wiki/tools.html"
 title = "Tools for Software Engineering"
+
+[[input.files]]
+path = "pages/wiki/arch-linux-on-xps-15-9520.html"
+url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
+title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
 path = "book-review-cpython-internals.html"

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-12-26T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Fix 3D graphics in Arch Linux on Dell XPS 15 9520</title><link href="https://slar.se/xps-15-9520-arch-linux-intel-dri2.html" rel="alternate"></link><published>2022-12-26T00:00:00+01:00</published><updated>2022-12-26T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-12-26:/xps-15-9520-arch-linux-intel-dri2.html</id><summary type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. it's
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-12-26T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Fix 3D graphics in Arch Linux on Dell XPS 15 9520</title><link href="https://slar.se/xps-15-9520-arch-linux-intel-dri2.html" rel="alternate"></link><published>2022-12-26T00:00:00+01:00</published><updated>2022-12-26T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-12-26:/xps-15-9520-arch-linux-intel-dri2.html</id><summary type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
 highly Linux-compatible and just following the &lt;a href="https://wiki.archlinux.org/title/Installation_guide"&gt;official installation
 guide&lt;/a&gt; got me 90% of the
-way of having a well-behaved Arch Linux laptop, but the final 10% took me quite
-a while to iron out. One …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. it's
+way of having a well-behaved Arch Linux laptop. One big thing wasn't working,
+though: 3D graphics!&lt;/p&gt;
+&lt;h2&gt;Symptoms: glitchy 2D graphics and …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
 highly Linux-compatible and just following the &lt;a href="https://wiki.archlinux.org/title/Installation_guide"&gt;official installation
 guide&lt;/a&gt; got me 90% of the
-way of having a well-behaved Arch Linux laptop, but the final 10% took me quite
-a while to iron out. One big thing wasn't working, though: 3D graphics!&lt;/p&gt;
+way of having a well-behaved Arch Linux laptop. One big thing wasn't working,
+though: 3D graphics!&lt;/p&gt;
 &lt;h2&gt;Symptoms: glitchy 2D graphics and unusable 3D graphics&lt;/h2&gt;
 &lt;p&gt;2D graphics worked mostly fine after installing &lt;code&gt;xf86-video-intel&lt;/code&gt;, &lt;code&gt;nvidia&lt;/code&gt; and
 &lt;code&gt;nvidia-prime&lt;/code&gt;. Websites, most desktop applications as well as 2D games like

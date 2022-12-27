@@ -59,3 +59,7 @@ books I've read (along with a review).
 * [_Podcast.\_\_init\_\_\_](https://www.podcastinit.com/)
     - Similar to Talk Python To Me
     - [Blog post]({filename}/blog/Programming/awesome_python_podcasts.md)
+
+# Other links
+* [A guide to home row mods](https://precondition.github.io/home-row-mods)
+    - Comprehensive introduction to home row mods

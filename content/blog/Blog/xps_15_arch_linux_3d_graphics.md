@@ -4,11 +4,11 @@ Author: Simon Larsén
 Tags: blog,linux,xps15
 Slug: xps-15-9520-arch-linux-intel-dri2
 
-I recently got myself a Dell XPS 15 9520 to replace my aging laptop. it's
+I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
 highly Linux-compatible and just following the [official installation
 guide](https://wiki.archlinux.org/title/Installation_guide) got me 90% of the
-way of having a well-behaved Arch Linux laptop, but the final 10% took me quite
-a while to iron out. One big thing wasn't working, though: 3D graphics!
+way of having a well-behaved Arch Linux laptop. One big thing wasn't working,
+though: 3D graphics!
 
 ## Symptoms: glitchy 2D graphics and unusable 3D graphics
 2D graphics worked mostly fine after installing `xf86-video-intel`, `nvidia` and

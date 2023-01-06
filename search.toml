@@ -13,6 +13,11 @@ url = "/pages/wiki/aws.html"
 title = "AWS"
 
 [[input.files]]
+path = "pages/wiki/databases.html"
+url = "/pages/wiki/databases.html"
+title = "Databases"
+
+[[input.files]]
 path = "pages/publications-and-essays.html"
 url = "/pages/publications-and-essays.html"
 title = "Publications and Essays"

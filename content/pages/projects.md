@@ -3,6 +3,12 @@ Title: Projects
 I always have a few side projects going. You can find an exhaustive list on my
 GitHub page, but here are a few highlights.
 
+## Rut
+Rut is a clone of Git, written in Rust. It's a project I use to learn both the
+Rust programming language and about the internals of Git.
+
+* [Rut on GitHub](https://github.com/slarse/rut)
+
 ## RepoBee
 RepoBee is a tool for managing Git repositories on GitHub for education. It can
 do things like generate repositories for students, clone student repositories
@@ -28,10 +34,3 @@ of merging Java files by their raw text, it resolves the abstract syntax trees
 and merges based on them instead. It is built on top of Spoon.
 
 * [Spork on GitHub](https://github.com/kth/spork)
-
-## Rusthon
-Rusthon is a Python-like programming language implemented in Rust. It is a work
-in progress that serves as my learning project to learn the ins and outs of the
-Rust programming language.
-
-* [Rusthon on GitHub](https://github.com/slarse/rusthon)

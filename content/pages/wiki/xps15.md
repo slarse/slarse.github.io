@@ -12,7 +12,7 @@ GPU: NVIDIA RTX 3050Ti
 Monitor: 3.5k OLED
 ```
 
-## Set SSD AHCI/NVME to save battery
+## Set SSD to AHCI/NVME to save battery
 For some reason, setting the SSD to AHCI/NVME in BIOS (instead of RAID which
 was default for me) causes power consumption in idle and light workloads to
 absolutely plummet. Consumption dropped by as much as 20-50% for me, depending
@@ -28,16 +28,20 @@ the OLED screen and a power-hungry i7 in the machine.
     - `ibt=off` was required for me to be able to start the X server with NVIDIA's proprietary drivers, [see this issue](https://github.com/NVIDIA/open-gpu-kernel-modules/issues/256)
 * Intel driver config:
     - Must use DRI2, as the default DRI3 causes all kinds of problems with 3D graphics acceleration
-    ```
-    # /etc/X11/xorg.conf.d/20-intel.conf
+```
+# /etc/X11/xorg.conf.d/20-intel.conf
 
-    Section "Device"
-      Identifier "Intel Graphics"
-      Driver "intel"
-      Option "DRI" "2"
-    EndSection
-    ```
-    - **Note:** The [modesetting driver also works](https://wiki.archlinux.org/title/Intel_graphics#Issues_with_selecting_Qt_elements_within_Plasma_Desktop_on_Alder_Lake.2FUHD_770), but it interferes with PRIME offloading s.t. the NVIDIA GPU is always active. This butchers battery life.
+Section "Device"
+  Identifier "Intel Graphics"
+  Driver "intel"
+  Option "DRI" "2"
+EndSection
+```
+
+> **Note:** The [modesetting driver also
+> works](https://wiki.archlinux.org/title/Intel_graphics#Issues_with_selecting_Qt_elements_within_Plasma_Desktop_on_Alder_Lake.2FUHD_770),
+> but it interferes with PRIME offloading s.t. the NVIDIA GPU is always active.
+> This butchers battery life.
 
 ## Touchpad
 The touchpad worked great without any configuration with the exception of

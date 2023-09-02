@@ -50,7 +50,7 @@ books I've read (along with a review).
 # Podcasts
 
 * [_Python Bytes_](https://pythonbytes.fm/)
-    - First podcast I ever
+    - First podcast I ever listened to
     - Great long-running Python Podcast
     - [Blog post]({filename}/blog/Programming/awesome_python_podcasts.md)
 * [_Talk Python To Me_](https://talkpython.fm/) 

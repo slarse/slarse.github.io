@@ -59,6 +59,12 @@ books I've read (along with a review).
 * [_Podcast.\_\_init\_\_\_](https://www.podcastinit.com/)
     - Similar to Talk Python To Me
     - [Blog post]({filename}/blog/Programming/awesome_python_podcasts.md)
+* [_TalkScript_](https://talkscript.sitepen.com/)
+    - Web development focused on Java/TypeScript podcast
+* [_New Rustacean_](https://newrustacean.com/)
+    - Awesome Rust podcast
+    - Unfortunately has ended, but served me as a great introduction to the Rust programming language and ecosystem
+    - Mentioned in my [article on learning a new programming language]({filename}/blog/Programming/learning_a_new_pl.md)
 
 # Other links
 * [A guide to home row mods](https://precondition.github.io/home-row-mods)

@@ -51,3 +51,9 @@ over the years.
 * If that's not enough, [you can create your own docsets](https://github.com/zealdocs/zeal#create-your-own-docsets)
 * For MacOs users, [dash](https://kapeli.com/dash) does exactly the same
     thing
+
+### [slimbook-battery](https://github.com/Slimbook-Team/slimbookbattery) - Battery/performance management
+- Neat GUI for managing battery and performance settings
+- **Note:** The current release (v4.0.8) does not work with newer
+  versions of the Linux kernel (6.4.2 or later). Prerelease of  v4.0.9 exists
+  and [works fine](https://github.com/Slimbook-Team/slimbookbattery/issues/110).

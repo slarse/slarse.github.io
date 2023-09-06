@@ -38,10 +38,20 @@ Section "Device"
 EndSection
 ```
 
-> **Note:** The [modesetting driver also
-> works](https://wiki.archlinux.org/title/Intel_graphics#Issues_with_selecting_Qt_elements_within_Plasma_Desktop_on_Alder_Lake.2FUHD_770),
-> but it interferes with PRIME offloading s.t. the NVIDIA GPU is always active.
-> This butchers battery life.
+The above config _mostly_ works, but some applications still experience some
+glitchy graphics. For everything to work perfectly, The
+[modesetting driver](https://wiki.archlinux.org/title/Intel_graphics#Issues_with_selecting_Qt_elements_within_Plasma_Desktop_on_Alder_Lake.2FUHD_770)
+must be used. However, this interferes with PRIME offloading s.t. the NVIDIA
+GPU is always active which severely impacts battery life.
+
+```
+# /etc/X11/xorg.conf.d/20-intel.conf
+
+Section "Device"
+  Identifier "Intel Graphics"
+  Driver "modesetting"
+EndSection
+```
 
 ## Touchpad
 The touchpad worked great without any configuration with the exception of

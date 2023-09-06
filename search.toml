@@ -1,6 +1,6 @@
 [input]
-base_directory = "/home/slarse/projects/personal/slarse.github.io/output"
 html_selector = "div#main-container"
+base_directory = "/home/slarse/projects/personal/slarse.github.io/output"
 
 [[input.files]]
 path = "pages/about.html"

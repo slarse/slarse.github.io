@@ -7,6 +7,7 @@ learned it. It's a forever-work-in-progress with no particular level of quality.
 > search bar on the [home page](/).
 
 * [Arch Linux on Dell XPS 15 9520]({filename}xps15.md)
+* [Arch Linux on Lenovo T14S Gen 3 (Intel)]({filename}lenovo_t14s_g3.md)
 * [Awesome Media]({filename}media.md)
 * [AWS]({filename}aws.md)
 * [Databases]({filename}databases.md)

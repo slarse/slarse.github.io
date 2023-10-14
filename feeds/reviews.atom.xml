@@ -15,7 +15,7 @@ book on interpreters. In Go.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;You can buy the book directly from Thorsten Ball's website at
-&lt;a href="https://interpreterbook.com/"&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;a href="https://interpreterbook.com/"&gt;https://interpreterbook.com/&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;Writing an Interpreter in Go&lt;/em&gt; is precisely what it sounds like; a practical

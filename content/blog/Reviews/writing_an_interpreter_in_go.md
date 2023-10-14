@@ -6,7 +6,7 @@ Slug: book-review-writing-an-interpreter-in-go
 
 I love programming languages, both using them and implementing them. As such, I
 found the concept of learning Go by creating a programming language to be just
-delightful. And, to put it briefly, it was. Let's talk about why Thorsten Ball's
+delightful. And, to put it briefly, it was. Let's talk about Thorsten Ball's
 book on interpreters. In Go.
 
 ```

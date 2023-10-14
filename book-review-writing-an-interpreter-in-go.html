@@ -8,7 +8,7 @@
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Learning a new programming language as a practicing software engineer - Programming for fun and profit</title>
+    <title>Book Review: Writing an Interpreter in Go - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -89,184 +89,120 @@
 <article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
   <header class="article-header">
 <abbr class="article-header-date">
-  Sun 12 June 2022
+  Sat 14 October 2023
 </abbr> <h1>
-  <a href="https://slar.se/learning-a-new-programming-language.html" rel="bookmark"
-     title="Permalink to Learning a new programming language as a practicing software engineer">
-    Learning a new programming language as a practicing software engineer
+  <a href="https://slar.se/book-review-writing-an-interpreter-in-go.html" rel="bookmark"
+     title="Permalink to Book Review: Writing an Interpreter in Go">
+    Book Review: Writing an Interpreter in Go
   </a>
 </h1><div class="article-header-info">
   <p>
       Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
     in 
-    <a href="https://slar.se/category/programming.html">
-      Programming</a>
+    <a href="https://slar.se/category/reviews.html">
+      Reviews</a>
     &nbsp;&nbsp;
   </p>
 </div> <!-- /.article-header-info --><div class="article-tag-list">
 <span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/rust.html"><i class="fas fa-tag"></i>rust</a>&nbsp;
-	<a href="https://slar.se/tag/programming-languages.html"><i class="fas fa-tag"></i>programming languages</a>&nbsp;
-	<a href="https://slar.se/tag/learning.html"><i class="fas fa-tag"></i>learning</a>&nbsp;
+	<a href="https://slar.se/tag/book-review.html"><i class="fas fa-tag"></i>book review</a>&nbsp;
+	<a href="https://slar.se/tag/software-engineering.html"><i class="fas fa-tag"></i>software engineering</a>&nbsp;
+	<a href="https://slar.se/tag/go.html"><i class="fas fa-tag"></i>go</a>&nbsp;
 </div>  </header>
   <div class="content-body" itemprop="text articleBody">
-	<p>When it comes to programming languages, I consider myself something of a
-polyglot. To me, learning a new language is one of the most enjoyable
-things in all of software engineering. This is especially true when you
-start to venture into new paradigms; going from procedural to functional,
-functional to logical and logical to constraint-based. Exploring programming
-languages is one of the best way to improve your craft, even if you don't
-end up using that language in your daily work.</p>
-<p>Having learned (to varying degrees of proficiency) a good few languages over
-the years, I figured it's about time I share my process for learning a new one.
-And when I say learn here, I mean <em>really</em> learn the language and become
-proficient in it, as opposed to learning just enough to become dangerous.
-There is a time and place for the latter as well, but that is not the focus
-of this article. This article is also not about learning your <em>first</em>
-programming language, as that's a process where you need to also learn
-programming as a skill.</p>
-<p>I'm currently in the process of learning the Rust programming language, and in
-this article I'll take you through how I go about learning it. My process, which
-I will detail throughout this article, is as follows:</p>
-<ol>
-<li>Identify learning resources</li>
-<li>Start learning</li>
-<li>Build a project</li>
-<li>Maintain knowledge</li>
-</ol>
-<h1>Step 1: Identify learning resources</h1>
-<p>The first thing I do is to identify the learning resources that I intend to use.
-This does not have to be an exhaustive list of resources, as sometimes I stumble
-upon more of them as I go along, but I always put in some amount of research
-into which learning resources are the most well received by others. I divide
-these into <em>primary</em> and <em>secondary</em> learning resources, where the primary ones
-guide me through the learning experience while the secondary ones are
-supplementary and can be skipped altogether if time is tight.</p>
-<h2>Primary learning resources</h2>
-<p>My primary learning resources are one or more structured overviews of the
-language I'm about to learn. I usually only aim for one or two primary resources,
-and in the vast majority of cases I go with books. The reason I prefer books
-over things like video courses is that I find books to be better suited to
-active learning. It is incredibly easy for me to watch a video and just start
-thinking about something else. In fact, that's something I do even when reading
-a book, but to a lesser extent.</p>
-<p>Sometimes, finding a good primary learning resource is easy. In the case of
-Rust, the community maintains a book called <a href="https://doc.rust-lang.org/stable/book/"><em>The Rust Programming
-Language</em></a>, which is the recommended
-starting point for newcomers. After that, I intend to continue with
-<a href="https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/"><em>Programming
-Rust</em></a>,
-which appears to be more in-depth. In some cases, identifying a good primary
-resource may be far from trivial, and requires a fair amount of looking around.
-But for Rust it did not take me much time at all to find what I was looking for.</p>
-<p>I am aware that many prefer video resources over books nowadays. If that fits
-your learning style, then that's all good. Books are just where it's at for me
-personally. Sites like <a href="https://udemy.com">Udemy</a> and
-<a href="https://pluralsight.com">Pluralsight</a> provide an ample selection of courses
-suitable as primary learning resources for most programming languages in use
-today. In my experience, such courses do however often cater to people learning
-<em>programming</em>, rather than software engineers just looking to add a new language
-to their repertoire.</p>
-<p>An important note on my primary learning resource is that I never follow more
-than one at any one time. That's essentially what makes it a primary resource.
-So right now, I'm going with <em>The Rust Programming Language</em> first and will then
-move on to <em>Programming Rust</em>, but I don't read them at the same time.</p>
-<h2>Secondary learning resources</h2>
-<p>Secondary learning resources are complementary, both to primary learning
-resources and other secondary learning resources. I most often have at one or
-two secondary resources that I utilize in parallel with a primary one. My
-favourite sources of secondary learning resources are conference talks and
-podcasts.</p>
-<p>For Rust, I found a rather high-quality podcast called <a href="https://newrustacean.com/">New
-Rustacean</a>, which features the host's journey of
-learning the Rust programming language. It's a nice complement to my reading,
-and I enjoy being able to listen to it on the go. If you're about to learn
-Python, see my post on <a href="https://slar.se/awesome-python-podcasts.html">Awesome Python
-Podcasts</a> for some inspiration.</p>
-<p>Talks are most easily found on YouTube. Many of today's popular programming
-languages have at least one yearly conference, while a lot of them have many
-more. Python as various incarnations of <a href="https://pycon.org/">PyCon</a>, Rust has
-<a href="https://rustconf.com/">RustConf</a> and C++ has <a href="https://cppcon.org/">CppCon</a>, and
-you'll find that pretty much any language has a yearly conference named
-<code>&lt;Language&gt;Con(f)</code>. Some put all talks on YouTube, while others are a bit
-less easy to get a hold of.</p>
-<p>There is one more detail about secondary learning resources that I think is
-worth noting, namely that they keep being useful to me long after I've stopped
-investing time in primary learning resources. Secondary learning resources can
-also enter my radar when I'm already a well-rounded programmer in a given
-language. I will touch more on this when I discuss maintaining knowledge of a
-programming language.</p>
-<h1>Step 2: Start to learn</h1>
-<p>In the initial step of learning, I simply sit down with my chosen primary
-learning resource and consume only that. As I'm a book person, this entails
-sitting down for a nice read. Although a very common advice is to learn actively
-by trying out examples and writing your own code as soon as possible, I
-personally prefer to just read for a while before I start dabbling with code
-myself. Sometimes I'll try a small example or other that looks extra
-interesting, but I generally wait with any serious amount of programming until
-Step 3 of my learning process. The goal of Step 2 is not really to learn the
-language, but to get a good overview of it.</p>
-<p>I often start using my chosen secondary resources immediately after my first
-sitting with a primary resource, at least if there's at least one podcast lined
-up. What I mostly seek from secondary resources is to get an idea of the
-community surrounding the programming language, what the ecosystem (e.g
-libraries and frameworks) looks like and keep up to date with the development of
-the core language. More on this in Step 4.</p>
-<h1>Step 3: Build a project</h1>
-<p>As soon as I feel like I have touched all subjects I need to sit down and start
-up a small project, that's exactly what I do. This point usually rolls around
-when I know how to create a project in the language, how to write unit tests and
-how to write documentation. I'll often have a particular project in mind, and
-then I may also know about a few additional things I need to learn about before
-I get going.</p>
-<p>My chosen project for learning Rust is to create a compiler and runtime
-environment for a statically typed Python-like programming language that I call
-<em>Rusthon</em>. This is an open source project and you can find it over at <a href="https://github.com/slarse/rusthon">Rusthon's
-GitHub page</a> if you're interested.</p>
-<p>Like I mentioned in Step 2, this is where the advice of active learning comes
-into play. It's virtually impossible to become proficient with a new language
-you're confined to following along with examples and solving tiny problems
-without context. You need something larger to work on, I really do think this is
-essential.</p>
-<h1>Step 4: Maintain knowledge</h1>
-<p>Once I've learned a language well enough to become proficient in it, I need to
-maintain that knowledge and also keep up-to-date with developments in the
-community and ecosystem. These are two rather separate concerns. Maintaining a
-working knowledge of the language requires one to write code in it. For this I
-keep using my project, or find new things to do. I often try to get involved in
-open source projects, such as <a href="https://github.com/repobee/repobee">RepoBee</a>
-(Python) and <a href="https://github.com/inria/spoon">Spoon</a> (Java) to make meaningful
-contributions to the community.</p>
-<p>Keeping up-to-date with the community and ecosystem is where I mostly keep using
-secondary learning resources, mostly podcasts but also talks from conferences.
-This may be less important in older languages with less vibrant ecosystems, but
-in "newer" languages like Java, Python and Rust, knowing your way around the
-package ecosystem and keeping up-to-date with new language features is rather
-important.</p>
-<h1>Final thoughts</h1>
-<p>Learning a new programming language is something I enjoy greatly. I go about it
-in a rather rigorous fashion where my goal is to become really proficient. I
-<em>immerse</em> myself in the language, its community and its ecosystem. This also
-entails that I spend some amount of effort in maintaining my knowledge and grasp
-on the language, leading to the selection of languages I call myself proficient
-in being small. When I learn a new language it often effectively replaces
-something already in my repertoire. Rust is a contender to replace C, although I
-can't say I've been all that thorough in maintaining my skills in C in the past
-few years.</p>
-<p>It is also worth considering that learning a new language without maintaining
-your skills in it for any considerable amount of time can still be worthwhile. I
-think this is especially true when exploring different paradigms, as I alluded
-to in the introduction of this article. I learned Haskell many years back but
-did not maintain a working knowledge of it for very long. Yet, the concepts that
-I learned from being forced to code in a purely functional fashion are valuable
-to me to this day. It was thanks to programming in Haskell that I really grasped
-the concepts of recursion and higher-order functions, and understanding that has
-greatly benefited me in all languages I've practiced since.</p>
-<p>To summarize, learning a new language can be greatly beneficial. Even if you
-don't intend to add it to your repertoire, it can still be a worthwhile effort
-to step out of your comfort zone and explore new programming paradigms. The
-things you learn from programming in one language can benefit your programming
-in another, and make you a more well-rounded software engineer.</p>
+	<p>I love programming languages, both using them and implementing them. As such, I
+found the concept of learning Go by creating a programming language to be just
+delightful. And, to put it briefly, it was. Let's talk about why Thorsten Ball's
+book on interpreters. In Go.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Writing</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">Interpreter</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">Go</span><span class="w"></span>
+<span class="k">by</span><span class="w"> </span><span class="n">Thorsten</span><span class="w"> </span><span class="n">Ball</span><span class="w"></span>
+<span class="nl">Publisher</span><span class="p">:</span><span class="w"> </span><span class="n">Thorsten</span><span class="w"> </span><span class="n">Ball</span><span class="w"></span>
+<span class="nl">ISBN</span><span class="p">:</span><span class="w"> </span><span class="mi">9783982016115</span><span class="w"></span>
+</code></pre></div>
+
+<blockquote>
+<p>You can buy the book directly from Thorsten Ball's website at
+<a href="https://interpreterbook.com/"></a>.</p>
+</blockquote>
+<h1>The book in a nutshell</h1>
+<p><em>Writing an Interpreter in Go</em> is precisely what it sounds like; a practical
+guide to writing a fully functioning interpreter in Go. You go from source
+code, to tokens, to abstract syntax tree and tree evaluation. The parser
+is based on the pretty fascinating
+<a href="https://en.wikipedia.org/wiki/Operator-precedence_parser#Pratt_parsing"><em>Pratt parsing</em></a>
+technique, while the evaluation is based on simple tree-walking. This relative
+simplicity allows Ball to cram a whole lot of functionality into a very concise
+200 pages worth of book. The result is impressive, and I am somewhat astonished
+by just how much content is actually in here, and how well written said content
+is.</p>
+<h1>What I liked</h1>
+<p>There is so much to like about this book. First of all, it is wonderfully
+standalone. I wrote around 3500 lines of code based entirely on descriptions
+and code samples from the book's 200 printed pages. Although the source code
+for the interpreter is available as part of the book, I never needed to
+reference it.</p>
+<p>Something else I just barely needed to reference was documentation for Go
+itself. While this book doesn't teach you programming and is therefore not for
+complete beginners, it does somewhat teach you Go by example. There are little
+to no explanations for how Go works, but due to how simple Go is I think the
+examples speak for themselves. A caveat to that is that I have done some Go
+programming in the past, and I think that a complete beginner to Go should
+probably go through the interactive <a href="https://go.dev/tour/">A Tour of Go</a>
+tutorial first. The only thing that I personally needed to reference was some
+details around how interfaces and <code>nil</code> work together in Go (it's <a href="https://go.dev/doc/faq#nil_error">really quite
+unintuitive</a>). It should also be noted that
+there is nothing about concurrency in this book, which being a major selling
+point of Go entails that this book omits some important parts of the language.
+I do however find that completely reasonable given the scope of the book.</p>
+<p>The book is also for the most part organized in a way that fit me very well.
+In the first few parts of the book, the implementation is given up front and
+then tests are added to verify the behavior. The majority of the later parts of
+the book are however laid out in the opposite order, with descriptions of
+functionality and tests being followed by the actual implementation. This
+allowed me to read the tests and the descriptions to get a good idea of the
+intended behavior, and then try my own hand at coming up with a solution.
+Comparing my solution to the author's after the fact was a great way to cement
+the knowledge.</p>
+<p>The source code exhibits a splendid balance between proper design and being
+simple enough to put into a book this short. There were several design decisions
+that I did not fully agree with, especially with the parsing of strings, but I
+can also see that certain simplifications had to be made to fit the format. For
+the most part, I think these simplifications are well chosen.</p>
+<p>Concepts are explained clearly and intuitively. Pratt parsing is by far the most
+involved topic in the book, and I think Ball presents it in a very digestible
+fashion. I needed to run through it a couple of times and mentally step through
+the code, but when it clicked I found no fault in how the concepts were
+explained. At no point did I need to reference external sources to understand
+something.</p>
+<p>The last part of the book adds in a few extra features, such as arrays and hash
+maps. All of these extra features are implemented in a very satisfying loop,
+going all the way from the lexing to the finished evaluation in one short
+chapter for each feature. Adding one feature at a time in this way really aids
+in understanding the workings of each part of the interpreter. And that, in
+fact, is a perfect segue to the one part of this book that I did not entirely
+like.</p>
+<h1>What I didn't like</h1>
+<p>I actually started this book around five years ago, but never finished it. In
+fact, I got just barely halfway due to what I perceive as the one flaw of this
+otherwise fantastic piece of literature: it has a rather slow start. It's not
+until halfway through that you actually get to evaluation and thereby create a
+complete path from source code to output. The fantastic pacing of the last
+quarter of the book where you add features one at a time highlights that the
+first half isn't as satisfying as it probably could be. While I recognize that
+the amount of groundwork to put down before getting to the exciting parts is a
+tough one to make, I think the book would have been better off closing the path
+from source code to evaluation earlier. For instance, I don't see any need to
+parse function definitions before evaluating arithmetic expressions.</p>
+<h1>Conclusions</h1>
+<p>This is a great book. It's clear, concise and packed full of learnings. Due to
+the way the last quarter of the book is laid out, adding feature upon feature
+from start to finish, I was able to quite effortlessly add features completely
+of my own design by the time I finished the book. The only complaint I have
+about the book is that not more of it is laid out in that fashion, because it's
+just so good.</p>
+<p>If you've dipped your toes in Go and want an exciting project to learn the
+language better, I think this is a great way to do it. It takes a little while
+before the book gets going for real, but when it does, it really takes off.</p>
   </div>
   
 

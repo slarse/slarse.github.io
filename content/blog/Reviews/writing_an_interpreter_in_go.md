@@ -17,7 +17,7 @@ ISBN: 9783982016115
 ```
 
 > You can buy the book directly from Thorsten Ball's website at
-> [](https://interpreterbook.com/).
+> [https://interpreterbook.com/](https://interpreterbook.com/).
 
 # The book in a nutshell
 _Writing an Interpreter in Go_ is precisely what it sounds like; a practical

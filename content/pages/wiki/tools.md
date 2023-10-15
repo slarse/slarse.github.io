@@ -29,6 +29,11 @@ tools.
 * An incredibly fast implementation of the classic `grep` utility
 * Great integration with `neovim`
 
+### [tmux](https://github.com/tmux/tmux) - The best terminal multiplexer!
+* A great terminal multiplexer, letting you run multiple programs in a single terminal!
+* Large amount of plugins and themes to customize it to your liking
+    - But I run [mostly vanilla](https://github.com/slarse/config/blob/main/tmux/tmux.conf)
+
 ## GUI utilities
 I don't use a whole lot of GUI utilities, but I've found a few really neat ones
 over the years.

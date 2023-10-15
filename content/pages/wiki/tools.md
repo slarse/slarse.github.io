@@ -62,3 +62,12 @@ over the years.
 - **Note:** The current release (v4.0.8) does not work with newer
   versions of the Linux kernel (6.4.2 or later). Prerelease of  v4.0.9 exists
   and [works fine](https://github.com/Slimbook-Team/slimbookbattery/issues/110).
+
+## Note taking and blogging
+While apps like [LoqSeq](https://logseq.com/), [Obsidian](https://obsidian.md/)
+and [Notion](https://www.notion.so/) are all the rage right now, I prefer
+simpler solutions.
+
+### [pelican](https://getpelican.com/) - An extensible static site generator
+- Write Markdown (or reStructuredText), get a static web site!
+- This blog is created with Pelican

@@ -6,8 +6,8 @@ digging deep into technical topics and teaching them to others. As far
 as credentials go, I have an MSc in Computer Science and Engineering from [KTH
 Royal Institute of Technology](https://kth.se). I taught computer science
 topics there for over four years and I probably learned more myself than any
-of my students ever did. Continuing on that road out in industry, I am involved
-in a trainee program and meetups.
+of my students ever did. Continuing on that road out in industry, I've both
+taught in trainee programs and held talks at meetups.
 
 I enjoy open-source development and spend much of my free time working on
 projects in that sphere. See the [Projects page]({filename}projects.md)

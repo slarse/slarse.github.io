@@ -18,6 +18,11 @@ url = "/pages/wiki/databases.html"
 title = "Databases"
 
 [[input.files]]
+path = "pages/wiki/docker.html"
+url = "/pages/wiki/docker.html"
+title = "Docker"
+
+[[input.files]]
 path = "pages/publications-and-essays.html"
 url = "/pages/publications-and-essays.html"
 title = "Publications and Essays"

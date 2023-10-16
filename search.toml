@@ -18,11 +18,6 @@ url = "/pages/wiki/databases.html"
 title = "Databases"
 
 [[input.files]]
-path = "pages/wiki/docker.html"
-url = "/pages/wiki/docker.html"
-title = "Docker"
-
-[[input.files]]
 path = "pages/publications-and-essays.html"
 url = "/pages/publications-and-essays.html"
 title = "Publications and Essays"
@@ -36,11 +31,6 @@ title = "Wiki"
 path = "pages/wiki/arch-linux-on-lenovo-t14s-g3-intel.html"
 url = "/pages/wiki/arch-linux-on-lenovo-t14s-g3-intel.html"
 title = "Arch Linux on Lenovo T14S Gen 3 (Intel)"
-
-[[input.files]]
-path = "pages/wiki/Malware.html"
-url = "/pages/wiki/Malware.html"
-title = "Malware"
 
 [[input.files]]
 path = "pages/wiki/media.html"

@@ -38,6 +38,11 @@ url = "/pages/wiki/arch-linux-on-lenovo-t14s-g3-intel.html"
 title = "Arch Linux on Lenovo T14S Gen 3 (Intel)"
 
 [[input.files]]
+path = "pages/wiki/Malware.html"
+url = "/pages/wiki/Malware.html"
+title = "Malware"
+
+[[input.files]]
 path = "pages/wiki/media.html"
 url = "/pages/wiki/media.html"
 title = "Awesome Media"

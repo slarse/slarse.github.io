@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>The sheer insanity of interfaces and nil in Go - Programming for fun and profit</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous"
+      />
+
+
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/pygment.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/search.css" />
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming for fun and profit Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+                  <li>
+                    <a href="https://slar.se/pages/about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/wiki.html">Wiki</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/projects.html">Projects</a>
+                  </li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">Programming for fun and profit</a></h1>
+		<p class="lead">A blog about software engineering, programming languages and technical tinkering</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Sat 21 October 2023
+</abbr> <h1>
+  <a href="https://slar.se/the-sheer-insanity-of-interfaces-and-nil-in-go.html" rel="bookmark"
+     title="Permalink to The sheer insanity of interfaces and nil in Go">
+    The sheer insanity of interfaces and nil in Go
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/go.html"><i class="fas fa-tag"></i>go</a>&nbsp;
+	<a href="https://slar.se/tag/nil.html"><i class="fas fa-tag"></i>nil</a>&nbsp;
+	<a href="https://slar.se/tag/null.html"><i class="fas fa-tag"></i>null</a>&nbsp;
+	<a href="https://slar.se/tag/software-engineering.html"><i class="fas fa-tag"></i>software engineering</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>If you've only dabbled briefly in Go, you might think that its <code>nil</code> is
+analogous to the good ol' <a href="https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions">"billion dollar mistake"</a>
+known as <code>null</code>. I thought so, too, up until just a few weeks ago when I
+decided to make a pass through Thorsten Ball's neat little book
+<a href="https://slar.se/book-review-writing-an-interpreter-in-go.html">Writing an Interpreter in Go</a>.
+That's when I first cut myself real bad on <code>nil</code>, or more specificaly, an
+interface with a <code>nil</code> value.</p>
+<h1>The sensible kind of <code>nil</code></h1>
+<p>First let's look at <code>nil</code> behaving like we'd expect. Here's a code snippet of a
+"parser" that somewhat shows the situation I had.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;strings&quot;</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">IfExpression</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">raw</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">IfExpression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>So, we have a parse function that returns a pointer to an <code>IfExpression</code> struct
+if the input is an <code>if</code> expression (with an incredibly loose definition of what
+constitutes an <code>if</code> expression). Let's add a <code>main</code> function and try it out.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="s">&quot;if a == b&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ifExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">notIfExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="s">&quot;not an expression&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;notIfExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">notIfExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">notIfExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Running this results in completely sensible output; <code>ifExpr</code> is not <code>nil</code> while
+<code>notIfExpr</code> is.</p>
+<div class="highlight"><pre><span></span><code>$ go run main.go
+<span class="p">&amp;</span><span class="o">{</span><span class="k">if</span> <span class="nv">a</span> <span class="o">==</span> b<span class="o">}</span> <span class="nb">false</span>
+&lt;nil&gt; <span class="nb">true</span>
+</code></pre></div>
+
+<p>Say what you want about <code>nil</code>, this at least makes complete sense and is
+intuitively understandable. But when we throw interfaces into the mix,
+that goes way out the window.</p>
+<h1>The completely insane kind of <code>nil</code></h1>
+<p>As my parser came along, it turned out I needed multiple kinds of expressions,
+and so had to abstract the parse function to be able to return multiple kinds
+of expressions. So let's generalize the expression in an interface and add
+another one.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Expression</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">Raw</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">IfExpression</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">raw</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">ie</span><span class="w"> </span><span class="o">*</span><span class="nx">IfExpression</span><span class="p">)</span><span class="w"> </span><span class="nx">Raw</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">ie</span><span class="p">.</span><span class="nx">raw</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">ForExpression</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">raw</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">fe</span><span class="w"> </span><span class="o">*</span><span class="nx">ForExpression</span><span class="p">)</span><span class="w"> </span><span class="nx">Raw</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">fe</span><span class="p">.</span><span class="nx">raw</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>And then we adapt the parsing as well.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">Expression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">parseFor</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">parseFor</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">ForExpression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;for&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">ForExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">IfExpression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Now, we have a more generalized <code>parse</code> function that tries to parse an <code>if</code>
+expression, and falls back on parsing a <code>for</code> expression if it turns out not to
+be an <code>if</code>. We then adapt our <code>main</code> function to make use of this.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;if a == b&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ifExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;for a in b&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;forExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">forExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>And at first glance, this seems to work as expected.</p>
+<div class="highlight"><pre><span></span><code>$ go run main.go 
+ifExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">if</span> <span class="nv">a</span> <span class="o">==</span> b<span class="o">}</span> <span class="nb">false</span>
+forExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">for</span> a <span class="k">in</span> b<span class="o">}</span> <span class="nb">false</span>
+</code></pre></div>
+
+<p>But what happens when you try to parse something that is neither an <code>if</code> nor a
+<code>for</code>? We add the following to <code>main</code> to find out.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">notAnExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;not an expression&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;notAnExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">notAnExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">notAnExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+<p>Clearly, as <code>"not an expression"</code> is neither an <code>if</code> expression nor a <code>for</code>
+expression, both <code>parseIf</code> and <code>parseFor</code> will return <code>nil</code>, and as such <code>parse</code>
+should return <code>nil</code>. But that's not <em>really</em> what happens.</p>
+<div class="highlight"><pre><span></span><code>$ go run main.go 
+ifExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">if</span> <span class="nv">a</span> <span class="o">==</span> b<span class="o">}</span> <span class="nb">false</span>
+forExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">for</span> a <span class="k">in</span> b<span class="o">}</span> <span class="nb">false</span>
+notAnExpr &lt;nil&gt; <span class="nb">false</span>
+</code></pre></div>
+
+<p>What? <code>notAnExpr</code> is <code>&lt;nil&gt;</code>, but it does not compare true to a literal<code>nil</code>?
+What does that mean?</p>
+<h1>The confusing type-and-value composition of interfaces</h1>
+<p>In Go, an interface is represented at runtime as a
+<a href="https://go.dev/doc/faq#nil_error">type and a value</a>. You can think of it as a
+struct with two fields.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Interface</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">type</span><span class="w">  </span><span class="kt">string</span><span class="w"></span>
+<span class="w">    </span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>So, when <code>parseIf(s)</code> returns <code>nil</code>, the <code>parse(s)</code> function's return statement
+wraps the <code>nil</code> value into something like this.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">Interface</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IfExpression&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">Value</span><span class="p">:</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Armed with this knowledge, we can actually check for <code>nil</code> using
+<a href="https://pkg.go.dev/reflect">runtime reflection</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">IsNil</span><span class="p">()</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;if a == b&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ifExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">ifExpr</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;for a in b&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;forExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">forExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">forExpr</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">notAnExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;a == b&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;notAnExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">notAnExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">notAnExpr</span><span class="p">))</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>And running this, we now seem to have a functioning way to check for <code>nil</code>
+interfaces.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">ifExpr</span><span class="w"> </span><span class="o">&amp;</span>{<span class="k">if</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">b</span>}<span class="w"> </span><span class="nv">false</span><span class="w"></span>
+<span class="nv">forExpr</span><span class="w"> </span><span class="o">&amp;</span>{<span class="k">for</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">b</span>}<span class="w"> </span><span class="nv">false</span><span class="w"></span>
+<span class="nv">notAnExpr</span><span class="w"> </span><span class="o">&lt;</span><span class="nv">nil</span><span class="o">&gt;</span><span class="w"> </span><span class="nv">true</span><span class="w"></span>
+</code></pre></div>
+
+<p>But do we really? Of course not.</p>
+<h1>Actually, interfaces can also be "completely" <code>nil</code></h1>
+<p>Let's make this even more confusing, and refactor our <code>parse</code> function a bit.
+Instead of "falling back" on <code>parseFor</code>, we simply return <code>nil</code> explicitly if
+we can't parse any known expression.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">Expression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseFor</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Now let's run it again.</p>
+<div class="highlight"><pre><span></span><code>$ go run main.go 
+ifExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">if</span> <span class="nv">a</span> <span class="o">==</span> b<span class="o">}</span> <span class="nb">false</span>
+forExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">for</span> a <span class="k">in</span> b<span class="o">}</span> <span class="nb">false</span>
+panic: reflect: call of reflect.Value.IsNil on zero Value
+</code></pre></div>
+
+<p>Suddenly, <code>notAnExpr</code> <em>is</em> <code>nil</code>, causing our check to panic. What in the world
+is going on here? As it turns out, explicitly returning <code>nil</code> from a function
+that returns an interface is semantically different to returning a <a href="https://go.dev/doc/faq#nil_error">variable
+contaning <code>nil</code> value, and typed with something implementing the
+interface</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="c1">// actually returns nil</span><span class="w"></span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">*</span><span class="nx">ForExpression</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
+<span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="c1">// returns an interface with type *ForExpression and value nil</span><span class="w"></span>
+</code></pre></div>
+
+<p>So a way around this is of course to always return <code>nil</code> in the form of a typed
+variable. But I'm not satisfied with that, because even if I'm very strict
+about it myself, others may not be. And I may also just make an honest mistake.
+So let's tweak our <code>IsNil()</code> function to account for true <code>nil</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">IsNil</span><span class="p">()</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>If you run this, you'll see that the runtime panic is replaced with the
+following.</p>
+<div class="highlight"><pre><span></span><code>notAnExpr &lt;nil&gt; true
+</code></pre></div>
+
+<p>So we're done? Unfortunately, not quite.</p>
+<h1>Structs are a problem</h1>
+<p>Our <code>IsNil()</code> handles true <code>nil</code> and interfaces with <code>nil</code> values. But,
+unfortunately, it does not handle structs.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">}</span><span class="w"></span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span><span class="w"> </span><span class="c1">// panic: reflect: call of reflect.Value.IsNil on struct Value</span><span class="w"></span>
+</code></pre></div>
+
+<p>Poop. It appears we missed a critical part of
+<a href="https://pkg.go.dev/reflect#Value.IsNil"><code>IsNil()</code>'s documentation</a>.
+And by missed, I of course mean that we didn't read it, but here's the relevant
+part.</p>
+<blockquote>
+<p>IsNil reports whether its argument v is nil. The argument must be a chan,
+func, interface, map, pointer, or slice value; if it is not, IsNil panics.</p>
+</blockquote>
+<p>So, we need to check if the value is of any of these <code>nil</code>-able types,
+and otherwise assume that it is not <code>nil</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">reflected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">reflected</span><span class="p">.</span><span class="nx">Kind</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"></span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Chan</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Func</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Interface</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Map</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Ptr</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Slice</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">reflected</span><span class="p">.</span><span class="nx">IsNil</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>And with this, the panic is abated.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">}</span><span class="w"></span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span><span class="w"> </span><span class="c1">// false</span><span class="w"></span>
+</code></pre></div>
+
+<p>This will work so long as Go doesn't add some other <code>nil</code>-able type. Given how
+conservative the language is, such an addition to the core types seems an
+unlikely prospect. But of course, it could happen, and then this function would
+return <code>false</code> incorrectly in some cases.</p>
+<h1>Footguns</h1>
+<p>All languages have <a href="https://en.wiktionary.org/wiki/footgun">footguns</a>. Some
+languages, like C++ and JavaScript, are seemingly built exclusively of them.
+Go is a small-ish and conservative language, and so naturally has fewer such
+contraptions. But how <code>nil</code> is handled differently in different contexts and how
+the type of a variable can change the actual value that's returned from a
+function, is a big one.</p>
+<p>Of course, all of this may just be symptoms of my not knowing Go very well, and
+this whole article could just be the frustrated ramblings of an apprentice. But,
+I'm an experienced programmer, and this confused me quite a bit. That alone
+should be sufficient evidence that some design choices made here aren't optimal.</p>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/linux.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/reviews.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Reviews</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/go.html">
+          <i class="fas fa-tag"></i>
+        go
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+<script src="https://files.stork-search.net/releases/v1.2.1/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://slar.se/search-index.st")
+</script>  </body>
+</html>

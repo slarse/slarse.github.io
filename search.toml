@@ -53,6 +53,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "the-sheer-insanity-of-interfaces-and-nil-in-go.html"
+url = "/the-sheer-insanity-of-interfaces-and-nil-in-go.html"
+title = "The sheer insanity of interfaces and nil in Go"
+
+[[input.files]]
 path = "book-review-writing-an-interpreter-in-go.html"
 url = "/book-review-writing-an-interpreter-in-go.html"
 title = "Book Review: Writing an Interpreter in Go"

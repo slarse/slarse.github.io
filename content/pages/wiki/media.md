@@ -44,6 +44,9 @@ books I've read (along with a review).
 * Mastering PostgreSQL 15
     - By Hans-Jurgen Schonig, 2023
     - ISBN: 9781803248349
+* The Linux Programming Interface
+    - By Michael Kerrisk, 2010
+    - ISBN: 9781593272203
 
 # Videos
 

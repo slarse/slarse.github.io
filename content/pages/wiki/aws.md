@@ -16,5 +16,3 @@ Slug: wiki/aws
     - It's easy to conflate the `MaximumRetryAttempts` on the ESM with the
       `maxReceiveCount` attribute on SQS, where X maximum receives means X total
       attempts
-
-

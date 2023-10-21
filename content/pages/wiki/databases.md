@@ -39,5 +39,3 @@ P2 = process 2
       transactions serially. Under normal operations with concurrent
       transaction execution deadlocks can occur, and the database should then
       abort one or both transactions that are part of the deadlock.
-
-

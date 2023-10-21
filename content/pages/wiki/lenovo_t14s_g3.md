@@ -29,5 +29,7 @@ initially used the system. Installing the
 fixed the problem.
 
 
+
 ## Refers to
+
 * [Arch Linux on XPS 15 9520]({filename}xps15.md)

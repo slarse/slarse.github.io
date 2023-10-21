@@ -8,51 +8,67 @@ software engineering workflows or just general usage of my machines. I'm
 continuously expanding this list as I find new tools and recall ones that I
 already use.
 
-## Command Line Tools
+### Table of contents
+* Command Line Tools
+    * autojump - cd that learns!
+    * neovim - The future (and present) of Vim
+    * fzf - The best fuzzy finder around
+    * ripgrep - grep, but fast!
+    * tmux - The best terminal multiplexer!
+    * tldr - Short and concise man pages
+* GUI utilities
+    * i3 - Improved tiling window manager
+    * warpd - Navigate GUIs with your keyboard
+    * zeal - Offline docs
+    * slimbook-battery - Battery/performance management
+* Note taking and blogging
+    * pelican - An extensible static site generator
+
+# Command Line Tools
 Command line tools are my bread and butter. Here's a selection of my favorite
 tools.
 
-### [autojump](https://github.com/wting/autojump) - `cd` that learns!
+## [autojump](https://github.com/wting/autojump) - `cd` that learns!
 * Instead of `cd ~/path/to/my/best-project`, just type `j best-project`!
 * Finds the directory I want the vast majority of the time
 
-### [neovim](https://neovim.io/) - The future (and present) of Vim
+## [neovim](https://neovim.io/) - The future (and present) of Vim
 * You know what it is, it's Vim. But better.
 * I use it for everything. That's the largest appeal for me. One editor for all
     my editing needs.
 
-### [fzf](https://github.com/junegunn/fzf) - The best fuzzy finder around
+## [fzf](https://github.com/junegunn/fzf) - The best fuzzy finder around
 * A _fuzzy finder_ allowing you to search through text with inexact (fuzzy) search terms
 * Great integration with `neovim`
 
-### [ripgrep](https://github.com/BurntSushi/ripgrep) - `grep`, but fast!
+## [ripgrep](https://github.com/BurntSushi/ripgrep) - `grep`, but fast!
 * An incredibly fast implementation of the classic `grep` utility
 * Great integration with `neovim`
 
-### [tmux](https://github.com/tmux/tmux) - The best terminal multiplexer!
+## [tmux](https://github.com/tmux/tmux) - The best terminal multiplexer!
 * A great terminal multiplexer, letting you run multiple programs in a single terminal!
 * Large amount of plugins and themes to customize it to your liking
     - But I run [mostly vanilla](https://github.com/slarse/config/blob/main/tmux/tmux.conf)
 
-### [tldr](https://github.com/tldr-pages/tldr) - Short and concise man pages
+## [tldr](https://github.com/tldr-pages/tldr) - Short and concise man pages
 * Super short man pages that give just the bare minimum of information to use a tool
 * Very often, precisely what you need!
 
-## GUI utilities
+# GUI utilities
 I don't use a whole lot of GUI utilities, but I've found a few really neat ones
 over the years.
 
-### [i3](https://i3wm.org/) - Improved tiling window manager
+## [i3](https://i3wm.org/) - Improved tiling window manager
 * A tiling window manager - once you go tiling, you never go back!
     - Seriously, try it. You'll wonder why you ever had floating windows.
 * Relatively easy to get started with
 * Highly customizable
 
-### [warpd](https://github.com/rvaiya/warpd) - Navigate GUIs with your keyboard
+## [warpd](https://github.com/rvaiya/warpd) - Navigate GUIs with your keyboard
 * Navigate your GUIs using your keyboard
 * Fantastic for use with a laptop
 
-### [zeal](https://github.com/zealdocs/zeal) - Offline docs
+## [zeal](https://github.com/zealdocs/zeal) - Offline docs
 * Keep your docs locally on your machine instead of having to navigate to a
     docs website
 * Comes out-of-the-box with docs for most major programming languages, like
@@ -61,19 +77,17 @@ over the years.
 * For MacOs users, [dash](https://kapeli.com/dash) does exactly the same
     thing
 
-### [slimbook-battery](https://github.com/Slimbook-Team/slimbookbattery) - Battery/performance management
+## [slimbook-battery](https://github.com/Slimbook-Team/slimbookbattery) - Battery/performance management
 - Neat GUI for managing battery and performance settings
 - **Note:** The current release (v4.0.8) does not work with newer
   versions of the Linux kernel (6.4.2 or later). Prerelease of  v4.0.9 exists
   and [works fine](https://github.com/Slimbook-Team/slimbookbattery/issues/110).
 
-## Note taking and blogging
+# Note taking and blogging
 While apps like [LoqSeq](https://logseq.com/), [Obsidian](https://obsidian.md/)
 and [Notion](https://www.notion.so/) are all the rage right now, I prefer
 simpler solutions.
 
-### [pelican](https://getpelican.com/) - An extensible static site generator
+## [pelican](https://getpelican.com/) - An extensible static site generator
 - Write Markdown (or reStructuredText), get a static web site!
 - This blog is created with Pelican
-
-

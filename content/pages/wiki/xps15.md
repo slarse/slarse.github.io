@@ -102,5 +102,7 @@ controls.
 ```
 
 
+
 ## Referenced from
+
 * [Arch Linux on Lenovo T14S Gen 3 (Intel)]({filename}lenovo_t14s_g3.md)

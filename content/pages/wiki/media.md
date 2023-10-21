@@ -1,7 +1,15 @@
 Title: Awesome Media
 Slug: wiki/media
 
-A collection of awsome media resources (videos, books, podcasts, etc).
+A collection of awesome media resources (videos, books, podcasts, etc).
+
+### Table of contents
+* Books
+    * Books I've read
+    * Books I'm currently reading
+* Videos
+* Podcasts
+* Other links
 
 # Books
 Books are great, and my absolute favorite way to learn something new.
@@ -79,5 +87,3 @@ books I've read (along with a review).
 # Other links
 * [A guide to home row mods](https://precondition.github.io/home-row-mods)
     - Comprehensive introduction to home row mods
-
-

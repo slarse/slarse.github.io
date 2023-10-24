@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
+    <meta name="description" content="A Page in : Terms" />
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>RepoBee at ITiCSE and SIGCSE 2021! - Programming for fun and profit</title>
+    <title>Terms - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -86,48 +86,129 @@
     <div class="container" id="main-container">
       <div class="row">
         <div class="col-md-9" id="content">
-<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
-  <header class="article-header">
-<abbr class="article-header-date">
-  Thu 09 September 2021
-</abbr> <h1>
-  <a href="https://slar.se/repobee-at-iticse-and-sigcse-2021.html" rel="bookmark"
-     title="Permalink to RepoBee at ITiCSE and SIGCSE 2021!">
-    RepoBee at ITiCSE and SIGCSE 2021!
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/blog.html">
-      Blog</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info --><div class="article-tag-list">
-<span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/blog.html"><i class="fas fa-tag"></i>blog</a>&nbsp;
-	<a href="https://slar.se/tag/repobee.html"><i class="fas fa-tag"></i>repobee</a>&nbsp;
-</div>  </header>
-  <div class="content-body" itemprop="text articleBody">
-	<p>Another year, and a few new papers published on my favorite project:
-<a href="https://repobee.org">RepoBee</a>. We made a hat-trick and appeared at
-ITiCSE 2021 for a third year in a row (see <a href="https://slar.se/repobee-and-simon-at-iticse-2019.html">ITiCSE 2019</a>
-and <a href="https://slar.se/repobee-at-iticse-2020.html">ITiCSE 2020</a>), but this time we managed to sneak
-in two papers. One paper that I presented detailed <a href="https://doi.org/10.1145/3456565.3460031">RepoBee's double-blind peer
-review</a>, and the other paper that was
-presented by my colleague Tobias showcased the <a href="https://doi.org/10.1145/3456565.3460036">repobee-sanitizer
-plugin</a>. Amazingly, the presentations
-won <a href="https://iticse.acm.org/best-paper-award/">both "Best Presentation" awards for their
-category</a>.</p>
-<p>We also made an appearance at SIGCSE with a 20-minute demo and Q&amp;A. The teaser
-trailer for the demo <a href="https://repobee.org/media/repobee-demo.mp4">is available
-here</a>. The demo itself was
-essentially that, but less compressed and a little more elaborate.
-It was followed by a nicely active Q&amp;A, where we made some new connections.</p>
-<p>All my publications can be found on the <a href="https://slar.se/pages/publications-and-essays.html">Publications
-page</a>.</p>
+<div class="stork-wrapper">
+    <input class="stork-input" data-stork="sitesearch" placeholder="Seach all content"/>
+    <div class="stork-output" data-stork="sitesearch-output"></div>
+</div><article itemscope="itemscope" 
+         itemtype="http://schema.org/WebPage">
+  <header>
+    <h1 itemprop="name headline">Terms</h1>
+  </header>
+  <div class="content-body" itemprop="text">
+    <p>This is my (currently not so) big list of software engineering terminology and
+definitions, in alphabetical order.</p>
+<ul>
+<li>Cooperative multitasking<ul>
+<li>Tasks run and yield control to other tasks of their own volition</li>
+<li>Common in event loops, such as <code>asyncio</code> in <code>Python</code></li>
+</ul>
+</li>
+<li>Exit status<ul>
+<li>A special termination status that the process sets itself as it calls the
+  <code>_exit()</code> system call</li>
+<li>Note that <code>_exit()</code> is a system call - a process cannot terminate itself!</li>
+</ul>
+</li>
+<li>File descriptor<ul>
+<li>Unique integer denoting an open file</li>
+<li>Sometimes referred to as a <em>file handle</em></li>
+</ul>
+</li>
+<li>Group process id (GPID)<ul>
+<li>Only for shells with job control</li>
+<li>Each process in a process group has the same GPID</li>
+<li>The process group leader has <code>PID == GPID</code></li>
+</ul>
+</li>
+<li>Kernel space<ul>
+<li>Area of virtual memory that can only be accessed in kernel mode</li>
+</ul>
+</li>
+<li>Parent process ID (PPID)<ul>
+<li>Process ID of the parent process</li>
+</ul>
+</li>
+<li>Preemptive multitasking<ul>
+<li>A scheduler (such as an OS kernel) decides when and how tasks (e.g.
+  processes) run.</li>
+<li>See <a href="https://slar.se/pages/wiki/linux.html">Linux</a></li>
+</ul>
+</li>
+<li>Process<ul>
+<li>A running instance of a program</li>
+</ul>
+</li>
+<li>Process group<ul>
+<li>A collection of related processes</li>
+<li>Sometimes called a <em>job</em></li>
+<li>Requires a shell with <em>job control</em></li>
+</ul>
+</li>
+<li>Process ID (PID)<ul>
+<li>A small non-negative integer representing the process</li>
+</ul>
+</li>
+<li>Root (username)<ul>
+<li>The (most common) login name of the superuser on a *NIX system</li>
+</ul>
+</li>
+<li>Root (hierarchy)<ul>
+<li>The topmost element of some hierarchy, usually a tree</li>
+</ul>
+</li>
+<li>Session (UNIX)<ul>
+<li>A collection of process groups</li>
+<li>Used primarily by job-control shells</li>
+</ul>
+</li>
+<li>Session leader (UNIX)<ul>
+<li>Process that created its session</li>
+</ul>
+</li>
+<li>Static library<ul>
+<li>A library that is statically linked with (i.e. copied into) a program at
+  compile time</li>
+</ul>
+</li>
+<li>Shared library<ul>
+<li>A library that is dynamically linked with a program as it is loaded</li>
+</ul>
+</li>
+<li>Single UNIX Specification (SUS)<ul>
+<li>Standards for UNIX operating systems</li>
+<li>Various versions, the most important one is SUSv3.</li>
+</ul>
+</li>
+<li>Termination status<ul>
+<li>A small non-negative integer that is "emitted" by as the program terminates</li>
+<li>Non-zero termination status indicates an error</li>
+</ul>
+</li>
+<li>User space<ul>
+<li>Area of virtual memory that is allocated for a user mode process</li>
+</ul>
+</li>
+<li>UNIX<ul>
+<li>Originally an operating system, now a set of standards</li>
+<li>See <a href="https://slar.se/pages/wiki/linux.html">Linux</a></li>
+</ul>
+</li>
+<li>Virtual private computer<ul>
+<li>Multi-user operating systems provide each user with a (mostly) private
+  computer experience</li>
+</ul>
+</li>
+</ul>
+<h2>Referenced from</h2>
+<ul>
+<li><a href="https://slar.se/pages/wiki/linux.html">Linux</a></li>
+</ul>
+<h2>Refers to</h2>
+<ul>
+<li><a href="https://slar.se/pages/wiki/linux.html">Linux</a></li>
+</ul>
   </div>
-  
+
 
 </article>
         </div><!-- /content -->

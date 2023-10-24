@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>What does the number in a man page mean? - Programming for fun and profit</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous"
+      />
+
+
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/pygment.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/search.css" />
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming for fun and profit Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+                  <li>
+                    <a href="https://slar.se/pages/about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/wiki.html">Wiki</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/projects.html">Projects</a>
+                  </li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">Programming for fun and profit</a></h1>
+		<p class="lead">A blog about software engineering, programming languages and technical tinkering</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Tue 24 October 2023
+</abbr> <h1>
+  <a href="https://slar.se/man-page-numbering.html" rel="bookmark"
+     title="Permalink to What does the number in a man page mean?">
+    What does the number in a man page mean?
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/linux.html">
+      Linux</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/linux.html"><i class="fas fa-tag"></i>linux</a>&nbsp;
+	<a href="https://slar.se/tag/man.html"><i class="fas fa-tag"></i>man</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>If you open a <code>man</code> page on a *NIX system (such as a Linux distro), you'll
+always see a number next to the subject of the <code>man</code> page. Like <code>GIT(1)</code>,
+<code>SUDO(8)</code> or <code>open(n)</code>. What's that thing in parentheses? To cut a long
+story short, it's the <em>section</em> the <code>man</code> page belongs to. Let's discover
+what that means.</p>
+<h1><code>man</code> pages are divided into sections</h1>
+<p><code>man</code> pages act as a system reference manual on any *NIX system. All <code>man</code> pages
+have a heading containing the name of the page, its section and a very short
+description. Something like this.</p>
+<div class="highlight"><pre><span></span><code>&lt;name&gt;(&lt;#section&gt;)     &lt;description&gt;     &lt;name&gt;(&lt;#section&gt;)
+</code></pre></div>
+
+<p>As a concrete example, here's the first line you get if you execute <code>man git</code>.</p>
+<div class="highlight"><pre><span></span><code>GIT(1)                         Git Manual                        GIT(1)
+</code></pre></div>
+
+<p>The name is self-explanatory, is is the short description, but the section
+number is not so transparent in its meaning. To find out what it means,
+we can actually consult the <code>man</code> page for the <code>man</code> program itself.</p>
+<div class="highlight"><pre><span></span><code><span class="n">$</span><span class="w"> </span><span class="n">man</span><span class="w"> </span><span class="n">man</span><span class="w"></span>
+<span class="n">MAN</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">                     </span><span class="n">Manual</span><span class="w"> </span><span class="n">pager</span><span class="w"> </span><span class="n">utils</span><span class="w">                    </span><span class="n">MAN</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="p">[...]</span><span class="w"></span>
+<span class="n">The</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">below</span><span class="w"> </span><span class="n">shows</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">manual</span><span class="w"> </span><span class="n">followed</span><span class="w"></span>
+<span class="n">by</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">pages</span><span class="w"> </span><span class="n">they</span><span class="w"> </span><span class="n">contain</span><span class="p">.</span><span class="w"></span>
+
+<span class="mi">1</span><span class="w">   </span><span class="n">Executable</span><span class="w"> </span><span class="n">programs</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">shell</span><span class="w"> </span><span class="n">commands</span><span class="w"></span>
+<span class="mi">2</span><span class="w">   </span><span class="n">System</span><span class="w"> </span><span class="n">calls</span><span class="w"> </span><span class="p">(</span><span class="n">functions</span><span class="w"> </span><span class="n">provided</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">kernel</span><span class="p">)</span><span class="w"></span>
+<span class="mi">3</span><span class="w">   </span><span class="n">Library</span><span class="w"> </span><span class="n">calls</span><span class="w"> </span><span class="p">(</span><span class="n">functions</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">program</span><span class="w"> </span><span class="n">libraries</span><span class="p">)</span><span class="w"></span>
+<span class="mi">4</span><span class="w">   </span><span class="n">Special</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="p">(</span><span class="n">usually</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">/</span><span class="n">dev</span><span class="p">)</span><span class="w"></span>
+<span class="mi">5</span><span class="w">   </span><span class="n">File</span><span class="w"> </span><span class="n">formats</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">conventions</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">passwd</span><span class="w"></span>
+<span class="mi">6</span><span class="w">   </span><span class="n">Games</span><span class="w"></span>
+<span class="mi">7</span><span class="w">   </span><span class="n">Miscellaneous</span><span class="w"> </span><span class="p">(</span><span class="n">including</span><span class="w"> </span><span class="n">macro</span><span class="w">  </span><span class="n">packages</span><span class="w">  </span><span class="n">and</span><span class="w">  </span><span class="n">conventions</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span><span class="w"> </span><span class="n">man</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span><span class="w"> </span><span class="n">groff</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span><span class="w"> </span><span class="n">man</span><span class="o">-</span><span class="n">pages</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="w"></span>
+<span class="mi">8</span><span class="w">   </span><span class="n">System</span><span class="w"> </span><span class="n">administration</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="p">(</span><span class="n">usually</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">root</span><span class="p">)</span><span class="w"></span>
+<span class="mi">9</span><span class="w">   </span><span class="n">Kernel</span><span class="w"> </span><span class="n">routines</span><span class="w"> </span><span class="p">[</span><span class="n">Non</span><span class="w"> </span><span class="n">standard</span><span class="p">]</span><span class="w"></span>
+<span class="p">[...]</span><span class="w"></span>
+</code></pre></div>
+
+<p>This sectioning makes it possible to have multiple <code>man</code> pages with the same
+name, but in different sections. By default, you'll get only one result when
+executing <code>man &lt;name&gt;</code>, and which one you get is dependent on a pre-defined
+search order. Which, of course, we can also find in the <code>man</code> page for <code>man</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">The</span><span class="w">  </span><span class="n">order</span><span class="w">  </span><span class="n">of</span><span class="w"> </span><span class="n">sections</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">overridden</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">envi</span><span class="err">‐</span><span class="w"></span>
+<span class="n">ronment</span><span class="w">  </span><span class="n">variable</span><span class="w">  </span><span class="o">$</span><span class="n">MANSECT</span><span class="w">  </span><span class="ow">or</span><span class="w">  </span><span class="n">by</span><span class="w">  </span><span class="n">the</span><span class="w">  </span><span class="n">SECTION</span><span class="w">  </span><span class="n">directive</span><span class="w">  </span><span class="ow">in</span><span class="w"></span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">man_db</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="w">  </span><span class="n">By</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">follows</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="n">p</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">3</span><span class="n">p</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="n">p</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="n">type</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">7</span><span class="w"></span>
+</code></pre></div>
+
+<p>In my personal experience, the default search order most often gives you what
+you want. But sometimes it doesn't, and then you need to figure out how to find
+the man page you're after.</p>
+<h1>Selecting man pages from different sections</h1>
+<p>To select a page from a particular section, you specify the section before the
+name. For example, as indicated by the excerpt from <code>MAN(1)</code> above, there's also
+a <code>man(7)</code>. We can get it like so.</p>
+<div class="highlight"><pre><span></span><code>$ man <span class="m">7</span> man
+man<span class="o">(</span><span class="m">7</span><span class="o">)</span>              Miscellaneous Information Manual             man<span class="o">(</span><span class="m">7</span><span class="o">)</span>
+<span class="o">[</span>...<span class="o">]</span>
+</code></pre></div>
+
+<p>But what if you don't actually know which section the man page you're looking
+for is in, you only know that the one you're looking at isn't the one? Then you
+can use <code>whatis</code>. For example, I have four different man pages named <code>open</code> on
+my machine.</p>
+<div class="highlight"><pre><span></span><code>$ whatis open
+open <span class="o">(</span><span class="m">2</span><span class="o">)</span>             - open and possibly create a file
+open <span class="o">(</span>3p<span class="o">)</span>            - open file
+open <span class="o">(</span>3perl<span class="o">)</span>         - perl pragma to <span class="nb">set</span> default PerlIO layers <span class="k">for</span> input and output
+open <span class="o">(</span>n<span class="o">)</span>             - Open a file-based or <span class="nb">command</span> pipeline channel
+</code></pre></div>
+
+<p>Here you can also see a couple of section numbers that look a bit different,
+namely <code>3perl</code> and <code>n</code>. These don't belong to any of the standard sections, but
+you can open them just the same. For example, <code>man 3perl open</code> would open the
+<code>open</code> page from the custom <code>3perl</code> section.</p>
+<blockquote>
+<p>Note: If you don't see all available man pages when running <code>whatis</code> for a
+particular page, your <code>man</code> database is out-of-date, you may want to run
+<code>mandb</code> manually (or whatever is equivalent on your system) to rebuild the
+search index.</p>
+</blockquote>
+<h1>And that's all!</h1>
+<p>Now you should hopefully be a bit more confident in finding the man page you're
+looking for. And if at any point you forget what I've written here, almost all
+of the information is available just a <code>man man</code> away!</p>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/linux.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/reviews.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Reviews</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/go.html">
+          <i class="fas fa-tag"></i>
+        go
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+<script src="https://files.stork-search.net/releases/v1.2.1/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://slar.se/search-index.st")
+</script>  </body>
+</html>

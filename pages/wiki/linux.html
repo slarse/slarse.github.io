@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A Page in : Linux" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Linux - Programming for fun and profit</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous"
+      />
+
+
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/pygment.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/search.css" />
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming for fun and profit Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+                  <li>
+                    <a href="https://slar.se/pages/about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/wiki.html">Wiki</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/projects.html">Projects</a>
+                  </li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">Programming for fun and profit</a></h1>
+		<p class="lead">A blog about software engineering, programming languages and technical tinkering</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<div class="stork-wrapper">
+    <input class="stork-input" data-stork="sitesearch" placeholder="Seach all content"/>
+    <div class="stork-output" data-stork="sitesearch-output"></div>
+</div><article itemscope="itemscope" 
+         itemtype="http://schema.org/WebPage">
+  <header>
+    <h1 itemprop="name headline">Linux</h1>
+  </header>
+  <div class="content-body" itemprop="text">
+    <h3>Table of contents</h3>
+<ul>
+<li>UNIX</li>
+<li>Fundamentals<ul>
+<li>Kernel</li>
+<li>Users and groups</li>
+<li>Directory hierarchy</li>
+<li>File I/O</li>
+<li>Processes</li>
+<li>Memory mappings</li>
+<li>Libraries</li>
+<li>Interprocess communication (IPC)</li>
+<li>Signals</li>
+<li>Threads</li>
+<li>Sessions</li>
+</ul>
+</li>
+<li>File I/O</li>
+</ul>
+<h1>UNIX</h1>
+<p>Primarily notes from chapter 1 of TLPI</p>
+<ul>
+<li>Originally a specific operating system, with the first version
+  developed at Bell Labs by Ken Thompson in 1969</li>
+<li>Came in versions</li>
+<li>Nowadays, UNIX more often denotes a "UNIX-like" operating system,
+  such as Linux distributions, macOS and BSD variants.</li>
+<li>The Open Group owns the UNIX trademark<ul>
+<li>They issue certifications for conformance to the <em>Single Unix
+  Specification</em> (SUS), of which there are multiple versions</li>
+<li>For example, macOS 14 (Sonoma) is a certified SUSv3 OS</li>
+<li>No Linux distribution I know of is a certified UNIX product</li>
+</ul>
+</li>
+</ul>
+<h1>Fundamentals</h1>
+<p>Primarily notes from chapter 2 of TLPI.</p>
+<h2>Kernel</h2>
+<ul>
+<li>Resides at <code>/etc/vmlinuz</code><ul>
+<li>The trailing <code>z</code> denotes that the file is compressed</li>
+</ul>
+</li>
+<li>Tasks performed by the kernel include<ul>
+<li>Process scheduling (Linux employs
+  <a href="https://slar.se/pages/wiki/terms.html"><em>preemptive multitasking</em></a>, including cration and
+  termination</li>
+<li>Memory management</li>
+<li>File system provisioning</li>
+<li>Device access - devices are exposed as files in <code>/dev</code></li>
+<li>Networking</li>
+<li>System call API</li>
+<li>Multi-user enviroment - each user gets a <em>virtual private computer</em></li>
+</ul>
+</li>
+<li>Kernel mode vs user mode<ul>
+<li>Modern CPUs provide hardware instructions for allowing processes to
+  operate in <em>kernel</em> or <em>user</em> mode.</li>
+<li>Areas of memory can be marked for either mode.<ul>
+<li><em>Kernel space</em> and <em>user space</em></li>
+<li>Kernel mode processes can access everything, whereas user mode
+  processes are limited to <em>user space</em></li>
+<li>Kernel-specific data structures will be marked for kernel mode, which
+  user processes cannot access </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Users and groups</h2>
+<ul>
+<li>User consists of<ul>
+<li>Login name (username)</li>
+<li>Numeric user ID (UID)</li>
+<li>Group ID - the <em>first</em> group the user belongs to</li>
+<li>Home directory</li>
+<li>Login shell</li>
+</ul>
+</li>
+<li>Users are stored in the <code>/etc/passwd</code> file<ul>
+<li>For security reasons, passwords are usually stored in <code>/etc/shadow</code></li>
+</ul>
+</li>
+<li>Group consists of<ul>
+<li>Group name</li>
+<li>Numeric group id (GID)</li>
+<li>User list - comma separated list of usernames that belong to the group</li>
+</ul>
+</li>
+<li>Superuser<ul>
+<li>UID=0</li>
+<li>Login name is most often <em>root</em></li>
+</ul>
+</li>
+</ul>
+<h2>Directory hierarchy</h2>
+<ul>
+<li>Single tree structure (i.e. just one root)<ul>
+<li>Contrast this to Windows, where each device has it's own directory
+  hierarchy (e.g. <code>C:</code>, <code>D:</code> etc)</li>
+<li>Devices are <em>mounted</em> into the single directory hierarchy</li>
+</ul>
+</li>
+<li>Files<ul>
+<li>In Linux, "everything is a file"</li>
+<li>Files have different types: regular file, directory, pipes,
+  sockets symbolic links etc.</li>
+</ul>
+</li>
+<li>Directory<ul>
+<li>A file whose contents is a list of other files</li>
+<li>Always has at least two entries<ul>
+<li><code>.</code> denotes itself</li>
+<li><code>..</code> denotes its parent (except for the root directory, where
+  <code>. == ..</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>(Hard) link<ul>
+<li>An association between a filename and a specific file</li>
+</ul>
+</li>
+<li>Symbolic link<ul>
+<li>A file that contains a path to another file</li>
+<li>Sometimes called a <em>soft</em> link to contrast it with a normal (or hard)
+  link</li>
+</ul>
+</li>
+<li>Filenames<ul>
+<li>The name of a file in a directory</li>
+<li>Recommended to keep to the <em>portable filename character set</em> specified by
+  SUSv3: <code>[-._a-zA-Z0-9]</code>.<ul>
+<li>Even if most modern systems can handle a large range of UTF8.</li>
+<li>Characters that have special meaning must be escaped</li>
+<li>Some environments/programs may not support escaping, and then you're
+  kind of pooped</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Pathnames<ul>
+<li>A <code>/</code>-separated list of directory names, except for the final entry which
+  may be any kind of file</li>
+<li>Absolute pathnames start with <code>/</code>, relative pathnames do not</li>
+</ul>
+</li>
+<li>Current working directory   <ul>
+<li>Every process has a current working directory</li>
+<li>The working directory is inherited from the parent process, or explicitly
+  specified when a new process is created</li>
+<li>A login shell always starts in the home directory of the logged in user</li>
+</ul>
+</li>
+<li>File permissions<ul>
+<li>Each file has an associated UID and GID</li>
+<li>Each file has a set of permissions<ul>
+<li><em>read</em> (<code>r</code>) - allows a file to be read</li>
+<li><em>write</em> (<code>w</code>) - allows a file to be written</li>
+<li><em>execute</em> (<code>x</code>) - allows a file to be executed</li>
+<li>Permission bits are in the order <code>rwx</code>, so e.g. <code>7</code> is all
+  permissions, while <code>4</code> is only <code>r</code> permission.</li>
+</ul>
+</li>
+<li>There are 9 permission bits, 3 each for <em>owner</em>, <em>group</em> and <em>other</em><ul>
+<li>So e.g. <code>744</code> translates to <code>rwx</code> for the owner, and only <code>r</code> for
+  group and other</li>
+</ul>
+</li>
+<li>Directories have a slightly different interpretation of permissions<ul>
+<li>read - allows the filenames in the directory to be listed</li>
+<li>write - allows filenames to be added or removed</li>
+<li>execute (or <em>search</em>) - allows files to be read and written as per
+  the permissions on the files themselves<ul>
+<li>A file with <code>777</code> permissions in a directory that lacks <code>x</code> still
+  cannot be read!</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>File I/O</h2>
+<ul>
+<li><em>Universality of I/O</em><ul>
+<li>All I/O is done through accessing files with system calls such as
+  <code>open()</code>, <code>read()</code>, <code>write()</code> etc.</li>
+<li>It doesn't matter if the file is a device or a regular file</li>
+<li>There's only one type of file access: a stream of bytes that you can get
+  to any point in with the <code>lseek()</code> system call.</li>
+</ul>
+</li>
+<li>File descriptors<ul>
+<li>A per-process unique and non-negative integer denoting an open file</li>
+<li>Each process has a table of open file descriptors</li>
+<li>Normally a process inherits descriptors 0 (stdout), 1 (stdin) and 2
+  (stderror) from the parent process</li>
+</ul>
+</li>
+</ul>
+<h2>Processes</h2>
+<ul>
+<li>A process is an instance of an executing program</li>
+<li>Process memory layout:<ul>
+<li><em>Text</em> - program instructions</li>
+<li><em>Data</em> - static variables</li>
+<li><em>Heap</em> - dynamically allocated memory</li>
+<li><em>Stack</em> - automatically allocated memory</li>
+</ul>
+</li>
+<li>Processes are created with the <em>fork()</em> system call<ul>
+<li><em>fork()</em> clones the currently running process and creates a <em>child
+  process</em></li>
+<li>A child process inherits copies of the parent's data, stack and heap</li>
+<li>The text segment is shared between parent and child process</li>
+<li>The child process will often immediately execute the <code>execve()</code> system
+  call to execute some new program</li>
+</ul>
+</li>
+<li>Process ID (PID)<ul>
+<li>A small non-negative integer representing the process</li>
+</ul>
+</li>
+<li>Parent process ID (PPID)<ul>
+<li>Process ID of the parent process</li>
+</ul>
+</li>
+<li>Group process id (GPID)<ul>
+<li>Only for shells with job control</li>
+<li>Each process in a process group has the same GPID</li>
+<li>The process group leader has <code>PID == GPID</code></li>
+</ul>
+</li>
+<li>Termination status<ul>
+<li>A small non-negative integer that is "emitted" by as the program terminates</li>
+<li>Non-zero termination status indicates an error</li>
+</ul>
+</li>
+<li>Exit status<ul>
+<li>A special termination status that the process sets itself as it calls the
+  <code>_exit()</code> system call</li>
+<li>Note that <code>_exit()</code> is a system call - a process cannot terminate itself!</li>
+</ul>
+</li>
+<li>Processes have user and group ids<ul>
+<li>Real UID and GID - denote the user and group to which the process belong
+  (that started the process)</li>
+<li>Effective UID and GID - denote the user and group with which privileges
+  the process is executing.</li>
+<li>Most often the same as real UID/GID, but can differ e.g. by using
+    <code>setuid</code></li>
+<li>Supplementary GIDs - additional groups the process belongs to</li>
+</ul>
+</li>
+<li>Privileged processes<ul>
+<li>Any process running with effective UID 0 (root)</li>
+<li>Bypasses any normal permission checks</li>
+<li>Either started by root, or uses setuid</li>
+</ul>
+</li>
+<li>Capabilities<ul>
+<li>Introduced in Linux 2.2, allows a subset of superuser privileges to be
+  allowed</li>
+<li>The superuser represents <em>all</em> capabilities</li>
+</ul>
+</li>
+<li>The <em>init</em> process<ul>
+<li>The first process started when the OS starts</li>
+<li>The praent of all processes, has PID 1</li>
+<li>Cannot be stopped (even by the superuser)</li>
+<li>Derived from <code>/sbin/init</code></li>
+</ul>
+</li>
+<li>Daemon (service)<ul>
+<li>Long-lived process that runs in the background</li>
+<li>Usually does not have any associated terminal</li>
+<li>Usually starts at system start and is managed by something like <code>systemd</code></li>
+</ul>
+</li>
+<li>Environment list<ul>
+<li>A process has a list of environment variables</li>
+<li>Inherited from the parent process and thus provides a way for a parent
+  process to "pass arguments" to a child process</li>
+</ul>
+</li>
+<li>Resource limits<ul>
+<li>The resources a process can use can be limited with the <code>setrlimit()</code>
+  system call</li>
+<li><em>Soft limit</em> - the current resource limit, can be adjusted by the process
+  itself</li>
+<li><em>Hard limit</em> - the absolute resource limit, the soft limit cannot be
+  adjusted beyond this point</li>
+</ul>
+</li>
+</ul>
+<h2>Memory mappings</h2>
+<ul>
+<li>The <code>mmap()</code> system call creates a memory mapping</li>
+<li>File mapping<ul>
+<li>Maps a region of a file into the process address space</li>
+</ul>
+</li>
+<li>Anonymous mapping<ul>
+<li>Does not need a corresponding file</li>
+<li>Initializes the memory to 0s</li>
+</ul>
+</li>
+<li>Can be used e.g. for:<ul>
+<li>Initializing a process text</li>
+<li>Allocation of new memory (filled with 0s)</li>
+<li>Memory-mapped I/O</li>
+<li>Communication between processes using shared mappings</li>
+</ul>
+</li>
+</ul>
+<h2>Libraries</h2>
+<ul>
+<li>Static libraries<ul>
+<li>Bundle of compiled object modules</li>
+<li>Statically linked to a program at compile time - the libraries are
+  <em>copied</em> into the program text</li>
+</ul>
+</li>
+<li>Shared libraries<ul>
+<li>Linked by a dynamic linker when the program starts</li>
+<li>Requires that the shared library is available on the system the program
+  executes on</li>
+</ul>
+</li>
+</ul>
+<h2>Interprocess communication (IPC)</h2>
+<ul>
+<li>Processes need to communicate with each other, and can do so with<ul>
+<li>signals - to indicate that something has occurred</li>
+<li>pipes and FIFOs - to transfer data</li>
+<li>sockets - to transfer data to a process that may not be on the same host</li>
+<li>file locking - to disallow other processes from reading or writing part
+  of a file</li>
+<li>message queues - to exchange messages</li>
+<li>semaphores - to synchronize concurrent actions</li>
+<li>shared memory - to read and write to the same memory</li>
+</ul>
+</li>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li>Used as IPC</li>
+<li>Used by the kernel to control programs, and can be sent if e.g.<ul>
+<li>A user pressed CTRL-C (SIGINT)</li>
+<li>A user used the <code>kill</code> command</li>
+<li>A timer expired</li>
+<li>A process behaved badly</li>
+</ul>
+</li>
+</ul>
+<h2>Threads</h2>
+<ul>
+<li>A process has one or more threads</li>
+<li>Threads (of a process) share, among other things<ul>
+<li>Resource limits</li>
+<li>Address space</li>
+<li>Program code</li>
+</ul>
+</li>
+<li>Threads have their own stack pointer</li>
+</ul>
+<h2>Sessions</h2>
+<ul>
+<li>A session is a collection of process groups</li>
+<li>Session leader - the process that created the session</li>
+<li>All processes in a session have the same session id</li>
+<li>All processes created by a job-control shell belong to the same session as
+  the shell itself</li>
+<li>Usually associated with a <em>controlling terminal</em><ul>
+<li>Established when the session leader opens a terminal device</li>
+<li>Usually the terminal with which the user logged in</li>
+<li>The session leader becomes the <em>controlling process</em></li>
+<li>The controlling process receives a SIGHUP if the terminal disconnects</li>
+</ul>
+</li>
+<li><em>Foreground process group</em> - the current "focused" process group</li>
+<li><em>Background process group</em> - any process group that is not the foreground
+  process group</li>
+</ul>
+<h1>File I/O</h1>
+<ul>
+<li>Each process has a file descriptor table<ul>
+<li>File descriptors 0, 1 and 2 are by convention assigned to stdin, stdout and stderr</li>
+<li>This can be changed with the <code>freopen()</code> system call!</li>
+</ul>
+</li>
+</ul>
+<h2>Referenced from</h2>
+<ul>
+<li><a href="https://slar.se/pages/wiki/terms.html">Terms</a></li>
+</ul>
+<h2>Refers to</h2>
+<ul>
+<li><a href="https://slar.se/pages/wiki/terms.html">Terms</a></li>
+</ul>
+  </div>
+
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/linux.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/reviews.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Reviews</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/go.html">
+          <i class="fas fa-tag"></i>
+        go
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+<script src="https://files.stork-search.net/releases/v1.2.1/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://slar.se/search-index.st")
+</script>  </body>
+</html>

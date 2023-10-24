@@ -8,4 +8,6 @@ learned it. It's a forever-work-in-progress with no particular level of quality.
 * [Arch Linux on XPS 15 9520]({filename}xps15.md)
 * [Awesome Media]({filename}media.md)
 * [Databases]({filename}databases.md)
+* [Linux]({filename}linux.md)
+* [Terms]({filename}terms.md)
 * [Tools for Software Engineering]({filename}tools.md)

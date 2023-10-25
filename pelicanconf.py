@@ -70,7 +70,7 @@ FONT_AWESOME_CDN_LINK = {
     "crossorigin": "anonymous",
 }
 
-STYLESHEET_FILES = ("pygment.css", "voidybootstrap.css", "search.css")
+STYLESHEET_FILES = ("dracula.css", "voidybootstrap.css", "search.css")
 
 DEFAULT_PAGINATION = 5
 

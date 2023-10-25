@@ -1,5 +1,90 @@
 .navbar {
-	margin-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+body {
+   background-color: #1E1E1E;
+   color: #E0E0E0;
+}
+
+.navbar-default {
+   background-color: #1E1E1E;
+   border-color: #333333;
+   color: #B0B0B0;
+}
+
+.jumbotron {
+   background-color: #2E2E2E;
+}
+
+.breadcrumb {
+   background-color: #2E2E2E;
+   color: #B0B0B0;
+}
+
+.breadcrumb > .active {
+   color: #FFA500;
+}
+
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+   color: #FFA500;
+}
+
+.navbar-default .navbar-nav > li > a {
+   color: #B0B0B0;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
+   background-color: #2E2E2E;
+   color: #FFA500;
+}
+
+code {
+    background-color: #2E2E2E;
+    color: #ff79c6;
+}
+
+.highlight > pre {
+    color: #D4D4D4;
+    border-left: 5px solid #999;
+    overflow-x: auto;
+    padding-left: 20px;
+    word-break: normal;
+    word-wrap: normal;
+    white-space: pre;
+    background-color: #333333;
+}
+
+a {
+    color: #FFA500;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #FFA500;
+}
+
+a:hover {
+    color: #FFD700;
+}
+
+blockquote {
+    background-color: #444444;
+    color: #E0E0E0;
+    border-radius: 2pt;
+}
+
+h1 {
+    color: #E0E0E0;
+}
+
+h2 {
+    color: #B0B0B0;
+}
+
+h3, h4, h5, h6 {
+    color: #D4D4D4;
 }
 
 @media screen and (min-width: 768px) {
@@ -14,7 +99,7 @@ img {
 }
 
 #content {
-    padding-right: 50px; 
+    padding-right: 50px;
     line-height: 26px;
 }
 
@@ -36,28 +121,28 @@ p.standfirst {
 }
 
 .article-header-date, .article-header-info {
-	color: #999;
+  color: #999;
 }
 
 .social-links {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 .category-links {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 .tag-1 {
-	font-size: 14pt;
+  font-size: 14pt;
 }
 .tag-2 {
-	font-size: 12pt;
+  font-size: 12pt;
 }
 .tag-3 {
-	font-size: 10pt;
+  font-size: 10pt;
 }
 .tag-4 {
-	font-size: 8pt;
+  font-size: 8pt;
 }
 
 .tag-cloud {
@@ -69,7 +154,7 @@ p.standfirst {
 }
 
 .home-top {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 #sidebar h4 {
@@ -77,22 +162,14 @@ p.standfirst {
 }
 
 #site-footer {
-    background: #eee;
+    background-color: #2E2E2E;
     border-top: 1px dotted #999;
     margin-top: 40px;
     padding-top: 20px;
 }
 
-/*
- * My preference for code blocks is no line wraps and horizontal scrolling.
- */
-#content pre {
-    border-left: 5px solid #999;
-    overflow-x: auto;
-    padding-left: 20px;
-    word-break: normal;
-    word-wrap: normal;
-    white-space: pre;
+#site-footer p {
+    color: #B0B0B0;
 }
 
 dt {

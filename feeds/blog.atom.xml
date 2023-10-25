@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2022-12-26T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Fix 3D graphics in Arch Linux on Dell XPS 15 9520</title><link href="https://slar.se/xps-15-9520-arch-linux-intel-dri2.html" rel="alternate"></link><published>2022-12-26T00:00:00+01:00</published><updated>2022-12-26T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-12-26:/xps-15-9520-arch-linux-intel-dri2.html</id><summary type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2023-10-25T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>A new dark theme for the blog!</title><link href="https://slar.se/new-dark-theme.html" rel="alternate"></link><published>2023-10-25T00:00:00+02:00</published><updated>2023-10-25T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2023-10-25:/new-dark-theme.html</id><summary type="html">&lt;p&gt;If you've &lt;em&gt;ever&lt;/em&gt; visited my blog before, you'll notice it looks a bit
+different. I finally took the time to make a dark theme! Only 5 or so years late
+to the party. But late or not, I have a new theme to show off, so let's have a
+look …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you've &lt;em&gt;ever&lt;/em&gt; visited my blog before, you'll notice it looks a bit
+different. I finally took the time to make a dark theme! Only 5 or so years late
+to the party. But late or not, I have a new theme to show off, so let's have a
+look!&lt;/p&gt;
+&lt;h1&gt;Before and after&lt;/h1&gt;
+&lt;p&gt;I only put a couple of hours into trying out different colors and contrasts, so
+this is still a bit of a work in progress. But I can't say I'm not pleased.
+Let's have a look at what it used to look like.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The site with the old light theme" src="./images/new_dark_theme/before.png" style="max-width: 95%;"&gt;&lt;/p&gt;
+&lt;p&gt;So, that doesn't look terrible in any way, but it doesn't fit the "programmer
+aesthetic". It doesn't fit &lt;em&gt;my&lt;/em&gt; aesthetic. The new theme is much more "me", and
+although you should already be seeing it all around here, here's the same image
+as above with the new theme.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="The site with the new dark theme" src="./images/new_dark_theme/after.png" style="max-width: 95%;"&gt;&lt;/p&gt;
+&lt;p&gt;Much better! There are still a few rough edges, and I keep finding details where
+the old theme isn't being overridden correctly (because this is all just &lt;em&gt;on top
+of&lt;/em&gt; Bootstrap), but it's all mostly there.&lt;/p&gt;
+&lt;h1&gt;Parts of the puzzle&lt;/h1&gt;
+&lt;p&gt;There are really only two parts to this. I'm still using the same
+&lt;a href="https://github.com/robulouski/voidy-bootstrap"&gt;&lt;code&gt;voidy-bootstrap&lt;/code&gt; theme&lt;/a&gt; as
+before, but I rewrote some of the CSS with the somewhat Halloween-looking
+experience you're looking at right now. Which is fitting, considering Halloween
+is just around the corner!&lt;/p&gt;
+&lt;p&gt;The second part is the fantastic
+&lt;a href="https://draculatheme.com/pygments"&gt;&lt;code&gt;dracula&lt;/code&gt; theme for Pygments&lt;/a&gt;
+which gives the neat colorization of code snippets. That I find to be the single
+largest improvement.&lt;/p&gt;
+&lt;h1&gt;Enjoy!&lt;/h1&gt;
+&lt;p&gt;That's all there is to it, enjoy the new theme!&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>Fix 3D graphics in Arch Linux on Dell XPS 15 9520</title><link href="https://slar.se/xps-15-9520-arch-linux-intel-dri2.html" rel="alternate"></link><published>2022-12-26T00:00:00+01:00</published><updated>2022-12-26T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-12-26:/xps-15-9520-arch-linux-intel-dri2.html</id><summary type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
 highly Linux-compatible and just following the &lt;a href="https://wiki.archlinux.org/title/Installation_guide"&gt;official installation
 guide&lt;/a&gt; got me 90% of the
 way of having a well-behaved Arch Linux laptop. One big thing wasn't working,

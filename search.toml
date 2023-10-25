@@ -63,6 +63,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "new-dark-theme.html"
+url = "/new-dark-theme.html"
+title = "A new dark theme for the blog!"
+
+[[input.files]]
 path = "man-page-numbering.html"
 url = "/man-page-numbering.html"
 title = "What does the number in a man page mean?"

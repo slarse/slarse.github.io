@@ -36,8 +36,29 @@ body {
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
-   background-color: #2E2E2E;
+   background-color: #FFA500;
    color: #FFA500;
+}
+
+.pagination > li > a, .pagination > li > span {
+	background-color: #2E2E2E;
+  color: #FFA500;
+}
+
+.pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
+	 background-color: #2E2E2E;
+	 color: #FFD700;
+}
+
+.pagination > .active > span {
+   background-color: #2E2E2E;
+	 border-color: #FFA500;
+   color: #FFA500;
+}
+
+.pagination > .disabled > a, .pagination > .disabled > a:focus, .pagination > .disabled > a:hover, .pagination > .disabled > span, .pagination > .disabled > span:focus, .pagination > .disabled > span:hover {
+	 background-color: #2E2E2E;
+	 color: #999;
 }
 
 code {

@@ -95,4 +95,4 @@ STORK_INPUT_OPTIONS = {
     "html_selector": "div#main-container"
 }
 
-RESUME_PATH = "/resume.pdf"
+RESUME_PATH = EXTRA_PATH_METADATA["extra/resume.pdf"]["path"]

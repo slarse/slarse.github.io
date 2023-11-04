@@ -19,6 +19,7 @@ EXTRA_PATH_METADATA = {
     "extra/README": {"path": "README.md"},
     "essays/graph_db_essay": {"path": "essays/graph_db_essay.html"},
     "extra/slarse.asc": {"path": "gpg/slarse.asc"},
+    "extra/resume.pdf": {"path": "resume.pdf"},
 }
 
 PATH = "content"
@@ -93,3 +94,5 @@ CUSTOM_SCRIPTS_BASE = "custom/scripts.html"
 STORK_INPUT_OPTIONS = {
     "html_selector": "div#main-container"
 }
+
+RESUME_PATH = "/resume.pdf"

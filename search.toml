@@ -63,6 +63,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "dependabots-dependency-grouping.html"
+url = "/dependabots-dependency-grouping.html"
+title = "Dependabot's dependency grouping is awesome"
+
+[[input.files]]
 path = "new-dark-theme.html"
 url = "/new-dark-theme.html"
 title = "A new dark theme for the blog!"

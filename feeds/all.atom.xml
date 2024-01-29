@@ -1,5 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2023-10-25T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>A new dark theme for the blog!</title><link href="https://slar.se/new-dark-theme.html" rel="alternate"></link><published>2023-10-25T00:00:00+02:00</published><updated>2023-10-25T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2023-10-25:/new-dark-theme.html</id><summary type="html">&lt;p&gt;If you've &lt;em&gt;ever&lt;/em&gt; visited my blog before, you'll notice it looks a bit
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2024-01-29T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Dependabot's dependency grouping is awesome</title><link href="https://slar.se/dependabots-dependency-grouping.html" rel="alternate"></link><published>2024-01-29T00:00:00+01:00</published><updated>2024-01-29T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-01-29:/dependabots-dependency-grouping.html</id><summary type="html">&lt;p&gt;I've been using GitHub's Dependabot since it was &lt;a href="https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/"&gt;released around 4 years
+ago&lt;/a&gt;,
+and to a large extent, it's been great. Except for one thing: the sheer amount
+of pull requests Dependabot would open for dependency updates. For some of my
+repositories it became more of a chore to keep …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've been using GitHub's Dependabot since it was &lt;a href="https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/"&gt;released around 4 years
+ago&lt;/a&gt;,
+and to a large extent, it's been great. Except for one thing: the sheer amount
+of pull requests Dependabot would open for dependency updates. For some of my
+repositories it became more of a chore to keep up with Dependabot's pull request
+spamming than to just manually update dependencies every once in a while.&lt;/p&gt;
+&lt;p&gt;Well. Turns out that's been fixed.&lt;/p&gt;
+&lt;h1&gt;Dependabot's big problem: Pull request spam&lt;/h1&gt;
+&lt;p&gt;Since Dependabot was released, it's only mode of operation has been to open one
+pull request per dependency update. As you can imagine, that leads to a whole
+bunch of pull requests being opened. I would routinely get dozens of dependency
+pull requests a week for some of my more dependency heavy repositories. Needless
+to say, that's just not manageable.&lt;/p&gt;
+&lt;p&gt;One of my projects, &lt;a href="https://github.com/kth-assert/spork"&gt;Spork&lt;/a&gt;, which is
+mostly in maintenance mod is one such example where I just gave up on keeping up
+with the updates. It ended up looking like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Spork dependency spam" src="/images/dependabot_dependency_grouping/pr-spam.png" style="max-width: 95%;"&gt;&lt;/p&gt;
+&lt;p&gt;What a mess. But there's light at the end of the tunnel.&lt;/p&gt;
+&lt;h1&gt;The fix: Grouped dependencies&lt;/h1&gt;
+&lt;p&gt;To address that problem GitHub recently released
+&lt;a href="https://github.blog/changelog/2023-08-24-grouped-version-updates-for-dependabot-are-generally-available/"&gt;Grouped Version Updates&lt;/a&gt;
+as a feature for Dependabot. In short, this means that you can get Dependabot
+to open pull requests containing multiple dependency updates, grouped in three
+different ways.&lt;/p&gt;
+&lt;h2&gt;A configuration example&lt;/h2&gt;
+&lt;p&gt;For my project &lt;a href="https://github.com/kth-assert/spork"&gt;Spork&lt;/a&gt;, I decided to group
+dependencies in three groups:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Updates to GitHub Actions dependencies&lt;/li&gt;
+&lt;li&gt;Updates to production dependencies&lt;/li&gt;
+&lt;li&gt;Updates to development dependencies&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Configuring this was really straightforward, all it took was &lt;a href="https://github.com/ASSERT-KTH/spork/commit/ac3051e07bc6632c4f41f74feb60ffc555fce1cd"&gt;this
+commit&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="w"&gt; &lt;/span&gt;    directory: &amp;quot;/&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    schedule:&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;      interval: &amp;quot;daily&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    groups:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+      actions-deps:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+        patterns:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+          - &amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt; &lt;/span&gt;  - package-ecosystem: &amp;quot;maven&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    directory: &amp;quot;/&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    schedule:&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;      interval: &amp;quot;daily&amp;quot;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    groups:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+      dev-deps:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+        dependency-type: &amp;quot;development&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+      prod-deps:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+        dependency-type: &amp;quot;production&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In full, the configuration looks like so.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;2&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nt"&gt;updates&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;package-ecosystem&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;github-actions&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;directory&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;schedule&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;interval&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;daily&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;groups&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;actions-deps&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nt"&gt;patterns&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;*&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;package-ecosystem&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;maven&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;directory&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;schedule&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;interval&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;daily&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;groups&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;dev-deps&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nt"&gt;dependency-type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;development&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;prod-deps&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nt"&gt;dependency-type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;production&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For each package ecosystem, you must group on &lt;em&gt;something&lt;/em&gt;. For
+&lt;code&gt;github-actions&lt;/code&gt;, I just wanted a single group, and the way to achieve such an
+"everything group" is to simply use a wildcard pattern. For &lt;code&gt;maven&lt;/code&gt;, I ended up
+splitting by the &lt;code&gt;dependency-type&lt;/code&gt; attribute instead, which can be either
+&lt;code&gt;development&lt;/code&gt; or &lt;code&gt;production&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;But that's just two ways to group, you said there were three ways? Very
+attentive of you! In addition to the &lt;code&gt;pattern&lt;/code&gt; and &lt;code&gt;dependency-type&lt;/code&gt; groupings,
+you can also group by &lt;code&gt;update-type&lt;/code&gt;, which can be &lt;code&gt;patch&lt;/code&gt;, &lt;code&gt;minor&lt;/code&gt; or &lt;code&gt;major&lt;/code&gt;
+and only really works for dependencies that comply with &lt;a href="https://semver.org/"&gt;Semantic
+Versioning&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Effects of the configuration&lt;/h2&gt;
+&lt;p&gt;Within minutes, Dependabot had closed all* of the single dependency pull requests
+and created two new pull requests. One PR contained the GitHub Actions updates,
+which I could immediately merge.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;*For reasons I don't quite get at this point,
+&lt;a href="https://github.com/ASSERT-KTH/spork/pull/458"&gt;one single-dependency PR for &lt;code&gt;gumtree-spoon-ast-diff&lt;/code&gt; remained
+open&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img alt="Merged GitHub Actions dependencies" src="/images/dependabot_dependency_grouping/actions_deps.png" style="max-width: 95%;"&gt;&lt;/p&gt;
+&lt;p&gt;Note that the &lt;code&gt;actions-deps&lt;/code&gt; name, which is one of the keys in the YAML config
+file, ends up being written out in the pull request title. Another PR was opened
+for the grouped production dependencies, but it did not pass CI.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Production dependencies PR" src="/images/dependabot_dependency_grouping/prod-deps.png" style="max-width: 95%;"&gt;&lt;/p&gt;
+&lt;p&gt;This showcases the one downside with grouped dependency updates: there's no
+indication as to which dependency caused the CI failure. If you scroll up to the
+first image of this article, you'll similarly see the one benefit of single
+dependency pull requests: the update for &lt;code&gt;jgit&lt;/code&gt; is failing.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: As stated above, &lt;code&gt;gumtree-spoon-ast-diff&lt;/code&gt; wasn't included in the grouped
+dependency update for some reason, so we'll ignore that it's also failing.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So I decided to try to get Dependabot to open a new pull request without &lt;code&gt;jgit&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Ignoring certain dependencies in a group&lt;/h2&gt;
+&lt;p&gt;I knew that &lt;code&gt;jgit&lt;/code&gt; was the issue in this case and decided to ignore it. It
+seemed like ignoring minor version updates was the best path forward, so I
+issued an &lt;code&gt;@dependabot ignore &amp;lt;dependency_name&amp;gt; minor version&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Ignore minor version updates of jgit" src="/images/dependabot_dependency_grouping/ignore_minor.png" style="max-width: 95%;"&gt;&lt;/p&gt;
+&lt;p&gt;This didn't quite have the effect I was looking for, as Dependabot then
+proceeded to
+&lt;a href="https://github.com/ASSERT-KTH/spork/pull/485"&gt;open a new pull request&lt;/a&gt;
+with the previous minor version of &lt;code&gt;jgit&lt;/code&gt;, which is also incompatible with
+Spork. At this point I decided to bring out the big guns and ignore &lt;code&gt;jgit&lt;/code&gt;
+altoghether for now, as I knew I needed to put in some manual work to update it
+anyway.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Ignore all version updates of jgit" src="/images/dependabot_dependency_grouping/ignore.png" style="max-width: 95%;"&gt;&lt;/p&gt;
+&lt;p&gt;This finally resulted in what I wanted, a new PR without a bump to &lt;code&gt;jgit&lt;/code&gt; that
+does not break the build. Thus, it's ready to merge.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Ignore all version updates of jgit" src="/images/dependabot_dependency_grouping/green-prod-pr.png" style="max-width: 95%;"&gt;&lt;/p&gt;
+&lt;p&gt;Of course, this comes with the caveat that I need to remember to &lt;a href="https://github.com/ASSERT-KTH/spork/issues/487"&gt;unignore &lt;code&gt;jgit&lt;/code&gt;
+when I get around to updating it&lt;/a&gt;.
+But I have 8 dependency updates with not too much effort, which is kind of cool!&lt;/p&gt;
+&lt;h1&gt;Closing thoughts&lt;/h1&gt;
+&lt;p&gt;I had somewhat given up on keeping dependencies up to date in my lesser loved
+projects. With grouped dependency updates, I feel like it will be possible for
+me to get back to keeping dependencies in good shape even for projects that I no
+longer actively work on.&lt;/p&gt;
+&lt;p&gt;The one downside is that it's no longer evident which dependency update breaks
+the build. However, over many years of maintaining projects built in various
+languages and technologies, experience tells me that it's way more common for
+dependencies to update just fine than for them to break something, so I think
+it's a tradeoff well worth taking. As patterns of which dependencies break the
+build more often start to become apparent, one can also refine the groupings and
+separate dependencies that break often from those that rarely or never do so.&lt;/p&gt;
+&lt;p&gt;To summarize, grouped dependency updates is a killer feature that makes
+Dependabot viable again. Everyone should use it, and it's honestly a shame that
+backwards compatibility demands makes it such that groups will probably never be
+the default.&lt;/p&gt;</content><category term="Programming"></category><category term="dependabot"></category><category term="github"></category><category term="dependencies"></category></entry><entry><title>A new dark theme for the blog!</title><link href="https://slar.se/new-dark-theme.html" rel="alternate"></link><published>2023-10-25T00:00:00+02:00</published><updated>2023-10-25T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2023-10-25:/new-dark-theme.html</id><summary type="html">&lt;p&gt;If you've &lt;em&gt;ever&lt;/em&gt; visited my blog before, you'll notice it looks a bit
 different. I finally took the time to make a dark theme! Only 5 or so years late
 to the party. But late or not, I have a new theme to show off, so let's have a
 look …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you've &lt;em&gt;ever&lt;/em&gt; visited my blog before, you'll notice it looks a bit

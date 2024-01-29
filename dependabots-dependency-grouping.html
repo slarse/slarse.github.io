@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Dependabot&#39;s dependency grouping is awesome - Programming for fun and profit</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous"
+      />
+
+
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/dracula.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/search.css" />
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming for fun and profit Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+                  <li>
+                    <a href="https://slar.se/pages/about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/wiki.html">Wiki</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/projects.html">Projects</a>
+                  </li>
+							<li><a href="https://slar.se/resume.pdf">Resume</a></li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">Programming for fun and profit</a></h1>
+		<p class="lead">A blog about software engineering, programming languages and technical tinkering</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Mon 29 January 2024
+</abbr> <h1>
+  <a href="https://slar.se/dependabots-dependency-grouping.html" rel="bookmark"
+     title="Permalink to Dependabot&#39;s dependency grouping is awesome">
+    Dependabot's dependency grouping is awesome
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/dependabot.html"><i class="fas fa-tag"></i>dependabot</a>&nbsp;
+	<a href="https://slar.se/tag/github.html"><i class="fas fa-tag"></i>github</a>&nbsp;
+	<a href="https://slar.se/tag/dependencies.html"><i class="fas fa-tag"></i>dependencies</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>I've been using GitHub's Dependabot since it was <a href="https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/">released around 4 years
+ago</a>,
+and to a large extent, it's been great. Except for one thing: the sheer amount
+of pull requests Dependabot would open for dependency updates. For some of my
+repositories it became more of a chore to keep up with Dependabot's pull request
+spamming than to just manually update dependencies every once in a while.</p>
+<p>Well. Turns out that's been fixed.</p>
+<h1>Dependabot's big problem: Pull request spam</h1>
+<p>Since Dependabot was released, it's only mode of operation has been to open one
+pull request per dependency update. As you can imagine, that leads to a whole
+bunch of pull requests being opened. I would routinely get dozens of dependency
+pull requests a week for some of my more dependency heavy repositories. Needless
+to say, that's just not manageable.</p>
+<p>One of my projects, <a href="https://github.com/kth-assert/spork">Spork</a>, which is
+mostly in maintenance mod is one such example where I just gave up on keeping up
+with the updates. It ended up looking like this:</p>
+<p><img alt="Spork dependency spam" src="/images/dependabot_dependency_grouping/pr-spam.png" style="max-width: 95%;"></p>
+<p>What a mess. But there's light at the end of the tunnel.</p>
+<h1>The fix: Grouped dependencies</h1>
+<p>To address that problem GitHub recently released
+<a href="https://github.blog/changelog/2023-08-24-grouped-version-updates-for-dependabot-are-generally-available/">Grouped Version Updates</a>
+as a feature for Dependabot. In short, this means that you can get Dependabot
+to open pull requests containing multiple dependency updates, grouped in three
+different ways.</p>
+<h2>A configuration example</h2>
+<p>For my project <a href="https://github.com/kth-assert/spork">Spork</a>, I decided to group
+dependencies in three groups:</p>
+<ol>
+<li>Updates to GitHub Actions dependencies</li>
+<li>Updates to production dependencies</li>
+<li>Updates to development dependencies</li>
+</ol>
+<p>Configuring this was really straightforward, all it took was <a href="https://github.com/ASSERT-KTH/spork/commit/ac3051e07bc6632c4f41f74feb60ffc555fce1cd">this
+commit</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>    directory: &quot;/&quot;<span class="w"></span>
+<span class="w"> </span>    schedule:<span class="w"></span>
+<span class="w"> </span>      interval: &quot;daily&quot;<span class="w"></span>
+<span class="gi">+    groups:</span><span class="w"></span>
+<span class="gi">+      actions-deps:</span><span class="w"></span>
+<span class="gi">+        patterns:</span><span class="w"></span>
+<span class="gi">+          - &quot;*&quot;</span><span class="w"></span>
+
+<span class="w"> </span>  - package-ecosystem: &quot;maven&quot;<span class="w"></span>
+<span class="w"> </span>    directory: &quot;/&quot;<span class="w"></span>
+<span class="w"> </span>    schedule:<span class="w"></span>
+<span class="w"> </span>      interval: &quot;daily&quot;<span class="w"></span>
+<span class="gi">+    groups:</span><span class="w"></span>
+<span class="gi">+      dev-deps:</span><span class="w"></span>
+<span class="gi">+        dependency-type: &quot;development&quot;</span><span class="w"></span>
+<span class="gi">+      prod-deps:</span><span class="w"></span>
+<span class="gi">+        dependency-type: &quot;production&quot;</span><span class="w"></span>
+</code></pre></div>
+
+<p>In full, the configuration looks like so.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+<span class="nt">updates</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">package-ecosystem</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;github-actions&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">schedule</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;daily&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">groups</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">actions-deps</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">patterns</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="w"></span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">package-ecosystem</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;maven&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">schedule</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;daily&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">groups</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dev-deps</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">dependency-type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;development&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">prod-deps</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">dependency-type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;production&quot;</span><span class="w"></span>
+</code></pre></div>
+
+<p>For each package ecosystem, you must group on <em>something</em>. For
+<code>github-actions</code>, I just wanted a single group, and the way to achieve such an
+"everything group" is to simply use a wildcard pattern. For <code>maven</code>, I ended up
+splitting by the <code>dependency-type</code> attribute instead, which can be either
+<code>development</code> or <code>production</code>.</p>
+<p>But that's just two ways to group, you said there were three ways? Very
+attentive of you! In addition to the <code>pattern</code> and <code>dependency-type</code> groupings,
+you can also group by <code>update-type</code>, which can be <code>patch</code>, <code>minor</code> or <code>major</code>
+and only really works for dependencies that comply with <a href="https://semver.org/">Semantic
+Versioning</a></p>
+<h2>Effects of the configuration</h2>
+<p>Within minutes, Dependabot had closed all* of the single dependency pull requests
+and created two new pull requests. One PR contained the GitHub Actions updates,
+which I could immediately merge.</p>
+<blockquote>
+<p>*For reasons I don't quite get at this point,
+<a href="https://github.com/ASSERT-KTH/spork/pull/458">one single-dependency PR for <code>gumtree-spoon-ast-diff</code> remained
+open</a></p>
+</blockquote>
+<p><img alt="Merged GitHub Actions dependencies" src="/images/dependabot_dependency_grouping/actions_deps.png" style="max-width: 95%;"></p>
+<p>Note that the <code>actions-deps</code> name, which is one of the keys in the YAML config
+file, ends up being written out in the pull request title. Another PR was opened
+for the grouped production dependencies, but it did not pass CI.</p>
+<p><img alt="Production dependencies PR" src="/images/dependabot_dependency_grouping/prod-deps.png" style="max-width: 95%;"></p>
+<p>This showcases the one downside with grouped dependency updates: there's no
+indication as to which dependency caused the CI failure. If you scroll up to the
+first image of this article, you'll similarly see the one benefit of single
+dependency pull requests: the update for <code>jgit</code> is failing.</p>
+<blockquote>
+<p>Note: As stated above, <code>gumtree-spoon-ast-diff</code> wasn't included in the grouped
+dependency update for some reason, so we'll ignore that it's also failing.</p>
+</blockquote>
+<p>So I decided to try to get Dependabot to open a new pull request without <code>jgit</code>.</p>
+<h2>Ignoring certain dependencies in a group</h2>
+<p>I knew that <code>jgit</code> was the issue in this case and decided to ignore it. It
+seemed like ignoring minor version updates was the best path forward, so I
+issued an <code>@dependabot ignore &lt;dependency_name&gt; minor version</code> command.</p>
+<p><img alt="Ignore minor version updates of jgit" src="/images/dependabot_dependency_grouping/ignore_minor.png" style="max-width: 95%;"></p>
+<p>This didn't quite have the effect I was looking for, as Dependabot then
+proceeded to
+<a href="https://github.com/ASSERT-KTH/spork/pull/485">open a new pull request</a>
+with the previous minor version of <code>jgit</code>, which is also incompatible with
+Spork. At this point I decided to bring out the big guns and ignore <code>jgit</code>
+altoghether for now, as I knew I needed to put in some manual work to update it
+anyway.</p>
+<p><img alt="Ignore all version updates of jgit" src="/images/dependabot_dependency_grouping/ignore.png" style="max-width: 95%;"></p>
+<p>This finally resulted in what I wanted, a new PR without a bump to <code>jgit</code> that
+does not break the build. Thus, it's ready to merge.</p>
+<p><img alt="Ignore all version updates of jgit" src="/images/dependabot_dependency_grouping/green-prod-pr.png" style="max-width: 95%;"></p>
+<p>Of course, this comes with the caveat that I need to remember to <a href="https://github.com/ASSERT-KTH/spork/issues/487">unignore <code>jgit</code>
+when I get around to updating it</a>.
+But I have 8 dependency updates with not too much effort, which is kind of cool!</p>
+<h1>Closing thoughts</h1>
+<p>I had somewhat given up on keeping dependencies up to date in my lesser loved
+projects. With grouped dependency updates, I feel like it will be possible for
+me to get back to keeping dependencies in good shape even for projects that I no
+longer actively work on.</p>
+<p>The one downside is that it's no longer evident which dependency update breaks
+the build. However, over many years of maintaining projects built in various
+languages and technologies, experience tells me that it's way more common for
+dependencies to update just fine than for them to break something, so I think
+it's a tradeoff well worth taking. As patterns of which dependencies break the
+build more often start to become apparent, one can also refine the groupings and
+separate dependencies that break often from those that rarely or never do so.</p>
+<p>To summarize, grouped dependency updates is a killer feature that makes
+Dependabot viable again. Everyone should use it, and it's honestly a shame that
+backwards compatibility demands makes it such that groups will probably never be
+the default.</p>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/linux.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/reviews.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Reviews</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/go.html">
+          <i class="fas fa-tag"></i>
+        go
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+<script src="https://files.stork-search.net/releases/v1.2.1/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://slar.se/search-index.st")
+</script>  </body>
+</html>

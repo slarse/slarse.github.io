@@ -1,5 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2024-01-29T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Dependabot's dependency grouping is awesome</title><link href="https://slar.se/dependabots-dependency-grouping.html" rel="alternate"></link><published>2024-01-29T00:00:00+01:00</published><updated>2024-01-29T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-01-29:/dependabots-dependency-grouping.html</id><summary type="html">&lt;p&gt;I've been using GitHub's Dependabot since it was &lt;a href="https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/"&gt;released around 4 years
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2024-02-04T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>First impressions of Wayland on Arch Linux</title><link href="https://slar.se/wayland-one-month-later.html" rel="alternate"></link><published>2024-02-04T00:00:00+01:00</published><updated>2024-02-04T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-02-04:/wayland-one-month-later.html</id><summary type="html">&lt;p&gt;Wayland appears to be the future of window systems in the world of Linux,
+replacing the aging X.Org window system. The &lt;a href="https://wiki.archlinux.org/title/Xorg"&gt;Arch Wiki article on
+X.Org&lt;/a&gt; refers to it as "the alternative
+and successor [of X.Org]" and Canonical even dropped its own &lt;a href="https://wiki.ubuntu.com/Wayland"&gt;Mir display
+server in favor …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Wayland appears to be the future of window systems in the world of Linux,
+replacing the aging X.Org window system. The &lt;a href="https://wiki.archlinux.org/title/Xorg"&gt;Arch Wiki article on
+X.Org&lt;/a&gt; refers to it as "the alternative
+and successor [of X.Org]" and Canonical even dropped its own &lt;a href="https://wiki.ubuntu.com/Wayland"&gt;Mir display
+server in favor of Wayland on Ubuntu&lt;/a&gt;.
+So when it became time for me to configure a new laptop in the beginning of
+January, I decided to do give Wayland a go. Here's what I think of it so far.&lt;/p&gt;
+&lt;h1&gt;What the heck is a window system?&lt;/h1&gt;
+&lt;p&gt;First of all, what the heck is a window system? In short, it's the component
+that renders graphical windows to your screen and communicates the user's input
+to the underlying operating system. The X Window System, or just X for short, is
+the reigning king of window systems in UNIX-like operating systems (excepting
+macOS which uses &lt;a href="https://en.wikipedia.org/wiki/Quartz_Compositor"&gt;Quartz&lt;/a&gt;). You
+will often see it referred to as X.Org; this is simply the most commonly used
+&lt;a href="https://www.x.org/wiki/"&gt;open source implementation of X&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I could try to outline what X.Org's problems are and how Wayland solves many of
+them, but I simply don't have the level of understanding necessary to do so
+confidently. One thing to note is that Wayland is first and foremost a
+&lt;em&gt;protocol&lt;/em&gt; for the communication between a display server and applications. A
+display server can implement the Wayland protocol and is then referred to as a
+Wayland &lt;em&gt;compositor&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;If you want to learn more, &lt;a href="https://linuxiac.com/xorg-x11-wayland-linux-display-servers-and-protocols-explained/"&gt;here's a brief article on the
+subjecp&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Wayland first impressions with Sway&lt;/h1&gt;
+&lt;p&gt;I recently setup Wayland on a brand new work computer, and going from a clean
+slate setup was really effortless. I chose &lt;a href="https://swaywm.org/"&gt;Sway&lt;/a&gt; as my
+compositor and started it. And it just kind of worked. Outside of &lt;a href="https://github.com/slarse/config/blob/d8ba6671a2245be75c5fa3b4fdfef3df61cc93a0/sway/config"&gt;configuring
+Sway to my
+liking&lt;/a&gt;,
+I didn't really have to do much of anything for it to work.&lt;/p&gt;
+&lt;p&gt;On my private Dell XPS 15 &lt;a href="https://slar.se/xps-15-9520-arch-linux-intel-dri2.html"&gt;where I'm already running
+X.Org&lt;/a&gt;, setting up
+Wayland was similarly effortless. I just installed Sway, and even though it
+doesn't support &lt;a href="https://github.com/swaywm/sway/wiki#nvidia-users"&gt;NVIDIA's proprietary
+drivers&lt;/a&gt;, running Sway with
+the &lt;code&gt;--unsuported-gpu&lt;/code&gt; option just worked.&lt;/p&gt;
+&lt;p&gt;All-in-all, setup was a breeze and I did not encounter any problems at all.&lt;/p&gt;
+&lt;h2&gt;Upsides of Sway&lt;/h2&gt;
+&lt;p&gt;I immediately noticed some improvements in my desktop experience. The first came
+when connecting an external display, which Sway just found and started
+outputting an image to. In almost a decade of using X.Org on just shy of a half
+dozen devices, that has never happened before without effort on my part.&lt;/p&gt;
+&lt;p&gt;I was also treated with a complete lack of screen tearing when scrolling
+websites and documents, which I had a lot of under X.Org. I'm sure there's a way
+to configure that away with X and I never bothered to look into it more than
+stating that it wasn't as easy as toggling a flag, but it was just for free with
+Wayland. Now that it's gone I would have a hard time going back to it.&lt;/p&gt;
+&lt;p&gt;Finally, most things just kind of work. It's a &lt;em&gt;big&lt;/em&gt; accolade to note that over
+a whole month of use, I haven't encountered a single show-stopping problem. But
+I have definitely encountered quite a few lesser ones.&lt;/p&gt;
+&lt;h2&gt;Downsites of Sway&lt;/h2&gt;
+&lt;p&gt;Pretty much all of the downsides I've encountered have to do with the fact that
+a lot of applications I've used over the years were written for X.Org. This
+means that many applications run under the the 
+&lt;a href="https://wayland.freedesktop.org/xserver.html"&gt;XWayland&lt;/a&gt; compatibility layer,
+which nullifies the performance improvements of Wayland's architecture. I've
+especially noted that startup times for GUI apps that run under XWayland are
+slow compared to running X.Org directly.&lt;/p&gt;
+&lt;p&gt;Another problem is that apps directly related to X.Org typically just do not
+function. For example, I've been using the &lt;a href="https://imagemagick.org/script/import.php"&gt;&lt;code&gt;import&lt;/code&gt; command from
+&lt;code&gt;imagemagick&lt;/code&gt;&lt;/a&gt; to grab snippeted
+screenshots for nigh on a decade, and it doesn't work at all with Wayland as it
+expects to work with an X.Org backend. Similarly,
+&lt;a href="https://wiki.archlinux.org/title/Redshift"&gt;Redshift&lt;/a&gt; which I've been using for
+years to adjust color temperature does not support Wayland. It results in a whole
+lot of &lt;a href="https://www.reddit.com/r/wayland/comments/si49y1/redshift_alternatives_for_wayland/?rdt=39794"&gt;&lt;insert program&gt; alternative for
+Wayland&lt;/a&gt;
+kinds of searches, but they usually bear fruit. I found &lt;a href="https://sr.ht/~emersion/grim/"&gt;&lt;code&gt;grim&lt;/code&gt; as a replacement
+for &lt;code&gt;import&lt;/code&gt;&lt;/a&gt; and &lt;a href="https://gitlab.com/chinstrap/gammastep"&gt;&lt;code&gt;gammastep&lt;/code&gt; as a replacement
+for &lt;code&gt;redshift&lt;/code&gt;&lt;/a&gt; that way.&lt;/p&gt;
+&lt;p&gt;The incompatibility with Redshift does bring up another interesting point,
+namely that Wayland is still neither complete nor stable. &lt;a href="https://gitlab.freedesktop.org/wayland/wayland-protocols/-/merge_requests/14"&gt;Color management is for
+example still not
+standardized&lt;/a&gt;.
+In some respects, stepping into the land of Way feels a bit like using a beta
+product.&lt;/p&gt;
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;p&gt;Will I keep using Wayland? Definitely. I've only encountered a few very minor
+problems with application compatibility, and most I've found alternatives for.
+I'm even a little bit excited to find some need completely unfulfilled in the
+land of Wayland applications, because that would give me a good reason to
+implement it myself.&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category><category term="wayland"></category><category term="xorg"></category><category term="x11"></category></entry><entry><title>Dependabot's dependency grouping is awesome</title><link href="https://slar.se/dependabots-dependency-grouping.html" rel="alternate"></link><published>2024-01-29T00:00:00+01:00</published><updated>2024-01-29T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-01-29:/dependabots-dependency-grouping.html</id><summary type="html">&lt;p&gt;I've been using GitHub's Dependabot since it was &lt;a href="https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/"&gt;released around 4 years
 ago&lt;/a&gt;,
 and to a large extent, it's been great. Except for one thing: the sheer amount
 of pull requests Dependabot would open for dependency updates. For some of my

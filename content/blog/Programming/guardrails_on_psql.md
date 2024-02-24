@@ -1,4 +1,4 @@
-Title: Adding guardrails to `psql` for PostgreSQL
+Title: Adding guardrails to psql for PostgreSQL
 Date: 2024-02-24
 Author: Simon Larsén
 Tags: postgresql,psql,database
@@ -108,4 +108,3 @@ misconfiguration.
 
 But this article was about `psql` in particular and in that context disabling
 `AUTOCOMMIT` seems like the clear winner in terms of guardrails.
-reduces the risk of client misconfiguration.

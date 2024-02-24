@@ -88,23 +88,18 @@ test_db=*# ROLLBACK; -- <=== * in the prompt signifies transaction
 ROLLBACK
 ```
 
-Do note that this transaction is _writable_ regardless of the value set on
-`default_transaction_read_only`. In other words, it isn't meaningful to use
-both, but it's important to know that one makes the other one meaningless.
+Combined with `default_transaction_read_only`, this automatically creates a
+read-only transaction that's not immediately committed, putting two layers of
+protection between you and an errenous write. Unlike setting
+`default_transaction_read_only` however, disabling `AUTOCOMMIT` persists even if
+you switch database with `\c`.
 
 # Summary
 When connecting to any database that you for some reason don't want to
 accidentally write to, you should have guardrails. Many graphical PostgreSQL
 clients that I've seen my colleagues use have such guardrails by default in
-that an explicit commit must be issued by clicking a button. `psql` does not.
+that an explicit commit must be issued by clicking a button. `psql` does not, so
+setting up some yourself is imperative.
 
-Which of the two options in this article to use is a bit circumstantial. I
-personally prefer disabling `AUTOCOMMIT` in `psql` as that is a client-side
-setting. Setting `default_transaction_read_only` to on is a bit precarious as
-it doesn't get reapplied if you change database with `\c`. The latter can
-however be configured on the server itself, which is always a nice safety net
-to have as it reduces the risk of errant commits due to client
-misconfiguration. 
-
-But this article was about `psql` in particular and in that context disabling
-`AUTOCOMMIT` seems like the clear winner in terms of guardrails.
+With `AUTOCOMMIT` disabled and `default_transaction_read_only` set to `on`, you
+should however be about as safe as can be.

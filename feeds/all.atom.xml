@@ -74,23 +74,19 @@ transaction without automatically committing it by setting the &lt;code&gt;AUTOC
 &lt;span class="k"&gt;ROLLBACK&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Do note that this transaction is &lt;em&gt;writable&lt;/em&gt; regardless of the value set on
-&lt;code&gt;default_transaction_read_only&lt;/code&gt;. In other words, it isn't meaningful to use
-both, but it's important to know that one makes the other one meaningless.&lt;/p&gt;
+&lt;p&gt;Combined with &lt;code&gt;default_transaction_read_only&lt;/code&gt;, this automatically creates a
+read-only transaction that's not immediately committed, putting two layers of
+protection between you and an errenous write. Unlike setting
+&lt;code&gt;default_transaction_read_only&lt;/code&gt; however, disabling &lt;code&gt;AUTOCOMMIT&lt;/code&gt; persists even if
+you switch database with &lt;code&gt;\c&lt;/code&gt;.&lt;/p&gt;
 &lt;h1&gt;Summary&lt;/h1&gt;
 &lt;p&gt;When connecting to any database that you for some reason don't want to
 accidentally write to, you should have guardrails. Many graphical PostgreSQL
 clients that I've seen my colleagues use have such guardrails by default in
-that an explicit commit must be issued by clicking a button. &lt;code&gt;psql&lt;/code&gt; does not.&lt;/p&gt;
-&lt;p&gt;Which of the two options in this article to use is a bit circumstantial. I
-personally prefer disabling &lt;code&gt;AUTOCOMMIT&lt;/code&gt; in &lt;code&gt;psql&lt;/code&gt; as that is a client-side
-setting. Setting &lt;code&gt;default_transaction_read_only&lt;/code&gt; to on is a bit precarious as
-it doesn't get reapplied if you change database with &lt;code&gt;\c&lt;/code&gt;. The latter can
-however be configured on the server itself, which is always a nice safety net
-to have as it reduces the risk of errant commits due to client
-misconfiguration. &lt;/p&gt;
-&lt;p&gt;But this article was about &lt;code&gt;psql&lt;/code&gt; in particular and in that context disabling
-&lt;code&gt;AUTOCOMMIT&lt;/code&gt; seems like the clear winner in terms of guardrails.&lt;/p&gt;</content><category term="Programming"></category><category term="postgresql"></category><category term="psql"></category><category term="database"></category></entry><entry><title>First impressions of Wayland on Arch Linux</title><link href="https://slar.se/wayland-one-month-later.html" rel="alternate"></link><published>2024-02-04T00:00:00+01:00</published><updated>2024-02-04T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-02-04:/wayland-one-month-later.html</id><summary type="html">&lt;p&gt;Wayland appears to be the future of window systems in the world of Linux,
+that an explicit commit must be issued by clicking a button. &lt;code&gt;psql&lt;/code&gt; does not, so
+setting up some yourself is imperative.&lt;/p&gt;
+&lt;p&gt;With &lt;code&gt;AUTOCOMMIT&lt;/code&gt; disabled and &lt;code&gt;default_transaction_read_only&lt;/code&gt; set to &lt;code&gt;on&lt;/code&gt;, you
+should however be about as safe as can be.&lt;/p&gt;</content><category term="Programming"></category><category term="postgresql"></category><category term="psql"></category><category term="database"></category></entry><entry><title>First impressions of Wayland on Arch Linux</title><link href="https://slar.se/wayland-one-month-later.html" rel="alternate"></link><published>2024-02-04T00:00:00+01:00</published><updated>2024-02-04T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-02-04:/wayland-one-month-later.html</id><summary type="html">&lt;p&gt;Wayland appears to be the future of window systems in the world of Linux,
 replacing the aging X.Org window system. The &lt;a href="https://wiki.archlinux.org/title/Xorg"&gt;Arch Wiki article on
 X.Org&lt;/a&gt; refers to it as "the alternative
 and successor [of X.Org]" and Canonical even dropped its own &lt;a href="https://wiki.ubuntu.com/Wayland"&gt;Mir display

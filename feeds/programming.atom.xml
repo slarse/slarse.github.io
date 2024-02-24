@@ -74,23 +74,19 @@ transaction without automatically committing it by setting the &lt;code&gt;AUTOC
 &lt;span class="k"&gt;ROLLBACK&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Do note that this transaction is &lt;em&gt;writable&lt;/em&gt; regardless of the value set on
-&lt;code&gt;default_transaction_read_only&lt;/code&gt;. In other words, it isn't meaningful to use
-both, but it's important to know that one makes the other one meaningless.&lt;/p&gt;
+&lt;p&gt;Combined with &lt;code&gt;default_transaction_read_only&lt;/code&gt;, this automatically creates a
+read-only transaction that's not immediately committed, putting two layers of
+protection between you and an errenous write. Unlike setting
+&lt;code&gt;default_transaction_read_only&lt;/code&gt; however, disabling &lt;code&gt;AUTOCOMMIT&lt;/code&gt; persists even if
+you switch database with &lt;code&gt;\c&lt;/code&gt;.&lt;/p&gt;
 &lt;h1&gt;Summary&lt;/h1&gt;
 &lt;p&gt;When connecting to any database that you for some reason don't want to
 accidentally write to, you should have guardrails. Many graphical PostgreSQL
 clients that I've seen my colleagues use have such guardrails by default in
-that an explicit commit must be issued by clicking a button. &lt;code&gt;psql&lt;/code&gt; does not.&lt;/p&gt;
-&lt;p&gt;Which of the two options in this article to use is a bit circumstantial. I
-personally prefer disabling &lt;code&gt;AUTOCOMMIT&lt;/code&gt; in &lt;code&gt;psql&lt;/code&gt; as that is a client-side
-setting. Setting &lt;code&gt;default_transaction_read_only&lt;/code&gt; to on is a bit precarious as
-it doesn't get reapplied if you change database with &lt;code&gt;\c&lt;/code&gt;. The latter can
-however be configured on the server itself, which is always a nice safety net
-to have as it reduces the risk of errant commits due to client
-misconfiguration. &lt;/p&gt;
-&lt;p&gt;But this article was about &lt;code&gt;psql&lt;/code&gt; in particular and in that context disabling
-&lt;code&gt;AUTOCOMMIT&lt;/code&gt; seems like the clear winner in terms of guardrails.&lt;/p&gt;</content><category term="Programming"></category><category term="postgresql"></category><category term="psql"></category><category term="database"></category></entry><entry><title>Dependabot's dependency grouping is awesome</title><link href="https://slar.se/dependabots-dependency-grouping.html" rel="alternate"></link><published>2024-01-29T00:00:00+01:00</published><updated>2024-01-29T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-01-29:/dependabots-dependency-grouping.html</id><summary type="html">&lt;p&gt;I've been using GitHub's Dependabot since it was &lt;a href="https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/"&gt;released around 4 years
+that an explicit commit must be issued by clicking a button. &lt;code&gt;psql&lt;/code&gt; does not, so
+setting up some yourself is imperative.&lt;/p&gt;
+&lt;p&gt;With &lt;code&gt;AUTOCOMMIT&lt;/code&gt; disabled and &lt;code&gt;default_transaction_read_only&lt;/code&gt; set to &lt;code&gt;on&lt;/code&gt;, you
+should however be about as safe as can be.&lt;/p&gt;</content><category term="Programming"></category><category term="postgresql"></category><category term="psql"></category><category term="database"></category></entry><entry><title>Dependabot's dependency grouping is awesome</title><link href="https://slar.se/dependabots-dependency-grouping.html" rel="alternate"></link><published>2024-01-29T00:00:00+01:00</published><updated>2024-01-29T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-01-29:/dependabots-dependency-grouping.html</id><summary type="html">&lt;p&gt;I've been using GitHub's Dependabot since it was &lt;a href="https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/"&gt;released around 4 years
 ago&lt;/a&gt;,
 and to a large extent, it's been great. Except for one thing: the sheer amount
 of pull requests Dependabot would open for dependency updates. For some of my

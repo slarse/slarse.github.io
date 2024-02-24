@@ -63,6 +63,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "psql-guardrails.html"
+url = "/psql-guardrails.html"
+title = "Adding guardrails to `psql` for PostgreSQL"
+
+[[input.files]]
 path = "wayland-one-month-later.html"
 url = "/wayland-one-month-later.html"
 title = "First impressions of Wayland on Arch Linux"

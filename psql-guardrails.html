@@ -8,7 +8,7 @@
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Programming for fun and profit - Page 6</title>
+    <title>Adding guardrails to `psql` for PostgreSQL - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -87,81 +87,14 @@
     <div class="container" id="main-container">
       <div class="row">
         <div class="col-md-9" id="content">
-<div class="stork-wrapper">
-    <input class="stork-input" data-stork="sitesearch" placeholder="Search all stuff"/>
-    <div class="stork-output" data-stork="sitesearch-output"></div>
-</div>    <article>
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
 <abbr class="article-header-date">
-  Sun 02 August 2020
+  Sat 24 February 2024
 </abbr> <h1>
-  <a href="https://slar.se/etc-passwd.html" rel="bookmark"
-     title="Permalink to The Linux /etc/passwd file, and why it doesn&#39;t contain passwords">
-    The Linux /etc/passwd file, and why it doesn't contain passwords
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/linux.html">
-      Linux</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info --><div class="article-tag-list">
-<span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/linux.html"><i class="fas fa-tag"></i>linux</a>&nbsp;
-</div>  
-      <div class="summary">
-		<p>On any Linux distribution, there's a file located at <code>/etc/passwd</code>. This file
-contains information about users that exist on the system, including their
-username, user id, group id and more. In this short article, I'll outline the
-structure of the <code>/etc/passwd</code> file, and also illuminate why it doesn't …</p>
-		<p class="content-emphasis"><a href="https://slar.se/etc-passwd.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
-
-    <hr />
-    <article>
-<abbr class="article-header-date">
-  Fri 31 July 2020
-</abbr> <h1>
-  <a href="https://slar.se/essential-pytest-1.html" rel="bookmark"
-     title="Permalink to Essential pytest pt. 1: Controlling the verbosity of output">
-    Essential pytest pt. 1: Controlling the verbosity of output
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/testing.html">
-      Testing</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info --><div class="article-tag-list">
-<span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/python.html"><i class="fas fa-tag"></i>python</a>&nbsp;
-	<a href="https://slar.se/tag/pytest.html"><i class="fas fa-tag"></i>pytest</a>&nbsp;
-	<a href="https://slar.se/tag/testing.html"><i class="fas fa-tag"></i>testing</a>&nbsp;
-</div>  
-      <div class="summary">
-		<p>This is the first part of a series of small articles detailing some of the
-functionality of the <a href="https://docs.pytest.org/en/latest/">pytest</a> testing
-framework that I find most essential. The series assumes you know how to run
-tests with <code>pytest</code> already.</p>
-<p>In this first part, we'll take a look at the <code>-v</code> and …</p>
-		<p class="content-emphasis"><a href="https://slar.se/essential-pytest-1.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
-
-    <hr />
-    <article>
-<abbr class="article-header-date">
-  Sun 10 November 2019
-</abbr> <h1>
-  <a href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html" rel="bookmark"
-     title="Permalink to Don&#39;t use String for method options, use an enum!">
-    Don't use String for method options, use an enum!
+  <a href="https://slar.se/psql-guardrails.html" rel="bookmark"
+     title="Permalink to Adding guardrails to `psql` for PostgreSQL">
+    Adding guardrails to `psql` for PostgreSQL
   </a>
 </h1><div class="article-header-info">
   <p>
@@ -173,133 +106,104 @@ tests with <code>pytest</code> already.</p>
   </p>
 </div> <!-- /.article-header-info --><div class="article-tag-list">
 <span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/java.html"><i class="fas fa-tag"></i>java</a>&nbsp;
-	<a href="https://slar.se/tag/enums.html"><i class="fas fa-tag"></i>enums</a>&nbsp;
-</div>  
-      <div class="summary">
-		<p>In this article, we are going to have a look at a method that accepts an option.
-That is to say, it accepts an argument that somehow decides how it operates. If
-you use a lot of libraries in your day-to-day programming, you're bound to come
-across methods that accept …</p>
-		<p class="content-emphasis"><a href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
+	<a href="https://slar.se/tag/postgresql.html"><i class="fas fa-tag"></i>postgresql</a>&nbsp;
+	<a href="https://slar.se/tag/psql.html"><i class="fas fa-tag"></i>psql</a>&nbsp;
+	<a href="https://slar.se/tag/database.html"><i class="fas fa-tag"></i>database</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>I've been using <code>psql</code> for many years to interface with PostgreSQL databases.
+It's simple, pretty much always available as it's usually bundled with
+PostgreSQL and just does what it's supposed to. It does, however, have some
+pretty dangerous defaults. Not only are writes allowed, but it also
+automatically commits any statements executed outside of explicit transactions.
+Let's fix that.</p>
+<h1>Configuring <code>psql</code> with <code>.psqlrc</code></h1>
+<p>The <a href="https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-FILES-PSQLRC"><code>.psqlrc</code>
+file</a>
+can be used to set defaults for new connections made with <code>psql</code>. It should be
+placed in your home directory (i.e. <code>~/.psqlrc</code>) and most often contains <code>\set</code>
+and <code>SET</code> commands.</p>
+<p>The difference between <code>\set</code> and <code>SET</code> commands is a bit subtle. A <a href="https://www.postgresql.org/docs/current/sql-set.html"><code>SET</code>
+command</a> sets a session
+variable inside of the PostgreSQL server, whereas a <a href="https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMAND-SET"><code>\set</code>
+command</a>
+sets configuration in the <code>psql</code> client itself.</p>
+<h2>Making the default transaction read-only</h2>
+<p>PostgreSQL executes all statements as transactions. If you don't start an
+explicit transaction for a statement, <a href="https://www.postgresql.org/docs/current/tutorial-transactions.html">PostgreSQL automatically wraps the
+statement in a
+transaction</a>.
+By default transactions are both readable and writable, which isn't necessarily
+desirable. To make transactions read-only by default, you can set the following
+session variable inside of PostgreSQL.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="n">default_transaction_read_only</span><span class="o">=</span><span class="ss">&quot;on&quot;</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
 
-    <hr />
-    <article>
-<abbr class="article-header-date">
-  Fri 11 October 2019
-</abbr> <h1>
-  <a href="https://slar.se/javas-optional-why-you-should-prefer-it-over-null.html" rel="bookmark"
-     title="Permalink to Java&#39;s Optional: Why you should prefer it over null">
-    Java's Optional: Why you should prefer it over null
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/programming.html">
-      Programming</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info --><div class="article-tag-list">
-<span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/java.html"><i class="fas fa-tag"></i>java</a>&nbsp;
-</div>  
-      <div class="summary">
-		<p>Null references are problematic, to say the least. Tony Hoare (inventor of the
-null reference) even went as far to say call them his <a href="https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions">"billion dollar
-mistake"</a>.
-In this article, I first make a cursory exploration of why null references are
-so problematic, and then have a look at Java's …</p>
-		<p class="content-emphasis"><a href="https://slar.se/javas-optional-why-you-should-prefer-it-over-null.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
+<p>You can do this in any PostgreSQL session. It can also be configured on the
+database server, but here we assume it isn't. If you after having done that try
+to execute a statement that writes to the database, you'll get an error.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test_db</span><span class="o">=#</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">test_table</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">serial</span><span class="p">);</span><span class="w"></span>
+<span class="n">ERROR</span><span class="p">:</span><span class="w">  </span><span class="n">cannot</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">read</span><span class="o">-</span><span class="k">only</span><span class="w"> </span><span class="k">transaction</span><span class="w"></span>
+</code></pre></div>
 
-    <hr />
-    <article>
-<abbr class="article-header-date">
-  Mon 22 July 2019
-</abbr> <h1>
-  <a href="https://slar.se/repobee-and-simon-at-iticse-2019.html" rel="bookmark"
-     title="Permalink to RepoBee (and Simon) at ITiCSE 2019!">
-    RepoBee (and Simon) at ITiCSE 2019!
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/blog.html">
-      Blog</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info --><div class="article-tag-list">
-<span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/blog.html"><i class="fas fa-tag"></i>blog</a>&nbsp;
-</div>  
-      <div class="summary">
-		<p>I just got home from the <em>Innovation and Technology in Computer Science</em>
-(ITiCSE) conference in lovely Aberdeen, Scotland. I was there to present a small
-experience paper on developing and using <a href="https://repobee.org">RepoBee</a>, an open
-source tool for generating and managing large amounts of Git repositories for
-students in higher education …</p>
-		<p class="content-emphasis"><a href="https://slar.se/repobee-and-simon-at-iticse-2019.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
+<p>However, it's still possible to create an explicit transaction that's allowed
+to write, so it doesn't hinder you if you do need to write.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test_db</span><span class="o">=#</span><span class="w"> </span><span class="k">BEGIN</span><span class="w"> </span><span class="k">READ</span><span class="w"> </span><span class="k">WRITE</span><span class="p">;</span><span class="w"></span>
+<span class="k">BEGIN</span><span class="w"></span>
+<span class="n">test_db</span><span class="o">=*#</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">test_table</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">serial</span><span class="p">);</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"></span>
+<span class="n">test_db</span><span class="o">=*#</span><span class="w"> </span><span class="k">COMMIT</span><span class="p">;</span><span class="w"></span>
+<span class="k">COMMIT</span><span class="w"></span>
+</code></pre></div>
 
-    <hr />
+<p>To set this in <code>.psqlrc</code>, simply add the exact same line you'd use in an
+interactive session to <code>~/.psqlrc</code>. When you connect to a database, any <code>SET</code>
+command in <code>.psqlrc</code> is automatically executed.</p>
+<blockquote>
+<p><strong>Pitfall:</strong> <code>SET</code> commands in <code>.psqlrc</code> are only executed when you
+first establish a connection to the database server. If you <em>switch</em> database
+after having connected with <code>\c</code>, the <code>SET</code> command is <em>not</em> executed again.
+Keep that in mind.</p>
+</blockquote>
+<h2>Disabling autocommit</h2>
+<p><a href="https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-FILES-PSQLRC"><code>psql</code> automatically
+commits</a>
+the implicit transaction created when you execute a statement outside of an
+explicit transaction. This can be altered such that <code>psql</code> implicitly creates a
+transaction without automatically committing it by setting the <code>AUTOCIMMIT</code> variable to <code>off</code>. This is a <code>psql</code> variable, so we use <code>\set</code> to set it.</p>
+<div class="highlight"><pre><span></span><code><span class="err">\</span><span class="k">set</span><span class="w"> </span><span class="n">AUTOCOMMIT</span><span class="w"> </span><span class="k">false</span><span class="w"></span>
+</code></pre></div>
 
-<nav class="index-pager">
-	<ul class="pagination">
-		<li class="prev">
-		  <a href="https://slar.se/index5.html">
-			<i class="fas fa-chevron-circle-left fa-fw fa-lg"></i> Previous
-		  </a>
-		</li>
+<p>To validate that it's working as expected, you should look for the <code>*</code> in the
+<code>psql</code> prompt.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test_db</span><span class="o">=#</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">test_table</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">serial</span><span class="p">);</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"></span>
+<span class="n">test_db</span><span class="o">=*#</span><span class="w"> </span><span class="k">ROLLBACK</span><span class="p">;</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="o">&lt;</span><span class="c1">--- * in the prompt signifies transaction</span>
+<span class="k">ROLLBACK</span><span class="w"></span>
+</code></pre></div>
 
-        <li>
-          <a href="https://slar.se/index.html">1</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index2.html">2</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index3.html">3</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index4.html">4</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index5.html">5</a>
-        </li>
-        <li class="active"> <span>6</span> </li>
-        <li>
-          <a href="https://slar.se/index7.html">7</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index8.html">8</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index9.html">9</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index10.html">10</a>
-        </li>
-        <li>
-          <a href="https://slar.se/index11.html">11</a>
-        </li>
+<p>Do note that this transaction is <em>writable</em> regardless of the value set on
+<code>default_transaction_read_only</code>. In other words, it isn't meaningful to use
+both, but it's important to know that one makes the other one meaningless.</p>
+<h1>Summary</h1>
+<p>When connecting to any database that you for some reason don't want to
+accidentally write to, you should have guardrails. Many graphical PostgreSQL
+clients that I've seen my colleagues use have such guardrails by default in
+that an explicit commit must be issued by clicking a button. <code>psql</code> does not.</p>
+<p>Which of the two options in this article to use is a bit circumstantial. I
+personally prefer disabling <code>AUTOCOMMIT</code> in <code>psql</code> as that is a client-side
+setting. Setting <code>default_transaction_read_only</code> to on is a bit precarious as
+it doesn't get reapplied if you change database with <code>\c</code>. The latter can
+however be configured on the server itself, which is always a nice safety net
+to have as it reduces the risk of errant commits due to client
+misconfiguration. </p>
+<p>But this article was about <code>psql</code> in particular and in that context disabling
+<code>AUTOCOMMIT</code> seems like the clear winner in terms of guardrails.
+reduces the risk of client misconfiguration.</p>
+  </div>
+  
 
-		<li class="next">
-		  <a href="https://slar.se/index7.html">
-			Next <i class="fas fa-chevron-circle-right fa-fw fa-lg"></i>
-		  </a>
-		</li>
-	</ul>
-
-</nav> <!-- /index-pager -->
+</article>
         </div><!-- /content -->
 
         <div class="col-md-3 sidebar-nav" id="sidebar">

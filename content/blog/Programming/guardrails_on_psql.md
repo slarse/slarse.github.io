@@ -84,7 +84,7 @@ To validate that it's working as expected, you should look for the `*` in the
 ```sql
 test_db=# CREATE TABLE test_table (id serial);
 CREATE TABLE
-test_db=*# ROLLBACK; # <--- * in the prompt signifies transaction
+test_db=*# ROLLBACK; -- <=== * in the prompt signifies transaction
 ROLLBACK
 ```
 

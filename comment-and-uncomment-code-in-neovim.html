@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Extending NeoVim for commenting and uncommenting code blocks - Programming for fun and profit</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous"
+      />
+
+
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/dracula.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/search.css" />
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming for fun and profit Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+                  <li>
+                    <a href="https://slar.se/pages/about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/wiki.html">Wiki</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/projects.html">Projects</a>
+                  </li>
+							<li><a href="https://slar.se/resume.pdf">Resume</a></li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">Programming for fun and profit</a></h1>
+		<p class="lead">A blog about software engineering, programming languages and technical tinkering</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Thu 29 February 2024
+</abbr> <h1>
+  <a href="https://slar.se/comment-and-uncomment-code-in-neovim.html" rel="bookmark"
+     title="Permalink to Extending NeoVim for commenting and uncommenting code blocks">
+    Extending NeoVim for commenting and uncommenting code blocks
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/neovim.html"><i class="fas fa-tag"></i>neovim</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>I've been using some variation of Vim for going on a decade now, yet I've never
+bothered with an efficient way of commenting out code. It just isn't something
+that I do very often. But I saw a colleague comment out and uncomment lines of
+code like a breeze in VS Code, so obviously I had to also have that capability.
+And then choose to not use it. Let's see how you can get that option, too.</p>
+<blockquote>
+<p>This article contains Lua code for configuring NeoVim. To follow along, paste
+the Lua code presented into any <code>.lua</code> file and run <code>:luafile %</code> with the
+file in the current buffer. This makes the commands defined within available
+in your current NeoVim session.</p>
+</blockquote>
+<h1>Commenting out code the hard way</h1>
+<p>A simple no-preparation way of commenting out code in any variation of Vim is to
+simply select a few lines of code in visual mode and then make a substitution.
+Let's say we're writing Python where the inline comment character is <code>#</code>, then
+commenting out a line would look like this.</p>
+<div class="highlight"><pre><span></span><code><span class="p">:</span>s<span class="sr">/^/</span>#/
+</code></pre></div>
+
+<p>The <code>^</code> character is the "start of line" character, so here we're simply
+replacing the start of line with <code>#</code>. And don't worry, the start of line isn't
+actually a character; there'll be a new start of line just in front of the <code>#</code>
+after the substitution. Select a range of lines in visual mode and run the same
+substitution and you'll comment out the entire range.</p>
+<p>If you do this rarely it's fine. But if you do it regularly it becomes rather
+cumbersome. Luckily for us, NeoVim is easy to extend.</p>
+<h1>Defining a command to comment out code</h1>
+<p>To make the above substitution a bit less of an effort, we can define a command
+for it. First, we need to define a function that executes the code. A very
+simple first effort would look like this.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">function</span> <span class="nf">comment_out</span><span class="p">()</span>
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="s2">&quot;s:^:#:&quot;</span><span class="p">)</span>
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="s2">&quot;noh&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+
+<p>There are a couple things to note about this function.</p>
+<ol>
+<li><code>vim.api.nvim_command</code> synchronously executes a command.</li>
+<li>We use <code>:</code> instead of <code>/</code> as the substitution delimiter in anticipation of
+   the C-style <code>//</code> inline comment.</li>
+<li>We clear the search highlight with <code>noh</code> after doing the substitution.<ul>
+<li>Figuring out what happens if you don't do that is left as an exercise to
+  the reader.</li>
+</ul>
+</li>
+</ol>
+<p>So that's our function for performing the substitution, and if we simply place
+our cursor on a line we wish to comment out we can execute it like so.</p>
+<div class="highlight"><pre><span></span><code><span class="p">:</span><span class="k">lua</span> comment_out<span class="p">()</span>
+</code></pre></div>
+
+<p>It should insert a <code>#</code> character at the start of the line. But this isn't
+terribly ergonomic, it'd be nicer if we could just call a native NeoVim command.
+Fortunately, defining such a command is pretty simple.</p>
+<div class="highlight"><pre><span></span><code><span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_create_user_command</span><span class="p">(</span><span class="s2">&quot;CommentOut&quot;</span><span class="p">,</span> <span class="n">comment_out</span><span class="p">,</span> <span class="p">{})</span>
+</code></pre></div>
+
+<p>This exposes the <code>:CommentOut</code> command, and we can now invoke our commenting out
+function like so.</p>
+<div class="highlight"><pre><span></span><code><span class="p">:</span>CommentOut
+</code></pre></div>
+
+<p>Still, this feels like some amount of effort, so let's add a couple of handy
+keybindings to do this. I like <code>&lt;leader&gt;co</code> which is a mnemonic for <strong>c</strong>omment
+<strong>o</strong>ut.</p>
+<div class="highlight"><pre><span></span><code><span class="n">vim</span><span class="p">.</span><span class="n">keymap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;leader&gt;co&quot;</span><span class="p">,</span> <span class="s2">&quot;:CommentOut&lt;CR&gt;&quot;</span><span class="p">)</span> <span class="c1">-- visual mode keymap</span>
+<span class="n">vim</span><span class="p">.</span><span class="n">keymap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;leader&gt;co&quot;</span><span class="p">,</span> <span class="s2">&quot;:CommentOut&lt;CR&gt;&quot;</span><span class="p">)</span> <span class="c1">-- normal mode keymap</span>
+</code></pre></div>
+
+<p>Now we can simply invoke the commenting out routing with <code>&lt;leader&gt;co</code>, or
+whatever else you've decided to put in there. There are however two big problems
+left to address:</p>
+<ol>
+<li>The <code>:CommentOut</code> command doesn't work with a range<ul>
+<li>If you try to select a range of lines and run the function, you will
+  encounter an error saying <code>E481: No range allowed</code></li>
+</ul>
+</li>
+<li>The commenting character is hard-coded as <code>#</code><ul>
+<li>That approach works great if you only work with a single language, but if
+  you like me work daily with multiple languages that have different line
+  comment styles it's not ideal</li>
+</ul>
+</li>
+</ol>
+<p>Let's address these in turn.</p>
+<h2>Adding support for range selection</h2>
+<p>Being able to run our little <code>:CommentOut</code> command only on one line at a time
+is hardly useful, so let's make our command compatible with range selection.
+First we need to modify the creation of the command, which by default does
+not allow ranges.</p>
+<div class="highlight"><pre><span></span><code><span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_create_user_command</span><span class="p">(</span><span class="s2">&quot;CommentOut&quot;</span><span class="p">,</span> <span class="n">comment_out</span><span class="p">,</span> <span class="p">{</span> <span class="n">range</span> <span class="o">=</span> <span class="kc">true</span> <span class="p">})</span>
+</code></pre></div>
+
+<p>With this modification, you'll be able to execute <code>:CommentOut</code> when a range is
+selected, but only the first line of the selection will actually be commented
+out. We need to add a few lines of code to the <code>comment_out()</code> function to
+actually act on the entire range. While we're at it, we'll also make the
+function <code>local</code> as it doesn't need to be accessible outside the module anymore.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">comment_out</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">start</span> <span class="o">=</span> <span class="nb">math.min</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">finish</span> <span class="o">=</span> <span class="nb">math.max</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="n">start</span> <span class="o">..</span> <span class="s2">&quot;,&quot;</span> <span class="o">..</span> <span class="n">finish</span> <span class="o">..</span> <span class="s2">&quot;s:^:#:&quot;</span><span class="p">)</span>
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="s2">&quot;noh&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+
+<p>Options for NeoVim commands are passed in via the <code>opts</code> table, and the line
+numbers of the selection are stored in <code>line1</code> and <code>line2</code>. Other available
+options are <a href="https://neovim.io/doc/user/api.html#nvim_create_user_command()">detailed in the NeoVim API
+docs</a>.</p>
+<p>Note that depending on where you start the selection, either line may be the one
+at the top and bottom, respectively, so we do some rudimentary math to get the
+start and finish of our substitution in the right order.</p>
+<p>Selecting a few lines of code and running <code>:CommentOut</code> (or using the
+keybind for it) now actually comments out those lines! Let's now figure out how
+to select the correct kind of line comment for the given file type.</p>
+<h2>Choosing line comment style by filetype</h2>
+<p>While there's probably a super clever way of accomplishing this, I went with
+something really rudimentary: a table with line comment styles by filetype. It
+looks something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">non_c_line_comments_by_filetype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">lua</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+    <span class="n">python</span> <span class="o">=</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span>
+    <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="kd">local</span> <span class="n">default_line_comment</span> <span class="o">=</span> <span class="s2">&quot;//&quot;</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">comment_out</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">line_comment</span> <span class="o">=</span> <span class="n">non_c_line_comments_by_filetype</span><span class="p">[</span><span class="n">vim</span><span class="p">.</span><span class="n">bo</span><span class="p">.</span><span class="n">filetype</span><span class="p">]</span> <span class="ow">or</span> <span class="n">default_line_comment</span>
+    <span class="kd">local</span> <span class="n">start</span> <span class="o">=</span> <span class="nb">math.min</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">finish</span> <span class="o">=</span> <span class="nb">math.max</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="n">start</span> <span class="o">..</span> <span class="s2">&quot;,&quot;</span> <span class="o">..</span> <span class="n">finish</span> <span class="o">..</span> <span class="s2">&quot;s:^:&quot;</span> <span class="o">..</span> <span class="n">line_comment</span> <span class="o">..</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="s2">&quot;noh&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+
+<p>Basically, we default to the <code>//</code> line comment style <em>unless</em> we find a match in
+the <code>non_c_line_comments_by_filetype</code> table. We use <code>vim.bo.filetype</code> to get the
+current buffer's filetype. Then we do some more string concatenation in the
+substitution command, and that's pretty much that. If you need other line
+comment styles, just add them to the table.</p>
+<p>If you now run the <code>:CommentOut</code> command in a Python file, it'll use <code>#</code> as the
+comment style. But if you do it in a SQL file, it'll use <code>--</code>, and in a Go file
+it'll use <code>//</code>.</p>
+<h1>Uncommenting code</h1>
+<p>We now have a neat way of commenting out code, but what about <em>uncommenting</em>
+code? Let's straight up copy <code>comment_out()</code> and just replace the substitution
+expression with something that removes a line comment start.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">uncomment</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">line_comment</span> <span class="o">=</span> <span class="n">non_c_line_comments_by_filetype</span><span class="p">[</span><span class="n">vim</span><span class="p">.</span><span class="n">bo</span><span class="p">.</span><span class="n">filetype</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">&quot;//&quot;</span>
+    <span class="kd">local</span> <span class="n">start</span> <span class="o">=</span> <span class="nb">math.min</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">finish</span> <span class="o">=</span> <span class="nb">math.max</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="n">start</span> <span class="o">..</span> <span class="s2">&quot;,&quot;</span> <span class="o">..</span> <span class="n">finish</span> <span class="o">..</span> <span class="s2">&quot;s:^&quot;</span> <span class="o">..</span> <span class="n">line_comment</span> <span class="o">..</span> <span class="s2">&quot;::&quot;</span><span class="p">)</span>
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="s2">&quot;noh&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_create_user_command</span><span class="p">(</span><span class="s2">&quot;Uncomment&quot;</span><span class="p">,</span> <span class="n">uncomment</span><span class="p">,</span> <span class="p">{</span> <span class="n">range</span> <span class="o">=</span> <span class="kc">true</span> <span class="p">})</span>
+<span class="n">vim</span><span class="p">.</span><span class="n">keymap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;leader&gt;uc&quot;</span><span class="p">,</span> <span class="s2">&quot;:Uncomment&lt;CR&gt;&quot;</span><span class="p">)</span>
+<span class="n">vim</span><span class="p">.</span><span class="n">keymap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;leader&gt;uc&quot;</span><span class="p">,</span> <span class="s2">&quot;:Uncomment&lt;CR&gt;&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<p>Note: The keybinding is a mnemonic for <strong>u</strong>n<strong>c</strong>omment.</p>
+</blockquote>
+<p>This mostly works. If you first run <code>:CommentOut</code> and then <code>:Uncomment</code>, the
+latter cancels out the former. But there are two notable shortcomings.</p>
+<ol>
+<li>If you run <code>:Uncomment</code> on a line that deos not start with a line comment
+   start you encounter an error saying <code>Pattern not found:</code></li>
+<li>The line must <em>start</em> with a line comment start; leading whitespace causes
+   the substitution to fail</li>
+<li>If you have a formatter that indents line comments, you'll be in trouble!</li>
+</ol>
+<p>The first issue is simple to resolve: we wrap the call to <code>vim.api.nvim_comand</code>
+in a <em>protected call</em> using the <a href="https://www.lua.org/pil/8.4.html">pcall() function</a>.
+This allows us to handle errors, but in fact all we want is to prevent any error
+from bubbling up to the surface; we don't really care if the substitution fails
+or not as a failure simply indicates there was no comment to uncomment.</p>
+<p>The second issue requires a little bit more thought. We want to be able to
+uncomment lines even if there's leading whitespace to be give the command some
+more flexibility. With <code>#</code> as the line comment, a first attempt could look like
+this.</p>
+<div class="highlight"><pre><span></span><code><span class="p">:</span>s:^\s\{<span class="p">-</span>\}#::
+</code></pre></div>
+
+<p><code>^</code> is the line start meta character, <code>\s</code> denotes any whitespace except for
+linebreaks, and <code>\{-\}</code> means "zero or more`. This mostly works, but it removes
+both the leading whitespace and the comment character, effectively dedenting the
+line. We need to <em>capture</em> the whitespace and put it back after removing the
+line comment start.</p>
+<div class="highlight"><pre><span></span><code><span class="p">:</span>s:^\<span class="p">(</span>\s\{<span class="p">-</span>\}\<span class="p">)</span>#:\<span class="m">1</span>:
+</code></pre></div>
+
+<p>The escapes makes the pattern a bit difficult to read, but all we've done here
+is to wrap the "zero or more whitespace" in a capture group (denoted by
+parentheses), and then we reference that capture group in the replacement part
+of the expression with <code>\1</code>.</p>
+<p>Putting all of this together, we end up with the following <code>uncomment()</code>
+function.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">uncomment</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">line_comment</span> <span class="o">=</span> <span class="n">non_c_line_comments_by_filetype</span><span class="p">[</span><span class="n">vim</span><span class="p">.</span><span class="n">bo</span><span class="p">.</span><span class="n">filetype</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">&quot;//&quot;</span>
+    <span class="kd">local</span> <span class="n">start</span> <span class="o">=</span> <span class="nb">math.min</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">finish</span> <span class="o">=</span> <span class="nb">math.max</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+
+    <span class="nb">pcall</span><span class="p">(</span><span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">,</span> <span class="n">start</span> <span class="o">..</span> <span class="s2">&quot;,&quot;</span> <span class="o">..</span> <span class="n">finish</span> <span class="o">..</span> <span class="s2">&quot;s:^</span><span class="se">\\</span><span class="s2">(</span><span class="se">\\</span><span class="s2">s</span><span class="se">\\</span><span class="s2">{-</span><span class="se">\\</span><span class="s2">}</span><span class="se">\\</span><span class="s2">)&quot;</span> <span class="o">..</span> <span class="n">line_comment</span> <span class="o">..</span> <span class="s2">&quot;:</span><span class="se">\\</span><span class="s2">1:&quot;</span><span class="p">)</span>
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="s2">&quot;noh&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+
+<p>Now it should work pretty well!</p>
+<h1>Summary and full code</h1>
+<p>That's pretty much it for commenting and uncommenting code, at least as far as
+my semi-imagined needs for it go. This represents among the first non-trivial
+extensions I've made to NeoVim using only its API and made me realise just how
+much power I've left untapped for so many years. I will undoubtedly return with
+more blog posts on extending NeoVim in the future; it's just too much fun not
+to.</p>
+<p>The full code can be found below. You can just copy and paste it into your root
+<code>init.lua</code> file and it should work without any further tweaks. For a more
+segregated placement, you can draw inspiration from <a href="https://github.com/slarse/config/commit/fe1ab5bcd24f4a1ad0a111b67a652de1c330a18d">my NeoVim
+configuration</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">non_c_line_comments_by_filetype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">lua</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+    <span class="n">python</span> <span class="o">=</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span>
+    <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">comment_out</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">line_comment</span> <span class="o">=</span> <span class="n">non_c_line_comments_by_filetype</span><span class="p">[</span><span class="n">vim</span><span class="p">.</span><span class="n">bo</span><span class="p">.</span><span class="n">filetype</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">&quot;//&quot;</span>
+    <span class="kd">local</span> <span class="n">start</span> <span class="o">=</span> <span class="nb">math.min</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">finish</span> <span class="o">=</span> <span class="nb">math.max</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="n">start</span> <span class="o">..</span> <span class="s2">&quot;,&quot;</span> <span class="o">..</span> <span class="n">finish</span> <span class="o">..</span> <span class="s2">&quot;s:^:&quot;</span> <span class="o">..</span> <span class="n">line_comment</span> <span class="o">..</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="s2">&quot;noh&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">uncomment</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">line_comment</span> <span class="o">=</span> <span class="n">non_c_line_comments_by_filetype</span><span class="p">[</span><span class="n">vim</span><span class="p">.</span><span class="n">bo</span><span class="p">.</span><span class="n">filetype</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">&quot;//&quot;</span>
+    <span class="kd">local</span> <span class="n">start</span> <span class="o">=</span> <span class="nb">math.min</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">finish</span> <span class="o">=</span> <span class="nb">math.max</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="n">line1</span><span class="p">,</span> <span class="n">opts</span><span class="p">.</span><span class="n">line2</span><span class="p">)</span>
+
+    <span class="nb">pcall</span><span class="p">(</span><span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">,</span> <span class="n">start</span> <span class="o">..</span> <span class="s2">&quot;,&quot;</span> <span class="o">..</span> <span class="n">finish</span> <span class="o">..</span> <span class="s2">&quot;s:^</span><span class="se">\\</span><span class="s2">(</span><span class="se">\\</span><span class="s2">s</span><span class="se">\\</span><span class="s2">{-</span><span class="se">\\</span><span class="s2">}</span><span class="se">\\</span><span class="s2">)&quot;</span> <span class="o">..</span> <span class="n">line_comment</span> <span class="o">..</span> <span class="s2">&quot;:</span><span class="se">\\</span><span class="s2">1:&quot;</span><span class="p">)</span>
+    <span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_command</span><span class="p">(</span><span class="s2">&quot;noh&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_create_user_command</span><span class="p">(</span><span class="s2">&quot;CommentOut&quot;</span><span class="p">,</span> <span class="n">comment_out</span><span class="p">,</span> <span class="p">{</span> <span class="n">range</span> <span class="o">=</span> <span class="kc">true</span> <span class="p">})</span>
+<span class="n">vim</span><span class="p">.</span><span class="n">keymap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;leader&gt;co&quot;</span><span class="p">,</span> <span class="s2">&quot;:CommentOut&lt;CR&gt;&quot;</span><span class="p">)</span>
+<span class="n">vim</span><span class="p">.</span><span class="n">keymap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;leader&gt;co&quot;</span><span class="p">,</span> <span class="s2">&quot;:CommentOut&lt;CR&gt;&quot;</span><span class="p">)</span>
+
+<span class="n">vim</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">nvim_create_user_command</span><span class="p">(</span><span class="s2">&quot;Uncomment&quot;</span><span class="p">,</span> <span class="n">uncomment</span><span class="p">,</span> <span class="p">{</span> <span class="n">range</span> <span class="o">=</span> <span class="kc">true</span> <span class="p">})</span>
+<span class="n">vim</span><span class="p">.</span><span class="n">keymap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;leader&gt;uc&quot;</span><span class="p">,</span> <span class="s2">&quot;:Uncomment&lt;CR&gt;&quot;</span><span class="p">)</span>
+<span class="n">vim</span><span class="p">.</span><span class="n">keymap</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;leader&gt;uc&quot;</span><span class="p">,</span> <span class="s2">&quot;:Uncomment&lt;CR&gt;&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Happy editing!</p>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/linux.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/reviews.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Reviews</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/database.html">
+          <i class="fas fa-tag"></i>
+        database
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/neovim.html">
+          <i class="fas fa-tag"></i>
+        neovim
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/go.html">
+          <i class="fas fa-tag"></i>
+        go
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+<script src="https://files.stork-search.net/releases/v1.2.1/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://slar.se/search-index.st")
+</script>  </body>
+</html>

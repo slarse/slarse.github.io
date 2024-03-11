@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Syntax highlight anything with Tree-sitter - Programming for fun and profit</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous"
+      />
+
+
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/dracula.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/search.css" />
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming for fun and profit Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+	   <div class="navbar-header">
+		<button type="button" class="navbar-toggle" 
+				data-toggle="collapse" data-target="#main-navbar-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+                  <li>
+                    <a href="https://slar.se/pages/about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/wiki.html">Wiki</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/projects.html">Projects</a>
+                  </li>
+							<li><a href="https://slar.se/resume.pdf">Resume</a></li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+	  </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">Programming for fun and profit</a></h1>
+		<p class="lead">A blog about software engineering, programming languages and technical tinkering</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Mon 11 March 2024
+</abbr> <h1>
+  <a href="https://slar.se/syntax-highlight-anything-with-tree-sitter.html" rel="bookmark"
+     title="Permalink to Syntax highlight anything with Tree-sitter">
+    Syntax highlight anything with Tree-sitter
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/tree-sitter.html"><i class="fas fa-tag"></i>tree-sitter</a>&nbsp;
+	<a href="https://slar.se/tag/parsing.html"><i class="fas fa-tag"></i>parsing</a>&nbsp;
+	<a href="https://slar.se/tag/syntax.html"><i class="fas fa-tag"></i>syntax</a>&nbsp;
+	<a href="https://slar.se/tag/neovim.html"><i class="fas fa-tag"></i>neovim</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>As of my previous post on <a href="https://slar.se/comment-and-uncomment-code-in-neovim.html">extending NeoVim for commenting and uncommenting
+code blocks</a>, I'm on something of a
+NeoVim extension streak. The flavor of the week is syntax highlighting. I've been
+using the highly customizable
+<a href="https://github.com/nvim-treesitter/nvim-treesitter">nvim-treesitter</a> for the
+past few years. This depends on there being a
+<a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</a> parser for whatever
+language you're working with. Usually there is, but sometimes you run into
+languages that are esoteric enough that there aren't any parsers available. And
+then you're SOL on the whole syntax highlighting part. Unless, of course, you
+write a parser of your own. Which naturally is what we'll do.</p>
+<p>This is the first article in a series on working with Tree-sitter to syntax
+highlight anything. Although this article series is intended for a
+NeoVim-inclined audience, this first part has nothing to do with NeoVim and can
+be enjoyed by anyone interested in Tree-sitter or parsers in general. In the
+still under construction second part, we'll dive into working with and utilizing
+Tree-sitter in NeoVim.</p>
+<blockquote>
+<p><strong>Companion repository:</strong> The complete parser developed in this article is
+available in a companion repository at
+<a href="https://github.com/slarse/tree-sitter-mds">slarse/tree-sitter-mds</a></p>
+</blockquote>
+<h1>What's this Tree-sitter thing?</h1>
+<p><a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</a> is a parser generator
+tool for the modern era. What's a parser generator, you ask? Well, it's exactly
+what it sounds like: a tool to generate a parser! By defining the syntax of a
+language in a way the parser generator understands, it can generate a parser
+for you that can take source code of that language and transform it into a
+syntax tree.</p>
+<p>Parser generators aren't a new concept. <a href="https://en.wikipedia.org/wiki/GNU_Bison">GNU
+Bison</a> has been around for 38 years at
+this point, and <a href="https://en.wikipedia.org/wiki/Yacc">YACC</a> had been around for a
+decade by the time Bison arrived. So, not at all a new concept. What's novel
+with Tree-sitter is both how easy it is to define a grammar as long as you know
+a little bit of JavaScript and the fact that <a href="https://tree-sitter.github.io/tree-sitter/syntax-highlighting">syntax highlighting is a built-in
+feature</a>.</p>
+<p>You can do a lot of cool things with Tree-sitter's syntax trees, but in this
+article our focus is on syntax highlighting.</p>
+<blockquote>
+<p>This article assumes that you have access to a <code>bash</code>-like shell (such as
+<code>bash</code> or <code>zsh</code>). Commands intended to be executed in a shell are prefixed
+with <code>$</code>. Lines that follow a <code>$</code>-prefixed line but are not prefixed are
+output lines.</p>
+</blockquote>
+<h1>Working example: Markdown Simple</h1>
+<p>As a driving example for this article series, we'll look at a tiny subset of
+Markdown, which should be familiar to most anyone in the target audience.
+Specifically, we want to be able to highlight the following containing
+headings, paragraphs, inline code and code blocks.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># This is a heading</span><span class="w"></span>
+<span class="n">This</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="err">`</span><span class="n">inline</span><span class="w"> </span><span class="n">code</span><span class="err">`</span><span class="w"></span>
+
+<span class="err">```</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;javascript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;code&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;highlighting&quot;</span><span class="p">];</span><span class="w"></span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">word</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="err">```</span><span class="w"></span>
+
+<span class="c1"># This is another heading</span><span class="w"></span>
+<span class="n">Another</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="c1"># in the middle.</span><span class="w"></span>
+</code></pre></div>
+
+<p><strong>Store these sample file contents in <code>test.mds</code> for later use</strong>!</p>
+<p>I call this subset <em>Markdown Simple</em> and choose to write it in files with the
+<code>.mds</code> file extension. At the end of this article, we'll have fully functioning
+syntax highlighting for <code>.mds</code> files, including properly highlighted JavaScript
+code in the multiline code blocks!</p>
+<h1>Getting started with creating Tree-sitter parsers</h1>
+<p>Tree-sitter's docs have a good <a href="https://tree-sitter.github.io/tree-sitter/creating-parsers#project-setup">Project
+setup</a>
+section, but I found that it lacks a few key ingredients for our purposes. I
+will offer an augmented version here.</p>
+<p>As a pre-requisite, you must have decently up-to-date versions <code>node</code> and <code>npm</code>
+installed. With that, we can get started creating a project directory.</p>
+<div class="highlight"><pre><span></span><code>$ mkdir tree-sitter-mds
+$ <span class="nb">cd</span> tree-sitter-mds
+$ npm init
+</code></pre></div>
+
+<p>The <code>npm init</code> command will prompt you for a bunch of stuff. If you don't know
+what to choose, just go with the defaults, it hardly matters for the rest of
+this article. Now, you need the <code>tree-sitter-cli</code> application, which you can
+also get with <code>npm</code>.</p>
+<div class="highlight"><pre><span></span><code>$ npm --save-dev tree-sitter-cli
+</code></pre></div>
+
+<p>Then setup a configuration file for <code>tree-sitter-cli</code>.</p>
+<div class="highlight"><pre><span></span><code>$ npx tree-sitter init-config
+</code></pre></div>
+
+<p>Note where the configuration file is written to. You may need to edit it later
+for your project to be located by Tree-sitter.</p>
+<h2>Baby's first grammar rule</h2>
+<p>As previously mentioned, a parser generator reads a grammar that defines some
+language and spits out a parser for it. In Tree-sitter, we define grammar rules
+in JavaScript, in a file called <code>grammar.js</code> in the root of your project. It
+should have the following structure.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">grammar</span><span class="p">({</span><span class="w"></span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;markdownsimple&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// grammar rules go in here</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</code></pre></div>
+
+<p>If you now try to generate a parser you should get an error about there not being any rules.</p>
+<div class="highlight"><pre><span></span><code>$ npx tree-sitter generate
+<span class="o">[</span>stdin<span class="o">]</span>:409
+    throw new Error<span class="o">(</span><span class="s2">&quot;Grammar must have at least one rule.&quot;</span><span class="o">)</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Let's define a very simple grammar just to be able to parse the file.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">(.</span><span class="o">|</span><span class="err">\</span><span class="nx">n</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Put the above rules into your <code>grammar.js</code> file and then generate and run the
+parser.</p>
+<div class="highlight"><pre><span></span><code>$ npx tree-sitter generate
+$ npx tree-sitter parse test.mds
+</code></pre></div>
+
+<p>This should produce a simple syntax tree.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]))</span><span class="w"></span>
+</code></pre></div>
+
+<p>Let's dissect the grammar in detail so we can improve the syntax tree
+granularity. The root node is the <code>source_file</code>. Every syntax tree is rooted in
+this node, and there is only one of them for each parsed file. The rule
+definition may look a bit strange at first sight.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="w"></span>
+</code></pre></div>
+
+<p>Any non-trivial grammar is built by composing rules. Any rule that references
+another rule is a so-called
+<a href="https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols"><em>non-terminal</em></a>.
+The above rule says that the <code>source_file</code> consists of precisely one <code>text</code>
+node. So <code>source_file</code> is a non-terminal that references <code>text</code>.</p>
+<p>We then define the <code>text</code> rule using regex.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">(.</span><span class="o">+|</span><span class="err">\</span><span class="nx">n</span><span class="p">)</span><span class="o">/</span><span class="p">,</span><span class="w"></span>
+</code></pre></div>
+
+<p>This regex just captures any character (<code>.</code>) or line feeds (<code>\n</code>). As the rule
+does not reference any other rules, it is a so-called
+<a href="https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols"><em>terminal</em></a>.</p>
+<blockquote>
+<p>Note: Tree-sitter supports <a href="https://en.wikipedia.org/wiki/LR_parser"><code>LR(1)</code>
+grammars</a>, which <a href="https://tree-sitter.github.io/tree-sitter/creating-parsers#the-grammar-dsl">limits the kinds of
+regex
+expressions</a>
+that can be used. The finer details of this is beyond the scope of this
+article.</p>
+</blockquote>
+<p>In summary, our grammar currently defines a <code>source_file</code> as a single <code>text</code>
+node. Of course, we could immediately define <code>source_file</code> as the regex that
+currently resides in <code>text</code> at this point; I just wanted to illustrate the
+concept of terminal and non-terminal rules as it will become important in the
+next part.</p>
+<h2>Let there be color</h2>
+<p>The goal of this article is to achieve nice syntax highlighting, so let's get
+started immediately. We can highlight a file using the <code>highlight</code> command,
+but it won't work out of the box.</p>
+<p>If you run the below command, you should get an error message.</p>
+<div class="highlight"><pre><span></span><code>$ npx tree-sitter highlight test.mds
+No language found <span class="k">for</span> path <span class="sb">`</span>test.mds<span class="sb">`</span>
+
+If a language should be associated with this file extension, please ensure the path to <span class="sb">`</span>test.mds<span class="sb">`</span> is inside one of the following directories as specified by your <span class="s1">&#39;config.json&#39;</span>:
+
+  <span class="m">1</span>. /home/slarse/github  
+  <span class="m">2</span>. /home/slarse/src  
+  <span class="m">3</span>. /home/slarse/source  
+  <span class="m">4</span>. /home/slarse/projects  
+  <span class="m">5</span>. /home/slarse/dev  
+  <span class="m">6</span>. /home/slarse/git
+
+If the directory that contains the relevant grammar <span class="k">for</span> <span class="sb">`</span>test.mds<span class="sb">`</span> is not listed above, please add the directory to the list of directories <span class="k">in</span> your config file, located at /home/slarse/.config/tree-sitter/config.json
+</code></pre></div>
+
+<p>To resolve this we need to add some information to <code>package.json</code>. Put the
+following in there.</p>
+<blockquote>
+<p>Tip: It's easy to break the <code>package.json</code> file with a misplaced comma. To
+ensure that you don't break the syntax of <code>package.json</code>, run <code>npm i</code> until it
+doesn't complain anymore.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;tree-sitter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source.markdownsimple&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;file-types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;mds&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;highlights&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;queries/highlights.scm&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+</code></pre></div>
+
+<p>Now run the <code>highlight</code> command again. If you get the <em>same</em> error as before,
+you need to add the directory that contains you project's directory to
+Tree-sitter's <code>config.json</code> file. For example, my project is located in
+<code>/home/slarse/projects/tree-sitter/tree-sitter-mds</code>, so I add the path
+<code>/home/slarse/projects/tree-sitter</code> to the list of paths at the top of
+<code>/home/slarse/.config/tree-sitter/config.json</code>.</p>
+<p>With that fixed, you should get a new error.</p>
+<div class="highlight"><pre><span></span><code>$ npx tree-sitter highlight test.mds
+Failed to <span class="nb">read</span> query file <span class="s2">&quot;queries/highlights.scm&quot;</span>
+
+Caused by:
+    No such file or directory <span class="o">(</span>os error <span class="m">2</span><span class="o">)</span>
+</code></pre></div>
+
+<p>This means your project was correctly located. We now need to define <em>queries</em>
+for our highlight. Queries allow us to select nodes in the syntax tree and
+assign pre-defined semantic meaning to them. Put the following content in the
+file <code>queries/highlights.scm</code> in your project directory.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">text</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
+</code></pre></div>
+
+<blockquote>
+<p>I won't go into detail on queries in this article. You can find all captures
+(e.g. <code>@string</code>) available <a href="https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights">over
+here</a>,
+and you can read more about queries as a whole <a href="https://tree-sitter.github.io/tree-sitter/using-parsers#pattern-matching-with-queries">over
+here</a>.</p>
+</blockquote>
+<p>This says that any <code>text</code> node should be considered a <code>string</code>. Running the
+highlight command again, you ought to get some colored output.</p>
+<p><img alt="Simple syntax highlighting" src="/images/tree_sitter_highlighting/first_highlight.png" style="max-width: 95%;"></p>
+<p>Not all that impressive; as all nodes with any content are <code>text</code> nodes
+everything is just highlighted as a string. In my Tree-sitter configuration
+the <code>string</code> color happens happens to be a shade of green, but it may be
+different for you. For more granular highlighting, we need a more granular
+syntax tree to perform queries against.</p>
+<h1>Refining the grammar</h1>
+<p>The basic pieces of the puzzle are now in place. We have a rudimentary syntax
+tree allowing for an equally rudimentary syntax highlighting. It's now time to
+start refining the grammar to capture different components. With some crude
+annotations in <code>()</code>, we want a structure like this.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">section</span><span class="p">)</span><span class="w"></span>
+<span class="c1"># This is a heading (heading)</span><span class="w"></span>
+<span class="n">This</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="err">`</span><span class="n">inline</span><span class="w"> </span><span class="n">code</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="n">paragraph</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">inlineCode</span><span class="w"> </span><span class="p">(</span><span class="n">codeText</span><span class="p">)))</span><span class="w"></span>
+
+<span class="err">```</span><span class="w"> </span><span class="p">(</span><span class="n">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="n">codeText</span><span class="p">))</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;javascript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;code&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;highlighting&quot;</span><span class="p">];</span><span class="w"></span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">word</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="err">```</span><span class="w"></span>
+
+<span class="c1"># This is another heading (heading)</span><span class="w"></span>
+<span class="n">And</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">another</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">paragraph</span><span class="o">.</span><span class="w"> </span><span class="p">(</span><span class="n">paragraph</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="p">))</span><span class="w"></span>
+</code></pre></div>
+
+<p>Let's start off only with capturing the additional <code>section</code> and <code>heading</code> nodes
+with new rules.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">section</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">heading</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="err">#</span><span class="p">.</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">(.</span><span class="o">|</span><span class="err">\</span><span class="nx">n</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Our non-terminals <code>source_file</code> and <code>section</code> bring in ways of composing rules
+with the <code>repeat()</code> and <code>seq()</code> composers. <code>repeat(rule)</code> means "repeat rule
+zero or more times, while <code>seq(rules...)</code> means "match these rules in this
+order". So a <code>source_file</code> node is zero or more <code>section</code> nodes, and a <code>section</code>
+node is a <code>heading</code> followed by zero or more <code>text</code> nodes.</p>
+<p>Generating and running the parser again, this lands us with a slightly more
+granular syntax tree where we separately capture the section's heading.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">])))</span><span class="w"></span>
+</code></pre></div>
+
+<p>Clearly there's a bug here: we only have one section, yet our source file
+contains two. The reason for this is that <code>text</code> is too liberal, it captures <code>#</code>
+characters anywhere on the line. We must adjust the regex to disallow <code>#</code>
+directly after line feeds.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">([</span><span class="o">^</span><span class="err">#</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="nx">n</span><span class="p">]</span><span class="err">#</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
+</code></pre></div>
+
+<p>Here we say that <code>text</code> is either not a <code>#</code>, or it's a non-linefeed character
+followed by <code>#</code>. Generating and parsing again we should now have our basic
+section structure mapped out.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]))</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">])))</span><span class="w"></span>
+</code></pre></div>
+
+<p>Great! We can now also adjust the query in <code>queries/highlights.scm</code> to only
+highlight headings.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
+</code></pre></div>
+
+<p>This should land you with the following highlighting.</p>
+<p><img alt="Syntax highlighting only on headings" src="/images/tree_sitter_highlighting/second_highlight.png" style="max-width: 95%;"></p>
+<p>Nice!</p>
+<h1>Capturing inline code and code blocks</h1>
+<p>The only thing left for us to capture is inline code and code blocks. This is
+however where it starts to get a little bit complicated, so let's take each of
+these in turn.</p>
+<h2>Capturing code blocks</h2>
+<p>Code blocks are relatively simple to capture in isolation. A rule for code
+blocks could look as follows.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">codeBlock</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+
+<span class="nx">codeText</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">[</span><span class="o">^</span><span class="sb">`]*/,</span>
+</code></pre></div>
+
+<p>We could inline <code>codeText</code> into the <code>codeBlock</code>, but making it a separate rule
+will make it easier for us to highlight the content of the code block without
+affecting the backticks around it. Note that <code>codeText</code> is not quite the same as
+<code>text</code>; the former allows any <em>zero or more</em> characters except for backticks.
+This will of course make it impossible to use backticks inside of a <code>codeBlock</code>,
+which is a simplification we're going with here. Extending the rule to allow
+for backticks within a <code>codeBlock</code> node is left as an exercise to the reader.</p>
+<p>We can now extend our <code>section</code> rule to contain <code>codeBlock</code>s.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nx">repeat</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">),</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+</code></pre></div>
+
+<p>If you put this in and run it, you may be a bit surprised to see that the output
+doesn't change from before. The syntax tree still consists of two <code>section</code>s
+containing one <code>heading</code> and <code>text</code> each. This is because <code>text</code> is consuming
+the backticks that should delimit a <code>codeBlock</code>. We'll address this at the same
+time as we define our paragraphs in the next part.</p>
+<h2>Paragraphs with text and inline code</h2>
+<p>We want to define grammar rules such that the parser can recognize <em>paragraphs</em>
+that are composed of one or more <code>text</code> and/or <code>inlineCode</code> nodes. The
+<code>inlineCode</code> rule is quite simple: a backtick, followed by zero or more
+characters that are anything but a backtick (i.e. <code>codeText</code>), followed by a
+backtick.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">inlineCode</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+</code></pre></div>
+
+<p>We also need to alter the <code>text</code> terminal to not allow backticks, because
+otherwise it will just consume them like it did the <code>#</code> before. This will also
+allow our <code>codeBlock</code> rule to actually consume something.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">([</span><span class="o">^</span><span class="err">#</span><span class="sb">`]|[^\n]#)+/,</span>
+</code></pre></div>
+
+<p>Now we can define the <code>paragraph</code> non-terminal which, again, should be one or
+more <code>inlineCode</code> or <code>text</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat1</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="p">),</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+</code></pre></div>
+
+<p>And then we update the <code>section</code> to repeat <code>paragraph</code> instead of <code>text</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nx">repeat</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">paragraph</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">),</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+</code></pre></div>
+
+<p>We end up with the following rule set.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">section</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">repeat</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">paragraph</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat1</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">inlineCode</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">codeBlock</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">codeText</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">[</span><span class="o">^</span><span class="sb">`]*/,</span>
+
+<span class="sb">  heading: _ =&gt; /#.+/,</span>
+
+<span class="sb">  text: _ =&gt; /([^#`</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="nx">n</span><span class="p">]</span><span class="err">#</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>If you try this out, you'll find that it doesn't work, Tree-sitter won't even
+generate a parser for you. Instead, it complains about a conflict. Oh, dear.</p>
+<h2>Resolving a conflict in the grammar</h2>
+<p>A conflict in the grammar occurs when there are multiple ways for Tree-sitter
+to interpret the rules you've provided it with. In the case of our <code>paragraph</code>
+rule, Tree-sitter has the following to say.</p>
+<div class="highlight"><pre><span></span><code>$ npx tree-sitter generate
+Unresolved conflict <span class="k">for</span> symbol sequence:
+
+  heading  paragraph_repeat1  •  <span class="s1">&#39;`&#39;</span>  …
+
+Possible interpretations:
+
+  <span class="m">1</span>:  heading  <span class="o">(</span>paragraph  paragraph_repeat1<span class="o">)</span>  •  <span class="s1">&#39;`&#39;</span>  …
+  <span class="m">2</span>:  heading  <span class="o">(</span>paragraph_repeat1  paragraph_repeat1  •  paragraph_repeat1<span class="o">)</span>
+
+Possible resolutions:
+
+  <span class="m">1</span>:  Specify a left or right associativity <span class="k">in</span> <span class="sb">`</span>paragraph<span class="sb">`</span>
+  <span class="m">2</span>:  Add a conflict <span class="k">for</span> these rules: <span class="sb">`</span>paragraph<span class="sb">`</span>
+</code></pre></div>
+
+<p>This is a little bit hard to interpret if you haven't worked a lot with parsers
+before. The short of it is that our use of the <code>paragraph</code> rule is ambiguous due
+to the <code>paragraph</code> being repeated in the <code>section</code> rule, and then is itself a
+repetition. For example, how should the first paragraph of the first section be
+parsed, as shown below, be parsed?</p>
+<div class="highlight"><pre><span></span><code>This little paragraph of text with `inline code`
+</code></pre></div>
+
+<p>Is it one paragraph containing <code>text</code> and <code>inlineCode</code>, i.e. <code>(paragraph (text)
+(inlineCode))</code>? Or is it perhaps two paragraphs, one with the <code>text</code> and one
+with the <code>inlineCode</code>, i.e. <code>(paragraph (text))</code> and <code>(paragraph (inlineCode))</code>?
+It's impossible to tell based on the rules we've defined.</p>
+<p>To get rid of this ambiguity, we can use
+<a href="https://tree-sitter.github.io/tree-sitter/creating-parsers#using-associativity"><em>associativity</em></a>.
+As associativity is a bit of a brain twister the first time around, we won't
+bother trying to fully understand it here. We'll just try both and see what
+happens. We can make a rule left- or right-associative by wrapping it in
+<code>prec.left()</code> or <code>prec.right()</code>, respectively. Doing that in turn, we get the
+following two parse results for this part of the tree.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">; left-associative result</span><span class="w"></span>
+<span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">(</span><span class="nf">text</span><span class="p">))</span><span class="w"></span>
+<span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">(</span><span class="nf">inlineCode</span><span class="p">))</span><span class="w"></span>
+
+<span class="c1">; right-associative result</span><span class="w"></span>
+<span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">(</span><span class="nf">text</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">inlineCode</span><span class="p">))</span><span class="w"></span>
+</code></pre></div>
+
+<p>The right-associative version looks like what we sketched out before embarking
+down this road, so we'll adjust the rule accordingly.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prec</span><span class="p">.</span><span class="nx">right</span><span class="p">(</span><span class="nx">repeat1</span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="p">),</span><span class="w"></span>
+<span class="p">)),</span><span class="w"></span>
+</code></pre></div>
+
+<p>And with that, we can now create a syntax tree with a sufficient level of
+granularity to achieve the highlighting we set out to. If you generate the
+parser again and run it, you should see a tree like this.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">48</span><span class="p">]</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">35</span><span class="p">])</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="nf">inlineCode</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">35</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">48</span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="nf">codeText</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">36</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">47</span><span class="p">])))</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">48</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="nf">codeText</span><span class="w"> </span><span class="p">[</span><span class="nv">3,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">0</span><span class="p">])))</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]))))</span><span class="w"></span>
+</code></pre></div>
+
+<p>We still only have a single highlight query, though, so next up is improving
+that.</p>
+<h2>Improving the highlight queries</h2>
+<p>We now have a significantly more granular syntax tree to work with. As a first
+attempt, let's color inline code including backticks with one color, code block
+backticks with one color and finally the code blocks themselves with another
+color.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
+<span class="p">(</span><span class="nf">inlineCode</span><span class="p">)</span><span class="w"> </span><span class="nv">@property</span><span class="w"></span>
+<span class="p">(</span><span class="nf">codeBlock</span><span class="p">)</span><span class="w"> </span><span class="nv">@punctuation</span><span class="o">.</span><span class="nv">delimiter</span><span class="w"></span>
+<span class="p">(</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="nf">codeText</span><span class="p">)</span><span class="w"> </span><span class="nv">@module</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+<p>Here we have our first non-trivial use of queries, as we have two queries
+referencing the same type of node: <code>codeBlock</code>. The first query marks the
+entire <code>codeBlock</code> with <code>@punctuation.delimiter</code>, which is dark grey in my color
+scheme. Then we mark <code>codeText</code> <em>inside</em> the <code>codeBlock</code> as a <code>@module</code>, which
+is yellow in my color scheme. The latter query is more specific than the former,
+and so takes precedence. The result is a significant improvement over our
+starting point.</p>
+<p><img alt="Syntax highlighting on headings, inline code and code blocks" src="/images/tree_sitter_highlighting/third_highlight.png" style="max-width: 95%;"></p>
+<p>But it's still not <em>great</em>. Having yellow JavaScript code is a marginal
+improvement over just white code. This is where Tree-sitter's killer syntax
+highlighting feature comes into play:
+<a href="https://tree-sitter.github.io/tree-sitter/syntax-highlighting#language-injection">injections</a></p>
+<h2>Injecting a JavaScript parser</h2>
+<p>Injections are super cool. They allow us to succinctly state that certain nodes
+should be parsed with some other parser than the one we're currently using. Just
+like with highlights, injections are specified with queries. What makes this
+even cooler is that the author of some given parser doesn't need to have thought
+about this; you can tack it on afterwards due to queries being completely
+separate from the parser itself.</p>
+<p>First of all, we need to extend our <code>package.json</code> with an <code>injections</code> key.</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;tree-sitter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source.markdownsimple&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;file-types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;mds&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;highlights&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;queries/highlights.scm&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;injections&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;queries/injections.scm&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+</code></pre></div>
+
+<p>Then we add a file at <code>queries/injections.scm</code> with the following query.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(((</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="nf">codeText</span><span class="p">)</span><span class="w"> </span><span class="nv">@injection</span><span class="o">.</span><span class="nv">content</span><span class="p">))</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="o">#</span><span class="k">set!</span><span class="w"> </span><span class="nv">injection</span><span class="o">.</span><span class="nv">language</span><span class="w"> </span><span class="s">&quot;javascript&quot;</span><span class="p">))</span><span class="w"></span>
+</code></pre></div>
+
+<p>Unfortunately, the highlight queries will interfere a bit with this injection,
+so we also need to reduce our <code>queries/highlights.scm</code> file to the following.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
+<span class="p">(</span><span class="nf">inlineCode</span><span class="p">)</span><span class="w"> </span><span class="nv">@property</span><span class="w"></span>
+</code></pre></div>
+
+<p>But with that change, highlighting is now a lot more interesting. Although,
+admittedly, the color scheme could definitely use some work.</p>
+<p><img alt="Syntax highlighting on headings, inline code and JavaScript injection in code blocks" src="/images/tree_sitter_highlighting/final_highlight.png" style="max-width: 95%;"></p>
+<p>With that, we've achieved the highlighting goals we set out to at the beginning
+of the article.</p>
+<h1>Summary</h1>
+<p>In this article, we explored the basics of Tree-sitter and how to apply it to
+provide syntax highlighting for a simple markup language. The full source code
+for the project can be found
+<a href="https://github.com/slarse/tree-sitter-mds">in the companion repository</a>.
+There are still numerous shortcomings with this implementation, such as the fact
+that <code>codeBlock</code>s cannot contain backticks, or that empty lines between
+paragraphs don't actually produce multiple paragraphs in the syntax tree. But
+the point of this article wasn't to produce a perfect Markdown Simple parser,
+but rather illustrate some fundamental concepts of creating parsers with
+Tree-sitter. And that, I think, has been achieved.</p>
+<p>In the next part of this article series, we'll explore working with Tree-sitter
+in NeoVim!</p>
+<p>The final versions of the grammar and queries are inlined below for your
+convenience.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// grammar.js</span><span class="w"></span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">grammar</span><span class="p">({</span><span class="w"></span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;markdownsimple&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">  </span><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">section</span><span class="p">),</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nx">repeat</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
+<span class="w">          </span><span class="nx">$</span><span class="p">.</span><span class="nx">paragraph</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prec</span><span class="p">.</span><span class="nx">right</span><span class="p">(</span><span class="nx">repeat1</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="p">)),</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">inlineCode</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">codeBlock</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">),</span><span class="w"></span>
+
+<span class="w">    </span><span class="nx">codeText</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">[</span><span class="o">^</span><span class="sb">`]*/,</span>
+
+<span class="sb">    heading: _ =&gt; /#.+/,</span>
+
+<span class="sb">    text: _ =&gt; /([^#`</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="nx">n</span><span class="p">]</span><span class="err">#</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">; queries/highlights.scm</span><span class="w"></span>
+<span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
+<span class="p">(</span><span class="nf">inlineCode</span><span class="p">)</span><span class="w"> </span><span class="nv">@property</span><span class="w"></span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">; queries/injections.scm</span><span class="w"></span>
+<span class="p">(((</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="nf">codeText</span><span class="p">)</span><span class="w"> </span><span class="nv">@injection</span><span class="o">.</span><span class="nv">content</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="o">#</span><span class="k">set!</span><span class="w"> </span><span class="nv">injection</span><span class="o">.</span><span class="nv">language</span><span class="w"> </span><span class="s">&quot;javascript&quot;</span><span class="p">))</span><span class="w"></span>
+</code></pre></div>
+  </div>
+  
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/linux.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/reviews.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Reviews</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/neovim.html">
+          <i class="fas fa-tag"></i>
+        neovim
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/syntax.html">
+          <i class="fas fa-tag"></i>
+        syntax
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/database.html">
+          <i class="fas fa-tag"></i>
+        database
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/go.html">
+          <i class="fas fa-tag"></i>
+        go
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+ 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+<script src="https://files.stork-search.net/releases/v1.2.1/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://slar.se/search-index.st")
+</script>  </body>
+</html>

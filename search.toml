@@ -63,6 +63,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "syntax-highlight-anything-with-tree-sitter.html"
+url = "/syntax-highlight-anything-with-tree-sitter.html"
+title = "Syntax highlight anything with Tree-sitter"
+
+[[input.files]]
 path = "comment-and-uncomment-code-in-neovim.html"
 url = "/comment-and-uncomment-code-in-neovim.html"
 title = "Extending NeoVim for commenting and uncommenting code blocks"

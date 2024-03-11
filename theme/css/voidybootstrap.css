@@ -193,6 +193,10 @@ p.standfirst {
     color: #B0B0B0;
 }
 
+footer small {
+    text-align: center;
+}
+
 dt {
   margin-top: 10px;
 }

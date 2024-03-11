@@ -33,6 +33,11 @@ url = "/pages/wiki/arch-linux-on-lenovo-t14s-g3-intel.html"
 title = "Arch Linux on Lenovo T14S Gen 3 (Intel)"
 
 [[input.files]]
+path = "pages/license.html"
+url = "/pages/license.html"
+title = "License"
+
+[[input.files]]
 path = "pages/wiki/linux.html"
 url = "/pages/wiki/linux.html"
 title = "Linux"

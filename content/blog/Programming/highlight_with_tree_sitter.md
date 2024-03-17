@@ -3,6 +3,7 @@ Date: 2024-03-11
 Author: Simon Larsén
 Tags: tree-sitter,parsing,syntax,neovim
 Slug: syntax-highlight-anything-with-tree-sitter
+Image: {photo}tree_sitter_highlighting/final_highlight.png
 
 As of my previous post on [extending NeoVim for commenting and uncommenting
 code blocks]({filename}comment_out_code_neovim.md), I'm on something of a
@@ -279,7 +280,7 @@ file `queries/highlights.scm` in your project directory.
 This says that any `text` node should be considered a `string`. Running the
 highlight command again, you ought to get some colored output.
 
-<img alt="Simple syntax highlighting" src="/images/tree_sitter_highlighting/first_highlight.png" style="max-width: 95%;">
+![Simple syntax higlighting]({photo}tree_sitter_highlighting/first_highlight.png)
 
 Not all that impressive; as all nodes with any content are `text` nodes
 everything is just highlighted as a string. In my Tree-sitter configuration
@@ -376,7 +377,7 @@ highlight headings.
 
 This should land you with the following highlighting.
 
-<img alt="Syntax highlighting only on headings" src="/images/tree_sitter_highlighting/second_highlight.png" style="max-width: 95%;">
+![Syntax highlighting only on headings]({photo}tree_sitter_highlighting/second_highlight.png)
 
 Nice!
 
@@ -632,7 +633,7 @@ is yellow in my color scheme. The latter query is more specific than the former,
 and so takes precedence. The result is a significant improvement over our
 starting point.
 
-<img alt="Syntax highlighting on headings, inline code and code blocks" src="/images/tree_sitter_highlighting/third_highlight.png" style="max-width: 95%;">
+![Syntax highlighting on headings, inline code and code blocks]({photo}tree_sitter_highlighting/third_highlight.png)
 
 But it's still not _great_. Having yellow JavaScript code is a marginal
 improvement over just white code. This is where Tree-sitter's killer syntax
@@ -684,7 +685,7 @@ so we also need to reduce our `queries/highlights.scm` file to the following.
 But with that change, highlighting is now a lot more interesting. Although,
 admittedly, the color scheme could definitely use some work.
 
-<img alt="Syntax highlighting on headings, inline code and JavaScript injection in code blocks" src="/images/tree_sitter_highlighting/final_highlight.png" style="max-width: 95%;">
+![Syntax highlighting on headings, inline code and JavaScript injection in code blocks]({photo}tree_sitter_highlighting/final_highlight.png)
 
 With that, we've achieved the highlighting goals we set out to at the beginning
 of the article.

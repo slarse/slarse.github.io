@@ -3,6 +3,7 @@ Date: 2024-01-29
 Author: Simon Larsén
 Tags: dependabot,github,dependencies
 Slug: dependabots-dependency-grouping
+Image: {photo}dependabot_dependency_grouping/ignore.png
 
 I've been using GitHub's Dependabot since it was [released around 4 years
 ago](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/),
@@ -24,7 +25,7 @@ One of my projects, [Spork](https://github.com/kth-assert/spork), which is
 mostly in maintenance mod is one such example where I just gave up on keeping up
 with the updates. It ended up looking like this:
 
-<img alt="Spork dependency spam" src="/images/dependabot_dependency_grouping/pr-spam.png" style="max-width: 95%;">
+![Spork dependency spam]({photo}dependabot_dependency_grouping/pr-spam.png)
 
 What a mess. But there's light at the end of the tunnel.
 
@@ -113,13 +114,13 @@ which I could immediately merge.
 > [one single-dependency PR for `gumtree-spoon-ast-diff` remained
 > open](https://github.com/ASSERT-KTH/spork/pull/458)
 
-<img alt="Merged GitHub Actions dependencies" src="/images/dependabot_dependency_grouping/actions_deps.png" style="max-width: 95%;">
+![Merged GitHub Actions dependencies]({photo}dependabot_dependency_grouping/actions_deps.png)
 
 Note that the `actions-deps` name, which is one of the keys in the YAML config
 file, ends up being written out in the pull request title. Another PR was opened
 for the grouped production dependencies, but it did not pass CI.
 
-<img alt="Production dependencies PR" src="/images/dependabot_dependency_grouping/prod-deps.png" style="max-width: 95%;">
+![Production dependencies PR]({photo}dependabot_dependency_grouping/prod-deps.png)
 
 This showcases the one downside with grouped dependency updates: there's no
 indication as to which dependency caused the CI failure. If you scroll up to the
@@ -136,7 +137,7 @@ I knew that `jgit` was the issue in this case and decided to ignore it. It
 seemed like ignoring minor version updates was the best path forward, so I
 issued an `@dependabot ignore <dependency_name> minor version` command.
 
-<img alt="Ignore minor version updates of jgit" src="/images/dependabot_dependency_grouping/ignore_minor.png" style="max-width: 95%;">
+![Ignore minor version updates of jgit]({photo}dependabot_dependency_grouping/ignore_minor.png)
 
 This didn't quite have the effect I was looking for, as Dependabot then
 proceeded to
@@ -146,12 +147,12 @@ Spork. At this point I decided to bring out the big guns and ignore `jgit`
 altoghether for now, as I knew I needed to put in some manual work to update it
 anyway.
 
-<img alt="Ignore all version updates of jgit" src="/images/dependabot_dependency_grouping/ignore.png" style="max-width: 95%;">
+![Ignore all version updates of jgit]({photo}dependabot_dependency_grouping/ignore.png)
 
 This finally resulted in what I wanted, a new PR without a bump to `jgit` that
 does not break the build. Thus, it's ready to merge.
 
-<img alt="Ignore all version updates of jgit" src="/images/dependabot_dependency_grouping/green-prod-pr.png" style="max-width: 95%;">
+![Production dependency PR now passing checks]({photo}dependabot_dependency_grouping/green-prod-pr.png)
 
 Of course, this comes with the caveat that I need to remember to [unignore `jgit`
 when I get around to updating it](https://github.com/ASSERT-KTH/spork/issues/487).

@@ -80,7 +80,16 @@ RELATIVE_URLS = True
 
 # plugins
 PLUGIN_PATHS = ["../pelican-plugins"]
-PLUGINS = ["tag_cloud", "search"]
+PLUGINS = ["tag_cloud", "search", "photos"]
+
+# photos
+PHOTO_LIBRARY = "./content/images"
+PHOTO_GALLERY = (1024, 768, 100)
+PHOTO_ARTICLE = (800, 506, 100)
+PHOTO_THUMB = (190, 144, 60)
+PHOTO_SQUARE_THUMB = False
+PHOTO_RESIZE_JOBS = 10
+PHOTO_WATERMARK = False
 
 _SEARCH = "custom/search.html"
 CUSTOM_CONTENT_TOP_INDEX = _SEARCH

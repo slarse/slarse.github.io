@@ -94,7 +94,7 @@
   <header class="article-header">
 <abbr class="article-header-date">
   Mon 29 January 2024
-</abbr> <h1>
+</abbr> <h1 class="article-header-title">
   <a href="https://slar.se/dependabots-dependency-grouping.html" rel="bookmark"
      title="Permalink to Dependabot&#39;s dependency grouping is awesome">
     Dependabot's dependency grouping is awesome
@@ -114,6 +114,7 @@
 	<a href="https://slar.se/tag/dependencies.html"><i class="fas fa-tag"></i>dependencies</a>&nbsp;
 </div>  </header>
   <div class="content-body" itemprop="text articleBody">
+    <img src="https://slar.se/photos/dependabot_dependency_grouping/ignorea.jpg" />
 	<p>I've been using GitHub's Dependabot since it was <a href="https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/">released around 4 years
 ago</a>,
 and to a large extent, it's been great. Except for one thing: the sheer amount
@@ -130,7 +131,7 @@ to say, that's just not manageable.</p>
 <p>One of my projects, <a href="https://github.com/kth-assert/spork">Spork</a>, which is
 mostly in maintenance mod is one such example where I just gave up on keeping up
 with the updates. It ended up looking like this:</p>
-<p><img alt="Spork dependency spam" src="/images/dependabot_dependency_grouping/pr-spam.png" style="max-width: 95%;"></p>
+<p><img alt="Spork dependency spam" src="https://slar.se/photos/dependabot_dependency_grouping/pr-spama.jpg"></p>
 <p>What a mess. But there's light at the end of the tunnel.</p>
 <h1>The fix: Grouped dependencies</h1>
 <p>To address that problem GitHub recently released
@@ -210,11 +211,11 @@ which I could immediately merge.</p>
 <a href="https://github.com/ASSERT-KTH/spork/pull/458">one single-dependency PR for <code>gumtree-spoon-ast-diff</code> remained
 open</a></p>
 </blockquote>
-<p><img alt="Merged GitHub Actions dependencies" src="/images/dependabot_dependency_grouping/actions_deps.png" style="max-width: 95%;"></p>
+<p><img alt="Merged GitHub Actions dependencies" src="https://slar.se/photos/dependabot_dependency_grouping/actions_depsa.jpg"></p>
 <p>Note that the <code>actions-deps</code> name, which is one of the keys in the YAML config
 file, ends up being written out in the pull request title. Another PR was opened
 for the grouped production dependencies, but it did not pass CI.</p>
-<p><img alt="Production dependencies PR" src="/images/dependabot_dependency_grouping/prod-deps.png" style="max-width: 95%;"></p>
+<p><img alt="Production dependencies PR" src="https://slar.se/photos/dependabot_dependency_grouping/prod-depsa.jpg"></p>
 <p>This showcases the one downside with grouped dependency updates: there's no
 indication as to which dependency caused the CI failure. If you scroll up to the
 first image of this article, you'll similarly see the one benefit of single
@@ -228,7 +229,7 @@ dependency update for some reason, so we'll ignore that it's also failing.</p>
 <p>I knew that <code>jgit</code> was the issue in this case and decided to ignore it. It
 seemed like ignoring minor version updates was the best path forward, so I
 issued an <code>@dependabot ignore &lt;dependency_name&gt; minor version</code> command.</p>
-<p><img alt="Ignore minor version updates of jgit" src="/images/dependabot_dependency_grouping/ignore_minor.png" style="max-width: 95%;"></p>
+<p><img alt="Ignore minor version updates of jgit" src="https://slar.se/photos/dependabot_dependency_grouping/ignore_minora.jpg"></p>
 <p>This didn't quite have the effect I was looking for, as Dependabot then
 proceeded to
 <a href="https://github.com/ASSERT-KTH/spork/pull/485">open a new pull request</a>
@@ -236,10 +237,10 @@ with the previous minor version of <code>jgit</code>, which is also incompatible
 Spork. At this point I decided to bring out the big guns and ignore <code>jgit</code>
 altoghether for now, as I knew I needed to put in some manual work to update it
 anyway.</p>
-<p><img alt="Ignore all version updates of jgit" src="/images/dependabot_dependency_grouping/ignore.png" style="max-width: 95%;"></p>
+<p><img alt="Ignore all version updates of jgit" src="https://slar.se/photos/dependabot_dependency_grouping/ignorea.jpg"></p>
 <p>This finally resulted in what I wanted, a new PR without a bump to <code>jgit</code> that
 does not break the build. Thus, it's ready to merge.</p>
-<p><img alt="Ignore all version updates of jgit" src="/images/dependabot_dependency_grouping/green-prod-pr.png" style="max-width: 95%;"></p>
+<p><img alt="Production dependency PR now passing checks" src="https://slar.se/photos/dependabot_dependency_grouping/green-prod-pra.jpg"></p>
 <p>Of course, this comes with the caveat that I need to remember to <a href="https://github.com/ASSERT-KTH/spork/issues/487">unignore <code>jgit</code>
 when I get around to updating it</a>.
 But I have 8 dependency updates with not too much effort, which is kind of cool!</p>
@@ -260,7 +261,7 @@ Dependabot viable again. Everyone should use it, and it's honestly a shame that
 backwards compatibility demands makes it such that groups will probably never be
 the default.</p>
   </div>
-  
+
 
 </article>
         </div><!-- /content -->
@@ -305,22 +306,40 @@ the default.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-4">
-      <a href="https://slar.se/tag/postgresql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        postgresql
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/blog.html">
           <i class="fas fa-tag"></i>
-        bash
+        blog
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/dependencies.html">
+      <a href="https://slar.se/tag/tree-sitter.html">
           <i class="fas fa-tag"></i>
-        dependencies
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
       </a>
     </span>
     <span class="tag-1">
@@ -330,21 +349,27 @@ the default.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/programming-languages.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        programming languages
+        gradle
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
           <i class="fas fa-tag"></i>
-        tornadofx
+        xorg
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
       </a>
     </span>
     <span class="tag-4">
@@ -353,34 +378,52 @@ the default.</p>
         unit testing
       </a>
     </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
+        pytest
       </a>
     </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/git.html">
           <i class="fas fa-tag"></i>
-        testing
+        git
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
+      <a href="https://slar.se/tag/dependencies.html">
           <i class="fas fa-tag"></i>
-        gradle
+        dependencies
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
     <span class="tag-3">
@@ -390,9 +433,99 @@ the default.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
+      <a href="https://slar.se/tag/null.html">
           <i class="fas fa-tag"></i>
-        psql
+        null
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/syntax.html">
+          <i class="fas fa-tag"></i>
+        syntax
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/database.html">
+          <i class="fas fa-tag"></i>
+        database
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
       </a>
     </span>
     <span class="tag-4">
@@ -407,138 +540,6 @@ the default.</p>
         totw
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
-          <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/neovim.html">
-          <i class="fas fa-tag"></i>
-        neovim
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
-          <i class="fas fa-tag"></i>
-        syntax
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
-          <i class="fas fa-tag"></i>
-        xps15
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/software-engineering.html">
-          <i class="fas fa-tag"></i>
-        software engineering
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
-          <i class="fas fa-tag"></i>
-        rust
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
-          <i class="fas fa-tag"></i>
-        book review
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/go.html">
-          <i class="fas fa-tag"></i>
-        go
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
     <span class="tag-2">
       <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
@@ -546,27 +547,9 @@ the default.</p>
       </a>
     </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
+      <a href="https://slar.se/tag/go.html">
           <i class="fas fa-tag"></i>
-        learning
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
+        go
       </a>
     </span>
     <span class="tag-3">
@@ -576,21 +559,39 @@ the default.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
+      <a href="https://slar.se/tag/xps15.html">
           <i class="fas fa-tag"></i>
-        man
+        xps15
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
+      <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
-        enums
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/neovim.html">
+          <i class="fas fa-tag"></i>
+        neovim
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/psql.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
+        psql
       </a>
     </span>
 </p>

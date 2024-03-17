@@ -94,7 +94,7 @@
   <header class="article-header">
 <abbr class="article-header-date">
   Mon 11 March 2024
-</abbr> <h1>
+</abbr> <h1 class="article-header-title">
   <a href="https://slar.se/syntax-highlight-anything-with-tree-sitter.html" rel="bookmark"
      title="Permalink to Syntax highlight anything with Tree-sitter">
     Syntax highlight anything with Tree-sitter
@@ -115,6 +115,7 @@
 	<a href="https://slar.se/tag/neovim.html"><i class="fas fa-tag"></i>neovim</a>&nbsp;
 </div>  </header>
   <div class="content-body" itemprop="text articleBody">
+    <img src="https://slar.se/photos/tree_sitter_highlighting/final_highlighta.jpg" />
 	<p>As of my previous post on <a href="https://slar.se/comment-and-uncomment-code-in-neovim.html">extending NeoVim for commenting and uncommenting
 code blocks</a>, I'm on something of a
 NeoVim extension streak. The flavor of the week is syntax highlighting. I've been
@@ -350,7 +351,7 @@ here</a>.</p>
 </blockquote>
 <p>This says that any <code>text</code> node should be considered a <code>string</code>. Running the
 highlight command again, you ought to get some colored output.</p>
-<p><img alt="Simple syntax highlighting" src="/images/tree_sitter_highlighting/first_highlight.png" style="max-width: 95%;"></p>
+<p><img alt="Simple syntax higlighting" src="https://slar.se/photos/tree_sitter_highlighting/first_highlighta.jpg"></p>
 <p>Not all that impressive; as all nodes with any content are <code>text</code> nodes
 everything is just highlighted as a string. In my Tree-sitter configuration
 the <code>string</code> color happens happens to be a shade of green, but it may be
@@ -431,7 +432,7 @@ highlight headings.</p>
 </code></pre></div>
 
 <p>This should land you with the following highlighting.</p>
-<p><img alt="Syntax highlighting only on headings" src="/images/tree_sitter_highlighting/second_highlight.png" style="max-width: 95%;"></p>
+<p><img alt="Syntax highlighting only on headings" src="https://slar.se/photos/tree_sitter_highlighting/second_highlighta.jpg"></p>
 <p>Nice!</p>
 <h1>Capturing inline code and code blocks</h1>
 <p>The only thing left for us to capture is inline code and code blocks. This is
@@ -652,7 +653,7 @@ scheme. Then we mark <code>codeText</code> <em>inside</em> the <code>codeBlock</
 is yellow in my color scheme. The latter query is more specific than the former,
 and so takes precedence. The result is a significant improvement over our
 starting point.</p>
-<p><img alt="Syntax highlighting on headings, inline code and code blocks" src="/images/tree_sitter_highlighting/third_highlight.png" style="max-width: 95%;"></p>
+<p><img alt="Syntax highlighting on headings, inline code and code blocks" src="https://slar.se/photos/tree_sitter_highlighting/third_highlighta.jpg"></p>
 <p>But it's still not <em>great</em>. Having yellow JavaScript code is a marginal
 improvement over just white code. This is where Tree-sitter's killer syntax
 highlighting feature comes into play:
@@ -694,7 +695,7 @@ so we also need to reduce our <code>queries/highlights.scm</code> file to the fo
 
 <p>But with that change, highlighting is now a lot more interesting. Although,
 admittedly, the color scheme could definitely use some work.</p>
-<p><img alt="Syntax highlighting on headings, inline code and JavaScript injection in code blocks" src="/images/tree_sitter_highlighting/final_highlight.png" style="max-width: 95%;"></p>
+<p><img alt="Syntax highlighting on headings, inline code and JavaScript injection in code blocks" src="https://slar.se/photos/tree_sitter_highlighting/final_highlighta.jpg"></p>
 <p>With that, we've achieved the highlighting goals we set out to at the beginning
 of the article.</p>
 <h1>Summary</h1>
@@ -767,7 +768,7 @@ convenience.</p>
 <span class="w">    </span><span class="p">(</span><span class="o">#</span><span class="k">set!</span><span class="w"> </span><span class="nv">injection</span><span class="o">.</span><span class="nv">language</span><span class="w"> </span><span class="s">&quot;javascript&quot;</span><span class="p">))</span><span class="w"></span>
 </code></pre></div>
   </div>
-  
+
 
 </article>
         </div><!-- /content -->
@@ -812,22 +813,40 @@ convenience.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-4">
-      <a href="https://slar.se/tag/postgresql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        postgresql
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/blog.html">
           <i class="fas fa-tag"></i>
-        bash
+        blog
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/dependencies.html">
+      <a href="https://slar.se/tag/tree-sitter.html">
           <i class="fas fa-tag"></i>
-        dependencies
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
       </a>
     </span>
     <span class="tag-1">
@@ -837,21 +856,27 @@ convenience.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/programming-languages.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        programming languages
+        gradle
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/tornadofx.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
           <i class="fas fa-tag"></i>
-        tornadofx
+        xorg
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        kotlin
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
       </a>
     </span>
     <span class="tag-4">
@@ -860,34 +885,52 @@ convenience.</p>
         unit testing
       </a>
     </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
+        pytest
       </a>
     </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
+      <a href="https://slar.se/tag/git.html">
           <i class="fas fa-tag"></i>
-        testing
+        git
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
+      <a href="https://slar.se/tag/dependencies.html">
           <i class="fas fa-tag"></i>
-        gradle
+        dependencies
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
       </a>
     </span>
     <span class="tag-3">
@@ -897,9 +940,99 @@ convenience.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
+      <a href="https://slar.se/tag/null.html">
           <i class="fas fa-tag"></i>
-        psql
+        null
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/syntax.html">
+          <i class="fas fa-tag"></i>
+        syntax
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/database.html">
+          <i class="fas fa-tag"></i>
+        database
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
       </a>
     </span>
     <span class="tag-4">
@@ -914,138 +1047,6 @@ convenience.</p>
         totw
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
-          <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/neovim.html">
-          <i class="fas fa-tag"></i>
-        neovim
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
-          <i class="fas fa-tag"></i>
-        syntax
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
-          <i class="fas fa-tag"></i>
-        xps15
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/software-engineering.html">
-          <i class="fas fa-tag"></i>
-        software engineering
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
-          <i class="fas fa-tag"></i>
-        rust
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
-          <i class="fas fa-tag"></i>
-        book review
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/go.html">
-          <i class="fas fa-tag"></i>
-        go
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
     <span class="tag-2">
       <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
@@ -1053,27 +1054,9 @@ convenience.</p>
       </a>
     </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
+      <a href="https://slar.se/tag/go.html">
           <i class="fas fa-tag"></i>
-        learning
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
+        go
       </a>
     </span>
     <span class="tag-3">
@@ -1083,21 +1066,39 @@ convenience.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
+      <a href="https://slar.se/tag/xps15.html">
           <i class="fas fa-tag"></i>
-        man
+        xps15
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
+      <a href="https://slar.se/tag/testing-tips.html">
           <i class="fas fa-tag"></i>
-        enums
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/neovim.html">
+          <i class="fas fa-tag"></i>
+        neovim
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/psql.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
+        psql
       </a>
     </span>
 </p>

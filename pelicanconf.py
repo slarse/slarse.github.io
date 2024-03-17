@@ -83,7 +83,7 @@ PLUGIN_PATHS = ["../pelican-plugins"]
 PLUGINS = ["tag_cloud", "search", "photos"]
 
 # photos
-PHOTO_LIBRARY = "./content/images"
+PHOTO_LIBRARY = "./../blog-images/"
 PHOTO_GALLERY = (1024, 768, 100)
 PHOTO_ARTICLE = (800, 506, 100)
 PHOTO_THUMB = (190, 144, 60)

@@ -1,7 +1,7 @@
 Title: Configuring touchpad tap in Sway
 Date: 2024-03-24
 Author: Simon Larsén
-Tags: linux,wayland,sway
+Tags: linux,wayland,sway,libinput
 Slug: configuring-touchpad-in-sway
 
 One thing that didn't carry over from my i3 setup [when moving over to

@@ -80,7 +80,7 @@ RELATIVE_URLS = True
 
 # plugins
 PLUGIN_PATHS = ["../pelican-plugins"]
-PLUGINS = ["tag_cloud", "search", "photos"]
+PLUGINS = ["tag_cloud", "search", "photos", "simple_footnotes"]
 
 # photos
 PHOTO_LIBRARY = "./../blog-images/"

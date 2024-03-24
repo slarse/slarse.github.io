@@ -16,9 +16,12 @@ already use.
     * ripgrep - grep, but fast!
     * tmux - The best terminal multiplexer!
     * tldr - Short and concise man pages
+    * tshark
 * GUI utilities
+    * Edgeshark
     * i3 - Improved tiling window manager
     * warpd - Navigate GUIs with your keyboard
+    * Wireshark
     * zeal - Offline docs
     * slimbook-battery - Battery/performance management
 * Note taking and blogging
@@ -54,9 +57,17 @@ tools.
 * Super short man pages that give just the bare minimum of information to use a tool
 * Very often, precisely what you need!
 
+## [tshark](https://www.wireshark.org/docs/wsug_html_chunked/AppToolstshark.html)
+* CLI version of Wireshark
+
 # GUI utilities
 I don't use a whole lot of GUI utilities, but I've found a few really neat ones
 over the years.
+
+## [Edgeshark](https://edgeshark.siemens.io/#/)
+* Show network topologies of containers
+* Incredibly easy to get up and running with Docker
+* Can be integrated with Wireshark/TShark via [cshargextcap](https://github.com/siemens/cshargextcap)
 
 ## [i3](https://i3wm.org/) - Improved tiling window manager
 * A tiling window manager - once you go tiling, you never go back!
@@ -67,6 +78,9 @@ over the years.
 ## [warpd](https://github.com/rvaiya/warpd) - Navigate GUIs with your keyboard
 * Navigate your GUIs using your keyboard
 * Fantastic for use with a laptop
+
+## [Wireshark](https://www.wireshark.org/)
+* Capture and analyze network traffic
 
 ## [zeal](https://github.com/zealdocs/zeal) - Offline docs
 * Keep your docs locally on your machine instead of having to navigate to a

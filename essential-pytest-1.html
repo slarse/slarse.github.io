@@ -140,35 +140,35 @@ file called <code>test_mul.py</code>:</p>
 
 <p>Obviously, the implementation of <code>mul</code> is broken, and running <code>pytest</code> gives
 the following output.</p>
-<div class="highlight"><pre><span></span><code>$ <span class="nv">pytest</span>
-<span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
-platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/python
-collected <span class="m">3</span> items                                                        
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nv">pytest</span>
+<span class="o">==========================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">===========================</span>
+platform<span class="w"> </span>linux<span class="w"> </span>--<span class="w"> </span>Python<span class="w"> </span><span class="m">3</span>.8.3,<span class="w"> </span>pytest-5.4.3,<span class="w"> </span>py-1.9.0,<span class="w"> </span>pluggy-0.13.1
+rootdir:<span class="w"> </span>/home/slarse/python
+collected<span class="w"> </span><span class="m">3</span><span class="w"> </span>items<span class="w">                                                        </span>
 
-test_mul.py .FF                                                         <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+test_mul.py<span class="w"> </span>.FF<span class="w">                                                         </span><span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
 
-<span class="o">================================</span> <span class="nv">FAILURES</span> <span class="o">================================</span>
-_________________________ test_multiply_by_zero __________________________
+<span class="o">================================</span><span class="w"> </span><span class="nv">FAILURES</span><span class="w"> </span><span class="o">================================</span>
+_________________________<span class="w"> </span>test_multiply_by_zero<span class="w"> </span>__________________________
 
-    def test_multiply_by_zero<span class="o">()</span>:
-&gt;       assert mul<span class="o">(</span><span class="m">1</span>, <span class="m">0</span><span class="o">)</span> <span class="o">==</span> <span class="m">0</span>
-E       assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
-E        +  where <span class="nv">1</span> <span class="o">=</span> mul<span class="o">(</span><span class="m">1</span>, <span class="m">0</span><span class="o">)</span>
+<span class="w">    </span>def<span class="w"> </span>test_multiply_by_zero<span class="o">()</span>:
+&gt;<span class="w">       </span>assert<span class="w"> </span>mul<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>
+E<span class="w">       </span>assert<span class="w"> </span><span class="nv">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>
+E<span class="w">        </span>+<span class="w">  </span>where<span class="w"> </span><span class="nv">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>mul<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="m">0</span><span class="o">)</span>
 
-test_mul.py:8: AssertionError
-____________________ test_multiply_different_numbers _____________________
+test_mul.py:8:<span class="w"> </span>AssertionError
+____________________<span class="w"> </span>test_multiply_different_numbers<span class="w"> </span>_____________________
 
-    def test_multiply_different_numbers<span class="o">()</span>:
-&gt;       assert mul<span class="o">(</span><span class="m">5</span>, <span class="m">3</span><span class="o">)</span> <span class="o">==</span> <span class="m">15</span>
-E       assert <span class="nv">25</span> <span class="o">==</span> <span class="m">15</span>
-E        +  where <span class="nv">25</span> <span class="o">=</span> mul<span class="o">(</span><span class="m">5</span>, <span class="m">3</span><span class="o">)</span>
+<span class="w">    </span>def<span class="w"> </span>test_multiply_different_numbers<span class="o">()</span>:
+&gt;<span class="w">       </span>assert<span class="w"> </span>mul<span class="o">(</span><span class="m">5</span>,<span class="w"> </span><span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">15</span>
+E<span class="w">       </span>assert<span class="w"> </span><span class="nv">25</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">15</span>
+E<span class="w">        </span>+<span class="w">  </span>where<span class="w"> </span><span class="nv">25</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>mul<span class="o">(</span><span class="m">5</span>,<span class="w"> </span><span class="m">3</span><span class="o">)</span>
 
-test_mul.py:11: <span class="nv">AssertionError</span>
-<span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
-FAILED test_mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
-FAILED test_mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
-<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.08s <span class="o">=======================</span>
+test_mul.py:11:<span class="w"> </span><span class="nv">AssertionError</span>
+<span class="o">========================</span><span class="w"> </span>short<span class="w"> </span><span class="nb">test</span><span class="w"> </span>summary<span class="w"> </span><span class="nv">info</span><span class="w"> </span><span class="o">=========================</span>
+FAILED<span class="w"> </span>test_mul.py::test_multiply_by_zero<span class="w"> </span>-<span class="w"> </span>assert<span class="w"> </span><span class="nv">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>
+FAILED<span class="w"> </span>test_mul.py::test_multiply_different_numbers<span class="w"> </span>-<span class="w"> </span>assert<span class="w"> </span><span class="nv">25</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">15</span>
+<span class="o">======================</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>failed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>passed<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span>.08s<span class="w"> </span><span class="o">=======================</span>
 </code></pre></div>
 
 <p>Let's learn how to control how much of what we see here.</p>
@@ -178,38 +178,38 @@ FAILED test_mul.py::test_multiply_different_numbers - assert <span class="nv">25
 consider that it stems from a single-line function and single-line tests. With
 that in mind, it's actually pretty freaking verbose. We can show less of it by
 using the <code>--tb</code> option. We can even shut it off completely.</p>
-<div class="highlight"><pre><span></span><code>$ pytest --tb<span class="o">=</span><span class="nv">no</span>
-<span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
-platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/python
-collected <span class="m">3</span> items                                                        
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pytest<span class="w"> </span>--tb<span class="o">=</span><span class="nv">no</span>
+<span class="o">==========================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">===========================</span>
+platform<span class="w"> </span>linux<span class="w"> </span>--<span class="w"> </span>Python<span class="w"> </span><span class="m">3</span>.8.3,<span class="w"> </span>pytest-5.4.3,<span class="w"> </span>py-1.9.0,<span class="w"> </span>pluggy-0.13.1
+rootdir:<span class="w"> </span>/home/slarse/python
+collected<span class="w"> </span><span class="m">3</span><span class="w"> </span>items<span class="w">                                                        </span>
 
-test_mul.py .FF                                                         <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+test_mul.py<span class="w"> </span>.FF<span class="w">                                                         </span><span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
 
-<span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
-FAILED test_mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
-FAILED test_mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
-<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.02s <span class="o">=======================</span>
+<span class="o">========================</span><span class="w"> </span>short<span class="w"> </span><span class="nb">test</span><span class="w"> </span>summary<span class="w"> </span><span class="nv">info</span><span class="w"> </span><span class="o">=========================</span>
+FAILED<span class="w"> </span>test_mul.py::test_multiply_by_zero<span class="w"> </span>-<span class="w"> </span>assert<span class="w"> </span><span class="nv">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>
+FAILED<span class="w"> </span>test_mul.py::test_multiply_different_numbers<span class="w"> </span>-<span class="w"> </span>assert<span class="w"> </span><span class="nv">25</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">15</span>
+<span class="o">======================</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>failed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>passed<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span>.02s<span class="w"> </span><span class="o">=======================</span>
 </code></pre></div>
 
 <p>This is useful when you're just trying to figure out what tests are failing, and
 when test output is just entirely overwhelming. I find myself using it quite
 frequently. Another useful traceback value is <code>line</code>.</p>
-<div class="highlight"><pre><span></span><code>$ pytest --tb<span class="o">=</span><span class="nv">line</span>
-<span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
-platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
-rootdir: /home/slarse/python
-collected <span class="m">3</span> items                                                        
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pytest<span class="w"> </span>--tb<span class="o">=</span><span class="nv">line</span>
+<span class="o">==========================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">===========================</span>
+platform<span class="w"> </span>linux<span class="w"> </span>--<span class="w"> </span>Python<span class="w"> </span><span class="m">3</span>.8.3,<span class="w"> </span>pytest-5.4.3,<span class="w"> </span>py-1.9.0,<span class="w"> </span>pluggy-0.13.1
+rootdir:<span class="w"> </span>/home/slarse/python
+collected<span class="w"> </span><span class="m">3</span><span class="w"> </span>items<span class="w">                                                        </span>
 
-test_mul.py .FF                                                         <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+test_mul.py<span class="w"> </span>.FF<span class="w">                                                         </span><span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
 
-<span class="o">================================</span> <span class="nv">FAILURES</span> <span class="o">================================</span>
-/home/slarse/python/test_mul.py:8: assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
-/home/slarse/python/test_mul.py:11: assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
-<span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
-FAILED test_mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
-FAILED test_mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
-<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.03s <span class="o">=======================</span>
+<span class="o">================================</span><span class="w"> </span><span class="nv">FAILURES</span><span class="w"> </span><span class="o">================================</span>
+/home/slarse/python/test_mul.py:8:<span class="w"> </span>assert<span class="w"> </span><span class="nv">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>
+/home/slarse/python/test_mul.py:11:<span class="w"> </span>assert<span class="w"> </span><span class="nv">25</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">15</span>
+<span class="o">========================</span><span class="w"> </span>short<span class="w"> </span><span class="nb">test</span><span class="w"> </span>summary<span class="w"> </span><span class="nv">info</span><span class="w"> </span><span class="o">=========================</span>
+FAILED<span class="w"> </span>test_mul.py::test_multiply_by_zero<span class="w"> </span>-<span class="w"> </span>assert<span class="w"> </span><span class="nv">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>
+FAILED<span class="w"> </span>test_mul.py::test_multiply_different_numbers<span class="w"> </span>-<span class="w"> </span>assert<span class="w"> </span><span class="nv">25</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">15</span>
+<span class="o">======================</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>failed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>passed<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span>.03s<span class="w"> </span><span class="o">=======================</span>
 </code></pre></div>
 
 <p>This lets us see the exact lines where the test failures occurred. In this case,
@@ -227,21 +227,21 @@ look for the <code>--tb</code> option.</p>
 running, and also the verbosity of single items in the traceback. It's really
 useful when tests take a long time to run, and you want to know approximately
 where you're at.</p>
-<div class="highlight"><pre><span></span><code>$ pytest --tb<span class="o">=</span>no -v
-<span class="o">==========================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">===========================</span>
-platform linux -- Python <span class="m">3</span>.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python
-cachedir: .pytest_cache
-rootdir: /home/slarse/python
-collected <span class="m">3</span> items                                                        
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pytest<span class="w"> </span>--tb<span class="o">=</span>no<span class="w"> </span>-v
+<span class="o">==========================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">===========================</span>
+platform<span class="w"> </span>linux<span class="w"> </span>--<span class="w"> </span>Python<span class="w"> </span><span class="m">3</span>.8.3,<span class="w"> </span>pytest-5.4.3,<span class="w"> </span>py-1.9.0,<span class="w"> </span>pluggy-0.13.1<span class="w"> </span>--<span class="w"> </span>/usr/bin/python
+cachedir:<span class="w"> </span>.pytest_cache
+rootdir:<span class="w"> </span>/home/slarse/python
+collected<span class="w"> </span><span class="m">3</span><span class="w"> </span>items<span class="w">                                                        </span>
 
-test_mul.py::test_multiply_equal_numbers PASSED                         <span class="o">[</span> <span class="m">33</span>%<span class="o">]</span>
-test_mul.py::test_multiply_by_zero FAILED                               <span class="o">[</span> <span class="m">66</span>%<span class="o">]</span>
-test_mul.py::test_multiply_different_numbers FAILED                     <span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
+test_mul.py::test_multiply_equal_numbers<span class="w"> </span>PASSED<span class="w">                         </span><span class="o">[</span><span class="w"> </span><span class="m">33</span>%<span class="o">]</span>
+test_mul.py::test_multiply_by_zero<span class="w"> </span>FAILED<span class="w">                               </span><span class="o">[</span><span class="w"> </span><span class="m">66</span>%<span class="o">]</span>
+test_mul.py::test_multiply_different_numbers<span class="w"> </span>FAILED<span class="w">                     </span><span class="o">[</span><span class="m">100</span>%<span class="o">]</span>
 
-<span class="o">========================</span> short <span class="nb">test</span> summary <span class="nv">info</span> <span class="o">=========================</span>
-FAILED test_mul.py::test_multiply_by_zero - assert <span class="nv">1</span> <span class="o">==</span> <span class="m">0</span>
-FAILED test_mul.py::test_multiply_different_numbers - assert <span class="nv">25</span> <span class="o">==</span> <span class="nv">15</span>
-<span class="o">======================</span> <span class="m">2</span> failed, <span class="m">1</span> passed <span class="k">in</span> <span class="m">0</span>.03s <span class="o">=======================</span>
+<span class="o">========================</span><span class="w"> </span>short<span class="w"> </span><span class="nb">test</span><span class="w"> </span>summary<span class="w"> </span><span class="nv">info</span><span class="w"> </span><span class="o">=========================</span>
+FAILED<span class="w"> </span>test_mul.py::test_multiply_by_zero<span class="w"> </span>-<span class="w"> </span>assert<span class="w"> </span><span class="nv">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>
+FAILED<span class="w"> </span>test_mul.py::test_multiply_different_numbers<span class="w"> </span>-<span class="w"> </span>assert<span class="w"> </span><span class="nv">25</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">15</span>
+<span class="o">======================</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>failed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>passed<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span>.03s<span class="w"> </span><span class="o">=======================</span>
 </code></pre></div>
 
 <p>Note how each test is now shown on a line of its own, as opposed to just <code>.</code> and
@@ -259,40 +259,40 @@ this single (pointless) test:</p>
 </code></pre></div>
 
 <p>Running this test will yield a traceback that looks something like this.</p>
-<div class="highlight"><pre><span></span><code>$ pytest
-<span class="o">[</span>... OMITTED ...<span class="o">]</span>
-______________________ test_truncation_demonstration _____________________
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pytest
+<span class="o">[</span>...<span class="w"> </span>OMITTED<span class="w"> </span>...<span class="o">]</span>
+______________________<span class="w"> </span>test_truncation_demonstration<span class="w"> </span>_____________________
 
-    def test_truncation_demonstration<span class="o">()</span>:
-    &gt;       assert <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span> <span class="o">==</span> list<span class="o">(</span>range<span class="o">(</span><span class="m">1000</span><span class="o">))</span>
-    E       assert <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span> <span class="o">==</span> <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>, ...<span class="o">]</span>
-    E         Right contains <span class="m">996</span> more items, first extra item: <span class="m">4</span>
-    E         Use -v to get the full diff
+<span class="w">    </span>def<span class="w"> </span>test_truncation_demonstration<span class="o">()</span>:
+<span class="w">    </span>&gt;<span class="w">       </span>assert<span class="w"> </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">3</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>list<span class="o">(</span>range<span class="o">(</span><span class="m">1000</span><span class="o">))</span>
+<span class="w">    </span>E<span class="w">       </span>assert<span class="w"> </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">3</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="m">4</span>,<span class="w"> </span><span class="m">5</span>,<span class="w"> </span>...<span class="o">]</span>
+<span class="w">    </span>E<span class="w">         </span>Right<span class="w"> </span>contains<span class="w"> </span><span class="m">996</span><span class="w"> </span>more<span class="w"> </span>items,<span class="w"> </span>first<span class="w"> </span>extra<span class="w"> </span>item:<span class="w"> </span><span class="m">4</span>
+<span class="w">    </span>E<span class="w">         </span>Use<span class="w"> </span>-v<span class="w"> </span>to<span class="w"> </span>get<span class="w"> </span>the<span class="w"> </span>full<span class="w"> </span>diff
 
-    truncation.py:4: AssertionError
+<span class="w">    </span>truncation.py:4:<span class="w"> </span>AssertionError
 </code></pre></div>
 
 <p>Note how the long list has been truncated such that only the first few items are
 shown. Note also how pytest is suggesting the use of <code>-v</code>. If we supply <code>-v</code>, it
 actually still doesn't show the whole list.</p>
-<div class="highlight"><pre><span></span><code>$ pytest -v
-<span class="o">[</span>... OMITTED ...<span class="o">]</span>
-______________________ test_truncation_demonstration _____________________
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pytest<span class="w"> </span>-v
+<span class="o">[</span>...<span class="w"> </span>OMITTED<span class="w"> </span>...<span class="o">]</span>
+______________________<span class="w"> </span>test_truncation_demonstration<span class="w"> </span>_____________________
 
-    def test_truncation_demonstration<span class="o">()</span>:
-    &gt;       assert <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span> <span class="o">==</span> list<span class="o">(</span>range<span class="o">(</span><span class="m">1000</span><span class="o">))</span>
-    E       AssertionError: assert <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span><span class="o">]</span> <span class="o">==</span> <span class="o">[</span><span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>, ...<span class="o">]</span>
-    E         Right contains <span class="m">996</span> more items, first extra item: <span class="m">4</span>
-    E         Full diff:
-    E           <span class="o">[</span>
-    E            <span class="m">0</span>,
-    E            <span class="m">1</span>,
-    E            <span class="m">2</span>,
-    E            <span class="m">3</span>,...
-    E         
-    E         ...Full output truncated <span class="o">(</span><span class="m">998</span> lines hidden<span class="o">)</span>, use <span class="s1">&#39;-vv&#39;</span> to show
+<span class="w">    </span>def<span class="w"> </span>test_truncation_demonstration<span class="o">()</span>:
+<span class="w">    </span>&gt;<span class="w">       </span>assert<span class="w"> </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">3</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>list<span class="o">(</span>range<span class="o">(</span><span class="m">1000</span><span class="o">))</span>
+<span class="w">    </span>E<span class="w">       </span>AssertionError:<span class="w"> </span>assert<span class="w"> </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">3</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="m">4</span>,<span class="w"> </span><span class="m">5</span>,<span class="w"> </span>...<span class="o">]</span>
+<span class="w">    </span>E<span class="w">         </span>Right<span class="w"> </span>contains<span class="w"> </span><span class="m">996</span><span class="w"> </span>more<span class="w"> </span>items,<span class="w"> </span>first<span class="w"> </span>extra<span class="w"> </span>item:<span class="w"> </span><span class="m">4</span>
+<span class="w">    </span>E<span class="w">         </span>Full<span class="w"> </span>diff:
+<span class="w">    </span>E<span class="w">           </span><span class="o">[</span>
+<span class="w">    </span>E<span class="w">            </span><span class="m">0</span>,
+<span class="w">    </span>E<span class="w">            </span><span class="m">1</span>,
+<span class="w">    </span>E<span class="w">            </span><span class="m">2</span>,
+<span class="w">    </span>E<span class="w">            </span><span class="m">3</span>,...
+<span class="w">    </span>E<span class="w">         </span>
+<span class="w">    </span>E<span class="w">         </span>...Full<span class="w"> </span>output<span class="w"> </span>truncated<span class="w"> </span><span class="o">(</span><span class="m">998</span><span class="w"> </span>lines<span class="w"> </span>hidden<span class="o">)</span>,<span class="w"> </span>use<span class="w"> </span><span class="s1">&#39;-vv&#39;</span><span class="w"> </span>to<span class="w"> </span>show
 
-    truncation.py:4: AssertionError
+<span class="w">    </span>truncation.py:4:<span class="w"> </span>AssertionError
 </code></pre></div>
 
 <p>In fact, pytest isn't even showing more output here, it just shows the same
@@ -355,82 +355,22 @@ required to get fully verbose output.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
           <i class="fas fa-tag"></i>
-        exposed
+        book review
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
+      <a href="https://slar.se/tag/xps15.html">
           <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
+        xps15
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/database.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
-          <i class="fas fa-tag"></i>
-        man
+        database
       </a>
     </span>
     <span class="tag-4">
@@ -440,9 +380,105 @@ required to get fully verbose output.</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-3">
@@ -457,94 +493,16 @@ required to get fully verbose output.</p>
         git
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependencies.html">
-          <i class="fas fa-tag"></i>
-        dependencies
-      </a>
-    </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
+      <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
-        book review
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
-          <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
+        linux
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
-          <i class="fas fa-tag"></i>
-        syntax
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
+        python
       </a>
     </span>
     <span class="tag-3">
@@ -553,10 +511,16 @@ required to get fully verbose output.</p>
         data structures
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/postgresql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
           <i class="fas fa-tag"></i>
-        postgresql
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
       </a>
     </span>
     <span class="tag-2">
@@ -566,33 +530,57 @@ required to get fully verbose output.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
-          <i class="fas fa-tag"></i>
-        learning
+        javascript
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+      <a href="https://slar.se/tag/man.html">
           <i class="fas fa-tag"></i>
-        podcast
+        man
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        totw
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/linux.html">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        linux
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
       </a>
     </span>
     <span class="tag-3">
@@ -608,27 +596,33 @@ required to get fully verbose output.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
+      <a href="https://slar.se/tag/syntax.html">
           <i class="fas fa-tag"></i>
-        xps15
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
+        syntax
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        gradle
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        rust
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
       </a>
     </span>
     <span class="tag-3">
@@ -637,10 +631,22 @@ required to get fully verbose output.</p>
         neovim
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        psql
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
       </a>
     </span>
 </p>

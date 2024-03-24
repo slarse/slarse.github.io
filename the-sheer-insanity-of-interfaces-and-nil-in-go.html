@@ -125,43 +125,43 @@ interface with a <code>nil</code> value.</p>
 <h1>The sensible kind of <code>nil</code></h1>
 <p>First let's look at <code>nil</code> behaving like we'd expect. Here's a code snippet of a
 "parser" that somewhat shows the situation I had.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="s">&quot;fmt&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="s">&quot;strings&quot;</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;strings&quot;</span>
+<span class="p">)</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">IfExpression</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">raw</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">IfExpression</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">raw</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">IfExpression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">IfExpression</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>So, we have a parse function that returns a pointer to an <code>IfExpression</code> struct
 if the input is an <code>if</code> expression (with an incredibly loose definition of what
 constitutes an <code>if</code> expression). Let's add a <code>main</code> function and try it out.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="s">&quot;if a == b&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ifExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="s">&quot;if a == b&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ifExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">notIfExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="s">&quot;not an expression&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;notIfExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">notIfExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">notIfExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nx">notIfExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="s">&quot;not an expression&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;notIfExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">notIfExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">notIfExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Running this results in completely sensible output; <code>ifExpr</code> is not <code>nil</code> while
 <code>notIfExpr</code> is.</p>
-<div class="highlight"><pre><span></span><code>$ go run main.go
-<span class="p">&amp;</span><span class="o">{</span><span class="k">if</span> <span class="nv">a</span> <span class="o">==</span> b<span class="o">}</span> <span class="nb">false</span>
-&lt;nil&gt; <span class="nb">true</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>go<span class="w"> </span>run<span class="w"> </span>main.go
+<span class="p">&amp;</span><span class="o">{</span><span class="k">if</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>b<span class="o">}</span><span class="w"> </span><span class="nb">false</span>
+&lt;nil&gt;<span class="w"> </span><span class="nb">true</span>
 </code></pre></div>
 
 <p>Say what you want about <code>nil</code>, this at least makes complete sense and is
@@ -172,80 +172,80 @@ that goes way out the window.</p>
 and so had to abstract the parse function to be able to return multiple kinds
 of expressions. So let's generalize the expression in an interface and add
 another one.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Expression</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">Raw</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Expression</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Raw</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">IfExpression</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">raw</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">IfExpression</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">raw</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">ie</span><span class="w"> </span><span class="o">*</span><span class="nx">IfExpression</span><span class="p">)</span><span class="w"> </span><span class="nx">Raw</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">ie</span><span class="p">.</span><span class="nx">raw</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">ie</span><span class="w"> </span><span class="o">*</span><span class="nx">IfExpression</span><span class="p">)</span><span class="w"> </span><span class="nx">Raw</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">ie</span><span class="p">.</span><span class="nx">raw</span><span class="w"> </span><span class="p">}</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">ForExpression</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">raw</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ForExpression</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">raw</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">fe</span><span class="w"> </span><span class="o">*</span><span class="nx">ForExpression</span><span class="p">)</span><span class="w"> </span><span class="nx">Raw</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">fe</span><span class="p">.</span><span class="nx">raw</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">fe</span><span class="w"> </span><span class="o">*</span><span class="nx">ForExpression</span><span class="p">)</span><span class="w"> </span><span class="nx">Raw</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">fe</span><span class="p">.</span><span class="nx">raw</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 
 <p>And then we adapt the parsing as well.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">Expression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">parseFor</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">Expression</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ifExpr</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">parseFor</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">parseFor</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">ForExpression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;for&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">ForExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">parseFor</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">ForExpression</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;for&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">ForExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">IfExpression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">IfExpression</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Now, we have a more generalized <code>parse</code> function that tries to parse an <code>if</code>
 expression, and falls back on parsing a <code>for</code> expression if it turns out not to
 be an <code>if</code>. We then adapt our <code>main</code> function to make use of this.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;if a == b&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ifExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;if a == b&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ifExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;for a in b&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;forExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">forExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;for a in b&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;forExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">forExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>And at first glance, this seems to work as expected.</p>
-<div class="highlight"><pre><span></span><code>$ go run main.go 
-ifExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">if</span> <span class="nv">a</span> <span class="o">==</span> b<span class="o">}</span> <span class="nb">false</span>
-forExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">for</span> a <span class="k">in</span> b<span class="o">}</span> <span class="nb">false</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>go<span class="w"> </span>run<span class="w"> </span>main.go<span class="w"> </span>
+ifExpr<span class="w"> </span><span class="p">&amp;</span><span class="o">{</span><span class="k">if</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>b<span class="o">}</span><span class="w"> </span><span class="nb">false</span>
+forExpr<span class="w"> </span><span class="p">&amp;</span><span class="o">{</span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span><span class="k">in</span><span class="w"> </span>b<span class="o">}</span><span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 
 <p>But what happens when you try to parse something that is neither an <code>if</code> nor a
 <code>for</code>? We add the following to <code>main</code> to find out.</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">notAnExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;not an expression&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;notAnExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">notAnExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">notAnExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">notAnExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;not an expression&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;notAnExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">notAnExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">notAnExpr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
 </code></pre></div>
 
 <p>Clearly, as <code>"not an expression"</code> is neither an <code>if</code> expression nor a <code>for</code>
 expression, both <code>parseIf</code> and <code>parseFor</code> will return <code>nil</code>, and as such <code>parse</code>
 should return <code>nil</code>. But that's not <em>really</em> what happens.</p>
-<div class="highlight"><pre><span></span><code>$ go run main.go 
-ifExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">if</span> <span class="nv">a</span> <span class="o">==</span> b<span class="o">}</span> <span class="nb">false</span>
-forExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">for</span> a <span class="k">in</span> b<span class="o">}</span> <span class="nb">false</span>
-notAnExpr &lt;nil&gt; <span class="nb">false</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>go<span class="w"> </span>run<span class="w"> </span>main.go<span class="w"> </span>
+ifExpr<span class="w"> </span><span class="p">&amp;</span><span class="o">{</span><span class="k">if</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>b<span class="o">}</span><span class="w"> </span><span class="nb">false</span>
+forExpr<span class="w"> </span><span class="p">&amp;</span><span class="o">{</span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span><span class="k">in</span><span class="w"> </span>b<span class="o">}</span><span class="w"> </span><span class="nb">false</span>
+notAnExpr<span class="w"> </span>&lt;nil&gt;<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 
 <p>What? <code>notAnExpr</code> is <code>&lt;nil&gt;</code>, but it does not compare true to a literal<code>nil</code>?
@@ -254,43 +254,43 @@ What does that mean?</p>
 <p>In Go, an interface is represented at runtime as a
 <a href="https://go.dev/doc/faq#nil_error">type and a value</a>. You can think of it as a
 struct with two fields.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Interface</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">type</span><span class="w">  </span><span class="kt">string</span><span class="w"></span>
-<span class="w">    </span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Interface</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">type</span><span class="w">  </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>So, when <code>parseIf(s)</code> returns <code>nil</code>, the <code>parse(s)</code> function's return statement
 wraps the <code>nil</code> value into something like this.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">Interface</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IfExpression&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">Value</span><span class="p">:</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">Interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IfExpression&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Value</span><span class="p">:</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Armed with this knowledge, we can actually check for <code>nil</code> using
 <a href="https://pkg.go.dev/reflect">runtime reflection</a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">IsNil</span><span class="p">()</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">IsNil</span><span class="p">()</span>
+<span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;if a == b&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ifExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">ifExpr</span><span class="p">))</span><span class="w"></span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;if a == b&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ifExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ifExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">ifExpr</span><span class="p">))</span>
 
-<span class="w">    </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;for a in b&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;forExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">forExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">forExpr</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;for a in b&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;forExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">forExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">forExpr</span><span class="p">))</span>
 
-<span class="w">    </span><span class="nx">notAnExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;a == b&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;notAnExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">notAnExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">notAnExpr</span><span class="p">))</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nx">notAnExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="s">&quot;a == b&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;notAnExpr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">notAnExpr</span><span class="p">,</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">notAnExpr</span><span class="p">))</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>And running this, we now seem to have a functioning way to check for <code>nil</code>
 interfaces.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">ifExpr</span><span class="w"> </span><span class="o">&amp;</span>{<span class="k">if</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">b</span>}<span class="w"> </span><span class="nv">false</span><span class="w"></span>
-<span class="nv">forExpr</span><span class="w"> </span><span class="o">&amp;</span>{<span class="k">for</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">b</span>}<span class="w"> </span><span class="nv">false</span><span class="w"></span>
-<span class="nv">notAnExpr</span><span class="w"> </span><span class="o">&lt;</span><span class="nv">nil</span><span class="o">&gt;</span><span class="w"> </span><span class="nv">true</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nv">ifExpr</span><span class="w"> </span><span class="o">&amp;</span>{<span class="k">if</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">b</span>}<span class="w"> </span><span class="nv">false</span>
+<span class="nv">forExpr</span><span class="w"> </span><span class="o">&amp;</span>{<span class="k">for</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">b</span>}<span class="w"> </span><span class="nv">false</span>
+<span class="nv">notAnExpr</span><span class="w"> </span><span class="o">&lt;</span><span class="nv">nil</span><span class="o">&gt;</span><span class="w"> </span><span class="nv">true</span>
 </code></pre></div>
 
 <p>But do we really? Of course not.</p>
@@ -298,22 +298,22 @@ interfaces.</p>
 <p>Let's make this even more confusing, and refactor our <code>parse</code> function a bit.
 Instead of "falling back" on <code>parseFor</code>, we simply return <code>nil</code> explicitly if
 we can't parse any known expression.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">Expression</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseFor</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">Expression</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseIf</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">ifExpr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ifExpr</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parseFor</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">forExpr</span><span class="w"> </span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Now let's run it again.</p>
-<div class="highlight"><pre><span></span><code>$ go run main.go 
-ifExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">if</span> <span class="nv">a</span> <span class="o">==</span> b<span class="o">}</span> <span class="nb">false</span>
-forExpr <span class="p">&amp;</span><span class="o">{</span><span class="k">for</span> a <span class="k">in</span> b<span class="o">}</span> <span class="nb">false</span>
-panic: reflect: call of reflect.Value.IsNil on zero Value
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>go<span class="w"> </span>run<span class="w"> </span>main.go<span class="w"> </span>
+ifExpr<span class="w"> </span><span class="p">&amp;</span><span class="o">{</span><span class="k">if</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>b<span class="o">}</span><span class="w"> </span><span class="nb">false</span>
+forExpr<span class="w"> </span><span class="p">&amp;</span><span class="o">{</span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span><span class="k">in</span><span class="w"> </span>b<span class="o">}</span><span class="w"> </span><span class="nb">false</span>
+panic:<span class="w"> </span>reflect:<span class="w"> </span>call<span class="w"> </span>of<span class="w"> </span>reflect.Value.IsNil<span class="w"> </span>on<span class="w"> </span>zero<span class="w"> </span>Value
 </code></pre></div>
 
 <p>Suddenly, <code>notAnExpr</code> <em>is</em> <code>nil</code>, causing our check to panic. What in the world
@@ -321,19 +321,19 @@ is going on here? As it turns out, explicitly returning <code>nil</code> from a 
 that returns an interface is semantically different to returning a <a href="https://go.dev/doc/faq#nil_error">variable
 contaning <code>nil</code> value, and typed with something implementing the
 interface</a>.</p>
-<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="c1">// actually returns nil</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="c1">// actually returns nil</span>
 
-<span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">*</span><span class="nx">ForExpression</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span><span class="w"></span>
-<span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="c1">// returns an interface with type *ForExpression and value nil</span><span class="w"></span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">*</span><span class="nx">ForExpression</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span>
+<span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="c1">// returns an interface with type *ForExpression and value nil</span>
 </code></pre></div>
 
 <p>So a way around this is of course to always return <code>nil</code> in the form of a typed
 variable. But I'm not satisfied with that, because even if I'm very strict
 about it myself, others may not be. And I may also just make an honest mistake.
 So let's tweak our <code>IsNil()</code> function to account for true <code>nil</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">IsNil</span><span class="p">()</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">IsNil</span><span class="p">()</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>If you run this, you'll see that the runtime panic is replaced with the
@@ -345,8 +345,8 @@ following.</p>
 <h1>Structs are a problem</h1>
 <p>Our <code>IsNil()</code> handles true <code>nil</code> and interfaces with <code>nil</code> values. But,
 unfortunately, it does not handle structs.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span><span class="w"> </span><span class="c1">// panic: reflect: call of reflect.Value.IsNil on struct Value</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">}</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span><span class="w"> </span><span class="c1">// panic: reflect: call of reflect.Value.IsNil on struct Value</span>
 </code></pre></div>
 
 <p>Poop. It appears we missed a critical part of
@@ -359,29 +359,29 @@ func, interface, map, pointer, or slice value; if it is not, IsNil panics.</p>
 </blockquote>
 <p>So, we need to check if the value is of any of these <code>nil</code>-able types,
 and otherwise assume that it is not <code>nil</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nx">reflected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">reflected</span><span class="p">.</span><span class="nx">Kind</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">case</span><span class="w"></span>
-<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Chan</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Func</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Interface</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Map</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Ptr</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Slice</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">reflected</span><span class="p">.</span><span class="nx">IsNil</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nx">reflected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">reflected</span><span class="p">.</span><span class="nx">Kind</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Chan</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Func</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Interface</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Map</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Ptr</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Slice</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">reflected</span><span class="p">.</span><span class="nx">IsNil</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>And with this, the panic is abated.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span><span class="w"> </span><span class="c1">// false</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">IfExpression</span><span class="p">{</span><span class="nx">raw</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;if&quot;</span><span class="p">}</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">IsNil</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span><span class="w"> </span><span class="c1">// false</span>
 </code></pre></div>
 
 <p>This will work so long as Go doesn't add some other <code>nil</code>-able type. Given how
@@ -445,82 +445,22 @@ should be sufficient evidence that some design choices made here aren't optimal.
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
           <i class="fas fa-tag"></i>
-        exposed
+        book review
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
+      <a href="https://slar.se/tag/xps15.html">
           <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
+        xps15
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/database.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
-          <i class="fas fa-tag"></i>
-        man
+        database
       </a>
     </span>
     <span class="tag-4">
@@ -530,9 +470,105 @@ should be sufficient evidence that some design choices made here aren't optimal.
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-3">
@@ -547,94 +583,16 @@ should be sufficient evidence that some design choices made here aren't optimal.
         git
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependencies.html">
-          <i class="fas fa-tag"></i>
-        dependencies
-      </a>
-    </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
+      <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
-        book review
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
-          <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
+        linux
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
-          <i class="fas fa-tag"></i>
-        syntax
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
+        python
       </a>
     </span>
     <span class="tag-3">
@@ -643,10 +601,16 @@ should be sufficient evidence that some design choices made here aren't optimal.
         data structures
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/postgresql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
           <i class="fas fa-tag"></i>
-        postgresql
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
       </a>
     </span>
     <span class="tag-2">
@@ -656,33 +620,57 @@ should be sufficient evidence that some design choices made here aren't optimal.
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
-          <i class="fas fa-tag"></i>
-        learning
+        javascript
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+      <a href="https://slar.se/tag/man.html">
           <i class="fas fa-tag"></i>
-        podcast
+        man
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        totw
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/linux.html">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        linux
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
       </a>
     </span>
     <span class="tag-3">
@@ -698,27 +686,33 @@ should be sufficient evidence that some design choices made here aren't optimal.
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
+      <a href="https://slar.se/tag/syntax.html">
           <i class="fas fa-tag"></i>
-        xps15
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
+        syntax
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        gradle
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        rust
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
       </a>
     </span>
     <span class="tag-3">
@@ -727,10 +721,22 @@ should be sufficient evidence that some design choices made here aren't optimal.
         neovim
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        psql
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
       </a>
     </span>
 </p>

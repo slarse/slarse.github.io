@@ -165,19 +165,19 @@ output lines.</p>
 Markdown, which should be familiar to most anyone in the target audience.
 Specifically, we want to be able to highlight the following containing
 headings, paragraphs, inline code and code blocks.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># This is a heading</span><span class="w"></span>
-<span class="n">This</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="err">`</span><span class="n">inline</span><span class="w"> </span><span class="n">code</span><span class="err">`</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1"># This is a heading</span>
+<span class="n">This</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="err">`</span><span class="n">inline</span><span class="w"> </span><span class="n">code</span><span class="err">`</span>
 
-<span class="err">```</span><span class="w"></span>
-<span class="k">const</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;javascript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;code&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;highlighting&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="err">```</span>
+<span class="k">const</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;javascript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;code&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;highlighting&quot;</span><span class="p">];</span>
 
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">word</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="err">```</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="err">```</span>
 
-<span class="c1"># This is another heading</span><span class="w"></span>
-<span class="n">Another</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="c1"># in the middle.</span><span class="w"></span>
+<span class="c1"># This is another heading</span>
+<span class="n">Another</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="c1"># in the middle.</span>
 </code></pre></div>
 
 <p><strong>Store these sample file contents in <code>test.mds</code> for later use</strong>!</p>
@@ -192,20 +192,20 @@ section, but I found that it lacks a few key ingredients for our purposes. I
 will offer an augmented version here.</p>
 <p>As a pre-requisite, you must have decently up-to-date versions <code>node</code> and <code>npm</code>
 installed. With that, we can get started creating a project directory.</p>
-<div class="highlight"><pre><span></span><code>$ mkdir tree-sitter-mds
-$ <span class="nb">cd</span> tree-sitter-mds
-$ npm init
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mkdir<span class="w"> </span>tree-sitter-mds
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tree-sitter-mds
+$<span class="w"> </span>npm<span class="w"> </span>init
 </code></pre></div>
 
 <p>The <code>npm init</code> command will prompt you for a bunch of stuff. If you don't know
 what to choose, just go with the defaults, it hardly matters for the rest of
 this article. Now, you need the <code>tree-sitter-cli</code> application, which you can
 also get with <code>npm</code>.</p>
-<div class="highlight"><pre><span></span><code>$ npm --save-dev tree-sitter-cli
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>npm<span class="w"> </span>--save-dev<span class="w"> </span>tree-sitter-cli
 </code></pre></div>
 
 <p>Then setup a configuration file for <code>tree-sitter-cli</code>.</p>
-<div class="highlight"><pre><span></span><code>$ npx tree-sitter init-config
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>npx<span class="w"> </span>tree-sitter<span class="w"> </span>init-config
 </code></pre></div>
 
 <p>Note where the configuration file is written to. You may need to edit it later
@@ -215,45 +215,45 @@ for your project to be located by Tree-sitter.</p>
 language and spits out a parser for it. In Tree-sitter, we define grammar rules
 in JavaScript, in a file called <code>grammar.js</code> in the root of your project. It
 should have the following structure.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">grammar</span><span class="p">({</span><span class="w"></span>
-<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;markdownsimple&#39;</span><span class="p">,</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">grammar</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;markdownsimple&#39;</span><span class="p">,</span>
 
-<span class="w">  </span><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="c1">// grammar rules go in here</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// grammar rules go in here</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <p>If you now try to generate a parser you should get an error about there not being any rules.</p>
-<div class="highlight"><pre><span></span><code>$ npx tree-sitter generate
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>npx<span class="w"> </span>tree-sitter<span class="w"> </span>generate
 <span class="o">[</span>stdin<span class="o">]</span>:409
-    throw new Error<span class="o">(</span><span class="s2">&quot;Grammar must have at least one rule.&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">    </span>throw<span class="w"> </span>new<span class="w"> </span>Error<span class="o">(</span><span class="s2">&quot;Grammar must have at least one rule.&quot;</span><span class="o">)</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Let's define a very simple grammar just to be able to parse the file.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span>
 
-<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">(.</span><span class="o">|</span><span class="err">\</span><span class="nx">n</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">(.</span><span class="o">|</span><span class="err">\</span><span class="nx">n</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Put the above rules into your <code>grammar.js</code> file and then generate and run the
 parser.</p>
-<div class="highlight"><pre><span></span><code>$ npx tree-sitter generate
-$ npx tree-sitter parse test.mds
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>npx<span class="w"> </span>tree-sitter<span class="w"> </span>generate
+$<span class="w"> </span>npx<span class="w"> </span>tree-sitter<span class="w"> </span>parse<span class="w"> </span>test.mds
 </code></pre></div>
 
 <p>This should produce a simple syntax tree.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]))</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]))</span>
 </code></pre></div>
 
 <p>Let's dissect the grammar in detail so we can improve the syntax tree
 granularity. The root node is the <code>source_file</code>. Every syntax tree is rooted in
 this node, and there is only one of them for each parsed file. The rule
 definition may look a bit strange at first sight.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span>
 </code></pre></div>
 
 <p>Any non-trivial grammar is built by composing rules. Any rule that references
@@ -262,7 +262,7 @@ another rule is a so-called
 The above rule says that the <code>source_file</code> consists of precisely one <code>text</code>
 node. So <code>source_file</code> is a non-terminal that references <code>text</code>.</p>
 <p>We then define the <code>text</code> rule using regex.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">(.</span><span class="o">+|</span><span class="err">\</span><span class="nx">n</span><span class="p">)</span><span class="o">/</span><span class="p">,</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">(.</span><span class="o">+|</span><span class="err">\</span><span class="nx">n</span><span class="p">)</span><span class="o">/</span><span class="p">,</span>
 </code></pre></div>
 
 <p>This regex just captures any character (<code>.</code>) or line feeds (<code>\n</code>). As the rule
@@ -286,19 +286,19 @@ next part.</p>
 started immediately. We can highlight a file using the <code>highlight</code> command,
 but it won't work out of the box.</p>
 <p>If you run the below command, you should get an error message.</p>
-<div class="highlight"><pre><span></span><code>$ npx tree-sitter highlight test.mds
-No language found <span class="k">for</span> path <span class="sb">`</span>test.mds<span class="sb">`</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>npx<span class="w"> </span>tree-sitter<span class="w"> </span>highlight<span class="w"> </span>test.mds
+No<span class="w"> </span>language<span class="w"> </span>found<span class="w"> </span><span class="k">for</span><span class="w"> </span>path<span class="w"> </span><span class="sb">`</span>test.mds<span class="sb">`</span>
 
-If a language should be associated with this file extension, please ensure the path to <span class="sb">`</span>test.mds<span class="sb">`</span> is inside one of the following directories as specified by your <span class="s1">&#39;config.json&#39;</span>:
+If<span class="w"> </span>a<span class="w"> </span>language<span class="w"> </span>should<span class="w"> </span>be<span class="w"> </span>associated<span class="w"> </span>with<span class="w"> </span>this<span class="w"> </span>file<span class="w"> </span>extension,<span class="w"> </span>please<span class="w"> </span>ensure<span class="w"> </span>the<span class="w"> </span>path<span class="w"> </span>to<span class="w"> </span><span class="sb">`</span>test.mds<span class="sb">`</span><span class="w"> </span>is<span class="w"> </span>inside<span class="w"> </span>one<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>directories<span class="w"> </span>as<span class="w"> </span>specified<span class="w"> </span>by<span class="w"> </span>your<span class="w"> </span><span class="s1">&#39;config.json&#39;</span>:
 
-  <span class="m">1</span>. /home/slarse/github  
-  <span class="m">2</span>. /home/slarse/src  
-  <span class="m">3</span>. /home/slarse/source  
-  <span class="m">4</span>. /home/slarse/projects  
-  <span class="m">5</span>. /home/slarse/dev  
-  <span class="m">6</span>. /home/slarse/git
+<span class="w">  </span><span class="m">1</span>.<span class="w"> </span>/home/slarse/github<span class="w">  </span>
+<span class="w">  </span><span class="m">2</span>.<span class="w"> </span>/home/slarse/src<span class="w">  </span>
+<span class="w">  </span><span class="m">3</span>.<span class="w"> </span>/home/slarse/source<span class="w">  </span>
+<span class="w">  </span><span class="m">4</span>.<span class="w"> </span>/home/slarse/projects<span class="w">  </span>
+<span class="w">  </span><span class="m">5</span>.<span class="w"> </span>/home/slarse/dev<span class="w">  </span>
+<span class="w">  </span><span class="m">6</span>.<span class="w"> </span>/home/slarse/git
 
-If the directory that contains the relevant grammar <span class="k">for</span> <span class="sb">`</span>test.mds<span class="sb">`</span> is not listed above, please add the directory to the list of directories <span class="k">in</span> your config file, located at /home/slarse/.config/tree-sitter/config.json
+If<span class="w"> </span>the<span class="w"> </span>directory<span class="w"> </span>that<span class="w"> </span>contains<span class="w"> </span>the<span class="w"> </span>relevant<span class="w"> </span>grammar<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="sb">`</span>test.mds<span class="sb">`</span><span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>listed<span class="w"> </span>above,<span class="w"> </span>please<span class="w"> </span>add<span class="w"> </span>the<span class="w"> </span>directory<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>list<span class="w"> </span>of<span class="w"> </span>directories<span class="w"> </span><span class="k">in</span><span class="w"> </span>your<span class="w"> </span>config<span class="w"> </span>file,<span class="w"> </span>located<span class="w"> </span>at<span class="w"> </span>/home/slarse/.config/tree-sitter/config.json
 </code></pre></div>
 
 <p>To resolve this we need to add some information to <code>package.json</code>. Put the
@@ -308,17 +308,17 @@ following in there.</p>
 ensure that you don't break the syntax of <code>package.json</code>, run <code>npm i</code> until it
 doesn't complain anymore.</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;tree-sitter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source.markdownsimple&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;file-types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;mds&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">],</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;highlights&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;queries/highlights.scm&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;tree-sitter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source.markdownsimple&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;file-types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;mds&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;highlights&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;queries/highlights.scm&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
 </code></pre></div>
 
 <p>Now run the <code>highlight</code> command again. If you get the <em>same</em> error as before,
@@ -328,18 +328,18 @@ Tree-sitter's <code>config.json</code> file. For example, my project is located 
 <code>/home/slarse/projects/tree-sitter</code> to the list of paths at the top of
 <code>/home/slarse/.config/tree-sitter/config.json</code>.</p>
 <p>With that fixed, you should get a new error.</p>
-<div class="highlight"><pre><span></span><code>$ npx tree-sitter highlight test.mds
-Failed to <span class="nb">read</span> query file <span class="s2">&quot;queries/highlights.scm&quot;</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>npx<span class="w"> </span>tree-sitter<span class="w"> </span>highlight<span class="w"> </span>test.mds
+Failed<span class="w"> </span>to<span class="w"> </span><span class="nb">read</span><span class="w"> </span>query<span class="w"> </span>file<span class="w"> </span><span class="s2">&quot;queries/highlights.scm&quot;</span>
 
-Caused by:
-    No such file or directory <span class="o">(</span>os error <span class="m">2</span><span class="o">)</span>
+Caused<span class="w"> </span>by:
+<span class="w">    </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory<span class="w"> </span><span class="o">(</span>os<span class="w"> </span>error<span class="w"> </span><span class="m">2</span><span class="o">)</span>
 </code></pre></div>
 
 <p>This means your project was correctly located. We now need to define <em>queries</em>
 for our highlight. Queries allow us to select nodes in the syntax tree and
 assign pre-defined semantic meaning to them. Put the following content in the
 file <code>queries/highlights.scm</code> in your project directory.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">text</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">text</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span>
 </code></pre></div>
 
 <blockquote>
@@ -362,36 +362,36 @@ syntax tree to perform queries against.</p>
 tree allowing for an equally rudimentary syntax highlighting. It's now time to
 start refining the grammar to capture different components. With some crude
 annotations in <code>()</code>, we want a structure like this.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">section</span><span class="p">)</span><span class="w"></span>
-<span class="c1"># This is a heading (heading)</span><span class="w"></span>
-<span class="n">This</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="err">`</span><span class="n">inline</span><span class="w"> </span><span class="n">code</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="n">paragraph</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">inlineCode</span><span class="w"> </span><span class="p">(</span><span class="n">codeText</span><span class="p">)))</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+<span class="c1"># This is a heading (heading)</span>
+<span class="n">This</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">paragraph</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="err">`</span><span class="n">inline</span><span class="w"> </span><span class="n">code</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="n">paragraph</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">inlineCode</span><span class="w"> </span><span class="p">(</span><span class="n">codeText</span><span class="p">)))</span>
 
-<span class="err">```</span><span class="w"> </span><span class="p">(</span><span class="n">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="n">codeText</span><span class="p">))</span><span class="w"></span>
-<span class="k">const</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;javascript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;code&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;highlighting&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="err">```</span><span class="w"> </span><span class="p">(</span><span class="n">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="n">codeText</span><span class="p">))</span>
+<span class="k">const</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;javascript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;code&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;highlighting&quot;</span><span class="p">];</span>
 
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">word</span><span class="p">);</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="err">```</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="err">```</span>
 
-<span class="c1"># This is another heading (heading)</span><span class="w"></span>
-<span class="n">And</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">another</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">paragraph</span><span class="o">.</span><span class="w"> </span><span class="p">(</span><span class="n">paragraph</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="p">))</span><span class="w"></span>
+<span class="c1"># This is another heading (heading)</span>
+<span class="n">And</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">another</span><span class="w"> </span><span class="n">little</span><span class="w"> </span><span class="n">paragraph</span><span class="o">.</span><span class="w"> </span><span class="p">(</span><span class="n">paragraph</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </code></pre></div>
 
 <p>Let's start off only with capturing the additional <code>section</code> and <code>heading</code> nodes
 with new rules.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">section</span><span class="p">),</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">section</span><span class="p">),</span>
 
-<span class="w">  </span><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">),</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">),</span>
+<span class="w">  </span><span class="p">),</span>
 
-<span class="w">  </span><span class="nx">heading</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="err">#</span><span class="p">.</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
+<span class="w">  </span><span class="nx">heading</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="err">#</span><span class="p">.</span><span class="o">+</span><span class="err">/,</span>
 
-<span class="w">  </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">(.</span><span class="o">|</span><span class="err">\</span><span class="nx">n</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">(.</span><span class="o">|</span><span class="err">\</span><span class="nx">n</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Our non-terminals <code>source_file</code> and <code>section</code> bring in ways of composing rules
@@ -401,34 +401,34 @@ order". So a <code>source_file</code> node is zero or more <code>section</code> 
 node is a <code>heading</code> followed by zero or more <code>text</code> nodes.</p>
 <p>Generating and running the parser again, this lands us with a slightly more
 granular syntax tree where we separately capture the section's heading.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">])</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">])))</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">])</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">])))</span>
 </code></pre></div>
 
 <p>Clearly there's a bug here: we only have one section, yet our source file
 contains two. The reason for this is that <code>text</code> is too liberal, it captures <code>#</code>
 characters anywhere on the line. We must adjust the regex to disallow <code>#</code>
 directly after line feeds.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">([</span><span class="o">^</span><span class="err">#</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="nx">n</span><span class="p">]</span><span class="err">#</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">([</span><span class="o">^</span><span class="err">#</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="nx">n</span><span class="p">]</span><span class="err">#</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span>
 </code></pre></div>
 
 <p>Here we say that <code>text</code> is either not a <code>#</code>, or it's a non-linefeed character
 followed by <code>#</code>. Generating and parsing again we should now have our basic
 section structure mapped out.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">])</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]))</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">])</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">])))</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">])</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]))</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">])</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">])))</span>
 </code></pre></div>
 
 <p>Great! We can now also adjust the query in <code>queries/highlights.scm</code> to only
 highlight headings.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span>
 </code></pre></div>
 
 <p>This should land you with the following highlighting.</p>
@@ -441,11 +441,11 @@ these in turn.</p>
 <h2>Capturing code blocks</h2>
 <p>Code blocks are relatively simple to capture in isolation. A rule for code
 blocks could look as follows.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">codeBlock</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="p">),</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">codeBlock</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">  </span><span class="s1">&#39;```&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;```&#39;</span><span class="p">,</span>
+<span class="p">),</span>
 
 <span class="nx">codeText</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">[</span><span class="o">^</span><span class="sb">`]*/,</span>
 </code></pre></div>
@@ -458,15 +458,15 @@ This will of course make it impossible to use backticks inside of a <code>codeBl
 which is a simplification we're going with here. Extending the rule to allow
 for backticks within a <code>codeBlock</code> node is left as an exercise to the reader.</p>
 <p>We can now extend our <code>section</code> rule to contain <code>codeBlock</code>s.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">repeat</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
-<span class="p">),</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">repeat</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">choice</span><span class="p">(</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">  </span><span class="p">),</span>
+<span class="p">),</span>
 </code></pre></div>
 
 <p>If you put this in and run it, you may be a bit surprised to see that the output
@@ -480,11 +480,11 @@ that are composed of one or more <code>text</code> and/or <code>inlineCode</code
 <code>inlineCode</code> rule is quite simple: a backtick, followed by zero or more
 characters that are anything but a backtick (i.e. <code>codeText</code>), followed by a
 backtick.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">inlineCode</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="p">),</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">inlineCode</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">  </span><span class="s1">&#39;`&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;`&#39;</span><span class="p">,</span>
+<span class="p">),</span>
 </code></pre></div>
 
 <p>We also need to alter the <code>text</code> terminal to not allow backticks, because
@@ -495,65 +495,65 @@ allow our <code>codeBlock</code> rule to actually consume something.</p>
 
 <p>Now we can define the <code>paragraph</code> non-terminal which, again, should be one or
 more <code>inlineCode</code> or <code>text</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat1</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
-<span class="p">),</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat1</span><span class="p">(</span>
+<span class="w">  </span><span class="nx">choice</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">),</span>
+<span class="p">),</span>
 </code></pre></div>
 
 <p>And then we update the <code>section</code> to repeat <code>paragraph</code> instead of <code>text</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nx">repeat</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">paragraph</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
-<span class="p">),</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">  </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">repeat</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">choice</span><span class="p">(</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">paragraph</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">  </span><span class="p">),</span>
+<span class="p">),</span>
 </code></pre></div>
 
 <p>We end up with the following rule set.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">section</span><span class="p">),</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">section</span><span class="p">),</span>
 
-<span class="w">  </span><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">repeat</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">paragraph</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">),</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">repeat</span><span class="p">(</span>
+<span class="w">      </span><span class="nx">choice</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">paragraph</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span>
+<span class="w">      </span><span class="p">)</span>
+<span class="w">    </span><span class="p">),</span>
+<span class="w">  </span><span class="p">),</span>
 
-<span class="w">  </span><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat1</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="p">),</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat1</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">choice</span><span class="p">(</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span>
+<span class="w">    </span><span class="p">),</span>
+<span class="w">  </span><span class="p">),</span>
 
-<span class="w">  </span><span class="nx">inlineCode</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="nx">inlineCode</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;`&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;`&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">),</span>
 
-<span class="w">  </span><span class="nx">codeBlock</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="nx">codeBlock</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;```&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;```&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">),</span>
 
 <span class="w">  </span><span class="nx">codeText</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">[</span><span class="o">^</span><span class="sb">`]*/,</span>
 
 <span class="sb">  heading: _ =&gt; /#.+/,</span>
 
-<span class="sb">  text: _ =&gt; /([^#`</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="nx">n</span><span class="p">]</span><span class="err">#</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="sb">  text: _ =&gt; /([^#`</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="nx">n</span><span class="p">]</span><span class="err">#</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>If you try this out, you'll find that it doesn't work, Tree-sitter won't even
@@ -562,20 +562,20 @@ generate a parser for you. Instead, it complains about a conflict. Oh, dear.</p>
 <p>A conflict in the grammar occurs when there are multiple ways for Tree-sitter
 to interpret the rules you've provided it with. In the case of our <code>paragraph</code>
 rule, Tree-sitter has the following to say.</p>
-<div class="highlight"><pre><span></span><code>$ npx tree-sitter generate
-Unresolved conflict <span class="k">for</span> symbol sequence:
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>npx<span class="w"> </span>tree-sitter<span class="w"> </span>generate
+Unresolved<span class="w"> </span>conflict<span class="w"> </span><span class="k">for</span><span class="w"> </span>symbol<span class="w"> </span>sequence:
 
-  heading  paragraph_repeat1  •  <span class="s1">&#39;`&#39;</span>  …
+<span class="w">  </span>heading<span class="w">  </span>paragraph_repeat1<span class="w">  </span>•<span class="w">  </span><span class="s1">&#39;`&#39;</span><span class="w">  </span>…
 
-Possible interpretations:
+Possible<span class="w"> </span>interpretations:
 
-  <span class="m">1</span>:  heading  <span class="o">(</span>paragraph  paragraph_repeat1<span class="o">)</span>  •  <span class="s1">&#39;`&#39;</span>  …
-  <span class="m">2</span>:  heading  <span class="o">(</span>paragraph_repeat1  paragraph_repeat1  •  paragraph_repeat1<span class="o">)</span>
+<span class="w">  </span><span class="m">1</span>:<span class="w">  </span>heading<span class="w">  </span><span class="o">(</span>paragraph<span class="w">  </span>paragraph_repeat1<span class="o">)</span><span class="w">  </span>•<span class="w">  </span><span class="s1">&#39;`&#39;</span><span class="w">  </span>…
+<span class="w">  </span><span class="m">2</span>:<span class="w">  </span>heading<span class="w">  </span><span class="o">(</span>paragraph_repeat1<span class="w">  </span>paragraph_repeat1<span class="w">  </span>•<span class="w">  </span>paragraph_repeat1<span class="o">)</span>
 
-Possible resolutions:
+Possible<span class="w"> </span>resolutions:
 
-  <span class="m">1</span>:  Specify a left or right associativity <span class="k">in</span> <span class="sb">`</span>paragraph<span class="sb">`</span>
-  <span class="m">2</span>:  Add a conflict <span class="k">for</span> these rules: <span class="sb">`</span>paragraph<span class="sb">`</span>
+<span class="w">  </span><span class="m">1</span>:<span class="w">  </span>Specify<span class="w"> </span>a<span class="w"> </span>left<span class="w"> </span>or<span class="w"> </span>right<span class="w"> </span>associativity<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="sb">`</span>paragraph<span class="sb">`</span>
+<span class="w">  </span><span class="m">2</span>:<span class="w">  </span>Add<span class="w"> </span>a<span class="w"> </span>conflict<span class="w"> </span><span class="k">for</span><span class="w"> </span>these<span class="w"> </span>rules:<span class="w"> </span><span class="sb">`</span>paragraph<span class="sb">`</span>
 </code></pre></div>
 
 <p>This is a little bit hard to interpret if you haven't worked a lot with parsers
@@ -597,40 +597,40 @@ bother trying to fully understand it here. We'll just try both and see what
 happens. We can make a rule left- or right-associative by wrapping it in
 <code>prec.left()</code> or <code>prec.right()</code>, respectively. Doing that in turn, we get the
 following two parse results for this part of the tree.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">; left-associative result</span><span class="w"></span>
-<span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">(</span><span class="nf">text</span><span class="p">))</span><span class="w"></span>
-<span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">(</span><span class="nf">inlineCode</span><span class="p">))</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">; left-associative result</span>
+<span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">(</span><span class="nf">text</span><span class="p">))</span>
+<span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">(</span><span class="nf">inlineCode</span><span class="p">))</span>
 
-<span class="c1">; right-associative result</span><span class="w"></span>
-<span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">(</span><span class="nf">text</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">inlineCode</span><span class="p">))</span><span class="w"></span>
+<span class="c1">; right-associative result</span>
+<span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">(</span><span class="nf">text</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nf">inlineCode</span><span class="p">))</span>
 </code></pre></div>
 
 <p>The right-associative version looks like what we sketched out before embarking
 down this road, so we'll adjust the rule accordingly.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prec</span><span class="p">.</span><span class="nx">right</span><span class="p">(</span><span class="nx">repeat1</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="p">),</span><span class="w"></span>
-<span class="p">)),</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prec</span><span class="p">.</span><span class="nx">right</span><span class="p">(</span><span class="nx">repeat1</span><span class="p">(</span>
+<span class="w">  </span><span class="nx">choice</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span>
+<span class="w">  </span><span class="p">),</span>
+<span class="p">)),</span>
 </code></pre></div>
 
 <p>And with that, we can now create a syntax tree with a sufficient level of
 granularity to achieve the highlighting we set out to. If you generate the
 parser again and run it, you should see a tree like this.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">])</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">48</span><span class="p">]</span><span class="w"></span>
-<span class="w">      </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">35</span><span class="p">])</span><span class="w"></span>
-<span class="w">      </span><span class="p">(</span><span class="nf">inlineCode</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">35</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">48</span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="p">(</span><span class="nf">codeText</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">36</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">47</span><span class="p">])))</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">48</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
-<span class="w">      </span><span class="p">(</span><span class="nf">codeText</span><span class="w"> </span><span class="p">[</span><span class="nv">3,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">0</span><span class="p">])))</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">])</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">      </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]))))</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">source_file</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">])</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">48</span><span class="p">]</span>
+<span class="w">      </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">0,</span><span class="w"> </span><span class="mi">19</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">35</span><span class="p">])</span>
+<span class="w">      </span><span class="p">(</span><span class="nf">inlineCode</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">35</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">48</span><span class="p">]</span>
+<span class="w">        </span><span class="p">(</span><span class="nf">codeText</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">36</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">47</span><span class="p">])))</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">[</span><span class="nv">1,</span><span class="w"> </span><span class="mi">48</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="w">      </span><span class="p">(</span><span class="nf">codeText</span><span class="w"> </span><span class="p">[</span><span class="nv">3,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">0</span><span class="p">])))</span>
+<span class="w">  </span><span class="p">(</span><span class="nf">section</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">heading</span><span class="w"> </span><span class="p">[</span><span class="nv">9,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">])</span>
+<span class="w">    </span><span class="p">(</span><span class="nf">paragraph</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">      </span><span class="p">(</span><span class="nf">text</span><span class="w"> </span><span class="p">[</span><span class="nv">11,</span><span class="w"> </span><span class="mi">25</span><span class="p">]</span><span class="w"> </span><span class="nb">-</span><span class="w"> </span><span class="p">[</span><span class="nv">13,</span><span class="w"> </span><span class="mi">0</span><span class="p">]))))</span>
 </code></pre></div>
 
 <p>We still only have a single highlight query, though, so next up is improving
@@ -640,10 +640,10 @@ that.</p>
 attempt, let's color inline code including backticks with one color, code block
 backticks with one color and finally the code blocks themselves with another
 color.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
-<span class="p">(</span><span class="nf">inlineCode</span><span class="p">)</span><span class="w"> </span><span class="nv">@property</span><span class="w"></span>
-<span class="p">(</span><span class="nf">codeBlock</span><span class="p">)</span><span class="w"> </span><span class="nv">@punctuation</span><span class="o">.</span><span class="nv">delimiter</span><span class="w"></span>
-<span class="p">(</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="nf">codeText</span><span class="p">)</span><span class="w"> </span><span class="nv">@module</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span>
+<span class="p">(</span><span class="nf">inlineCode</span><span class="p">)</span><span class="w"> </span><span class="nv">@property</span>
+<span class="p">(</span><span class="nf">codeBlock</span><span class="p">)</span><span class="w"> </span><span class="nv">@punctuation</span><span class="o">.</span><span class="nv">delimiter</span>
+<span class="p">(</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="nf">codeText</span><span class="p">)</span><span class="w"> </span><span class="nv">@module</span><span class="p">)</span>
 </code></pre></div>
 
 <p>Here we have our first non-trivial use of queries, as we have two queries
@@ -666,31 +666,31 @@ even cooler is that the author of some given parser doesn't need to have thought
 about this; you can tack it on afterwards due to queries being completely
 separate from the parser itself.</p>
 <p>First of all, we need to extend our <code>package.json</code> with an <code>injections</code> key.</p>
-<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;tree-sitter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source.markdownsimple&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;file-types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;mds&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">],</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;highlights&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;queries/highlights.scm&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">],</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;injections&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;queries/injections.scm&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;tree-sitter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source.markdownsimple&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;file-types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;mds&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;highlights&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;queries/highlights.scm&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;injections&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;queries/injections.scm&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
 </code></pre></div>
 
 <p>Then we add a file at <code>queries/injections.scm</code> with the following query.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(((</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="nf">codeText</span><span class="p">)</span><span class="w"> </span><span class="nv">@injection</span><span class="o">.</span><span class="nv">content</span><span class="p">))</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="o">#</span><span class="k">set!</span><span class="w"> </span><span class="nv">injection</span><span class="o">.</span><span class="nv">language</span><span class="w"> </span><span class="s">&quot;javascript&quot;</span><span class="p">))</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(((</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="nf">codeText</span><span class="p">)</span><span class="w"> </span><span class="nv">@injection</span><span class="o">.</span><span class="nv">content</span><span class="p">))</span>
+<span class="w">  </span><span class="p">(</span><span class="o">#</span><span class="k">set!</span><span class="w"> </span><span class="nv">injection</span><span class="o">.</span><span class="nv">language</span><span class="w"> </span><span class="s">&quot;javascript&quot;</span><span class="p">))</span>
 </code></pre></div>
 
 <p>Unfortunately, the highlight queries will interfere a bit with this injection,
 so we also need to reduce our <code>queries/highlights.scm</code> file to the following.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
-<span class="p">(</span><span class="nf">inlineCode</span><span class="p">)</span><span class="w"> </span><span class="nv">@property</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span>
+<span class="p">(</span><span class="nf">inlineCode</span><span class="p">)</span><span class="w"> </span><span class="nv">@property</span>
 </code></pre></div>
 
 <p>But with that change, highlighting is now a lot more interesting. Although,
@@ -713,59 +713,59 @@ Tree-sitter. And that, I think, has been achieved.</p>
 in NeoVim!</p>
 <p>The final versions of the grammar and queries are inlined below for your
 convenience.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// grammar.js</span><span class="w"></span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">grammar</span><span class="p">({</span><span class="w"></span>
-<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;markdownsimple&#39;</span><span class="p">,</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// grammar.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">grammar</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;markdownsimple&#39;</span><span class="p">,</span>
 
-<span class="w">  </span><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">section</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">source_file</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">repeat</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">section</span><span class="p">),</span>
 
-<span class="w">    </span><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nx">repeat</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
-<span class="w">          </span><span class="nx">$</span><span class="p">.</span><span class="nx">paragraph</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="nx">section</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">heading</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">repeat</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">choice</span><span class="p">(</span>
+<span class="w">          </span><span class="nx">$</span><span class="p">.</span><span class="nx">paragraph</span><span class="p">,</span>
+<span class="w">          </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeBlock</span><span class="p">,</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">      </span><span class="p">),</span>
+<span class="w">    </span><span class="p">),</span>
 
-<span class="w">    </span><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prec</span><span class="p">.</span><span class="nx">right</span><span class="p">(</span><span class="nx">repeat1</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="nx">choice</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="p">)),</span><span class="w"></span>
+<span class="w">    </span><span class="nx">paragraph</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">prec</span><span class="p">.</span><span class="nx">right</span><span class="p">(</span><span class="nx">repeat1</span><span class="p">(</span>
+<span class="w">      </span><span class="nx">choice</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">inlineCode</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">$</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span>
+<span class="w">      </span><span class="p">),</span>
+<span class="w">    </span><span class="p">)),</span>
 
-<span class="w">    </span><span class="nx">inlineCode</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="s1">&#39;`&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="nx">inlineCode</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;`&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span>
+<span class="w">      </span><span class="s1">&#39;`&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">),</span>
 
-<span class="w">    </span><span class="nx">codeBlock</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="s1">&#39;```&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="nx">codeBlock</span><span class="o">:</span><span class="w"> </span><span class="nx">$</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">seq</span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;```&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">$</span><span class="p">.</span><span class="nx">codeText</span><span class="p">,</span>
+<span class="w">      </span><span class="s1">&#39;```&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">),</span>
 
 <span class="w">    </span><span class="nx">codeText</span><span class="o">:</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="o">/</span><span class="p">[</span><span class="o">^</span><span class="sb">`]*/,</span>
 
 <span class="sb">    heading: _ =&gt; /#.+/,</span>
 
-<span class="sb">    text: _ =&gt; /([^#`</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="nx">n</span><span class="p">]</span><span class="err">#</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">});</span><span class="w"></span>
+<span class="sb">    text: _ =&gt; /([^#`</span><span class="p">]</span><span class="o">|</span><span class="p">[</span><span class="o">^</span><span class="err">\</span><span class="nx">n</span><span class="p">]</span><span class="err">#</span><span class="p">)</span><span class="o">+</span><span class="err">/,</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code><span class="c1">; queries/highlights.scm</span><span class="w"></span>
-<span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span><span class="w"></span>
-<span class="p">(</span><span class="nf">inlineCode</span><span class="p">)</span><span class="w"> </span><span class="nv">@property</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">; queries/highlights.scm</span>
+<span class="p">(</span><span class="nf">heading</span><span class="p">)</span><span class="w"> </span><span class="nv">@string</span>
+<span class="p">(</span><span class="nf">inlineCode</span><span class="p">)</span><span class="w"> </span><span class="nv">@property</span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code><span class="c1">; queries/injections.scm</span><span class="w"></span>
-<span class="p">(((</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="nf">codeText</span><span class="p">)</span><span class="w"> </span><span class="nv">@injection</span><span class="o">.</span><span class="nv">content</span><span class="p">))</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="o">#</span><span class="k">set!</span><span class="w"> </span><span class="nv">injection</span><span class="o">.</span><span class="nv">language</span><span class="w"> </span><span class="s">&quot;javascript&quot;</span><span class="p">))</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">; queries/injections.scm</span>
+<span class="p">(((</span><span class="nf">codeBlock</span><span class="w"> </span><span class="p">(</span><span class="nf">codeText</span><span class="p">)</span><span class="w"> </span><span class="nv">@injection</span><span class="o">.</span><span class="nv">content</span><span class="p">))</span>
+<span class="w">    </span><span class="p">(</span><span class="o">#</span><span class="k">set!</span><span class="w"> </span><span class="nv">injection</span><span class="o">.</span><span class="nv">language</span><span class="w"> </span><span class="s">&quot;javascript&quot;</span><span class="p">))</span>
 </code></pre></div>
   </div>
 
@@ -813,82 +813,22 @@ convenience.</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
           <i class="fas fa-tag"></i>
-        exposed
+        book review
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
+      <a href="https://slar.se/tag/xps15.html">
           <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
+        xps15
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/database.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
-          <i class="fas fa-tag"></i>
-        man
+        database
       </a>
     </span>
     <span class="tag-4">
@@ -898,9 +838,105 @@ convenience.</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-3">
@@ -915,94 +951,16 @@ convenience.</p>
         git
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependencies.html">
-          <i class="fas fa-tag"></i>
-        dependencies
-      </a>
-    </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
+      <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
-        book review
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
-          <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
+        linux
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
-          <i class="fas fa-tag"></i>
-        syntax
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
+        python
       </a>
     </span>
     <span class="tag-3">
@@ -1011,10 +969,16 @@ convenience.</p>
         data structures
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/postgresql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
           <i class="fas fa-tag"></i>
-        postgresql
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
       </a>
     </span>
     <span class="tag-2">
@@ -1024,33 +988,57 @@ convenience.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
-          <i class="fas fa-tag"></i>
-        learning
+        javascript
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+      <a href="https://slar.se/tag/man.html">
           <i class="fas fa-tag"></i>
-        podcast
+        man
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        totw
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/linux.html">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        linux
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
       </a>
     </span>
     <span class="tag-3">
@@ -1066,27 +1054,33 @@ convenience.</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
+      <a href="https://slar.se/tag/syntax.html">
           <i class="fas fa-tag"></i>
-        xps15
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
+        syntax
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        gradle
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        rust
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
       </a>
     </span>
     <span class="tag-3">
@@ -1095,10 +1089,22 @@ convenience.</p>
         neovim
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        psql
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
       </a>
     </span>
 </p>

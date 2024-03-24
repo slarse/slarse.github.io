@@ -131,7 +131,7 @@ command. Creating an alias is very simple. The syntax looks like this:</p>
 
 <p>So for example, if I want to have a command <code>hellofile</code> that creates a file with
 the text "Hello, world!", I can achieve that with the following alias.</p>
-<div class="highlight"><pre><span></span><code>$ <span class="nb">alias</span> <span class="nv">hellofile</span><span class="o">=</span><span class="s1">&#39;echo &quot;Hello, world!&quot; &gt; hellofile.txt&#39;</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">alias</span><span class="w"> </span><span class="nv">hellofile</span><span class="o">=</span><span class="s1">&#39;echo &quot;Hello, world!&quot; &gt; hellofile.txt&#39;</span>
 </code></pre></div>
 
 <p>Note the single quotes around the command definition. Without them, <code>bash</code>
@@ -146,7 +146,7 @@ use cases!</p>
 <p>This is probably the most common use case for aliases, and it's likely that you
 already have some in play. A common one is to have <code>ls</code> aliased to <code>ls
 --color=auto</code>. That is to say, the following alias is defined:</p>
-<div class="highlight"><pre><span></span><code>$ <span class="nb">alias</span> <span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto&#39;</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">alias</span><span class="w"> </span><span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls --color=auto&#39;</span>
 </code></pre></div>
 
 <p>So if I now run e.g. <code>ls /etc</code>, the resulting command is actually <code>ls
@@ -156,12 +156,12 @@ use an alias for is <code>xclip</code>, which is a small utility for copying stu
 it almost exclusively to copy file contents to the clipboard, but that's not the
 default functionality. In order to copy to the clipboard, I must write this
 rather cumbersome command.</p>
-<div class="highlight"><pre><span></span><code>$ xclip -selection clipboard &lt;FILEPATH&gt;
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>xclip<span class="w"> </span>-selection<span class="w"> </span>clipboard<span class="w"> </span>&lt;FILEPATH&gt;
 </code></pre></div>
 
 <p>So I have an alias for it so I can just type <code>xclip &lt;FILEPATH&gt;</code> to copy to the
 clipboard.</p>
-<div class="highlight"><pre><span></span><code>$ <span class="nb">alias</span> <span class="nv">xclip</span><span class="o">=</span><span class="s1">&#39;xclip -selection clipboard&#39;</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">alias</span><span class="w"> </span><span class="nv">xclip</span><span class="o">=</span><span class="s1">&#39;xclip -selection clipboard&#39;</span>
 </code></pre></div>
 
 <p>As a side note, it may not be the best style to clobber an existing command with
@@ -180,7 +180,7 @@ session, but isn't useful in general. An example would be when I need to run
 some specific Java class in a project. Let's say I need to run the class
 <code>se.slar.awesome.project.Main</code> over and over. Instead of typing <code>java
 se.slar.awesome.project.Main</code> over and over, I define an alias for it.</p>
-<div class="highlight"><pre><span></span><code>$ <span class="nb">alias</span> <span class="nv">runmain</span><span class="o">=</span><span class="s1">&#39;java se.slar.awesome.project.Main&#39;</span>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">alias</span><span class="w"> </span><span class="nv">runmain</span><span class="o">=</span><span class="s1">&#39;java se.slar.awesome.project.Main&#39;</span>
 </code></pre></div>
 
 <p>And then, instead of writing all of that out, or having to do some
@@ -236,82 +236,22 @@ next TOTW coming next week!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
           <i class="fas fa-tag"></i>
-        exposed
+        book review
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
+      <a href="https://slar.se/tag/xps15.html">
           <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
+        xps15
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/database.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
-          <i class="fas fa-tag"></i>
-        man
+        database
       </a>
     </span>
     <span class="tag-4">
@@ -321,9 +261,105 @@ next TOTW coming next week!</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-3">
@@ -338,94 +374,16 @@ next TOTW coming next week!</p>
         git
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependencies.html">
-          <i class="fas fa-tag"></i>
-        dependencies
-      </a>
-    </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
+      <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
-        book review
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
-          <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
+        linux
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
-          <i class="fas fa-tag"></i>
-        syntax
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
+        python
       </a>
     </span>
     <span class="tag-3">
@@ -434,10 +392,16 @@ next TOTW coming next week!</p>
         data structures
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/postgresql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
           <i class="fas fa-tag"></i>
-        postgresql
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
       </a>
     </span>
     <span class="tag-2">
@@ -447,33 +411,57 @@ next TOTW coming next week!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
-          <i class="fas fa-tag"></i>
-        learning
+        javascript
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+      <a href="https://slar.se/tag/man.html">
           <i class="fas fa-tag"></i>
-        podcast
+        man
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        totw
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/linux.html">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        linux
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
       </a>
     </span>
     <span class="tag-3">
@@ -489,27 +477,33 @@ next TOTW coming next week!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
+      <a href="https://slar.se/tag/syntax.html">
           <i class="fas fa-tag"></i>
-        xps15
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
+        syntax
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        gradle
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        rust
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
       </a>
     </span>
     <span class="tag-3">
@@ -518,10 +512,22 @@ next TOTW coming next week!</p>
         neovim
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        psql
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
       </a>
     </span>
 </p>

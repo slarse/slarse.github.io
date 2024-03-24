@@ -151,21 +151,21 @@ quite adverse to using <code>null</code>, I will refrain from doing so as well. 
 want is an abstract node class <code>ANode</code> and sub-classes <code>Node</code> and <code>Empty</code>. Let's
 give it a first try in a pretty Java-like manner, and then improve upon it with
 some neat Kotlin language constructs.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ANode</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ANode</span>
 
-<span class="kd">class</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span><span class="w"></span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span>
 
-<span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"></span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"></span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"></span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span>
 
-<span class="w">    </span><span class="k">constructor</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">super</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">constructor</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">super</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="w">        </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">()</span>
+<span class="w">        </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>If you've had any experience with any remotely Java-looking language, you can
@@ -179,12 +179,12 @@ One such case is when we search the tree for a given value, to see if it is
 contained in the tree. This operation can be succinctly expressed using
 recursion, but let us leave that for part 2. For now, let's just check the first
 node (the <em>root</em>), without exploring its children.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span><span class="w"></span>
-<span class="kd">fun</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="c1">// note implicit cast</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;node argument was neither Empty nor Node!&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="c1">// note implicit cast</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;node argument was neither Empty nor Node!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>This is of course a pretty stupid function at this point, but we'll make it much
@@ -202,12 +202,12 @@ dereference it with <code>node.data</code>! Finally, note that the <code>else</c
 the compiler does not know that there are only two subclasses of <code>ANode</code> (even
 though we currently do, in this very small project). We'll see how to resolve
 that shortly. Let's try this function out:</p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Empty</span><span class="p">(),</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"></span>
-<span class="kc">false</span><span class="w"></span>
-<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"></span>
-<span class="kc">true</span><span class="w"></span>
-<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"></span>
-<span class="kc">false</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Empty</span><span class="p">(),</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="kc">false</span>
+<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="kc">true</span>
+<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+<span class="kc">false</span>
 </code></pre></div>
 
 <p>It seems to work just fine. We <em>could</em> leave the class hierarchy like this and
@@ -224,20 +224,20 @@ node classes.</p>
 <h3>Problem 1 solution: Singleton objects</h3>
 <p>Problem number 1 can be solved very easily, as Kotlin has language support for
 the singleton pattern. We simply swap this declaration</p>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span>
 </code></pre></div>
 
 <p>for this declaration</p>
-<div class="highlight"><pre><span></span><code><span class="kd">object</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">object</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span>
 </code></pre></div>
 
 <p><code>Empty</code> is now a singleton object, so we can assign it without instantiating
 <code>Empty</code>s all over the place. The constructor for <code>Node</code> now looks like this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">constructor</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">super</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="w">       </span><span class="c1">// note the lack of parentheses!</span><span class="w"></span>
-<span class="w">    </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">constructor</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">super</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="w">       </span><span class="c1">// note the lack of parentheses!</span>
+<span class="w">    </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>One problem solved, two to go!</p>
@@ -245,7 +245,7 @@ the singleton pattern. We simply swap this declaration</p>
 <p>We can solve problem number 2 with Kotlin's syntax for
 <a href="https://kotlinlang.org/docs/reference/classes.html">primary constructors</a>.
 Instead of defining <code>Node</code> the Java way, we do it the Kotlin way:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span>
 </code></pre></div>
 
 <p>This is <em>almost</em> equivalent to the previous declaration, with the exception that
@@ -254,7 +254,7 @@ be replaced by explicit arguments when calling the constructor. Note that
 <code>ANode</code> must be instantiated right there in the header as well. However, since
 we know that <code>Node</code> will always be a simple container, we can do one better here
 by prepending <code>data</code> to the declaration.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span>
 </code></pre></div>
 
 <p>This makes <code>Node</code> a
@@ -271,12 +271,12 @@ good in this case).</p>
 <code>Empty</code> are the only subtypes of <code>ANode</code>. Therefore, we needed the <code>else</code> in the
 <code>when</code> expression to cover up the non-existent case of the argument to
 <code>contains</code> being anything else.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span><span class="w"></span>
-<span class="kd">fun</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;node argument was neither Empty nor Node!&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;node argument was neither Empty nor Node!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>We can, however, <em>tell</em> the compiler that <code>Node</code> and <code>Empty</code> <em>are</em> the only
@@ -286,24 +286,24 @@ Any subclass of a sealed class must be declared inside the same file, which lets
 the compiler know precisely which subtypes can exist. To accomplish this, we
 simply replace the <code>abstract</code> modifier with <code>sealed</code> (because <code>sealed</code> implies
 <code>abstract</code>, we don't need the latter).</p>
-<div class="highlight"><pre><span></span><code><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ANode</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ANode</span>
 </code></pre></div>
 
 <p>We can now drop the <code>else</code> from <code>contains</code>, because the compiler knows that a
 variable with static type <code>ANode</code> is either <code>Empty</code>, or a <code>Node</code>, there are no
 other possibilities.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span><span class="w"></span>
-<span class="n">fun</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="o">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">:</span><span class="w"> </span><span class="n">Int</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kr">false</span><span class="w"></span>
-<span class="w">    </span><span class="n">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="kt">data</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">// check if data is contained in node</span>
+<span class="n">fun</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">):</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">false</span>
+<span class="w">    </span><span class="n">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">data</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Let's give it a try</p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"></span>
-<span class="kc">true</span><span class="w"></span>
-<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"></span>
-<span class="kc">false</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="kc">true</span>
+<span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">contains</span><span class="p">(</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="kc">false</span>
 </code></pre></div>
 
 <p>Neat, now we have a good base for venturing into the fraught land of generics in
@@ -312,23 +312,23 @@ other possibilities.</p>
 <p>The final version of the code, that we'll use in part 2, can be found below.
 I've also included a main function such that you can run the code in your
 preferred way, right off the bat!</p>
-<div class="highlight"><pre><span></span><code><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ANode</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ANode</span>
 
-<span class="kd">object</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span><span class="w"></span>
+<span class="kd">object</span><span class="w"> </span><span class="nc">Empty</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span>
 
-<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span><span class="w"></span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Node</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">left</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">right</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Empty</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">()</span>
 
-<span class="c1">// check if data is contained in node</span><span class="w"></span>
-<span class="kd">fun</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="c1">// note implicit cast</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="c1">// check if data is contained in node</span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="n">node</span><span class="p">:</span><span class="w"> </span><span class="n">ANode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Empty</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Node</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="c1">// note implicit cast</span>
+<span class="p">}</span>
 
-<span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w"></span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">3</span><span class="p">))</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">Empty</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">))</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">contains</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="m">3</span><span class="p">))</span>
+<span class="p">}</span>
 </code></pre></div>
   </div>
 
@@ -376,82 +376,22 @@ preferred way, right off the bat!</p>
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
           <i class="fas fa-tag"></i>
-        exposed
+        book review
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
+      <a href="https://slar.se/tag/xps15.html">
           <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
+        xps15
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/database.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
-          <i class="fas fa-tag"></i>
-        man
+        database
       </a>
     </span>
     <span class="tag-4">
@@ -461,9 +401,105 @@ preferred way, right off the bat!</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-3">
@@ -478,94 +514,16 @@ preferred way, right off the bat!</p>
         git
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependencies.html">
-          <i class="fas fa-tag"></i>
-        dependencies
-      </a>
-    </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
+      <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
-        book review
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
-          <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
+        linux
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
-          <i class="fas fa-tag"></i>
-        syntax
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
+        python
       </a>
     </span>
     <span class="tag-3">
@@ -574,10 +532,16 @@ preferred way, right off the bat!</p>
         data structures
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/postgresql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
           <i class="fas fa-tag"></i>
-        postgresql
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
       </a>
     </span>
     <span class="tag-2">
@@ -587,33 +551,57 @@ preferred way, right off the bat!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
-          <i class="fas fa-tag"></i>
-        learning
+        javascript
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+      <a href="https://slar.se/tag/man.html">
           <i class="fas fa-tag"></i>
-        podcast
+        man
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        totw
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/linux.html">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        linux
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
       </a>
     </span>
     <span class="tag-3">
@@ -629,27 +617,33 @@ preferred way, right off the bat!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
+      <a href="https://slar.se/tag/syntax.html">
           <i class="fas fa-tag"></i>
-        xps15
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
+        syntax
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        gradle
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        rust
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
       </a>
     </span>
     <span class="tag-3">
@@ -658,10 +652,22 @@ preferred way, right off the bat!</p>
         neovim
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        psql
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
       </a>
     </span>
 </p>

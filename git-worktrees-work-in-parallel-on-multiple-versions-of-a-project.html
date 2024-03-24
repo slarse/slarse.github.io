@@ -127,24 +127,24 @@ is for you.</p>
 <p>Let's first create an example repo. Here's a little terminal session where I
 create a repository, add a README to it on the master branch, add another line
 to the readme on a branch called other, and finally checking out to master.</p>
-<div class="highlight"><pre><span></span><code><span class="o">[</span>~<span class="o">]</span> $ mkdir repo
-<span class="o">[</span>~<span class="o">]</span> $ <span class="nb">cd</span> repo
-<span class="o">[</span>repo<span class="o">]</span> $ git init
-Initialized empty Git repository <span class="k">in</span> /home/slarse/repo/.git/
-<span class="o">[</span>repo<span class="o">]</span> $ <span class="nb">echo</span> <span class="s2">&quot;Hello!&quot;</span> &gt; README.md
-<span class="o">[</span>repo<span class="o">]</span> $ git add README.md <span class="o">&amp;&amp;</span> git commit -m <span class="s1">&#39;Add README&#39;</span>
-<span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> 6094baf<span class="o">]</span> Add README
- <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>
- create mode <span class="m">100644</span> README.md
-<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ git checkout -b other
-Switched to a new branch <span class="s1">&#39;other&#39;</span>
-<span class="o">(</span>other<span class="o">)[</span>repo<span class="o">]</span> $ <span class="nb">echo</span> <span class="s2">&quot;There!&quot;</span> &gt;&gt; README.md 
-<span class="o">(</span>other<span class="o">)[</span>repo<span class="o">]</span> $ git commit -am <span class="s1">&#39;Add new line to README&#39;</span>
-<span class="o">[</span>other b779dfb<span class="o">]</span> Add new line to README
- <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>
-<span class="o">(</span>other<span class="o">)[</span>repo<span class="o">]</span> $ git checkout master
-Switched to branch <span class="s1">&#39;master&#39;</span>
-<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ 
+<div class="highlight"><pre><span></span><code><span class="o">[</span>~<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>mkdir<span class="w"> </span>repo
+<span class="o">[</span>~<span class="o">]</span><span class="w"> </span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>repo
+<span class="o">[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>init
+Initialized<span class="w"> </span>empty<span class="w"> </span>Git<span class="w"> </span>repository<span class="w"> </span><span class="k">in</span><span class="w"> </span>/home/slarse/repo/.git/
+<span class="o">[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello!&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>README.md
+<span class="o">[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>README.md<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Add README&#39;</span>
+<span class="o">[</span>master<span class="w"> </span><span class="o">(</span>root-commit<span class="o">)</span><span class="w"> </span>6094baf<span class="o">]</span><span class="w"> </span>Add<span class="w"> </span>README
+<span class="w"> </span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>changed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>insertion<span class="o">(</span>+<span class="o">)</span>
+<span class="w"> </span>create<span class="w"> </span>mode<span class="w"> </span><span class="m">100644</span><span class="w"> </span>README.md
+<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>other
+Switched<span class="w"> </span>to<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;other&#39;</span>
+<span class="o">(</span>other<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;There!&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>README.md<span class="w"> </span>
+<span class="o">(</span>other<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s1">&#39;Add new line to README&#39;</span>
+<span class="o">[</span>other<span class="w"> </span>b779dfb<span class="o">]</span><span class="w"> </span>Add<span class="w"> </span>new<span class="w"> </span>line<span class="w"> </span>to<span class="w"> </span>README
+<span class="w"> </span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>changed,<span class="w"> </span><span class="m">1</span><span class="w"> </span>insertion<span class="o">(</span>+<span class="o">)</span>
+<span class="o">(</span>other<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>master
+Switched<span class="w"> </span>to<span class="w"> </span>branch<span class="w"> </span><span class="s1">&#39;master&#39;</span>
+<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>
 </code></pre></div>
 
 <p>It's not super important how you do it, just make sure to have two branches.</p>
@@ -153,10 +153,10 @@ Switched to branch <span class="s1">&#39;master&#39;</span>
 is the part of a repository where you actually do your work (edit files etc).
 Running <code>git worktree list</code> on most repos will show the location of this single
 worktree, and what commit/branch it is checked out to.</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ <span class="nb">pwd</span> <span class="c1"># just checking the current working directory</span>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span><span class="nb">pwd</span><span class="w"> </span><span class="c1"># just checking the current working directory</span>
 /home/slarse/repo
-<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ git worktree list
-/home/slarse/repo  6094baf <span class="o">[</span>master<span class="o">]</span>  <span class="c1"># points to the cwd, checked out to master</span>
+<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>worktree<span class="w"> </span>list
+/home/slarse/repo<span class="w">  </span>6094baf<span class="w"> </span><span class="o">[</span>master<span class="o">]</span><span class="w">  </span><span class="c1"># points to the cwd, checked out to master</span>
 </code></pre></div>
 
 <blockquote>
@@ -169,22 +169,22 @@ different commits. The most basic usage is <code>git worktree add &lt;path&gt;
 to put it), and <code>commit-ish</code> is something like a commit or branch (or a few
 other things that are not important for every-day use). Let's check out <code>other</code>
 in a new worktree. </p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ git worktree add ../repo-other other
-Preparing worktree <span class="o">(</span>checking out <span class="s1">&#39;other&#39;</span><span class="o">)</span>
-HEAD is now at b779dfb Add new line to README
-<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ git worktree list
-/home/slarse/repo        6094baf <span class="o">[</span>master<span class="o">]</span>
-/home/slarse/repo-other  b779dfb <span class="o">[</span>other<span class="o">]</span>
-<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ ls -a ../repo-other <span class="c1"># have a look in the new working tree</span>
-.  ..  .git  README.md
+<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>worktree<span class="w"> </span>add<span class="w"> </span>../repo-other<span class="w"> </span>other
+Preparing<span class="w"> </span>worktree<span class="w"> </span><span class="o">(</span>checking<span class="w"> </span>out<span class="w"> </span><span class="s1">&#39;other&#39;</span><span class="o">)</span>
+HEAD<span class="w"> </span>is<span class="w"> </span>now<span class="w"> </span>at<span class="w"> </span>b779dfb<span class="w"> </span>Add<span class="w"> </span>new<span class="w"> </span>line<span class="w"> </span>to<span class="w"> </span>README
+<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>worktree<span class="w"> </span>list
+/home/slarse/repo<span class="w">        </span>6094baf<span class="w"> </span><span class="o">[</span>master<span class="o">]</span>
+/home/slarse/repo-other<span class="w">  </span>b779dfb<span class="w"> </span><span class="o">[</span>other<span class="o">]</span>
+<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>ls<span class="w"> </span>-a<span class="w"> </span>../repo-other<span class="w"> </span><span class="c1"># have a look in the new working tree</span>
+.<span class="w">  </span>..<span class="w">  </span>.git<span class="w">  </span>README.md
 </code></pre></div>
 
 <p>As you can see, the new worktree has been created, and can be seen in the list
 of worktrees. <code>.git</code> is usually a directory, but in the case of a non-primary
 worktree, it's actually just a file with a path to the original <code>.git</code>
 directory.</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ cat ../repo-other/.git 
-gitdir: /home/slarse/repo/.git/worktrees/repo-other
+<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>cat<span class="w"> </span>../repo-other/.git<span class="w"> </span>
+gitdir:<span class="w"> </span>/home/slarse/repo/.git/worktrees/repo-other
 </code></pre></div>
 
 <p>Like many things in Git, it's brilliantly simple. You can start working in your
@@ -197,19 +197,19 @@ new branches.</p>
 move</code> to make sure that all of the references are correctly changed. It's very
 simple, just type <code>git worktree move &lt;src&gt; &lt;dst&gt;</code>. For example, if I want to
 move <code>../repo-other</code> to <code>../repo-work</code>, I do:</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ git worktree move ../repo-other ../repo-work
-<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ git worktree list
-/home/slarse/repo       6094baf <span class="o">[</span>master<span class="o">]</span>
-/home/slarse/repo-work  b779dfb <span class="o">[</span>other<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>worktree<span class="w"> </span>move<span class="w"> </span>../repo-other<span class="w"> </span>../repo-work
+<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>worktree<span class="w"> </span>list
+/home/slarse/repo<span class="w">       </span>6094baf<span class="w"> </span><span class="o">[</span>master<span class="o">]</span>
+/home/slarse/repo-work<span class="w">  </span>b779dfb<span class="w"> </span><span class="o">[</span>other<span class="o">]</span>
 </code></pre></div>
 
 <p>That's all there is to moving worktrees. Not very exciting, and I can't recall
 ever actually doing it, but I can see how it could be useful.</p>
 <h3>Removing a worktree</h3>
 <p>To remove a worktree, run <code>git worktree remove &lt;path&gt;</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ git worktree remove ../repo-work/
-<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span> $ git worktree list
-/home/slarse/repo  6094baf <span class="o">[</span>master<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>worktree<span class="w"> </span>remove<span class="w"> </span>../repo-work/
+<span class="o">(</span>master<span class="o">)[</span>repo<span class="o">]</span><span class="w"> </span>$<span class="w"> </span>git<span class="w"> </span>worktree<span class="w"> </span>list
+/home/slarse/repo<span class="w">  </span>6094baf<span class="w"> </span><span class="o">[</span>master<span class="o">]</span>
 </code></pre></div>
 
 <p>You can also just remove the directory with the worktree and the reference to it
@@ -273,82 +273,22 @@ on it more in its man-page (either with <code>man git-worktree</code> or
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
           <i class="fas fa-tag"></i>
-        exposed
+        book review
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
+      <a href="https://slar.se/tag/xps15.html">
           <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
+        xps15
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/database.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
-          <i class="fas fa-tag"></i>
-        man
+        database
       </a>
     </span>
     <span class="tag-4">
@@ -358,9 +298,105 @@ on it more in its man-page (either with <code>man git-worktree</code> or
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-3">
@@ -375,94 +411,16 @@ on it more in its man-page (either with <code>man git-worktree</code> or
         git
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependencies.html">
-          <i class="fas fa-tag"></i>
-        dependencies
-      </a>
-    </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
+      <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
-        book review
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
-          <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
+        linux
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
-          <i class="fas fa-tag"></i>
-        syntax
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
+        python
       </a>
     </span>
     <span class="tag-3">
@@ -471,10 +429,16 @@ on it more in its man-page (either with <code>man git-worktree</code> or
         data structures
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/postgresql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
           <i class="fas fa-tag"></i>
-        postgresql
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
       </a>
     </span>
     <span class="tag-2">
@@ -484,33 +448,57 @@ on it more in its man-page (either with <code>man git-worktree</code> or
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
-          <i class="fas fa-tag"></i>
-        learning
+        javascript
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+      <a href="https://slar.se/tag/man.html">
           <i class="fas fa-tag"></i>
-        podcast
+        man
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        totw
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/linux.html">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        linux
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
       </a>
     </span>
     <span class="tag-3">
@@ -526,27 +514,33 @@ on it more in its man-page (either with <code>man git-worktree</code> or
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
+      <a href="https://slar.se/tag/syntax.html">
           <i class="fas fa-tag"></i>
-        xps15
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
+        syntax
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        gradle
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        rust
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
       </a>
     </span>
     <span class="tag-3">
@@ -555,10 +549,22 @@ on it more in its man-page (either with <code>man git-worktree</code> or
         neovim
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        psql
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
       </a>
     </span>
 </p>

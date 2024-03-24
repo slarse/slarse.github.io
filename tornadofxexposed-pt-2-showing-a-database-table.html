@@ -145,12 +145,12 @@ the view model, as it is by far the simplest component.</p>
 about it in detail in the
 <a href="https://edvin.gitbooks.io/tornadofx-guide/part1/11.%20Editing%20Models%20and%20Validation.html">TornadoFX guide</a>.
 It will simply look like this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">tornadofx.*</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">tornadofx.*</span>
 
-<span class="kd">class</span><span class="w"> </span><span class="nc">CategoryModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemViewModel</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bind</span><span class="p">(</span><span class="n">Category</span><span class="o">::</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bind</span><span class="p">(</span><span class="n">Category</span><span class="o">::</span><span class="n">description</span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">CategoryModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ItemViewModel</span><span class="o">&lt;</span><span class="n">Category</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bind</span><span class="p">(</span><span class="n">Category</span><span class="o">::</span><span class="n">name</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bind</span><span class="p">(</span><span class="n">Category</span><span class="o">::</span><span class="n">description</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>This is essentially a proxy for the <code>Category</code> class, acting as a middle-man
@@ -165,28 +165,28 @@ transaction per change. Now, let's move on to the controller.</p>
 items from the database. In the next article, we will extend the controller
 with add and delete-functionality. Here's the initial version of the
 controller:</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">javafx.collections.ObservableList</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.sql.Database</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.sql.transactions.transaction</span><span class="w"></span>
-<span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.sql.transactions.TransactionManager</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">javafx.collections.ObservableList</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.sql.Database</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.sql.transactions.transaction</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.jetbrains.exposed.sql.transactions.TransactionManager</span>
 
-<span class="kd">class</span><span class="w"> </span><span class="nc">DBController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Controller</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">categories</span><span class="p">:</span><span class="w"> </span><span class="n">ObservableList</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">lazy</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">transaction</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">Category</span><span class="p">.</span><span class="na">all</span><span class="p">().</span><span class="na">map</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">CategoryModel</span><span class="p">().</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">it</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">}.</span><span class="na">observable</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">DBController</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Controller</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">categories</span><span class="p">:</span><span class="w"> </span><span class="n">ObservableList</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">lazy</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">transaction</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Category</span><span class="p">.</span><span class="na">all</span><span class="p">().</span><span class="na">map</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">CategoryModel</span><span class="p">().</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">it</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}.</span><span class="na">observable</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">init</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">Database</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="s">&quot;jdbc:sqlite:file:data.sqlite&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;org.sqlite.JDBC&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="n">TransactionManager</span><span class="p">.</span><span class="na">manager</span><span class="p">.</span><span class="na">defaultIsolationLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Connection</span><span class="p">.</span><span class="na">TRANSACTION_SERIALIZABLE</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">init</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Database</span><span class="p">.</span><span class="na">connect</span><span class="p">(</span><span class="s">&quot;jdbc:sqlite:file:data.sqlite&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;org.sqlite.JDBC&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">TransactionManager</span><span class="p">.</span><span class="na">manager</span><span class="p">.</span><span class="na">defaultIsolationLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Connection</span><span class="p">.</span><span class="na">TRANSACTION_SERIALIZABLE</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>The <code>categories</code> property is lazily initialized to a fetch from the database,
@@ -201,23 +201,23 @@ plain <code>TableView</code>. The reason is that the <code>TableViewEditModel</c
 additional functionality, most notably the ability to edit rows directly in the
 table. Again, you can read up on the details in the
 <a href="https://edvin.gitbooks.io/tornadofx-guide/part1/11.%20Editing%20Models%20and%20Validation.html">TornadoFX guide</a>. Our initial attempt looks like this:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">CategoryEditor</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="p">(</span><span class="s">&quot;Categories&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">dbController</span><span class="p">:</span><span class="w"> </span><span class="n">DBController</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">inject</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">categoryTable</span><span class="p">:</span><span class="w"> </span><span class="n">TableViewEditModel</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">singleAssign</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">categories</span><span class="p">:</span><span class="w"> </span><span class="n">ObservableList</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">singleAssign</span><span class="p">()</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">CategoryEditor</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="p">(</span><span class="s">&quot;Categories&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">dbController</span><span class="p">:</span><span class="w"> </span><span class="n">DBController</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">inject</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">categoryTable</span><span class="p">:</span><span class="w"> </span><span class="n">TableViewEditModel</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">singleAssign</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">categories</span><span class="p">:</span><span class="w"> </span><span class="n">ObservableList</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">singleAssign</span><span class="p">()</span>
 
-<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">borderpane</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbController</span><span class="p">.</span><span class="na">categories</span><span class="w"></span>
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">borderpane</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dbController</span><span class="p">.</span><span class="na">categories</span>
 
-<span class="w">        </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">categoryTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">editModel</span><span class="w"></span>
-<span class="w">            </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">categories</span><span class="w"></span>
+<span class="w">        </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tableview</span><span class="o">&lt;</span><span class="n">CategoryModel</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">categoryTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">editModel</span>
+<span class="w">            </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">categories</span>
 
-<span class="w">            </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">name</span><span class="p">)</span>
+<span class="w">            </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;Description&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CategoryModel</span><span class="o">::</span><span class="n">description</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>There's not too much going on here. The three properties store references to
@@ -232,12 +232,12 @@ references here, we will put them to use in the next article.</p>
 <h2>Creating a runnable app</h2>
 <p>Now, we just need to make the app runnable. That's as simple as adding the
 following:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">Kuizzy</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">App</span><span class="p">(</span><span class="n">CategoryEditor</span><span class="o">::</span><span class="n">class</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">Kuizzy</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">App</span><span class="p">(</span><span class="n">CategoryEditor</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
 
 
-<span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">launch</span><span class="o">&lt;</span><span class="n">Kuizzy</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">launch</span><span class="o">&lt;</span><span class="n">Kuizzy</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>Running the main method will start the app, and you should then see a view that
@@ -292,82 +292,22 @@ into how to add, delete and edit rows of the <code>Categories</code> table. You 
 
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
-    <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
           <i class="fas fa-tag"></i>
-        exposed
+        book review
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
+      <a href="https://slar.se/tag/xps15.html">
           <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/tornadofx.html">
-          <i class="fas fa-tag"></i>
-        tornadofx
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/blog.html">
-          <i class="fas fa-tag"></i>
-        blog
+        xps15
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/database.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/css.html">
-          <i class="fas fa-tag"></i>
-        css
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
-          <i class="fas fa-tag"></i>
-        man
+        database
       </a>
     </span>
     <span class="tag-4">
@@ -377,9 +317,105 @@ into how to add, delete and edit rows of the <code>Categories</code> table. You 
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/enums.html">
           <i class="fas fa-tag"></i>
         enums
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
       </a>
     </span>
     <span class="tag-3">
@@ -394,94 +430,16 @@ into how to add, delete and edit rows of the <code>Categories</code> table. You 
         git
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependencies.html">
-          <i class="fas fa-tag"></i>
-        dependencies
-      </a>
-    </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/book-review.html">
+      <a href="https://slar.se/tag/linux.html">
           <i class="fas fa-tag"></i>
-        book review
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
-          <i class="fas fa-tag"></i>
-        java
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/testing.html">
-          <i class="fas fa-tag"></i>
-        testing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
-          <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
+        linux
       </a>
     </span>
     <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
+      <a href="https://slar.se/tag/python.html">
           <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
-          <i class="fas fa-tag"></i>
-        syntax
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
+        python
       </a>
     </span>
     <span class="tag-3">
@@ -490,10 +448,16 @@ into how to add, delete and edit rows of the <code>Categories</code> table. You 
         data structures
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/postgresql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
           <i class="fas fa-tag"></i>
-        postgresql
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
       </a>
     </span>
     <span class="tag-2">
@@ -503,33 +467,57 @@ into how to add, delete and edit rows of the <code>Categories</code> table. You 
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
+      <a href="https://slar.se/tag/javascript.html">
           <i class="fas fa-tag"></i>
-        repobee
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
-          <i class="fas fa-tag"></i>
-        learning
+        javascript
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+      <a href="https://slar.se/tag/man.html">
           <i class="fas fa-tag"></i>
-        podcast
+        man
       </a>
     </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        totw
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
       </a>
     </span>
     <span class="tag-2">
-      <a href="https://slar.se/tag/linux.html">
+      <a href="https://slar.se/tag/kotlin.html">
           <i class="fas fa-tag"></i>
-        linux
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
       </a>
     </span>
     <span class="tag-3">
@@ -545,27 +533,33 @@ into how to add, delete and edit rows of the <code>Categories</code> table. You 
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
+      <a href="https://slar.se/tag/syntax.html">
           <i class="fas fa-tag"></i>
-        xps15
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
-          <i class="fas fa-tag"></i>
-        bst
+        syntax
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
+      <a href="https://slar.se/tag/gradle.html">
           <i class="fas fa-tag"></i>
-        testing tips
+        gradle
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
-        rust
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
       </a>
     </span>
     <span class="tag-3">
@@ -574,10 +568,22 @@ into how to add, delete and edit rows of the <code>Categories</code> table. You 
         neovim
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
           <i class="fas fa-tag"></i>
-        psql
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
       </a>
     </span>
 </p>

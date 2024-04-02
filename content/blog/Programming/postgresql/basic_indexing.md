@@ -257,7 +257,9 @@ next segment (i.e. `500000 <= value < 600000` in this example). Following the
 reference to the start of the next page, we search that until we find the
 segment where `560000 <= value < 561000`. This segment refers to a leaf page,
 which again we search through until we find the desired key that in turn
-contains references to the sought rows of the table.
+contains references to the sought rows of the table. This search path is
+reflected in the below image with black lines, whereas the faint gray lines
+show existing references that are not traversed.
 
 ..graphviz dot
 digraph G {
@@ -309,7 +311,7 @@ digraph G {
 > would actually make.
 
 In addition to providing quick lookup to specific values, the fact that B-trees
-are sorted leads to some possibly unexpected benefits in quires that require
+are sorted leads to some possibly unexpected benefits in queries that require
 sorted output.
 
 ## Selecting ranges is almost as fast as single values

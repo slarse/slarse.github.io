@@ -68,6 +68,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "postgresql-indexing-basics.html"
+url = "/postgresql-indexing-basics.html"
+title = "PostgreSQL indexing: The basics"
+
+[[input.files]]
 path = "configuring-touchpad-in-sway.html"
 url = "/configuring-touchpad-in-sway.html"
 title = "Configuring touchpad tap in Sway"

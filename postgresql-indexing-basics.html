@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>PostgreSQL indexing: The basics - Programming for fun and profit</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous"
+      />
+
+
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/dracula.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/search.css" />
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming for fun and profit Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+     <div class="navbar-header">
+    <button type="button" class="navbar-toggle" 
+        data-toggle="collapse" data-target="#main-navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+                  <li>
+                    <a href="https://slar.se/pages/about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/wiki.html">Wiki</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/license.html">License</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/projects.html">Projects</a>
+                  </li>
+              <li><a href="https://slar.se/resume.pdf">Resume</a></li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+    </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">Programming for fun and profit</a></h1>
+		<p class="lead">A blog about software engineering, programming languages and technical tinkering</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Tue 02 April 2024
+</abbr> <h1 class="article-header-title">
+  <a href="https://slar.se/postgresql-indexing-basics.html" rel="bookmark"
+     title="Permalink to PostgreSQL indexing: The basics">
+    PostgreSQL indexing: The basics
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/postgresql.html"><i class="fas fa-tag"></i>postgresql</a>&nbsp;
+	<a href="https://slar.se/tag/database.html"><i class="fas fa-tag"></i>database</a>&nbsp;
+	<a href="https://slar.se/tag/indexing.html"><i class="fas fa-tag"></i>indexing</a>&nbsp;
+	<a href="https://slar.se/tag/sql.html"><i class="fas fa-tag"></i>sql</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+    <img src="https://slar.se/photos/postgresql_indexing_basics/btreea.jpg" />
+	<p>Back when I was in university, I had a teacher in database systems who also did
+contract work as a database administrator. He told me that 90% of his work was
+to just add and reorganize indexes to speed up queries. That was almost 10 years
+ago, and I'm now inclined to believe him. Having worked on three different
+systems backed by PostgreSQL databases over the past four years, I've seen my
+fair share of queries missing indexes. The fallout has ranged from a poor a end
+user experience due to slow responses to entire systems becoming unresponsive
+as databases grind to a halt under the load of unindexed queries.</p>
+<p>Needless to say, indexing is important. I would go as far as to say that if you
+don't understand the basics of indexing, you shouldn't be writing queries
+against a relational database in a production system. In this article, I'll walk
+you through the basics of indexing in PostgreSQL, including how an index
+actually works. While this is targeted at PostgreSQL and contains a lot of
+specifics about it, the general principles of indexing presented here are
+applicable to relational databases in general.</p>
+<p>Let's get started.</p>
+<h1>The incredible impact of indexes</h1>
+<p>To sell you on the fact that indexes are important, let's do a quick experiment.
+Below I define a simple data model and fill it with some sample data.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">value</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="c1">-- seed with 10 million rows where 0 &lt;= value &lt;= 1,000,000</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="p">(</span><span class="n">RANDOM</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000000</span><span class="p">)::</span><span class="nb">INT</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10000000</span><span class="p">);</span>
+</code></pre></div>
+
+<p>This gives us 10 million rows, where the value is between 0 and 1 million, thus
+on average giving us 10 duplicates of each value. To be very clear, the data
+looks like this.</p>
+<blockquote>
+<p>Note: <code>test=#</code> is my <code>psql</code> prompt. I'm using <code>psql</code> throughout this article
+to execute queries.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">value</span><span class="w">  </span>
+<span class="c1">----+--------</span>
+<span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">602761</span>
+<span class="w">  </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">744515</span>
+<span class="w">  </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">725410</span>
+<span class="w">  </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">729718</span>
+<span class="w">  </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">783837</span>
+<span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Let's execute two queries, one where we search for a particular <code>id</code>, and one
+where we search for a particular <code>value</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">timing</span>
+<span class="n">Timing</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">on</span><span class="p">.</span>
+<span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">;</span>
+<span class="w">   </span><span class="n">id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">value</span><span class="w">  </span>
+<span class="c1">--------+--------</span>
+<span class="w"> </span><span class="mi">560487</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">650515</span>
+<span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="p">)</span>
+
+<span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">845</span><span class="w"> </span><span class="n">ms</span>
+
+<span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">;</span>
+<span class="w">   </span><span class="n">id</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">value</span><span class="w">  </span>
+<span class="c1">---------+--------</span>
+<span class="w"> </span><span class="mi">2068259</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">5013963</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">6894022</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">4305566</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">8455242</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">9020004</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">7313065</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="p">(</span><span class="mi">7</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+
+<span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">254</span><span class="p">.</span><span class="mi">458</span><span class="w"> </span><span class="n">ms</span>
+</code></pre></div>
+
+<p>Searching for the <code>id</code> took less than a millisecond, while searching for the
+<code>value</code> took a quarter of a second. While you could argue that the database had
+to do more work in compiling the results for the <code>value</code> search as there were
+more hits, that shouldn't (and in fact, does not) account for a more than 250x
+timing difference.</p>
+<p>So what's up? Let's have a look at the query plans to find out.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">ANALYZE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">;</span>
+<span class="w">                                                   </span><span class="n">QUERY</span><span class="w"> </span><span class="n">PLAN</span><span class="w">                                                   </span>
+<span class="c1">----------------------------------------------------------------------------------------------------------------</span>
+<span class="w"> </span><span class="k">Index</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">data_pkey</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">data</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">43</span><span class="p">..</span><span class="mi">8</span><span class="p">.</span><span class="mi">45</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">016</span><span class="p">..</span><span class="mi">0</span><span class="p">.</span><span class="mi">017</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="k">Index</span><span class="w"> </span><span class="n">Cond</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">)</span>
+<span class="w"> </span><span class="n">Planning</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">058</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">030</span><span class="w"> </span><span class="n">ms</span>
+<span class="p">(</span><span class="mi">4</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+
+<span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">ANALYZE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">;</span>
+<span class="w">                                                     </span><span class="n">QUERY</span><span class="w"> </span><span class="n">PLAN</span><span class="w">                                                      </span>
+<span class="c1">---------------------------------------------------------------------------------------------------------------------</span>
+<span class="w"> </span><span class="n">Gather</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">1000</span><span class="p">.</span><span class="mi">00</span><span class="p">..</span><span class="mi">97332</span><span class="p">.</span><span class="mi">43</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">11</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">74</span><span class="p">.</span><span class="mi">701</span><span class="p">..</span><span class="mi">257</span><span class="p">.</span><span class="mi">131</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">7</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="n">Workers</span><span class="w"> </span><span class="n">Planned</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">   </span><span class="n">Workers</span><span class="w"> </span><span class="n">Launched</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">   </span><span class="o">-&gt;</span><span class="w">  </span><span class="n">Parallel</span><span class="w"> </span><span class="n">Seq</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">data</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="p">..</span><span class="mi">96331</span><span class="p">.</span><span class="mi">33</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">5</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">114</span><span class="p">.</span><span class="mi">550</span><span class="p">..</span><span class="mi">231</span><span class="p">.</span><span class="mi">494</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">         </span><span class="n">Filter</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">)</span>
+<span class="w">         </span><span class="k">Rows</span><span class="w"> </span><span class="n">Removed</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">Filter</span><span class="p">:</span><span class="w"> </span><span class="mi">3333331</span>
+<span class="w"> </span><span class="n">Planning</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">046</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">257</span><span class="p">.</span><span class="mi">164</span><span class="w"> </span><span class="n">ms</span>
+<span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Going deep into query plans is beyond the scope of this article, but we don't
+need to go deep here. We only need to see that the <code>id</code> query does an <em>index
+scan</em>, while the <code>value</code> query does a <em>seq(uential) scan</em>. The former means that
+the sought value is looked up in an index, while the latter means that the
+entire table is scanned to find the value we're looking for. We can even see
+that the query planner<sup id="sf-postgresql-indexing-basics-1-back"><a href="#sf-postgresql-indexing-basics-1" class="simple-footnote" title="The query planner (or optimizer) is the part of PostgreSQL that's responsible for taking your high-level SQL query and figuring out the fastest way to execute it in the database (source).">1</a></sup>
+decided to do the sequential scan in parallel with two workers, indicating that
+it's a rather heavy query.</p>
+<p>Why was <code>id</code> indexed and not <code>value</code>, you ask? Because the primary key in a
+PostgreSQL table is always indexed, but that's also the only index you get for
+free. Let's now add an index to <code>value</code> as well and see if we can make it a bit
+faster.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_data_value</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span>
+<span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">;</span>
+<span class="w">   </span><span class="n">id</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">value</span><span class="w">  </span>
+<span class="c1">---------+--------</span>
+<span class="w"> </span><span class="mi">2068259</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">4305566</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">5013963</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">6894022</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">7313065</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">8455242</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">9020004</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="p">(</span><span class="mi">7</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+
+<span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">058</span><span class="w"> </span><span class="n">ms</span>
+</code></pre></div>
+
+<p>Look at that, as fast as searching for the <code>id</code>! If we have a look at the query
+plan, we can see that we now do hit an index.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">ANALYZE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">;</span>
+<span class="w">                                                       </span><span class="n">QUERY</span><span class="w"> </span><span class="n">PLAN</span><span class="w">                                                       </span>
+<span class="c1">------------------------------------------------------------------------------------------------------------------------</span>
+<span class="w"> </span><span class="n">Bitmap</span><span class="w"> </span><span class="n">Heap</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">data</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">4</span><span class="p">.</span><span class="mi">52</span><span class="p">..</span><span class="mi">48</span><span class="p">.</span><span class="mi">14</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">11</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">050</span><span class="p">..</span><span class="mi">0</span><span class="p">.</span><span class="mi">072</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">7</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="k">Recheck</span><span class="w"> </span><span class="n">Cond</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">)</span>
+<span class="w">   </span><span class="n">Heap</span><span class="w"> </span><span class="n">Blocks</span><span class="p">:</span><span class="w"> </span><span class="n">exact</span><span class="o">=</span><span class="mi">7</span>
+<span class="w">   </span><span class="o">-&gt;</span><span class="w">  </span><span class="n">Bitmap</span><span class="w"> </span><span class="k">Index</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">idx_data_value</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="p">..</span><span class="mi">4</span><span class="p">.</span><span class="mi">52</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">11</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">034</span><span class="p">..</span><span class="mi">0</span><span class="p">.</span><span class="mi">035</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">7</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">         </span><span class="k">Index</span><span class="w"> </span><span class="n">Cond</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">)</span>
+<span class="w"> </span><span class="n">Planning</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">189</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">122</span><span class="w"> </span><span class="n">ms</span>
+<span class="p">(</span><span class="mi">7</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This looks a bit different with bitmap this and bitmap that. That's because
+the query planner decided that it was going to read more data, and thus opted
+for a slightly different strategy. We're still making good use of the index,
+though, and if we simply put a limit on the amount of returned values we'll see
+a pure index scan just like we did with the primary key.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">ANALYZE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                                                         </span><span class="n">QUERY</span><span class="w"> </span><span class="n">PLAN</span><span class="w">                                                          </span>
+<span class="c1">-----------------------------------------------------------------------------------------------------------------------------</span>
+<span class="w"> </span><span class="k">Limit</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">43</span><span class="p">..</span><span class="mi">4</span><span class="p">.</span><span class="mi">82</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">041</span><span class="p">..</span><span class="mi">0</span><span class="p">.</span><span class="mi">042</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="o">-&gt;</span><span class="w">  </span><span class="k">Index</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">idx_data_value</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">data</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">43</span><span class="p">..</span><span class="mi">48</span><span class="p">.</span><span class="mi">63</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">11</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">038</span><span class="p">..</span><span class="mi">0</span><span class="p">.</span><span class="mi">039</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">         </span><span class="k">Index</span><span class="w"> </span><span class="n">Cond</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">560487</span><span class="p">)</span>
+<span class="w"> </span><span class="n">Planning</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">169</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">077</span><span class="w"> </span><span class="n">ms</span>
+<span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+</code></pre></div>
+
+<p>If you only wanted to be sold on the fact that indexing is important, I think
+that's been covered already. But just having the effect of something without
+understanding at least the principles on which it operates will still make it
+harder than it has to be to apply it in practice. So let's discuss the
+principles of indexing and work through an example of the most commonly used
+index type: the B-tree.</p>
+<h1>Indexing in theory</h1>
+<p>If you've ever read a non-fiction book, you know in principle what an index is.
+Because at the back of that book there's a section called "index", and it
+contains an alphabetically sorted list of terms and phrases used throughout the
+book and a reference to the page number(s) where you can find their use. It's
+faster to find where "the rule of three" is defined in the book by looking it up
+in the index than by scanning through the entire book. Database indexes operate
+on precisely that assumption; it's faster to look a value up in an index than it
+is to scan through the entire table.</p>
+<p>There are many different kinds of indexes in databases, but by far the most
+common type is the B-tree index. Inspecting the indexes of the 'data<code>table, we
+can see that they are both of type</code>btree`.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">d</span><span class="w"> </span><span class="k">data</span>
+<span class="w">                            </span><span class="k">Table</span><span class="w"> </span><span class="ss">"public.data"</span>
+<span class="w"> </span><span class="k">Column</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="k">Type</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">Collation</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">Nullable</span><span class="w"> </span><span class="o">|</span><span class="w">             </span><span class="k">Default</span><span class="w">              </span>
+<span class="c1">--------+---------+-----------+----------+----------------------------------</span>
+<span class="w"> </span><span class="n">id</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="o">|</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">nextval</span><span class="p">(</span><span class="s1">'data_id_seq'</span><span class="p">::</span><span class="n">regclass</span><span class="p">)</span>
+<span class="w"> </span><span class="n">value</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="o">|</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>
+<span class="n">Indexes</span><span class="p">:</span>
+<span class="w">    </span><span class="ss">"data_pkey"</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w"> </span><span class="n">btree</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">    </span><span class="ss">"idx_data_value"</span><span class="w"> </span><span class="n">btree</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+
+<p>You may immediately think "oh, a binary tree", which is close, but no cigar. In
+the following section I'll outline how a B-tree index works and its properties
+such that you can make effective use of it in your day to day work.</p>
+<h2>The B-tree</h2>
+<p>A B-tree is indeed a search tree, and it is in fact rather similar to a binary search
+tree. Each node, or <em>page</em><sup id="sf-postgresql-indexing-basics-2-back"><a href="#sf-postgresql-indexing-basics-2" class="simple-footnote" title="In PostgreSQL, the nodes of a B-tree are called pages (source)">2</a></sup>
+is a sorted list of references either to other pages of the tree, or to columns of the
+indexed table<sup id="sf-postgresql-indexing-basics-3-back"><a href="#sf-postgresql-indexing-basics-3" class="simple-footnote" title="Pages in the B-tree are either internal pages or leaf pages. An internal page only contains references to other B-tree pages, while a leaf page only contains references to the indexed table. There are no hybrid internal/leaf pages. The root can be either internal or a leaf depending on the size of the index. There is also a special metapage that keeps track of things like tree depth and which page is the root of the tree (source). A search in a B-tree index starts from the singular root page and then proceeds through internal pages in the tree until a leaf page containing references to the indexed table is found. From there, the references to the table can be resolved and the rows retrieved.">3</a></sup></p>
+<p>Let's work through the example of searching for <code>value=560487</code> given the index
+structure shown in the image below. We start from the root page and search
+<sup id="sf-postgresql-indexing-basics-4-back"><a href="#sf-postgresql-indexing-basics-4" class="simple-footnote" title="The page is sorted, PostgreSQL makes effective use of binary search to quickly find a key">4</a></sup>
+through it until we find the segment where <code>500000 &lt;= value</code>. Semantically, this
+segment has an exclusive upper limit equal to the inclusive lower limit of the
+next segment (i.e. <code>500000 &lt;= value &lt; 600000</code> in this example). Following the
+reference to the start of the next page, we search that until we find the
+segment where <code>560000 &lt;= value &lt; 561000</code>. This segment refers to a leaf page,
+which again we search through until we find the desired key that in turn
+contains references to the sought rows of the table.</p>
+<div class="graphviz"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8IS0tIEdlbmVyYXRlZCBieSBncmFwaHZpeiB2ZXJzaW9uIDEwLjAuMSAoMCkKIC0tPgo8IS0tIFRpdGxlOiBHIFBhZ2VzOiAxIC0tPgo8c3ZnIHdpZHRoPSIxMDczcHQiIGhlaWdodD0iNzEzcHQiCiB2aWV3Qm94PSIwLjAwIDAuMDAgMTA3My4yNSA3MTIuNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgo8ZyBpZD0iZ3JhcGgwIiBjbGFzcz0iZ3JhcGgiIHRyYW5zZm9ybT0ic2NhbGUoMSAxKSByb3RhdGUoMCkgdHJhbnNsYXRlKDQgNzA4LjUpIj4KPHRpdGxlPkc8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJub25lIiBwb2ludHM9Ii00LDQgLTQsLTcwOC41IDEwNjkuMjUsLTcwOC41IDEwNjkuMjUsNCAtNCw0Ii8+CjxnIGlkPSJjbHVzdDEiIGNsYXNzPSJjbHVzdGVyIj4KPHRpdGxlPmNsdXN0ZXJfbGVnZW5kPC90aXRsZT4KPHBvbHlnb24gZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI0ODUuMjUsLTggNDg1LjI1LC02MCAxMDU3LjI1LC02MCAxMDU3LjI1LC04IDQ4NS4yNSwtOCIvPgo8L2c+CjwhLS0gTm9kZTEgLS0+CjxnIGlkPSJub2RlMSIgY2xhc3M9Im5vZGUiPgo8dGl0bGU+Tm9kZTE8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSJsaWdodGJsdWUiIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iNDA0LjEyLC02NjggNDA0LjEyLC03MDQgOTAwLjM4LC03MDQgOTAwLjM4LC02NjggNDA0LjEyLC02NjgiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNDE4Ljg4IiB5PSItNjgxLjMzIiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPi4uLjwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iNDMzLjYyLC02NjggNDMzLjYyLC03MDQiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNTA2LjUiIHk9Ii02ODEuMzMiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+NDAwMDAwIOKJpCB2YWx1ZSAmbHQ7PC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI1NzkuMzgsLTY2OCA1NzkuMzgsLTcwNCIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI2NTIuMjUiIHk9Ii02ODEuMzMiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+NTAwMDAwIOKJpCB2YWx1ZSAmbHQ7PC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI3MjUuMTIsLTY2OCA3MjUuMTIsLTcwNCIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI3OTgiIHk9Ii02ODEuMzMiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+NjAwMDAwIOKJpCB2YWx1ZSAmbHQ7PC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI4NzAuODgsLTY2OCA4NzAuODgsLTcwNCIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI4ODUuNjIiIHk9Ii02ODEuMzMiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+Li4uPC90ZXh0Pgo8L2c+CjwhLS0gTm9kZTIgLS0+CjxnIGlkPSJub2RlMiIgY2xhc3M9Im5vZGUiPgo8dGl0bGU+Tm9kZTI8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSJsaWdodHllbGxvdyIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSIwLC01NTkgMCwtNTk1IDM1MC41LC01OTUgMzUwLjUsLTU1OSAwLC01NTkiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMTQuNzUiIHk9Ii01NzIuMzMiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+Li4uPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSIyOS41LC01NTkgMjkuNSwtNTk1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjEwMi4zOCIgeT0iLTU3Mi4zMyIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj40MTAwMDAg4omkIHZhbHVlICZsdDs8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjE3NS4yNSwtNTU5IDE3NS4yNSwtNTk1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI0OC4xMiIgeT0iLTU3Mi4zMyIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj40MjAwMDAg4omkIHZhbHVlICZsdDs8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjMyMSwtNTU5IDMyMSwtNTk1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjMzNS43NSIgeT0iLTU3Mi4zMyIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj4uLi48L3RleHQ+CjwvZz4KPCEtLSBOb2RlMSYjNDU7Jmd0O05vZGUyIC0tPgo8ZyBpZD0iZWRnZTEiIGNsYXNzPSJlZGdlIj4KPHRpdGxlPk5vZGUxOmYwJiM0NTsmZ3Q7Tm9kZTI6ZjA8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImxpZ2h0Z3JheSIgZD0iTTUwNi4yNSwtNjY3LjVDNTA2LjI1LC01NjEuMSA1MC4wOSwtNjk1LjMgMTYuMjMsLTYwNi43NiIvPgo8cG9seWdvbiBmaWxsPSJsaWdodGdyYXkiIHN0cm9rZT0ibGlnaHRncmF5IiBwb2ludHM9IjE5LjY5LC02MDYuMjMgMTQuNTEsLTU5Ni45OSAxMi44LC02MDcuNDUgMTkuNjksLTYwNi4yMyIvPgo8L2c+CjwhLS0gTm9kZTMgLS0+CjxnIGlkPSJub2RlMyIgY2xhc3M9Im5vZGUiPgo8dGl0bGU+Tm9kZTM8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSJsaWdodHllbGxvdyIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSIzOTYsLTU1OSAzOTYsLTU5NSA3NDYuNSwtNTk1IDc0Ni41LC01NTkgMzk2LC01NTkiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNDEwLjc1IiB5PSItNTcyLjMzIiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPi4uLjwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iNDI1LjUsLTU1OSA0MjUuNSwtNTk1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ5OC4zOCIgeT0iLTU3Mi4zMyIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj41NjAwMDAg4omkIHZhbHVlICZsdDs8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjU3MS4yNSwtNTU5IDU3MS4yNSwtNTk1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjY0NC4xMiIgeT0iLTU3Mi4zMyIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj41NjEwMDAg4omkIHZhbHVlICZsdDs8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjcxNywtNTU5IDcxNywtNTk1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjczMS43NSIgeT0iLTU3Mi4zMyIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj4uLi48L3RleHQ+CjwvZz4KPCEtLSBOb2RlMSYjNDU7Jmd0O05vZGUzIC0tPgo8ZyBpZD0iZWRnZTIiIGNsYXNzPSJlZGdlIj4KPHRpdGxlPk5vZGUxOmYxJiM0NTsmZ3Q7Tm9kZTM6ZjA8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNNjUyLjI1LC02NjcuNUM2NTIuMjUsLTU1OS40NSA0MjcuODgsLTY5Ni43NyA0MTEuMjMsLTYwNi45MyIvPgo8cG9seWdvbiBmaWxsPSJibGFjayIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI0MTQuNzIsLTYwNi42NyA0MTAuMzgsLTU5Ny4wMSA0MDcuNzQsLTYwNy4yNyA0MTQuNzIsLTYwNi42NyIvPgo8L2c+CjwhLS0gTm9kZTEmIzQ1OyZndDtOb2RlMyAtLT4KPCEtLSBOb2RlNSAtLT4KPGcgaWQ9Im5vZGU0IiBjbGFzcz0ibm9kZSI+Cjx0aXRsZT5Ob2RlNTwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9ImxpZ2h0Z3JlZW4iIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iMjc4Ljg4LC00NTAgMjc4Ljg4LC00ODYgNzI1LjYyLC00ODYgNzI1LjYyLC00NTAgMjc4Ljg4LC00NTAiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMjkzLjYyIiB5PSItNDYzLjMyIiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPi4uLjwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iMzA4LjM4LC00NTAgMzA4LjM4LC00ODYiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzczIiB5PSItNDYzLjMyIiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPnZhbHVlID0gNTYwNDg2PC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI0MzcuNjIsLTQ1MCA0MzcuNjIsLTQ4NiIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1MDIuMjUiIHk9Ii00NjMuMzIiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+dmFsdWUgPSA1NjA0ODc8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjU2Ni44OCwtNDUwIDU2Ni44OCwtNDg2Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjYzMS41IiB5PSItNDYzLjMyIiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPnZhbHVlID0gNTA2NDg4PC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI2OTYuMTIsLTQ1MCA2OTYuMTIsLTQ4NiIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI3MTAuODgiIHk9Ii00NjMuMzIiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+Li4uPC90ZXh0Pgo8L2c+CjwhLS0gTm9kZTEmIzQ1OyZndDtOb2RlNSAtLT4KPCEtLSBUYWJsZSAtLT4KPGcgaWQ9Im5vZGU1IiBjbGFzcz0ibm9kZSI+Cjx0aXRsZT5UYWJsZTwvdGl0bGU+CjxwYXRoIGZpbGw9IiNlYmViZWIiIHN0cm9rZT0iYmxhY2siIGQ9Ik00NzQuNzUsLTEyNC41QzQ3NC43NSwtMTI0LjUgNTk5Ljc1LC0xMjQuNSA1OTkuNzUsLTEyNC41IDYwNS43NSwtMTI0LjUgNjExLjc1LC0xMzAuNSA2MTEuNzUsLTEzNi41IDYxMS43NSwtMTM2LjUgNjExLjc1LC0zNjUgNjExLjc1LC0zNjUgNjExLjc1LC0zNzEgNjA1Ljc1LC0zNzcgNTk5Ljc1LC0zNzcgNTk5Ljc1LC0zNzcgNDc0Ljc1LC0zNzcgNDc0Ljc1LC0zNzcgNDY4Ljc1LC0zNzcgNDYyLjc1LC0zNzEgNDYyLjc1LC0zNjUgNDYyLjc1LC0zNjUgNDYyLjc1LC0xMzYuNSA0NjIuNzUsLTEzNi41IDQ2Mi43NSwtMTMwLjUgNDY4Ljc1LC0xMjQuNSA0NzQuNzUsLTEyNC41Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjUwMi4yNSIgeT0iLTM1OS43IiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPmlkPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI0NjIuNzUsLTM1MS43NSA1NDEuNzUsLTM1MS43NSIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1MDIuMjUiIHk9Ii0zMzQuNDUiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+Li4uPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI0NjIuNzUsLTMyNi41IDU0MS43NSwtMzI2LjUiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNTAyLjI1IiB5PSItMzA5LjIiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+NDU8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjQ2Mi43NSwtMzAxLjI1IDU0MS43NSwtMzAxLjI1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjUwMi4yNSIgeT0iLTI4My45NSIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj4uLi48L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjQ2Mi43NSwtMjc2IDU0MS43NSwtMjc2Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjUwMi4yNSIgeT0iLTI1OC43IiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPjIwNjgyNTk8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjQ2Mi43NSwtMjUwLjc1IDU0MS43NSwtMjUwLjc1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjUwMi4yNSIgeT0iLTIzMy40NSIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj4uLi48L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjQ2Mi43NSwtMjI1LjUgNTQxLjc1LC0yMjUuNSIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1MDIuMjUiIHk9Ii0yMDguMiIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj41MDEzOTYzPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI0NjIuNzUsLTIwMC4yNSA1NDEuNzUsLTIwMC4yNSIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1MDIuMjUiIHk9Ii0xODIuOTUiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+Li4uPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI0NjIuNzUsLTE3NSA1NDEuNzUsLTE3NSIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1MDIuMjUiIHk9Ii0xNTcuNyIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj42MDAwMTM1PC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI0NjIuNzUsLTE0OS43NSA1NDEuNzUsLTE0OS43NSIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1MDIuMjUiIHk9Ii0xMzIuNDUiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+Li4uPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI1NDEuNzUsLTEyNC41IDU0MS43NSwtMzc3Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjU3Ni43NSIgeT0iLTM1OS43IiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPnZhbHVlPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI1NDEuNzUsLTM1MS43NSA2MTEuNzUsLTM1MS43NSIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1NzYuNzUiIHk9Ii0zMzQuNDUiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+Li4uPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI1NDEuNzUsLTMyNi41IDYxMS43NSwtMzI2LjUiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNTc2Ljc1IiB5PSItMzA5LjIiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+NTYwNDg4PC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI1NDEuNzUsLTMwMS4yNSA2MTEuNzUsLTMwMS4yNSIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1NzYuNzUiIHk9Ii0yODMuOTUiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+Li4uPC90ZXh0Pgo8cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI1NDEuNzUsLTI3NiA2MTEuNzUsLTI3NiIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1NzYuNzUiIHk9Ii0yNTguNyIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj41NjA0ODc8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjU0MS43NSwtMjUwLjc1IDYxMS43NSwtMjUwLjc1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjU3Ni43NSIgeT0iLTIzMy40NSIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj4uLi48L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjU0MS43NSwtMjI1LjUgNjExLjc1LC0yMjUuNSIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI1NzYuNzUiIHk9Ii0yMDguMiIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj41NjA0ODc8L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjU0MS43NSwtMjAwLjI1IDYxMS43NSwtMjAwLjI1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjU3Ni43NSIgeT0iLTE4Mi45NSIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj4uLi48L3RleHQ+Cjxwb2x5bGluZSBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjU0MS43NSwtMTc1IDYxMS43NSwtMTc1Ii8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjU3Ni43NSIgeT0iLTE1Ny43IiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPjU2MDQ4NjwvdGV4dD4KPHBvbHlsaW5lIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iNTQxLjc1LC0xNDkuNzUgNjExLjc1LC0xNDkuNzUiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNTc2Ljc1IiB5PSItMTMyLjQ1IiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPi4uLjwvdGV4dD4KPC9nPgo8IS0tIE5vZGUxJiM0NTsmZ3Q7VGFibGUgLS0+CjwhLS0gTm9kZTFfb21pdHRlZCAtLT4KPGcgaWQ9Im5vZGU2IiBjbGFzcz0ibm9kZSI+Cjx0aXRsZT5Ob2RlMV9vbWl0dGVkPC90aXRsZT4KPHBvbHlnb24gZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI4NTMuMjUsLTU1OSA4NTMuMjUsLTU5NSA5MDcuMjUsLTU5NSA5MDcuMjUsLTU1OSA4NTMuMjUsLTU1OSIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI4ODAiIHk9Ii01NzIuMzMiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+Li4uPC90ZXh0Pgo8L2c+CjwhLS0gTm9kZTEmIzQ1OyZndDtOb2RlMV9vbWl0dGVkIC0tPgo8ZyBpZD0iZWRnZTMiIGNsYXNzPSJlZGdlIj4KPHRpdGxlPk5vZGUxOmYyJiM0NTsmZ3Q7Tm9kZTFfb21pdHRlZDwvdGl0bGU+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0ibGlnaHRncmF5IiBkPSJNNzk4LjI1LC02NjcuNUM3OTguMjUsLTYzOC42OCA4MjEuNjUsLTYxNS4xMSA4NDMuNDUsLTU5OS40Ii8+Cjxwb2x5Z29uIGZpbGw9ImxpZ2h0Z3JheSIgc3Ryb2tlPSJsaWdodGdyYXkiIHBvaW50cz0iODQ1LjM5LC02MDIuMzIgODUxLjY5LC01OTMuODEgODQxLjQ1LC01OTYuNTMgODQ1LjM5LC02MDIuMzIiLz4KPC9nPgo8IS0tIE5vZGUyX29taXR0ZWRfMSAtLT4KPGcgaWQ9Im5vZGU3IiBjbGFzcz0ibm9kZSI+Cjx0aXRsZT5Ob2RlMl9vbWl0dGVkXzE8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9Ijc1LjI1LC00NTAgNzUuMjUsLTQ4NiAxMjkuMjUsLTQ4NiAxMjkuMjUsLTQ1MCA3NS4yNSwtNDUwIi8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjEwMiIgeT0iLTQ2My4zMiIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj4uLi48L3RleHQ+CjwvZz4KPCEtLSBOb2RlMiYjNDU7Jmd0O05vZGUyX29taXR0ZWRfMSAtLT4KPGcgaWQ9ImVkZ2U0IiBjbGFzcz0iZWRnZSI+Cjx0aXRsZT5Ob2RlMjpmMSYjNDU7Jmd0O05vZGUyX29taXR0ZWRfMTwvdGl0bGU+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0ibGlnaHRncmF5IiBkPSJNMTAyLjI1LC01NTguNUMxMDIuMjUsLTUzOC4yNyAxMDIuMjUsLTUxNS40NyAxMDIuMjUsLTQ5Ny45NSIvPgo8cG9seWdvbiBmaWxsPSJsaWdodGdyYXkiIHN0cm9rZT0ibGlnaHRncmF5IiBwb2ludHM9IjEwNS43NSwtNDk4LjAxIDEwMi4yNSwtNDg4LjAxIDk4Ljc1LC00OTguMDEgMTA1Ljc1LC00OTguMDEiLz4KPC9nPgo8IS0tIE5vZGUyX29taXR0ZWRfMiAtLT4KPGcgaWQ9Im5vZGU4IiBjbGFzcz0ibm9kZSI+Cjx0aXRsZT5Ob2RlMl9vbWl0dGVkXzI8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjIwNy4yNSwtNDUwIDIwNy4yNSwtNDg2IDI2MS4yNSwtNDg2IDI2MS4yNSwtNDUwIDIwNy4yNSwtNDUwIi8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjIzNCIgeT0iLTQ2My4zMiIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj4uLi48L3RleHQ+CjwvZz4KPCEtLSBOb2RlMiYjNDU7Jmd0O05vZGUyX29taXR0ZWRfMiAtLT4KPGcgaWQ9ImVkZ2U1IiBjbGFzcz0iZWRnZSI+Cjx0aXRsZT5Ob2RlMjpmMiYjNDU7Jmd0O05vZGUyX29taXR0ZWRfMjwvdGl0bGU+CjxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0ibGlnaHRncmF5IiBkPSJNMjQ4LjI1LC01NTguNUMyNDguMjUsLTUzNy45MyAyNDQuNTksLTUxNS4wMSAyNDEuMDIsLTQ5Ny41MiIvPgo8cG9seWdvbiBmaWxsPSJsaWdodGdyYXkiIHN0cm9rZT0ibGlnaHRncmF5IiBwb2ludHM9IjI0NC40NiwtNDk2Ljg4IDIzOC45MiwtNDg3Ljg1IDIzNy42MiwtNDk4LjM2IDI0NC40NiwtNDk2Ljg4Ii8+CjwvZz4KPCEtLSBOb2RlMyYjNDU7Jmd0O05vZGU1IC0tPgo8ZyBpZD0iZWRnZTYiIGNsYXNzPSJlZGdlIj4KPHRpdGxlPk5vZGUzOmYxJiM0NTsmZ3Q7Tm9kZTU6ZjA8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNNDk4LjI1LC01NTguNUM0OTguMjUsLTQ2Ni4wOCAzMTAuNDksLTU3My4wNiAyOTQuMzUsLTQ5Ny43OCIvPgo8cG9seWdvbiBmaWxsPSJibGFjayIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSIyOTcuODUsLTQ5Ny42MiAyOTMuNCwtNDg4LjAxIDI5MC44OSwtNDk4LjMgMjk3Ljg1LC00OTcuNjIiLz4KPC9nPgo8IS0tIE5vZGUzX29taXR0ZWQgLS0+CjxnIGlkPSJub2RlOSIgY2xhc3M9Im5vZGUiPgo8dGl0bGU+Tm9kZTNfb21pdHRlZDwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iNzQzLjI1LC00NTAgNzQzLjI1LC00ODYgNzk3LjI1LC00ODYgNzk3LjI1LC00NTAgNzQzLjI1LC00NTAiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNzcwIiB5PSItNDYzLjMyIiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPi4uLjwvdGV4dD4KPC9nPgo8IS0tIE5vZGUzJiM0NTsmZ3Q7Tm9kZTNfb21pdHRlZCAtLT4KPGcgaWQ9ImVkZ2U3IiBjbGFzcz0iZWRnZSI+Cjx0aXRsZT5Ob2RlMzpmMiYjNDU7Jmd0O05vZGUzX29taXR0ZWQ8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImxpZ2h0Z3JheSIgZD0iTTY0NC4yNSwtNTU4LjVDNjQ0LjI1LC01NDcuNDggNjk2LjE2LC01MTMuNzMgNzMzLjM0LC00OTAuOTciLz4KPHBvbHlnb24gZmlsbD0ibGlnaHRncmF5IiBzdHJva2U9ImxpZ2h0Z3JheSIgcG9pbnRzPSI3MzQuODksLTQ5NC4xMyA3NDEuNjIsLTQ4NS45NSA3MzEuMjUsLTQ4OC4xNSA3MzQuODksLTQ5NC4xMyIvPgo8L2c+CjwhLS0gTm9kZTUmIzQ1OyZndDtUYWJsZSAtLT4KPGcgaWQ9ImVkZ2U4IiBjbGFzcz0iZWRnZSI+Cjx0aXRsZT5Ob2RlNTpmMSYjNDU7Jmd0O1RhYmxlOmY2PC90aXRsZT4KPHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSJsaWdodGdyYXkiIGQ9Ik0zNzMuMjUsLTQ0OS41QzM3My4yNSwtMzIwLjA5IDMzMC41NiwtMTcxLjcyIDQ0OS45OSwtMTYzLjE0Ii8+Cjxwb2x5Z29uIGZpbGw9ImxpZ2h0Z3JheSIgc3Ryb2tlPSJsaWdodGdyYXkiIHBvaW50cz0iNDQ5Ljg2LC0xNjYuNjUgNDU5Ljc0LC0xNjIuOCA0NDkuNjIsLTE1OS42NSA0NDkuODYsLTE2Ni42NSIvPgo8L2c+CjwhLS0gTm9kZTUmIzQ1OyZndDtUYWJsZSAtLT4KPGcgaWQ9ImVkZ2U5IiBjbGFzcz0iZWRnZSI+Cjx0aXRsZT5Ob2RlNTpmMiYjNDU7Jmd0O1RhYmxlOmYyPC90aXRsZT4KPHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgZD0iTTUwMi4yNSwtNDQ5LjVDNTAyLjI1LC00MTIuODkgNDcxLjU5LC00MTIuOSA0NjIuMjUsLTM3Ny41IDQ1MC40NiwtMzMyLjgyIDQxNy4xNSwtMjc0Ljc4IDQ1MC4xMiwtMjY1LjE0Ii8+Cjxwb2x5Z29uIGZpbGw9ImJsYWNrIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjQ1MC4yNiwtMjY4LjY1IDQ1OS43NSwtMjYzLjk0IDQ0OS4zOSwtMjYxLjcgNDUwLjI2LC0yNjguNjUiLz4KPC9nPgo8IS0tIE5vZGU1JiM0NTsmZ3Q7VGFibGUgLS0+CjxnIGlkPSJlZGdlMTAiIGNsYXNzPSJlZGdlIj4KPHRpdGxlPk5vZGU1OmYyJiM0NTsmZ3Q7VGFibGU6ZjQ8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBkPSJNNTAyLjI1LC00NDkuNUM1MDIuMjUsLTQxMi44OSA0NzEuNTQsLTQxMi45MSA0NjIuMjUsLTM3Ny41IDQ0NC43MiwtMzEwLjY5IDM5NC4yMSwtMjIzLjMyIDQ1MC4wMiwtMjEzLjYzIi8+Cjxwb2x5Z29uIGZpbGw9ImJsYWNrIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjQ1MC4wNSwtMjE3LjE0IDQ1OS43NCwtMjEyLjg3IDQ0OS41LC0yMTAuMTYgNDUwLjA1LC0yMTcuMTQiLz4KPC9nPgo8IS0tIE5vZGU1JiM0NTsmZ3Q7VGFibGUgLS0+CjxnIGlkPSJlZGdlMTEiIGNsYXNzPSJlZGdlIj4KPHRpdGxlPk5vZGU1OmYzJiM0NTsmZ3Q7VGFibGU6ZjE8L3RpdGxlPgo8cGF0aCBmaWxsPSJub25lIiBzdHJva2U9ImxpZ2h0Z3JheSIgZD0iTTYzMS4yNSwtNDQ5LjVDNjMxLjI1LC0zOTIuOTIgNjY4LjMsLTMyNC4yMSA2MjQuNiwtMzE0LjgzIi8+Cjxwb2x5Z29uIGZpbGw9ImxpZ2h0Z3JheSIgc3Ryb2tlPSJsaWdodGdyYXkiIHBvaW50cz0iNjI1LjA0LC0zMTEuMzYgNjE0Ljc2LC0zMTMuODkgNjI0LjM4LC0zMTguMzIgNjI1LjA0LC0zMTEuMzYiLz4KPC9nPgo8IS0tIFJvb3QgLS0+CjxnIGlkPSJub2RlMTAiIGNsYXNzPSJub2RlIj4KPHRpdGxlPlJvb3Q8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSJsaWdodGJsdWUiIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iNTgxLjI1LC01MiA0OTMuMjUsLTUyIDQ5My4yNSwtMTYgNTgxLjI1LC0xNiA1ODEuMjUsLTUyIi8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjUzNy4yNSIgeT0iLTI5LjMyIiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPlJvb3QgUGFnZTwvdGV4dD4KPC9nPgo8IS0tIFRhYmxlJiM0NTsmZ3Q7Um9vdCAtLT4KPCEtLSBJbnRlcm5hbCAtLT4KPGcgaWQ9Im5vZGUxMSIgY2xhc3M9Im5vZGUiPgo8dGl0bGU+SW50ZXJuYWw8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSJsaWdodHllbGxvdyIgc3Ryb2tlPSJibGFjayIgcG9pbnRzPSI3MTEuMjUsLTUyIDU5OS4yNSwtNTIgNTk5LjI1LC0xNiA3MTEuMjUsLTE2IDcxMS4yNSwtNTIiLz4KPHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iNjU1LjI1IiB5PSItMjkuMzIiIGZvbnQtZmFtaWx5PSJUaW1lcyxzZXJpZiIgZm9udC1zaXplPSIxNC4wMCI+SW50ZXJuYWwgUGFnZTwvdGV4dD4KPC9nPgo8IS0tIExlYWYgLS0+CjxnIGlkPSJub2RlMTIiIGNsYXNzPSJub2RlIj4KPHRpdGxlPkxlYWY8L3RpdGxlPgo8cG9seWdvbiBmaWxsPSJsaWdodGdyZWVuIiBzdHJva2U9ImJsYWNrIiBwb2ludHM9IjgxNS4xMiwtNTIgNzI5LjM4LC01MiA3MjkuMzgsLTE2IDgxNS4xMiwtMTYgODE1LjEyLC01MiIvPgo8dGV4dCB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB4PSI3NzIuMjUiIHk9Ii0yOS4zMiIgZm9udC1mYW1pbHk9IlRpbWVzLHNlcmlmIiBmb250LXNpemU9IjE0LjAwIj5MZWFmIFBhZ2U8L3RleHQ+CjwvZz4KPCEtLSBUYWJsZU5vZGUgLS0+CjxnIGlkPSJub2RlMTMiIGNsYXNzPSJub2RlIj4KPHRpdGxlPlRhYmxlTm9kZTwvdGl0bGU+Cjxwb2x5Z29uIGZpbGw9IiNlYmViZWIiIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iOTI1LjUsLTUyIDgzMywtNTIgODMzLC0xNiA5MjUuNSwtMTYgOTI1LjUsLTUyIi8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9Ijg3OS4yNSIgeT0iLTI5LjMyIiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPkRhdGEgVGFibGU8L3RleHQ+CjwvZz4KPCEtLSBPbWl0dGVkIC0tPgo8ZyBpZD0ibm9kZTE0IiBjbGFzcz0ibm9kZSI+Cjx0aXRsZT5PbWl0dGVkPC90aXRsZT4KPHBvbHlnb24gZmlsbD0id2hpdGUiIHN0cm9rZT0iYmxhY2siIHBvaW50cz0iMTA0OS4yNSwtNTIgOTQzLjI1LC01MiA5NDMuMjUsLTE2IDEwNDkuMjUsLTE2IDEwNDkuMjUsLTUyIi8+Cjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9Ijk5Ni4yNSIgeT0iLTI5LjMyIiBmb250LWZhbWlseT0iVGltZXMsc2VyaWYiIGZvbnQtc2l6ZT0iMTQuMDAiPi4uLiA9IG9taXR0ZWQ8L3RleHQ+CjwvZz4KPC9nPgo8L3N2Zz4K"></div>
+<blockquote>
+<p>Note that this is just for illustrative purposes. The splitting into segments
+as shown here is completely made up by me to be easy to illustrate. It's very
+unlikely to actually be a good split and therefore not the one that PostgreSQL
+would actually make.</p>
+</blockquote>
+<p>In addition to providing quick lookup to specific values, the fact that B-trees
+are sorted leads to some possibly unexpected benefits in quires that require
+sorted output.</p>
+<h2>Selecting ranges is almost as fast as single values</h2>
+<p>Did you notice in the illustration above that the leaf page contained not only
+the value we searched for, but also its closest neighbors? Because of this
+adjacency, an index lookup for a <em>range</em> of values is incredibly
+efficient<sup id="sf-postgresql-indexing-basics-5-back"><a href="#sf-postgresql-indexing-basics-5" class="simple-footnote" title="Depending on the amount of hits, scanning the rows from the table may of course take longer, however.">5</a></sup>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="mi">560486</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">560489</span><span class="p">;</span>
+<span class="w">   </span><span class="n">id</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">value</span><span class="w">  </span>
+<span class="c1">---------+--------</span>
+<span class="w"> </span><span class="mi">1061367</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">1451289</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">2068259</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">2250572</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">2298922</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560486</span>
+<span class="w"> </span><span class="mi">2998709</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560486</span>
+<span class="w"> </span><span class="mi">3149734</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560486</span>
+<span class="w"> </span><span class="mi">3385911</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560486</span>
+<span class="w"> </span><span class="mi">3552143</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">4123068</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">4305566</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">4599351</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">5013963</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">5490314</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">5521774</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">5715474</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560486</span>
+<span class="w"> </span><span class="mi">5725443</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">6125940</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560486</span>
+<span class="w"> </span><span class="mi">6423931</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560486</span>
+<span class="w"> </span><span class="mi">6752395</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">6894022</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">7313065</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">7365878</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">7956607</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">8046840</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560486</span>
+<span class="w"> </span><span class="mi">8290267</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">8455242</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">8941102</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="w"> </span><span class="mi">9020004</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560487</span>
+<span class="w"> </span><span class="mi">9663961</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">560488</span>
+<span class="p">(</span><span class="mi">30</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+
+<span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">360</span><span class="w"> </span><span class="n">ms</span>
+</code></pre></div>
+
+<p>A very common use case for a range selection is on creation date, e.g. `WHERE
+created_at &gt;= '2024-04-01'.</p>
+<h2>Indexes greatly speed up <code>ORDER BY</code></h2>
+<p>Tacking on an <code>ORDER BY</code> to a query is commonplace and pretty much required if
+you plan to do any kind of pagination on the result set<sup id="sf-postgresql-indexing-basics-6-back"><a href="#sf-postgresql-indexing-basics-6" class="simple-footnote" title="The order in which rows are returned from a query is undefined unless ORDER BY is provided. A common bug in backend systems is that OFFSET and LIMIT are used for pagination either without explicit ordering or with ordering that is not unique.">6</a></sup>. Without an index on <code>value</code>, ordering by it takes quite a bit of
+time.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">idx_data_value</span><span class="p">;</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span>
+<span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">   </span><span class="n">id</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">value</span><span class="w"> </span>
+<span class="c1">---------+-------</span>
+<span class="w"> </span><span class="mi">1453865</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">8150282</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">7796750</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">3782708</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">8571152</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">1650656</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">9165134</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">  </span><span class="mi">268472</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">5889252</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">3330397</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="p">(</span><span class="mi">10</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+
+<span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">331</span><span class="p">.</span><span class="mi">239</span><span class="w"> </span><span class="n">ms</span>
+</code></pre></div>
+
+<p>But tacking on the index, it's again orders of magnitude faster.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_data_value</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span>
+<span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">   </span><span class="n">id</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">value</span><span class="w"> </span>
+<span class="c1">---------+-------</span>
+<span class="w"> </span><span class="mi">1453865</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">3782708</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">7796750</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">8150282</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w">  </span><span class="mi">268472</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">1650656</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">2191333</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">3330397</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">5364764</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">5889252</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="p">(</span><span class="mi">10</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+
+<span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">628</span><span class="w"> </span><span class="n">ms</span>
+</code></pre></div>
+
+<p>This is so fast because there's actually no ordering going on; PostgreSQL just
+scans the already sorted index.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">ANALYZE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">                                                               </span><span class="n">QUERY</span><span class="w"> </span><span class="n">PLAN</span><span class="w">                                                               </span>
+<span class="c1">----------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="w"> </span><span class="k">Limit</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">43</span><span class="p">..</span><span class="mi">0</span><span class="p">.</span><span class="mi">81</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">049</span><span class="p">..</span><span class="mi">0</span><span class="p">.</span><span class="mi">074</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="o">-&gt;</span><span class="w">  </span><span class="k">Index</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">idx_data_value</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">data</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">43</span><span class="p">..</span><span class="mi">372326</span><span class="p">.</span><span class="mi">50</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">10000000</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">046</span><span class="p">..</span><span class="mi">0</span><span class="p">.</span><span class="mi">069</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w"> </span><span class="n">Planning</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">161</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">104</span><span class="w"> </span><span class="n">ms</span>
+<span class="p">(</span><span class="mi">4</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+
+<span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">284</span><span class="w"> </span><span class="n">ms</span>
+</code></pre></div>
+
+<p>There is simply a lot of value to having an index that is already ordered<sup id="sf-postgresql-indexing-basics-7-back"><a href="#sf-postgresql-indexing-basics-7" class="simple-footnote" title=" Note that only the B-tree type of index has this property (source).">7</a></sup>
+as so many common operations rely on ordering.</p>
+<h1>Indexing pitfalls</h1>
+<p>Thus far, this article has mostly covered the happy path of indexing, when
+everything just works out. It may have given you the impression that indexing is
+a silver bullet to any query running a bit slow. Unfortunately, that's far from
+the case, so in this section I will outline a few scenarios that may cause
+confusion among up and coming indexers.</p>
+<h2>The query planner can choose not to use an index</h2>
+<p>Indexes are great, but sometimes the query planner may choose to ignore them and
+just scan the table instead. This is quite easy to show, take for example the
+following query where we search for any <code>value &gt; 500000</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">ANALYZE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">500000</span><span class="p">;</span>
+<span class="w">                                                   </span><span class="n">QUERY</span><span class="w"> </span><span class="n">PLAN</span><span class="w">                                                    </span>
+<span class="c1">-----------------------------------------------------------------------------------------------------------------</span>
+<span class="w"> </span><span class="n">Seq</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">data</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="p">..</span><span class="mi">169248</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">5044664</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">5</span><span class="p">.</span><span class="mi">213</span><span class="p">..</span><span class="mi">653</span><span class="p">.</span><span class="mi">177</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">4998152</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="n">Filter</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">500000</span><span class="p">)</span>
+<span class="w">   </span><span class="k">Rows</span><span class="w"> </span><span class="n">Removed</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">Filter</span><span class="p">:</span><span class="w"> </span><span class="mi">5001848</span>
+<span class="w"> </span><span class="n">Planning</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">151</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">JIT</span><span class="p">:</span>
+<span class="w">   </span><span class="n">Functions</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">   </span><span class="k">Options</span><span class="p">:</span><span class="w"> </span><span class="n">Inlining</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">Optimization</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">Expressions</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"> </span><span class="n">Deforming</span><span class="w"> </span><span class="k">true</span>
+<span class="w">   </span><span class="n">Timing</span><span class="p">:</span><span class="w"> </span><span class="n">Generation</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">379</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Inlining</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Optimization</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">356</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Emission</span><span class="w"> </span><span class="mi">3</span><span class="p">.</span><span class="mi">469</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Total</span><span class="w"> </span><span class="mi">4</span><span class="p">.</span><span class="mi">204</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">770</span><span class="p">.</span><span class="mi">366</span><span class="w"> </span><span class="n">ms</span>
+<span class="p">(</span><span class="mi">9</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The query planner chooses to forego the index and just scan the table (<code>Seq Scan
+on data</code>). Why? Recall again the example trace of the B-tree index in the first
+section of this article; it requires resolving a whole bunch of references and
+accessing data both from the index and the table<sup id="sf-postgresql-indexing-basics-8-back"><a href="#sf-postgresql-indexing-basics-8" class="simple-footnote" title="Except for so-called index-only scans (source)">8</a></sup>,
+which are stored separately. When accessing large parts of the table, it's often
+faster to just scan through the entire table than it is to resolve all of those
+references. The condition <code>value &gt; 500000</code> corresponds to roughly half of the
+table<sup id="sf-postgresql-indexing-basics-9-back"><a href="#sf-postgresql-indexing-basics-9" class="simple-footnote" title="The query planner knows this as PostgreSQL keeps statistics on table contents (source).">9</a></sup>,
+so the query planner does not use the index.</p>
+<p>If we increase the value, the query planner will re-evaluate and use the index
+as it estimates that a small enough part of the table needs to be scanned in the
+end.</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">Bitmap</span><span class="w"> </span><span class="n">Heap</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">data</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">49658</span><span class="p">.</span><span class="mi">83</span><span class="p">..</span><span class="mi">144439</span><span class="p">.</span><span class="mi">73</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">4042632</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">196</span><span class="p">.</span><span class="mi">822</span><span class="p">..</span><span class="mi">663</span><span class="p">.</span><span class="mi">746</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">4000401</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="k">Recheck</span><span class="w"> </span><span class="n">Cond</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">600000</span><span class="p">)</span>
+<span class="w">   </span><span class="n">Heap</span><span class="w"> </span><span class="n">Blocks</span><span class="p">:</span><span class="w"> </span><span class="n">exact</span><span class="o">=</span><span class="mi">44248</span>
+<span class="w">   </span><span class="o">-&gt;</span><span class="w">  </span><span class="n">Bitmap</span><span class="w"> </span><span class="k">Index</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">idx_data_value</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="p">..</span><span class="mi">48648</span><span class="p">.</span><span class="mi">17</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">4042632</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">189</span><span class="p">.</span><span class="mi">479</span><span class="p">..</span><span class="mi">189</span><span class="p">.</span><span class="mi">479</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">4000401</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">         </span><span class="k">Index</span><span class="w"> </span><span class="n">Cond</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">600000</span><span class="p">)</span>
+<span class="w"> </span><span class="n">Planning</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">157</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">JIT</span><span class="p">:</span>
+<span class="w">   </span><span class="n">Functions</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">   </span><span class="k">Options</span><span class="p">:</span><span class="w"> </span><span class="n">Inlining</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">Optimization</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">Expressions</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"> </span><span class="n">Deforming</span><span class="w"> </span><span class="k">true</span>
+<span class="w">   </span><span class="n">Timing</span><span class="p">:</span><span class="w"> </span><span class="n">Generation</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">367</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Inlining</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Optimization</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Emission</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Total</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">367</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">756</span><span class="p">.</span><span class="mi">080</span><span class="w"> </span><span class="n">ms</span>
+<span class="p">(</span><span class="mi">11</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Now the index is used, but the query runs almost precisely as fast at <code>756 ms</code>,
+compared to <code>770 ms</code> for the full table scan. Considering it's also fetching
+fewer rows due to a narrower search, the fact that the query planner chose to
+run the previous plan without touching the index seems justified.</p>
+<p>Note that this is all circumstantial, and that's entirely the point. The query
+planner will come up with different query plans depending on the layout of the
+data and the exact parameters of the query, even with all other server and
+client settings being the same. A consequence of this is query plans can change
+dramatically as data in your tables accumulate. This also means that the <strong>query
+plans you get in your local development environment are often different from the
+ones you get in production</strong>. As such, one can easily be fooled by a query that
+gets a terrible looking plan in your local environment but actually runs fine in
+production, and vice versa<sup id="sf-postgresql-indexing-basics-10-back"><a href="#sf-postgresql-indexing-basics-10" class="simple-footnote" title="The query planner can also come up with terrible queries if table statistics are too outdated, but that's a topic for another time.">10</a></sup>. Be aware of this when you add new indexes and are perplexed as to
+why they are not used; there may just not be enough data for it to be worth it.</p>
+<h2>An index is for an exact expression</h2>
+<p>We have an index on <code>data(value)</code> and showed that ordering by <code>value</code> is super
+quick. Let's do it again so you don't have to scroll up too far.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">   </span><span class="n">id</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">value</span><span class="w"> </span>
+<span class="c1">---------+-------</span>
+<span class="w"> </span><span class="mi">1453865</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">3782708</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">7796750</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">8150282</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w">  </span><span class="mi">268472</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">1650656</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">2191333</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">3330397</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">5364764</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">5889252</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="p">(</span><span class="mi">10</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+
+<span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">455</span><span class="w"> </span><span class="n">ms</span>
+</code></pre></div>
+
+<p>But what if we order by <code>value * 2</code>?</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">   </span><span class="n">id</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">value</span><span class="w"> </span>
+<span class="c1">---------+-------</span>
+<span class="w"> </span><span class="mi">3782708</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">1453865</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">7796750</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">8150282</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">0</span>
+<span class="w"> </span><span class="mi">5889252</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">3330397</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">9165134</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">5364764</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w"> </span><span class="mi">8571152</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">  </span><span class="mi">268472</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mi">1</span>
+<span class="p">(</span><span class="mi">10</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+
+<span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">.</span><span class="mi">665</span><span class="w"> </span><span class="n">ms</span>
+</code></pre></div>
+
+<p>It takes 1000 times as long. Looking at the query plan, we can see why.</p>
+<div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">EXPLAIN</span><span class="w"> </span><span class="k">ANALYZE</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">                                                                 </span><span class="n">QUERY</span><span class="w"> </span><span class="n">PLAN</span><span class="w">                                                                 </span>
+<span class="c1">--------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="w"> </span><span class="k">Limit</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">187371</span><span class="p">.</span><span class="mi">53</span><span class="p">..</span><span class="mi">187372</span><span class="p">.</span><span class="mi">70</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">691</span><span class="p">.</span><span class="mi">290</span><span class="p">..</span><span class="mi">696</span><span class="p">.</span><span class="mi">029</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="o">-&gt;</span><span class="w">  </span><span class="n">Gather</span><span class="w"> </span><span class="n">Merge</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">187371</span><span class="p">.</span><span class="mi">53</span><span class="p">..</span><span class="mi">1159661</span><span class="p">.</span><span class="mi">72</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">8333334</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">682</span><span class="p">.</span><span class="mi">579</span><span class="p">..</span><span class="mi">687</span><span class="p">.</span><span class="mi">316</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">10</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">         </span><span class="n">Workers</span><span class="w"> </span><span class="n">Planned</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">         </span><span class="n">Workers</span><span class="w"> </span><span class="n">Launched</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">         </span><span class="o">-&gt;</span><span class="w">  </span><span class="n">Sort</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">186371</span><span class="p">.</span><span class="mi">51</span><span class="p">..</span><span class="mi">196788</span><span class="p">.</span><span class="mi">18</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">4166667</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">659</span><span class="p">.</span><span class="mi">729</span><span class="p">..</span><span class="mi">659</span><span class="p">.</span><span class="mi">730</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">7</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">               </span><span class="n">Sort</span><span class="w"> </span><span class="k">Key</span><span class="p">:</span><span class="w"> </span><span class="p">((</span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
+<span class="w">               </span><span class="n">Sort</span><span class="w"> </span><span class="k">Method</span><span class="p">:</span><span class="w"> </span><span class="n">top</span><span class="o">-</span><span class="n">N</span><span class="w"> </span><span class="n">heapsort</span><span class="w">  </span><span class="n">Memory</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="n">kB</span>
+<span class="w">               </span><span class="n">Worker</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w">  </span><span class="n">Sort</span><span class="w"> </span><span class="k">Method</span><span class="p">:</span><span class="w"> </span><span class="n">top</span><span class="o">-</span><span class="n">N</span><span class="w"> </span><span class="n">heapsort</span><span class="w">  </span><span class="n">Memory</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="n">kB</span>
+<span class="w">               </span><span class="n">Worker</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w">  </span><span class="n">Sort</span><span class="w"> </span><span class="k">Method</span><span class="p">:</span><span class="w"> </span><span class="n">top</span><span class="o">-</span><span class="n">N</span><span class="w"> </span><span class="n">heapsort</span><span class="w">  </span><span class="n">Memory</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="n">kB</span>
+<span class="w">               </span><span class="o">-&gt;</span><span class="w">  </span><span class="n">Parallel</span><span class="w"> </span><span class="n">Seq</span><span class="w"> </span><span class="n">Scan</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">data</span><span class="w">  </span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="p">..</span><span class="mi">96331</span><span class="p">.</span><span class="mi">33</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">4166667</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="k">time</span><span class="o">=</span><span class="mi">1</span><span class="p">.</span><span class="mi">799</span><span class="p">..</span><span class="mi">312</span><span class="p">.</span><span class="mi">822</span><span class="w"> </span><span class="k">rows</span><span class="o">=</span><span class="mi">3333333</span><span class="w"> </span><span class="n">loops</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="w"> </span><span class="n">Planning</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">250</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">JIT</span><span class="p">:</span>
+<span class="w">   </span><span class="n">Functions</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">   </span><span class="k">Options</span><span class="p">:</span><span class="w"> </span><span class="n">Inlining</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">Optimization</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"> </span><span class="n">Expressions</span><span class="w"> </span><span class="k">true</span><span class="p">,</span><span class="w"> </span><span class="n">Deforming</span><span class="w"> </span><span class="k">true</span>
+<span class="w">   </span><span class="n">Timing</span><span class="p">:</span><span class="w"> </span><span class="n">Generation</span><span class="w"> </span><span class="mi">1</span><span class="p">.</span><span class="mi">026</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Inlining</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">000</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Optimization</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">738</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Emission</span><span class="w"> </span><span class="mi">13</span><span class="p">.</span><span class="mi">207</span><span class="w"> </span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">Total</span><span class="w"> </span><span class="mi">14</span><span class="p">.</span><span class="mi">971</span><span class="w"> </span><span class="n">ms</span>
+<span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="k">Time</span><span class="p">:</span><span class="w"> </span><span class="mi">696</span><span class="p">.</span><span class="mi">794</span><span class="w"> </span><span class="n">ms</span>
+<span class="p">(</span><span class="mi">16</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Again, there is no need for a deep understanding of query plans to see that this
+is worse than the simple index scan shown before. Here we've both got sequential
+scanning of the entire table and a bunch of sorting going on, ending up taking a
+whole lot of time. The reason the query plan looks like that is that <code>value * 2</code>
+is not indexed, only <code>value</code> is. It's the <em>exact</em> expression used in the index
+creation that is actually indexed and can be used in <code>WHERE</code>, <code>ORDER BY</code>, <code>GROUP
+BY</code> etc. This should be fairly evident given how a B-tree index lookup works; we
+cannot quickly lookup an arbitrary expression using a column based on an index
+of the raw column.</p>
+<p>This example is of course silly, because ordering by a value or ordering by
+double that value results in the same order. In a more realistic scenario, there
+are many good reasons to use expressions in ordering or searching. For example,
+if you want to perform a case insensitive search on a text column that contains
+mixed casing, calling <code>LOWER()</code> on that column makes a whole lot of sense. Such
+searches can be optimized using an <a href="https://www.postgresql.org/docs/16/indexes-expressional.html">expression index (a.k.a functional
+index)</a>, but
+that is something I plan to cover in an upcoming article. For the purposes of
+this article, I only want to make it very clear that a column having an index on
+it does not imply that any search on that column can utilize said index.</p>
+<h2>Indexes optimize reads but slow down writes</h2>
+<p>Something to keep in mind with indexing is that an index is made to speed up
+reads. On the flip side, they slow down writes as every time a table is written
+to its indexes must also be written to<sup id="sf-postgresql-indexing-basics-11-back"><a href="#sf-postgresql-indexing-basics-11" class="simple-footnote" title="Except for heap-only tuples (source). Indexes can also take up a significant amount of storage. I once worked with a production database where the largest table was around 2 terabytes in size, with an additional 3 terabytes of indexes. Adding a new index was something we thought long and hard about before actually doing.">11</a></sup></p>
+<p>That said, you probably don't need to worry much about indexes taking up space
+or slowing down writes. I have personally only had to think about such things
+with indexes for very large tables with billions of rows, or tables with very
+high throughput demands. The vast majority of applications have neither of
+those, while the lack of indexes becomes problematic even for small amounts of
+data. In other words, the benefits of indexing almost always outweighs the cons,
+but it's good to be aware that cons exist.</p>
+<h1>Summary</h1>
+<p>In this article, we've covered the basics of indexing in PostgreSQL, had a
+theoretical look at a B-tree index and its properties as well as how these can
+be taken advantage of. In addition, we've looked at some common pitfalls with
+indexing and some things to keep in mind. That may seem like a lot more than
+just basics, but the unfortunate reality is that indexing is a complex subject.
+We haven't delved into <a href="https://www.postgresql.org/docs/16/indexes-types.html">other types of
+indexes</a> or <a href="https://www.postgresql.org/docs/current/indexes-multicolumn.html">multicolumn
+indexes</a>.
+We also haven't touched upon <a href="https://www.postgresql.org/docs/current/indexes-partial.html">partial
+indexes</a> or how
+indexes interact with more complex queries, such as joins. Simply put, there is
+a lot more to cover.</p>
+<p>I plan to continue this article series with shorter articles that cover specific
+use cases where these more advanced indexing techniques are useful. If you're
+eager to learn more before I get around to that, the <a href="https://www.postgresql.org/docs/16/indexes.html">PostgreSQL index
+documentation</a> is a great place
+to start!</p><ol class="simple-footnotes"><li id="sf-postgresql-indexing-basics-1">The <em>query planner</em> (or <em>optimizer</em>) is the part of
+PostgreSQL that's responsible for taking your high-level SQL query and figuring
+out the fastest way to execute it in the database
+(<a href="https://www.postgresql.org/docs/current/planner-optimizer.html">source</a>). <a href="#sf-postgresql-indexing-basics-1-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-2">In PostgreSQL, the nodes of a B-tree are called
+pages
+<a href="https://www.postgresql.org/docs/current/btree-implementation.html">(source)</a> <a href="#sf-postgresql-indexing-basics-2-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-3">Pages in the B-tree are either <em>internal</em> pages or <em>leaf</em>
+pages. An internal page only contains references to other B-tree pages, while a
+leaf page only contains references to the indexed table. There are no hybrid
+internal/leaf pages. The root can be either internal or a leaf depending on the
+size of the index. There is also a special metapage that keeps track of things
+like tree depth and which page is the root of the tree
+<a href="https://www.postgresql.org/docs/current/btree-implementation.html">(source)</a>.
+A search in a B-tree index starts from the singular root page and then proceeds
+through <em>internal</em> pages in the tree until a <em>leaf</em> page containing references
+to the indexed table is found. From there, the references to the table can be
+resolved and the rows retrieved. <a href="#sf-postgresql-indexing-basics-3-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-4">The page is sorted, <a href="https://github.com/postgres/postgres/blob/f4ad0021aface01ee74604355bd2e998e5f73320/src/backend/access/nbtree/nbtsearch.c#L318">PostgreSQL makes effective use of binary
+search to quickly find a
+key</a> <a href="#sf-postgresql-indexing-basics-4-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-5">Depending on the amount of hits, scanning the rows from the table
+may of course take longer, however. <a href="#sf-postgresql-indexing-basics-5-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-6">The order in which
+rows are returned from a query is undefined unless <code>ORDER BY</code> is provided. A
+common bug in backend systems is that <code>OFFSET</code> and <code>LIMIT</code> are used for
+pagination either without explicit ordering or with ordering that is not
+unique. <a href="#sf-postgresql-indexing-basics-6-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-7">
+Note that only the B-tree type of index has this property
+(<a href="https://www.postgresql.org/docs/16/indexes-ordering.html">source</a>). <a href="#sf-postgresql-indexing-basics-7-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-8">Except for so-called <em>index-only scans</em>
+(<a href="https://www.postgresql.org/docs/current/indexes-index-only-scans.html">source</a>) <a href="#sf-postgresql-indexing-basics-8-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-9">The query planner knows this as PostgreSQL keeps statistics on table
+contents (<a href="https://www.postgresql.org/docs/16/sql-analyze.html">source</a>). <a href="#sf-postgresql-indexing-basics-9-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-10">The query planner can also come up with terrible
+queries if table statistics are too outdated, but that's a topic for another
+time. <a href="#sf-postgresql-indexing-basics-10-back" class="simple-footnote-back">↩</a></li><li id="sf-postgresql-indexing-basics-11">Except for heap-only tuples
+(<a href="https://www.postgresql.org/docs/16/storage-hot.html">source</a>). Indexes can
+also take up a significant amount of storage. I once worked with a production
+database where the largest table was around 2 terabytes in size, with an
+additional 3 terabytes of indexes. Adding a new index was something we thought
+long and hard about before actually doing. <a href="#sf-postgresql-indexing-basics-11-back" class="simple-footnote-back">↩</a></li></ol>
+  </div>
+
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/linux.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/reviews.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Reviews</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/indexing.html">
+          <i class="fas fa-tag"></i>
+        indexing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sql.html">
+          <i class="fas fa-tag"></i>
+        sql
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/neovim.html">
+          <i class="fas fa-tag"></i>
+        neovim
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/database.html">
+          <i class="fas fa-tag"></i>
+        database
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/syntax.html">
+          <i class="fas fa-tag"></i>
+        syntax
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/go.html">
+          <i class="fas fa-tag"></i>
+        go
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/libinput.html">
+          <i class="fas fa-tag"></i>
+        libinput
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+<small>
+	<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Code snippets</span> licensed under <a href="http://creativecommons.org/publicdomain/zero/1.0?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC0 1.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/zero.svg?ref=chooser-v1"></a></p>
+	<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">Texts (natural language) licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
+</small> 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+<script src="https://files.stork-search.net/releases/v1.2.1/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://slar.se/search-index.st")
+</script>  </body>
+</html>

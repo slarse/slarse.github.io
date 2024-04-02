@@ -1,0 +1,50 @@
+digraph G {
+  splines=spline;
+  node [shape=record];
+  rankdir=TB;
+  ranksep=1.0;
+
+  Node1 [label="... | <f0> 400000 &le; value &lt; | <f1> 500000 &le; value &lt; | <f2> 600000 &le; value &lt; | ...", fillcolor=lightblue, style=filled];
+  Node2 [label="<f0> ... | <f1> 410000 &le; value &lt; | <f2> 420000 &le; value &lt; | ...", fillcolor=lightyellow, style=filled];
+  Node3 [label="<f0> ... | <f1> 560000 &le; value &lt; | <f2> 561000 &le; value &lt; | ...", fillcolor=lightyellow, style=filled];
+  Node5 [label="<f0> ... | <f1> value = 560486 | <f2> value = 560487 | <f3> value = 506488 | ...", fillcolor=lightgreen, style=filled];
+  Table [label="{ id | ... | <f0> 45 |  ... | <f2> 2250572 | ... | <f4> 5013963 | ... | <f6> 6894022 | ... } | { value | ... | <f1> 560488 |  ... | <f3> 560487 | ... | <f5> 560487 | ... | <f6> 560486 | ... }", shape=Mrecord, fillcolor=grey92, style=filled];
+
+  Node1_omitted [label="..."];
+  Node2_omitted_1 [label="..."];
+  Node2_omitted_2 [label="..."];
+  Node3_omitted [label="..."];
+
+  Node1:f0 -> Node2:f0 [color=lightgray];
+  Node1:f1 -> Node3:f0;
+  Node1:f2 -> Node1_omitted [color=lightgray];
+  Node2:f1 -> Node2_omitted_1 [color=lightgray];
+  Node2:f2 -> Node2_omitted_2 [color=lightgray];
+  Node3:f1 -> Node5:f0;
+  Node3:f2 -> Node3_omitted [color=lightgray];
+
+  Node5:f1 -> Table:f6 [color=lightgray];
+  Node5:f2 -> Table:f2;
+  Node5:f2 -> Table:f4;
+  Node5:f3 -> Table:f1 [color=lightgray];
+
+  // Invisible edges for layout adjustment
+  Node1 -> Node3 [style=invis];
+  Node1 -> Node5 [style=invis];
+  Node1 -> Table [style=invis];
+
+  subgraph cluster_legend {
+    rank = "sink";
+    color = black;
+    node [shape=box, style=filled, label=""];
+
+    labelloc="b";
+    Root [label="Root Page", fillcolor=lightblue];
+    Internal [label="Internal Page", fillcolor=lightyellow];
+    Leaf [label="Leaf Page", fillcolor=lightgreen];
+    TableNode [label="Data Table", fillcolor=grey92];
+    Omitted [label="... = omitted", fillcolor=white]
+  }
+
+  Table -> Root [style=invis];
+}

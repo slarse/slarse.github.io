@@ -11,7 +11,7 @@ contract work as a database administrator. He told me that 90% of his work was
 to just add and reorganize indexes to speed up queries. That was almost 10 years
 ago, and I'm now inclined to believe him. Having worked on three different
 systems backed by PostgreSQL databases over the past four years, I've seen my
-fair share of queries missing indexes. The fallout has ranged from a poor a end
+fair share of queries missing indexes. The fallout has ranged from a poor end
 user experience due to slow responses to entire systems becoming unresponsive
 as databases grind to a halt under the load of unindexed queries.
 
@@ -24,6 +24,9 @@ specifics about it, the general principles of indexing presented here are
 applicable to relational databases in general.
 
 Let's get started.
+
+> Note: This article is based on PostgreSQL 16, but the vast majority of the
+> content should be accurate for PostgreSQL 9.6 and newer.
 
 # The incredible impact of indexes
 To sell you on the fact that indexes are important, let's do a quick experiment.

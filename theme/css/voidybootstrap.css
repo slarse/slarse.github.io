@@ -66,6 +66,10 @@ code {
     color: #ff79c6;
 }
 
+.content-body pre code {
+    white-space: unset;
+}
+
 .highlight > pre {
     color: #D4D4D4;
     border-left: 5px solid #999;

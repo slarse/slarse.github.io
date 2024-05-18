@@ -273,7 +273,7 @@ digraph G {
   Node1 [label="... | <f0> 400000 &le; value &lt; | <f1> 500000 &le; value &lt; | <f2> 600000 &le; value &lt; | ...", fillcolor=lightblue, style=filled];
   Node2 [label="<f0> ... | <f1> 410000 &le; value &lt; | <f2> 420000 &le; value &lt; | ...", fillcolor=lightyellow, style=filled];
   Node3 [label="<f0> ... | <f1> 560000 &le; value &lt; | <f2> 561000 &le; value &lt; | ...", fillcolor=lightyellow, style=filled];
-  Node5 [label="<f0> ... | <f1> value = 560486 | <f2> value = 560487 | <f3> value = 506488 | ...", fillcolor=lightgreen, style=filled];
+  Node5 [label="<f0> ... | <f1> value = 560486 | <f2> value = 560487 | <f3> value = 560488 | ...", fillcolor=lightgreen, style=filled];
   Table [label="{ id | ... | <f0> 45 |  ... | <f2> 2068259 | ... | <f4> 5013963 | ... | <f6> 6000135 | ... } | { value | ... | <f1> 560488 |  ... | <f3> 560487 | ... | <f5> 560487 | ... | <f6> 560486 | ... }", shape=Mrecord, fillcolor=grey92, style=filled];
   Node1_omitted [label="..."];
   Node2_omitted_1 [label="..."];

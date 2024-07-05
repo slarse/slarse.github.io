@@ -117,15 +117,13 @@ There's a large amount of footnotes throughout the book, a lot of which contain
 useful and interesting snippets of information as well as sources for
 statements. These, I do not mind at all. But, unfortunately, there is a bit of
 an oversaturation of footnotes that only contain jokes, puns and witty remarks.
-While they are all well written and give the book a lighter tone, there's at
-times simply too many of them. As many of the footnotes are useful, I would stop
-to read every single one. When that caused me to read three jokes in a row, I
-would get a little bit frustrated.
+While they are all well written and give the book a lighter tone, there are at
+times simply too many of them.
 
 Don't get me wrong, I don't mind light-hearted writing, and a few of these kinds
-of footnotes would only have made the book more enjoyable to read. But when
-you interrupt your reading flow to read a footnote and find your third witty
-remark in a row, it does get a bit annoying.
+of footnotes would only have made the book more enjoyable to read. But when you
+interrupt your reading flow to read a footnote only to be greeted by your third
+witty remark in a row, it does get a bit annoying.
 
 # Conclusions
 This book widened my view of software engineering and cybersecurity. While most

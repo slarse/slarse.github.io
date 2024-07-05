@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A Page in : Projects" />
+    <meta name="description" content="" />
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Projects - Programming for fun and profit</title>
+    <title>Book Review: Cybersecurity Myths and Misconceptions - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -63,7 +63,7 @@
                   <li>
                     <a href="https://slar.se/pages/license.html">License</a>
                   </li>
-                  <li class="active">
+                  <li>
                     <a href="https://slar.se/pages/projects.html">Projects</a>
                   </li>
               <li><a href="https://slar.se/resume.pdf">Resume</a></li>
@@ -90,49 +90,158 @@
     <div class="container" id="main-container">
       <div class="row">
         <div class="col-md-9" id="content">
-<div class="stork-wrapper">
-    <input class="stork-input" data-stork="sitesearch" placeholder="Search all stuff"/>
-    <div class="stork-output" data-stork="sitesearch-output"></div>
-</div><article itemscope="itemscope" 
-         itemtype="http://schema.org/WebPage">
-  <header>
-    <h1 itemprop="name headline">Projects</h1>
-  </header>
-  <div class="content-body" itemprop="text">
-    <p>I always have a few side projects going. You can find an exhaustive list on my
-GitHub page, but here are a few highlights.</p>
-<h2>Rut</h2>
-<p>Rut is a clone of Git, written in Rust. It's a project I use to learn both the
-Rust programming language and about the internals of Git.</p>
-<ul>
-<li><a href="https://github.com/slarse/rut">Rut on GitHub</a></li>
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Fri 05 July 2024
+</abbr> <h1 class="article-header-title">
+  <a href="https://slar.se/book-review-cybersecurity-myths-and-misconceptions.html" rel="bookmark"
+     title="Permalink to Book Review: Cybersecurity Myths and Misconceptions">
+    Book Review: Cybersecurity Myths and Misconceptions
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/reviews.html">
+      Reviews</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/book-review.html"><i class="fas fa-tag"></i>book review</a>&nbsp;
+	<a href="https://slar.se/tag/software-engineering.html"><i class="fas fa-tag"></i>software engineering</a>&nbsp;
+	<a href="https://slar.se/tag/cybersecurity.html"><i class="fas fa-tag"></i>cybersecurity</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>The world of cybersecurity is full of perils. Many of those perils stem from
+misconceptions about the nature of cybersecurity. If you come to the insight
+that perfect security is unachievable, you may reach the conclusion that
+being concerned with cybersecurity at all is a waste of your time. After all,
+the bad guys will get in anyway. Or you may have the notion that your particular
+company is too small of a target for anyone to bother with, and so you don't
+bother to defend yourself appropriately. Or perhaps you experience a security
+breach and take action before you even know what's going on, because surely,
+some action is better than no action. If reading about 175 statements of this
+kind and why they're flawed, then <em>Cybersecurity Myths and
+Misconceptions: Avoiding the Hazards and Pitfalls that Derail Us</em> may be the
+book for you.</p>
+<div class="highlight"><pre><span></span><code>Cybersecurity Myths and Misconceptions: Avoiding the Hazards and Pitfalls that Derail Us
+by Eugene Spafford, Josiah Dykstra, Leigh Metcalf
+Released October 2009
+Publisher(s): O'Reilly Media, Inc.
+ISBN: 9780596518387
+</code></pre></div>
+
+<h1>The book in a nutshell</h1>
+<p>The book covers 175 myths and misconceptions in cybersecurity. These are divided
+into 16 chapters covering different topics ranging from faulty assumptions
+(e.g. "I am too small to be a target"<sup id="sf-book-review-cybersecurity-myths-and-misconceptions-1-back"><a href="#sf-book-review-cybersecurity-myths-and-misconceptions-1" class="simple-footnote" title="You are not. A lot of cyber mischief isn't even targeted, but rather automated processes scanning vast amounts of the Internet to find servers with known vulnerabilities.">1</a></sup>) to misconceptions
+about digital forensics (e.g. "Incidents are discovered as soon as they
+occur"<sup id="sf-book-review-cybersecurity-myths-and-misconceptions-2-back"><a href="#sf-book-review-cybersecurity-myths-and-misconceptions-2" class="simple-footnote" title="They are not. In 2022, the average time to discovery of a breach was 207 days.">2</a></sup>).</p>
+<p>The vast majority of the myths are presented in the following format.</p>
+<ol>
+<li>Present some background information for the topic to make sense.</li>
+<li>Make a bold statement (the myth or misconception)</li>
+<li>Dismantle the statement and show how it does not hold water<ul>
+<li>Although some myths are acknowledge to be partially true, given the right
+  circumstances</li>
 </ul>
-<h2>RepoBee</h2>
-<p>RepoBee is a tool for managing Git repositories on GitHub for education. It can
-do things like generate repositories for students, clone student repositories
-in batches, run tasks on the cloned repositories as defined by plugins, and
-more. I'm really quite proud of it, and have some exciting things coming up for
-it this summer (that I can't yet talk about).</p>
-<ul>
-<li><a href="https://repobee.org">RepoBee's website</a></li>
-<li><a href="https://github.com/repobee/repobee">RepoBee on GitHub</a></li>
-<li><a href="https://repobee.readthedocs.io">RepoBee's documentation</a></li>
-</ul>
-<h2>Spoon</h2>
-<p>Spoon is a popular metaprogramming library for Java. It allows you to parse
-source code into a rich AST, analyze and/or transform the AST and print it
-back to source code. I'm one of a handful of maintainers on the project.</p>
-<ul>
-<li><a href="https://spoon.gforge.inria.fr/">Spoon's website</a></li>
-<li><a href="https://github.com/inria/spoon">Spoon on GitHub</a></li>
-</ul>
-<h2>Spork</h2>
-<p>Spork is an AST based structured merge tool for Java. This means that instead
-of merging Java files by their raw text, it resolves the abstract syntax trees
-and merges based on them instead. It is built on top of Spoon.</p>
-<ul>
-<li><a href="https://github.com/kth/spork">Spork on GitHub</a></li>
-</ul>
+</li>
+</ol>
+<p>In some cases, there's also a small fictitious case study of a manager wanting
+to apply some technology or rule motivated by the myth. These can be a bit on
+the nose, but also occasionally hit too close to home to be comfortable.</p>
+<p>For the most part, this is not a technical book. Most myths are presented on high
+enough a level that you do not need to be a software engineer to appreciate it.
+There are some things that may fly over your head if you're not a software
+engineer, such as talk about the OSI network model and interprocess
+communication, but such technical dives are so infrequent that they barely need
+mention.</p>
+<h1>What I liked</h1>
+<p>This book is a leisure read. It does not require you to sit at a computer and
+apply concepts to benefit from it, all you need to do is read the book and
+ponder its implications. At the same time, it will surely grant you insights
+that will have tangible effects on your ability to perform in a technical role.</p>
+<p>As a concrete example, there is a section about cognitive biases. One such bias
+is so-called <em>action bias</em>, where you are prone to take action as a response to
+a cybersecurity threat, even before you have understood the situation well
+enough to make a qualified decision about <em>what</em> action to take. In reality,
+sometimes no action is the best solution, and rather often I'd say that no
+action is better than the <em>wrong</em> action. While I have experience enough to know
+not to act prematurely, and sometimes not to act at all, I am definitely
+predisposed with an action bias. As, I think, are a lot of software engineers.
+We want to <em>fix</em> things, not just wait for them to resolve themselves. Reading
+about action bias in the way it is framed in this book has caused me to reflect
+on how I act, especially in incident response, and I think it will help me take
+an even more measured approach in the future.</p>
+<p>In addition to expanding my own mind, I also found that the book framed a whole
+lot of the complaints that I've had to managers and peers over the years. For
+example, the notion that "I'm to small to be a target" is something I've seen a
+lot, and the next time I come across it I very well may use this book as a
+reference to attempt to dissuade it.</p>
+<p>A lot of what is covered in the book is also applicable to software engineering
+as a whole (or even business as a whole), rather than just cybersecurity. The
+sunk cost fallacy<sup id="sf-book-review-cybersecurity-myths-and-misconceptions-3-back"><a href="#sf-book-review-cybersecurity-myths-and-misconceptions-3" class="simple-footnote" title="The idea that an existing investment in something warrants further investment into the same thing (see Wikipedia)">3</a></sup> is
+universally applicable when it comes to any costly investment, as is the fact
+that basing decisions on anecdotal evidence isn't necessarily the best idea.
+There's also this really insightful chapter on how analogies and abstractions
+can be damaging to understanding when they don't fit well enough. For example,
+the name <em>firewall</em> comes from physical walls intended to impede the spread of
+fire. A firewall in computing is built to stop some traffic ("fire"), but also
+let some traffic through. The latter does not fit the analogy, a physical
+firewall shouldn't let <em>any</em> fire through.</p>
+<p>As a final note on what I liked, there is a running theme in the book that
+insulting people for their lack of cybersecurity awareness serves no purpose,
+and that guiding others to better decisions rather than berating bad ones is
+often the most effective path. However, there is also an undertone that
+at least some cybersecurity issues stem from software engineers with
+insufficient skills. When discussing cross-platform compatibility in high-level
+programming languages, one footnote reads as follows.</p>
+<blockquote>
+<p>We are glossing over many things such as numerical precision, interprocess
+communication, and character sets. For this discussion, assume those things do
+not matter, although they certainly do in real life. If you do not know what
+we mean by that <strong>and</strong> you are writing production software, then you need to
+study more software engineering.</p>
+</blockquote>
+<p>This makes it clear that even though the authors believe in helping and
+educating your peers to the best of your abilities, a base level of
+understanding is to be expected from your peers. And that understanding is, at
+least in part, their responsibility to attain.</p>
+<h1>What I didn't like</h1>
+<p>There's a large amount of footnotes throughout the book, a lot of which contain
+useful and interesting snippets of information as well as sources for
+statements. These, I do not mind at all. But, unfortunately, there is a bit of
+an oversaturation of footnotes that only contain jokes, puns and witty remarks.
+While they are all well written and give the book a lighter tone, there's at
+times simply too many of them. As many of the footnotes are useful, I would stop
+to read every single one. When that caused me to read three jokes in a row, I
+would get a little bit frustrated.</p>
+<p>Don't get me wrong, I don't mind light-hearted writing, and a few of these kinds
+of footnotes would only have made the book more enjoyable to read. But when
+you interrupt your reading flow to read a footnote and find your third witty
+remark in a row, it does get a bit annoying.</p>
+<h1>Conclusions</h1>
+<p>This book widened my view of software engineering and cybersecurity. While most
+of the topics were familiar to me from my education and professional experience,
+some were forgotten, some brand new, and many were simply framed in a way I had
+previously not considered them in. Given the rather limited amount of effort I
+put into reading the book, I got a whole lot of value out of it.</p>
+<p>If you're a practicing software engineer, you should read this book, especially
+if you feel like your grasp of cybersecurity topics isn't where it should be. It
+won't teach you what you need to know on a technical level, but it will help
+build up the basic mindset you ought to adopt as well as illuminate a lot of
+what you don't yet know.</p>
+<p>If you're a technical manager in charge of software engineers, you should read
+this book. It will give you better insight into why software engineers sometimes
+say "no" and hopefully allow you to make more measured decisions when it comes
+to acquiring new or retaining existing software.</p><ol class="simple-footnotes"><li id="sf-book-review-cybersecurity-myths-and-misconceptions-1">You are not. A lot of cyber mischief
+isn't even targeted, but rather automated processes scanning vast amounts of the
+Internet to find servers with known vulnerabilities. <a href="#sf-book-review-cybersecurity-myths-and-misconceptions-1-back" class="simple-footnote-back">↩</a></li><li id="sf-book-review-cybersecurity-myths-and-misconceptions-2">They are not. In 2022, the average time to discovery of a breach was
+207 days. <a href="#sf-book-review-cybersecurity-myths-and-misconceptions-2-back" class="simple-footnote-back">↩</a></li><li id="sf-book-review-cybersecurity-myths-and-misconceptions-3">The idea that an existing investment in something warrants
+further investment into the same thing <a href="https://en.wikipedia.org/wiki/Sunk_cost#Fallacy_effect">(see
+Wikipedia)</a> <a href="#sf-book-review-cybersecurity-myths-and-misconceptions-3-back" class="simple-footnote-back">↩</a></li></ol>
   </div>
 
 

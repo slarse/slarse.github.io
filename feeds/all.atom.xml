@@ -1,5 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2024-04-02T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>PostgreSQL indexing: The basics</title><link href="https://slar.se/postgresql-indexing-basics.html" rel="alternate"></link><published>2024-04-02T00:00:00+02:00</published><updated>2024-04-02T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-04-02:/postgresql-indexing-basics.html</id><summary type="html">&lt;p&gt;Back when I was in university, I had a teacher in database systems who also did
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/all.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2024-07-05T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Book Review: Cybersecurity Myths and Misconceptions</title><link href="https://slar.se/book-review-cybersecurity-myths-and-misconceptions.html" rel="alternate"></link><published>2024-07-05T00:00:00+02:00</published><updated>2024-07-05T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-07-05:/book-review-cybersecurity-myths-and-misconceptions.html</id><summary type="html">&lt;p&gt;The world of cybersecurity is full of perils. Many of those perils stem from
+misconceptions about the nature of cybersecurity. If you come to the insight
+that perfect security is unachievable, you may reach the conclusion that
+being concerned with cybersecurity at all is a waste of your time. After …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The world of cybersecurity is full of perils. Many of those perils stem from
+misconceptions about the nature of cybersecurity. If you come to the insight
+that perfect security is unachievable, you may reach the conclusion that
+being concerned with cybersecurity at all is a waste of your time. After all,
+the bad guys will get in anyway. Or you may have the notion that your particular
+company is too small of a target for anyone to bother with, and so you don't
+bother to defend yourself appropriately. Or perhaps you experience a security
+breach and take action before you even know what's going on, because surely,
+some action is better than no action. If reading about 175 statements of this
+kind and why they're flawed, then &lt;em&gt;Cybersecurity Myths and
+Misconceptions: Avoiding the Hazards and Pitfalls that Derail Us&lt;/em&gt; may be the
+book for you.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Cybersecurity Myths and Misconceptions: Avoiding the Hazards and Pitfalls that Derail Us
+by Eugene Spafford, Josiah Dykstra, Leigh Metcalf
+Released October 2009
+Publisher(s): O'Reilly Media, Inc.
+ISBN: 9780596518387
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;p&gt;The book covers 175 myths and misconceptions in cybersecurity. These are divided
+into 16 chapters covering different topics ranging from faulty assumptions
+(e.g. "I am too small to be a target"&lt;sup id="sf-book-review-cybersecurity-myths-and-misconceptions-1-back"&gt;&lt;a href="#sf-book-review-cybersecurity-myths-and-misconceptions-1" class="simple-footnote" title="You are not. A lot of cyber mischief isn't even targeted, but rather automated processes scanning vast amounts of the Internet to find servers with known vulnerabilities."&gt;1&lt;/a&gt;&lt;/sup&gt;) to misconceptions
+about digital forensics (e.g. "Incidents are discovered as soon as they
+occur"&lt;sup id="sf-book-review-cybersecurity-myths-and-misconceptions-2-back"&gt;&lt;a href="#sf-book-review-cybersecurity-myths-and-misconceptions-2" class="simple-footnote" title="They are not. In 2022, the average time to discovery of a breach was 207 days."&gt;2&lt;/a&gt;&lt;/sup&gt;).&lt;/p&gt;
+&lt;p&gt;The vast majority of the myths are presented in the following format.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Present some background information for the topic to make sense.&lt;/li&gt;
+&lt;li&gt;Make a bold statement (the myth or misconception)&lt;/li&gt;
+&lt;li&gt;Dismantle the statement and show how it does not hold water&lt;ul&gt;
+&lt;li&gt;Although some myths are acknowledge to be partially true, given the right
+  circumstances&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In some cases, there's also a small fictitious case study of a manager wanting
+to apply some technology or rule motivated by the myth. These can be a bit on
+the nose, but also occasionally hit too close to home to be comfortable.&lt;/p&gt;
+&lt;p&gt;For the most part, this is not a technical book. Most myths are presented on high
+enough a level that you do not need to be a software engineer to appreciate it.
+There are some things that may fly over your head if you're not a software
+engineer, such as talk about the OSI network model and interprocess
+communication, but such technical dives are so infrequent that they barely need
+mention.&lt;/p&gt;
+&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;p&gt;This book is a leisure read. It does not require you to sit at a computer and
+apply concepts to benefit from it, all you need to do is read the book and
+ponder its implications. At the same time, it will surely grant you insights
+that will have tangible effects on your ability to perform in a technical role.&lt;/p&gt;
+&lt;p&gt;As a concrete example, there is a section about cognitive biases. One such bias
+is so-called &lt;em&gt;action bias&lt;/em&gt;, where you are prone to take action as a response to
+a cybersecurity threat, even before you have understood the situation well
+enough to make a qualified decision about &lt;em&gt;what&lt;/em&gt; action to take. In reality,
+sometimes no action is the best solution, and rather often I'd say that no
+action is better than the &lt;em&gt;wrong&lt;/em&gt; action. While I have experience enough to know
+not to act prematurely, and sometimes not to act at all, I am definitely
+predisposed with an action bias. As, I think, are a lot of software engineers.
+We want to &lt;em&gt;fix&lt;/em&gt; things, not just wait for them to resolve themselves. Reading
+about action bias in the way it is framed in this book has caused me to reflect
+on how I act, especially in incident response, and I think it will help me take
+an even more measured approach in the future.&lt;/p&gt;
+&lt;p&gt;In addition to expanding my own mind, I also found that the book framed a whole
+lot of the complaints that I've had to managers and peers over the years. For
+example, the notion that "I'm to small to be a target" is something I've seen a
+lot, and the next time I come across it I very well may use this book as a
+reference to attempt to dissuade it.&lt;/p&gt;
+&lt;p&gt;A lot of what is covered in the book is also applicable to software engineering
+as a whole (or even business as a whole), rather than just cybersecurity. The
+sunk cost fallacy&lt;sup id="sf-book-review-cybersecurity-myths-and-misconceptions-3-back"&gt;&lt;a href="#sf-book-review-cybersecurity-myths-and-misconceptions-3" class="simple-footnote" title="The idea that an existing investment in something warrants further investment into the same thing (see Wikipedia)"&gt;3&lt;/a&gt;&lt;/sup&gt; is
+universally applicable when it comes to any costly investment, as is the fact
+that basing decisions on anecdotal evidence isn't necessarily the best idea.
+There's also this really insightful chapter on how analogies and abstractions
+can be damaging to understanding when they don't fit well enough. For example,
+the name &lt;em&gt;firewall&lt;/em&gt; comes from physical walls intended to impede the spread of
+fire. A firewall in computing is built to stop some traffic ("fire"), but also
+let some traffic through. The latter does not fit the analogy, a physical
+firewall shouldn't let &lt;em&gt;any&lt;/em&gt; fire through.&lt;/p&gt;
+&lt;p&gt;As a final note on what I liked, there is a running theme in the book that
+insulting people for their lack of cybersecurity awareness serves no purpose,
+and that guiding others to better decisions rather than berating bad ones is
+often the most effective path. However, there is also an undertone that
+at least some cybersecurity issues stem from software engineers with
+insufficient skills. When discussing cross-platform compatibility in high-level
+programming languages, one footnote reads as follows.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We are glossing over many things such as numerical precision, interprocess
+communication, and character sets. For this discussion, assume those things do
+not matter, although they certainly do in real life. If you do not know what
+we mean by that &lt;strong&gt;and&lt;/strong&gt; you are writing production software, then you need to
+study more software engineering.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This makes it clear that even though the authors believe in helping and
+educating your peers to the best of your abilities, a base level of
+understanding is to be expected from your peers. And that understanding is, at
+least in part, their responsibility to attain.&lt;/p&gt;
+&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;p&gt;There's a large amount of footnotes throughout the book, a lot of which contain
+useful and interesting snippets of information as well as sources for
+statements. These, I do not mind at all. But, unfortunately, there is a bit of
+an oversaturation of footnotes that only contain jokes, puns and witty remarks.
+While they are all well written and give the book a lighter tone, there's at
+times simply too many of them. As many of the footnotes are useful, I would stop
+to read every single one. When that caused me to read three jokes in a row, I
+would get a little bit frustrated.&lt;/p&gt;
+&lt;p&gt;Don't get me wrong, I don't mind light-hearted writing, and a few of these kinds
+of footnotes would only have made the book more enjoyable to read. But when
+you interrupt your reading flow to read a footnote and find your third witty
+remark in a row, it does get a bit annoying.&lt;/p&gt;
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;p&gt;This book widened my view of software engineering and cybersecurity. While most
+of the topics were familiar to me from my education and professional experience,
+some were forgotten, some brand new, and many were simply framed in a way I had
+previously not considered them in. Given the rather limited amount of effort I
+put into reading the book, I got a whole lot of value out of it.&lt;/p&gt;
+&lt;p&gt;If you're a practicing software engineer, you should read this book, especially
+if you feel like your grasp of cybersecurity topics isn't where it should be. It
+won't teach you what you need to know on a technical level, but it will help
+build up the basic mindset you ought to adopt as well as illuminate a lot of
+what you don't yet know.&lt;/p&gt;
+&lt;p&gt;If you're a technical manager in charge of software engineers, you should read
+this book. It will give you better insight into why software engineers sometimes
+say "no" and hopefully allow you to make more measured decisions when it comes
+to acquiring new or retaining existing software.&lt;/p&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-book-review-cybersecurity-myths-and-misconceptions-1"&gt;You are not. A lot of cyber mischief
+isn't even targeted, but rather automated processes scanning vast amounts of the
+Internet to find servers with known vulnerabilities. &lt;a href="#sf-book-review-cybersecurity-myths-and-misconceptions-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;li id="sf-book-review-cybersecurity-myths-and-misconceptions-2"&gt;They are not. In 2022, the average time to discovery of a breach was
+207 days. &lt;a href="#sf-book-review-cybersecurity-myths-and-misconceptions-2-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;li id="sf-book-review-cybersecurity-myths-and-misconceptions-3"&gt;The idea that an existing investment in something warrants
+further investment into the same thing &lt;a href="https://en.wikipedia.org/wiki/Sunk_cost#Fallacy_effect"&gt;(see
+Wikipedia)&lt;/a&gt; &lt;a href="#sf-book-review-cybersecurity-myths-and-misconceptions-3-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Reviews"></category><category term="book review"></category><category term="software engineering"></category><category term="cybersecurity"></category></entry><entry><title>PostgreSQL indexing: The basics</title><link href="https://slar.se/postgresql-indexing-basics.html" rel="alternate"></link><published>2024-04-02T00:00:00+02:00</published><updated>2024-04-02T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-04-02:/postgresql-indexing-basics.html</id><summary type="html">&lt;p&gt;Back when I was in university, I had a teacher in database systems who also did
 contract work as a database administrator. He told me that 90% of his work was
 to just add and reorganize indexes to speed up queries. That was almost 10 years
 ago, and I'm now …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Back when I was in university, I had a teacher in database systems who also did

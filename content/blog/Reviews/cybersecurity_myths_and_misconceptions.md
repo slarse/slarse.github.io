@@ -20,9 +20,9 @@ book for you.
 ```
 Cybersecurity Myths and Misconceptions: Avoiding the Hazards and Pitfalls that Derail Us
 by Eugene Spafford, Josiah Dykstra, Leigh Metcalf
-Released October 2009
-Publisher(s): O'Reilly Media, Inc.
-ISBN: 9780596518387
+Released January 2023
+Publisher(s): Pearson Education (US)
+ISBN: 9780137929238
 ```
 
 # The book in a nutshell

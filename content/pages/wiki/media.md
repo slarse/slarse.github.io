@@ -26,9 +26,16 @@ every book I read nowadays.
     - By Anthony Shaw
     - ISBN: 9781775093344
     - [Book review]({filename}/blog/Reviews/cpython_internals.md)
+* [Cybersecurity Myths and Misconceptions: Avoiding the Hazards and Pitfalls that Derail Us](https://www.amazon.se/Cybersecurity-Myths-Misconceptions-Avoiding-Pitfalls/dp/0137929234/)
+    - By Eugene Spafford, Josiah Dykstra, Leigh Metcalf
+    - ISBN: 9780137929238
+    - [Book review]({filename}/blog/Reviews/cybersecurity_myths_and_misconceptions.md)
 * [Designing Data-Intensive Applications](https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/)
     - By Martin Kleppman
     - ISBN: 9781449373320
+* [Kuburnetes Up and Running (3rd ed)](https://www.amazon.se/Kubernetes-Running-Dive-Future-Infrastructure/dp/109811020X/)
+    - By Brendan Burns, Joe Beda, Kelsey Hightower, Lachlan Evenson
+    - ISBN: 9781098110208
 * The Rust Programming Language
     - By Steve Klabnik, Carol Nichols, 2018
     - ISBN: 9781593278281

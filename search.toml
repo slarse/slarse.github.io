@@ -68,6 +68,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "taking-a-step-back-from-open-source-development.html"
+url = "/taking-a-step-back-from-open-source-development.html"
+title = "Taking a step back from open source development"
+
+[[input.files]]
 path = "book-review-cybersecurity-myths-and-misconceptions.html"
 url = "/book-review-cybersecurity-myths-and-misconceptions.html"
 title = "Book Review: Cybersecurity Myths and Misconceptions"

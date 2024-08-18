@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2023-10-25T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>A new dark theme for the blog!</title><link href="https://slar.se/new-dark-theme.html" rel="alternate"></link><published>2023-10-25T00:00:00+02:00</published><updated>2023-10-25T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2023-10-25:/new-dark-theme.html</id><summary type="html">&lt;p&gt;If you've &lt;em&gt;ever&lt;/em&gt; visited my blog before, you'll notice it looks a bit
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Blog</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/blog.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2024-08-18T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Taking a step back from open source development</title><link href="https://slar.se/taking-a-step-back-from-open-source-development.html" rel="alternate"></link><published>2024-08-18T00:00:00+02:00</published><updated>2024-08-18T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-08-18:/taking-a-step-back-from-open-source-development.html</id><summary type="html">&lt;p&gt;Over the past couple of years, I've half-heartedly tried to keep up with the
+bar I set for open source contributions back when I was in university. It has
+not been easy, and ultimately I haven't been able to align my current projects
+with where I'm taking my career. I's …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Over the past couple of years, I've half-heartedly tried to keep up with the
+bar I set for open source contributions back when I was in university. It has
+not been easy, and ultimately I haven't been able to align my current projects
+with where I'm taking my career. I's time for me to take a step back.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tl;dr. I am taking a step back from open source development. Response times on
+my open source repositories will be slow. Sometimes I may not respond at all.
+Open source development is not one of my current focus points; my free time is
+spent elsewhere.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1&gt;Open source development got me to where I am&lt;/h1&gt;
+&lt;p&gt;From creating &lt;a href="https://repobee.org"&gt;RepoBee&lt;/a&gt; to maintaining
+&lt;a href="https://github.com/inria/spoon"&gt;Spoon&lt;/a&gt;, I've spent thousands upon
+thousands of hours of my free time contributing to projects and putting them out
+there for the world to see and use. It served me well in developing my skills,
+but also in more unexpected ways such as opening doors to &lt;a href="https://slar.se/pages/publications-and-essays.html"&gt;publishing articles
+at academic conferences&lt;/a&gt; and
+mentoring more junior developers well before I had a full time
+job&lt;sup id="sf-taking-a-step-back-from-open-source-development-1-back"&gt;&lt;a href="#sf-taking-a-step-back-from-open-source-development-1" class="simple-footnote" title="Sadly, I never managed to find someone to mentor me."&gt;1&lt;/a&gt;&lt;/sup&gt;. I am fully
+convinced that I would not be nearly as skilled a software engineer as I am
+today had I not had these experiences. Given the choice, I would take the exact
+same path all over again.&lt;/p&gt;
+&lt;h1&gt;But things have changed&lt;/h1&gt;
+&lt;p&gt;I loved open source development as a university student because it gave me the
+opportunity to collaborate with other developers on &lt;em&gt;real&lt;/em&gt; and &lt;em&gt;long-term&lt;/em&gt;
+projects, honing skills that were not being honed in the predominantly
+theoretical computer science program I attended&lt;sup id="sf-taking-a-step-back-from-open-source-development-2-back"&gt;&lt;a href="#sf-taking-a-step-back-from-open-source-development-2" class="simple-footnote" title="I still think that studying computer science was well worth my time, but that's a topic for another blog post."&gt;2&lt;/a&gt;&lt;/sup&gt;. I needed to ground the theoretical learnings in practical
+application, and open source development gave me an outlet where I could do just
+that.&lt;/p&gt;
+&lt;p&gt;However, I must now recognize that those circumstances are in the past, and new
+circumstances surround my day-to-day. A lot of what I got out of open source
+development as a student, such as collaboration and real-world application, I'm
+now getting from my job. This greatly lessens the appeal of open source
+development for me, as it was never about some altruistic notion of helping
+others, but about what I could learn from the experience. It was all part of my
+skills development process.&lt;/p&gt;
+&lt;p&gt;What I &lt;em&gt;now&lt;/em&gt; desire from my skills development in my free time is to explore new
+technologies and concepts that I don't have time or reason to work with on the
+job. This leads to a lot of &lt;a href="https://slar.se/syntax-highlight-anything-with-tree-sitter.html"&gt;doing a little bit of
+this&lt;/a&gt; and &lt;a href="content/blog/Programming/postgresql/basic_indexing.md"&gt;a little
+bit of that&lt;/a&gt;. While this
+may still translate to the odd &lt;a href="https://github.com/slarse/rut"&gt;open source repository with some half-finished
+project&lt;/a&gt;, it does not mesh well with long-term
+maintenance of established projects.&lt;/p&gt;
+&lt;h1&gt;So what's up now?&lt;/h1&gt;
+&lt;p&gt;This disconnect between my own needs and open source development has been
+weighing on me for years. I've felt guilty for neglecting the projects I
+maintain, but at the same time haven't been able to do anything about it.
+A little while back, I decided that it wasn't a healthy way to go about it, and
+decided to more officially scale down my open source involvement. I started out
+by &lt;a href="https://github.com/INRIA/spoon/pull/5863"&gt;resigning as a maintainer of Spoon&lt;/a&gt;,
+and am finishing up with this blog post as a statement of my intentions.&lt;/p&gt;
+&lt;p&gt;I will still attempt to respond to issues and PRs on my existing open source
+projects. I will attempt to fix critical bugs in any project I maintain. But the
+keyword is &lt;em&gt;attempt&lt;/em&gt;. I make no promises about anything, responses from me will
+likely be few and far between. Complex issues may never be investigated, and
+major PRs with difficult to integrate code will likely not be integrated.&lt;/p&gt;
+&lt;p&gt;Things may change in the future. I may find that spark for open source
+development again and dive back into it. But now is not that time. Right now, I
+just want time for myself to tinker with things that interest me, but are of
+little use to others in the state that I leave them.&lt;/p&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-taking-a-step-back-from-open-source-development-1"&gt;Sadly, I never managed to find someone to mentor &lt;em&gt;me&lt;/em&gt;. &lt;a href="#sf-taking-a-step-back-from-open-source-development-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;li id="sf-taking-a-step-back-from-open-source-development-2"&gt;I still think that studying
+computer science was well worth my time, but that's a topic for another blog
+post. &lt;a href="#sf-taking-a-step-back-from-open-source-development-2-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Blog"></category><category term="blog"></category><category term="open source"></category><category term="software engineering"></category></entry><entry><title>A new dark theme for the blog!</title><link href="https://slar.se/new-dark-theme.html" rel="alternate"></link><published>2023-10-25T00:00:00+02:00</published><updated>2023-10-25T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2023-10-25:/new-dark-theme.html</id><summary type="html">&lt;p&gt;If you've &lt;em&gt;ever&lt;/em&gt; visited my blog before, you'll notice it looks a bit
 different. I finally took the time to make a dark theme! Only 5 or so years late
 to the party. But late or not, I have a new theme to show off, so let's have a
 look …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you've &lt;em&gt;ever&lt;/em&gt; visited my blog before, you'll notice it looks a bit

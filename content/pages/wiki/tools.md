@@ -13,6 +13,7 @@ already use.
     * autojump - cd that learns!
     * neovim - The future (and present) of Vim
     * fzf - The best fuzzy finder around
+    * hl - An incredibly useful JSON log viewer
     * ripgrep - grep, but fast!
     * tmux - The best terminal multiplexer!
     * tldr - Short and concise man pages
@@ -43,6 +44,10 @@ tools.
 ## [fzf](https://github.com/junegunn/fzf) - The best fuzzy finder around
 * A _fuzzy finder_ allowing you to search through text with inexact (fuzzy) search terms
 * Great integration with `neovim`
+
+## [hl](https://github.com/pamburus/hl) - An incredibly useful JSON log viewer
+* View JSON-formatted log output in a nicely formatted fashion
+* Easily search and filter logs
 
 ## [ripgrep](https://github.com/BurntSushi/ripgrep) - `grep`, but fast!
 * An incredibly fast implementation of the classic `grep` utility

@@ -118,14 +118,14 @@ mistake"</a>.
 In this article, I first make a cursory exploration of why null references are
 so problematic, and then have a look at Java's proposed solution: the
 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"><code>Optional&lt;T&gt;</code> class</a>.</p>
-<h1>Why null is problematic</h1>
+<h1 id="why-null-is-problematic">Why null is problematic</h1>
 <p>There are many reasons why null is problematic, but there are a few that are
 particularly easy to illustrate. I will be using the
 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get(java.lang.Object)"><code>Map.get</code></a>
 method as an example, as it returns null if the key provided to it is not in
 the map. For all of the examples, assume that there is a variable <code>Map&lt;Integer,
 String&gt; map</code> in the current scope.</p>
-<h2>null circumvents the type system</h2>
+<h2 id="null-circumvents-the-type-system">null circumvents the type system</h2>
 <p>Java has a fairly rigorous type system (although it's not entirely sound, I may
 do an article on that later!). The type system can't help with null, however.
 Any variable of reference type can either contain a reference to an object of
@@ -150,20 +150,20 @@ it can be even worse. What if the call to <code>value.toUpperCase()</code> occur
 entirely different part of the program, perhaps hours or even days after
 <code>Map.get</code> returned null? Then, not only do you have a crash, but a crash that
 can potentially be very difficult to diagnose.</p>
-<h2>It's easy to miss that a method can return null</h2>
+<h2 id="its-easy-to-miss-that-a-method-can-return-null">It's easy to miss that a method can return null</h2>
 <p>The cause of the previous problem is often that it's not always obvious that a
 method may return null. If you have a look at the <a href="https://github.com/openjdk/jdk/blob/0dbfc97c05218ffd10242901d73c0715ccb53bf3/src/java.base/share/classes/java/util/Map.java#L217-L242">documentation for
 Map.get</a>,
 you'll see that it says that it may return null a little here and there, and
 it's pretty clear about that. But still, a careless developer might miss this,
 and there's also the fact that many methods are <em>not</em> this well documented.</p>
-<h2>Why not just throw an exception instead?</h2>
+<h2 id="why-not-just-throw-an-exception-instead">Why not just throw an exception instead?</h2>
 <p>One question you may ask is, why even return null, why not just throw an
 exception? Indeed, throwing an exception may be a good solution in many cases,
 but sometimes it just isn't desirable. In the case of <code>Map.get</code>, it's mostly
 about efficiency. If <code>Map.get</code> were to throw an exception when the key was
 missing, you'd essentially have two alternatives. </p>
-<h3>Ask for forgiveness (catch the exception)</h3>
+<h3 id="ask-for-forgiveness-catch-the-exception">Ask for forgiveness (catch the exception)</h3>
 <div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
@@ -175,7 +175,7 @@ missing, you'd essentially have two alternatives. </p>
 <p>That's both ugly, and very inefficient if it is often the case that the key is
 missing. Catching an exception involves a whole lot of work for the JVM, so you
 really do not want to do this for an operation that you often perform.</p>
-<h3>Look before you leap</h3>
+<h3 id="look-before-you-leap">Look before you leap</h3>
 <div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
@@ -190,7 +190,7 @@ you're using
 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Streams</a>.
 So, I think we can safely conclude that throwing an exception is not the
 be-all-end-all solution.</p>
-<h1><code>Optional&lt;T&gt;</code> to the rescue</h1>
+<h1 id="optionalt-to-the-rescue"><code>Optional&lt;T&gt;</code> to the rescue</h1>
 <p>Using the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"><code>Optional&lt;T&gt;</code>
 class</a>, we
 solve the issues discussed previously. <code>Optional</code> is simply a container for
@@ -207,7 +207,7 @@ lets us check first if the value is present, to avoid an exception if it is not.
 hypothetical. We'll see toward the end of the article how one can wrap
 <code>Map.get</code> to create a <code>getOptional</code> method.</p>
 </blockquote>
-<h2>Retrieve the value without checking if it is present</h2>
+<h2 id="retrieve-the-value-without-checking-if-it-is-present">Retrieve the value without checking if it is present</h2>
 <p>If you're certain that the value will be present, you may simply retrieve it
 immediately.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">getOptional</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
@@ -223,7 +223,7 @@ scream bloody murder if they try to use the <code>Optional&lt;String&gt;</code> 
 choice of how to handle errors. Now, this may crash with a
 <code>NoSuchElementException</code>, but as <code>Optional</code> values typically are not passed
 around, the is unlikely to happen far from where the <code>Optional</code> was produced.</p>
-<h2>Check if the object is present</h2>
+<h2 id="check-if-the-object-is-present">Check if the object is present</h2>
 <p>If you're uncertain whether the value will be present, you may simply check for
 it:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">getOptional</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
@@ -235,7 +235,7 @@ it:</p>
 
 <p>This is very much like the null check we had before, but it's supported by the
 type system.</p>
-<h2>Use a fallback value</h2>
+<h2 id="use-a-fallback-value">Use a fallback value</h2>
 <p>Often when we don't want the code to crash, we have a fallback value. <code>Optional</code>
 has a method to handle that.</p>
 <div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">getOptional</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="s">&quot;Nothing here :)&quot;</span><span class="p">);</span>
@@ -243,7 +243,7 @@ has a method to handle that.</p>
 
 <p>If the value is present, it is returned. Otherwise, we get <code>"Nothing here :)"</code>.
 This, I think, is one of the cleanest and tidiest uses of <code>Optional</code>.</p>
-<h2>What about drawbacks?</h2>
+<h2 id="what-about-drawbacks">What about drawbacks?</h2>
 <p>Of course, <code>Optional</code> has drawbacks. As every single object is wrapped in
 another object, there will be an increase in memory consumption. The extra
 method call <em>may</em> result in a noticeable performance penalty, but I don't dare
@@ -253,7 +253,7 @@ segments of code should not use <code>Optional</code>. But the vast majority of 
 is not performance critical, so most often it will be a moot point. Finally,
 there's also a little bit of extra boilerplate to deal with, which also may not
 be desirable.</p>
-<h1>Alright, I'm sold, how do I <code>Optional</code>?</h1>
+<h1 id="alright-im-sold-how-do-i-optional">Alright, I'm sold, how do I <code>Optional</code>?</h1>
 <p>We've already had a look at how to consume <code>Optional</code>s. But how do we produce
 them? It's really quite easy. The three most important methods are:</p>
 <ol>
@@ -318,7 +318,7 @@ from earlier, we can wrap its <code>get</code> method in our own <code>getOption
 <p>This lets us easily create APIs that contain two versions of, for example, a
 getter method: one that returns <code>T</code>, and one that returns <code>Optional&lt;T&gt;</code>. And
 that's all the essentials. Not that hard, right?</p>
-<h1>Summary</h1>
+<h1 id="summary">Summary</h1>
 <p><code>Optional</code> solves most of the problems with null references in a mostly
 elegant way. The most important thing with <code>Optional</code> is that it is a strong
 form of documentation, which states both to the programmer and to the compiler
@@ -386,45 +386,27 @@ it's a surprisingly simple class that provides all of this functionality!</p>
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
+        intellij
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/linux.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        linux
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
-          <i class="fas fa-tag"></i>
-        xps15
+        bash
       </a>
     </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        java
+        pytest
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
+      <a href="https://slar.se/tag/psql.html">
           <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
+        psql
       </a>
     </span>
     <span class="tag-1">
@@ -434,15 +416,231 @@ it's a surprisingly simple class that provides all of this functionality!</p>
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/libinput.html">
           <i class="fas fa-tag"></i>
         libinput
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
           <i class="fas fa-tag"></i>
-        podcast
+        data structures
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/open-source.html">
+          <i class="fas fa-tag"></i>
+        open source
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/cybersecurity.html">
+          <i class="fas fa-tag"></i>
+        cybersecurity
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/neovim.html">
+          <i class="fas fa-tag"></i>
+        neovim
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/syntax.html">
+          <i class="fas fa-tag"></i>
+        syntax
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/indexing.html">
+          <i class="fas fa-tag"></i>
+        indexing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/database.html">
+          <i class="fas fa-tag"></i>
+        database
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
       </a>
     </span>
     <span class="tag-3">
@@ -458,225 +656,9 @@ it's a surprisingly simple class that provides all of this functionality!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/programming-languages.html">
-          <i class="fas fa-tag"></i>
-        programming languages
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/go.html">
-          <i class="fas fa-tag"></i>
-        go
-      </a>
-    </span>
-    <span class="tag-4">
       <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
         css
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
-          <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/cybersecurity.html">
-          <i class="fas fa-tag"></i>
-        cybersecurity
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/software-engineering.html">
-          <i class="fas fa-tag"></i>
-        software engineering
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/postgresql.html">
-          <i class="fas fa-tag"></i>
-        postgresql
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/sway.html">
-          <i class="fas fa-tag"></i>
-        sway
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
-          <i class="fas fa-tag"></i>
-        man
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
-          <i class="fas fa-tag"></i>
-        learning
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/sql.html">
-          <i class="fas fa-tag"></i>
-        sql
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
-          <i class="fas fa-tag"></i>
-        rust
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
-          <i class="fas fa-tag"></i>
-        psql
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/indexing.html">
-          <i class="fas fa-tag"></i>
-        indexing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/open-source.html">
-          <i class="fas fa-tag"></i>
-        open source
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
       </a>
     </span>
     <span class="tag-4">
@@ -686,15 +668,33 @@ it's a surprisingly simple class that provides all of this functionality!</p>
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
+      <a href="https://slar.se/tag/sql.html">
           <i class="fas fa-tag"></i>
-        syntax
+        sql
       </a>
     </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
+      <a href="https://slar.se/tag/go.html">
           <i class="fas fa-tag"></i>
-        bst
+        go
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
       </a>
     </span>
     <span class="tag-2">
@@ -703,10 +703,10 @@ it's a surprisingly simple class that provides all of this functionality!</p>
         book review
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/neovim.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
           <i class="fas fa-tag"></i>
-        neovim
+        parsing
       </a>
     </span>
 </p>

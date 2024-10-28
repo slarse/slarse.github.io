@@ -19,7 +19,7 @@ working for me, which is massively annoying.&lt;/p&gt;
 
 &lt;p&gt;But if you want to improve your understanding of how to configure input devices
 such as touchpads and mice in a Wayland compositor, then read on!&lt;/p&gt;
-&lt;h1&gt;Configuring a libinput device in Sway&lt;/h1&gt;
+&lt;h1 id="configuring-a-libinput-device-in-sway"&gt;Configuring a libinput device in Sway&lt;/h1&gt;
 &lt;p&gt;We need to add a libinput&lt;sup id="sf-configuring-touchpad-in-sway-1-back"&gt;&lt;a href="#sf-configuring-touchpad-in-sway-1" class="simple-footnote" title="libinput is a stack for common input devices, such as keyboards, touchpads and mice. Read more in the Wayland wiki."&gt;1&lt;/a&gt;&lt;/sup&gt;
 configuration into the Sway config file, which is usually located at
 &lt;code&gt;~/.config/sway/config&lt;/code&gt;. The Sway wiki &lt;a href="https://github.com/swaywm/sway/wiki#libinput-config-options"&gt;has a small example for libinput
@@ -116,7 +116,7 @@ $&lt;span class="w"&gt; &lt;/span&gt;swaymsg&lt;span class="w"&gt; &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And that's that, click-on-tap now works again!&lt;/p&gt;
-&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;h1 id="summary"&gt;Summary&lt;/h1&gt;
 &lt;p&gt;In this article, I outlined how to configure a touchpad in Sway. The principles
 shown here carry over to any kind of libinput device, and should also be
 applicable in most other Wayland compositors.&lt;/p&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-configuring-touchpad-in-sway-1"&gt;libinput is a stack for common input devices, such
@@ -140,7 +140,7 @@ and successor [of X.Org]" and Canonical even dropped its own &lt;a href="https:/
 server in favor of Wayland on Ubuntu&lt;/a&gt;.
 So when it became time for me to configure a new laptop in the beginning of
 January, I decided to do give Wayland a go. Here's what I think of it so far.&lt;/p&gt;
-&lt;h1&gt;What the heck is a window system?&lt;/h1&gt;
+&lt;h1 id="what-the-heck-is-a-window-system"&gt;What the heck is a window system?&lt;/h1&gt;
 &lt;p&gt;First of all, what the heck is a window system? In short, it's the component
 that renders graphical windows to your screen and communicates the user's input
 to the underlying operating system. The X Window System, or just X for short, is
@@ -156,7 +156,7 @@ display server can implement the Wayland protocol and is then referred to as a
 Wayland &lt;em&gt;compositor&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;If you want to learn more, &lt;a href="https://linuxiac.com/xorg-x11-wayland-linux-display-servers-and-protocols-explained/"&gt;here's a brief article on the
 subjecp&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Wayland first impressions with Sway&lt;/h1&gt;
+&lt;h1 id="wayland-first-impressions-with-sway"&gt;Wayland first impressions with Sway&lt;/h1&gt;
 &lt;p&gt;I recently setup Wayland on a brand new work computer, and going from a clean
 slate setup was really effortless. I chose &lt;a href="https://swaywm.org/"&gt;Sway&lt;/a&gt; as my
 compositor and started it. And it just kind of worked. Outside of &lt;a href="https://github.com/slarse/config/blob/d8ba6671a2245be75c5fa3b4fdfef3df61cc93a0/sway/config"&gt;configuring
@@ -170,7 +170,7 @@ doesn't support &lt;a href="https://github.com/swaywm/sway/wiki#nvidia-users"&gt
 drivers&lt;/a&gt;, running Sway with
 the &lt;code&gt;--unsuported-gpu&lt;/code&gt; option just worked.&lt;/p&gt;
 &lt;p&gt;All-in-all, setup was a breeze and I did not encounter any problems at all.&lt;/p&gt;
-&lt;h2&gt;Upsides of Sway&lt;/h2&gt;
+&lt;h2 id="upsides-of-sway"&gt;Upsides of Sway&lt;/h2&gt;
 &lt;p&gt;I immediately noticed some improvements in my desktop experience. The first came
 when connecting an external display, which Sway just found and started
 outputting an image to. In almost a decade of using X.Org on just shy of a half
@@ -183,7 +183,7 @@ Wayland. Now that it's gone I would have a hard time going back to it.&lt;/p&gt;
 &lt;p&gt;Finally, most things just kind of work. It's a &lt;em&gt;big&lt;/em&gt; accolade to note that over
 a whole month of use, I haven't encountered a single show-stopping problem. But
 I have definitely encountered quite a few lesser ones.&lt;/p&gt;
-&lt;h2&gt;Downsites of Sway&lt;/h2&gt;
+&lt;h2 id="downsites-of-sway"&gt;Downsites of Sway&lt;/h2&gt;
 &lt;p&gt;Pretty much all of the downsides I've encountered have to do with the fact that
 a lot of applications I've used over the years were written for X.Org. This
 means that many applications run under the the 
@@ -209,7 +209,7 @@ example still not
 standardized&lt;/a&gt;.
 In some respects, stepping into the land of Way feels a bit like using a beta
 product.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;Will I keep using Wayland? Definitely. I've only encountered a few very minor
 problems with application compatibility, and most I've found alternatives for.
 I'm even a little bit excited to find some need completely unfulfilled in the
@@ -222,7 +222,7 @@ always see a number next to the subject of the &lt;code&gt;man&lt;/code&gt; page
 &lt;code&gt;SUDO(8)&lt;/code&gt; or &lt;code&gt;open(n)&lt;/code&gt;. What's that thing in parentheses? To cut a long
 story short, it's the &lt;em&gt;section&lt;/em&gt; the &lt;code&gt;man&lt;/code&gt; page belongs to. Let's discover
 what that means.&lt;/p&gt;
-&lt;h1&gt;&lt;code&gt;man&lt;/code&gt; pages are divided into sections&lt;/h1&gt;
+&lt;h1 id="man-pages-are-divided-into-sections"&gt;&lt;code&gt;man&lt;/code&gt; pages are divided into sections&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;man&lt;/code&gt; pages act as a system reference manual on any *NIX system. All &lt;code&gt;man&lt;/code&gt; pages
 have a heading containing the name of the page, its section and a very short
 description. Something like this.&lt;/p&gt;
@@ -269,7 +269,7 @@ search order. Which, of course, we can also find in the &lt;code&gt;man&lt;/code
 &lt;p&gt;In my personal experience, the default search order most often gives you what
 you want. But sometimes it doesn't, and then you need to figure out how to find
 the man page you're after.&lt;/p&gt;
-&lt;h1&gt;Selecting man pages from different sections&lt;/h1&gt;
+&lt;h1 id="selecting-man-pages-from-different-sections"&gt;Selecting man pages from different sections&lt;/h1&gt;
 &lt;p&gt;To select a page from a particular section, you specify the section before the
 name. For example, as indicated by the excerpt from &lt;code&gt;MAN(1)&lt;/code&gt; above, there's also
 a &lt;code&gt;man(7)&lt;/code&gt;. We can get it like so.&lt;/p&gt;
@@ -299,7 +299,7 @@ particular page, your &lt;code&gt;man&lt;/code&gt; database is out-of-date, you 
 &lt;code&gt;mandb&lt;/code&gt; manually (or whatever is equivalent on your system) to rebuild the
 search index.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;And that's all!&lt;/h1&gt;
+&lt;h1 id="and-thats-all"&gt;And that's all!&lt;/h1&gt;
 &lt;p&gt;Now you should hopefully be a bit more confident in finding the man page you're
 looking for. And if at any point you forget what I've written here, almost all
 of the information is available just a &lt;code&gt;man man&lt;/code&gt; away!&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category><category term="man"></category></entry><entry><title>The Linux /etc/passwd file, and why it doesn't contain passwords</title><link href="https://slar.se/etc-passwd.html" rel="alternate"></link><published>2020-08-02T11:51:33+00:00</published><updated>2020-08-02T12:15:33+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2020-08-02:/etc-passwd.html</id><summary type="html">&lt;p&gt;On any Linux distribution, there's a file located at &lt;code&gt;/etc/passwd&lt;/code&gt;. This file
@@ -310,7 +310,7 @@ contains information about users that exist on the system, including their
 username, user id, group id and more. In this short article, I'll outline the
 structure of the &lt;code&gt;/etc/passwd&lt;/code&gt; file, and also illuminate why it doesn't
 typically contain any passwords.&lt;/p&gt;
-&lt;h2&gt;Layout of the &lt;code&gt;/etc/passwd&lt;/code&gt; file&lt;/h2&gt;
+&lt;h2 id="layout-of-the-etcpasswd-file"&gt;Layout of the &lt;code&gt;/etc/passwd&lt;/code&gt; file&lt;/h2&gt;
 &lt;p&gt;The layout of the &lt;code&gt;/etc/passwd&lt;/code&gt; file is fairly simple. Each line represents a
 user on the system, with different fields being separated by colons as follows:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;UID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;GID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;GECOS&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;
@@ -357,7 +357,7 @@ file?&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Hint:&lt;/strong&gt; To access section &lt;code&gt;Y&lt;/code&gt; of a manpage &lt;code&gt;PAGE&lt;/code&gt;, type &lt;code&gt;man PAGE.Y&lt;/code&gt; into a
 terminal. For example, to access &lt;code&gt;passwd (5)&lt;/code&gt;, you type &lt;code&gt;man passwd.5&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;The &lt;code&gt;/etc/shadow&lt;/code&gt; file&lt;/h2&gt;
+&lt;h2 id="the-etcshadow-file"&gt;The &lt;code&gt;/etc/shadow&lt;/code&gt; file&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;/etc/passwd&lt;/code&gt; file is a so-called &lt;em&gt;world-readable&lt;/em&gt;, meaning that any user on
 the system can read it. Many programs use this file to map users to their ids,
 for example, and so its broad accessibility is necessary. A side effect is that

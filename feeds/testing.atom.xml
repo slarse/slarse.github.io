@@ -9,7 +9,7 @@ framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
 &lt;p&gt;In this third part, we'll take a super quick look at the &lt;code&gt;--lf&lt;/code&gt; flag that lets
 us rerun failed tests, as well as the caching mechanism that makes it possible.&lt;/p&gt;
-&lt;h2&gt;Using &lt;code&gt;--lf&lt;/code&gt; to rerun failed tests&lt;/h2&gt;
+&lt;h2 id="using-lf-to-rerun-failed-tests"&gt;Using &lt;code&gt;--lf&lt;/code&gt; to rerun failed tests&lt;/h2&gt;
 &lt;p&gt;In this article, we'll use the test suite from &lt;a href="https://slar.se/essential-pytest-1.html"&gt;the first
 article&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
@@ -90,7 +90,7 @@ that a test &lt;code&gt;A&lt;/code&gt; passes, and then subsequently reintroduce
 addressing another test, but at that point &lt;code&gt;A&lt;/code&gt; is no longer executing with
 &lt;code&gt;--lf&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Interacting with the cache&lt;/h2&gt;
+&lt;h2 id="interacting-with-the-cache"&gt;Interacting with the cache&lt;/h2&gt;
 &lt;p&gt;I mentioned that the failed tests from the last run are stored in a cache. This
 cache is located in the &lt;code&gt;.pytest_cache&lt;/code&gt; directory of the current working
 directory. There are a few flags to interact with said cache. First, you can
@@ -125,7 +125,7 @@ strange interactions by the user. This has happened to me on several occasions,
 with tests simply not executing as I expect them to. At that point, supplying
 the &lt;code&gt;--cache-clear&lt;/code&gt; flag to a test run will clear the cache. Alternatively, you
 may simply remove the &lt;code&gt;.pytest_cache&lt;/code&gt; directory.&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;Being able to execute only the failing tests from the previous test run is a
 very handy feature when addressing bugs, both saving time in test execution and
 limiting the amount of output shown to the user. It's however important to
@@ -142,7 +142,7 @@ framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
 &lt;p&gt;In this second part, we'll take a look at the &lt;code&gt;-k&lt;/code&gt; and &lt;code&gt;-m&lt;/code&gt; options to control
 which tests in the test suite are executed.&lt;/p&gt;
-&lt;h2&gt;The test suite&lt;/h2&gt;
+&lt;h2 id="the-test-suite"&gt;The test suite&lt;/h2&gt;
 &lt;p&gt;In this article, we'll use the test suite from &lt;a href="https://slar.se/essential-pytest-1.html"&gt;the first
 article&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
@@ -176,7 +176,7 @@ mul.py::test_multiply_different_numbers&lt;span class="w"&gt; &lt;/span&gt;PASSE
 
 &lt;p&gt;Now, let's learn how to run subsets of these tests, without modifying the
 source code.&lt;/p&gt;
-&lt;h2&gt;Using the &lt;code&gt;-k&lt;/code&gt; option to select tests by substring matching&lt;/h2&gt;
+&lt;h2 id="using-the-k-option-to-select-tests-by-substring-matching"&gt;Using the &lt;code&gt;-k&lt;/code&gt; option to select tests by substring matching&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;-k&lt;/code&gt; option is wonderful, and allows us to select a subset of tests to
 execute based on simple substring matching. The simplest use of &lt;code&gt;-k&lt;/code&gt; is to
 provide it with a whitespace-less string. Any test with a name that &lt;em&gt;contains&lt;/em&gt;
@@ -243,7 +243,7 @@ test_mul.py::test_multiply_equal_numbers&lt;span class="w"&gt; &lt;/span&gt;PASS
 
 &lt;p&gt;And that's pretty much all there is to the &lt;code&gt;-k&lt;/code&gt; option. It's extremely useful
 when test suites grow in size, and I use it daily.&lt;/p&gt;
-&lt;h2&gt;Using the &lt;code&gt;-m&lt;/code&gt; option to select by marker&lt;/h2&gt;
+&lt;h2 id="using-the-m-option-to-select-by-marker"&gt;Using the &lt;code&gt;-m&lt;/code&gt; option to select by marker&lt;/h2&gt;
 &lt;p&gt;With &lt;code&gt;-m&lt;/code&gt;, we can select tests by &lt;em&gt;markers&lt;/em&gt;. You can mark a test function (or
 class) by placing a decorator above it.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
@@ -299,7 +299,7 @@ will make the warnings go away.&lt;/p&gt;
 &lt;code&gt;not&lt;/code&gt;, &lt;code&gt;and&lt;/code&gt; and &lt;code&gt;or&lt;/code&gt;, just like the &lt;code&gt;-k&lt;/code&gt; option does. Personally, I very rarely
 use &lt;code&gt;-m&lt;/code&gt; when using &lt;code&gt;pytest&lt;/code&gt;, but some people swear by it, which is why I wanted
 to include it in this article.&lt;/p&gt;
-&lt;h2&gt;Trick: Grouping related tests into classes makes selection easier&lt;/h2&gt;
+&lt;h2 id="trick-grouping-related-tests-into-classes-makes-selection-easier"&gt;Trick: Grouping related tests into classes makes selection easier&lt;/h2&gt;
 &lt;p&gt;A trick that I like to employ is to group related tests into classes. The class
 name is then incorporated into the test's name, and it becomes very easy to
 select tests that are part of the same class. Here's a simple example, where I'm
@@ -353,7 +353,7 @@ is also part of the test name. I typically do both by creating one test module
 per module of production code, and one test class per production code function.
 This allows me to easily select tests at two levels of granularity, which comes
 in very handy.&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;Selecting a subset of test cases to run is crucial to my development workflow.
 When there are 100s or even 1000s of tests to run, running all of them is often
 not what you want to do. My preferred way of selecting test cases is by using
@@ -370,7 +370,7 @@ framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
 &lt;p&gt;In this first part, we'll take a look at the &lt;code&gt;-v&lt;/code&gt; and &lt;code&gt;--tb&lt;/code&gt; options to control
 the verbosity of the output.&lt;/p&gt;
-&lt;h2&gt;The test suite&lt;/h2&gt;
+&lt;h2 id="the-test-suite"&gt;The test suite&lt;/h2&gt;
 &lt;p&gt;For the purposes of this article, I've implemented a very simple multiplication
 function called &lt;code&gt;mul&lt;/code&gt;, along with a few tests. Here's the entire thing, in a
 file called &lt;code&gt;test_mul.py&lt;/code&gt;:&lt;/p&gt;
@@ -422,7 +422,7 @@ FAILED&lt;span class="w"&gt; &lt;/span&gt;test_mul.py::test_multiply_different_n
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Let's learn how to control how much of what we see here.&lt;/p&gt;
-&lt;h2&gt;Using the &lt;code&gt;--tb&lt;/code&gt; option to control traceback verbosity&lt;/h2&gt;
+&lt;h2 id="using-the-tb-option-to-control-traceback-verbosity"&gt;Using the &lt;code&gt;--tb&lt;/code&gt; option to control traceback verbosity&lt;/h2&gt;
 &lt;p&gt;Most of what you're seeing in the output of the previous section is the
 &lt;em&gt;traceback&lt;/em&gt; information. While the traceback shown above is manageable as is,
 consider that it stems from a single-line function and single-line tests. With
@@ -472,7 +472,7 @@ difference for deeply nested function calls.&lt;/p&gt;
 &lt;p&gt;There are more ways to manipulate the traceback, but these are the two I use the
 most, aside from the default. To see the other options, refer to &lt;code&gt;pytest -h&lt;/code&gt; and
 look for the &lt;code&gt;--tb&lt;/code&gt; option.&lt;/p&gt;
-&lt;h2&gt;Using &lt;code&gt;-v&lt;/code&gt; to show more verbose test output&lt;/h2&gt;
+&lt;h2 id="using-v-to-show-more-verbose-test-output"&gt;Using &lt;code&gt;-v&lt;/code&gt; to show more verbose test output&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;-v&lt;/code&gt; option controls the verbosity of test output while the tests are
 running, and also the verbosity of single items in the traceback. It's really
 useful when tests take a long time to run, and you want to know approximately
@@ -550,7 +550,7 @@ things more verbosely. If we stack &lt;code&gt;-v&lt;/code&gt; twice, i.e. &lt;c
 get the full output. I find &lt;code&gt;-v&lt;/code&gt; on its own to be rather useless, and typically
 always supply &lt;code&gt;-vv&lt;/code&gt; if I want verbose output. For obvious reasons, I will not
 show what that output looks like.&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;In this article, we had a look at the &lt;code&gt;--tb&lt;/code&gt; and &lt;code&gt;-v&lt;/code&gt; options to control output
 verbosity in pytest. &lt;code&gt;--tb&lt;/code&gt; controls the overall size of the traceback, and can
 be supplied with values like &lt;code&gt;no&lt;/code&gt; for no output at all, &lt;code&gt;line&lt;/code&gt; for just a single
@@ -567,7 +567,7 @@ taught a lot of students what I know, I've decided to share my top tips of
 things to think about when testing. First up is one that may seem obvious, but
 beginners and experienced testers alike fail with on occasion: make sure you
 are actually testing something.&lt;/p&gt;
-&lt;h2&gt;Tests that don't test&lt;/h2&gt;
+&lt;h2 id="tests-that-dont-test"&gt;Tests that don't test&lt;/h2&gt;
 &lt;p&gt;Quite often, I find tests written by students that don't actually test anything,
 and will pass regardless of what the student's code is doing. Sometimes, I find
 tests written by yours truly that are similarly ineffective. A test that passes
@@ -603,7 +603,7 @@ it can simply be used as a list.&lt;/p&gt;
 
 &lt;p&gt;For brevity, the docstring will be excluded from now on.  Let's get to it the,
 shall we?&lt;/p&gt;
-&lt;h3&gt;Not calling the function under test&lt;/h3&gt;
+&lt;h3 id="not-calling-the-function-under-test"&gt;Not calling the function under test&lt;/h3&gt;
 &lt;p&gt;This mistake definitely sits in the top two most common ones that I encounter. A
 typical example of this is when using &lt;em&gt;redundant computation&lt;/em&gt; to produce a test
 oracle. That is, using some other implementation of the function under test to
@@ -628,7 +628,7 @@ often find it propagating elsewhere due to copy-paste errors. This kind of
 mistake is applicable in most any language, and is especially easy to make if
 the redundant function and the function under test have similar names and usage
 (which was actually not the case here!).&lt;/p&gt;
-&lt;h3&gt;Copy mistakes with references/pointers&lt;/h3&gt;
+&lt;h3 id="copy-mistakes-with-referencespointers"&gt;Copy mistakes with references/pointers&lt;/h3&gt;
 &lt;p&gt;Another very common issue that is often related to redundant computation is
 failing to make a proper copy of a data structure. If you have a look at the
 previous example, there is comment telling you to note the copy. Compare that
@@ -651,7 +651,7 @@ reference the &lt;em&gt;same list&lt;/em&gt;. The assertion is then semantically
 &lt;code&gt;mysort&lt;/code&gt; did with the list. This is a problem in any language that uses
 references (not C++ references, but pointer-like references), such as Java and
 Python, or when dealing with pointers in pretty much any language that has them.&lt;/p&gt;
-&lt;h3&gt;Mistakes during setup&lt;/h3&gt;
+&lt;h3 id="mistakes-during-setup"&gt;Mistakes during setup&lt;/h3&gt;
 &lt;p&gt;This is also fairly common, and can manifest in a variety of ways. The general
 idea is that the setup is performed such that the outcome of the test is very
 likely to be the same even if the production code is anything but correct. One
@@ -683,21 +683,21 @@ programming language. As a side note, the correct way to do this would of
 course be to seed &lt;em&gt;before&lt;/em&gt; the loop. Note that even with the correct
 configuration, there is a very small chance that the random elements are
 generated in ascending order.&lt;/p&gt;
-&lt;h3&gt;Mistakes with assertions&lt;/h3&gt;
+&lt;h3 id="mistakes-with-assertions"&gt;Mistakes with assertions&lt;/h3&gt;
 &lt;p&gt;The final issue is also common, and comes in many shapes and forms. One thing I
 sometimes see is that the assertions are tautologies, such as &lt;code&gt;assert
 random_list == random_list&lt;/code&gt; (obviously true), and probably mostly result from
 typos and unchecked auto-completion. Another common one is that assertions are
 simply missing, and is most often found in tests that are large enough that a
 missing line or two is not immediately apparent.&lt;/p&gt;
-&lt;h2&gt;Finding tests that don't test&lt;/h2&gt;
+&lt;h2 id="finding-tests-that-dont-test"&gt;Finding tests that don't test&lt;/h2&gt;
 &lt;p&gt;There are essentially two ways I know of to find tests that (pretty much) never
 fail.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Write the tests first (Test-driven development)&lt;/li&gt;
 &lt;li&gt;Inject errors into production code and expect tests to fail&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3&gt;Test-driven development (TDD)&lt;/h3&gt;
+&lt;h3 id="test-driven-development-tdd"&gt;Test-driven development (TDD)&lt;/h3&gt;
 &lt;p&gt;TDD involves writing the test cases before you implement the functionality.
 You first write the test cases, ensure that the test cases fail, and then
 implement the production code such that the tests pas. I typically use TDD
@@ -726,7 +726,7 @@ your tests, and make sure they fail before you start implementing production
 code. I don't think TDD is always practical to use, however, especially when
 I'm a bit unsure of what to do and need to experiment with different APIs.
 That's when the second technique comes in real handy.&lt;/p&gt;
-&lt;h3&gt;Inject errors into production code and expect tests to fail&lt;/h3&gt;
+&lt;h3 id="inject-errors-into-production-code-and-expect-tests-to-fail"&gt;Inject errors into production code and expect tests to fail&lt;/h3&gt;
 &lt;p&gt;This is a highly useful technique that can always be performed, and I do this
 almost every time I implement tests after production code. The idea is simply to
 consider what your test is testing, and inject errors into the production code
@@ -746,7 +746,7 @@ general, it takes a &lt;em&gt;long&lt;/em&gt; time to run mutation testing on a 
 often the whole test suite needs to be run for a single fault. And there are
 many, many possible faults.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;While I framed this as a unit testing article, these concepts are applicable to
 most kinds of testing. You should always attempt to make sure that your test is
 doing what it claims to be doing. A single typo may be what stands between a

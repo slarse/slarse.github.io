@@ -32,7 +32,7 @@ faster, it's about reducing mental strain while programming, so that
 counterpoint completely misses the mark. The fact that becoming a more
 proficient typist also makes you faster is simply a neat side effect. And
 becoming proficient really isn't very difficult. Let me tell you how I did it.&lt;/p&gt;
-&lt;h1&gt;Learning finger placement&lt;/h1&gt;
+&lt;h1 id="learning-finger-placement"&gt;Learning finger placement&lt;/h1&gt;
 &lt;p&gt;The first thing to learn about typing is the very basics: finger placement. You
 shouldn't be using your right index finger to do 90% of the typing, and your
 left pinky shouldn't be completely unutilized. They all need to contribute.&lt;/p&gt;
@@ -58,7 +58,7 @@ all times. If you are inaccurate, you are typing too fast and need to slow down.
 frequently. However, you should be &lt;a href="https://en.wikipedia.org/wiki/Touch_typing"&gt;touch
 typing&lt;/a&gt; comfortably and accurately
 before you graduate to the next level of practice.&lt;/p&gt;
-&lt;h1&gt;Leveling up&lt;/h1&gt;
+&lt;h1 id="leveling-up"&gt;Leveling up&lt;/h1&gt;
 &lt;p&gt;Once you've gotten the basics down and can touch type comfortably, I would
 suggest proceeding to &lt;a href="https://monkeytype.com/"&gt;monkeytype&lt;/a&gt; as it's a lot more
 customizable. Use the basic configuration in the beginning, and practice 10-15
@@ -75,7 +75,7 @@ typing in your editor instead, but it's an option if you really like monkeytype.
 &lt;p&gt;Even though I consider myself a highly proficient typist, I still practice on
 monkeytype every now and then.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Some words about keyboard layout&lt;/h1&gt;
+&lt;h1 id="some-words-about-keyboard-layout"&gt;Some words about keyboard layout&lt;/h1&gt;
 &lt;p&gt;While I don't think there's good reason for most people to switch from the
 standard QWERTY keyboard layout, there &lt;em&gt;is&lt;/em&gt; good reason to choose a variant of
 that layout that's well suited for programming. A layout that I find absolutely
@@ -99,7 +99,7 @@ key.&lt;/p&gt;
 &lt;p&gt;It made quite the difference for me. So if you live in a country with a quirky
 layout, where some frequently used programming characters are in awkward
 positions, consider adopting a layout that is more appropriate for programming.&lt;/p&gt;
-&lt;h1&gt;Closing words&lt;/h1&gt;
+&lt;h1 id="closing-words"&gt;Closing words&lt;/h1&gt;
 &lt;p&gt;Trust me when I say that learning to type properly will really benefit you in
 the long run. I'm not advocating that you practice for hours a day and become
 the fastest typist in town, but that you become proficient enough with typing
@@ -126,7 +126,7 @@ my open source repositories will be slow. Sometimes I may not respond at all.
 Open source development is not one of my current focus points; my free time is
 spent elsewhere.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Open source development got me to where I am&lt;/h1&gt;
+&lt;h1 id="open-source-development-got-me-to-where-i-am"&gt;Open source development got me to where I am&lt;/h1&gt;
 &lt;p&gt;From creating &lt;a href="https://repobee.org"&gt;RepoBee&lt;/a&gt; to maintaining
 &lt;a href="https://github.com/inria/spoon"&gt;Spoon&lt;/a&gt;, I've spent thousands upon
 thousands of hours of my free time contributing to projects and putting them out
@@ -138,7 +138,7 @@ job&lt;sup id="sf-taking-a-step-back-from-open-source-development-1-back"&gt;&lt
 convinced that I would not be nearly as skilled a software engineer as I am
 today had I not had these experiences. Given the choice, I would take the exact
 same path all over again.&lt;/p&gt;
-&lt;h1&gt;But things have changed&lt;/h1&gt;
+&lt;h1 id="but-things-have-changed"&gt;But things have changed&lt;/h1&gt;
 &lt;p&gt;I loved open source development as a university student because it gave me the
 opportunity to collaborate with other developers on &lt;em&gt;real&lt;/em&gt; and &lt;em&gt;long-term&lt;/em&gt;
 projects, honing skills that were not being honed in the predominantly
@@ -160,7 +160,7 @@ bit of that&lt;/a&gt;. While this
 may still translate to the odd &lt;a href="https://github.com/slarse/rut"&gt;open source repository with some half-finished
 project&lt;/a&gt;, it does not mesh well with long-term
 maintenance of established projects.&lt;/p&gt;
-&lt;h1&gt;So what's up now?&lt;/h1&gt;
+&lt;h1 id="so-whats-up-now"&gt;So what's up now?&lt;/h1&gt;
 &lt;p&gt;This disconnect between my own needs and open source development has been
 weighing on me for years. I've felt guilty for neglecting the projects I
 maintain, but at the same time haven't been able to do anything about it.
@@ -200,7 +200,7 @@ Publisher(s): Pearson Education (US)
 ISBN: 9780137929238
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;The book covers 175 myths and misconceptions in cybersecurity. These are divided
 into 16 chapters covering different topics ranging from faulty assumptions
 (e.g. "I am too small to be a target"&lt;sup id="sf-book-review-cybersecurity-myths-and-misconceptions-1-back"&gt;&lt;a href="#sf-book-review-cybersecurity-myths-and-misconceptions-1" class="simple-footnote" title="You are not. A lot of cyber mischief isn't even targeted, but rather automated processes scanning vast amounts of the Internet to find servers with known vulnerabilities."&gt;1&lt;/a&gt;&lt;/sup&gt;) to misconceptions
@@ -225,7 +225,7 @@ There are some things that may fly over your head if you're not a software
 engineer, such as talk about the OSI network model and interprocess
 communication, but such technical dives are so infrequent that they barely need
 mention.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;This book is a leisure read. It does not require you to sit at a computer and
 apply concepts to benefit from it, all you need to do is read the book and
 ponder its implications. At the same time, it will surely grant you insights
@@ -276,7 +276,7 @@ study more software engineering.&lt;/p&gt;
 educating your peers to the best of your abilities, a base level of
 understanding is to be expected from your peers. And that understanding is, at
 least in part, their responsibility to attain.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;There's a large amount of footnotes throughout the book, a lot of which contain
 useful and interesting snippets of information as well as sources for
 statements. These, I do not mind at all. But, unfortunately, there is a bit of
@@ -287,7 +287,7 @@ times simply too many of them.&lt;/p&gt;
 of footnotes would only have made the book more enjoyable to read. But when you
 interrupt your reading flow to read a footnote only to be greeted by your third
 witty remark in a row, it does get a bit annoying.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This book widened my view of software engineering and cybersecurity. While most
 of the topics were familiar to me from my education and professional experience,
 some were forgotten, some brand new, and many were simply framed in a way I had
@@ -329,7 +329,24 @@ applicable to relational databases in general.&lt;/p&gt;
 &lt;p&gt;Note: This article is based on PostgreSQL 16, but the vast majority of the
 content should be accurate for PostgreSQL 9.6 and newer.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;The incredible impact of indexes&lt;/h1&gt;
+&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#the-incredible-impact-of-indexes"&gt;The incredible impact of indexes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#indexing-in-theory"&gt;Indexing in theory&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#the-b-tree"&gt;The B-tree&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#selecting-ranges-is-almost-as-fast-as-single-values"&gt;Selecting ranges is almost as fast as single values&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#indexes-greatly-speed-up-order-by"&gt;Indexes greatly speed up ORDER BY&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#indexing-pitfalls"&gt;Indexing pitfalls&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#the-query-planner-can-choose-not-to-use-an-index"&gt;The query planner can choose not to use an index&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#an-index-is-for-an-exact-expression"&gt;An index is for an exact expression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#indexes-optimize-reads-but-slow-down-writes"&gt;Indexes optimize reads but slow down writes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#summary"&gt;Summary&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id="the-incredible-impact-of-indexes"&gt;The incredible impact of indexes&lt;/h1&gt;
 &lt;p&gt;To sell you on the fact that indexes are important, let's do a quick experiment.
 Below I define a simple data model and fill it with some sample data.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;TABLE&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;IF&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;NOT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;EXISTS&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
@@ -483,7 +500,7 @@ understanding at least the principles on which it operates will still make it
 harder than it has to be to apply it in practice. So let's discuss the
 principles of indexing and work through an example of the most commonly used
 index type: the B-tree.&lt;/p&gt;
-&lt;h1&gt;Indexing in theory&lt;/h1&gt;
+&lt;h1 id="indexing-in-theory"&gt;Indexing in theory&lt;/h1&gt;
 &lt;p&gt;If you've ever read a non-fiction book, you know in principle what an index is.
 Because at the back of that book there's a section called "index", and it
 contains an alphabetically sorted list of terms and phrases used throughout the
@@ -509,7 +526,7 @@ can see that they are both of type&lt;/code&gt;btree`.&lt;/p&gt;
 &lt;p&gt;You may immediately think "oh, a binary tree", which is close, but no cigar. In
 the following section I'll outline how a B-tree index works and its properties
 such that you can make effective use of it in your day to day work.&lt;/p&gt;
-&lt;h2&gt;The B-tree&lt;/h2&gt;
+&lt;h2 id="the-b-tree"&gt;The B-tree&lt;/h2&gt;
 &lt;p&gt;A B-tree is indeed a search tree, and it is in fact rather similar to a binary search
 tree. Each node, or &lt;em&gt;page&lt;/em&gt;&lt;sup id="sf-postgresql-indexing-basics-2-back"&gt;&lt;a href="#sf-postgresql-indexing-basics-2" class="simple-footnote" title="In PostgreSQL, the nodes of a B-tree are called pages (source)"&gt;2&lt;/a&gt;&lt;/sup&gt;
 is a sorted list of references either to other pages of the tree, or to columns of the
@@ -536,7 +553,7 @@ would actually make.&lt;/p&gt;
 &lt;p&gt;In addition to providing quick lookup to specific values, the fact that B-trees
 are sorted leads to some possibly unexpected benefits in queries that require
 sorted output.&lt;/p&gt;
-&lt;h2&gt;Selecting ranges is almost as fast as single values&lt;/h2&gt;
+&lt;h2 id="selecting-ranges-is-almost-as-fast-as-single-values"&gt;Selecting ranges is almost as fast as single values&lt;/h2&gt;
 &lt;p&gt;Did you notice in the illustration above that the leaf page contained not only
 the value we searched for, but also its closest neighbors? Because of this
 adjacency, an index lookup for a &lt;em&gt;range&lt;/em&gt; of values is incredibly
@@ -581,7 +598,7 @@ efficient&lt;sup id="sf-postgresql-indexing-basics-5-back"&gt;&lt;a href="#sf-po
 
 &lt;p&gt;A very common use case for a range selection is on creation date, e.g. `WHERE
 created_at &amp;gt;= '2024-04-01'.&lt;/p&gt;
-&lt;h2&gt;Indexes greatly speed up &lt;code&gt;ORDER BY&lt;/code&gt;&lt;/h2&gt;
+&lt;h2 id="indexes-greatly-speed-up-order-by"&gt;Indexes greatly speed up &lt;code&gt;ORDER BY&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;Tacking on an &lt;code&gt;ORDER BY&lt;/code&gt; to a query is commonplace and pretty much required if
 you plan to do any kind of pagination on the result set&lt;sup id="sf-postgresql-indexing-basics-6-back"&gt;&lt;a href="#sf-postgresql-indexing-basics-6" class="simple-footnote" title="The order in which rows are returned from a query is undefined unless ORDER BY is provided. A common bug in backend systems is that OFFSET and LIMIT are used for pagination either without explicit ordering or with ordering that is not unique."&gt;6&lt;/a&gt;&lt;/sup&gt;. Without an index on &lt;code&gt;value&lt;/code&gt;, ordering by it takes quite a bit of
 time.&lt;/p&gt;
@@ -642,13 +659,13 @@ scans the already sorted index.&lt;/p&gt;
 
 &lt;p&gt;There is simply a lot of value to having an index that is already ordered&lt;sup id="sf-postgresql-indexing-basics-7-back"&gt;&lt;a href="#sf-postgresql-indexing-basics-7" class="simple-footnote" title=" Note that only the B-tree type of index has this property (source)."&gt;7&lt;/a&gt;&lt;/sup&gt;
 as so many common operations rely on ordering.&lt;/p&gt;
-&lt;h1&gt;Indexing pitfalls&lt;/h1&gt;
+&lt;h1 id="indexing-pitfalls"&gt;Indexing pitfalls&lt;/h1&gt;
 &lt;p&gt;Thus far, this article has mostly covered the happy path of indexing, when
 everything just works out. It may have given you the impression that indexing is
 a silver bullet to any query running a bit slow. Unfortunately, that's far from
 the case, so in this section I will outline a few scenarios that may cause
 confusion among up and coming indexers.&lt;/p&gt;
-&lt;h2&gt;The query planner can choose not to use an index&lt;/h2&gt;
+&lt;h2 id="the-query-planner-can-choose-not-to-use-an-index"&gt;The query planner can choose not to use an index&lt;/h2&gt;
 &lt;p&gt;Indexes are great, but sometimes the query planner may choose to ignore them and
 just scan the table instead. This is quite easy to show, take for example the
 following query where we search for any &lt;code&gt;value &amp;gt; 500000&lt;/code&gt;.&lt;/p&gt;
@@ -707,7 +724,7 @@ ones you get in production&lt;/strong&gt;. As such, one can easily be fooled by 
 gets a terrible looking plan in your local environment but actually runs fine in
 production, and vice versa&lt;sup id="sf-postgresql-indexing-basics-10-back"&gt;&lt;a href="#sf-postgresql-indexing-basics-10" class="simple-footnote" title="The query planner can also come up with terrible queries if table statistics are too outdated, but that's a topic for another time."&gt;10&lt;/a&gt;&lt;/sup&gt;. Be aware of this when you add new indexes and are perplexed as to
 why they are not used; there may just not be enough data for it to be worth it.&lt;/p&gt;
-&lt;h2&gt;An index is for an exact expression&lt;/h2&gt;
+&lt;h2 id="an-index-is-for-an-exact-expression"&gt;An index is for an exact expression&lt;/h2&gt;
 &lt;p&gt;We have an index on &lt;code&gt;data(value)&lt;/code&gt; and showed that ordering by &lt;code&gt;value&lt;/code&gt; is super
 quick. Let's do it again so you don't have to scroll up too far.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="o"&gt;=#&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;ORDER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;BY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;LIMIT&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -789,7 +806,7 @@ index)&lt;/a&gt;, but
 that is something I plan to cover in an upcoming article. For the purposes of
 this article, I only want to make it very clear that a column having an index on
 it does not imply that any search on that column can utilize said index.&lt;/p&gt;
-&lt;h2&gt;Indexes optimize reads but slow down writes&lt;/h2&gt;
+&lt;h2 id="indexes-optimize-reads-but-slow-down-writes"&gt;Indexes optimize reads but slow down writes&lt;/h2&gt;
 &lt;p&gt;Something to keep in mind with indexing is that an index is made to speed up
 reads. On the flip side, they slow down writes as every time a table is written
 to its indexes must also be written to&lt;sup id="sf-postgresql-indexing-basics-11-back"&gt;&lt;a href="#sf-postgresql-indexing-basics-11" class="simple-footnote" title="Except for heap-only tuples (source). Indexes can also take up a significant amount of storage. I once worked with a production database where the largest table was around 2 terabytes in size, with an additional 3 terabytes of indexes. Adding a new index was something we thought long and hard about before actually doing."&gt;11&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
@@ -800,7 +817,7 @@ high throughput demands. The vast majority of applications have neither of
 those, while the lack of indexes becomes problematic even for small amounts of
 data. In other words, the benefits of indexing almost always outweighs the cons,
 but it's good to be aware that cons exist.&lt;/p&gt;
-&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;h1 id="summary"&gt;Summary&lt;/h1&gt;
 &lt;p&gt;In this article, we've covered the basics of indexing in PostgreSQL, had a
 theoretical look at a B-tree index and its properties as well as how these can
 be taken advantage of. In addition, we've looked at some common pitfalls with
@@ -870,7 +887,7 @@ working for me, which is massively annoying.&lt;/p&gt;
 
 &lt;p&gt;But if you want to improve your understanding of how to configure input devices
 such as touchpads and mice in a Wayland compositor, then read on!&lt;/p&gt;
-&lt;h1&gt;Configuring a libinput device in Sway&lt;/h1&gt;
+&lt;h1 id="configuring-a-libinput-device-in-sway"&gt;Configuring a libinput device in Sway&lt;/h1&gt;
 &lt;p&gt;We need to add a libinput&lt;sup id="sf-configuring-touchpad-in-sway-1-back"&gt;&lt;a href="#sf-configuring-touchpad-in-sway-1" class="simple-footnote" title="libinput is a stack for common input devices, such as keyboards, touchpads and mice. Read more in the Wayland wiki."&gt;1&lt;/a&gt;&lt;/sup&gt;
 configuration into the Sway config file, which is usually located at
 &lt;code&gt;~/.config/sway/config&lt;/code&gt;. The Sway wiki &lt;a href="https://github.com/swaywm/sway/wiki#libinput-config-options"&gt;has a small example for libinput
@@ -967,7 +984,7 @@ $&lt;span class="w"&gt; &lt;/span&gt;swaymsg&lt;span class="w"&gt; &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And that's that, click-on-tap now works again!&lt;/p&gt;
-&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;h1 id="summary"&gt;Summary&lt;/h1&gt;
 &lt;p&gt;In this article, I outlined how to configure a touchpad in Sway. The principles
 shown here carry over to any kind of libinput device, and should also be
 applicable in most other Wayland compositors.&lt;/p&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-configuring-touchpad-in-sway-1"&gt;libinput is a stack for common input devices, such
@@ -1008,7 +1025,27 @@ Tree-sitter in NeoVim.&lt;/p&gt;
 available in a companion repository at
 &lt;a href="https://github.com/slarse/tree-sitter-mds"&gt;slarse/tree-sitter-mds&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;What's this Tree-sitter thing?&lt;/h1&gt;
+&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#whats-this-tree-sitter-thing"&gt;What's this Tree-sitter thing?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#working-example-markdown-simple"&gt;Working example: Markdown Simple&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#getting-started-with-creating-tree-sitter-parsers"&gt;Getting started with creating Tree-sitter parsers&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#babys-first-grammar-rule"&gt;Baby's first grammar rule&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#let-there-be-color"&gt;Let there be color&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#refining-the-grammar"&gt;Refining the grammar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#capturing-inline-code-and-code-blocks"&gt;Capturing inline code and code blocks&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#capturing-code-blocks"&gt;Capturing code blocks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#paragraphs-with-text-and-inline-code"&gt;Paragraphs with text and inline code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#resolving-a-conflict-in-the-grammar"&gt;Resolving a conflict in the grammar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#improving-the-highlight-queries"&gt;Improving the highlight queries&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#injecting-a-javascript-parser"&gt;Injecting a JavaScript parser&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#summary"&gt;Summary&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id="whats-this-tree-sitter-thing"&gt;What's this Tree-sitter thing?&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://tree-sitter.github.io/tree-sitter/"&gt;Tree-sitter&lt;/a&gt; is a parser generator
 tool for the modern era. What's a parser generator, you ask? Well, it's exactly
 what it sounds like: a tool to generate a parser! By defining the syntax of a
@@ -1030,7 +1067,7 @@ article our focus is on syntax highlighting.&lt;/p&gt;
 with &lt;code&gt;$&lt;/code&gt;. Lines that follow a &lt;code&gt;$&lt;/code&gt;-prefixed line but are not prefixed are
 output lines.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Working example: Markdown Simple&lt;/h1&gt;
+&lt;h1 id="working-example-markdown-simple"&gt;Working example: Markdown Simple&lt;/h1&gt;
 &lt;p&gt;As a driving example for this article series, we'll look at a tiny subset of
 Markdown, which should be familiar to most anyone in the target audience.
 Specifically, we want to be able to highlight the following containing
@@ -1055,7 +1092,7 @@ headings, paragraphs, inline code and code blocks.&lt;/p&gt;
 &lt;code&gt;.mds&lt;/code&gt; file extension. At the end of this article, we'll have fully functioning
 syntax highlighting for &lt;code&gt;.mds&lt;/code&gt; files, including properly highlighted JavaScript
 code in the multiline code blocks!&lt;/p&gt;
-&lt;h1&gt;Getting started with creating Tree-sitter parsers&lt;/h1&gt;
+&lt;h1 id="getting-started-with-creating-tree-sitter-parsers"&gt;Getting started with creating Tree-sitter parsers&lt;/h1&gt;
 &lt;p&gt;Tree-sitter's docs have a good &lt;a href="https://tree-sitter.github.io/tree-sitter/creating-parsers#project-setup"&gt;Project
 setup&lt;/a&gt;
 section, but I found that it lacks a few key ingredients for our purposes. I
@@ -1080,7 +1117,7 @@ also get with &lt;code&gt;npm&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Note where the configuration file is written to. You may need to edit it later
 for your project to be located by Tree-sitter.&lt;/p&gt;
-&lt;h2&gt;Baby's first grammar rule&lt;/h2&gt;
+&lt;h2 id="babys-first-grammar-rule"&gt;Baby's first grammar rule&lt;/h2&gt;
 &lt;p&gt;As previously mentioned, a parser generator reads a grammar that defines some
 language and spits out a parser for it. In Tree-sitter, we define grammar rules
 in JavaScript, in a file called &lt;code&gt;grammar.js&lt;/code&gt; in the root of your project. It
@@ -1151,7 +1188,7 @@ node. Of course, we could immediately define &lt;code&gt;source_file&lt;/code&gt
 currently resides in &lt;code&gt;text&lt;/code&gt; at this point; I just wanted to illustrate the
 concept of terminal and non-terminal rules as it will become important in the
 next part.&lt;/p&gt;
-&lt;h2&gt;Let there be color&lt;/h2&gt;
+&lt;h2 id="let-there-be-color"&gt;Let there be color&lt;/h2&gt;
 &lt;p&gt;The goal of this article is to achieve nice syntax highlighting, so let's get
 started immediately. We can highlight a file using the &lt;code&gt;highlight&lt;/code&gt; command,
 but it won't work out of the box.&lt;/p&gt;
@@ -1227,7 +1264,7 @@ everything is just highlighted as a string. In my Tree-sitter configuration
 the &lt;code&gt;string&lt;/code&gt; color happens happens to be a shade of green, but it may be
 different for you. For more granular highlighting, we need a more granular
 syntax tree to perform queries against.&lt;/p&gt;
-&lt;h1&gt;Refining the grammar&lt;/h1&gt;
+&lt;h1 id="refining-the-grammar"&gt;Refining the grammar&lt;/h1&gt;
 &lt;p&gt;The basic pieces of the puzzle are now in place. We have a rudimentary syntax
 tree allowing for an equally rudimentary syntax highlighting. It's now time to
 start refining the grammar to capture different components. With some crude
@@ -1304,11 +1341,11 @@ highlight headings.&lt;/p&gt;
 &lt;p&gt;This should land you with the following highlighting.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Syntax highlighting only on headings" src="https://slar.se/photos/tree_sitter_highlighting/second_highlighta.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;Nice!&lt;/p&gt;
-&lt;h1&gt;Capturing inline code and code blocks&lt;/h1&gt;
+&lt;h1 id="capturing-inline-code-and-code-blocks"&gt;Capturing inline code and code blocks&lt;/h1&gt;
 &lt;p&gt;The only thing left for us to capture is inline code and code blocks. This is
 however where it starts to get a little bit complicated, so let's take each of
 these in turn.&lt;/p&gt;
-&lt;h2&gt;Capturing code blocks&lt;/h2&gt;
+&lt;h2 id="capturing-code-blocks"&gt;Capturing code blocks&lt;/h2&gt;
 &lt;p&gt;Code blocks are relatively simple to capture in isolation. A rule for code
 blocks could look as follows.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;codeBlock&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;seq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
@@ -1344,7 +1381,7 @@ doesn't change from before. The syntax tree still consists of two &lt;code&gt;se
 containing one &lt;code&gt;heading&lt;/code&gt; and &lt;code&gt;text&lt;/code&gt; each. This is because &lt;code&gt;text&lt;/code&gt; is consuming
 the backticks that should delimit a &lt;code&gt;codeBlock&lt;/code&gt;. We'll address this at the same
 time as we define our paragraphs in the next part.&lt;/p&gt;
-&lt;h2&gt;Paragraphs with text and inline code&lt;/h2&gt;
+&lt;h2 id="paragraphs-with-text-and-inline-code"&gt;Paragraphs with text and inline code&lt;/h2&gt;
 &lt;p&gt;We want to define grammar rules such that the parser can recognize &lt;em&gt;paragraphs&lt;/em&gt;
 that are composed of one or more &lt;code&gt;text&lt;/code&gt; and/or &lt;code&gt;inlineCode&lt;/code&gt; nodes. The
 &lt;code&gt;inlineCode&lt;/code&gt; rule is quite simple: a backtick, followed by zero or more
@@ -1428,7 +1465,7 @@ more &lt;code&gt;inlineCode&lt;/code&gt; or &lt;code&gt;text&lt;/code&gt;.&lt;/p
 
 &lt;p&gt;If you try this out, you'll find that it doesn't work, Tree-sitter won't even
 generate a parser for you. Instead, it complains about a conflict. Oh, dear.&lt;/p&gt;
-&lt;h2&gt;Resolving a conflict in the grammar&lt;/h2&gt;
+&lt;h2 id="resolving-a-conflict-in-the-grammar"&gt;Resolving a conflict in the grammar&lt;/h2&gt;
 &lt;p&gt;A conflict in the grammar occurs when there are multiple ways for Tree-sitter
 to interpret the rules you've provided it with. In the case of our &lt;code&gt;paragraph&lt;/code&gt;
 rule, Tree-sitter has the following to say.&lt;/p&gt;
@@ -1505,7 +1542,7 @@ parser again and run it, you should see a tree like this.&lt;/p&gt;
 
 &lt;p&gt;We still only have a single highlight query, though, so next up is improving
 that.&lt;/p&gt;
-&lt;h2&gt;Improving the highlight queries&lt;/h2&gt;
+&lt;h2 id="improving-the-highlight-queries"&gt;Improving the highlight queries&lt;/h2&gt;
 &lt;p&gt;We now have a significantly more granular syntax tree to work with. As a first
 attempt, let's color inline code including backticks with one color, code block
 backticks with one color and finally the code blocks themselves with another
@@ -1528,7 +1565,7 @@ starting point.&lt;/p&gt;
 improvement over just white code. This is where Tree-sitter's killer syntax
 highlighting feature comes into play:
 &lt;a href="https://tree-sitter.github.io/tree-sitter/syntax-highlighting#language-injection"&gt;injections&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;Injecting a JavaScript parser&lt;/h2&gt;
+&lt;h2 id="injecting-a-javascript-parser"&gt;Injecting a JavaScript parser&lt;/h2&gt;
 &lt;p&gt;Injections are super cool. They allow us to succinctly state that certain nodes
 should be parsed with some other parser than the one we're currently using. Just
 like with highlights, injections are specified with queries. What makes this
@@ -1568,7 +1605,7 @@ admittedly, the color scheme could definitely use some work.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Syntax highlighting on headings, inline code and JavaScript injection in code blocks" src="https://slar.se/photos/tree_sitter_highlighting/final_highlighta.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;With that, we've achieved the highlighting goals we set out to at the beginning
 of the article.&lt;/p&gt;
-&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;h1 id="summary"&gt;Summary&lt;/h1&gt;
 &lt;p&gt;In this article, we explored the basics of Tree-sitter and how to apply it to
 provide syntax highlighting for a simple markup language. The full source code
 for the project can be found
@@ -1650,7 +1687,7 @@ the Lua code presented into any &lt;code&gt;.lua&lt;/code&gt; file and run &lt;c
 file in the current buffer. This makes the commands defined within available
 in your current NeoVim session.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Commenting out code the hard way&lt;/h1&gt;
+&lt;h1 id="commenting-out-code-the-hard-way"&gt;Commenting out code the hard way&lt;/h1&gt;
 &lt;p&gt;A simple no-preparation way of commenting out code in any variation of Vim is to
 simply select a few lines of code in visual mode and then make a substitution.
 Let's say we're writing Python where the inline comment character is &lt;code&gt;#&lt;/code&gt;, then
@@ -1665,7 +1702,7 @@ after the substitution. Select a range of lines in visual mode and run the same
 substitution and you'll comment out the entire range.&lt;/p&gt;
 &lt;p&gt;If you do this rarely it's fine. But if you do it regularly it becomes rather
 cumbersome. Luckily for us, NeoVim is easy to extend.&lt;/p&gt;
-&lt;h1&gt;Defining a command to comment out code&lt;/h1&gt;
+&lt;h1 id="defining-a-command-to-comment-out-code"&gt;Defining a command to comment out code&lt;/h1&gt;
 &lt;p&gt;To make the above substitution a bit less of an effort, we can define a command
 for it. First, we need to define a function that executes the code. A very
 simple first effort would look like this.&lt;/p&gt;
@@ -1726,7 +1763,7 @@ left to address:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Let's address these in turn.&lt;/p&gt;
-&lt;h2&gt;Adding support for range selection&lt;/h2&gt;
+&lt;h2 id="adding-support-for-range-selection"&gt;Adding support for range selection&lt;/h2&gt;
 &lt;p&gt;Being able to run our little &lt;code&gt;:CommentOut&lt;/code&gt; command only on one line at a time
 is hardly useful, so let's make our command compatible with range selection.
 First we need to modify the creation of the command, which by default does
@@ -1757,7 +1794,7 @@ start and finish of our substitution in the right order.&lt;/p&gt;
 &lt;p&gt;Selecting a few lines of code and running &lt;code&gt;:CommentOut&lt;/code&gt; (or using the
 keybind for it) now actually comments out those lines! Let's now figure out how
 to select the correct kind of line comment for the given file type.&lt;/p&gt;
-&lt;h2&gt;Choosing line comment style by filetype&lt;/h2&gt;
+&lt;h2 id="choosing-line-comment-style-by-filetype"&gt;Choosing line comment style by filetype&lt;/h2&gt;
 &lt;p&gt;While there's probably a super clever way of accomplishing this, I went with
 something really rudimentary: a table with line comment styles by filetype. It
 looks something like this:&lt;/p&gt;
@@ -1786,7 +1823,7 @@ comment styles, just add them to the table.&lt;/p&gt;
 &lt;p&gt;If you now run the &lt;code&gt;:CommentOut&lt;/code&gt; command in a Python file, it'll use &lt;code&gt;#&lt;/code&gt; as the
 comment style. But if you do it in a SQL file, it'll use &lt;code&gt;--&lt;/code&gt;, and in a Go file
 it'll use &lt;code&gt;//&lt;/code&gt;.&lt;/p&gt;
-&lt;h1&gt;Uncommenting code&lt;/h1&gt;
+&lt;h1 id="uncommenting-code"&gt;Uncommenting code&lt;/h1&gt;
 &lt;p&gt;We now have a neat way of commenting out code, but what about &lt;em&gt;uncommenting&lt;/em&gt;
 code? Let's straight up copy &lt;code&gt;comment_out()&lt;/code&gt; and just replace the substitution
 expression with something that removes a line comment start.&lt;/p&gt;
@@ -1853,7 +1890,7 @@ function.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Now it should work pretty well!&lt;/p&gt;
-&lt;h1&gt;Summary and full code&lt;/h1&gt;
+&lt;h1 id="summary-and-full-code"&gt;Summary and full code&lt;/h1&gt;
 &lt;p&gt;That's pretty much it for commenting and uncommenting code, at least as far as
 my semi-imagined needs for it go. This represents among the first non-trivial
 extensions I've made to NeoVim using only its API and made me realise just how
@@ -1907,7 +1944,7 @@ PostgreSQL and just does what it's supposed to. It does, however, have some
 pretty dangerous defaults. Not only are writes allowed, but it also
 automatically commits any statements executed outside of explicit transactions.
 Let's fix that.&lt;/p&gt;
-&lt;h1&gt;Configuring &lt;code&gt;psql&lt;/code&gt; with &lt;code&gt;.psqlrc&lt;/code&gt;&lt;/h1&gt;
+&lt;h1 id="configuring-psql-with-psqlrc"&gt;Configuring &lt;code&gt;psql&lt;/code&gt; with &lt;code&gt;.psqlrc&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;The &lt;a href="https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-FILES-PSQLRC"&gt;&lt;code&gt;.psqlrc&lt;/code&gt;
 file&lt;/a&gt;
 can be used to set defaults for new connections made with &lt;code&gt;psql&lt;/code&gt;. It should be
@@ -1918,7 +1955,7 @@ command&lt;/a&gt; sets a session
 variable inside of the PostgreSQL server, whereas a &lt;a href="https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMAND-SET"&gt;&lt;code&gt;\set&lt;/code&gt;
 command&lt;/a&gt;
 sets configuration in the &lt;code&gt;psql&lt;/code&gt; client itself.&lt;/p&gt;
-&lt;h2&gt;Making the default transaction read-only&lt;/h2&gt;
+&lt;h2 id="making-the-default-transaction-read-only"&gt;Making the default transaction read-only&lt;/h2&gt;
 &lt;p&gt;PostgreSQL executes all statements as transactions. If you don't start an
 explicit transaction for a statement, &lt;a href="https://www.postgresql.org/docs/current/tutorial-transactions.html"&gt;PostgreSQL automatically wraps the
 statement in a
@@ -1955,7 +1992,7 @@ first establish a connection to the database server. If you &lt;em&gt;switch&lt;
 after having connected with &lt;code&gt;\c&lt;/code&gt;, the &lt;code&gt;SET&lt;/code&gt; command is &lt;em&gt;not&lt;/em&gt; executed again.
 Keep that in mind.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Disabling autocommit&lt;/h2&gt;
+&lt;h2 id="disabling-autocommit"&gt;Disabling autocommit&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-FILES-PSQLRC"&gt;&lt;code&gt;psql&lt;/code&gt; automatically
 commits&lt;/a&gt;
 the implicit transaction created when you execute a statement outside of an
@@ -1977,7 +2014,7 @@ read-only transaction that's not immediately committed, putting two layers of
 protection between you and an errenous write. Unlike setting
 &lt;code&gt;default_transaction_read_only&lt;/code&gt; however, disabling &lt;code&gt;AUTOCOMMIT&lt;/code&gt; persists even if
 you switch database with &lt;code&gt;\c&lt;/code&gt;.&lt;/p&gt;
-&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;h1 id="summary"&gt;Summary&lt;/h1&gt;
 &lt;p&gt;When connecting to any database that you for some reason don't want to
 accidentally write to, you should have guardrails. Many graphical PostgreSQL
 clients that I've seen my colleagues use have such guardrails by default in
@@ -1995,7 +2032,7 @@ and successor [of X.Org]" and Canonical even dropped its own &lt;a href="https:/
 server in favor of Wayland on Ubuntu&lt;/a&gt;.
 So when it became time for me to configure a new laptop in the beginning of
 January, I decided to do give Wayland a go. Here's what I think of it so far.&lt;/p&gt;
-&lt;h1&gt;What the heck is a window system?&lt;/h1&gt;
+&lt;h1 id="what-the-heck-is-a-window-system"&gt;What the heck is a window system?&lt;/h1&gt;
 &lt;p&gt;First of all, what the heck is a window system? In short, it's the component
 that renders graphical windows to your screen and communicates the user's input
 to the underlying operating system. The X Window System, or just X for short, is
@@ -2011,7 +2048,7 @@ display server can implement the Wayland protocol and is then referred to as a
 Wayland &lt;em&gt;compositor&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;If you want to learn more, &lt;a href="https://linuxiac.com/xorg-x11-wayland-linux-display-servers-and-protocols-explained/"&gt;here's a brief article on the
 subjecp&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Wayland first impressions with Sway&lt;/h1&gt;
+&lt;h1 id="wayland-first-impressions-with-sway"&gt;Wayland first impressions with Sway&lt;/h1&gt;
 &lt;p&gt;I recently setup Wayland on a brand new work computer, and going from a clean
 slate setup was really effortless. I chose &lt;a href="https://swaywm.org/"&gt;Sway&lt;/a&gt; as my
 compositor and started it. And it just kind of worked. Outside of &lt;a href="https://github.com/slarse/config/blob/d8ba6671a2245be75c5fa3b4fdfef3df61cc93a0/sway/config"&gt;configuring
@@ -2025,7 +2062,7 @@ doesn't support &lt;a href="https://github.com/swaywm/sway/wiki#nvidia-users"&gt
 drivers&lt;/a&gt;, running Sway with
 the &lt;code&gt;--unsuported-gpu&lt;/code&gt; option just worked.&lt;/p&gt;
 &lt;p&gt;All-in-all, setup was a breeze and I did not encounter any problems at all.&lt;/p&gt;
-&lt;h2&gt;Upsides of Sway&lt;/h2&gt;
+&lt;h2 id="upsides-of-sway"&gt;Upsides of Sway&lt;/h2&gt;
 &lt;p&gt;I immediately noticed some improvements in my desktop experience. The first came
 when connecting an external display, which Sway just found and started
 outputting an image to. In almost a decade of using X.Org on just shy of a half
@@ -2038,7 +2075,7 @@ Wayland. Now that it's gone I would have a hard time going back to it.&lt;/p&gt;
 &lt;p&gt;Finally, most things just kind of work. It's a &lt;em&gt;big&lt;/em&gt; accolade to note that over
 a whole month of use, I haven't encountered a single show-stopping problem. But
 I have definitely encountered quite a few lesser ones.&lt;/p&gt;
-&lt;h2&gt;Downsites of Sway&lt;/h2&gt;
+&lt;h2 id="downsites-of-sway"&gt;Downsites of Sway&lt;/h2&gt;
 &lt;p&gt;Pretty much all of the downsides I've encountered have to do with the fact that
 a lot of applications I've used over the years were written for X.Org. This
 means that many applications run under the the 
@@ -2064,7 +2101,7 @@ example still not
 standardized&lt;/a&gt;.
 In some respects, stepping into the land of Way feels a bit like using a beta
 product.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;Will I keep using Wayland? Definitely. I've only encountered a few very minor
 problems with application compatibility, and most I've found alternatives for.
 I'm even a little bit excited to find some need completely unfulfilled in the
@@ -2080,7 +2117,7 @@ of pull requests Dependabot would open for dependency updates. For some of my
 repositories it became more of a chore to keep up with Dependabot's pull request
 spamming than to just manually update dependencies every once in a while.&lt;/p&gt;
 &lt;p&gt;Well. Turns out that's been fixed.&lt;/p&gt;
-&lt;h1&gt;Dependabot's big problem: Pull request spam&lt;/h1&gt;
+&lt;h1 id="dependabots-big-problem-pull-request-spam"&gt;Dependabot's big problem: Pull request spam&lt;/h1&gt;
 &lt;p&gt;Since Dependabot was released, it's only mode of operation has been to open one
 pull request per dependency update. As you can imagine, that leads to a whole
 bunch of pull requests being opened. I would routinely get dozens of dependency
@@ -2091,13 +2128,13 @@ mostly in maintenance mod is one such example where I just gave up on keeping up
 with the updates. It ended up looking like this:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Spork dependency spam" src="https://slar.se/photos/dependabot_dependency_grouping/pr-spama.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;What a mess. But there's light at the end of the tunnel.&lt;/p&gt;
-&lt;h1&gt;The fix: Grouped dependencies&lt;/h1&gt;
+&lt;h1 id="the-fix-grouped-dependencies"&gt;The fix: Grouped dependencies&lt;/h1&gt;
 &lt;p&gt;To address that problem GitHub recently released
 &lt;a href="https://github.blog/changelog/2023-08-24-grouped-version-updates-for-dependabot-are-generally-available/"&gt;Grouped Version Updates&lt;/a&gt;
 as a feature for Dependabot. In short, this means that you can get Dependabot
 to open pull requests containing multiple dependency updates, grouped in three
 different ways.&lt;/p&gt;
-&lt;h2&gt;A configuration example&lt;/h2&gt;
+&lt;h2 id="a-configuration-example"&gt;A configuration example&lt;/h2&gt;
 &lt;p&gt;For my project &lt;a href="https://github.com/kth-assert/spork"&gt;Spork&lt;/a&gt;, I decided to group
 dependencies in three groups:&lt;/p&gt;
 &lt;ol&gt;
@@ -2160,7 +2197,7 @@ attentive of you! In addition to the &lt;code&gt;pattern&lt;/code&gt; and &lt;co
 you can also group by &lt;code&gt;update-type&lt;/code&gt;, which can be &lt;code&gt;patch&lt;/code&gt;, &lt;code&gt;minor&lt;/code&gt; or &lt;code&gt;major&lt;/code&gt;
 and only really works for dependencies that comply with &lt;a href="https://semver.org/"&gt;Semantic
 Versioning&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;Effects of the configuration&lt;/h2&gt;
+&lt;h2 id="effects-of-the-configuration"&gt;Effects of the configuration&lt;/h2&gt;
 &lt;p&gt;Within minutes, Dependabot had closed all* of the single dependency pull requests
 and created two new pull requests. One PR contained the GitHub Actions updates,
 which I could immediately merge.&lt;/p&gt;
@@ -2183,7 +2220,7 @@ dependency pull requests: the update for &lt;code&gt;jgit&lt;/code&gt; is failin
 dependency update for some reason, so we'll ignore that it's also failing.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;So I decided to try to get Dependabot to open a new pull request without &lt;code&gt;jgit&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Ignoring certain dependencies in a group&lt;/h2&gt;
+&lt;h2 id="ignoring-certain-dependencies-in-a-group"&gt;Ignoring certain dependencies in a group&lt;/h2&gt;
 &lt;p&gt;I knew that &lt;code&gt;jgit&lt;/code&gt; was the issue in this case and decided to ignore it. It
 seemed like ignoring minor version updates was the best path forward, so I
 issued an &lt;code&gt;@dependabot ignore &amp;lt;dependency_name&amp;gt; minor version&lt;/code&gt; command.&lt;/p&gt;
@@ -2202,7 +2239,7 @@ does not break the build. Thus, it's ready to merge.&lt;/p&gt;
 &lt;p&gt;Of course, this comes with the caveat that I need to remember to &lt;a href="https://github.com/ASSERT-KTH/spork/issues/487"&gt;unignore &lt;code&gt;jgit&lt;/code&gt;
 when I get around to updating it&lt;/a&gt;.
 But I have 8 dependency updates with not too much effort, which is kind of cool!&lt;/p&gt;
-&lt;h1&gt;Closing thoughts&lt;/h1&gt;
+&lt;h1 id="closing-thoughts"&gt;Closing thoughts&lt;/h1&gt;
 &lt;p&gt;I had somewhat given up on keeping dependencies up to date in my lesser loved
 projects. With grouped dependency updates, I feel like it will be possible for
 me to get back to keeping dependencies in good shape even for projects that I no
@@ -2224,7 +2261,7 @@ look …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you've &lt;em&gt;ev
 different. I finally took the time to make a dark theme! Only 5 or so years late
 to the party. But late or not, I have a new theme to show off, so let's have a
 look!&lt;/p&gt;
-&lt;h1&gt;Before and after&lt;/h1&gt;
+&lt;h1 id="before-and-after"&gt;Before and after&lt;/h1&gt;
 &lt;p&gt;I only put a couple of hours into trying out different colors and contrasts, so
 this is still a bit of a work in progress. But I can't say I'm not pleased.
 Let's have a look at what it used to look like.&lt;/p&gt;
@@ -2237,7 +2274,7 @@ as above with the new theme.&lt;/p&gt;
 &lt;p&gt;Much better! There are still a few rough edges, and I keep finding details where
 the old theme isn't being overridden correctly (because this is all just &lt;em&gt;on top
 of&lt;/em&gt; Bootstrap), but it's all mostly there.&lt;/p&gt;
-&lt;h1&gt;Parts of the puzzle&lt;/h1&gt;
+&lt;h1 id="parts-of-the-puzzle"&gt;Parts of the puzzle&lt;/h1&gt;
 &lt;p&gt;There are really only two parts to this. I'm still using the same
 &lt;a href="https://github.com/robulouski/voidy-bootstrap"&gt;&lt;code&gt;voidy-bootstrap&lt;/code&gt; theme&lt;/a&gt; as
 before, but I rewrote some of the CSS with the somewhat Halloween-looking
@@ -2247,7 +2284,7 @@ is just around the corner!&lt;/p&gt;
 &lt;a href="https://draculatheme.com/pygments"&gt;&lt;code&gt;dracula&lt;/code&gt; theme for Pygments&lt;/a&gt;
 which gives the neat colorization of code snippets. That I find to be the single
 largest improvement.&lt;/p&gt;
-&lt;h1&gt;Enjoy!&lt;/h1&gt;
+&lt;h1 id="enjoy"&gt;Enjoy!&lt;/h1&gt;
 &lt;p&gt;That's all there is to it, enjoy the new theme!&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>What does the number in a man page mean?</title><link href="https://slar.se/man-page-numbering.html" rel="alternate"></link><published>2023-10-24T00:00:00+02:00</published><updated>2023-10-24T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2023-10-24:/man-page-numbering.html</id><summary type="html">&lt;p&gt;If you open a &lt;code&gt;man&lt;/code&gt; page on a *NIX system (such as a Linux distro), you'll
 always see a number next to the subject of the &lt;code&gt;man&lt;/code&gt; page. Like &lt;code&gt;GIT(1)&lt;/code&gt;,
 &lt;code&gt;SUDO(8)&lt;/code&gt; or &lt;code&gt;open(n)&lt;/code&gt;. What's that thing in parentheses? To cut a long
@@ -2256,7 +2293,7 @@ always see a number next to the subject of the &lt;code&gt;man&lt;/code&gt; page
 &lt;code&gt;SUDO(8)&lt;/code&gt; or &lt;code&gt;open(n)&lt;/code&gt;. What's that thing in parentheses? To cut a long
 story short, it's the &lt;em&gt;section&lt;/em&gt; the &lt;code&gt;man&lt;/code&gt; page belongs to. Let's discover
 what that means.&lt;/p&gt;
-&lt;h1&gt;&lt;code&gt;man&lt;/code&gt; pages are divided into sections&lt;/h1&gt;
+&lt;h1 id="man-pages-are-divided-into-sections"&gt;&lt;code&gt;man&lt;/code&gt; pages are divided into sections&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;man&lt;/code&gt; pages act as a system reference manual on any *NIX system. All &lt;code&gt;man&lt;/code&gt; pages
 have a heading containing the name of the page, its section and a very short
 description. Something like this.&lt;/p&gt;
@@ -2303,7 +2340,7 @@ search order. Which, of course, we can also find in the &lt;code&gt;man&lt;/code
 &lt;p&gt;In my personal experience, the default search order most often gives you what
 you want. But sometimes it doesn't, and then you need to figure out how to find
 the man page you're after.&lt;/p&gt;
-&lt;h1&gt;Selecting man pages from different sections&lt;/h1&gt;
+&lt;h1 id="selecting-man-pages-from-different-sections"&gt;Selecting man pages from different sections&lt;/h1&gt;
 &lt;p&gt;To select a page from a particular section, you specify the section before the
 name. For example, as indicated by the excerpt from &lt;code&gt;MAN(1)&lt;/code&gt; above, there's also
 a &lt;code&gt;man(7)&lt;/code&gt;. We can get it like so.&lt;/p&gt;
@@ -2333,7 +2370,7 @@ particular page, your &lt;code&gt;man&lt;/code&gt; database is out-of-date, you 
 &lt;code&gt;mandb&lt;/code&gt; manually (or whatever is equivalent on your system) to rebuild the
 search index.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;And that's all!&lt;/h1&gt;
+&lt;h1 id="and-thats-all"&gt;And that's all!&lt;/h1&gt;
 &lt;p&gt;Now you should hopefully be a bit more confident in finding the man page you're
 looking for. And if at any point you forget what I've written here, almost all
 of the information is available just a &lt;code&gt;man man&lt;/code&gt; away!&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category><category term="man"></category></entry><entry><title>The sheer insanity of interfaces and nil in Go</title><link href="https://slar.se/the-sheer-insanity-of-interfaces-and-nil-in-go.html" rel="alternate"></link><published>2023-10-21T00:00:00+02:00</published><updated>2023-10-21T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2023-10-21:/the-sheer-insanity-of-interfaces-and-nil-in-go.html</id><summary type="html">&lt;p&gt;If you've only dabbled briefly in Go, you might think that its &lt;code&gt;nil&lt;/code&gt; is
@@ -2347,7 +2384,7 @@ decided to make a pass through Thorsten Ball's neat little book
 &lt;a href="https://slar.se/book-review-writing-an-interpreter-in-go.html"&gt;Writing an Interpreter in Go&lt;/a&gt;.
 That's when I first cut myself real bad on &lt;code&gt;nil&lt;/code&gt;, or more specificaly, an
 interface with a &lt;code&gt;nil&lt;/code&gt; value.&lt;/p&gt;
-&lt;h1&gt;The sensible kind of &lt;code&gt;nil&lt;/code&gt;&lt;/h1&gt;
+&lt;h1 id="the-sensible-kind-of-nil"&gt;The sensible kind of &lt;code&gt;nil&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;First let's look at &lt;code&gt;nil&lt;/code&gt; behaving like we'd expect. Here's a code snippet of a
 "parser" that somewhat shows the situation I had.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;package&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;main&lt;/span&gt;
@@ -2392,7 +2429,7 @@ constitutes an &lt;code&gt;if&lt;/code&gt; expression). Let's add a &lt;code&gt;
 &lt;p&gt;Say what you want about &lt;code&gt;nil&lt;/code&gt;, this at least makes complete sense and is
 intuitively understandable. But when we throw interfaces into the mix,
 that goes way out the window.&lt;/p&gt;
-&lt;h1&gt;The completely insane kind of &lt;code&gt;nil&lt;/code&gt;&lt;/h1&gt;
+&lt;h1 id="the-completely-insane-kind-of-nil"&gt;The completely insane kind of &lt;code&gt;nil&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;As my parser came along, it turned out I needed multiple kinds of expressions,
 and so had to abstract the parse function to be able to return multiple kinds
 of expressions. So let's generalize the expression in an interface and add
@@ -2475,7 +2512,7 @@ notAnExpr&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;nil&amp;gt;&lt;span class="
 
 &lt;p&gt;What? &lt;code&gt;notAnExpr&lt;/code&gt; is &lt;code&gt;&amp;lt;nil&amp;gt;&lt;/code&gt;, but it does not compare true to a literal&lt;code&gt;nil&lt;/code&gt;?
 What does that mean?&lt;/p&gt;
-&lt;h1&gt;The confusing type-and-value composition of interfaces&lt;/h1&gt;
+&lt;h1 id="the-confusing-type-and-value-composition-of-interfaces"&gt;The confusing type-and-value composition of interfaces&lt;/h1&gt;
 &lt;p&gt;In Go, an interface is represented at runtime as a
 &lt;a href="https://go.dev/doc/faq#nil_error"&gt;type and a value&lt;/a&gt;. You can think of it as a
 struct with two fields.&lt;/p&gt;
@@ -2519,7 +2556,7 @@ interfaces.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;But do we really? Of course not.&lt;/p&gt;
-&lt;h1&gt;Actually, interfaces can also be "completely" &lt;code&gt;nil&lt;/code&gt;&lt;/h1&gt;
+&lt;h1 id="actually-interfaces-can-also-be-completely-nil"&gt;Actually, interfaces can also be "completely" &lt;code&gt;nil&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;Let's make this even more confusing, and refactor our &lt;code&gt;parse&lt;/code&gt; function a bit.
 Instead of "falling back" on &lt;code&gt;parseFor&lt;/code&gt;, we simply return &lt;code&gt;nil&lt;/code&gt; explicitly if
 we can't parse any known expression.&lt;/p&gt;
@@ -2567,7 +2604,7 @@ following.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;So we're done? Unfortunately, not quite.&lt;/p&gt;
-&lt;h1&gt;Structs are a problem&lt;/h1&gt;
+&lt;h1 id="structs-are-a-problem"&gt;Structs are a problem&lt;/h1&gt;
 &lt;p&gt;Our &lt;code&gt;IsNil()&lt;/code&gt; handles true &lt;code&gt;nil&lt;/code&gt; and interfaces with &lt;code&gt;nil&lt;/code&gt; values. But,
 unfortunately, it does not handle structs.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;IfExpression&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;raw&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;if&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
@@ -2613,7 +2650,7 @@ and otherwise assume that it is not &lt;code&gt;nil&lt;/code&gt;.&lt;/p&gt;
 conservative the language is, such an addition to the core types seems an
 unlikely prospect. But of course, it could happen, and then this function would
 return &lt;code&gt;false&lt;/code&gt; incorrectly in some cases.&lt;/p&gt;
-&lt;h1&gt;Footguns&lt;/h1&gt;
+&lt;h1 id="footguns"&gt;Footguns&lt;/h1&gt;
 &lt;p&gt;All languages have &lt;a href="https://en.wiktionary.org/wiki/footgun"&gt;footguns&lt;/a&gt;. Some
 languages, like C++ and JavaScript, are seemingly built exclusively of them.
 Go is a small-ish and conservative language, and so naturally has fewer such
@@ -2641,7 +2678,7 @@ book on interpreters. In Go.&lt;/p&gt;
 &lt;p&gt;You can buy the book directly from Thorsten Ball's website at
 &lt;a href="https://interpreterbook.com/"&gt;https://interpreterbook.com/&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;Writing an Interpreter in Go&lt;/em&gt; is precisely what it sounds like; a practical
 guide to writing a fully functioning interpreter in Go. You go from source
 code, to tokens, to abstract syntax tree and tree evaluation. The parser
@@ -2652,7 +2689,7 @@ simplicity allows Ball to cram a whole lot of functionality into a very concise
 200 pages worth of book. The result is impressive, and I am somewhat astonished
 by just how much content is actually in here, and how well written said content
 is.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;There is so much to like about this book. First of all, it is wonderfully
 standalone. I wrote around 3500 lines of code based entirely on descriptions
 and code samples from the book's 200 printed pages. Although the source code
@@ -2698,7 +2735,7 @@ chapter for each feature. Adding one feature at a time in this way really aids
 in understanding the workings of each part of the interpreter. And that, in
 fact, is a perfect segue to the one part of this book that I did not entirely
 like.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;I actually started this book around five years ago, but never finished it. In
 fact, I got just barely halfway due to what I perceive as the one flaw of this
 otherwise fantastic piece of literature: it has a rather slow start. It's not
@@ -2710,7 +2747,7 @@ the amount of groundwork to put down before getting to the exciting parts is a
 tough one to make, I think the book would have been better off closing the path
 from source code to evaluation earlier. For instance, I don't see any need to
 parse function definitions before evaluating arithmetic expressions.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This is a great book. It's clear, concise and packed full of learnings. Due to
 the way the last quarter of the book is laid out, adding feature upon feature
 from start to finish, I was able to quite effortlessly add features completely
@@ -2724,12 +2761,12 @@ highly Linux-compatible and just following the &lt;a href="https://wiki.archlinu
 guide&lt;/a&gt; got me 90% of the
 way of having a well-behaved Arch Linux laptop. One big thing wasn't working,
 though: 3D graphics!&lt;/p&gt;
-&lt;h2&gt;Symptoms: glitchy 2D graphics and …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
+&lt;h2 id="symptoms-glitchy-2d-graphics-and-unusable-3d-graphics"&gt;Symptoms: glitchy 2D graphics and …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
 highly Linux-compatible and just following the &lt;a href="https://wiki.archlinux.org/title/Installation_guide"&gt;official installation
 guide&lt;/a&gt; got me 90% of the
 way of having a well-behaved Arch Linux laptop. One big thing wasn't working,
 though: 3D graphics!&lt;/p&gt;
-&lt;h2&gt;Symptoms: glitchy 2D graphics and unusable 3D graphics&lt;/h2&gt;
+&lt;h2 id="symptoms-glitchy-2d-graphics-and-unusable-3d-graphics"&gt;Symptoms: glitchy 2D graphics and unusable 3D graphics&lt;/h2&gt;
 &lt;p&gt;2D graphics worked mostly fine after installing &lt;code&gt;xf86-video-intel&lt;/code&gt;, &lt;code&gt;nvidia&lt;/code&gt; and
 &lt;code&gt;nvidia-prime&lt;/code&gt;. Websites, most desktop applications as well as 2D games like
 Terraria worked without issue. Anything with the slightest hint of 3D would
@@ -2738,7 +2775,7 @@ with 3D graphics.&lt;/p&gt;
 &lt;p&gt;Some applications, such as Steam, wouldn't render properly unless in fullscreen.
 3D benchmark software like &lt;code&gt;fire&lt;/code&gt; (from &lt;code&gt;mesa-demo&lt;/code&gt;) and &lt;code&gt;glmark2&lt;/code&gt; wouldn't
 update properly with Intel and would again be black with NVIDIA.&lt;/p&gt;
-&lt;h2&gt;Solution: Using DRI2 for the Intel driver&lt;/h2&gt;
+&lt;h2 id="solution-using-dri2-for-the-intel-driver"&gt;Solution: Using DRI2 for the Intel driver&lt;/h2&gt;
 &lt;p&gt;The solution I found to this problem was to &lt;a href="https://wiki.archlinux.org/title/Intel_graphics#DRI3_issues"&gt;use
 DRI2 for the Intel
 driver&lt;/a&gt;. I have no
@@ -2755,7 +2792,7 @@ EndSection
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;a href="https://wiki.archlinux.org/title/Intel_graphics#Issues_with_selecting_Qt_elements_within_Plasma_Desktop_on_Alder_Lake.2FUHD_770"&gt;modesetting driver also works&lt;/a&gt;, but it interferes with PRIME offloading s.t. the NVIDIA GPU is always active. This butchers battery life and so wasn't acceptable to me.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Need more tweaks?&lt;/h2&gt;
+&lt;h2 id="need-more-tweaks"&gt;Need more tweaks?&lt;/h2&gt;
 &lt;p&gt;This wasn't the only tweak I put in to get my XPS 15 in tip-top shape, although
 it was the most crucial one. I've got a bunch of other tweaks listed &lt;a href="https://slar.se/pages/wiki/arch-linux-on-xps-15-9520.html"&gt;over on
 my Wiki page for the XPS 15&lt;/a&gt;.&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category><category term="linux"></category><category term="xps15"></category></entry><entry><title>Book Review: CPython Internals</title><link href="https://slar.se/book-review-cpython-internals.html" rel="alternate"></link><published>2022-11-20T00:00:00+01:00</published><updated>2022-11-20T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-11-20:/book-review-cpython-internals.html</id><summary type="html">&lt;p&gt;About a month ago I signed myself up to do a talk at a Python meetup hosted by
@@ -2781,7 +2818,7 @@ ISBN: 9781775093344
 between Python and
 CPython&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;CPython Internals&lt;/em&gt; gives you a guided tour of the CPython project, from
 parsing source code to compiling bytecode to interpreting said bytecode. The
 book is meant to serve as a starting point for budding CPython contributors or
@@ -2801,7 +2838,7 @@ Python&lt;/a&gt;. It is something of
 an appetizer for the book, but stands strong on its own. Having a brief look at
 that article will give you a better understanding of what the book is about
 than anything I could write here.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;I went from surface-level understanding of the CPython project to being pretty
 confident about where to poke around to do what just from reading this book.
 It's comprehensive in scope and the worked example of the &lt;code&gt;~=&lt;/code&gt; operator helps &lt;em&gt;a
@@ -2823,7 +2860,7 @@ The book is to a great extent a standalone resource and it should be very
 approachable even to developers without much experience. There's even an
 appendix at the end to explain what little you need to know about the C
 programming language to be able to understand the code samples.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;There was nothing about the book that I thought was &lt;em&gt;bad&lt;/em&gt;, but for me
 personally, I would have preferred less explanation of fundamental concepts
 (such as threading), and more in-depth details on CPython itself. That being
@@ -2835,7 +2872,7 @@ slightly outside the target audience of the book. It's clearly meant to contain
 everything you'd need to know to go from zero to hero, and it's a lot easier to
 skip over content you feel is redundant than it is to find content you didn't
 know you needed.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;CPython Internals saved my neck. I had three weeks to go from a shallow
 understanding of the CPython project to being able to explain it to others in a
 ~30-minute talk, and &lt;a href="https://github.com/slarse/talks/tree/80503786d4587abdadba9913c55c7d133269f3a2/under-the-hood-of-cpython"&gt;I made
@@ -2860,7 +2897,7 @@ Some ask themselves how CPython differs from Python, and then
 they move on with their lives without ever getting to the bottom of it. But if
 you're one of the curious ones who couldn't put that thought down, this article
 is for you.&lt;/p&gt;
-&lt;h1&gt;Python is a language specification&lt;/h1&gt;
+&lt;h1 id="python-is-a-language-specification"&gt;Python is a language specification&lt;/h1&gt;
 &lt;p&gt;Python is a programming language. A programming language is an abstract concept.
 It's fundamentally a set of rules saying what you're allowed to write in the
 language, the &lt;em&gt;syntax&lt;/em&gt; of the language, and another set of rules saying what
@@ -2889,7 +2926,7 @@ correspond to a NOOP instruction that when executed does nothing. It could also
 correspond to &lt;em&gt;nothing&lt;/em&gt;, i.e. no instruction is generated for it. There are
 really endless possibilities in producing the semantic behavior described by the
 Python language reference.&lt;/p&gt;
-&lt;h1&gt;CPython is an implementation of the Python language specification&lt;/h1&gt;
+&lt;h1 id="cpython-is-an-implementation-of-the-python-language-specification"&gt;CPython is an implementation of the Python language specification&lt;/h1&gt;
 &lt;p&gt;CPython is an implementation of the Python language specification. In fact, it
 is the &lt;a href="https://wiki.python.org/moin/CPython"&gt;&lt;em&gt;reference&lt;/em&gt; implementation&lt;/a&gt;,
 meaning that its runtime semantics are the law. It is necessarily the case that
@@ -2910,7 +2947,7 @@ CPython is to a large extent implemented in C. PyPy also employs a JIT
 (just-in-time) compiler that can compile hot code to machine code to
 substantially speed up running times, often making it &lt;a href="https://speed.pypy.org/"&gt;substantially faster than
 CPython&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Closing words&lt;/h1&gt;
+&lt;h1 id="closing-words"&gt;Closing words&lt;/h1&gt;
 &lt;p&gt;The difference between Python and CPython is that the former is a language
 specification while the latter is an implementation of said language
 specification. However, in most everyday conversations among developers, they
@@ -2948,7 +2985,7 @@ but a few days later he came back to me with a code snippet like this:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;What?&lt;/p&gt;
-&lt;h2&gt;No ternary operator you say?&lt;/h2&gt;
+&lt;h2 id="no-ternary-operator-you-say"&gt;No ternary operator you say?&lt;/h2&gt;
 &lt;p&gt;Developers are creative and opinionated. Sometimes this mix leads to
 monstrosities, such as when creative developers who really liked ternaries
 created this pattern:&lt;/p&gt;
@@ -2973,7 +3010,7 @@ the underlying &lt;a href="https://github.com/python/cpython/blob/2db55e0c0069a9
 access&lt;/a&gt;
 performs some rudimentary checks and then just uses the provided index as an
 offset to the base pointer of the list.&lt;/p&gt;
-&lt;h2&gt;But the hack isn't quite the same&lt;/h2&gt;
+&lt;h2 id="but-the-hack-isnt-quite-the-same"&gt;But the hack isn't quite the same&lt;/h2&gt;
 &lt;p&gt;At first glance, it may seem like the old hack with the list is functionally
 equivalent to the modern ternary operator. It isn't quite, though, because it
 lacks one very important property: lazy evaluation of the branches. In short,
@@ -3001,7 +3038,7 @@ To fully emulate the modern behavior we'd need something like this:&lt;/p&gt;
 &lt;p&gt;Here we get lazy evaluation by virtue of wrapping the two branches in lambdas,
 and then executing the lambda that's returned. I think we can all agree that's
 not a pretty sight.&lt;/p&gt;
-&lt;h2&gt;Conditional expressions are a good thing&lt;/h2&gt;
+&lt;h2 id="conditional-expressions-are-a-good-thing"&gt;Conditional expressions are a good thing&lt;/h2&gt;
 &lt;p&gt;Regardless of your stance on using ternary operators (or conditional
 expressions, as they're called in Python), it's probably a good thing they
 exist. Otherwise creative and opinionated programmers get around to hacks to
@@ -3013,7 +3050,7 @@ market it, I don't try to optimize it for SEO and I I don't even tell my
 friends and coworkers about it. Although I would of course be delighted to hear
 someone who found something useful in my blog, I really write it for myself.
 And what could I possibly get out of that? Glad you asked.&lt;/p&gt;
-&lt;h2&gt;Expressing thoughts and ideas is hard&lt;/h2&gt;
+&lt;h2 id="expressing-thoughts-and-ideas-is-hard"&gt;Expressing thoughts and ideas is hard&lt;/h2&gt;
 &lt;p&gt;I'm a software engineer. My job is mostly about coming up with neat solutions to
 tricky problems. Coming up with the solution in my head is however just part of
 the fight as I also need to be able to concisely express the ideas to my
@@ -3024,7 +3061,7 @@ still isn't working as it should or why project X got so expensive.&lt;/p&gt;
 &lt;p&gt;Writing a technical blog about helps me practice this skill. I put quite a bit
 of care into most blog posts I write and I also often look back at earlier posts
 to consider how I can improve the writing.&lt;/p&gt;
-&lt;h2&gt;Retaining knowledge is also hard&lt;/h2&gt;
+&lt;h2 id="retaining-knowledge-is-also-hard"&gt;Retaining knowledge is also hard&lt;/h2&gt;
 &lt;p&gt;Another reason for why I write this blog is to retain knowledge. Writing about
 something you've just learned is a great way to further cement that knowledge.
 As I put a large amount of care into my posts and want to be sure that I get
@@ -3038,7 +3075,7 @@ simply write things down without any particular care about quality. I can
 thereby help myself retain knowledge about things that I don't yet understand
 well enough to write a blog post about, or that I simply don't have the time
 to write about.&lt;/p&gt;
-&lt;h2&gt;Putting yourself out there is perhaps even harder&lt;/h2&gt;
+&lt;h2 id="putting-yourself-out-there-is-perhaps-even-harder"&gt;Putting yourself out there is perhaps even harder&lt;/h2&gt;
 &lt;p&gt;Exposing your work to the public is not something most people are comfortable
 with. It's easy to feel self-conscious about the things you create and be afraid
 of potential backlash or negative feedback. Putting up blog posts strengthens my
@@ -3063,14 +3100,14 @@ effort to record a tiny learning experience.&lt;/p&gt;
 Learn&lt;/em&gt; patterns from &lt;a href="https://slar.se/book-review-apprenticeship-patterns.html"&gt;Apprenticeship
 Patterns&lt;/a&gt;; two patterns
 that I value highly. Enter the Wiki!&lt;/p&gt;
-&lt;h1&gt;My public Wiki&lt;/h1&gt;
+&lt;h1 id="my-public-wiki"&gt;My public Wiki&lt;/h1&gt;
 &lt;p&gt;The &lt;a href="https://slar.se/pages/wiki.html"&gt;Wiki&lt;/a&gt; can be reached from the menu bar at the
 top of the page. Here, I jot down quick notes about what I learn, what I have
 yet to learn and anything else that I feel is worth recording. The quality of
 the writing will range from poor to worse, and it'll be haphazardly organized,
 at least initially. I hope to turn this into a wealth of knowledge both for
 myself and for others in the coming years.&lt;/p&gt;
-&lt;h2&gt;Why not use an established Wiki software?&lt;/h2&gt;
+&lt;h2 id="why-not-use-an-established-wiki-software"&gt;Why not use an established Wiki software?&lt;/h2&gt;
 &lt;p&gt;Although there are several open source Wikis out there, such as
 &lt;a href="https://xwiki.org"&gt;XWiki&lt;/a&gt;, they're usually quite heavy and require a backend.
 This site is a &lt;a href="https://en.wikipedia.org/wiki/Static_web_page"&gt;static site&lt;/a&gt;,
@@ -3079,12 +3116,12 @@ due to the lack of a backend. I quite like those properties, and I'm currently
 adapting the templates for this site to better suit my Wiki ambitions. This
 first rendition is &lt;em&gt;rough&lt;/em&gt;, but it suits my current needs, and improving upon
 it as my Wiki grows wll be an interesting challenge.&lt;/p&gt;
-&lt;h2&gt;Searching the Wiki&lt;/h2&gt;
+&lt;h2 id="searching-the-wiki"&gt;Searching the Wiki&lt;/h2&gt;
 &lt;p&gt;The &lt;a href="https://slar.se/pages/wiki.html"&gt;Wiki&lt;/a&gt; is indexed along with the rest of the site
 and can be searched using the &lt;a href="https://slar.se/pelican-search.html"&gt;search bar&lt;/a&gt; on
 the &lt;a href="https://slar.se/index.html"&gt;home page&lt;/a&gt;. In other words, you can search for anything on
 this website through that single search bar!&lt;/p&gt;
-&lt;h2&gt;Going forward&lt;/h2&gt;
+&lt;h2 id="going-forward"&gt;Going forward&lt;/h2&gt;
 &lt;p&gt;I intend to keep improving the wiki. As the amount of content grows, I expect to
 have to improve the layout, cross-document linking and other related features.
 I'm very excited to finally get around to this as I've been thinking about it
@@ -3110,7 +3147,7 @@ Publisher(s): No Starch Press
 ISBN: 9781593278281
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;The Rust Programming Language&lt;/em&gt; is really a book where the title perfectly
 captures what the book is about. It teaches Rust mostly by practical examples,
 and for the most part the examples are self-contained and executable. For some
@@ -3123,7 +3160,7 @@ looping works. I would rate this a great book for someone who is already
 somewhat familiar with programming concepts, but it's not the best resource for
 getting started with programming as a whole. It's the perfect "second language
 book".&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;This book is incredibly well written and organized. Concepts to be learned are
 first presented on a high level, and then the authors drill into the details.
 But not too far into the details; at several points we are referred to other
@@ -3159,7 +3196,7 @@ level &lt;em&gt;how&lt;/em&gt; before getting to the high level &lt;em&gt;what&l
 &lt;p&gt;The book ends with a project on building a multithreaded web server, which is
 meant to solidify many of the concepts taught throughout the book. It's a great
 way to close out a great book.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;This is my first book review where I can't come up with something that I overtly
 did not like about a book. There are things the book lacks, such as more
 beginner-friendly introductions to core programming concepts, but I feel that's
@@ -3167,7 +3204,7 @@ by design rather than thoughtless omission. The book would simply be way too
 long if it had to include such things as well.&lt;/p&gt;
 &lt;p&gt;Perhaps I will find something to be annoyed with as I revisit this in the
 future, but as it stands I am completely pleased with my reading experience.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This is a great book to learn the Rust programming language. It's not
 appropriate for absolute beginners, but I think that may be simply a consequence
 of Rust being designed to tackle rather advanced problems. I would not
@@ -3198,7 +3235,7 @@ novice will undoubtedly get more out of reading it.&lt;/p&gt;
 &lt;span class="n"&gt;ISBN&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;9780596809485&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;As I mentioned in the introduction, &lt;em&gt;97 Things Every Programmer Should Know&lt;/em&gt; is
 a collection of very short essays by practicing professionals. The essays treat
 a wide variety of themes that are relevant to a practicing software engineer,
@@ -3213,7 +3250,7 @@ systems and more.&lt;/p&gt;
 &lt;p&gt;There really isn't much more to say regarding what the book is about. It's like
 a collection of very well-written blog posts on programming-related topics. So
 if you're reading this blog, chances are good you're going to enjoy this book.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;In some ways, &lt;em&gt;97 Things&lt;/em&gt; has a lot in common with &lt;a href="https://slar.se/book-review-apprenticeship-patterns.html"&gt;Apprenticeship
 Patterns&lt;/a&gt; that I reviewed last week.
 They're both about how you improve as a software engineer. The difference is
@@ -3235,7 +3272,7 @@ large degree, opinions. A notable example I recall is about automatic code
 formatting, where one essay discourages its use and a few others encourage it.
 I think this is a great benefit of having so many different authors. You don't
 just get one person's opinion.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;As with many other books on how to be a good software engineer, there is a slight
 tint of workaholism over some of the essays. I especially found an essay by
 Robert C. Martin on what it means to be a professional programmer to send this
@@ -3252,7 +3289,7 @@ suffered through it trying to find the aforementioned essay by Robert C. Martin.
 &lt;p&gt;But as a package, I find little to dislike about the book. Even the workaholism
 part is effectively counteracted by an entire essay dedicated to sending the
 message "work smarter not harder".&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This is another book that I wish I'd read years ago. I strongly recommend it as
 a read for &lt;em&gt;any&lt;/em&gt; software engineer at the beginning of their career or student
 (self-taught or at a seat of learning) who is preparing for their career. Being
@@ -3290,7 +3327,7 @@ the fact that these experienced engineers may not have the inclination to teach
 you. But this blog post is about your disposition as a learner, so let's stick
 to the topic. And actually get to the topic to begin with: learning from the
 less experienced.&lt;/p&gt;
-&lt;h1&gt;A student can teach their teacher&lt;/h1&gt;
+&lt;h1 id="a-student-can-teach-their-teacher"&gt;A student can teach their teacher&lt;/h1&gt;
 &lt;p&gt;When I attended university, I worked many years as a teaching assistant in
 introductory computer science classes. During one class I held, there was at
 some point a part of an assignment that required flipping the value of a
@@ -3321,7 +3358,7 @@ just negate &lt;code&gt;isOdd&lt;/code&gt;?". What the student meant was the fol
 concept the task asked for. Something is "even" precisely if it is "not odd",
 after all. I managed to humble myself enough to commend the student for a well
 thought out solution.&lt;/p&gt;
-&lt;h1&gt;First year students routinely taught me new things&lt;/h1&gt;
+&lt;h1 id="first-year-students-routinely-taught-me-new-things"&gt;First year students routinely taught me new things&lt;/h1&gt;
 &lt;p&gt;I taught the first year computer science courses for four years. I expanded my
 skills exponentially during this time. And yet, every year there would be new
 first year students that knew something I did not, or had some insight I
@@ -3336,7 +3373,7 @@ determine if someone is less experienced than you are. In the &lt;code&gt;!isOdd
 outlined above, I was in a position of authority relative to the student who
 had the best solution, but it's not unlikely that student had done a lot more
 programming than I had, given that I didn't start until I was in university.&lt;/p&gt;
-&lt;h1&gt;The great challenge in keeping an open mind in disagreement&lt;/h1&gt;
+&lt;h1 id="the-great-challenge-in-keeping-an-open-mind-in-disagreement"&gt;The great challenge in keeping an open mind in disagreement&lt;/h1&gt;
 &lt;p&gt;The reason I could so easily swallow my pride and commend the student with the
 &lt;code&gt;!isOdd&lt;/code&gt; solution is not that I at that time was particularly humble. I simply
 agreed with the solution the student had in mind, it fit my mental model. I've
@@ -3374,7 +3411,7 @@ we should not embark on &lt;em&gt;The Long Road&lt;/em&gt;. So how can a book he
 &lt;span class="err"&gt;ISBN: 9780596518387&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;The core tenet of the book is that software engineering is a &lt;em&gt;craft&lt;/em&gt;. A craft in
 the same sense that blacksmithing is, or carpentry, or the construction of
 musical instruments. The authors provide a concise reasoning for why this is so.&lt;/p&gt;
@@ -3428,7 +3465,7 @@ direct application of that pattern.&lt;/p&gt;
 do these few ones justice with just this brief explanation of them. You really
 need to read the book with each context, problem, solution and action for the
 respective patterns to get the full picture.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;This book is a very easy read. I like to have at least one &lt;em&gt;soft&lt;/em&gt; book to read
 when my mind wanders too much for me to take in a technical book, and
 &lt;em&gt;Apprenticeship Patterns&lt;/em&gt; perfectly fits that bill. It took me a couple of weeks
@@ -3454,7 +3491,7 @@ is called &lt;em&gt;Apprenticeship Patterns&lt;/em&gt;, after all. I wish I woul
 years ago, and I wish I was already practicing many of the patterns. But better
 late than never, and as I will discuss in the next section there is a reason for
 me to be somewhat thankful for not reading it earlier.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;While I think this is a good handbook for mastering a craft, I also think the
 approach is potentially unhealthy if applied without moderation. I have
 personally struggled a lot with finding a balance between improving my skills as
@@ -3464,7 +3501,7 @@ much so that it prompted be to spend two hours of my Saturday morning writing
 this book review. To be completely honest, I am still tweaking the
 aforementioned balance. I would not say that I am struggling anymore, but I
 cannot deny that it is still a work in progress.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This book struck home with me, and I wholeheartedly recommend it. But that is a
 recommendation with a caveat, as I don't think this is a book for everyone.
 It's really all in the title, this book is for the aspiring software
@@ -3485,7 +3522,7 @@ day in and day out, I've in the past year started to devote more time to
 virtual reality (VR) gaming. In some VR games you actually get to move around,
 and I'm writing this article to fawn over my favorite experience yet: &lt;a href="https://elevenvr.com/en/"&gt;Eleven
 Table Tennis&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Table tennis is an excellent fit for VR&lt;/h3&gt;
+&lt;h3 id="table-tennis-is-an-excellent-fit-for-vr"&gt;Table tennis is an excellent fit for VR&lt;/h3&gt;
 &lt;p&gt;There are two things about table tennis that makes it very well suited to
 VR. First, the playing field is small enough that it can fit into a
 fair-sized living room. Granted, fitting a full-sized table tennis table into
@@ -3501,7 +3538,7 @@ hollow table tennis balls, so even though most motion controllers can't produce
 particularly strong vibrations, it's still enough. I've played both with
 a Valve Index and an Oculus Rift CV1, and both provide a perfectly serviceable
 experience.&lt;/p&gt;
-&lt;h3&gt;Eleven Table Tennis delivers on that premise&lt;/h3&gt;
+&lt;h3 id="eleven-table-tennis-delivers-on-that-premise"&gt;Eleven Table Tennis delivers on that premise&lt;/h3&gt;
 &lt;p&gt;So the actual game of table tennis is really well suited to a VR treatment.
 Eleven Table Tennis takes this premise and delivers an almost realistic physics
 engine that for the most part just &lt;em&gt;feels right&lt;/em&gt;. Granted, there are the odd
@@ -3548,7 +3585,7 @@ I will detail throughout this article, is as follows:&lt;/p&gt;
 &lt;li&gt;Build a project&lt;/li&gt;
 &lt;li&gt;Maintain knowledge&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1&gt;Step 1: Identify learning resources&lt;/h1&gt;
+&lt;h1 id="step-1-identify-learning-resources"&gt;Step 1: Identify learning resources&lt;/h1&gt;
 &lt;p&gt;The first thing I do is to identify the learning resources that I intend to use.
 This does not have to be an exhaustive list of resources, as sometimes I stumble
 upon more of them as I go along, but I always put in some amount of research
@@ -3556,7 +3593,7 @@ into which learning resources are the most well received by others. I divide
 these into &lt;em&gt;primary&lt;/em&gt; and &lt;em&gt;secondary&lt;/em&gt; learning resources, where the primary ones
 guide me through the learning experience while the secondary ones are
 supplementary and can be skipped altogether if time is tight.&lt;/p&gt;
-&lt;h2&gt;Primary learning resources&lt;/h2&gt;
+&lt;h2 id="primary-learning-resources"&gt;Primary learning resources&lt;/h2&gt;
 &lt;p&gt;My primary learning resources are one or more structured overviews of the
 language I'm about to learn. I usually only aim for one or two primary resources,
 and in the vast majority of cases I go with books. The reason I prefer books
@@ -3585,7 +3622,7 @@ to their repertoire.&lt;/p&gt;
 than one at any one time. That's essentially what makes it a primary resource.
 So right now, I'm going with &lt;em&gt;The Rust Programming Language&lt;/em&gt; first and will then
 move on to &lt;em&gt;Programming Rust&lt;/em&gt;, but I don't read them at the same time.&lt;/p&gt;
-&lt;h2&gt;Secondary learning resources&lt;/h2&gt;
+&lt;h2 id="secondary-learning-resources"&gt;Secondary learning resources&lt;/h2&gt;
 &lt;p&gt;Secondary learning resources are complementary, both to primary learning
 resources and other secondary learning resources. I most often have at one or
 two secondary resources that I utilize in parallel with a primary one. My
@@ -3610,7 +3647,7 @@ investing time in primary learning resources. Secondary learning resources can
 also enter my radar when I'm already a well-rounded programmer in a given
 language. I will touch more on this when I discuss maintaining knowledge of a
 programming language.&lt;/p&gt;
-&lt;h1&gt;Step 2: Start to learn&lt;/h1&gt;
+&lt;h1 id="step-2-start-to-learn"&gt;Step 2: Start to learn&lt;/h1&gt;
 &lt;p&gt;In the initial step of learning, I simply sit down with my chosen primary
 learning resource and consume only that. As I'm a book person, this entails
 sitting down for a nice read. Although a very common advice is to learn actively
@@ -3626,7 +3663,7 @@ up. What I mostly seek from secondary resources is to get an idea of the
 community surrounding the programming language, what the ecosystem (e.g
 libraries and frameworks) looks like and keep up to date with the development of
 the core language. More on this in Step 4.&lt;/p&gt;
-&lt;h1&gt;Step 3: Build a project&lt;/h1&gt;
+&lt;h1 id="step-3-build-a-project"&gt;Step 3: Build a project&lt;/h1&gt;
 &lt;p&gt;As soon as I feel like I have touched all subjects I need to sit down and start
 up a small project, that's exactly what I do. This point usually rolls around
 when I know how to create a project in the language, how to write unit tests and
@@ -3642,7 +3679,7 @@ into play. It's virtually impossible to become proficient with a new language
 you're confined to following along with examples and solving tiny problems
 without context. You need something larger to work on, I really do think this is
 essential.&lt;/p&gt;
-&lt;h1&gt;Step 4: Maintain knowledge&lt;/h1&gt;
+&lt;h1 id="step-4-maintain-knowledge"&gt;Step 4: Maintain knowledge&lt;/h1&gt;
 &lt;p&gt;Once I've learned a language well enough to become proficient in it, I need to
 maintain that knowledge and also keep up-to-date with developments in the
 community and ecosystem. These are two rather separate concerns. Maintaining a
@@ -3657,7 +3694,7 @@ This may be less important in older languages with less vibrant ecosystems, but
 in "newer" languages like Java, Python and Rust, knowing your way around the
 package ecosystem and keeping up-to-date with new language features is rather
 important.&lt;/p&gt;
-&lt;h1&gt;Final thoughts&lt;/h1&gt;
+&lt;h1 id="final-thoughts"&gt;Final thoughts&lt;/h1&gt;
 &lt;p&gt;Learning a new programming language is something I enjoy greatly. I go about it
 in a rather rigorous fashion where my goal is to become really proficient. I
 &lt;em&gt;immerse&lt;/em&gt; myself in the language, its community and its ecosystem. This also
@@ -3736,7 +3773,7 @@ framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
 &lt;p&gt;In this third part, we'll take a super quick look at the &lt;code&gt;--lf&lt;/code&gt; flag that lets
 us rerun failed tests, as well as the caching mechanism that makes it possible.&lt;/p&gt;
-&lt;h2&gt;Using &lt;code&gt;--lf&lt;/code&gt; to rerun failed tests&lt;/h2&gt;
+&lt;h2 id="using-lf-to-rerun-failed-tests"&gt;Using &lt;code&gt;--lf&lt;/code&gt; to rerun failed tests&lt;/h2&gt;
 &lt;p&gt;In this article, we'll use the test suite from &lt;a href="https://slar.se/essential-pytest-1.html"&gt;the first
 article&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
@@ -3817,7 +3854,7 @@ that a test &lt;code&gt;A&lt;/code&gt; passes, and then subsequently reintroduce
 addressing another test, but at that point &lt;code&gt;A&lt;/code&gt; is no longer executing with
 &lt;code&gt;--lf&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Interacting with the cache&lt;/h2&gt;
+&lt;h2 id="interacting-with-the-cache"&gt;Interacting with the cache&lt;/h2&gt;
 &lt;p&gt;I mentioned that the failed tests from the last run are stored in a cache. This
 cache is located in the &lt;code&gt;.pytest_cache&lt;/code&gt; directory of the current working
 directory. There are a few flags to interact with said cache. First, you can
@@ -3852,7 +3889,7 @@ strange interactions by the user. This has happened to me on several occasions,
 with tests simply not executing as I expect them to. At that point, supplying
 the &lt;code&gt;--cache-clear&lt;/code&gt; flag to a test run will clear the cache. Alternatively, you
 may simply remove the &lt;code&gt;.pytest_cache&lt;/code&gt; directory.&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;Being able to execute only the failing tests from the previous test run is a
 very handy feature when addressing bugs, both saving time in test execution and
 limiting the amount of output shown to the user. It's however important to
@@ -3869,7 +3906,7 @@ framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
 &lt;p&gt;In this second part, we'll take a look at the &lt;code&gt;-k&lt;/code&gt; and &lt;code&gt;-m&lt;/code&gt; options to control
 which tests in the test suite are executed.&lt;/p&gt;
-&lt;h2&gt;The test suite&lt;/h2&gt;
+&lt;h2 id="the-test-suite"&gt;The test suite&lt;/h2&gt;
 &lt;p&gt;In this article, we'll use the test suite from &lt;a href="https://slar.se/essential-pytest-1.html"&gt;the first
 article&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
@@ -3903,7 +3940,7 @@ mul.py::test_multiply_different_numbers&lt;span class="w"&gt; &lt;/span&gt;PASSE
 
 &lt;p&gt;Now, let's learn how to run subsets of these tests, without modifying the
 source code.&lt;/p&gt;
-&lt;h2&gt;Using the &lt;code&gt;-k&lt;/code&gt; option to select tests by substring matching&lt;/h2&gt;
+&lt;h2 id="using-the-k-option-to-select-tests-by-substring-matching"&gt;Using the &lt;code&gt;-k&lt;/code&gt; option to select tests by substring matching&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;-k&lt;/code&gt; option is wonderful, and allows us to select a subset of tests to
 execute based on simple substring matching. The simplest use of &lt;code&gt;-k&lt;/code&gt; is to
 provide it with a whitespace-less string. Any test with a name that &lt;em&gt;contains&lt;/em&gt;
@@ -3970,7 +4007,7 @@ test_mul.py::test_multiply_equal_numbers&lt;span class="w"&gt; &lt;/span&gt;PASS
 
 &lt;p&gt;And that's pretty much all there is to the &lt;code&gt;-k&lt;/code&gt; option. It's extremely useful
 when test suites grow in size, and I use it daily.&lt;/p&gt;
-&lt;h2&gt;Using the &lt;code&gt;-m&lt;/code&gt; option to select by marker&lt;/h2&gt;
+&lt;h2 id="using-the-m-option-to-select-by-marker"&gt;Using the &lt;code&gt;-m&lt;/code&gt; option to select by marker&lt;/h2&gt;
 &lt;p&gt;With &lt;code&gt;-m&lt;/code&gt;, we can select tests by &lt;em&gt;markers&lt;/em&gt;. You can mark a test function (or
 class) by placing a decorator above it.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# test_mul.py&lt;/span&gt;
@@ -4026,7 +4063,7 @@ will make the warnings go away.&lt;/p&gt;
 &lt;code&gt;not&lt;/code&gt;, &lt;code&gt;and&lt;/code&gt; and &lt;code&gt;or&lt;/code&gt;, just like the &lt;code&gt;-k&lt;/code&gt; option does. Personally, I very rarely
 use &lt;code&gt;-m&lt;/code&gt; when using &lt;code&gt;pytest&lt;/code&gt;, but some people swear by it, which is why I wanted
 to include it in this article.&lt;/p&gt;
-&lt;h2&gt;Trick: Grouping related tests into classes makes selection easier&lt;/h2&gt;
+&lt;h2 id="trick-grouping-related-tests-into-classes-makes-selection-easier"&gt;Trick: Grouping related tests into classes makes selection easier&lt;/h2&gt;
 &lt;p&gt;A trick that I like to employ is to group related tests into classes. The class
 name is then incorporated into the test's name, and it becomes very easy to
 select tests that are part of the same class. Here's a simple example, where I'm
@@ -4080,7 +4117,7 @@ is also part of the test name. I typically do both by creating one test module
 per module of production code, and one test class per production code function.
 This allows me to easily select tests at two levels of granularity, which comes
 in very handy.&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;Selecting a subset of test cases to run is crucial to my development workflow.
 When there are 100s or even 1000s of tests to run, running all of them is often
 not what you want to do. My preferred way of selecting test cases is by using
@@ -4100,7 +4137,7 @@ published&lt;/a&gt; and I don't
 have to do anything but wait. I have two weeks left of my one month off before I
 start working, and I found that now would be a good time to reflect a bit on my
 education.&lt;/p&gt;
-&lt;h2&gt;A CS degree does not an engineer make&lt;/h2&gt;
+&lt;h2 id="a-cs-degree-does-not-an-engineer-make"&gt;A CS degree does not an engineer make&lt;/h2&gt;
 &lt;p&gt;Early on in my education, it became abundantly clear to me that my CS degree
 would be highly theoretical, and the practical elements were mostly toy
 projects. I needed side projects, both to practice applying the theory I learned
@@ -4121,7 +4158,7 @@ incentive to keep going, and also gives you something to show off to future
 employers. If you can't come up with something yourself, then there are a
 borderline innumerable amount of open-source software projects out there that
 need all the help they can get. Such as RepoBee :)&lt;/p&gt;
-&lt;h2&gt;A CS degree gives you an exceptional theoretical foundation in computing&lt;/h2&gt;
+&lt;h2 id="a-cs-degree-gives-you-an-exceptional-theoretical-foundation-in-computing"&gt;A CS degree gives you an exceptional theoretical foundation in computing&lt;/h2&gt;
 &lt;p&gt;Although I think the engineering aspects were lacking in my education, the
 theoretical foundation that I now possess is nothing short of incredible. I
 never thought I could learn so much about mathematics, algorithms, operating
@@ -4146,7 +4183,7 @@ everyone, but the blanket statement that it isn't worth it is simply false. For
 those that enjoy learning and have a deep interest in programming, CS is the way
 to go. If you want to learn the practical skills you need to land a job as fast
 as possible, then it probably isn't.&lt;/p&gt;
-&lt;h2&gt;Teaching is learning&lt;/h2&gt;
+&lt;h2 id="teaching-is-learning"&gt;Teaching is learning&lt;/h2&gt;
 &lt;p&gt;After finishing the first year of my studies, I applied and was accepted to a
 position as a teaching assistant. I would go on to work as a TA during The
 remaining four years of my studies, year-round. I held exercises, worked labs,
@@ -4170,7 +4207,7 @@ career seems unlikely at this point.&lt;/p&gt;
 attribute a lot of my success to my experience as a TA, and many doors have been
 opened for me as a result of working with other academics. I can't recommend it
 enough.&lt;/p&gt;
-&lt;h2&gt;Closing thoughts&lt;/h2&gt;
+&lt;h2 id="closing-thoughts"&gt;Closing thoughts&lt;/h2&gt;
 &lt;p&gt;My education has overall been a great experience. I've met a lot of interesting
 people and done a lot of interesting things. I've taken classes, taught classes,
 written software, theses and conference papers, and despaired in the face of
@@ -4187,7 +4224,7 @@ contains information about users that exist on the system, including their
 username, user id, group id and more. In this short article, I'll outline the
 structure of the &lt;code&gt;/etc/passwd&lt;/code&gt; file, and also illuminate why it doesn't
 typically contain any passwords.&lt;/p&gt;
-&lt;h2&gt;Layout of the &lt;code&gt;/etc/passwd&lt;/code&gt; file&lt;/h2&gt;
+&lt;h2 id="layout-of-the-etcpasswd-file"&gt;Layout of the &lt;code&gt;/etc/passwd&lt;/code&gt; file&lt;/h2&gt;
 &lt;p&gt;The layout of the &lt;code&gt;/etc/passwd&lt;/code&gt; file is fairly simple. Each line represents a
 user on the system, with different fields being separated by colons as follows:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;UID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;GID&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;GECOS&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;
@@ -4234,7 +4271,7 @@ file?&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Hint:&lt;/strong&gt; To access section &lt;code&gt;Y&lt;/code&gt; of a manpage &lt;code&gt;PAGE&lt;/code&gt;, type &lt;code&gt;man PAGE.Y&lt;/code&gt; into a
 terminal. For example, to access &lt;code&gt;passwd (5)&lt;/code&gt;, you type &lt;code&gt;man passwd.5&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;The &lt;code&gt;/etc/shadow&lt;/code&gt; file&lt;/h2&gt;
+&lt;h2 id="the-etcshadow-file"&gt;The &lt;code&gt;/etc/shadow&lt;/code&gt; file&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;/etc/passwd&lt;/code&gt; file is a so-called &lt;em&gt;world-readable&lt;/em&gt;, meaning that any user on
 the system can read it. Many programs use this file to map users to their ids,
 for example, and so its broad accessibility is necessary. A side effect is that
@@ -4265,7 +4302,7 @@ framework that I find most essential. The series assumes you know how to run
 tests with &lt;code&gt;pytest&lt;/code&gt; already.&lt;/p&gt;
 &lt;p&gt;In this first part, we'll take a look at the &lt;code&gt;-v&lt;/code&gt; and &lt;code&gt;--tb&lt;/code&gt; options to control
 the verbosity of the output.&lt;/p&gt;
-&lt;h2&gt;The test suite&lt;/h2&gt;
+&lt;h2 id="the-test-suite"&gt;The test suite&lt;/h2&gt;
 &lt;p&gt;For the purposes of this article, I've implemented a very simple multiplication
 function called &lt;code&gt;mul&lt;/code&gt;, along with a few tests. Here's the entire thing, in a
 file called &lt;code&gt;test_mul.py&lt;/code&gt;:&lt;/p&gt;
@@ -4317,7 +4354,7 @@ FAILED&lt;span class="w"&gt; &lt;/span&gt;test_mul.py::test_multiply_different_n
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Let's learn how to control how much of what we see here.&lt;/p&gt;
-&lt;h2&gt;Using the &lt;code&gt;--tb&lt;/code&gt; option to control traceback verbosity&lt;/h2&gt;
+&lt;h2 id="using-the-tb-option-to-control-traceback-verbosity"&gt;Using the &lt;code&gt;--tb&lt;/code&gt; option to control traceback verbosity&lt;/h2&gt;
 &lt;p&gt;Most of what you're seeing in the output of the previous section is the
 &lt;em&gt;traceback&lt;/em&gt; information. While the traceback shown above is manageable as is,
 consider that it stems from a single-line function and single-line tests. With
@@ -4367,7 +4404,7 @@ difference for deeply nested function calls.&lt;/p&gt;
 &lt;p&gt;There are more ways to manipulate the traceback, but these are the two I use the
 most, aside from the default. To see the other options, refer to &lt;code&gt;pytest -h&lt;/code&gt; and
 look for the &lt;code&gt;--tb&lt;/code&gt; option.&lt;/p&gt;
-&lt;h2&gt;Using &lt;code&gt;-v&lt;/code&gt; to show more verbose test output&lt;/h2&gt;
+&lt;h2 id="using-v-to-show-more-verbose-test-output"&gt;Using &lt;code&gt;-v&lt;/code&gt; to show more verbose test output&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;-v&lt;/code&gt; option controls the verbosity of test output while the tests are
 running, and also the verbosity of single items in the traceback. It's really
 useful when tests take a long time to run, and you want to know approximately
@@ -4445,7 +4482,7 @@ things more verbosely. If we stack &lt;code&gt;-v&lt;/code&gt; twice, i.e. &lt;c
 get the full output. I find &lt;code&gt;-v&lt;/code&gt; on its own to be rather useless, and typically
 always supply &lt;code&gt;-vv&lt;/code&gt; if I want verbose output. For obvious reasons, I will not
 show what that output looks like.&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;In this article, we had a look at the &lt;code&gt;--tb&lt;/code&gt; and &lt;code&gt;-v&lt;/code&gt; options to control output
 verbosity in pytest. &lt;code&gt;--tb&lt;/code&gt; controls the overall size of the traceback, and can
 be supplied with values like &lt;code&gt;no&lt;/code&gt; for no output at all, &lt;code&gt;line&lt;/code&gt; for just a single
@@ -4470,7 +4507,7 @@ solution.&lt;/p&gt;
 are valid for any language that has support for enum types, or something
 comparable.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;The problem: What options do I have?&lt;/h2&gt;
+&lt;h2 id="the-problem-what-options-do-i-have"&gt;The problem: What options do I have?&lt;/h2&gt;
 &lt;p&gt;Consider the following method that formats a &lt;code&gt;String&lt;/code&gt; according to an option
 supplied as another &lt;code&gt;String&lt;/code&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -4505,7 +4542,7 @@ checks that actually verify that all possible options are documented. And even
 assuming that all options are properly documented at all times, the compiler
 can't distinguish which &lt;code&gt;String&lt;/code&gt; values are valid and which are not, so a user
 misspelling an option won't know until runtime.&lt;/p&gt;
-&lt;h2&gt;The solution: enums!&lt;/h2&gt;
+&lt;h2 id="the-solution-enums"&gt;The solution: enums!&lt;/h2&gt;
 &lt;p&gt;My goal here is not to explain the ins and outs of what enums are, but rather
 show a use case. In short, an enum is a data type with a (typically very)
 limited amount of possible values (&lt;a href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html"&gt;you can read more about it
@@ -4543,7 +4580,7 @@ values have descriptive enough names. The compiler can also distinguish between
 &lt;code&gt;FormatOption.UPPER&lt;/code&gt; and a misspelling such as &lt;code&gt;FormatOption.UPER&lt;/code&gt;, as the
 latter is not defined, so runtime errors due to invalid options is no longer a
 problem.&lt;/p&gt;
-&lt;h2&gt;What's the catch?&lt;/h2&gt;
+&lt;h2 id="whats-the-catch"&gt;What's the catch?&lt;/h2&gt;
 &lt;p&gt;So what's the catch? Well, if you have many methods like this, you'll end up
 with a lot of enum types. Personally, I think that's totally worth it, and you
 could also nest the enums inside the classes that use them to reduce their
@@ -4569,7 +4606,7 @@ overall footprint in the project. The whole thing could then look like this:&lt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Didn't add that much complexity now, did it?&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;If you have a method that you want to pass options to, &lt;em&gt;use enums&lt;/em&gt;.
 That's really all there is to it. Enums are quite widely used in the Java
 standard library as well, such as
@@ -4590,14 +4627,14 @@ mistake"&lt;/a&gt;.
 In this article, I first make a cursory exploration of why null references are
 so problematic, and then have a look at Java's proposed solution: the
 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; class&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Why null is problematic&lt;/h1&gt;
+&lt;h1 id="why-null-is-problematic"&gt;Why null is problematic&lt;/h1&gt;
 &lt;p&gt;There are many reasons why null is problematic, but there are a few that are
 particularly easy to illustrate. I will be using the
 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get(java.lang.Object)"&gt;&lt;code&gt;Map.get&lt;/code&gt;&lt;/a&gt;
 method as an example, as it returns null if the key provided to it is not in
 the map. For all of the examples, assume that there is a variable &lt;code&gt;Map&amp;lt;Integer,
 String&amp;gt; map&lt;/code&gt; in the current scope.&lt;/p&gt;
-&lt;h2&gt;null circumvents the type system&lt;/h2&gt;
+&lt;h2 id="null-circumvents-the-type-system"&gt;null circumvents the type system&lt;/h2&gt;
 &lt;p&gt;Java has a fairly rigorous type system (although it's not entirely sound, I may
 do an article on that later!). The type system can't help with null, however.
 Any variable of reference type can either contain a reference to an object of
@@ -4622,20 +4659,20 @@ it can be even worse. What if the call to &lt;code&gt;value.toUpperCase()&lt;/co
 entirely different part of the program, perhaps hours or even days after
 &lt;code&gt;Map.get&lt;/code&gt; returned null? Then, not only do you have a crash, but a crash that
 can potentially be very difficult to diagnose.&lt;/p&gt;
-&lt;h2&gt;It's easy to miss that a method can return null&lt;/h2&gt;
+&lt;h2 id="its-easy-to-miss-that-a-method-can-return-null"&gt;It's easy to miss that a method can return null&lt;/h2&gt;
 &lt;p&gt;The cause of the previous problem is often that it's not always obvious that a
 method may return null. If you have a look at the &lt;a href="https://github.com/openjdk/jdk/blob/0dbfc97c05218ffd10242901d73c0715ccb53bf3/src/java.base/share/classes/java/util/Map.java#L217-L242"&gt;documentation for
 Map.get&lt;/a&gt;,
 you'll see that it says that it may return null a little here and there, and
 it's pretty clear about that. But still, a careless developer might miss this,
 and there's also the fact that many methods are &lt;em&gt;not&lt;/em&gt; this well documented.&lt;/p&gt;
-&lt;h2&gt;Why not just throw an exception instead?&lt;/h2&gt;
+&lt;h2 id="why-not-just-throw-an-exception-instead"&gt;Why not just throw an exception instead?&lt;/h2&gt;
 &lt;p&gt;One question you may ask is, why even return null, why not just throw an
 exception? Indeed, throwing an exception may be a good solution in many cases,
 but sometimes it just isn't desirable. In the case of &lt;code&gt;Map.get&lt;/code&gt;, it's mostly
 about efficiency. If &lt;code&gt;Map.get&lt;/code&gt; were to throw an exception when the key was
 missing, you'd essentially have two alternatives. &lt;/p&gt;
-&lt;h3&gt;Ask for forgiveness (catch the exception)&lt;/h3&gt;
+&lt;h3 id="ask-for-forgiveness-catch-the-exception"&gt;Ask for forgiveness (catch the exception)&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -4647,7 +4684,7 @@ missing, you'd essentially have two alternatives. &lt;/p&gt;
 &lt;p&gt;That's both ugly, and very inefficient if it is often the case that the key is
 missing. Catching an exception involves a whole lot of work for the JVM, so you
 really do not want to do this for an operation that you often perform.&lt;/p&gt;
-&lt;h3&gt;Look before you leap&lt;/h3&gt;
+&lt;h3 id="look-before-you-leap"&gt;Look before you leap&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;containsKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -4662,7 +4699,7 @@ you're using
 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html"&gt;Streams&lt;/a&gt;.
 So, I think we can safely conclude that throwing an exception is not the
 be-all-end-all solution.&lt;/p&gt;
-&lt;h1&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; to the rescue&lt;/h1&gt;
+&lt;h1 id="optionalt-to-the-rescue"&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt; to the rescue&lt;/h1&gt;
 &lt;p&gt;Using the &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html"&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;
 class&lt;/a&gt;, we
 solve the issues discussed previously. &lt;code&gt;Optional&lt;/code&gt; is simply a container for
@@ -4679,7 +4716,7 @@ lets us check first if the value is present, to avoid an exception if it is not.
 hypothetical. We'll see toward the end of the article how one can wrap
 &lt;code&gt;Map.get&lt;/code&gt; to create a &lt;code&gt;getOptional&lt;/code&gt; method.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Retrieve the value without checking if it is present&lt;/h2&gt;
+&lt;h2 id="retrieve-the-value-without-checking-if-it-is-present"&gt;Retrieve the value without checking if it is present&lt;/h2&gt;
 &lt;p&gt;If you're certain that the value will be present, you may simply retrieve it
 immediately.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -4695,7 +4732,7 @@ scream bloody murder if they try to use the &lt;code&gt;Optional&amp;lt;String&a
 choice of how to handle errors. Now, this may crash with a
 &lt;code&gt;NoSuchElementException&lt;/code&gt;, but as &lt;code&gt;Optional&lt;/code&gt; values typically are not passed
 around, the is unlikely to happen far from where the &lt;code&gt;Optional&lt;/code&gt; was produced.&lt;/p&gt;
-&lt;h2&gt;Check if the object is present&lt;/h2&gt;
+&lt;h2 id="check-if-the-object-is-present"&gt;Check if the object is present&lt;/h2&gt;
 &lt;p&gt;If you're uncertain whether the value will be present, you may simply check for
 it:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Optional&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -4707,7 +4744,7 @@ it:&lt;/p&gt;
 
 &lt;p&gt;This is very much like the null check we had before, but it's supported by the
 type system.&lt;/p&gt;
-&lt;h2&gt;Use a fallback value&lt;/h2&gt;
+&lt;h2 id="use-a-fallback-value"&gt;Use a fallback value&lt;/h2&gt;
 &lt;p&gt;Often when we don't want the code to crash, we have a fallback value. &lt;code&gt;Optional&lt;/code&gt;
 has a method to handle that.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;map&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOptional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="na"&gt;orElse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Nothing here :)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -4715,7 +4752,7 @@ has a method to handle that.&lt;/p&gt;
 
 &lt;p&gt;If the value is present, it is returned. Otherwise, we get &lt;code&gt;"Nothing here :)"&lt;/code&gt;.
 This, I think, is one of the cleanest and tidiest uses of &lt;code&gt;Optional&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;What about drawbacks?&lt;/h2&gt;
+&lt;h2 id="what-about-drawbacks"&gt;What about drawbacks?&lt;/h2&gt;
 &lt;p&gt;Of course, &lt;code&gt;Optional&lt;/code&gt; has drawbacks. As every single object is wrapped in
 another object, there will be an increase in memory consumption. The extra
 method call &lt;em&gt;may&lt;/em&gt; result in a noticeable performance penalty, but I don't dare
@@ -4725,7 +4762,7 @@ segments of code should not use &lt;code&gt;Optional&lt;/code&gt;. But the vast 
 is not performance critical, so most often it will be a moot point. Finally,
 there's also a little bit of extra boilerplate to deal with, which also may not
 be desirable.&lt;/p&gt;
-&lt;h1&gt;Alright, I'm sold, how do I &lt;code&gt;Optional&lt;/code&gt;?&lt;/h1&gt;
+&lt;h1 id="alright-im-sold-how-do-i-optional"&gt;Alright, I'm sold, how do I &lt;code&gt;Optional&lt;/code&gt;?&lt;/h1&gt;
 &lt;p&gt;We've already had a look at how to consume &lt;code&gt;Optional&lt;/code&gt;s. But how do we produce
 them? It's really quite easy. The three most important methods are:&lt;/p&gt;
 &lt;ol&gt;
@@ -4790,7 +4827,7 @@ from earlier, we can wrap its &lt;code&gt;get&lt;/code&gt; method in our own &lt
 &lt;p&gt;This lets us easily create APIs that contain two versions of, for example, a
 getter method: one that returns &lt;code&gt;T&lt;/code&gt;, and one that returns &lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;. And
 that's all the essentials. Not that hard, right?&lt;/p&gt;
-&lt;h1&gt;Summary&lt;/h1&gt;
+&lt;h1 id="summary"&gt;Summary&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;Optional&lt;/code&gt; solves most of the problems with null references in a mostly
 elegant way. The most important thing with &lt;code&gt;Optional&lt;/code&gt; is that it is a strong
 form of documentation, which states both to the programmer and to the compiler
@@ -4837,7 +4874,7 @@ few different solutions to a single prodlem. If you've ever found yourself
 frantically switching branches, stashing changes to be able to switch branches,
 and even creating copies of the repository you're working in, then this article
 is for you.&lt;/p&gt;
-&lt;h3&gt;An example repo&lt;/h3&gt;
+&lt;h3 id="an-example-repo"&gt;An example repo&lt;/h3&gt;
 &lt;p&gt;Let's first create an example repo. Here's a little terminal session where I
 create a repository, add a README to it on the master branch, add another line
 to the readme on a branch called other, and finally checking out to master.&lt;/p&gt;
@@ -4862,7 +4899,7 @@ Switched&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&g
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;It's not super important how you do it, just make sure to have two branches.&lt;/p&gt;
-&lt;h3&gt;Adding a new worktree&lt;/h3&gt;
+&lt;h3 id="adding-a-new-worktree"&gt;Adding a new worktree&lt;/h3&gt;
 &lt;p&gt;First of all: what is a &lt;em&gt;worktree&lt;/em&gt;? Usually, you only have &lt;em&gt;the&lt;/em&gt; worktree, which
 is the part of a repository where you actually do your work (edit files etc).
 Running &lt;code&gt;git worktree list&lt;/code&gt; on most repos will show the location of this single
@@ -4906,7 +4943,7 @@ new worktree like it's an entirely separate repository, with the caveat that you
 can't check out to a branch that is checked out in some other worktree. That
 includes checking out to other commits or branches, and even creating entirely
 new branches.&lt;/p&gt;
-&lt;h3&gt;Moving a worktree&lt;/h3&gt;
+&lt;h3 id="moving-a-worktree"&gt;Moving a worktree&lt;/h3&gt;
 &lt;p&gt;If for some reason you need to move a worktree, you should use &lt;code&gt;git worktree
 move&lt;/code&gt; to make sure that all of the references are correctly changed. It's very
 simple, just type &lt;code&gt;git worktree move &amp;lt;src&amp;gt; &amp;lt;dst&amp;gt;&lt;/code&gt;. For example, if I want to
@@ -4919,7 +4956,7 @@ move &lt;code&gt;../repo-other&lt;/code&gt; to &lt;code&gt;../repo-work&lt;/code
 
 &lt;p&gt;That's all there is to moving worktrees. Not very exciting, and I can't recall
 ever actually doing it, but I can see how it could be useful.&lt;/p&gt;
-&lt;h3&gt;Removing a worktree&lt;/h3&gt;
+&lt;h3 id="removing-a-worktree"&gt;Removing a worktree&lt;/h3&gt;
 &lt;p&gt;To remove a worktree, run &lt;code&gt;git worktree remove &amp;lt;path&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;worktree&lt;span class="w"&gt; &lt;/span&gt;remove&lt;span class="w"&gt; &lt;/span&gt;../repo-work/
 &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;worktree&lt;span class="w"&gt; &lt;/span&gt;list
@@ -4929,11 +4966,11 @@ ever actually doing it, but I can see how it could be useful.&lt;/p&gt;
 &lt;p&gt;You can also just remove the directory with the worktree and the reference to it
 will be removed automatically (but not necessarily immediately). Run &lt;code&gt;git
 worktree prune&lt;/code&gt; to trigger this removal process.&lt;/p&gt;
-&lt;h3&gt;The other worktree commands&lt;/h3&gt;
+&lt;h3 id="the-other-worktree-commands"&gt;The other worktree commands&lt;/h3&gt;
 &lt;p&gt;There are a few more &lt;code&gt;git worktree&lt;/code&gt; commands that I've never felt the need to
 use. Have a look at them
 &lt;a href="https://git-scm.com/docs/git-worktree"&gt;in the git-worktree documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;h3 id="summary"&gt;Summary&lt;/h3&gt;
 &lt;p&gt;In this short article I showcased &lt;code&gt;git worktree&lt;/code&gt;. It's super useful to work in
 parallel on different versions of the same project, without having to create
 copies of the repository and thereby having to deal with synchronizing multiple
@@ -4944,12 +4981,12 @@ on it more in its man-page (either with &lt;code&gt;man git-worktree&lt;/code&gt
 &lt;a href="https://slar.se/io-redirection-in-bash.html"&gt;I/O redirection in bash&lt;/a&gt;). Well, there's actually
 a lot more to it, so for this TOTW I thought I'd touch on a few more advanced
 usages.&lt;/p&gt;
-&lt;h2&gt;Redirecting stderr&lt;/h2&gt;
+&lt;h2 id="redirecting-stderr"&gt;Redirecting stderr&lt;/h2&gt;
 &lt;p&gt;Sometimes, you may find that part …&lt;/p&gt;</summary><content type="html">&lt;p&gt;A couple of weeks ago I covered some basic I/O redirection in bash (see
 &lt;a href="https://slar.se/io-redirection-in-bash.html"&gt;I/O redirection in bash&lt;/a&gt;). Well, there's actually
 a lot more to it, so for this TOTW I thought I'd touch on a few more advanced
 usages.&lt;/p&gt;
-&lt;h2&gt;Redirecting stderr&lt;/h2&gt;
+&lt;h2 id="redirecting-stderr"&gt;Redirecting stderr&lt;/h2&gt;
 &lt;p&gt;Sometimes, you may find that part or all of the output of a command isn't
 properly redirected. As a quick example, navigate to any directory that is &lt;em&gt;not&lt;/em&gt;
 a Git repository, and run &lt;code&gt;git status&lt;/code&gt;. You should see something like this:&lt;/p&gt;
@@ -4981,7 +5018,7 @@ fatal:&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt
 default to 1. In some cases, you may want to redirect both stderr and stdout to
 the same file. But many programs output both on stderr and stdout, and we may
 want to redirect both of them.&lt;/p&gt;
-&lt;h2&gt;Redirecting stderr and stdout&lt;/h2&gt;
+&lt;h2 id="redirecting-stderr-and-stdout"&gt;Redirecting stderr and stdout&lt;/h2&gt;
 &lt;p&gt;So, we can specify a file descriptor to redirect stdout or stderr (or any other
 file descriptor, really), but many programs output on both stderr and stdout,
 and it's often useful to redirect both. Here's a small Python script &lt;code&gt;print.py&lt;/code&gt;
@@ -5079,7 +5116,7 @@ trying this stuff out, first create a new directory and do everything in
 there, so you don't litter your filesystem with strange files, or
 accidentally overwrite something important.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Redirecting output&lt;/h2&gt;
+&lt;h2 id="redirecting-output"&gt;Redirecting output&lt;/h2&gt;
 &lt;p&gt;To set the stage, I'll be working in a directory with the following contents:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;ls
 file1.txt&lt;span class="w"&gt;  &lt;/span&gt;file2.txt&lt;span class="w"&gt;  &lt;/span&gt;image1.png&lt;span class="w"&gt; &lt;/span&gt;file2.txt
@@ -5089,7 +5126,7 @@ file1.txt&lt;span class="w"&gt;  &lt;/span&gt;file2.txt&lt;span class="w"&gt;  &
 output of some command in a file. There are two primary ways of redirecting
 output: &lt;em&gt;appending&lt;/em&gt; and &lt;em&gt;truncating&lt;/em&gt;. Appending is the one I use the most,
 so let's start with that one.&lt;/p&gt;
-&lt;h3&gt;Appending output redirection&lt;/h3&gt;
+&lt;h3 id="appending-output-redirection"&gt;Appending output redirection&lt;/h3&gt;
 &lt;p&gt;With &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;, we can make an appending redirect.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;ls_output.txt&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# output from ls saved to output.txt&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;ls_output.txt&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;# let&amp;#39;s have a look... &lt;/span&gt;
@@ -5137,7 +5174,7 @@ output to the terminal, and when redirected to a file. &lt;code&gt;ls&lt;/code&g
 the stdout file descriptor points to a terminal, or something else, and
 formats the output accordingly. The details are somewhat out of scope.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;Truncating output redirection&lt;/h3&gt;
+&lt;h3 id="truncating-output-redirection"&gt;Truncating output redirection&lt;/h3&gt;
 &lt;p&gt;Let's assume that we start over from the initial state of the directory, before
 &lt;code&gt;ls_output.txt&lt;/code&gt; existed. We can then make a truncating redirect with &lt;code&gt;&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;rm&lt;span class="w"&gt; &lt;/span&gt;ls_output.txt&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;# restore initial directory state&lt;/span&gt;
@@ -5199,7 +5236,7 @@ them (although I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For this
 to figure out why it was useful. That something is bash aliases, and I'll now
 walk you through how to create aliases, and the two main ways in which I use
 them (although I'm sure there are more use cases).&lt;/p&gt;
-&lt;h1&gt;Using aliases&lt;/h1&gt;
+&lt;h1 id="using-aliases"&gt;Using aliases&lt;/h1&gt;
 &lt;p&gt;I think the &lt;code&gt;bash&lt;/code&gt; manpage has a very good and concise description of what an
 alias is:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -5224,7 +5261,7 @@ text substitution: precisely what you put in the alias definition will be put on
 the command line when you invoke it. You can view all of your current aliases
 by running &lt;code&gt;alias&lt;/code&gt; without any options. Now, let's have a look at some common
 use cases!&lt;/p&gt;
-&lt;h2&gt;Specifying "default" options for commands&lt;/h2&gt;
+&lt;h2 id="specifying-default-options-for-commands"&gt;Specifying "default" options for commands&lt;/h2&gt;
 &lt;p&gt;This is probably the most common use case for aliases, and it's likely that you
 already have some in play. A common one is to have &lt;code&gt;ls&lt;/code&gt; aliased to &lt;code&gt;ls
 --color=auto&lt;/code&gt;. That is to say, the following alias is defined:&lt;/p&gt;
@@ -5254,7 +5291,7 @@ without &lt;code&gt;--color=auto&lt;/code&gt;). Note that just defining an alias
 will not persist: it needs to be defined anew for each session. To have it
 permanently defined, put the definition in a startup script (e.g. &lt;code&gt;.bashrc&lt;/code&gt; or
 &lt;code&gt;.bash_profile&lt;/code&gt;).&lt;/p&gt;
-&lt;h2&gt;Creating throwaway commands&lt;/h2&gt;
+&lt;h2 id="creating-throwaway-commands"&gt;Creating throwaway commands&lt;/h2&gt;
 &lt;p&gt;Now, the aliases I described above are useful to have defined permanently, and
 should be defined in a startup script. The second use case I have for aliases is
 when I have a repetitive command that I need to type over and over in the same
@@ -5291,7 +5328,7 @@ management etc. GitHub is also not the only service around,
 &lt;a href="https://gitlab.com"&gt;GitLab&lt;/a&gt; and &lt;a href="https://bitbucket.com"&gt;BitBucket&lt;/a&gt; are two
 other prominent services which host Git repositories.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;Using Git locally&lt;/h3&gt;
+&lt;h3 id="using-git-locally"&gt;Using Git locally&lt;/h3&gt;
 &lt;p&gt;How do you use Git locally, then? It's simple. Just create a directory and run
 &lt;code&gt;git init&lt;/code&gt; to initialize it as a Git repository. Here's an example command line
 session of what it looks like.&lt;/p&gt;
@@ -5309,7 +5346,7 @@ Initialized&lt;span class="w"&gt; &lt;/span&gt;empty&lt;span class="w"&gt; &lt;/
 putting up in a remote repository. This is useful for when you accidentally
 remove stuff, or just need to try out a bunch of different ideas that you can
 swap back and forth between by simply switching branches.&lt;/p&gt;
-&lt;h3&gt;Changing your mind (also called adding a remote)&lt;/h3&gt;
+&lt;h3 id="changing-your-mind-also-called-adding-a-remote"&gt;Changing your mind (also called adding a remote)&lt;/h3&gt;
 &lt;p&gt;If you suddenly feel like that local repo should be put up on a hosting service
 after all, maybe just to back it up, or maybe to collaborate with someone else,
 it's very simple to do so. First, create an empty repository (as in completely
@@ -5341,7 +5378,7 @@ TOTW on &lt;a href="https://slar.se/reverse-search-in-bash.html"&gt;Reverse sear
 reverse searching just doesn't work out. You may not be quite sure what you
 are looking for, or there are just too many recent commands that look samey.
 In such cases, using the &lt;code&gt;history&lt;/code&gt; command is a good alternative. &lt;/p&gt;
-&lt;h3&gt;&lt;code&gt;history&lt;/code&gt;&lt;/h3&gt;
+&lt;h3 id="history"&gt;&lt;code&gt;history&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;history&lt;/code&gt; command will display the last commands that you have entered, and
 looks something like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;history&lt;/span&gt;
@@ -5360,7 +5397,7 @@ even for the weakest of computers. You can also limit the output of &lt;code&gt;
 by providing an integer argument, so e.g. &lt;code&gt;history 5&lt;/code&gt; will display the last 5
 commands. Now, the real power of &lt;code&gt;history&lt;/code&gt; becomes apparent when using it
 with &lt;em&gt;history expansion&lt;/em&gt;.&lt;/p&gt;
-&lt;h3&gt;History expansion&lt;/h3&gt;
+&lt;h3 id="history-expansion"&gt;History expansion&lt;/h3&gt;
 &lt;p&gt;History expansion can be used to expand an event number into the whole command
 it corresponds to. To expand an event, one simply types &lt;code&gt;!&amp;lt;event_nr&amp;gt;&lt;/code&gt;. For
 example, looking at the &lt;code&gt;history&lt;/code&gt; output above I can see that event number 1010
@@ -5400,7 +5437,7 @@ very useful if you need to do minor modifications to it. There are tons of
 more ways to use history expansion, and I strongly recommend reading the man-page
 on it. Type &lt;code&gt;man bash&lt;/code&gt; and then search for &lt;code&gt;HISTORY EXPANSION&lt;/code&gt;, or do the same
 in &lt;a href="https://linux.die.net/man/1/bash"&gt;this online bash man page&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Filtering history&lt;/h3&gt;
+&lt;h3 id="filtering-history"&gt;Filtering history&lt;/h3&gt;
 &lt;p&gt;A final tip on using history expansion is to filter the output with &lt;code&gt;grep&lt;/code&gt;. For
 example, if I only want to find commands that include the word &lt;code&gt;git&lt;/code&gt;, I can
 filter the output of &lt;code&gt;history&lt;/code&gt; by &lt;em&gt;piping&lt;/em&gt; to &lt;code&gt;grep&lt;/code&gt; with the &lt;code&gt;|&lt;/code&gt; character.&lt;/p&gt;
@@ -5466,7 +5503,7 @@ taught a lot of students what I know, I've decided to share my top tips of
 things to think about when testing. First up is one that may seem obvious, but
 beginners and experienced testers alike fail with on occasion: make sure you
 are actually testing something.&lt;/p&gt;
-&lt;h2&gt;Tests that don't test&lt;/h2&gt;
+&lt;h2 id="tests-that-dont-test"&gt;Tests that don't test&lt;/h2&gt;
 &lt;p&gt;Quite often, I find tests written by students that don't actually test anything,
 and will pass regardless of what the student's code is doing. Sometimes, I find
 tests written by yours truly that are similarly ineffective. A test that passes
@@ -5502,7 +5539,7 @@ it can simply be used as a list.&lt;/p&gt;
 
 &lt;p&gt;For brevity, the docstring will be excluded from now on.  Let's get to it the,
 shall we?&lt;/p&gt;
-&lt;h3&gt;Not calling the function under test&lt;/h3&gt;
+&lt;h3 id="not-calling-the-function-under-test"&gt;Not calling the function under test&lt;/h3&gt;
 &lt;p&gt;This mistake definitely sits in the top two most common ones that I encounter. A
 typical example of this is when using &lt;em&gt;redundant computation&lt;/em&gt; to produce a test
 oracle. That is, using some other implementation of the function under test to
@@ -5527,7 +5564,7 @@ often find it propagating elsewhere due to copy-paste errors. This kind of
 mistake is applicable in most any language, and is especially easy to make if
 the redundant function and the function under test have similar names and usage
 (which was actually not the case here!).&lt;/p&gt;
-&lt;h3&gt;Copy mistakes with references/pointers&lt;/h3&gt;
+&lt;h3 id="copy-mistakes-with-referencespointers"&gt;Copy mistakes with references/pointers&lt;/h3&gt;
 &lt;p&gt;Another very common issue that is often related to redundant computation is
 failing to make a proper copy of a data structure. If you have a look at the
 previous example, there is comment telling you to note the copy. Compare that
@@ -5550,7 +5587,7 @@ reference the &lt;em&gt;same list&lt;/em&gt;. The assertion is then semantically
 &lt;code&gt;mysort&lt;/code&gt; did with the list. This is a problem in any language that uses
 references (not C++ references, but pointer-like references), such as Java and
 Python, or when dealing with pointers in pretty much any language that has them.&lt;/p&gt;
-&lt;h3&gt;Mistakes during setup&lt;/h3&gt;
+&lt;h3 id="mistakes-during-setup"&gt;Mistakes during setup&lt;/h3&gt;
 &lt;p&gt;This is also fairly common, and can manifest in a variety of ways. The general
 idea is that the setup is performed such that the outcome of the test is very
 likely to be the same even if the production code is anything but correct. One
@@ -5582,21 +5619,21 @@ programming language. As a side note, the correct way to do this would of
 course be to seed &lt;em&gt;before&lt;/em&gt; the loop. Note that even with the correct
 configuration, there is a very small chance that the random elements are
 generated in ascending order.&lt;/p&gt;
-&lt;h3&gt;Mistakes with assertions&lt;/h3&gt;
+&lt;h3 id="mistakes-with-assertions"&gt;Mistakes with assertions&lt;/h3&gt;
 &lt;p&gt;The final issue is also common, and comes in many shapes and forms. One thing I
 sometimes see is that the assertions are tautologies, such as &lt;code&gt;assert
 random_list == random_list&lt;/code&gt; (obviously true), and probably mostly result from
 typos and unchecked auto-completion. Another common one is that assertions are
 simply missing, and is most often found in tests that are large enough that a
 missing line or two is not immediately apparent.&lt;/p&gt;
-&lt;h2&gt;Finding tests that don't test&lt;/h2&gt;
+&lt;h2 id="finding-tests-that-dont-test"&gt;Finding tests that don't test&lt;/h2&gt;
 &lt;p&gt;There are essentially two ways I know of to find tests that (pretty much) never
 fail.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Write the tests first (Test-driven development)&lt;/li&gt;
 &lt;li&gt;Inject errors into production code and expect tests to fail&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3&gt;Test-driven development (TDD)&lt;/h3&gt;
+&lt;h3 id="test-driven-development-tdd"&gt;Test-driven development (TDD)&lt;/h3&gt;
 &lt;p&gt;TDD involves writing the test cases before you implement the functionality.
 You first write the test cases, ensure that the test cases fail, and then
 implement the production code such that the tests pas. I typically use TDD
@@ -5625,7 +5662,7 @@ your tests, and make sure they fail before you start implementing production
 code. I don't think TDD is always practical to use, however, especially when
 I'm a bit unsure of what to do and need to experiment with different APIs.
 That's when the second technique comes in real handy.&lt;/p&gt;
-&lt;h3&gt;Inject errors into production code and expect tests to fail&lt;/h3&gt;
+&lt;h3 id="inject-errors-into-production-code-and-expect-tests-to-fail"&gt;Inject errors into production code and expect tests to fail&lt;/h3&gt;
 &lt;p&gt;This is a highly useful technique that can always be performed, and I do this
 almost every time I implement tests after production code. The idea is simply to
 consider what your test is testing, and inject errors into the production code
@@ -5645,7 +5682,7 @@ general, it takes a &lt;em&gt;long&lt;/em&gt; time to run mutation testing on a 
 often the whole test suite needs to be run for a single fault. And there are
 many, many possible faults.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;While I framed this as a unit testing article, these concepts are applicable to
 most kinds of testing. You should always attempt to make sure that your test is
 doing what it claims to be doing. A single typo may be what stands between a
@@ -5668,13 +5705,13 @@ previous ones, but it also contains a whole lot more content.&lt;/p&gt;
 &lt;p&gt;The full source code is available
 &lt;a href="https://github.com/slarse/tornadofx-exposed-example/tree/part_3"&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Article index&lt;/h1&gt;
+&lt;h1 id="article-index"&gt;Article index&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-1-project-and-database-setup.html"&gt;Project and database setup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;Showing a database table&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Adding, editing and removing rows -- This part!&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1&gt;Making the app interactive&lt;/h1&gt;
+&lt;h1 id="making-the-app-interactive"&gt;Making the app interactive&lt;/h1&gt;
 &lt;p&gt;So far, all we can do with our app is view the contents of the database. That's
 neat and all, but it would be even nicer if we could interact with the database
 and edit its contents. What this article will address is how to:&lt;/p&gt;
@@ -5684,7 +5721,7 @@ and edit its contents. What this article will address is how to:&lt;/p&gt;
 &lt;li&gt;Edit rows.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Deleting rows is the simplest thing to accomplish, so let's start with that.&lt;/p&gt;
-&lt;h2&gt;Deleting rows&lt;/h2&gt;
+&lt;h2 id="deleting-rows"&gt;Deleting rows&lt;/h2&gt;
 &lt;p&gt;Deleting a row is pretty easy. First, we'll add the desired functionality to
 the controller.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;fun&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;deleteCategory&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;CategoryModel&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
@@ -5751,7 +5788,7 @@ like this:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Table view with a delete button" src="https://slar.se/images/tornado_exposed/view_with_delete.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;If you first click a row and then the delete button, the row should disappear.
 Now that we can delete rows, let's turn our attention to adding new rows.&lt;/p&gt;
-&lt;h2&gt;Adding new rows&lt;/h2&gt;
+&lt;h2 id="adding-new-rows"&gt;Adding new rows&lt;/h2&gt;
 &lt;p&gt;For this, we're going to add a small form to the right of the table which will
 allow us to enter new rows. As before, we'll start with the controller, adding
 the following method to it:&lt;/p&gt;
@@ -5814,7 +5851,7 @@ need to import &lt;code&gt;TextField&lt;/code&gt;&lt;/p&gt;
 create a new row in the table. Not the most beautiful thing in the world, I'll
 admit, but it serves its purpose for this guide. Now we only have one more
 feature to add, namely editing rows.&lt;/p&gt;
-&lt;h2&gt;Editing rows&lt;/h2&gt;
+&lt;h2 id="editing-rows"&gt;Editing rows&lt;/h2&gt;
 &lt;p&gt;Now we will finally see why we used a &lt;code&gt;TableViewEditModel&lt;/code&gt; instead of a plain
 &lt;code&gt;TableView&lt;/code&gt;: the former allows us to edit rows directly in the table. To allow
 for inline editing, we need to add some stuff to the view itself. Our table
@@ -5899,7 +5936,7 @@ dirty cells to their previous state.&lt;/p&gt;
 model state is reset (the DAO is unaffected). This will leave us with a final
 GUI looking like this:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Final GUI" src="https://slar.se/images/tornado_exposed/final_gui.jpg"&gt;&lt;/p&gt;
-&lt;h1&gt;Closing words&lt;/h1&gt;
+&lt;h1 id="closing-words"&gt;Closing words&lt;/h1&gt;
 &lt;p&gt;That was all for this series of articles on TornadoFX and exposed. This is by
 no means a fully-fledged database UI, but it is a pretty good start.  There are
 tons of things here that need to be improved, though. Below are a few examples
@@ -5932,13 +5969,13 @@ add, edit and delete rows.&lt;/p&gt;
 &lt;p&gt;The full source code is available
 &lt;a href="https://github.com/slarse/tornadofx-exposed-example/tree/part_2"&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Article index&lt;/h1&gt;
+&lt;h1 id="article-index"&gt;Article index&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-1-project-and-database-setup.html"&gt;Project and database setup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Showing a database table -- This part!&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;Adding, editing and removing rows&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1&gt;Creating a table view&lt;/h1&gt;
+&lt;h1 id="creating-a-table-view"&gt;Creating a table view&lt;/h1&gt;
 &lt;p&gt;To be able to view the &lt;code&gt;Categories&lt;/code&gt; table, we're going to need three things:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;A view model to wrap &lt;code&gt;Category&lt;/code&gt; instances. We can actually get away without
@@ -5949,7 +5986,7 @@ add, edit and delete rows.&lt;/p&gt;
 &lt;/ol&gt;
 &lt;p&gt;We will do all of this in a new file called &lt;code&gt;categoryview.kt&lt;/code&gt;. Let's start with
 the view model, as it is by far the simplest component.&lt;/p&gt;
-&lt;h2&gt;An ItemViewModel wrapper for Category&lt;/h2&gt;
+&lt;h2 id="an-itemviewmodel-wrapper-for-category"&gt;An ItemViewModel wrapper for Category&lt;/h2&gt;
 &lt;p&gt;For this, we'll extend a utility class called &lt;code&gt;ItemViewModel&lt;/code&gt; (you can read
 about it in detail in the
 &lt;a href="https://edvin.gitbooks.io/tornadofx-guide/part1/11.%20Editing%20Models%20and%20Validation.html"&gt;TornadoFX guide&lt;/a&gt;.
@@ -5969,7 +6006,7 @@ will only propagate to the underlying &lt;code&gt;Category&lt;/code&gt; object w
 change(s).  This is very convenient, as it allows us to buffer changes and then
 commit all of them in a single database transaction, instead of having one
 transaction per change. Now, let's move on to the controller.&lt;/p&gt;
-&lt;h2&gt;The database controller&lt;/h2&gt;
+&lt;h2 id="the-database-controller"&gt;The database controller&lt;/h2&gt;
 &lt;p&gt;The controller is also fairly simple. Initially, it will only be able to fetch
 items from the database. In the next article, we will extend the controller
 with add and delete-functionality. Here's the initial version of the
@@ -6004,7 +6041,7 @@ a trade-off here: it's more efficient to fetch the whole table only once and
 then maintain the state with any objects that are added or &lt;code&gt;init&lt;/code&gt; contains
 precisely the same database connection setup that we used in the first article.
 Let's move on to the actual view.&lt;/p&gt;
-&lt;h2&gt;The table view&lt;/h2&gt;
+&lt;h2 id="the-table-view"&gt;The table view&lt;/h2&gt;
 &lt;p&gt;For the table view, we're going to use a &lt;code&gt;TableViewEditModel&lt;/code&gt; instead of a
 plain &lt;code&gt;TableView&lt;/code&gt;. The reason is that the &lt;code&gt;TableViewEditModel&lt;/code&gt; has some
 additional functionality, most notably the ability to edit rows directly in the
@@ -6038,7 +6075,7 @@ the latter the property containing the items of the table (which we set to the
 &lt;code&gt;categories&lt;/code&gt; observable list). Later, when we wish to update the table, we
 simply work with the &lt;code&gt;categories&lt;/code&gt; list. Don't worry that there are some unused
 references here, we will put them to use in the next article.&lt;/p&gt;
-&lt;h2&gt;Creating a runnable app&lt;/h2&gt;
+&lt;h2 id="creating-a-runnable-app"&gt;Creating a runnable app&lt;/h2&gt;
 &lt;p&gt;Now, we just need to make the app runnable. That's as simple as adding the
 following:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Kuizzy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;App&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CategoryEditor&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -6073,13 +6110,13 @@ admin part of Kuizzy up and running.&lt;/p&gt;
 &lt;p&gt;The full source code is available
 &lt;a href="https://github.com/slarse/tornadofx-exposed-example/tree/part_1"&gt;on GitHub&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Article index&lt;/h1&gt;
+&lt;h1 id="article-index"&gt;Article index&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Project and database setup -- This part!&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-2-showing-a-database-table.html"&gt;Showing a database table&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://slar.se/tornadofxexposed-pt-3-adding-editing-and-removing-rows.html"&gt;Adding, editing and removing&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1&gt;Getting started&lt;/h1&gt;
+&lt;h1 id="getting-started"&gt;Getting started&lt;/h1&gt;
 &lt;p&gt;In this first article, we will be concerned only with getting everything set up.
 This includes getting the dependencies and setting up the database with a table.
 I will assume that you know how to use Kotlin, and how to handle dependencies
@@ -6091,7 +6128,7 @@ reasonably focused and short, I take tons of shortcuts, completely eschew error
 handling and create very specialized functionality. The point of this article
 series is to show you how to get started with TornadoFX+Exposed, and you are
 meant to develop it further on your own.&lt;/p&gt;
-&lt;h2&gt;What are we aiming for?&lt;/h2&gt;
+&lt;h2 id="what-are-we-aiming-for"&gt;What are we aiming for?&lt;/h2&gt;
 &lt;p&gt;I think it helps tremendously when reading something to have the end goal in
 sight. What we're shooting for here is an interface that looks something like
 this:&lt;/p&gt;
@@ -6102,7 +6139,7 @@ pretty and it's not very user friendly, but it conveys an idea and has all the
 basic functionality required do administrate a single-table database.
 Now that you have a rough idea of what we're trying to accomplish, let's
 have a look at what libraries and tools we need to make it happen.&lt;/p&gt;
-&lt;h2&gt;Preliminaries&lt;/h2&gt;
+&lt;h2 id="preliminaries"&gt;Preliminaries&lt;/h2&gt;
 &lt;p&gt;Before we can get started, we need to make sure all dependencies are accounted
 for. Here's a complete list of the libraries and frameworks I'll be using
 throughout this series:&lt;/p&gt;
@@ -6158,7 +6195,7 @@ throughout this series:&lt;/p&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2&gt;Setting up the database&lt;/h2&gt;
+&lt;h2 id="setting-up-the-database"&gt;Setting up the database&lt;/h2&gt;
 &lt;p&gt;Any quiz game worth it's salt has categories, and that's the part of the
 database that we'll develop. Exposed allows us to interact with a SQL database
 in two different ways: through the SQL Domain Specific Language (DSL), or
@@ -6256,7 +6293,7 @@ through how to create a basic collapsible content-area using almost only CSS,
 along with a few lines of close-to-trivial JavaScript. The focus is on CSS, not
 JavaScript, so you should be able to follow this even with the most rudimentary
 programming experience.&lt;/p&gt;
-&lt;h1&gt;The fictional sidebar&lt;/h1&gt;
+&lt;h1 id="the-fictional-sidebar"&gt;The fictional sidebar&lt;/h1&gt;
 &lt;p&gt;For this toy example, we will be creating a collapsible &lt;code&gt;div&lt;/code&gt; (it could really
 be just about any element) that can be collapsed and expanded by clicking a
 "trigger". Just for the purpose of showing the effects more clearly, we'll do
@@ -6296,7 +6333,7 @@ Let's get to it! Note the &lt;code&gt;id&lt;/code&gt; attributes on the two inne
 later refer to the &lt;code&gt;#trigger&lt;/code&gt;, I mean the div with &lt;code&gt;id="trigger"&lt;/code&gt;, and likewise
 for the &lt;code&gt;#content&lt;/code&gt;. The &lt;code&gt;id&lt;/code&gt; attributes serve no other purpose here, you can
 remove them if you wish and everything will still work as expected.&lt;/p&gt;
-&lt;h2&gt;Collapsing and expanding the &lt;code&gt;div&lt;/code&gt;&lt;/h2&gt;
+&lt;h2 id="collapsing-and-expanding-the-div"&gt;Collapsing and expanding the &lt;code&gt;div&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;To collapse and expand &lt;code&gt;#content&lt;/code&gt;, we will use two classes: &lt;code&gt;collapse-trigger&lt;/code&gt;
 and &lt;code&gt;collapse&lt;/code&gt;. The basic idea is this:&lt;/p&gt;
 &lt;ol&gt;
@@ -6350,7 +6387,7 @@ collapse and expand the &lt;code&gt;#content&lt;/code&gt; by opening the develop
 Firefox and Chrome) and manually assigning the &lt;code&gt;active&lt;/code&gt; class to &lt;code&gt;#trigger&lt;/code&gt;.
 But that's not very convenient in every day use. This is where we need the
 tiniest bit of JavaScript to be able to toggle &lt;code&gt;active&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Toggling the &lt;code&gt;active&lt;/code&gt; class with the click of a button&lt;/h2&gt;
+&lt;h2 id="toggling-the-active-class-with-the-click-of-a-button"&gt;Toggling the &lt;code&gt;active&lt;/code&gt; class with the click of a button&lt;/h2&gt;
 &lt;p&gt;What we want to do is to remove and add the &lt;code&gt;active&lt;/code&gt; class from any
 &lt;code&gt;collapse-trigger&lt;/code&gt; element by clicking it. Here, we need JavaScript, because
 there is no way to change the class of an element with only CSS. For every
@@ -6392,7 +6429,7 @@ loaded for this to take effect. And that's it for the JavaScript, clicking the
 &lt;code&gt;#trigger&lt;/code&gt; will now cause &lt;code&gt;#content&lt;/code&gt; to collapse and expand!  However, it's not
 very clear to the user that the &lt;code&gt;#trigger&lt;/code&gt; even can be clicked. Let's make that
 just a little bit more clear by adding some visual cues.&lt;/p&gt;
-&lt;h2&gt;Finishing touches using the &lt;code&gt;::after&lt;/code&gt; pseudo class&lt;/h2&gt;
+&lt;h2 id="finishing-touches-using-the-after-pseudo-class"&gt;Finishing touches using the &lt;code&gt;::after&lt;/code&gt; pseudo class&lt;/h2&gt;
 &lt;p&gt;A typical visual cue that a drop down can be expanded is a down-triangle (▼).
 An up-triangle (▲) is as recognizable a cue that a menu can be collapsed. The
 down-triangle should be appended to any &lt;code&gt;collapse-trigger&lt;/code&gt; that is not active,
@@ -6414,10 +6451,10 @@ simply be the down-triangle. When a &lt;code&gt;collapse-trigger&lt;/code&gt; &l
 match both selectors. However, &lt;code&gt;.collapse-trigger.active&lt;/code&gt; is more specific than
 &lt;code&gt;.collapse-trigger&lt;/code&gt;, so it wins out, and the content will be an up-triangle.
 And that's it, all done!&lt;/p&gt;
-&lt;h1&gt;Code listing and JSFiddle link&lt;/h1&gt;
+&lt;h1 id="code-listing-and-jsfiddle-link"&gt;Code listing and JSFiddle link&lt;/h1&gt;
 &lt;p&gt;The full code is available in the following subsections, and you can find a
 &lt;a href="https://jsfiddle.net/p3qtev5w/"&gt;JSFiddle here&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Markup&lt;/h3&gt;
+&lt;h3 id="markup"&gt;Markup&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;!- the outer div with the class &amp;quot;sidebar&amp;quot; isn&amp;#39;t important, it&amp;#39;s just any container --&amp;gt;&lt;/span&gt;
 &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;sidebar&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
   &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;collapse-trigger&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Cool content heading&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
@@ -6429,7 +6466,7 @@ And that's it, all done!&lt;/p&gt;
 &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;CSS&lt;/h3&gt;
+&lt;h3 id="css"&gt;CSS&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;/* the sidebar class is just an arbitrary container for this example */&lt;/span&gt;
 &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;sidebar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -6455,7 +6492,7 @@ And that's it, all done!&lt;/p&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;JavaScript&lt;/h3&gt;
+&lt;h3 id="javascript"&gt;JavaScript&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;attachCollapseTriggers&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;colTriggers&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getElementsByClassName&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;collapse-trigger&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;colTrig&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;colTriggers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
@@ -6469,26 +6506,26 @@ And that's it, all done!&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Programming"></category><category term="html"></category><category term="css"></category><category term="javascript"></category></entry><entry><title>A binary search tree in Kotlin pt. 2: Generic node</title><link href="https://slar.se/a-binary-search-tree-in-kotlin-pt-2-generic-node.html" rel="alternate"></link><published>2018-10-30T08:26:05+00:00</published><updated>2018-10-30T08:26:05+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-10-30:/a-binary-search-tree-in-kotlin-pt-2-generic-node.html</id><summary type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
 part, we're gonna have a look at how to make the node representation from part 1
 capable of carrying any kind of data (i.e. &lt;em&gt;generic&lt;/em&gt;).&lt;/p&gt;
-&lt;h2&gt;Series index&lt;/h2&gt;
+&lt;h2 id="series-index"&gt;Series index&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://slar.se/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"&gt;Representing a node&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Generic node (this part …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Welcome to part 2 of my series on the idiomatic Kotlin binary tree! In this
 part, we're gonna have a look at how to make the node representation from part 1
 capable of carrying any kind of data (i.e. &lt;em&gt;generic&lt;/em&gt;).&lt;/p&gt;
-&lt;h2&gt;Series index&lt;/h2&gt;
+&lt;h2 id="series-index"&gt;Series index&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://slar.se/a-binary-search-tree-in-kotlin-pt-1-representing-a-node.html"&gt;Representing a node&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Generic node (this part!)&lt;/li&gt;
 &lt;li&gt;Generic BST with insert, contains and traversal (coming soon!)&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;Attribution and reading recommendations&lt;/h2&gt;
+&lt;h2 id="attribution-and-reading-recommendations"&gt;Attribution and reading recommendations&lt;/h2&gt;
 &lt;p&gt;In this part, we'll start working a little bit with binary tree algorithms. More
 specifically, we'll complete the &lt;code&gt;contains&lt;/code&gt; function from part 1. All of the
 algorithms I implement in this series are based on
 &lt;a href="https://yourbasic.org/algorithms/binary-search-tree/"&gt;this article by Stefan Nilsson&lt;/a&gt;.
 If you are unfamiliar with the concepts of binary trees, I highly recommend that
 you sift through that article before continuing with this one.&lt;/p&gt;
-&lt;h2&gt;Improving &lt;code&gt;contains&lt;/code&gt;&lt;/h2&gt;
+&lt;h2 id="improving-contains"&gt;Improving &lt;code&gt;contains&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;Recall the &lt;code&gt;contains&lt;/code&gt; function that we started working on in part 1. Before we
 start working on generics, I want us to complete this function. It will make
 some of the decisions about generics much more apparent. Anyway, here's
@@ -6553,7 +6590,7 @@ us to perform more complex operations in the matchings. And that's it for the
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;With that out of the way, let's dive into making the whole thing generic!&lt;/p&gt;
-&lt;h2&gt;Getting generic&lt;/h2&gt;
+&lt;h2 id="getting-generic"&gt;Getting generic&lt;/h2&gt;
 &lt;p&gt;Now, how do we make the node classes generic? A first attempt might be to just
 change the &lt;code&gt;Node&lt;/code&gt; class, and do something like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;data&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;val&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Empty&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -6587,7 +6624,7 @@ hierarchy, there is &lt;em&gt;no&lt;/em&gt; reasonable way around this. An &lt;c
 parameterized, and therefore the dynamic type of an &lt;code&gt;ANode&lt;/code&gt; can be any &lt;code&gt;Node&lt;/code&gt;
 type (e.g. &lt;code&gt;Node&amp;lt;Int&amp;gt;&lt;/code&gt;, &lt;code&gt;Node&amp;lt;String&amp;gt;&lt;/code&gt; etc) or &lt;code&gt;Empty&lt;/code&gt;. We have to put the type
 parameter &lt;code&gt;T&lt;/code&gt; higher up in the inheritance chain. &lt;/p&gt;
-&lt;h3&gt;Inheriting from a generic class&lt;/h3&gt;
+&lt;h3 id="inheriting-from-a-generic-class"&gt;Inheriting from a generic class&lt;/h3&gt;
 &lt;p&gt;Since &lt;code&gt;ANode&lt;/code&gt; is the only class higher up in the inheritance chain (apart from
 &lt;code&gt;Any&lt;/code&gt;), this is where we need to put our type parameter. For &lt;code&gt;ANode&lt;/code&gt; and &lt;code&gt;Node&lt;/code&gt;,
 it is straightforward.&lt;/p&gt;
@@ -6621,7 +6658,7 @@ non-nullable type), because the we wouldn't be able to assign &lt;code&gt;Empty&
 concrete type of &lt;code&gt;ANode&amp;lt;T&amp;gt;&lt;/code&gt;. Now you may be angrily shouting that you
 &lt;em&gt;still&lt;/em&gt; can't assign &lt;code&gt;Empty&lt;/code&gt; to &lt;em&gt;any&lt;/em&gt; type of &lt;code&gt;ANode&amp;lt;T&amp;gt;&lt;/code&gt;. Unfortunately,
 &lt;code&gt;ANode&amp;lt;T&amp;gt;&lt;/code&gt; (for any substition of &lt;code&gt;T&lt;/code&gt;) is &lt;em&gt;invariant&lt;/em&gt;. Let's fix that.&lt;/p&gt;
-&lt;h2&gt;Generics are invariant by default, but Kotlin can stretch the rules&lt;/h2&gt;
+&lt;h2 id="generics-are-invariant-by-default-but-kotlin-can-stretch-the-rules"&gt;Generics are invariant by default, but Kotlin can stretch the rules&lt;/h2&gt;
 &lt;p&gt;Any generc class is invariant by default. What does this mean? In short, it
 means that a generic type (e.g. &lt;code&gt;ANode&amp;lt;Int&amp;gt;&lt;/code&gt;) is not a supertype, nor subtype,
 of any other type. Formally, it means that if we have two types &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;B&lt;/code&gt;
@@ -6668,7 +6705,7 @@ example, &lt;code&gt;ANode&amp;lt;Int&amp;gt;&lt;/code&gt; must have dynamic typ
 no other possibilities. As the compiler knows this, we can in fact skip the
 &lt;code&gt;&amp;lt;T&amp;gt;&lt;/code&gt; and just write &lt;code&gt;is Node&lt;/code&gt;. That's all we need of our node classes, so we
 can move on to implement the &lt;code&gt;Tree&lt;/code&gt; class in part 3!&lt;/p&gt;
-&lt;h2&gt;Final code listing&lt;/h2&gt;
+&lt;h2 id="final-code-listing"&gt;Final code listing&lt;/h2&gt;
 &lt;p&gt;This is the final state of the code that we'll be using for part 3.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;sealed&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;ANode&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;out&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
 
@@ -6733,17 +6770,17 @@ a three-part series with the following content:&lt;/p&gt;
 &lt;p&gt;If you already know about object types, data classes and sealed classes, I
 recommend that you skip directly to part 2. If you are already comfortable with
 generics, including generic inheritance, you may skip directly to part 3.&lt;/p&gt;
-&lt;h2&gt;Series index&lt;/h2&gt;
+&lt;h2 id="series-index"&gt;Series index&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Representing a node (this part!)&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://slar.se/a-binary-search-tree-in-kotlin-pt-2-generic-node.html"&gt;Generic node&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Generic BST with insert, contains and traversal (coming soon!)&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;Goals and intended audience&lt;/h2&gt;
+&lt;h2 id="goals-and-intended-audience"&gt;Goals and intended audience&lt;/h2&gt;
 &lt;p&gt;I write articles mostly for myself, and as such, this article series is intended
 for developers with some experience with Java looking to get into Kotlin. Let's
 get at it then, shall we?&lt;/p&gt;
-&lt;h2&gt;Representing a node: A Java-like attempt&lt;/h2&gt;
+&lt;h2 id="representing-a-node-a-java-like-attempt"&gt;Representing a node: A Java-like attempt&lt;/h2&gt;
 &lt;p&gt;As I see it, a tree node can be one of two things: existent, or non-existent.
 In other words, it can be a node or an empty node. As Kotlin is, thankfully,
 quite adverse to using &lt;code&gt;null&lt;/code&gt;, I will refrain from doing so as well. So what we
@@ -6820,7 +6857,7 @@ node classes.&lt;/p&gt;
    &lt;code&gt;ANode&lt;/code&gt;, forcing us to use an &lt;code&gt;else&lt;/code&gt; in the &lt;code&gt;when&lt;/code&gt; expression.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;As it turns out, all of these problems are easy to solve in Kotlin!&lt;/p&gt;
-&lt;h3&gt;Problem 1 solution: Singleton objects&lt;/h3&gt;
+&lt;h3 id="problem-1-solution-singleton-objects"&gt;Problem 1 solution: Singleton objects&lt;/h3&gt;
 &lt;p&gt;Problem number 1 can be solved very easily, as Kotlin has language support for
 the singleton pattern. We simply swap this declaration&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Empty&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ANode&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -6840,7 +6877,7 @@ the singleton pattern. We simply swap this declaration&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;One problem solved, two to go!&lt;/p&gt;
-&lt;h3&gt;Problem 2 solution: Primary constructors and data classes&lt;/h3&gt;
+&lt;h3 id="problem-2-solution-primary-constructors-and-data-classes"&gt;Problem 2 solution: Primary constructors and data classes&lt;/h3&gt;
 &lt;p&gt;We can solve problem number 2 with Kotlin's syntax for
 &lt;a href="https://kotlinlang.org/docs/reference/classes.html"&gt;primary constructors&lt;/a&gt;.
 Instead of defining &lt;code&gt;Node&lt;/code&gt; the Java way, we do it the Kotlin way:&lt;/p&gt;
@@ -6865,7 +6902,7 @@ both &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt;, recursive
 be careful not to create a cycle, though, as this will cause a stack overflow,
 endlessly calling &lt;code&gt;toString&lt;/code&gt; (a tree, by definition, has no cycles, so we are
 good in this case).&lt;/p&gt;
-&lt;h3&gt;Problem 3 solution: Sealed classes&lt;/h3&gt;
+&lt;h3 id="problem-3-solution-sealed-classes"&gt;Problem 3 solution: Sealed classes&lt;/h3&gt;
 &lt;p&gt;To reiterate, the problem was that the compiler can't tell that &lt;code&gt;Node&lt;/code&gt; and
 &lt;code&gt;Empty&lt;/code&gt; are the only subtypes of &lt;code&gt;ANode&lt;/code&gt;. Therefore, we needed the &lt;code&gt;else&lt;/code&gt; in the
 &lt;code&gt;when&lt;/code&gt; expression to cover up the non-existent case of the argument to
@@ -6907,7 +6944,7 @@ other possibilities.&lt;/p&gt;
 
 &lt;p&gt;Neat, now we have a good base for venturing into the fraught land of generics in
 &lt;a href="https://slar.se/a-binary-search-tree-in-kotlin-pt-2-generic-node.html"&gt;part 2&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Final code listing&lt;/h2&gt;
+&lt;h2 id="final-code-listing"&gt;Final code listing&lt;/h2&gt;
 &lt;p&gt;The final version of the code, that we'll use in part 2, can be found below.
 I've also included a main function such that you can run the code in your
 preferred way, right off the bat!&lt;/p&gt;
@@ -6938,14 +6975,14 @@ as it turns out, was a bit tricky. In this short article, I will walk you
 through creating a small command line application using the
 awesome &lt;a href="https://ajalt.github.io/clikt/"&gt;&lt;code&gt;clikt&lt;/code&gt; library&lt;/a&gt;, and then packaging
 it into a standalone &lt;code&gt;.jar&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;Setting up&lt;/h2&gt;
+&lt;h2 id="setting-up"&gt;Setting up&lt;/h2&gt;
 &lt;p&gt;Start out with creating a new project by going to &lt;code&gt;File -&amp;gt; New -&amp;gt; Project&lt;/code&gt;, select
 Gradle in the leftmost menu bar (i.e. &lt;em&gt;not&lt;/em&gt; Kotlin), and then tick the Kotlin
 box in the &lt;code&gt;Additional Libraries and Frameworks&lt;/code&gt; menu. Then just fill in any
 GroupId, ArtifactId and Version (I will use &lt;code&gt;slarse&lt;/code&gt;, &lt;code&gt;app&lt;/code&gt; and &lt;code&gt;0.1&lt;/code&gt; for these
 fields, respectively). Then just click &lt;code&gt;Next&lt;/code&gt; with the defaults until the
 project is created.&lt;/p&gt;
-&lt;h3&gt;Initial Gradle configuration&lt;/h3&gt;
+&lt;h3 id="initial-gradle-configuration"&gt;Initial Gradle configuration&lt;/h3&gt;
 &lt;p&gt;In the project root, you should now have a file called &lt;code&gt;build.gradle&lt;/code&gt;, which
 looks something like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;plugi&lt;/span&gt;&lt;span class="kc"&gt;ns&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
@@ -6985,7 +7022,7 @@ dependencies section. It should now look like this:&lt;/p&gt;
 download the new dependency. And that's it for now!
 We'll get back to the &lt;code&gt;gradle.build&lt;/code&gt; file once we
 want to configure our &lt;code&gt;jar&lt;/code&gt; task, but let's create the app first!&lt;/p&gt;
-&lt;h2&gt;Creating the application&lt;/h2&gt;
+&lt;h2 id="creating-the-application"&gt;Creating the application&lt;/h2&gt;
 &lt;p&gt;Let's make this easy: we'll just use the sample application available from the
 &lt;a href="https://ajalt.github.io/clikt/"&gt;&lt;code&gt;clikt&lt;/code&gt; documentation&lt;/a&gt;. It looks like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kd"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Hello&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;CliktCommand&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
@@ -7017,7 +7054,7 @@ the above code into it. Note that we are using the default package here
 When running it, there should appear a prompt in the terminal saying &lt;code&gt;Your name:&lt;/code&gt;.
 With that out of the way, the only thing left to do is to package our
 fantastic application into a standalone &lt;code&gt;.jar&lt;/code&gt; file.&lt;/p&gt;
-&lt;h2&gt;Packaging the application into a standalone &lt;code&gt;.jar&lt;/code&gt; file&lt;/h2&gt;
+&lt;h2 id="packaging-the-application-into-a-standalone-jar-file"&gt;Packaging the application into a standalone &lt;code&gt;.jar&lt;/code&gt; file&lt;/h2&gt;
 &lt;p&gt;This is actually not very difficult, but you need to know what to do. We need
 to create a so-called "fat" jar, which includes both the Kotlin runtime and the
 &lt;code&gt;clikt&lt;/code&gt; library. We also need to specify the name of our main class.&lt;/p&gt;
@@ -7049,7 +7086,7 @@ manifest.&lt;/p&gt;
 It should now be possible to run the &lt;code&gt;jar&lt;/code&gt; Gradle task to produce a &lt;code&gt;.jar&lt;/code&gt; file
 in &lt;code&gt;build/libs/&amp;lt;ArtifactId&amp;gt;-&amp;lt;Version&amp;gt;&lt;/code&gt; (so in my case it is at
 &lt;code&gt;build/libs/app-0.1.jar&lt;/code&gt;). And that's it, hope it helped someone!&lt;/p&gt;
-&lt;h1&gt;Full source code and &lt;code&gt;build.gradle&lt;/code&gt;&lt;/h1&gt;
+&lt;h1 id="full-source-code-and-buildgradle"&gt;Full source code and &lt;code&gt;build.gradle&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;Here are both of the files we wrote in this tutorial, in their entirety.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// main.kt&lt;/span&gt;
 &lt;span class="k"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;com.github.ajalt.clikt.core.CliktCommand&lt;/span&gt;
@@ -7115,7 +7152,7 @@ number one passion, and Python is my favorite language, I tend
 to listen to podcasts that relate to them. In this post, I'll
 give a brief overview of my three favorite podcasts, and just
 why I enjoy them as much as I do!&lt;/p&gt;
-&lt;h3&gt;Python Bytes&lt;/h3&gt;
+&lt;h3 id="python-bytes"&gt;Python Bytes&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://pythonbytes.fm/"&gt;&lt;em&gt;Python Bytes&lt;/em&gt;&lt;/a&gt; was the first podcast I ever
 listened to. It's a really neat show that comes out on a weekly basis,
 and focuses on delivering news and headlines in the Python community.
@@ -7127,7 +7164,7 @@ been published every week without fail for almost two years now, which
 is really nice. The hosts (Brian Okken and Micheal Kennedy) have great
 chemistry, and the show is recorded with decent enough equipment and
 well edited. All in all, I really enjoy the show and highly recommend it!&lt;/p&gt;
-&lt;h3&gt;Talk Python To Me&lt;/h3&gt;
+&lt;h3 id="talk-python-to-me"&gt;Talk Python To Me&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://talkpython.fm/"&gt;&lt;em&gt;Talk Python To Me&lt;/em&gt;&lt;/a&gt; is Micheal Kennedy's (from
 Python Bytes) own show. In each episode, Micheal invites someone (sometimes
 multiple people at once) from
@@ -7137,7 +7174,7 @@ also mostly entertaining throughout. As with Python Bytes, the episodes
 are well edited, meaning that awkward pauses and the like shine with their
 absence. Talk Python To Me is probably my favorite podcast right now and
 I can't recommend it enough.&lt;/p&gt;
-&lt;h3&gt;Podcast.__init__&lt;/h3&gt;
+&lt;h3 id="podcast__init__"&gt;Podcast.__init__&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://www.podcastinit.com/"&gt;_Podcast.__init___&lt;/a&gt; is very similar to
 Talk Python To Me, seeing as both shows revolve around inviting prominent
 personalities to talk about their work. I haven't listened to all that many
@@ -7149,7 +7186,7 @@ few late ones that I've listened to. The length of the episodes seem hover
 around the 1 hour mark, +/- some 20 minutes. I will probably revisit this
 post once I've listened to a few more of the episodes, but as it stands I
 recommend listening to the show from the beginning.&lt;/p&gt;
-&lt;h3&gt;Did I miss something?&lt;/h3&gt;
+&lt;h3 id="did-i-miss-something"&gt;Did I miss something?&lt;/h3&gt;
 &lt;p&gt;Those were my 3 top picks for Python podcasts. If you feel like I've missed
 some great podcast(s), feel free to drop a comment!&lt;/p&gt;</content><category term="Programming"></category><category term="python"></category><category term="podcast"></category></entry><entry><title>What the self? Python's self demystified!</title><link href="https://slar.se/what-the-self-pythons-self-demystified.html" rel="alternate"></link><published>2018-05-01T16:04:01+00:00</published><updated>2018-05-01T16:04:01+00:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2018-05-01:/what-the-self-pythons-self-demystified.html</id><summary type="html">&lt;p&gt;Any Python programmer will sooner or later want to (or have to) write a class.
 With classes come &lt;code&gt;self&lt;/code&gt;, the &lt;em&gt;seemingly&lt;/em&gt; (do note the emphasis there)
@@ -7160,7 +7197,7 @@ magical keyword that you just have to write out as the first parameter to every
 method. To really understand classes, you need to understand what &lt;code&gt;self&lt;/code&gt;
 actually is: neither magical, nor a keyword. Let's demystify this integral part
 of Python classes!&lt;/p&gt;
-&lt;h2&gt;&lt;code&gt;self&lt;/code&gt; is not a keyword&lt;/h2&gt;
+&lt;h2 id="self-is-not-a-keyword"&gt;&lt;code&gt;self&lt;/code&gt; is not a keyword&lt;/h2&gt;
 &lt;p&gt;This is pretty easy to prove. Just open a Python interpreter and import the
 &lt;code&gt;keyword&lt;/code&gt; module.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;keyword&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iskeyword&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;for&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -7194,7 +7231,7 @@ write-protected in Python2, leading to shenanigans such as &lt;code&gt;True, Fal
 False, True&lt;/code&gt; being possible. In Python3, the keyword status of &lt;code&gt;True&lt;/code&gt; and
 &lt;code&gt;False&lt;/code&gt; make such an assignment a syntax error.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;&lt;code&gt;self&lt;/code&gt; is just a variable name&lt;/h2&gt;
+&lt;h2 id="self-is-just-a-variable-name"&gt;&lt;code&gt;self&lt;/code&gt; is just a variable name&lt;/h2&gt;
 &lt;p&gt;Consider the following code snippet of a (pretty useless) class that just
 stores two values (that are just assumed to be addable with each other),
 and defines a method that returns the sum of the values.&lt;/p&gt;
@@ -7279,7 +7316,7 @@ convention exists for a reason: it makes your code more readable.&lt;/p&gt;
 understanding of why we put &lt;code&gt;self&lt;/code&gt; everywhere in methods. But I think diving
 just a little bit deeper into where the first argument to methods actually
 comes from will prove fruitful.&lt;/p&gt;
-&lt;h2&gt;Two ways of calling methods&lt;/h2&gt;
+&lt;h2 id="two-ways-of-calling-methods"&gt;Two ways of calling methods&lt;/h2&gt;
 &lt;p&gt;Methods are defined on the class itself, and not on the instance. There is
 actually a way to call a method directly on the class, that is equivalent to
 the way we usually call methods on the instance.&lt;/p&gt;
@@ -7311,7 +7348,7 @@ additional arguments. To be super clear, with the following method added to
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And that pretty much concludes what I wanted to cover in this article!&lt;/p&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
 &lt;p&gt;In the beginning, someone (probably Guido) said &lt;em&gt;let there be &lt;code&gt;self&lt;/code&gt;&lt;/em&gt;. And there was.
 The first parameter to a method is since then, &lt;em&gt;by convention&lt;/em&gt;, called &lt;code&gt;self&lt;/code&gt;, and
 refers to the object on which the method was called.
@@ -7335,7 +7372,7 @@ read-only attribute that can be accessed like any data attribute (i.e with
 at how to expand the property to also allow us to write to &lt;code&gt;count&lt;/code&gt; like it's a
 normal data attribute (i.e. with &lt;code&gt;t.count = 42&lt;/code&gt;), while also doing input
 validation.&lt;/p&gt;
-&lt;h3&gt;A property as a Pythonic setter&lt;/h3&gt;
+&lt;h3 id="a-property-as-a-pythonic-setter"&gt;A property as a Pythonic setter&lt;/h3&gt;
 &lt;p&gt;Using the &lt;code&gt;Ticker&lt;/code&gt; class version from the final listing in 
 &lt;a href="https://slar.se/properties-as-pythonic-getters.html"&gt;Part 1&lt;/a&gt;, we are unable to set the &lt;code&gt;count&lt;/code&gt;
 attribute to &lt;em&gt;any&lt;/em&gt; value.&lt;/p&gt;
@@ -7401,7 +7438,7 @@ and usage now looks like this:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Seems to work just the way we want it to!&lt;/p&gt;
-&lt;h3&gt;Ticker full listing (with getter/setter property)&lt;/h3&gt;
+&lt;h3 id="ticker-full-listing-with-gettersetter-property"&gt;Ticker full listing (with getter/setter property)&lt;/h3&gt;
 &lt;p&gt;Here is the full listing of the &lt;code&gt;Ticker&lt;/code&gt; class.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Ticker&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;A Ticker ticks from 0 to an upper limit, and then starts over.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
@@ -7439,7 +7476,7 @@ abstraction and access the attributes directly. Sometimes, however, getters
 and setters are useful for providing write-protection and input validation.
 In this two-part series, we are going to explore how to make Pythonic setters
 and getters using one of my favorite Python features: &lt;strong&gt;properties&lt;/strong&gt;. &lt;/p&gt;
-&lt;h3&gt;Part 1 (this part): Properties as Pythonic getters&lt;/h3&gt;
+&lt;h3 id="part-1-this-part-properties-as-pythonic-getters"&gt;Part 1 (this part): Properties as Pythonic getters&lt;/h3&gt;
 &lt;p&gt;In this first part, we take a look at how to use a property
 to implement a read-only data attribute that can be accessed just like any other
 data attribute (e.g. like &lt;code&gt;obj.attr&lt;/code&gt;). Writing to it will, however, result in an
@@ -7448,12 +7485,12 @@ from accidentally changing the internal state of an object in an unintended
 way, while still providing a uniform API. For example, we might want a 
 way to access the root element of a binary tree, but without risking to alter 
 its container.&lt;/p&gt;
-&lt;h3&gt;&lt;a href="https://slar.se/properties-as-pythonic-setters.html"&gt;Part 2: Properties as Pythonic setters&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="part-2-properties-as-pythonic-setters"&gt;&lt;a href="https://slar.se/properties-as-pythonic-setters.html"&gt;Part 2: Properties as Pythonic setters&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;In the second part, we'll have a look at how we can use properties to also
 implement a setter method, with input validation, that can be utulized just 
 like any plain ol' data attribute (e.g. like &lt;code&gt;obj.attr = 42&lt;/code&gt;). This is useful
 when the attribute has some legal set of values.&lt;/p&gt;
-&lt;h2&gt;The Ticker class&lt;/h2&gt;
+&lt;h2 id="the-ticker-class"&gt;The Ticker class&lt;/h2&gt;
 &lt;p&gt;For the purpose of learning properties, we will develop a fairly useless class
 called &lt;code&gt;Ticker&lt;/code&gt;. All it does is tick from &lt;code&gt;0&lt;/code&gt; to some boundary, and then restart
 from &lt;code&gt;0&lt;/code&gt;. Two &lt;code&gt;Ticker&lt;/code&gt; instances could, for example, represent a rudimentary
@@ -7506,11 +7543,11 @@ in for a nasty surprise, meaning that there is a serious usability issue here.&l
 &lt;p&gt;How do we protect the &lt;code&gt;count&lt;/code&gt; variable from being put in an illegal state,
 while still allowing access to it?&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Solving the problem&lt;/h2&gt;
+&lt;h2 id="solving-the-problem"&gt;Solving the problem&lt;/h2&gt;
 &lt;p&gt;First of all, we should make the &lt;code&gt;count&lt;/code&gt; variable private (which in Python
 equates to prepending an underscore). The issue that remains to be resolved is
 how to expose &lt;code&gt;_count&lt;/code&gt; in the public API of the class.&lt;/p&gt;
-&lt;h3&gt;Solution 1: A Java-style getter&lt;/h3&gt;
+&lt;h3 id="solution-1-a-java-style-getter"&gt;Solution 1: A Java-style getter&lt;/h3&gt;
 &lt;p&gt;A Java or C++ programmer might instinctevly think of a traditional getter method.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 &lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Return the current count.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
@@ -7523,7 +7560,7 @@ is. It would be much preferable if we could access &lt;code&gt;_count&lt;/code&g
 accessed it before it was made private (i.e. with &lt;code&gt;t.count&lt;/code&gt;), but at the same 
 time provide write protection (such that &lt;code&gt;t.count = 42&lt;/code&gt; raises an error).
 Enter the &lt;em&gt;property&lt;/em&gt;.&lt;/p&gt;
-&lt;h3&gt;Solution 2: Using a property as a read-only data attribute&lt;/h3&gt;
+&lt;h3 id="solution-2-using-a-property-as-a-read-only-data-attribute"&gt;Solution 2: Using a property as a read-only data attribute&lt;/h3&gt;
 &lt;p&gt;Implementing the same functionality as &lt;code&gt;get_count()&lt;/code&gt; with a property is dead 
 simple.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@property&lt;/span&gt;
@@ -7558,7 +7595,7 @@ Usage now looks like below:&lt;/p&gt;
 but without the risk of accidental overwriting. This is precisely what we wanted,
 and a Pythonic way of dealing with the issue of providing read access to fragile
 state variables.&lt;/p&gt;
-&lt;h3&gt;Ticker full listing&lt;/h3&gt;
+&lt;h3 id="ticker-full-listing"&gt;Ticker full listing&lt;/h3&gt;
 &lt;p&gt;It always annoys me when I get to the conclusion of some tutorial, and the end
 result is just assumed to be obvious. Therefore, here is the full listing of
 &lt;code&gt;Ticker&lt;/code&gt; with a property as a getter.&lt;/p&gt;

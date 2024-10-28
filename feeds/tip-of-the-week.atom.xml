@@ -11,7 +11,7 @@ few different solutions to a single prodlem. If you've ever found yourself
 frantically switching branches, stashing changes to be able to switch branches,
 and even creating copies of the repository you're working in, then this article
 is for you.&lt;/p&gt;
-&lt;h3&gt;An example repo&lt;/h3&gt;
+&lt;h3 id="an-example-repo"&gt;An example repo&lt;/h3&gt;
 &lt;p&gt;Let's first create an example repo. Here's a little terminal session where I
 create a repository, add a README to it on the master branch, add another line
 to the readme on a branch called other, and finally checking out to master.&lt;/p&gt;
@@ -36,7 +36,7 @@ Switched&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&g
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;It's not super important how you do it, just make sure to have two branches.&lt;/p&gt;
-&lt;h3&gt;Adding a new worktree&lt;/h3&gt;
+&lt;h3 id="adding-a-new-worktree"&gt;Adding a new worktree&lt;/h3&gt;
 &lt;p&gt;First of all: what is a &lt;em&gt;worktree&lt;/em&gt;? Usually, you only have &lt;em&gt;the&lt;/em&gt; worktree, which
 is the part of a repository where you actually do your work (edit files etc).
 Running &lt;code&gt;git worktree list&lt;/code&gt; on most repos will show the location of this single
@@ -80,7 +80,7 @@ new worktree like it's an entirely separate repository, with the caveat that you
 can't check out to a branch that is checked out in some other worktree. That
 includes checking out to other commits or branches, and even creating entirely
 new branches.&lt;/p&gt;
-&lt;h3&gt;Moving a worktree&lt;/h3&gt;
+&lt;h3 id="moving-a-worktree"&gt;Moving a worktree&lt;/h3&gt;
 &lt;p&gt;If for some reason you need to move a worktree, you should use &lt;code&gt;git worktree
 move&lt;/code&gt; to make sure that all of the references are correctly changed. It's very
 simple, just type &lt;code&gt;git worktree move &amp;lt;src&amp;gt; &amp;lt;dst&amp;gt;&lt;/code&gt;. For example, if I want to
@@ -93,7 +93,7 @@ move &lt;code&gt;../repo-other&lt;/code&gt; to &lt;code&gt;../repo-work&lt;/code
 
 &lt;p&gt;That's all there is to moving worktrees. Not very exciting, and I can't recall
 ever actually doing it, but I can see how it could be useful.&lt;/p&gt;
-&lt;h3&gt;Removing a worktree&lt;/h3&gt;
+&lt;h3 id="removing-a-worktree"&gt;Removing a worktree&lt;/h3&gt;
 &lt;p&gt;To remove a worktree, run &lt;code&gt;git worktree remove &amp;lt;path&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;worktree&lt;span class="w"&gt; &lt;/span&gt;remove&lt;span class="w"&gt; &lt;/span&gt;../repo-work/
 &lt;span class="o"&gt;(&lt;/span&gt;master&lt;span class="o"&gt;)[&lt;/span&gt;repo&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;git&lt;span class="w"&gt; &lt;/span&gt;worktree&lt;span class="w"&gt; &lt;/span&gt;list
@@ -103,11 +103,11 @@ ever actually doing it, but I can see how it could be useful.&lt;/p&gt;
 &lt;p&gt;You can also just remove the directory with the worktree and the reference to it
 will be removed automatically (but not necessarily immediately). Run &lt;code&gt;git
 worktree prune&lt;/code&gt; to trigger this removal process.&lt;/p&gt;
-&lt;h3&gt;The other worktree commands&lt;/h3&gt;
+&lt;h3 id="the-other-worktree-commands"&gt;The other worktree commands&lt;/h3&gt;
 &lt;p&gt;There are a few more &lt;code&gt;git worktree&lt;/code&gt; commands that I've never felt the need to
 use. Have a look at them
 &lt;a href="https://git-scm.com/docs/git-worktree"&gt;in the git-worktree documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;h3 id="summary"&gt;Summary&lt;/h3&gt;
 &lt;p&gt;In this short article I showcased &lt;code&gt;git worktree&lt;/code&gt;. It's super useful to work in
 parallel on different versions of the same project, without having to create
 copies of the repository and thereby having to deal with synchronizing multiple
@@ -118,12 +118,12 @@ on it more in its man-page (either with &lt;code&gt;man git-worktree&lt;/code&gt
 &lt;a href="https://slar.se/io-redirection-in-bash.html"&gt;I/O redirection in bash&lt;/a&gt;). Well, there's actually
 a lot more to it, so for this TOTW I thought I'd touch on a few more advanced
 usages.&lt;/p&gt;
-&lt;h2&gt;Redirecting stderr&lt;/h2&gt;
+&lt;h2 id="redirecting-stderr"&gt;Redirecting stderr&lt;/h2&gt;
 &lt;p&gt;Sometimes, you may find that part …&lt;/p&gt;</summary><content type="html">&lt;p&gt;A couple of weeks ago I covered some basic I/O redirection in bash (see
 &lt;a href="https://slar.se/io-redirection-in-bash.html"&gt;I/O redirection in bash&lt;/a&gt;). Well, there's actually
 a lot more to it, so for this TOTW I thought I'd touch on a few more advanced
 usages.&lt;/p&gt;
-&lt;h2&gt;Redirecting stderr&lt;/h2&gt;
+&lt;h2 id="redirecting-stderr"&gt;Redirecting stderr&lt;/h2&gt;
 &lt;p&gt;Sometimes, you may find that part or all of the output of a command isn't
 properly redirected. As a quick example, navigate to any directory that is &lt;em&gt;not&lt;/em&gt;
 a Git repository, and run &lt;code&gt;git status&lt;/code&gt;. You should see something like this:&lt;/p&gt;
@@ -155,7 +155,7 @@ fatal:&lt;span class="w"&gt; &lt;/span&gt;not&lt;span class="w"&gt; &lt;/span&gt
 default to 1. In some cases, you may want to redirect both stderr and stdout to
 the same file. But many programs output both on stderr and stdout, and we may
 want to redirect both of them.&lt;/p&gt;
-&lt;h2&gt;Redirecting stderr and stdout&lt;/h2&gt;
+&lt;h2 id="redirecting-stderr-and-stdout"&gt;Redirecting stderr and stdout&lt;/h2&gt;
 &lt;p&gt;So, we can specify a file descriptor to redirect stdout or stderr (or any other
 file descriptor, really), but many programs output on both stderr and stdout,
 and it's often useful to redirect both. Here's a small Python script &lt;code&gt;print.py&lt;/code&gt;
@@ -253,7 +253,7 @@ trying this stuff out, first create a new directory and do everything in
 there, so you don't litter your filesystem with strange files, or
 accidentally overwrite something important.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Redirecting output&lt;/h2&gt;
+&lt;h2 id="redirecting-output"&gt;Redirecting output&lt;/h2&gt;
 &lt;p&gt;To set the stage, I'll be working in a directory with the following contents:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;ls
 file1.txt&lt;span class="w"&gt;  &lt;/span&gt;file2.txt&lt;span class="w"&gt;  &lt;/span&gt;image1.png&lt;span class="w"&gt; &lt;/span&gt;file2.txt
@@ -263,7 +263,7 @@ file1.txt&lt;span class="w"&gt;  &lt;/span&gt;file2.txt&lt;span class="w"&gt;  &
 output of some command in a file. There are two primary ways of redirecting
 output: &lt;em&gt;appending&lt;/em&gt; and &lt;em&gt;truncating&lt;/em&gt;. Appending is the one I use the most,
 so let's start with that one.&lt;/p&gt;
-&lt;h3&gt;Appending output redirection&lt;/h3&gt;
+&lt;h3 id="appending-output-redirection"&gt;Appending output redirection&lt;/h3&gt;
 &lt;p&gt;With &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;, we can make an appending redirect.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;ls&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;ls_output.txt&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# output from ls saved to output.txt&lt;/span&gt;
 &lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;cat&lt;span class="w"&gt; &lt;/span&gt;ls_output.txt&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;# let&amp;#39;s have a look... &lt;/span&gt;
@@ -311,7 +311,7 @@ output to the terminal, and when redirected to a file. &lt;code&gt;ls&lt;/code&g
 the stdout file descriptor points to a terminal, or something else, and
 formats the output accordingly. The details are somewhat out of scope.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;Truncating output redirection&lt;/h3&gt;
+&lt;h3 id="truncating-output-redirection"&gt;Truncating output redirection&lt;/h3&gt;
 &lt;p&gt;Let's assume that we start over from the initial state of the directory, before
 &lt;code&gt;ls_output.txt&lt;/code&gt; existed. We can then make a truncating redirect with &lt;code&gt;&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;[&lt;/span&gt;tmp&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="w"&gt; &lt;/span&gt;rm&lt;span class="w"&gt; &lt;/span&gt;ls_output.txt&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;# restore initial directory state&lt;/span&gt;
@@ -373,7 +373,7 @@ them (although I'm …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For this
 to figure out why it was useful. That something is bash aliases, and I'll now
 walk you through how to create aliases, and the two main ways in which I use
 them (although I'm sure there are more use cases).&lt;/p&gt;
-&lt;h1&gt;Using aliases&lt;/h1&gt;
+&lt;h1 id="using-aliases"&gt;Using aliases&lt;/h1&gt;
 &lt;p&gt;I think the &lt;code&gt;bash&lt;/code&gt; manpage has a very good and concise description of what an
 alias is:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -398,7 +398,7 @@ text substitution: precisely what you put in the alias definition will be put on
 the command line when you invoke it. You can view all of your current aliases
 by running &lt;code&gt;alias&lt;/code&gt; without any options. Now, let's have a look at some common
 use cases!&lt;/p&gt;
-&lt;h2&gt;Specifying "default" options for commands&lt;/h2&gt;
+&lt;h2 id="specifying-default-options-for-commands"&gt;Specifying "default" options for commands&lt;/h2&gt;
 &lt;p&gt;This is probably the most common use case for aliases, and it's likely that you
 already have some in play. A common one is to have &lt;code&gt;ls&lt;/code&gt; aliased to &lt;code&gt;ls
 --color=auto&lt;/code&gt;. That is to say, the following alias is defined:&lt;/p&gt;
@@ -428,7 +428,7 @@ without &lt;code&gt;--color=auto&lt;/code&gt;). Note that just defining an alias
 will not persist: it needs to be defined anew for each session. To have it
 permanently defined, put the definition in a startup script (e.g. &lt;code&gt;.bashrc&lt;/code&gt; or
 &lt;code&gt;.bash_profile&lt;/code&gt;).&lt;/p&gt;
-&lt;h2&gt;Creating throwaway commands&lt;/h2&gt;
+&lt;h2 id="creating-throwaway-commands"&gt;Creating throwaway commands&lt;/h2&gt;
 &lt;p&gt;Now, the aliases I described above are useful to have defined permanently, and
 should be defined in a startup script. The second use case I have for aliases is
 when I have a repetitive command that I need to type over and over in the same
@@ -465,7 +465,7 @@ management etc. GitHub is also not the only service around,
 &lt;a href="https://gitlab.com"&gt;GitLab&lt;/a&gt; and &lt;a href="https://bitbucket.com"&gt;BitBucket&lt;/a&gt; are two
 other prominent services which host Git repositories.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;Using Git locally&lt;/h3&gt;
+&lt;h3 id="using-git-locally"&gt;Using Git locally&lt;/h3&gt;
 &lt;p&gt;How do you use Git locally, then? It's simple. Just create a directory and run
 &lt;code&gt;git init&lt;/code&gt; to initialize it as a Git repository. Here's an example command line
 session of what it looks like.&lt;/p&gt;
@@ -483,7 +483,7 @@ Initialized&lt;span class="w"&gt; &lt;/span&gt;empty&lt;span class="w"&gt; &lt;/
 putting up in a remote repository. This is useful for when you accidentally
 remove stuff, or just need to try out a bunch of different ideas that you can
 swap back and forth between by simply switching branches.&lt;/p&gt;
-&lt;h3&gt;Changing your mind (also called adding a remote)&lt;/h3&gt;
+&lt;h3 id="changing-your-mind-also-called-adding-a-remote"&gt;Changing your mind (also called adding a remote)&lt;/h3&gt;
 &lt;p&gt;If you suddenly feel like that local repo should be put up on a hosting service
 after all, maybe just to back it up, or maybe to collaborate with someone else,
 it's very simple to do so. First, create an empty repository (as in completely
@@ -515,7 +515,7 @@ TOTW on &lt;a href="https://slar.se/reverse-search-in-bash.html"&gt;Reverse sear
 reverse searching just doesn't work out. You may not be quite sure what you
 are looking for, or there are just too many recent commands that look samey.
 In such cases, using the &lt;code&gt;history&lt;/code&gt; command is a good alternative. &lt;/p&gt;
-&lt;h3&gt;&lt;code&gt;history&lt;/code&gt;&lt;/h3&gt;
+&lt;h3 id="history"&gt;&lt;code&gt;history&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;history&lt;/code&gt; command will display the last commands that you have entered, and
 looks something like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;history&lt;/span&gt;
@@ -534,7 +534,7 @@ even for the weakest of computers. You can also limit the output of &lt;code&gt;
 by providing an integer argument, so e.g. &lt;code&gt;history 5&lt;/code&gt; will display the last 5
 commands. Now, the real power of &lt;code&gt;history&lt;/code&gt; becomes apparent when using it
 with &lt;em&gt;history expansion&lt;/em&gt;.&lt;/p&gt;
-&lt;h3&gt;History expansion&lt;/h3&gt;
+&lt;h3 id="history-expansion"&gt;History expansion&lt;/h3&gt;
 &lt;p&gt;History expansion can be used to expand an event number into the whole command
 it corresponds to. To expand an event, one simply types &lt;code&gt;!&amp;lt;event_nr&amp;gt;&lt;/code&gt;. For
 example, looking at the &lt;code&gt;history&lt;/code&gt; output above I can see that event number 1010
@@ -574,7 +574,7 @@ very useful if you need to do minor modifications to it. There are tons of
 more ways to use history expansion, and I strongly recommend reading the man-page
 on it. Type &lt;code&gt;man bash&lt;/code&gt; and then search for &lt;code&gt;HISTORY EXPANSION&lt;/code&gt;, or do the same
 in &lt;a href="https://linux.die.net/man/1/bash"&gt;this online bash man page&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Filtering history&lt;/h3&gt;
+&lt;h3 id="filtering-history"&gt;Filtering history&lt;/h3&gt;
 &lt;p&gt;A final tip on using history expansion is to filter the output with &lt;code&gt;grep&lt;/code&gt;. For
 example, if I only want to find commands that include the word &lt;code&gt;git&lt;/code&gt;, I can
 filter the output of &lt;code&gt;history&lt;/code&gt; by &lt;em&gt;piping&lt;/em&gt; to &lt;code&gt;grep&lt;/code&gt; with the &lt;code&gt;|&lt;/code&gt; character.&lt;/p&gt;

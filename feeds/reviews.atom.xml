@@ -21,7 +21,7 @@ Publisher(s): Pearson Education (US)
 ISBN: 9780137929238
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;The book covers 175 myths and misconceptions in cybersecurity. These are divided
 into 16 chapters covering different topics ranging from faulty assumptions
 (e.g. "I am too small to be a target"&lt;sup id="sf-book-review-cybersecurity-myths-and-misconceptions-1-back"&gt;&lt;a href="#sf-book-review-cybersecurity-myths-and-misconceptions-1" class="simple-footnote" title="You are not. A lot of cyber mischief isn't even targeted, but rather automated processes scanning vast amounts of the Internet to find servers with known vulnerabilities."&gt;1&lt;/a&gt;&lt;/sup&gt;) to misconceptions
@@ -46,7 +46,7 @@ There are some things that may fly over your head if you're not a software
 engineer, such as talk about the OSI network model and interprocess
 communication, but such technical dives are so infrequent that they barely need
 mention.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;This book is a leisure read. It does not require you to sit at a computer and
 apply concepts to benefit from it, all you need to do is read the book and
 ponder its implications. At the same time, it will surely grant you insights
@@ -97,7 +97,7 @@ study more software engineering.&lt;/p&gt;
 educating your peers to the best of your abilities, a base level of
 understanding is to be expected from your peers. And that understanding is, at
 least in part, their responsibility to attain.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;There's a large amount of footnotes throughout the book, a lot of which contain
 useful and interesting snippets of information as well as sources for
 statements. These, I do not mind at all. But, unfortunately, there is a bit of
@@ -108,7 +108,7 @@ times simply too many of them.&lt;/p&gt;
 of footnotes would only have made the book more enjoyable to read. But when you
 interrupt your reading flow to read a footnote only to be greeted by your third
 witty remark in a row, it does get a bit annoying.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This book widened my view of software engineering and cybersecurity. While most
 of the topics were familiar to me from my education and professional experience,
 some were forgotten, some brand new, and many were simply framed in a way I had
@@ -145,7 +145,7 @@ book on interpreters. In Go.&lt;/p&gt;
 &lt;p&gt;You can buy the book directly from Thorsten Ball's website at
 &lt;a href="https://interpreterbook.com/"&gt;https://interpreterbook.com/&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;Writing an Interpreter in Go&lt;/em&gt; is precisely what it sounds like; a practical
 guide to writing a fully functioning interpreter in Go. You go from source
 code, to tokens, to abstract syntax tree and tree evaluation. The parser
@@ -156,7 +156,7 @@ simplicity allows Ball to cram a whole lot of functionality into a very concise
 200 pages worth of book. The result is impressive, and I am somewhat astonished
 by just how much content is actually in here, and how well written said content
 is.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;There is so much to like about this book. First of all, it is wonderfully
 standalone. I wrote around 3500 lines of code based entirely on descriptions
 and code samples from the book's 200 printed pages. Although the source code
@@ -202,7 +202,7 @@ chapter for each feature. Adding one feature at a time in this way really aids
 in understanding the workings of each part of the interpreter. And that, in
 fact, is a perfect segue to the one part of this book that I did not entirely
 like.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;I actually started this book around five years ago, but never finished it. In
 fact, I got just barely halfway due to what I perceive as the one flaw of this
 otherwise fantastic piece of literature: it has a rather slow start. It's not
@@ -214,7 +214,7 @@ the amount of groundwork to put down before getting to the exciting parts is a
 tough one to make, I think the book would have been better off closing the path
 from source code to evaluation earlier. For instance, I don't see any need to
 parse function definitions before evaluating arithmetic expressions.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This is a great book. It's clear, concise and packed full of learnings. Due to
 the way the last quarter of the book is laid out, adding feature upon feature
 from start to finish, I was able to quite effortlessly add features completely
@@ -246,7 +246,7 @@ ISBN: 9781775093344
 between Python and
 CPython&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;CPython Internals&lt;/em&gt; gives you a guided tour of the CPython project, from
 parsing source code to compiling bytecode to interpreting said bytecode. The
 book is meant to serve as a starting point for budding CPython contributors or
@@ -266,7 +266,7 @@ Python&lt;/a&gt;. It is something of
 an appetizer for the book, but stands strong on its own. Having a brief look at
 that article will give you a better understanding of what the book is about
 than anything I could write here.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;I went from surface-level understanding of the CPython project to being pretty
 confident about where to poke around to do what just from reading this book.
 It's comprehensive in scope and the worked example of the &lt;code&gt;~=&lt;/code&gt; operator helps &lt;em&gt;a
@@ -288,7 +288,7 @@ The book is to a great extent a standalone resource and it should be very
 approachable even to developers without much experience. There's even an
 appendix at the end to explain what little you need to know about the C
 programming language to be able to understand the code samples.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;There was nothing about the book that I thought was &lt;em&gt;bad&lt;/em&gt;, but for me
 personally, I would have preferred less explanation of fundamental concepts
 (such as threading), and more in-depth details on CPython itself. That being
@@ -300,7 +300,7 @@ slightly outside the target audience of the book. It's clearly meant to contain
 everything you'd need to know to go from zero to hero, and it's a lot easier to
 skip over content you feel is redundant than it is to find content you didn't
 know you needed.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;CPython Internals saved my neck. I had three weeks to go from a shallow
 understanding of the CPython project to being able to explain it to others in a
 ~30-minute talk, and &lt;a href="https://github.com/slarse/talks/tree/80503786d4587abdadba9913c55c7d133269f3a2/under-the-hood-of-cpython"&gt;I made
@@ -333,7 +333,7 @@ Publisher(s): No Starch Press
 ISBN: 9781593278281
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;The Rust Programming Language&lt;/em&gt; is really a book where the title perfectly
 captures what the book is about. It teaches Rust mostly by practical examples,
 and for the most part the examples are self-contained and executable. For some
@@ -346,7 +346,7 @@ looping works. I would rate this a great book for someone who is already
 somewhat familiar with programming concepts, but it's not the best resource for
 getting started with programming as a whole. It's the perfect "second language
 book".&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;This book is incredibly well written and organized. Concepts to be learned are
 first presented on a high level, and then the authors drill into the details.
 But not too far into the details; at several points we are referred to other
@@ -382,7 +382,7 @@ level &lt;em&gt;how&lt;/em&gt; before getting to the high level &lt;em&gt;what&l
 &lt;p&gt;The book ends with a project on building a multithreaded web server, which is
 meant to solidify many of the concepts taught throughout the book. It's a great
 way to close out a great book.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;This is my first book review where I can't come up with something that I overtly
 did not like about a book. There are things the book lacks, such as more
 beginner-friendly introductions to core programming concepts, but I feel that's
@@ -390,7 +390,7 @@ by design rather than thoughtless omission. The book would simply be way too
 long if it had to include such things as well.&lt;/p&gt;
 &lt;p&gt;Perhaps I will find something to be annoyed with as I revisit this in the
 future, but as it stands I am completely pleased with my reading experience.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This is a great book to learn the Rust programming language. It's not
 appropriate for absolute beginners, but I think that may be simply a consequence
 of Rust being designed to tackle rather advanced problems. I would not
@@ -421,7 +421,7 @@ novice will undoubtedly get more out of reading it.&lt;/p&gt;
 &lt;span class="n"&gt;ISBN&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;9780596809485&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;As I mentioned in the introduction, &lt;em&gt;97 Things Every Programmer Should Know&lt;/em&gt; is
 a collection of very short essays by practicing professionals. The essays treat
 a wide variety of themes that are relevant to a practicing software engineer,
@@ -436,7 +436,7 @@ systems and more.&lt;/p&gt;
 &lt;p&gt;There really isn't much more to say regarding what the book is about. It's like
 a collection of very well-written blog posts on programming-related topics. So
 if you're reading this blog, chances are good you're going to enjoy this book.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;In some ways, &lt;em&gt;97 Things&lt;/em&gt; has a lot in common with &lt;a href="https://slar.se/book-review-apprenticeship-patterns.html"&gt;Apprenticeship
 Patterns&lt;/a&gt; that I reviewed last week.
 They're both about how you improve as a software engineer. The difference is
@@ -458,7 +458,7 @@ large degree, opinions. A notable example I recall is about automatic code
 formatting, where one essay discourages its use and a few others encourage it.
 I think this is a great benefit of having so many different authors. You don't
 just get one person's opinion.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;As with many other books on how to be a good software engineer, there is a slight
 tint of workaholism over some of the essays. I especially found an essay by
 Robert C. Martin on what it means to be a professional programmer to send this
@@ -475,7 +475,7 @@ suffered through it trying to find the aforementioned essay by Robert C. Martin.
 &lt;p&gt;But as a package, I find little to dislike about the book. Even the workaholism
 part is effectively counteracted by an entire essay dedicated to sending the
 message "work smarter not harder".&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This is another book that I wish I'd read years ago. I strongly recommend it as
 a read for &lt;em&gt;any&lt;/em&gt; software engineer at the beginning of their career or student
 (self-taught or at a seat of learning) who is preparing for their career. Being
@@ -497,7 +497,7 @@ we should not embark on &lt;em&gt;The Long Road&lt;/em&gt;. So how can a book he
 &lt;span class="err"&gt;ISBN: 9780596518387&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1&gt;The book in a nutshell&lt;/h1&gt;
+&lt;h1 id="the-book-in-a-nutshell"&gt;The book in a nutshell&lt;/h1&gt;
 &lt;p&gt;The core tenet of the book is that software engineering is a &lt;em&gt;craft&lt;/em&gt;. A craft in
 the same sense that blacksmithing is, or carpentry, or the construction of
 musical instruments. The authors provide a concise reasoning for why this is so.&lt;/p&gt;
@@ -551,7 +551,7 @@ direct application of that pattern.&lt;/p&gt;
 do these few ones justice with just this brief explanation of them. You really
 need to read the book with each context, problem, solution and action for the
 respective patterns to get the full picture.&lt;/p&gt;
-&lt;h1&gt;What I liked&lt;/h1&gt;
+&lt;h1 id="what-i-liked"&gt;What I liked&lt;/h1&gt;
 &lt;p&gt;This book is a very easy read. I like to have at least one &lt;em&gt;soft&lt;/em&gt; book to read
 when my mind wanders too much for me to take in a technical book, and
 &lt;em&gt;Apprenticeship Patterns&lt;/em&gt; perfectly fits that bill. It took me a couple of weeks
@@ -577,7 +577,7 @@ is called &lt;em&gt;Apprenticeship Patterns&lt;/em&gt;, after all. I wish I woul
 years ago, and I wish I was already practicing many of the patterns. But better
 late than never, and as I will discuss in the next section there is a reason for
 me to be somewhat thankful for not reading it earlier.&lt;/p&gt;
-&lt;h1&gt;What I didn't like&lt;/h1&gt;
+&lt;h1 id="what-i-didnt-like"&gt;What I didn't like&lt;/h1&gt;
 &lt;p&gt;While I think this is a good handbook for mastering a craft, I also think the
 approach is potentially unhealthy if applied without moderation. I have
 personally struggled a lot with finding a balance between improving my skills as
@@ -587,7 +587,7 @@ much so that it prompted be to spend two hours of my Saturday morning writing
 this book review. To be completely honest, I am still tweaking the
 aforementioned balance. I would not say that I am struggling anymore, but I
 cannot deny that it is still a work in progress.&lt;/p&gt;
-&lt;h1&gt;Conclusions&lt;/h1&gt;
+&lt;h1 id="conclusions"&gt;Conclusions&lt;/h1&gt;
 &lt;p&gt;This book struck home with me, and I wholeheartedly recommend it. But that is a
 recommendation with a caveat, as I don't think this is a book for everyone.
 It's really all in the title, this book is for the aspiring software

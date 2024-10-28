@@ -12,7 +12,7 @@ my open source repositories will be slow. Sometimes I may not respond at all.
 Open source development is not one of my current focus points; my free time is
 spent elsewhere.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Open source development got me to where I am&lt;/h1&gt;
+&lt;h1 id="open-source-development-got-me-to-where-i-am"&gt;Open source development got me to where I am&lt;/h1&gt;
 &lt;p&gt;From creating &lt;a href="https://repobee.org"&gt;RepoBee&lt;/a&gt; to maintaining
 &lt;a href="https://github.com/inria/spoon"&gt;Spoon&lt;/a&gt;, I've spent thousands upon
 thousands of hours of my free time contributing to projects and putting them out
@@ -24,7 +24,7 @@ job&lt;sup id="sf-taking-a-step-back-from-open-source-development-1-back"&gt;&lt
 convinced that I would not be nearly as skilled a software engineer as I am
 today had I not had these experiences. Given the choice, I would take the exact
 same path all over again.&lt;/p&gt;
-&lt;h1&gt;But things have changed&lt;/h1&gt;
+&lt;h1 id="but-things-have-changed"&gt;But things have changed&lt;/h1&gt;
 &lt;p&gt;I loved open source development as a university student because it gave me the
 opportunity to collaborate with other developers on &lt;em&gt;real&lt;/em&gt; and &lt;em&gt;long-term&lt;/em&gt;
 projects, honing skills that were not being honed in the predominantly
@@ -46,7 +46,7 @@ bit of that&lt;/a&gt;. While this
 may still translate to the odd &lt;a href="https://github.com/slarse/rut"&gt;open source repository with some half-finished
 project&lt;/a&gt;, it does not mesh well with long-term
 maintenance of established projects.&lt;/p&gt;
-&lt;h1&gt;So what's up now?&lt;/h1&gt;
+&lt;h1 id="so-whats-up-now"&gt;So what's up now?&lt;/h1&gt;
 &lt;p&gt;This disconnect between my own needs and open source development has been
 weighing on me for years. I've felt guilty for neglecting the projects I
 maintain, but at the same time haven't been able to do anything about it.
@@ -71,7 +71,7 @@ look …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you've &lt;em&gt;ev
 different. I finally took the time to make a dark theme! Only 5 or so years late
 to the party. But late or not, I have a new theme to show off, so let's have a
 look!&lt;/p&gt;
-&lt;h1&gt;Before and after&lt;/h1&gt;
+&lt;h1 id="before-and-after"&gt;Before and after&lt;/h1&gt;
 &lt;p&gt;I only put a couple of hours into trying out different colors and contrasts, so
 this is still a bit of a work in progress. But I can't say I'm not pleased.
 Let's have a look at what it used to look like.&lt;/p&gt;
@@ -84,7 +84,7 @@ as above with the new theme.&lt;/p&gt;
 &lt;p&gt;Much better! There are still a few rough edges, and I keep finding details where
 the old theme isn't being overridden correctly (because this is all just &lt;em&gt;on top
 of&lt;/em&gt; Bootstrap), but it's all mostly there.&lt;/p&gt;
-&lt;h1&gt;Parts of the puzzle&lt;/h1&gt;
+&lt;h1 id="parts-of-the-puzzle"&gt;Parts of the puzzle&lt;/h1&gt;
 &lt;p&gt;There are really only two parts to this. I'm still using the same
 &lt;a href="https://github.com/robulouski/voidy-bootstrap"&gt;&lt;code&gt;voidy-bootstrap&lt;/code&gt; theme&lt;/a&gt; as
 before, but I rewrote some of the CSS with the somewhat Halloween-looking
@@ -94,18 +94,18 @@ is just around the corner!&lt;/p&gt;
 &lt;a href="https://draculatheme.com/pygments"&gt;&lt;code&gt;dracula&lt;/code&gt; theme for Pygments&lt;/a&gt;
 which gives the neat colorization of code snippets. That I find to be the single
 largest improvement.&lt;/p&gt;
-&lt;h1&gt;Enjoy!&lt;/h1&gt;
+&lt;h1 id="enjoy"&gt;Enjoy!&lt;/h1&gt;
 &lt;p&gt;That's all there is to it, enjoy the new theme!&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category></entry><entry><title>Fix 3D graphics in Arch Linux on Dell XPS 15 9520</title><link href="https://slar.se/xps-15-9520-arch-linux-intel-dri2.html" rel="alternate"></link><published>2022-12-26T00:00:00+01:00</published><updated>2022-12-26T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-12-26:/xps-15-9520-arch-linux-intel-dri2.html</id><summary type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
 highly Linux-compatible and just following the &lt;a href="https://wiki.archlinux.org/title/Installation_guide"&gt;official installation
 guide&lt;/a&gt; got me 90% of the
 way of having a well-behaved Arch Linux laptop. One big thing wasn't working,
 though: 3D graphics!&lt;/p&gt;
-&lt;h2&gt;Symptoms: glitchy 2D graphics and …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
+&lt;h2 id="symptoms-glitchy-2d-graphics-and-unusable-3d-graphics"&gt;Symptoms: glitchy 2D graphics and …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;I recently got myself a Dell XPS 15 9520 to replace my aging laptop. It's
 highly Linux-compatible and just following the &lt;a href="https://wiki.archlinux.org/title/Installation_guide"&gt;official installation
 guide&lt;/a&gt; got me 90% of the
 way of having a well-behaved Arch Linux laptop. One big thing wasn't working,
 though: 3D graphics!&lt;/p&gt;
-&lt;h2&gt;Symptoms: glitchy 2D graphics and unusable 3D graphics&lt;/h2&gt;
+&lt;h2 id="symptoms-glitchy-2d-graphics-and-unusable-3d-graphics"&gt;Symptoms: glitchy 2D graphics and unusable 3D graphics&lt;/h2&gt;
 &lt;p&gt;2D graphics worked mostly fine after installing &lt;code&gt;xf86-video-intel&lt;/code&gt;, &lt;code&gt;nvidia&lt;/code&gt; and
 &lt;code&gt;nvidia-prime&lt;/code&gt;. Websites, most desktop applications as well as 2D games like
 Terraria worked without issue. Anything with the slightest hint of 3D would
@@ -114,7 +114,7 @@ with 3D graphics.&lt;/p&gt;
 &lt;p&gt;Some applications, such as Steam, wouldn't render properly unless in fullscreen.
 3D benchmark software like &lt;code&gt;fire&lt;/code&gt; (from &lt;code&gt;mesa-demo&lt;/code&gt;) and &lt;code&gt;glmark2&lt;/code&gt; wouldn't
 update properly with Intel and would again be black with NVIDIA.&lt;/p&gt;
-&lt;h2&gt;Solution: Using DRI2 for the Intel driver&lt;/h2&gt;
+&lt;h2 id="solution-using-dri2-for-the-intel-driver"&gt;Solution: Using DRI2 for the Intel driver&lt;/h2&gt;
 &lt;p&gt;The solution I found to this problem was to &lt;a href="https://wiki.archlinux.org/title/Intel_graphics#DRI3_issues"&gt;use
 DRI2 for the Intel
 driver&lt;/a&gt;. I have no
@@ -131,7 +131,7 @@ EndSection
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;a href="https://wiki.archlinux.org/title/Intel_graphics#Issues_with_selecting_Qt_elements_within_Plasma_Desktop_on_Alder_Lake.2FUHD_770"&gt;modesetting driver also works&lt;/a&gt;, but it interferes with PRIME offloading s.t. the NVIDIA GPU is always active. This butchers battery life and so wasn't acceptable to me.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2&gt;Need more tweaks?&lt;/h2&gt;
+&lt;h2 id="need-more-tweaks"&gt;Need more tweaks?&lt;/h2&gt;
 &lt;p&gt;This wasn't the only tweak I put in to get my XPS 15 in tip-top shape, although
 it was the most crucial one. I've got a bunch of other tweaks listed &lt;a href="https://slar.se/pages/wiki/arch-linux-on-xps-15-9520.html"&gt;over on
 my Wiki page for the XPS 15&lt;/a&gt;.&lt;/p&gt;</content><category term="Blog"></category><category term="blog"></category><category term="linux"></category><category term="xps15"></category></entry><entry><title>Why I write a blog that nobody reads (and you should, too)</title><link href="https://slar.se/why-i-write-a-blog-that-nobody-reads-and-you-should-too.html" rel="alternate"></link><published>2022-10-29T00:00:00+02:00</published><updated>2022-10-29T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2022-10-29:/why-i-write-a-blog-that-nobody-reads-and-you-should-too.html</id><summary type="html">&lt;p&gt;I don't write this blog in hopes that it will get a lot of traction. I don't
@@ -142,7 +142,7 @@ market it, I don't try to optimize it for SEO and I I don't even tell my
 friends and coworkers about it. Although I would of course be delighted to hear
 someone who found something useful in my blog, I really write it for myself.
 And what could I possibly get out of that? Glad you asked.&lt;/p&gt;
-&lt;h2&gt;Expressing thoughts and ideas is hard&lt;/h2&gt;
+&lt;h2 id="expressing-thoughts-and-ideas-is-hard"&gt;Expressing thoughts and ideas is hard&lt;/h2&gt;
 &lt;p&gt;I'm a software engineer. My job is mostly about coming up with neat solutions to
 tricky problems. Coming up with the solution in my head is however just part of
 the fight as I also need to be able to concisely express the ideas to my
@@ -153,7 +153,7 @@ still isn't working as it should or why project X got so expensive.&lt;/p&gt;
 &lt;p&gt;Writing a technical blog about helps me practice this skill. I put quite a bit
 of care into most blog posts I write and I also often look back at earlier posts
 to consider how I can improve the writing.&lt;/p&gt;
-&lt;h2&gt;Retaining knowledge is also hard&lt;/h2&gt;
+&lt;h2 id="retaining-knowledge-is-also-hard"&gt;Retaining knowledge is also hard&lt;/h2&gt;
 &lt;p&gt;Another reason for why I write this blog is to retain knowledge. Writing about
 something you've just learned is a great way to further cement that knowledge.
 As I put a large amount of care into my posts and want to be sure that I get
@@ -167,7 +167,7 @@ simply write things down without any particular care about quality. I can
 thereby help myself retain knowledge about things that I don't yet understand
 well enough to write a blog post about, or that I simply don't have the time
 to write about.&lt;/p&gt;
-&lt;h2&gt;Putting yourself out there is perhaps even harder&lt;/h2&gt;
+&lt;h2 id="putting-yourself-out-there-is-perhaps-even-harder"&gt;Putting yourself out there is perhaps even harder&lt;/h2&gt;
 &lt;p&gt;Exposing your work to the public is not something most people are comfortable
 with. It's easy to feel self-conscious about the things you create and be afraid
 of potential backlash or negative feedback. Putting up blog posts strengthens my
@@ -192,14 +192,14 @@ effort to record a tiny learning experience.&lt;/p&gt;
 Learn&lt;/em&gt; patterns from &lt;a href="https://slar.se/book-review-apprenticeship-patterns.html"&gt;Apprenticeship
 Patterns&lt;/a&gt;; two patterns
 that I value highly. Enter the Wiki!&lt;/p&gt;
-&lt;h1&gt;My public Wiki&lt;/h1&gt;
+&lt;h1 id="my-public-wiki"&gt;My public Wiki&lt;/h1&gt;
 &lt;p&gt;The &lt;a href="https://slar.se/pages/wiki.html"&gt;Wiki&lt;/a&gt; can be reached from the menu bar at the
 top of the page. Here, I jot down quick notes about what I learn, what I have
 yet to learn and anything else that I feel is worth recording. The quality of
 the writing will range from poor to worse, and it'll be haphazardly organized,
 at least initially. I hope to turn this into a wealth of knowledge both for
 myself and for others in the coming years.&lt;/p&gt;
-&lt;h2&gt;Why not use an established Wiki software?&lt;/h2&gt;
+&lt;h2 id="why-not-use-an-established-wiki-software"&gt;Why not use an established Wiki software?&lt;/h2&gt;
 &lt;p&gt;Although there are several open source Wikis out there, such as
 &lt;a href="https://xwiki.org"&gt;XWiki&lt;/a&gt;, they're usually quite heavy and require a backend.
 This site is a &lt;a href="https://en.wikipedia.org/wiki/Static_web_page"&gt;static site&lt;/a&gt;,
@@ -208,12 +208,12 @@ due to the lack of a backend. I quite like those properties, and I'm currently
 adapting the templates for this site to better suit my Wiki ambitions. This
 first rendition is &lt;em&gt;rough&lt;/em&gt;, but it suits my current needs, and improving upon
 it as my Wiki grows wll be an interesting challenge.&lt;/p&gt;
-&lt;h2&gt;Searching the Wiki&lt;/h2&gt;
+&lt;h2 id="searching-the-wiki"&gt;Searching the Wiki&lt;/h2&gt;
 &lt;p&gt;The &lt;a href="https://slar.se/pages/wiki.html"&gt;Wiki&lt;/a&gt; is indexed along with the rest of the site
 and can be searched using the &lt;a href="https://slar.se/pelican-search.html"&gt;search bar&lt;/a&gt; on
 the &lt;a href="https://slar.se/index.html"&gt;home page&lt;/a&gt;. In other words, you can search for anything on
 this website through that single search bar!&lt;/p&gt;
-&lt;h2&gt;Going forward&lt;/h2&gt;
+&lt;h2 id="going-forward"&gt;Going forward&lt;/h2&gt;
 &lt;p&gt;I intend to keep improving the wiki. As the amount of content grows, I expect to
 have to improve the layout, cross-document linking and other related features.
 I'm very excited to finally get around to this as I've been thinking about it
@@ -243,7 +243,7 @@ day in and day out, I've in the past year started to devote more time to
 virtual reality (VR) gaming. In some VR games you actually get to move around,
 and I'm writing this article to fawn over my favorite experience yet: &lt;a href="https://elevenvr.com/en/"&gt;Eleven
 Table Tennis&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Table tennis is an excellent fit for VR&lt;/h3&gt;
+&lt;h3 id="table-tennis-is-an-excellent-fit-for-vr"&gt;Table tennis is an excellent fit for VR&lt;/h3&gt;
 &lt;p&gt;There are two things about table tennis that makes it very well suited to
 VR. First, the playing field is small enough that it can fit into a
 fair-sized living room. Granted, fitting a full-sized table tennis table into
@@ -259,7 +259,7 @@ hollow table tennis balls, so even though most motion controllers can't produce
 particularly strong vibrations, it's still enough. I've played both with
 a Valve Index and an Oculus Rift CV1, and both provide a perfectly serviceable
 experience.&lt;/p&gt;
-&lt;h3&gt;Eleven Table Tennis delivers on that premise&lt;/h3&gt;
+&lt;h3 id="eleven-table-tennis-delivers-on-that-premise"&gt;Eleven Table Tennis delivers on that premise&lt;/h3&gt;
 &lt;p&gt;So the actual game of table tennis is really well suited to a VR treatment.
 Eleven Table Tennis takes this premise and delivers an almost realistic physics
 engine that for the most part just &lt;em&gt;feels right&lt;/em&gt;. Granted, there are the odd
@@ -337,7 +337,7 @@ published&lt;/a&gt; and I don't
 have to do anything but wait. I have two weeks left of my one month off before I
 start working, and I found that now would be a good time to reflect a bit on my
 education.&lt;/p&gt;
-&lt;h2&gt;A CS degree does not an engineer make&lt;/h2&gt;
+&lt;h2 id="a-cs-degree-does-not-an-engineer-make"&gt;A CS degree does not an engineer make&lt;/h2&gt;
 &lt;p&gt;Early on in my education, it became abundantly clear to me that my CS degree
 would be highly theoretical, and the practical elements were mostly toy
 projects. I needed side projects, both to practice applying the theory I learned
@@ -358,7 +358,7 @@ incentive to keep going, and also gives you something to show off to future
 employers. If you can't come up with something yourself, then there are a
 borderline innumerable amount of open-source software projects out there that
 need all the help they can get. Such as RepoBee :)&lt;/p&gt;
-&lt;h2&gt;A CS degree gives you an exceptional theoretical foundation in computing&lt;/h2&gt;
+&lt;h2 id="a-cs-degree-gives-you-an-exceptional-theoretical-foundation-in-computing"&gt;A CS degree gives you an exceptional theoretical foundation in computing&lt;/h2&gt;
 &lt;p&gt;Although I think the engineering aspects were lacking in my education, the
 theoretical foundation that I now possess is nothing short of incredible. I
 never thought I could learn so much about mathematics, algorithms, operating
@@ -383,7 +383,7 @@ everyone, but the blanket statement that it isn't worth it is simply false. For
 those that enjoy learning and have a deep interest in programming, CS is the way
 to go. If you want to learn the practical skills you need to land a job as fast
 as possible, then it probably isn't.&lt;/p&gt;
-&lt;h2&gt;Teaching is learning&lt;/h2&gt;
+&lt;h2 id="teaching-is-learning"&gt;Teaching is learning&lt;/h2&gt;
 &lt;p&gt;After finishing the first year of my studies, I applied and was accepted to a
 position as a teaching assistant. I would go on to work as a TA during The
 remaining four years of my studies, year-round. I held exercises, worked labs,
@@ -407,7 +407,7 @@ career seems unlikely at this point.&lt;/p&gt;
 attribute a lot of my success to my experience as a TA, and many doors have been
 opened for me as a result of working with other academics. I can't recommend it
 enough.&lt;/p&gt;
-&lt;h2&gt;Closing thoughts&lt;/h2&gt;
+&lt;h2 id="closing-thoughts"&gt;Closing thoughts&lt;/h2&gt;
 &lt;p&gt;My education has overall been a great experience. I've met a lot of interesting
 people and done a lot of interesting things. I've taken classes, taught classes,
 written software, theses and conference papers, and despaired in the face of

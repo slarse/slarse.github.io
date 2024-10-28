@@ -136,7 +136,24 @@ applicable to relational databases in general.</p>
 <p>Note: This article is based on PostgreSQL 16, but the vast majority of the
 content should be accurate for PostgreSQL 9.6 and newer.</p>
 </blockquote>
-<h1>The incredible impact of indexes</h1>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#the-incredible-impact-of-indexes">The incredible impact of indexes</a></li>
+<li><a href="#indexing-in-theory">Indexing in theory</a><ul>
+<li><a href="#the-b-tree">The B-tree</a></li>
+<li><a href="#selecting-ranges-is-almost-as-fast-as-single-values">Selecting ranges is almost as fast as single values</a></li>
+<li><a href="#indexes-greatly-speed-up-order-by">Indexes greatly speed up ORDER BY</a></li>
+</ul>
+</li>
+<li><a href="#indexing-pitfalls">Indexing pitfalls</a><ul>
+<li><a href="#the-query-planner-can-choose-not-to-use-an-index">The query planner can choose not to use an index</a></li>
+<li><a href="#an-index-is-for-an-exact-expression">An index is for an exact expression</a></li>
+<li><a href="#indexes-optimize-reads-but-slow-down-writes">Indexes optimize reads but slow down writes</a></li>
+</ul>
+</li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+</div>
+<h1 id="the-incredible-impact-of-indexes">The incredible impact of indexes</h1>
 <p>To sell you on the fact that indexes are important, let's do a quick experiment.
 Below I define a simple data model and fill it with some sample data.</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="p">(</span>
@@ -290,7 +307,7 @@ understanding at least the principles on which it operates will still make it
 harder than it has to be to apply it in practice. So let's discuss the
 principles of indexing and work through an example of the most commonly used
 index type: the B-tree.</p>
-<h1>Indexing in theory</h1>
+<h1 id="indexing-in-theory">Indexing in theory</h1>
 <p>If you've ever read a non-fiction book, you know in principle what an index is.
 Because at the back of that book there's a section called "index", and it
 contains an alphabetically sorted list of terms and phrases used throughout the
@@ -316,7 +333,7 @@ can see that they are both of type</code>btree`.</p>
 <p>You may immediately think "oh, a binary tree", which is close, but no cigar. In
 the following section I'll outline how a B-tree index works and its properties
 such that you can make effective use of it in your day to day work.</p>
-<h2>The B-tree</h2>
+<h2 id="the-b-tree">The B-tree</h2>
 <p>A B-tree is indeed a search tree, and it is in fact rather similar to a binary search
 tree. Each node, or <em>page</em><sup id="sf-postgresql-indexing-basics-2-back"><a href="#sf-postgresql-indexing-basics-2" class="simple-footnote" title="In PostgreSQL, the nodes of a B-tree are called pages (source)">2</a></sup>
 is a sorted list of references either to other pages of the tree, or to columns of the
@@ -343,7 +360,7 @@ would actually make.</p>
 <p>In addition to providing quick lookup to specific values, the fact that B-trees
 are sorted leads to some possibly unexpected benefits in queries that require
 sorted output.</p>
-<h2>Selecting ranges is almost as fast as single values</h2>
+<h2 id="selecting-ranges-is-almost-as-fast-as-single-values">Selecting ranges is almost as fast as single values</h2>
 <p>Did you notice in the illustration above that the leaf page contained not only
 the value we searched for, but also its closest neighbors? Because of this
 adjacency, an index lookup for a <em>range</em> of values is incredibly
@@ -388,7 +405,7 @@ efficient<sup id="sf-postgresql-indexing-basics-5-back"><a href="#sf-postgresql-
 
 <p>A very common use case for a range selection is on creation date, e.g. `WHERE
 created_at &gt;= '2024-04-01'.</p>
-<h2>Indexes greatly speed up <code>ORDER BY</code></h2>
+<h2 id="indexes-greatly-speed-up-order-by">Indexes greatly speed up <code>ORDER BY</code></h2>
 <p>Tacking on an <code>ORDER BY</code> to a query is commonplace and pretty much required if
 you plan to do any kind of pagination on the result set<sup id="sf-postgresql-indexing-basics-6-back"><a href="#sf-postgresql-indexing-basics-6" class="simple-footnote" title="The order in which rows are returned from a query is undefined unless ORDER BY is provided. A common bug in backend systems is that OFFSET and LIMIT are used for pagination either without explicit ordering or with ordering that is not unique.">6</a></sup>. Without an index on <code>value</code>, ordering by it takes quite a bit of
 time.</p>
@@ -449,13 +466,13 @@ scans the already sorted index.</p>
 
 <p>There is simply a lot of value to having an index that is already ordered<sup id="sf-postgresql-indexing-basics-7-back"><a href="#sf-postgresql-indexing-basics-7" class="simple-footnote" title=" Note that only the B-tree type of index has this property (source).">7</a></sup>
 as so many common operations rely on ordering.</p>
-<h1>Indexing pitfalls</h1>
+<h1 id="indexing-pitfalls">Indexing pitfalls</h1>
 <p>Thus far, this article has mostly covered the happy path of indexing, when
 everything just works out. It may have given you the impression that indexing is
 a silver bullet to any query running a bit slow. Unfortunately, that's far from
 the case, so in this section I will outline a few scenarios that may cause
 confusion among up and coming indexers.</p>
-<h2>The query planner can choose not to use an index</h2>
+<h2 id="the-query-planner-can-choose-not-to-use-an-index">The query planner can choose not to use an index</h2>
 <p>Indexes are great, but sometimes the query planner may choose to ignore them and
 just scan the table instead. This is quite easy to show, take for example the
 following query where we search for any <code>value &gt; 500000</code>.</p>
@@ -514,7 +531,7 @@ ones you get in production</strong>. As such, one can easily be fooled by a quer
 gets a terrible looking plan in your local environment but actually runs fine in
 production, and vice versa<sup id="sf-postgresql-indexing-basics-10-back"><a href="#sf-postgresql-indexing-basics-10" class="simple-footnote" title="The query planner can also come up with terrible queries if table statistics are too outdated, but that's a topic for another time.">10</a></sup>. Be aware of this when you add new indexes and are perplexed as to
 why they are not used; there may just not be enough data for it to be worth it.</p>
-<h2>An index is for an exact expression</h2>
+<h2 id="an-index-is-for-an-exact-expression">An index is for an exact expression</h2>
 <p>We have an index on <code>data(value)</code> and showed that ordering by <code>value</code> is super
 quick. Let's do it again so you don't have to scroll up too far.</p>
 <div class="highlight"><pre><span></span><code><span class="n">test</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
@@ -596,7 +613,7 @@ index)</a>, but
 that is something I plan to cover in an upcoming article. For the purposes of
 this article, I only want to make it very clear that a column having an index on
 it does not imply that any search on that column can utilize said index.</p>
-<h2>Indexes optimize reads but slow down writes</h2>
+<h2 id="indexes-optimize-reads-but-slow-down-writes">Indexes optimize reads but slow down writes</h2>
 <p>Something to keep in mind with indexing is that an index is made to speed up
 reads. On the flip side, they slow down writes as every time a table is written
 to its indexes must also be written to<sup id="sf-postgresql-indexing-basics-11-back"><a href="#sf-postgresql-indexing-basics-11" class="simple-footnote" title="Except for heap-only tuples (source). Indexes can also take up a significant amount of storage. I once worked with a production database where the largest table was around 2 terabytes in size, with an additional 3 terabytes of indexes. Adding a new index was something we thought long and hard about before actually doing.">11</a></sup></p>
@@ -607,7 +624,7 @@ high throughput demands. The vast majority of applications have neither of
 those, while the lack of indexes becomes problematic even for small amounts of
 data. In other words, the benefits of indexing almost always outweighs the cons,
 but it's good to be aware that cons exist.</p>
-<h1>Summary</h1>
+<h1 id="summary">Summary</h1>
 <p>In this article, we've covered the basics of indexing in PostgreSQL, had a
 theoretical look at a B-tree index and its properties as well as how these can
 be taken advantage of. In addition, we've looked at some common pitfalls with
@@ -705,45 +722,27 @@ long and hard about before actually doing. <a href="#sf-postgresql-indexing-basi
 <h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
 <p class="tag-cloud">
     <span class="tag-4">
-      <a href="https://slar.se/tag/tree-sitter.html">
+      <a href="https://slar.se/tag/intellij.html">
           <i class="fas fa-tag"></i>
-        tree-sitter
+        intellij
       </a>
     </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/linux.html">
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
           <i class="fas fa-tag"></i>
-        linux
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xps15.html">
-          <i class="fas fa-tag"></i>
-        xps15
+        bash
       </a>
     </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/java.html">
+      <a href="https://slar.se/tag/pytest.html">
           <i class="fas fa-tag"></i>
-        java
+        pytest
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/github.html">
+      <a href="https://slar.se/tag/psql.html">
           <i class="fas fa-tag"></i>
-        github
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/x11.html">
-          <i class="fas fa-tag"></i>
-        x11
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/enums.html">
-          <i class="fas fa-tag"></i>
-        enums
+        psql
       </a>
     </span>
     <span class="tag-1">
@@ -753,15 +752,231 @@ long and hard about before actually doing. <a href="#sf-postgresql-indexing-basi
       </a>
     </span>
     <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-4">
       <a href="https://slar.se/tag/libinput.html">
           <i class="fas fa-tag"></i>
         libinput
       </a>
     </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/podcast.html">
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
           <i class="fas fa-tag"></i>
-        podcast
+        data structures
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/open-source.html">
+          <i class="fas fa-tag"></i>
+        open source
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/cybersecurity.html">
+          <i class="fas fa-tag"></i>
+        cybersecurity
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/neovim.html">
+          <i class="fas fa-tag"></i>
+        neovim
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/syntax.html">
+          <i class="fas fa-tag"></i>
+        syntax
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/indexing.html">
+          <i class="fas fa-tag"></i>
+        indexing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/database.html">
+          <i class="fas fa-tag"></i>
+        database
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
       </a>
     </span>
     <span class="tag-3">
@@ -777,225 +992,9 @@ long and hard about before actually doing. <a href="#sf-postgresql-indexing-basi
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/programming-languages.html">
-          <i class="fas fa-tag"></i>
-        programming languages
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/go.html">
-          <i class="fas fa-tag"></i>
-        go
-      </a>
-    </span>
-    <span class="tag-4">
       <a href="https://slar.se/tag/css.html">
           <i class="fas fa-tag"></i>
         css
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/bash.html">
-          <i class="fas fa-tag"></i>
-        bash
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/database.html">
-          <i class="fas fa-tag"></i>
-        database
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/javascript.html">
-          <i class="fas fa-tag"></i>
-        javascript
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/python.html">
-          <i class="fas fa-tag"></i>
-        python
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/xorg.html">
-          <i class="fas fa-tag"></i>
-        xorg
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/cybersecurity.html">
-          <i class="fas fa-tag"></i>
-        cybersecurity
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/wayland.html">
-          <i class="fas fa-tag"></i>
-        wayland
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/dependabot.html">
-          <i class="fas fa-tag"></i>
-        dependabot
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/totw.html">
-          <i class="fas fa-tag"></i>
-        totw
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/intellij.html">
-          <i class="fas fa-tag"></i>
-        intellij
-      </a>
-    </span>
-    <span class="tag-1">
-      <a href="https://slar.se/tag/software-engineering.html">
-          <i class="fas fa-tag"></i>
-        software engineering
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/postgresql.html">
-          <i class="fas fa-tag"></i>
-        postgresql
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/sway.html">
-          <i class="fas fa-tag"></i>
-        sway
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/null.html">
-          <i class="fas fa-tag"></i>
-        null
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/man.html">
-          <i class="fas fa-tag"></i>
-        man
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/pytest.html">
-          <i class="fas fa-tag"></i>
-        pytest
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/git.html">
-          <i class="fas fa-tag"></i>
-        git
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/unit-testing.html">
-          <i class="fas fa-tag"></i>
-        unit testing
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/learning.html">
-          <i class="fas fa-tag"></i>
-        learning
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/exposed.html">
-          <i class="fas fa-tag"></i>
-        exposed
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/sql.html">
-          <i class="fas fa-tag"></i>
-        sql
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/testing-tips.html">
-          <i class="fas fa-tag"></i>
-        testing tips
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/parsing.html">
-          <i class="fas fa-tag"></i>
-        parsing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/gradle.html">
-          <i class="fas fa-tag"></i>
-        gradle
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/html.html">
-          <i class="fas fa-tag"></i>
-        html
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/data-structures.html">
-          <i class="fas fa-tag"></i>
-        data structures
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/rust.html">
-          <i class="fas fa-tag"></i>
-        rust
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/psql.html">
-          <i class="fas fa-tag"></i>
-        psql
-      </a>
-    </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/kuizzy.html">
-          <i class="fas fa-tag"></i>
-        kuizzy
-      </a>
-    </span>
-    <span class="tag-2">
-      <a href="https://slar.se/tag/kotlin.html">
-          <i class="fas fa-tag"></i>
-        kotlin
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/indexing.html">
-          <i class="fas fa-tag"></i>
-        indexing
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/nil.html">
-          <i class="fas fa-tag"></i>
-        nil
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/open-source.html">
-          <i class="fas fa-tag"></i>
-        open source
-      </a>
-    </span>
-    <span class="tag-4">
-      <a href="https://slar.se/tag/repobee.html">
-          <i class="fas fa-tag"></i>
-        repobee
       </a>
     </span>
     <span class="tag-4">
@@ -1005,15 +1004,33 @@ long and hard about before actually doing. <a href="#sf-postgresql-indexing-basi
       </a>
     </span>
     <span class="tag-4">
-      <a href="https://slar.se/tag/syntax.html">
+      <a href="https://slar.se/tag/sql.html">
           <i class="fas fa-tag"></i>
-        syntax
+        sql
       </a>
     </span>
     <span class="tag-3">
-      <a href="https://slar.se/tag/bst.html">
+      <a href="https://slar.se/tag/go.html">
           <i class="fas fa-tag"></i>
-        bst
+        go
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
       </a>
     </span>
     <span class="tag-2">
@@ -1022,10 +1039,10 @@ long and hard about before actually doing. <a href="#sf-postgresql-indexing-basi
         book review
       </a>
     </span>
-    <span class="tag-3">
-      <a href="https://slar.se/tag/neovim.html">
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
           <i class="fas fa-tag"></i>
-        neovim
+        parsing
       </a>
     </span>
 </p>

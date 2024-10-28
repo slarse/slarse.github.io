@@ -28,6 +28,8 @@ Tree-sitter in NeoVim.
 > available in a companion repository at
 > [slarse/tree-sitter-mds](https://github.com/slarse/tree-sitter-mds)
 
+[TOC]
+
 # What's this Tree-sitter thing?
 [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) is a parser generator
 tool for the modern era. What's a parser generator, you ask? Well, it's exactly

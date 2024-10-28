@@ -28,6 +28,8 @@ Let's get started.
 > Note: This article is based on PostgreSQL 16, but the vast majority of the
 > content should be accurate for PostgreSQL 9.6 and newer.
 
+[TOC]
+
 # The incredible impact of indexes
 To sell you on the fact that indexes are important, let's do a quick experiment.
 Below I define a simple data model and fill it with some sample data.

@@ -8,25 +8,7 @@ software engineering workflows or just general usage of my machines. I'm
 continuously expanding this list as I find new tools and recall ones that I
 already use.
 
-### Table of contents
-* Command Line Tools
-    * autojump - cd that learns!
-    * neovim - The future (and present) of Vim
-    * fzf - The best fuzzy finder around
-    * hl - An incredibly useful JSON log viewer
-    * ripgrep - grep, but fast!
-    * tmux - The best terminal multiplexer!
-    * tldr - Short and concise man pages
-    * tshark
-* GUI utilities
-    * Edgeshark
-    * i3 - Improved tiling window manager
-    * warpd - Navigate GUIs with your keyboard
-    * Wireshark
-    * zeal - Offline docs
-    * slimbook-battery - Battery/performance management
-* Note taking and blogging
-    * pelican - An extensible static site generator
+[TOC]
 
 # Command Line Tools
 Command line tools are my bread and butter. Here's a selection of my favorite

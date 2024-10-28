@@ -107,3 +107,15 @@ STORK_INPUT_OPTIONS = {
 }
 
 RESUME_PATH = EXTRA_PATH_METADATA["extra/resume.pdf"]["path"]
+
+MARKDOWN = {
+    "extension_configs": {
+        # Needed for code syntax highlighting
+        "markdown.extensions.codehilite": {"css_class": "highlight"},
+        "markdown.extensions.extra": {},
+        "markdown.extensions.meta": {},
+        # This is for enabling the TOC generation
+        "markdown.extensions.toc": {"title": "Table of Contents"},
+    },
+    "output_format": "html5",
+}

@@ -3,13 +3,7 @@ Slug: wiki/media
 
 A collection of awesome media resources (videos, books, podcasts, etc).
 
-### Table of contents
-* Books
-    * Books I've read
-    * Books I'm currently reading
-* Videos
-* Podcasts
-* Other links
+[TOC]
 
 # Books
 Books are great, and my absolute favorite way to learn something new.

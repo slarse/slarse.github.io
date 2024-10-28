@@ -1,21 +1,7 @@
 Title: Linux
 Slug: wiki/linux
 
-### Table of contents
-* UNIX
-* Fundamentals
-    * Kernel
-    * Users and groups
-    * Directory hierarchy
-    * File I/O
-    * Processes
-    * Memory mappings
-    * Libraries
-    * Interprocess communication (IPC)
-    * Signals
-    * Threads
-    * Sessions
-* File I/O
+[TOC]
 
 # UNIX
 

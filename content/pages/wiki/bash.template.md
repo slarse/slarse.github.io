@@ -17,7 +17,7 @@ These shortcuts are provided by the `readline` library, so any shell using
 * Kill ring - `readline`'s variant of a clipboard with multiple temporary buffers
 * Yank - paste the top of the kill ring at the cursor
 
-## Navigation
+## Movement
 
 * `M-f` - move forward one word
 * `M-b` - move back one word
@@ -26,7 +26,7 @@ These shortcuts are provided by the `readline` library, so any shell using
 * `C-a` - move to the start of the line
 * `C-e` - move to the end of the line
 
-## Text manipulation
+## Text editing
 
 * `M-d` - kill one word forward
 * `C-w` - kill one word backward
@@ -36,3 +36,25 @@ These shortcuts are provided by the `readline` library, so any shell using
 * `M-u` - make the word after the cursor uppercase
 * `C-y` - yank the top of the kill ring after the cursor
 * `M-y` - if you've just yanked, use this to cycle through the kill ring
+
+## Numeric arguments
+
+Most of Bash's movement and text editing commands take a numeric argument to
+repeat the command that many times. You issue the numeric argument before the
+command with `M-<n>`, where `<n>` is a number.
+
+Examples:
+
+* `M-2 M-d` - kill two words forward
+* `M-3 C-w` - kill three words backward
+
+You can also supply a negative argument to most commands that operate forward
+or backward, which will reverse the direction of the command. I've never found
+that very useful, but it's neat to understand what happens when you accidentaly
+combine Meta and `-`.
+
+* `M-(-) 2 M-d` - kill two words backward
+
+It's also possible to just repeat characters.
+
+* `M-50 b` - repeat the character `b` 50 times

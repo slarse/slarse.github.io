@@ -162,7 +162,7 @@ to `1`, but it's natively in _pixels per meter_. With `1 inch = 2.54cm`, we get
 the nice and round conversion factor `100 [cm/m] / 2.54 [cm/inch] ≈ 39.37008
 [inch/m]`. Finally, we also need to compute the CRC32 checksum, which
 conveniently is implemented in the Python standard library [`binascii`
-module](https://docs.python.org/3/library/binascii.html#binascii.crc32)
+module](https://docs.python.org/3/library/binascii.html#binascii.crc32).
 
 There's one more important piece of information, namely how to represent
 multi-byte integers.
@@ -199,7 +199,7 @@ def create_phys_chunk(dots_per_inch: int) -> bytes:
 ```
 
 That's actually all there is to creating the `pHYs` chunk. Putting this
-togethere with the previous code snippet, we have a fully functioning _addition_
+together with the previous code snippet, we have a fully functioning _addition_
 of a `pHYs` chunk to a PNG file!
 
 ## Caveat - what if there already is a `pHYs` chunk in the file?
@@ -209,7 +209,8 @@ after the `IHDR` chunk. For a more generalized solution, we should parse the PNG
 file and replace any existing `pHYs` chunk. That's really not very difficult,
 given how all the chunks start with the data chunk length and are therefore easy
 to skip over[ref]The length of a chunk is always `12 + len(data)`, due to the
-fixed size of the length, type and checksum fields.[/ref]
+fixed size of the length, type and checksum fields.[/ref], but it was still
+well beyond what was needed for my implementation.
 
 # And now you know how to set the DPI on a PNG!
 Working with binary formats may seem daunting if you're not used to it, but most

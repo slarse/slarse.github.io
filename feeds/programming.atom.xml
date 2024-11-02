@@ -1,5 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Programming</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/programming.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2024-10-19T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Developer PSA: Learn to type!</title><link href="https://slar.se/learn-to-type.html" rel="alternate"></link><published>2024-10-19T00:00:00+02:00</published><updated>2024-10-19T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-10-19:/learn-to-type.html</id><summary type="html">&lt;p&gt;Humans aren't great at multitasking. You can focus on just about one thing at a
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Programming</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/programming.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2024-11-03T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Programmatically set the pixel density (DPI) of a PNG image</title><link href="https://slar.se/set-png-dpi.html" rel="alternate"></link><published>2024-11-03T00:00:00+01:00</published><updated>2024-11-03T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-11-03:/set-png-dpi.html</id><summary type="html">&lt;p&gt;Earlier this week, I came across a situation where someone wanted a QR code to
+"have 300 DPI so it looks good when printed". As I don't have much experience
+with image formats, it took me a while to figure out what the actual request
+was: to print the QR …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Earlier this week, I came across a situation where someone wanted a QR code to
+"have 300 DPI so it looks good when printed". As I don't have much experience
+with image formats, it took me a while to figure out what the actual request
+was: to print the QR code on paper at a size of 2-3 cm, with sufficient
+resolution for even the crappiest of phone cameras to be able to scan it.&lt;/p&gt;
+&lt;p&gt;The resolution was easily solved as the QR code library supported it, but the
+size of the image on paper was a different story. I didn't even &lt;em&gt;really&lt;/em&gt; know
+what DPI meant in the context of image metadata. While I knew that I could get the
+task done in a heartbeat or two if I brought in a third party PNG library,
+bringing in an entire PNG library just to do a single tiny alteration felt a bit
+heavy-handed, not to mention that I wouldn't really understand what the library
+was doing. So I decided to roll my own. And then write an article about how I
+did it.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The code in this article is not the actual code written for my
+employer. It's not written in the same language and does not have the same
+constraints.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="toc"&gt;&lt;span class="toctitle"&gt;Table of Contents&lt;/span&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#what-is-this-dpi-thing"&gt;What is this DPI thing?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#the-structure-of-a-png-image"&gt;The structure of a PNG image&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="#the-png-signature"&gt;The PNG signature&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#chunk-format-and-order"&gt;Chunk format and order&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#the-phys-chunk"&gt;The pHYs chunk&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#caveat-what-if-there-already-is-a-phys-chunk-in-the-file"&gt;Caveat - what if there already is a pHYs chunk in the file?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#and-now-you-know-how-to-set-the-dpi-on-a-png"&gt;And now you know how to set the DPI on a PNG!&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#putting-it-all-together"&gt;Putting it all together&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h1 id="what-is-this-dpi-thing"&gt;What is this DPI thing?&lt;/h1&gt;
+&lt;p&gt;My first order of business was figuring out what &lt;em&gt;dots per inch&lt;/em&gt; (DPI) even
+means in relation to a digital image. I knew DPI only as a printer setting to
+set the quality of the output, had no particular insight into how that relates
+to images that are themselves just a bunch of pixels.&lt;/p&gt;
+&lt;p&gt;Turns out, it's pretty much exactly what it sounds like: the amount of dots to
+print per inch. As metadata on a digital image, it's essentially a scaling
+factor for displaying the image, particularly when printing on physical media.
+For example, if you print an image that is 100x100 pixels with a DPI of 100, the
+image will be 1 inch by 1 inch on the physical paper. If you set the DPI to 50
+instead, the image will be 2 inches by 2 inches.&lt;/p&gt;
+&lt;div style="display: flex; justify-content: center; gap: 20%;"&gt;
+    &lt;figure style="text-align: center;"&gt;
+        &lt;img alt="PNG image without pixel density set" src="/images/set_png_dpi/qrcode_without_dpi.png" style="width: 116px;"&gt;
+        &lt;figcaption&gt;Pixel density set to 100 DPI&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure style="text-align: center;"&gt;
+        &lt;img alt="PNG image with pixel density set" src="/images/set_png_dpi/qrcode_without_dpi.png" style="width: 228px;"&gt;
+        &lt;figcaption&gt;Pixel density set to 50 DPI&lt;/figcaption&gt;
+    &lt;/figure&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Actually, the above captions aren't entirely truthful. That's the same image
+just scaled with CSS. In general, DPI does not affect how the image is
+represented on a monitor, we have other scaling tools in the digital world (such
+as CSS). That is not to say that there are &lt;em&gt;no&lt;/em&gt; image viewers that care about
+DPI metadata, I'm sure there are, but none of the ones I currently have
+installed seem to care. Including my web browser.&lt;/p&gt;
+&lt;div style="display: flex; justify-content: center; gap: 20%;"&gt;
+    &lt;figure style="text-align: center;"&gt;
+        &lt;img alt="PNG image without pixel density set" src="/images/set_png_dpi/qrcode_100_dpi.png"&gt;
+        &lt;figcaption&gt;Pixel density set to 100 DPI (for real)&lt;/figcaption&gt;
+    &lt;/figure&gt;
+    &lt;figure style="text-align: center;"&gt;
+        &lt;img alt="PNG image with pixel density set" src="/images/set_png_dpi/qrcode_50_dpi.png"&gt;
+        &lt;figcaption&gt;Pixel density set to 50 DPI (for real)&lt;/figcaption&gt;
+    &lt;/figure&gt;
+&lt;/div&gt;
+
+&lt;h1 id="the-structure-of-a-png-image"&gt;The structure of a PNG image&lt;/h1&gt;
+&lt;p&gt;To be able to set the pixel density of a PNG image, we need to dive into the
+image format. As luck would have it, PNG is a &lt;a href="https://www.w3.org/TR/png-3/#5DataRep"&gt;relatively simple
+format&lt;/a&gt;. The spec defines the data format
+as follows.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The PNG datastream consists of a PNG signature followed by a sequence of
+chunks. It is the result of encoding a PNG image.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It 's not hard to determine that the chunk we want to add to the image is the
+ancillary&lt;sup id="sf-set-png-dpi-1-back"&gt;&lt;a href="#sf-set-png-dpi-1" class="simple-footnote" title="That's fancy speak for &amp;quot;optional&amp;quot;"&gt;1&lt;/a&gt;&lt;/sup&gt; &lt;a href="https://www.w3.org/TR/png-3/#11pHYs"&gt;&lt;code&gt;pHYs&lt;/code&gt;
+chunk&lt;/a&gt;. But how do we know where to place
+it? And what it should look like? Let's dive into the format and find out.&lt;/p&gt;
+&lt;h2 id="the-png-signature"&gt;The PNG signature&lt;/h2&gt;
+&lt;p&gt;The signature makes up the first eight bytes of the file, and looks like this in
+hex.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mf"&gt;89&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;50&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;4&lt;/span&gt;&lt;span class="n"&gt;E&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;47&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;1&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;50 4E 47&lt;/code&gt; maps to the ASCII characters &lt;code&gt;P N G&lt;/code&gt;. That's the name of the
+movie!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;If a file does &lt;em&gt;not&lt;/em&gt; start with this signature, it's not a PNG file. But if it
+does there, it's a PNG file and there should now be a bunch of chunks for us to
+sink our teeth into.&lt;/p&gt;
+&lt;h2 id="chunk-format-and-order"&gt;Chunk format and order&lt;/h2&gt;
+&lt;p&gt;Each chunk in the PNG format has &lt;a href="https://www.w3.org/TR/png-3/#5Chunk-layout"&gt;four
+fields&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Length: 4 bytes defining the amount of bytes in the data chunk.&lt;/li&gt;
+&lt;li&gt;Type: 4 bytes defining the chunk type.&lt;/li&gt;
+&lt;li&gt;Data: As many bytes of data as defined in the length field. This field
+  can be empty (and then the length field is 0).&lt;/li&gt;
+&lt;li&gt;CRC checksum: A CRC32 checksum computed over the type and data fields.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Every PNG datastream starts with an &lt;a href="https://www.w3.org/TR/png-3/#11IHDR"&gt;IHDR
+chunk&lt;/a&gt; and ends with an &lt;a href="https://www.w3.org/TR/png-3/#11IEND"&gt;IEND
+chunk&lt;/a&gt;. Everything in between is mostly
+unordered&lt;sup id="sf-set-png-dpi-2-back"&gt;&lt;a href="#sf-set-png-dpi-2" class="simple-footnote" title="There are some ordering rules. For example, if there are multiple IDAT chunks, they must appear consecutively, with no other kinds of chunks in between."&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Assuming we have a file without a &lt;code&gt;pHYs&lt;/code&gt; chunk, which is the situation I found
+myself in earlier this week, it's therefore very simple to find out &lt;em&gt;where&lt;/em&gt; to
+place the &lt;code&gt;pHYs&lt;/code&gt; chunk: after the required &lt;code&gt;IHDR&lt;/code&gt; chunk, which just happens to
+&lt;a href="https://www.w3.org/TR/png-3/#11IHDR"&gt;always be 25 bytes large&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This means that we can safely squeeze in our &lt;code&gt;pHYs&lt;/code&gt; chunk &lt;code&gt;8 + 25 = 33&lt;/code&gt; bytes
+into the file. With Python, that would look something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;PNG_SIGNATURE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="se"&gt;\x89\x50\x4e\x47\x0D\x0A\x1A\x0A&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;
+
+&lt;span class="n"&gt;IHDR_SIZE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;with_dpi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dots_per_inch&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PNG_SIGNATURE&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Not a PNG image"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;signature_and_ihdr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PNG_SIGNATURE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;IHDR_SIZE&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;rest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;signature_and_ihdr&lt;/span&gt;&lt;span class="p"&gt;):]&lt;/span&gt;
+
+    &lt;span class="n"&gt;phys_chunk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_phys_chunk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dots_per_inch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;signature_and_ihdr&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;phys_chunk&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;rest&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now all we need to figure out is what the &lt;code&gt;pHYs&lt;/code&gt; chunk should look like. In
+other words, we need to implement the &lt;code&gt;create_phys_chunk()&lt;/code&gt; function!&lt;/p&gt;
+&lt;h2 id="the-phys-chunk"&gt;The &lt;code&gt;pHYs&lt;/code&gt; chunk&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://www.w3.org/TR/png-3/#11pHYs"&gt;&lt;code&gt;pHYs&lt;/code&gt; chunk&lt;/a&gt; is simple. It follows
+the format &lt;a href="#chunk-format-and-order"&gt;outlined above&lt;/a&gt;, with a type field o &lt;code&gt;70 48
+59 73&lt;/code&gt; (which decodes to &lt;code&gt;pHYs&lt;/code&gt; in ASCII) and a 9-byte data chunk on the
+following format:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;4 bytes of pixels per unit (X-axis)&lt;/li&gt;
+&lt;li&gt;4 bytes of pixels per unit (Y-axis)&lt;/li&gt;
+&lt;li&gt;1 byte of unit specifier which is either 0 or 1&lt;ul&gt;
+&lt;li&gt;0: The unit is &lt;em&gt;unknown&lt;/em&gt; and the "pixels per unit" only defines aspect
+  ratio. This does not help us define DPI.&lt;/li&gt;
+&lt;li&gt;1: The unit is "meter". This is what we want.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, apparently, the PNG format supports pixel density if we set the final byte
+to &lt;code&gt;1&lt;/code&gt;, but it's natively in &lt;em&gt;pixels per meter&lt;/em&gt;. With &lt;code&gt;1 inch = 2.54cm&lt;/code&gt;, we get
+the nice and round conversion factor &lt;code&gt;100 [cm/m] / 2.54 [cm/inch] ≈ 39.37008
+[inch/m]&lt;/code&gt;. Finally, we also need to compute the CRC32 checksum, which
+conveniently is implemented in the Python standard library &lt;a href="https://docs.python.org/3/library/binascii.html#binascii.crc32"&gt;&lt;code&gt;binascii&lt;/code&gt;
+module&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;There's one more important piece of information, namely how to represent
+multi-byte integers.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;All integers that require more than one byte shall be in network byte order
+(as illustrated in Figure 17 ): the most significant byte comes first, then
+the less significant bytes in descending order of significance (MSB LSB for
+two-byte integers, MSB B2 B1 LSB for four-byte integers).&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.w3.org/TR/png-3/#7Integers-and-byte-order"&gt;Source&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Network byte order is the same as &lt;a href="https://en.wikipedia.org/wiki/Endianness"&gt;big-endian&lt;/a&gt;,
+and is how us humans write numbers. For example, the &lt;code&gt;pHYs&lt;/code&gt; length field, which
+has a value of 9, is encoded as &lt;code&gt;00 00 00 09&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;With this knowledge, let's write some code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;binascii&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create_phys_chunk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dots_per_inch&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;length_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\x00\x00\x00\x09&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+    &lt;span class="n"&gt;type_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"pHYs"&lt;/span&gt;
+
+    &lt;span class="n"&gt;inches_per_meter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;39.37008&lt;/span&gt;
+    &lt;span class="n"&gt;dots_per_meter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dots_per_inch&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;inches_per_meter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;pixels_per_meter_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dots_per_meter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_bytes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;byteorder&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"big"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;unit_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\x01&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+    &lt;span class="n"&gt;type_and_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;type_field&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;pixels_per_meter_field&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;pixels_per_meter_field&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;unit_field&lt;/span&gt;
+    &lt;span class="n"&gt;checksum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;binascii&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;crc32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;type_and_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_bytes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;byteorder&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"big"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;length_field&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;type_and_data&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;checksum&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That's actually all there is to creating the &lt;code&gt;pHYs&lt;/code&gt; chunk. Putting this
+togethere with the previous code snippet, we have a fully functioning &lt;em&gt;addition&lt;/em&gt;
+of a &lt;code&gt;pHYs&lt;/code&gt; chunk to a PNG file!&lt;/p&gt;
+&lt;h2 id="caveat-what-if-there-already-is-a-phys-chunk-in-the-file"&gt;Caveat - what if there already is a &lt;code&gt;pHYs&lt;/code&gt; chunk in the file?&lt;/h2&gt;
+&lt;p&gt;As you may have noted, this implementation relies on the fact that there isn't
+already a &lt;code&gt;pHYs&lt;/code&gt; chunk in the PNG file, and therefore we can simply add one
+after the &lt;code&gt;IHDR&lt;/code&gt; chunk. For a more generalized solution, we should parse the PNG
+file and replace any existing &lt;code&gt;pHYs&lt;/code&gt; chunk. That's really not very difficult,
+given how all the chunks start with the data chunk length and are therefore easy
+to skip over&lt;sup id="sf-set-png-dpi-3-back"&gt;&lt;a href="#sf-set-png-dpi-3" class="simple-footnote" title="The length of a chunk is always 12 + len(data), due to the fixed size of the length, type and checksum fields."&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h1 id="and-now-you-know-how-to-set-the-dpi-on-a-png"&gt;And now you know how to set the DPI on a PNG!&lt;/h1&gt;
+&lt;p&gt;Working with binary formats may seem daunting if you're not used to it, but most
+often, it really isn't that difficult. In fact, the PNG format is &lt;em&gt;very&lt;/em&gt; easy to
+work with due to the consistent layout of the chunks. I think the challenge lies
+primarily in reading and understanding specifications, and that's something that
+takes a bit of practice.&lt;/p&gt;
+&lt;p&gt;Some may still think that I should have just pulled in a library for this, but I
+strongly disagree. Not only is the final solution &lt;a href="#putting-it-all-together"&gt;both fairly short and
+simple&lt;/a&gt;, but I also now have a solid understanding for
+the fundamentals of the PNG file format and have improved my understanding of
+image formats in general.&lt;/p&gt;
+&lt;h1 id="putting-it-all-together"&gt;Putting it all together&lt;/h1&gt;
+&lt;p&gt;Putting this all together in a fully functioning Python script, it could look
+like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;binascii&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pathlib&lt;/span&gt;
+
+&lt;span class="n"&gt;PNG_SIGNATURE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="se"&gt;\x89\x50\x4e\x47\x0D\x0A\x1A\x0A&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;
+
+&lt;span class="c1"&gt;# the IHDR field is 25 bytes: [ length | 4 bytes ] [ type | 4 bytes ] [ data | 13 bytes ] [ checksum | 4 bytes ]&lt;/span&gt;
+&lt;span class="n"&gt;IHDR_SIZE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;qrcode_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pathlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"qrcode.png"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;absolute&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;qrcode_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;qrcode_path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_bytes&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;qrcode_data_with_adjusted_dpi&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;with_dpi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;qrcode_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dots_per_inch&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;pathlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"qrcode_with_dpi.png"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write_bytes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;qrcode_data_with_adjusted_dpi&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;with_dpi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dots_per_inch&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PNG_SIGNATURE&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Not a PNG image"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;signature_and_ihdr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PNG_SIGNATURE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;IHDR_SIZE&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;rest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;signature_and_ihdr&lt;/span&gt;&lt;span class="p"&gt;):]&lt;/span&gt;
+
+    &lt;span class="n"&gt;phys_chunk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_phys_chunk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dots_per_inch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;signature_and_ihdr&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;phys_chunk&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;rest&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;create_phys_chunk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dots_per_inch&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;"""Create a pHYs chunk with the specified dots per inch, converted to the&lt;/span&gt;
+&lt;span class="sd"&gt;    PNG native pixels per meter.&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;length_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\x00\x00\x00\x09&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+    &lt;span class="n"&gt;type_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"pHYs"&lt;/span&gt;
+
+    &lt;span class="n"&gt;inches_per_meter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;39.37008&lt;/span&gt;
+    &lt;span class="n"&gt;dots_per_meter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dots_per_inch&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;inches_per_meter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;pixels_per_meter_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dots_per_meter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_bytes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;byteorder&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"big"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;unit_field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\x01&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+    &lt;span class="n"&gt;type_and_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;type_field&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;pixels_per_meter_field&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;pixels_per_meter_field&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;unit_field&lt;/span&gt;
+    &lt;span class="n"&gt;checksum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;binascii&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;crc32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;type_and_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_bytes&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;byteorder&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"big"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;length_field&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;type_and_data&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;checksum&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-set-png-dpi-1"&gt;That's fancy speak for "optional" &lt;a href="#sf-set-png-dpi-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;li id="sf-set-png-dpi-2"&gt;There are some ordering rules. For example, if there are multiple
+&lt;code&gt;IDAT&lt;/code&gt; chunks, &lt;a href="https://www.w3.org/TR/png-3/#11IDAT"&gt;they must appear consecutively, with no other kinds of chunks in
+between&lt;/a&gt;. &lt;a href="#sf-set-png-dpi-2-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;li id="sf-set-png-dpi-3"&gt;The length of a chunk is always &lt;code&gt;12 + len(data)&lt;/code&gt;, due to the
+fixed size of the length, type and checksum fields. &lt;a href="#sf-set-png-dpi-3-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Programming"></category><category term="python"></category><category term="png"></category><category term="dpi"></category></entry><entry><title>Developer PSA: Learn to type!</title><link href="https://slar.se/learn-to-type.html" rel="alternate"></link><published>2024-10-19T00:00:00+02:00</published><updated>2024-10-19T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-10-19:/learn-to-type.html</id><summary type="html">&lt;p&gt;Humans aren't great at multitasking. You can focus on just about one thing at a
 time. This doesn't mean that you can only &lt;em&gt;do&lt;/em&gt; one thing at a time, because not
 all things you do require your full attention. For example, try walking around,
 but before taking each step, really …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Humans aren't great at multitasking. You can focus on just about one thing at a

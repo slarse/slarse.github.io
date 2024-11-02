@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Simon Larsén" />
+    <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
+
+    <title>Programmatically set the pixel density (DPI) of a PNG image - Programming for fun and profit</title>
+
+   
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous" />
+
+      <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+            integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+            crossorigin="anonymous"
+      />
+
+
+
+
+      <link rel="stylesheet" href="https://slar.se/theme/css/dracula.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/voidybootstrap.css" />
+      <link rel="stylesheet" href="https://slar.se/theme/css/search.css" />
+
+    <link rel="shortcut icon" href="https://slar.se/favicon.ico" />
+<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />        <link href="https://slar.se/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming for fun and profit Atom Feed" />
+  </head>
+
+  <body>
+   
+    <nav class="navbar navbar-default">
+      <div class="container">
+     <div class="navbar-header">
+    <button type="button" class="navbar-toggle" 
+        data-toggle="collapse" data-target="#main-navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://slar.se/" rel="home">
+          <i class="fas fa-home fa-fw fa-lg"> </i> </a>
+       </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+                  <li>
+                    <a href="https://slar.se/pages/about.html">About</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/publications-and-essays.html">Publications and Essays</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/wiki.html">Wiki</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/license.html">License</a>
+                  </li>
+                  <li>
+                    <a href="https://slar.se/pages/projects.html">Projects</a>
+                  </li>
+              <li><a href="https://slar.se/resume.pdf">Resume</a></li>
+            <li class="divider"></li>
+            <li class="">
+              <a href="https://slar.se/archives.html">Archives</a>
+            </li>
+          <li class="divider"></li>
+            <li><a href="https://slar.se/feeds/all.atom.xml" 
+                   type="application/atom+xml" rel="alternate">
+                <i class="fas fa-rss fa-fw fa-lg"></i> </a></li>
+        </ul> <!-- /nav -->
+      </div> <!-- /navbar-collapse -->
+    </div> <!-- /container -->
+    </nav> <!-- /navbar -->
+
+	<div class="jumbotron" id="overview">
+	  <div class="container">
+		<h1><a href="https://slar.se/">Programming for fun and profit</a></h1>
+		<p class="lead">A blog about software engineering, programming languages and technical tinkering</p>
+	  </div>
+	</div>
+
+    <div class="container" id="main-container">
+      <div class="row">
+        <div class="col-md-9" id="content">
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
+<abbr class="article-header-date">
+  Sun 03 November 2024
+</abbr> <h1 class="article-header-title">
+  <a href="https://slar.se/set-png-dpi.html" rel="bookmark"
+     title="Permalink to Programmatically set the pixel density (DPI) of a PNG image">
+    Programmatically set the pixel density (DPI) of a PNG image
+  </a>
+</h1><div class="article-header-info">
+  <p>
+      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
+    in 
+    <a href="https://slar.se/category/programming.html">
+      Programming</a>
+    &nbsp;&nbsp;
+  </p>
+</div> <!-- /.article-header-info --><div class="article-tag-list">
+<span class="label label-default">Tags</span>
+	<a href="https://slar.se/tag/python.html"><i class="fas fa-tag"></i>python</a>&nbsp;
+	<a href="https://slar.se/tag/png.html"><i class="fas fa-tag"></i>png</a>&nbsp;
+	<a href="https://slar.se/tag/dpi.html"><i class="fas fa-tag"></i>dpi</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+    <img src="https://slar.se/photos/set_png_dpi/qrcode_without_dpia.jpg" />
+	<p>Earlier this week, I came across a situation where someone wanted a QR code to
+"have 300 DPI so it looks good when printed". As I don't have much experience
+with image formats, it took me a while to figure out what the actual request
+was: to print the QR code on paper at a size of 2-3 cm, with sufficient
+resolution for even the crappiest of phone cameras to be able to scan it.</p>
+<p>The resolution was easily solved as the QR code library supported it, but the
+size of the image on paper was a different story. I didn't even <em>really</em> know
+what DPI meant in the context of image metadata. While I knew that I could get the
+task done in a heartbeat or two if I brought in a third party PNG library,
+bringing in an entire PNG library just to do a single tiny alteration felt a bit
+heavy-handed, not to mention that I wouldn't really understand what the library
+was doing. So I decided to roll my own. And then write an article about how I
+did it.</p>
+<blockquote>
+<p><strong>Note:</strong> The code in this article is not the actual code written for my
+employer. It's not written in the same language and does not have the same
+constraints.</p>
+</blockquote>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#what-is-this-dpi-thing">What is this DPI thing?</a></li>
+<li><a href="#the-structure-of-a-png-image">The structure of a PNG image</a><ul>
+<li><a href="#the-png-signature">The PNG signature</a></li>
+<li><a href="#chunk-format-and-order">Chunk format and order</a></li>
+<li><a href="#the-phys-chunk">The pHYs chunk</a></li>
+<li><a href="#caveat-what-if-there-already-is-a-phys-chunk-in-the-file">Caveat - what if there already is a pHYs chunk in the file?</a></li>
+</ul>
+</li>
+<li><a href="#and-now-you-know-how-to-set-the-dpi-on-a-png">And now you know how to set the DPI on a PNG!</a></li>
+<li><a href="#putting-it-all-together">Putting it all together</a></li>
+</ul>
+</div>
+<h1 id="what-is-this-dpi-thing">What is this DPI thing?</h1>
+<p>My first order of business was figuring out what <em>dots per inch</em> (DPI) even
+means in relation to a digital image. I knew DPI only as a printer setting to
+set the quality of the output, had no particular insight into how that relates
+to images that are themselves just a bunch of pixels.</p>
+<p>Turns out, it's pretty much exactly what it sounds like: the amount of dots to
+print per inch. As metadata on a digital image, it's essentially a scaling
+factor for displaying the image, particularly when printing on physical media.
+For example, if you print an image that is 100x100 pixels with a DPI of 100, the
+image will be 1 inch by 1 inch on the physical paper. If you set the DPI to 50
+instead, the image will be 2 inches by 2 inches.</p>
+<div style="display: flex; justify-content: center; gap: 20%;">
+    <figure style="text-align: center;">
+        <img alt="PNG image without pixel density set" src="/images/set_png_dpi/qrcode_without_dpi.png" style="width: 116px;">
+        <figcaption>Pixel density set to 100 DPI</figcaption>
+    </figure>
+    <figure style="text-align: center;">
+        <img alt="PNG image with pixel density set" src="/images/set_png_dpi/qrcode_without_dpi.png" style="width: 228px;">
+        <figcaption>Pixel density set to 50 DPI</figcaption>
+    </figure>
+</div>
+<p><br></p>
+<p>Actually, the above captions aren't entirely truthful. That's the same image
+just scaled with CSS. In general, DPI does not affect how the image is
+represented on a monitor, we have other scaling tools in the digital world (such
+as CSS). That is not to say that there are <em>no</em> image viewers that care about
+DPI metadata, I'm sure there are, but none of the ones I currently have
+installed seem to care. Including my web browser.</p>
+<div style="display: flex; justify-content: center; gap: 20%;">
+    <figure style="text-align: center;">
+        <img alt="PNG image without pixel density set" src="/images/set_png_dpi/qrcode_100_dpi.png">
+        <figcaption>Pixel density set to 100 DPI (for real)</figcaption>
+    </figure>
+    <figure style="text-align: center;">
+        <img alt="PNG image with pixel density set" src="/images/set_png_dpi/qrcode_50_dpi.png">
+        <figcaption>Pixel density set to 50 DPI (for real)</figcaption>
+    </figure>
+</div>
+
+<h1 id="the-structure-of-a-png-image">The structure of a PNG image</h1>
+<p>To be able to set the pixel density of a PNG image, we need to dive into the
+image format. As luck would have it, PNG is a <a href="https://www.w3.org/TR/png-3/#5DataRep">relatively simple
+format</a>. The spec defines the data format
+as follows.</p>
+<blockquote>
+<p>The PNG datastream consists of a PNG signature followed by a sequence of
+chunks. It is the result of encoding a PNG image.</p>
+</blockquote>
+<p>It 's not hard to determine that the chunk we want to add to the image is the
+ancillary<sup id="sf-set-png-dpi-1-back"><a href="#sf-set-png-dpi-1" class="simple-footnote" title="That's fancy speak for &quot;optional&quot;">1</a></sup> <a href="https://www.w3.org/TR/png-3/#11pHYs"><code>pHYs</code>
+chunk</a>. But how do we know where to place
+it? And what it should look like? Let's dive into the format and find out.</p>
+<h2 id="the-png-signature">The PNG signature</h2>
+<p>The signature makes up the first eight bytes of the file, and looks like this in
+hex.</p>
+<div class="highlight"><pre><span></span><code><span class="mf">89</span><span class="w"> </span><span class="mf">50</span><span class="w"> </span><span class="mf">4</span><span class="n">E</span><span class="w"> </span><span class="mf">47</span><span class="w"> </span><span class="mf">0</span><span class="n">D</span><span class="w"> </span><span class="mf">0</span><span class="n">A</span><span class="w"> </span><span class="mf">1</span><span class="n">A</span><span class="w"> </span><span class="mf">0</span><span class="n">A</span>
+</code></pre></div>
+
+<blockquote>
+<p><code>50 4E 47</code> maps to the ASCII characters <code>P N G</code>. That's the name of the
+movie!</p>
+</blockquote>
+<p>If a file does <em>not</em> start with this signature, it's not a PNG file. But if it
+does there, it's a PNG file and there should now be a bunch of chunks for us to
+sink our teeth into.</p>
+<h2 id="chunk-format-and-order">Chunk format and order</h2>
+<p>Each chunk in the PNG format has <a href="https://www.w3.org/TR/png-3/#5Chunk-layout">four
+fields</a>:</p>
+<ul>
+<li>Length: 4 bytes defining the amount of bytes in the data chunk.</li>
+<li>Type: 4 bytes defining the chunk type.</li>
+<li>Data: As many bytes of data as defined in the length field. This field
+  can be empty (and then the length field is 0).</li>
+<li>CRC checksum: A CRC32 checksum computed over the type and data fields.</li>
+</ul>
+<p>Every PNG datastream starts with an <a href="https://www.w3.org/TR/png-3/#11IHDR">IHDR
+chunk</a> and ends with an <a href="https://www.w3.org/TR/png-3/#11IEND">IEND
+chunk</a>. Everything in between is mostly
+unordered<sup id="sf-set-png-dpi-2-back"><a href="#sf-set-png-dpi-2" class="simple-footnote" title="There are some ordering rules. For example, if there are multiple IDAT chunks, they must appear consecutively, with no other kinds of chunks in between.">2</a></sup></p>
+<p>Assuming we have a file without a <code>pHYs</code> chunk, which is the situation I found
+myself in earlier this week, it's therefore very simple to find out <em>where</em> to
+place the <code>pHYs</code> chunk: after the required <code>IHDR</code> chunk, which just happens to
+<a href="https://www.w3.org/TR/png-3/#11IHDR">always be 25 bytes large</a>.</p>
+<p>This means that we can safely squeeze in our <code>pHYs</code> chunk <code>8 + 25 = 33</code> bytes
+into the file. With Python, that would look something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">PNG_SIGNATURE</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'</span><span class="se">\x89\x50\x4e\x47\x0D\x0A\x1A\x0A</span><span class="s1">'</span>
+
+<span class="n">IHDR_SIZE</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="k">def</span> <span class="nf">with_dpi</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">dots_per_inch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">PNG_SIGNATURE</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not a PNG image"</span><span class="p">)</span>
+
+    <span class="n">signature_and_ihdr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">PNG_SIGNATURE</span><span class="p">)</span> <span class="o">+</span> <span class="n">IHDR_SIZE</span><span class="p">]</span>
+    <span class="n">rest</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">signature_and_ihdr</span><span class="p">):]</span>
+
+    <span class="n">phys_chunk</span> <span class="o">=</span> <span class="n">create_phys_chunk</span><span class="p">(</span><span class="n">dots_per_inch</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">signature_and_ihdr</span> <span class="o">+</span> <span class="n">phys_chunk</span> <span class="o">+</span> <span class="n">rest</span>
+</code></pre></div>
+
+<p>Now all we need to figure out is what the <code>pHYs</code> chunk should look like. In
+other words, we need to implement the <code>create_phys_chunk()</code> function!</p>
+<h2 id="the-phys-chunk">The <code>pHYs</code> chunk</h2>
+<p>The <a href="https://www.w3.org/TR/png-3/#11pHYs"><code>pHYs</code> chunk</a> is simple. It follows
+the format <a href="#chunk-format-and-order">outlined above</a>, with a type field o <code>70 48
+59 73</code> (which decodes to <code>pHYs</code> in ASCII) and a 9-byte data chunk on the
+following format:</p>
+<ul>
+<li>4 bytes of pixels per unit (X-axis)</li>
+<li>4 bytes of pixels per unit (Y-axis)</li>
+<li>1 byte of unit specifier which is either 0 or 1<ul>
+<li>0: The unit is <em>unknown</em> and the "pixels per unit" only defines aspect
+  ratio. This does not help us define DPI.</li>
+<li>1: The unit is "meter". This is what we want.</li>
+</ul>
+</li>
+</ul>
+<p>So, apparently, the PNG format supports pixel density if we set the final byte
+to <code>1</code>, but it's natively in <em>pixels per meter</em>. With <code>1 inch = 2.54cm</code>, we get
+the nice and round conversion factor <code>100 [cm/m] / 2.54 [cm/inch] ≈ 39.37008
+[inch/m]</code>. Finally, we also need to compute the CRC32 checksum, which
+conveniently is implemented in the Python standard library <a href="https://docs.python.org/3/library/binascii.html#binascii.crc32"><code>binascii</code>
+module</a></p>
+<p>There's one more important piece of information, namely how to represent
+multi-byte integers.</p>
+<blockquote>
+<p>All integers that require more than one byte shall be in network byte order
+(as illustrated in Figure 17 ): the most significant byte comes first, then
+the less significant bytes in descending order of significance (MSB LSB for
+two-byte integers, MSB B2 B1 LSB for four-byte integers).</p>
+<p><a href="https://www.w3.org/TR/png-3/#7Integers-and-byte-order">Source</a></p>
+</blockquote>
+<p>Network byte order is the same as <a href="https://en.wikipedia.org/wiki/Endianness">big-endian</a>,
+and is how us humans write numbers. For example, the <code>pHYs</code> length field, which
+has a value of 9, is encoded as <code>00 00 00 09</code>.</p>
+<p>With this knowledge, let's write some code.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">binascii</span>
+
+<span class="k">def</span> <span class="nf">create_phys_chunk</span><span class="p">(</span><span class="n">dots_per_inch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="n">length_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"</span><span class="se">\x00\x00\x00\x09</span><span class="s2">"</span>
+    <span class="n">type_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"pHYs"</span>
+
+    <span class="n">inches_per_meter</span> <span class="o">=</span> <span class="mf">39.37008</span>
+    <span class="n">dots_per_meter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dots_per_inch</span> <span class="o">*</span> <span class="n">inches_per_meter</span><span class="p">)</span>
+    <span class="n">pixels_per_meter_field</span> <span class="o">=</span> <span class="n">dots_per_meter</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s2">"big"</span><span class="p">)</span>
+    <span class="n">unit_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"</span><span class="se">\x01</span><span class="s2">"</span>
+
+    <span class="n">type_and_data</span> <span class="o">=</span> <span class="n">type_field</span> <span class="o">+</span> <span class="n">pixels_per_meter_field</span> <span class="o">+</span> <span class="n">pixels_per_meter_field</span> <span class="o">+</span> <span class="n">unit_field</span>
+    <span class="n">checksum</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">type_and_data</span><span class="p">)</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s2">"big"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">length_field</span> <span class="o">+</span> <span class="n">type_and_data</span> <span class="o">+</span> <span class="n">checksum</span>
+</code></pre></div>
+
+<p>That's actually all there is to creating the <code>pHYs</code> chunk. Putting this
+togethere with the previous code snippet, we have a fully functioning <em>addition</em>
+of a <code>pHYs</code> chunk to a PNG file!</p>
+<h2 id="caveat-what-if-there-already-is-a-phys-chunk-in-the-file">Caveat - what if there already is a <code>pHYs</code> chunk in the file?</h2>
+<p>As you may have noted, this implementation relies on the fact that there isn't
+already a <code>pHYs</code> chunk in the PNG file, and therefore we can simply add one
+after the <code>IHDR</code> chunk. For a more generalized solution, we should parse the PNG
+file and replace any existing <code>pHYs</code> chunk. That's really not very difficult,
+given how all the chunks start with the data chunk length and are therefore easy
+to skip over<sup id="sf-set-png-dpi-3-back"><a href="#sf-set-png-dpi-3" class="simple-footnote" title="The length of a chunk is always 12 + len(data), due to the fixed size of the length, type and checksum fields.">3</a></sup></p>
+<h1 id="and-now-you-know-how-to-set-the-dpi-on-a-png">And now you know how to set the DPI on a PNG!</h1>
+<p>Working with binary formats may seem daunting if you're not used to it, but most
+often, it really isn't that difficult. In fact, the PNG format is <em>very</em> easy to
+work with due to the consistent layout of the chunks. I think the challenge lies
+primarily in reading and understanding specifications, and that's something that
+takes a bit of practice.</p>
+<p>Some may still think that I should have just pulled in a library for this, but I
+strongly disagree. Not only is the final solution <a href="#putting-it-all-together">both fairly short and
+simple</a>, but I also now have a solid understanding for
+the fundamentals of the PNG file format and have improved my understanding of
+image formats in general.</p>
+<h1 id="putting-it-all-together">Putting it all together</h1>
+<p>Putting this all together in a fully functioning Python script, it could look
+like this:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">binascii</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+
+<span class="n">PNG_SIGNATURE</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'</span><span class="se">\x89\x50\x4e\x47\x0D\x0A\x1A\x0A</span><span class="s1">'</span>
+
+<span class="c1"># the IHDR field is 25 bytes: [ length | 4 bytes ] [ type | 4 bytes ] [ data | 13 bytes ] [ checksum | 4 bytes ]</span>
+<span class="n">IHDR_SIZE</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">qrcode_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">"qrcode.png"</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+    <span class="n">qrcode_data</span> <span class="o">=</span> <span class="n">qrcode_path</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">()</span>
+    <span class="n">qrcode_data_with_adjusted_dpi</span> <span class="o">=</span> <span class="n">with_dpi</span><span class="p">(</span><span class="n">qrcode_data</span><span class="p">,</span> <span class="n">dots_per_inch</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">"qrcode_with_dpi.png"</span><span class="p">)</span><span class="o">.</span><span class="n">write_bytes</span><span class="p">(</span><span class="n">qrcode_data_with_adjusted_dpi</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">with_dpi</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">dots_per_inch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">PNG_SIGNATURE</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not a PNG image"</span><span class="p">)</span>
+
+    <span class="n">signature_and_ihdr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">PNG_SIGNATURE</span><span class="p">)</span> <span class="o">+</span> <span class="n">IHDR_SIZE</span><span class="p">]</span>
+    <span class="n">rest</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">signature_and_ihdr</span><span class="p">):]</span>
+
+    <span class="n">phys_chunk</span> <span class="o">=</span> <span class="n">create_phys_chunk</span><span class="p">(</span><span class="n">dots_per_inch</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">signature_and_ihdr</span> <span class="o">+</span> <span class="n">phys_chunk</span> <span class="o">+</span> <span class="n">rest</span>
+
+
+<span class="k">def</span> <span class="nf">create_phys_chunk</span><span class="p">(</span><span class="n">dots_per_inch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Create a pHYs chunk with the specified dots per inch, converted to the</span>
+<span class="sd">    PNG native pixels per meter.</span>
+<span class="sd">    """</span>
+    <span class="n">length_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"</span><span class="se">\x00\x00\x00\x09</span><span class="s2">"</span>
+    <span class="n">type_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"pHYs"</span>
+
+    <span class="n">inches_per_meter</span> <span class="o">=</span> <span class="mf">39.37008</span>
+    <span class="n">dots_per_meter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dots_per_inch</span> <span class="o">*</span> <span class="n">inches_per_meter</span><span class="p">)</span>
+    <span class="n">pixels_per_meter_field</span> <span class="o">=</span> <span class="n">dots_per_meter</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s2">"big"</span><span class="p">)</span>
+    <span class="n">unit_field</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"</span><span class="se">\x01</span><span class="s2">"</span>
+
+    <span class="n">type_and_data</span> <span class="o">=</span> <span class="n">type_field</span> <span class="o">+</span> <span class="n">pixels_per_meter_field</span> <span class="o">+</span> <span class="n">pixels_per_meter_field</span> <span class="o">+</span> <span class="n">unit_field</span>
+    <span class="n">checksum</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">type_and_data</span><span class="p">)</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s2">"big"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">length_field</span> <span class="o">+</span> <span class="n">type_and_data</span> <span class="o">+</span> <span class="n">checksum</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div><ol class="simple-footnotes"><li id="sf-set-png-dpi-1">That's fancy speak for "optional" <a href="#sf-set-png-dpi-1-back" class="simple-footnote-back">↩</a></li><li id="sf-set-png-dpi-2">There are some ordering rules. For example, if there are multiple
+<code>IDAT</code> chunks, <a href="https://www.w3.org/TR/png-3/#11IDAT">they must appear consecutively, with no other kinds of chunks in
+between</a>. <a href="#sf-set-png-dpi-2-back" class="simple-footnote-back">↩</a></li><li id="sf-set-png-dpi-3">The length of a chunk is always <code>12 + len(data)</code>, due to the
+fixed size of the length, type and checksum fields. <a href="#sf-set-png-dpi-3-back" class="simple-footnote-back">↩</a></li></ol>
+  </div>
+
+
+</article>
+        </div><!-- /content -->
+
+        <div class="col-md-3 sidebar-nav" id="sidebar">
+
+<div class="row">
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-comment fa-fw fa-lg"></i> Social</h4>
+<ul class="list-unstyled social-links">
+    <li><a href="https://www.linkedin.com/in/simon-lars%C3%A9n-b665b3102/" target="_blank">
+	  <i class="fab fa-linkedin fa-fw fa-lg" title="LinkedIn"></i>
+		LinkedIn
+	</a></li>
+    <li><a href="https://github.com/slarse" target="_blank">
+	  <i class="fab fa-github-square fa-fw fa-lg" title="GitHub"></i>
+		GitHub
+	</a></li>
+</ul>
+</div>
+
+<div class="col-xs-6 col-md-12">
+<h4><i class="fas fa-folder fa-fw fa-lg"></i> Categories</h4>
+<ul class="list-unstyled category-links">
+  <li><a href="https://slar.se/category/blog.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Blog</a></li>
+  <li><a href="https://slar.se/category/linux.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Linux</a></li>
+  <li><a href="https://slar.se/category/programming.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Programming</a></li>
+  <li><a href="https://slar.se/category/reviews.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Reviews</a></li>
+  <li><a href="https://slar.se/category/testing.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Testing</a></li>
+  <li><a href="https://slar.se/category/tip-of-the-week.html" >
+    <i class="fas fa-folder-open fa-fw fa-lg"></i> Tip of the Week</a></li>
+</ul>
+</div>
+
+</div> <!-- /row -->
+
+<h4><i class="fas fa-tags fa-fw fa-lg"></i> Tags</h4>
+<p class="tag-cloud">
+    <span class="tag-2">
+      <a href="https://slar.se/tag/kotlin.html">
+          <i class="fas fa-tag"></i>
+        kotlin
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/syntax.html">
+          <i class="fas fa-tag"></i>
+        syntax
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/book-review.html">
+          <i class="fas fa-tag"></i>
+        book review
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/data-structures.html">
+          <i class="fas fa-tag"></i>
+        data structures
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/unit-testing.html">
+          <i class="fas fa-tag"></i>
+        unit testing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xps15.html">
+          <i class="fas fa-tag"></i>
+        xps15
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/totw.html">
+          <i class="fas fa-tag"></i>
+        totw
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/programming-languages.html">
+          <i class="fas fa-tag"></i>
+        programming languages
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependabot.html">
+          <i class="fas fa-tag"></i>
+        dependabot
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/tornadofx.html">
+          <i class="fas fa-tag"></i>
+        tornadofx
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/man.html">
+          <i class="fas fa-tag"></i>
+        man
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/testing-tips.html">
+          <i class="fas fa-tag"></i>
+        testing tips
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/enums.html">
+          <i class="fas fa-tag"></i>
+        enums
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/cybersecurity.html">
+          <i class="fas fa-tag"></i>
+        cybersecurity
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dpi.html">
+          <i class="fas fa-tag"></i>
+        dpi
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/database.html">
+          <i class="fas fa-tag"></i>
+        database
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/blog.html">
+          <i class="fas fa-tag"></i>
+        blog
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/nil.html">
+          <i class="fas fa-tag"></i>
+        nil
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/go.html">
+          <i class="fas fa-tag"></i>
+        go
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/git.html">
+          <i class="fas fa-tag"></i>
+        git
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/bst.html">
+          <i class="fas fa-tag"></i>
+        bst
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/learning.html">
+          <i class="fas fa-tag"></i>
+        learning
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/kuizzy.html">
+          <i class="fas fa-tag"></i>
+        kuizzy
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/bash.html">
+          <i class="fas fa-tag"></i>
+        bash
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/javascript.html">
+          <i class="fas fa-tag"></i>
+        javascript
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/gradle.html">
+          <i class="fas fa-tag"></i>
+        gradle
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/libinput.html">
+          <i class="fas fa-tag"></i>
+        libinput
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/repobee.html">
+          <i class="fas fa-tag"></i>
+        repobee
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/png.html">
+          <i class="fas fa-tag"></i>
+        png
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/postgresql.html">
+          <i class="fas fa-tag"></i>
+        postgresql
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/software-engineering.html">
+          <i class="fas fa-tag"></i>
+        software engineering
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/psql.html">
+          <i class="fas fa-tag"></i>
+        psql
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/dependencies.html">
+          <i class="fas fa-tag"></i>
+        dependencies
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/xorg.html">
+          <i class="fas fa-tag"></i>
+        xorg
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/html.html">
+          <i class="fas fa-tag"></i>
+        html
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/intellij.html">
+          <i class="fas fa-tag"></i>
+        intellij
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/java.html">
+          <i class="fas fa-tag"></i>
+        java
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/github.html">
+          <i class="fas fa-tag"></i>
+        github
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/x11.html">
+          <i class="fas fa-tag"></i>
+        x11
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/css.html">
+          <i class="fas fa-tag"></i>
+        css
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/wayland.html">
+          <i class="fas fa-tag"></i>
+        wayland
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/null.html">
+          <i class="fas fa-tag"></i>
+        null
+      </a>
+    </span>
+    <span class="tag-1">
+      <a href="https://slar.se/tag/python.html">
+          <i class="fas fa-tag"></i>
+        python
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/open-source.html">
+          <i class="fas fa-tag"></i>
+        open source
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/neovim.html">
+          <i class="fas fa-tag"></i>
+        neovim
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/indexing.html">
+          <i class="fas fa-tag"></i>
+        indexing
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/parsing.html">
+          <i class="fas fa-tag"></i>
+        parsing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/exposed.html">
+          <i class="fas fa-tag"></i>
+        exposed
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/podcast.html">
+          <i class="fas fa-tag"></i>
+        podcast
+      </a>
+    </span>
+    <span class="tag-2">
+      <a href="https://slar.se/tag/linux.html">
+          <i class="fas fa-tag"></i>
+        linux
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/pytest.html">
+          <i class="fas fa-tag"></i>
+        pytest
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sway.html">
+          <i class="fas fa-tag"></i>
+        sway
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/testing.html">
+          <i class="fas fa-tag"></i>
+        testing
+      </a>
+    </span>
+    <span class="tag-3">
+      <a href="https://slar.se/tag/rust.html">
+          <i class="fas fa-tag"></i>
+        rust
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/tree-sitter.html">
+          <i class="fas fa-tag"></i>
+        tree-sitter
+      </a>
+    </span>
+    <span class="tag-4">
+      <a href="https://slar.se/tag/sql.html">
+          <i class="fas fa-tag"></i>
+        sql
+      </a>
+    </span>
+</p>
+<h4><i class="fas fa-rss fa-fw fa-lg"></i> Feeds</h4>
+<ul class="list-unstyled">
+    <li><a href="https://slar.se/feeds/all.atom.xml" 
+		   type="application/atom+xml" rel="alternate">
+		<i class="fas fa-rss-square fa-fw fa-lg"></i> Atom Feed</a></li>
+</ul>
+
+<hr />
+
+        </div><!--/sidebar -->
+      </div><!--/row-->
+    </div><!--/.container /#main-container -->
+
+    <footer id="site-footer">
+<small>
+	<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">Code snippets</span> licensed under <a href="http://creativecommons.org/publicdomain/zero/1.0?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC0 1.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/zero.svg?ref=chooser-v1"></a></p>
+	<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">Texts (natural language) licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
+</small> 
+      <address id="site-colophon">
+        <p class="text-center text-muted">
+        Site built using <a href="http://getpelican.com/" target="_blank">Pelican</a>
+        &nbsp;&bull;&nbsp; Theme based on
+        <a href="http://www.voidynullness.net/page/voidy-bootstrap-pelican-theme/"
+           target="_blank">VoidyBootstrap</a> by 
+        <a href="http://voidynullness.net"
+           target="_blank">RKI</a>  
+        </p>
+      </address><!-- /colophon  -->
+    </footer>
+
+
+    <!-- javascript -->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+<script src="https://files.stork-search.net/releases/v1.2.1/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://slar.se/search-index.st")
+</script>  </body>
+</html>

@@ -73,6 +73,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "set-png-dpi.html"
+url = "/set-png-dpi.html"
+title = "Programmatically set the pixel density (DPI) of a PNG image"
+
+[[input.files]]
 path = "learn-to-type.html"
 url = "/learn-to-type.html"
 title = "Developer PSA: Learn to type!"

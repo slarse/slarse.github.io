@@ -156,7 +156,7 @@ to &lt;code&gt;1&lt;/code&gt;, but it's natively in &lt;em&gt;pixels per meter&l
 the nice and round conversion factor &lt;code&gt;100 [cm/m] / 2.54 [cm/inch] ≈ 39.37008
 [inch/m]&lt;/code&gt;. Finally, we also need to compute the CRC32 checksum, which
 conveniently is implemented in the Python standard library &lt;a href="https://docs.python.org/3/library/binascii.html#binascii.crc32"&gt;&lt;code&gt;binascii&lt;/code&gt;
-module&lt;/a&gt;&lt;/p&gt;
+module&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;There's one more important piece of information, namely how to represent
 multi-byte integers.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -188,7 +188,7 @@ has a value of 9, is encoded as &lt;code&gt;00 00 00 09&lt;/code&gt;.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;That's actually all there is to creating the &lt;code&gt;pHYs&lt;/code&gt; chunk. Putting this
-togethere with the previous code snippet, we have a fully functioning &lt;em&gt;addition&lt;/em&gt;
+together with the previous code snippet, we have a fully functioning &lt;em&gt;addition&lt;/em&gt;
 of a &lt;code&gt;pHYs&lt;/code&gt; chunk to a PNG file!&lt;/p&gt;
 &lt;h2 id="caveat-what-if-there-already-is-a-phys-chunk-in-the-file"&gt;Caveat - what if there already is a &lt;code&gt;pHYs&lt;/code&gt; chunk in the file?&lt;/h2&gt;
 &lt;p&gt;As you may have noted, this implementation relies on the fact that there isn't
@@ -196,7 +196,8 @@ already a &lt;code&gt;pHYs&lt;/code&gt; chunk in the PNG file, and therefore we 
 after the &lt;code&gt;IHDR&lt;/code&gt; chunk. For a more generalized solution, we should parse the PNG
 file and replace any existing &lt;code&gt;pHYs&lt;/code&gt; chunk. That's really not very difficult,
 given how all the chunks start with the data chunk length and are therefore easy
-to skip over&lt;sup id="sf-set-png-dpi-3-back"&gt;&lt;a href="#sf-set-png-dpi-3" class="simple-footnote" title="The length of a chunk is always 12 + len(data), due to the fixed size of the length, type and checksum fields."&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+to skip over&lt;sup id="sf-set-png-dpi-3-back"&gt;&lt;a href="#sf-set-png-dpi-3" class="simple-footnote" title="The length of a chunk is always 12 + len(data), due to the fixed size of the length, type and checksum fields."&gt;3&lt;/a&gt;&lt;/sup&gt;, but it was still
+well beyond what was needed for my implementation.&lt;/p&gt;
 &lt;h1 id="and-now-you-know-how-to-set-the-dpi-on-a-png"&gt;And now you know how to set the DPI on a PNG!&lt;/h1&gt;
 &lt;p&gt;Working with binary formats may seem daunting if you're not used to it, but most
 often, it really isn't that difficult. In fact, the PNG format is &lt;em&gt;very&lt;/em&gt; easy to

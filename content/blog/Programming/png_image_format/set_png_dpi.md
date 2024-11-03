@@ -30,15 +30,16 @@ did it.
 # What is this DPI thing?
 My first order of business was figuring out what _dots per inch_ (DPI) even
 means in relation to a digital image. I knew DPI only as a printer setting to
-set the quality of the output, had no particular insight into how that relates
-to images that are themselves just a bunch of pixels.
+set the quality of the output, but had no particular insight into how that
+relates to images that are themselves just a bunch of pixels.
 
 Turns out, it's pretty much exactly what it sounds like: the amount of dots to
 print per inch. As metadata on a digital image, it's essentially a scaling
 factor for displaying the image, particularly when printing on physical media.
-For example, if you print an image that is 100x100 pixels with a DPI of 100, the
-image will be 1 inch by 1 inch on the physical paper. If you set the DPI to 50
-instead, the image will be 2 inches by 2 inches.
+For example, if you print an image that is 100x100 pixels with a DPI of 100,
+the image will be 1 inch by 1 inch on the physical paper. If you set the DPI to
+50 instead, the image will be 2 inches by 2 inches, smearing one pixel over two
+dots in each direction.
 
 <div style="display: flex; justify-content: center; gap: 20%;">
     <figure style="text-align: center;">
@@ -52,11 +53,11 @@ instead, the image will be 2 inches by 2 inches.
 </div>
 <br/>
 
-Actually, the above captions aren't entirely truthful. That's the same image
-just scaled with CSS. In general, DPI does not affect how the image is
-represented on a monitor, we have other scaling tools in the digital world (such
-as CSS). That is not to say that there are _no_ image viewers that care about
-DPI metadata, I'm sure there are, but none of the ones I currently have
+Actually, the above captions aren't entirely truthful. The images are one and
+the same, just scaled with CSS. In general, DPI does not affect how the image
+is represented on a monitor, we have other scaling tools in the digital world
+(such as CSS). That is not to say that there are _no_ image viewers that care
+about DPI metadata, I'm sure there are, but none of the ones I currently have
 installed seem to care. Including my web browser.
 
 <div style="display: flex; justify-content: center; gap: 20%;">
@@ -77,12 +78,20 @@ format](https://www.w3.org/TR/png-3/#5DataRep). The spec defines the data format
 as follows.
 
 > The PNG datastream consists of a PNG signature followed by a sequence of
-> chunks. It is the result of encoding a PNG image.
+> chunks.
 
-It 's not hard to determine that the chunk we want to add to the image is the
-ancillary[ref]That's fancy speak for "optional"[/ref] [`pHYs`
-chunk](https://www.w3.org/TR/png-3/#11pHYs). But how do we know where to place
-it? And what it should look like? Let's dive into the format and find out.
+Scanning through the available chunks, it seems like the ancillary[ref]That's
+fancy speak for "optional"[/ref] [`pHYs`
+chunk](https://www.w3.org/TR/png-3/#11pHYs) is the one where we can set pixel
+density for printing. I'm guessing "pHYs" is short for "physical".
+
+Quickly scanning through the PNG that I needed to amend[ref]The PNG chunk types
+are readable as plaintext. Open a PNG in any text editor that isn't afraid to
+read a file that isn't entirely plaintext, and you'll most often be able to tell
+if a chunk is present or not.[/ref], I could quickly determine that it simply
+lacked this chunk, so the task is simply to add it to the chunk sequence. But
+how do we know where to place it? And what it should look like? Let's dive into
+the format and find out.
 
 ## The PNG signature
 The signature makes up the first eight bytes of the file, and looks like this in
@@ -201,6 +210,84 @@ def create_phys_chunk(dots_per_inch: int) -> bytes:
 That's actually all there is to creating the `pHYs` chunk. Putting this
 together with the previous code snippet, we have a fully functioning _addition_
 of a `pHYs` chunk to a PNG file!
+
+## Validating the results
+While most image viewers will display the DPI of a PNG image somewhere, it can
+be useful to have more deliberate tooling for the job.
+[pngcheck](http://www.libpng.org/pub/png/apps/pngcheck.html), whose homepage is
+one of the last remaining bastions of plain `http` on the web, is a useful tool
+for inspecting the chunks of a PNG file.
+
+Inspecting the original `qrcode_without_dpi.png`, we get the following output.
+
+```bash
+$ pngcheck -v qrcode_without_dpi.png
+File: qrcode_without_dpi.png (484 bytes)
+  chunk IHDR at offset 0x0000c, length 13
+    116 x 116 image, 1-bit grayscale, non-interlaced
+  chunk cHRM at offset 0x00025, length 32
+    White x = 0.3127 y = 0.329,  Red x = 0.64 y = 0.33
+    Green x = 0.3 y = 0.6,  Blue x = 0.15 y = 0.06
+  chunk bKGD at offset 0x00051, length 2
+    gray = 0x0000
+  chunk tIME at offset 0x0005f, length 7:  2 Nov 2024 17:25:43 UTC
+  chunk IDAT at offset 0x00072, length 200
+    zlib: deflated, 2K window, maximum compression
+  chunk tEXt at offset 0x00146, length 37, keyword: date:create
+  chunk tEXt at offset 0x00177, length 37, keyword: date:modify
+  chunk tEXt at offset 0x001a8, length 40, keyword: date:timestamp
+  chunk IEND at offset 0x001dc, length 0
+No errors detected in qrcode_without_dpi.png (9 chunks, 72.2% compression).
+```
+
+It reports the chunks in the order it scans them, and some details about each,
+and summarizes with a status line about any errors (of which there should be
+none), the total number of chunks as well as the overall compression of the
+file.
+
+If we do the same with the modified `qrcode_50_dpi.png`, we can see the added
+`pHYs` chunk just after the `IHDR` chunk.
+
+```bash
+$ pngcheck -v qrcode_50_dpi.png
+File: qrcode_50_dpi.png (505 bytes)
+  chunk IHDR at offset 0x0000c, length 13
+    116 x 116 image, 1-bit grayscale, non-interlaced
+  chunk pHYs at offset 0x00025, length 9: 1968x1968 pixels/meter (50 dpi)
+  chunk cHRM at offset 0x0003a, length 32
+    White x = 0.3127 y = 0.329,  Red x = 0.64 y = 0.33
+    Green x = 0.3 y = 0.6,  Blue x = 0.15 y = 0.06
+  chunk bKGD at offset 0x00066, length 2
+    gray = 0x0000
+  chunk tIME at offset 0x00074, length 7:  2 Nov 2024 17:25:43 UTC
+  chunk IDAT at offset 0x00087, length 200
+    zlib: deflated, 2K window, maximum compression
+  chunk tEXt at offset 0x0015b, length 37, keyword: date:create
+  chunk tEXt at offset 0x0018c, length 37, keyword: date:modify
+  chunk tEXt at offset 0x001bd, length 40, keyword: date:timestamp
+  chunk IEND at offset 0x001f1, length 0
+No errors detected in qrcode_50_dpi.png (10 chunks, 71.0% compression).
+```
+
+`pngcheck` is kind enough to report both the literal value, 1968x1968
+pixels/meter, as well as the more industry standard 50 DPI. Note also how the
+final status line still reports no errors, and that there are now 10 chunks in
+total.
+
+If you just want to check the integrity of the PNG file, running `pngcheck`
+without the `-v` returns only a single, summarized status line.
+
+```bash
+$ pngcheck -v qrcode_50_dpi.png
+OK: qrcode_50_dpi.png (116x116, 1-bit grayscale, non-interlaced, 71.0%).
+```
+
+> **Note:** For a more comprehensive set of image inspection and manipulation
+> commands, I recommend [ImageMagick](https://imagemagick.org/). Its [identify
+> command](https://imagemagick.org/script/identify.php) can do many of the same
+> things as `pngcheck`, and is also more general purpose and can work with a
+> wide variety of image formats. I chose not to use it for this article as it's
+> a significantly more complicated tool than `pngcheck`.
 
 ## Caveat - what if there already is a `pHYs` chunk in the file?
 As you may have noted, this implementation relies on the fact that there isn't

@@ -23,6 +23,11 @@ tools.
 * I use it for everything. That's the largest appeal for me. One editor for all
     my editing needs.
 
+## [nushell](https://www.nushell.sh/) - A shell with data processing capabilities
+* Modern and powerful shell
+* Incorporates functionality equivalent of tools like `jq` and `awk` directly into the shell
+* You kind of have to try it out to understand - I use it more and more when I need to do quick data processing
+
 ## [fzf](https://github.com/junegunn/fzf) - The best fuzzy finder around
 * A _fuzzy finder_ allowing you to search through text with inexact (fuzzy) search terms
 * Great integration with `neovim`
@@ -30,6 +35,20 @@ tools.
 ## [hl](https://github.com/pamburus/hl) - An incredibly useful JSON log viewer
 * View JSON-formatted log output in a nicely formatted fashion
 * Easily search and filter logs
+
+## [jq](https://jqlang.github.io/jq/) - Command line JSON processor
+* Allows for easy querying of JSON data in pretty much any shell
+* Essential tool unless you use a shell like `nushell`
+
+## [kanata](https://github.com/jtroo/kanata) - QMK but for any keyboard
+* A keyboard manager with powerful functionality like tap-hold
+* More or less QMK that runs on the host machine instead of on the keyboard
+
+## [pgcli](https://www.pgcli.com/) - A powerful CLI client for PostgreSQL
+* More user friendly version of `psql`
+* Can do stuff like
+    - Auto-complete `ON` of `JOIN`-clause based on foreign keys
+    - Saved queries with parameters that can be invoked by name
 
 ## [ripgrep](https://github.com/BurntSushi/ripgrep) - `grep`, but fast!
 * An incredibly fast implementation of the classic `grep` utility
@@ -46,6 +65,10 @@ tools.
 
 ## [tshark](https://www.wireshark.org/docs/wsug_html_chunked/AppToolstshark.html)
 * CLI version of Wireshark
+
+## [qmk](https://qmk.fm/) - Keyboard software for microcontrollers
+* The most popular keyboard software for home-built keyboards
+* [My QMK configuration](https://github.com/slarse/qmk_firmware/tree/slarse)
 
 # GUI utilities
 I don't use a whole lot of GUI utilities, but I've found a few really neat ones
@@ -83,6 +106,10 @@ over the years.
 - **Note:** The current release (v4.0.8) does not work with newer
   versions of the Linux kernel (6.4.2 or later). Prerelease of  v4.0.9 exists
   and [works fine](https://github.com/Slimbook-Team/slimbookbattery/issues/110).
+
+## [sway](https://swaywm.org/) - i3 under Wayland
+- Tiling compositor for Wayland
+- Nearly drop-in replacement for the i3 window manager
 
 # Note taking and blogging
 While apps like [LoqSeq](https://logseq.com/), [Obsidian](https://obsidian.md/)

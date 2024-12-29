@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content=" Posts tagged with dependabot" />
+    <meta name="description" content="A Page in : Networking" />
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Tag:dependabot - Programming for fun and profit</title>
+    <title>Networking - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -93,49 +93,147 @@
 <div class="stork-wrapper">
     <input class="stork-input" data-stork="sitesearch" placeholder="Search all stuff"/>
     <div class="stork-output" data-stork="sitesearch-output"></div>
-</div><ol class="breadcrumb">
-    <li><a href="https://slar.se/" title="Home" rel="home">
-		<i class="fas fa-home fa-fw fa-lg"></i> </a></li>
-    <li>Tags </li>
-    <li class="active">dependabot</li>
-</ol>
-    <article>
-<abbr class="article-header-date">
-  Mon 29 January 2024
-</abbr> <h1 class="article-header-title">
-  <a href="https://slar.se/dependabots-dependency-grouping.html" rel="bookmark"
-     title="Permalink to Dependabot&#39;s dependency grouping is awesome">
-    Dependabot's dependency grouping is awesome
-  </a>
-</h1><div class="article-header-info">
-  <p>
-      Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
-    in 
-    <a href="https://slar.se/category/programming.html">
-      Programming</a>
-    &nbsp;&nbsp;
-  </p>
-</div> <!-- /.article-header-info --><div class="article-tag-list">
-<span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/dependabot.html"><i class="fas fa-tag"></i>dependabot</a>&nbsp;
-	<a href="https://slar.se/tag/github.html"><i class="fas fa-tag"></i>github</a>&nbsp;
-	<a href="https://slar.se/tag/dependencies.html"><i class="fas fa-tag"></i>dependencies</a>&nbsp;
+</div><article itemscope="itemscope" 
+         itemtype="http://schema.org/WebPage">
+  <header>
+    <h1 itemprop="name headline">Networking</h1>
+  </header>
+  <div class="content-body" itemprop="text">
+    <p>This page summarizes networking concepts in software engineering.</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#open-systems-interconnection-osi-model">Open Systems Interconnection (OSI) model</a></li>
+<li><a href="#internet-protocol-suite-tcpip-model">Internet Protocol Suite (TCP/IP model)</a></li>
+<li><a href="#the-internet-protocol-ip">The Internet Protocol (IP)</a><ul>
+<li><a href="#cidr-notation-and-netmasks">CIDR notation and netmasks</a><ul>
+<li><a href="#applying-a-netmask">Applying a netmask</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
-      <div class="summary">
-		<p>I've been using GitHub's Dependabot since it was <a href="https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/">released around 4 years
-ago</a>,
-and to a large extent, it's been great. Except for one thing: the sheer amount
-of pull requests Dependabot would open for dependency updates. For some of my
-repositories it became more of a chore to keep …</p>
-		<p class="content-emphasis"><a href="https://slar.se/dependabots-dependency-grouping.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
-    <hr />
+<h1 id="open-systems-interconnection-osi-model">Open Systems Interconnection (OSI) model</h1>
+<p>The OSI model is a reference model for network communications. It partitions networking into 7 isolated layers, as follows.</p>
+<ol>
+<li>Application layer<ul>
+<li>The communication protocols used at the application level</li>
+<li>E.g. HTTP, FTP, DNS, SMTP etc</li>
+</ul>
+</li>
+<li>Presentation layer<ul>
+<li>a.k.a "encoding layer"</li>
+<li>Character encoding, data compression etc</li>
+<li>Rarely meaningful to separate from the application layer</li>
+</ul>
+</li>
+<li>Session layer<ul>
+<li>Layer of dubious value in today's network architecture</li>
+<li>Supposedly responsible for establishing, maintaining and releasing connections, but that is also often performed at the transport layer by e.g. TCP</li>
+<li>I suppose TLS could be considered a session layer protocol?</li>
+</ul>
+</li>
+<li>Transport layer<ul>
+<li>In short, adds ports to be able to address specific sockets (processes) on hosts</li>
+<li>E.g. TCP, UDP, QUIC</li>
+<li>Firewalls are (typically) layer 4 devices. They need to keep track of
+  ports!</li>
+</ul>
+</li>
+<li>Network layer<ul>
+<li>a.k.a the "IP layer"</li>
+<li>Uses the Internet Protocol (IP) address hosts</li>
+</ul>
+</li>
+<li>Data Link layer<ul>
+<li>Low-level networking using ARP, Mac addresses and frames</li>
+<li>Switches are (typically) layer 2 devices</li>
+</ul>
+</li>
+<li>Physical layer<ul>
+<li>The actual cables and radio signals that transmit data from point A to point B</li>
+<li>As a software engineer, you are very rarely concerned with this layer other than its throughput (e.g. "gigabit ethernet")</li>
+</ul>
+</li>
+</ol>
+<p>The OSI model is often critiqued for being too granular. For example, it is
+rarely meaningful to distinguish bewteen layers 6 and 7. This is addressed by
+the more concise TCP/IP model.</p>
+<h1 id="internet-protocol-suite-tcpip-model">Internet Protocol Suite (TCP/IP model)</h1>
+<p>The TCP/IP model is a less granular networking model than the OSI model, having
+only 4 layers. Layers 5-7 of the OSI model have been collapsed into a single
+layer, and the physical layer has been omitted entirely.</p>
+<p>The layers are as follows:</p>
+<ul>
+<li>Application layer<ul>
+<li>Everything from layers 5-7 in the OSI model</li>
+</ul>
+</li>
+<li>Transport layer<ul>
+<li>Same as the OSI model's transport layer (5)</li>
+</ul>
+</li>
+<li>Internet layer<ul>
+<li>Same as the OSI model's Network layer (3)</li>
+</ul>
+</li>
+<li>Link layer<ul>
+<li>Same as the OSI model's Data Link layer (2)</li>
+</ul>
+</li>
+</ul>
+<p>This model is significantly more concise and granular enough to model most
+modern applications.</p>
+<h1 id="the-internet-protocol-ip">The Internet Protocol (IP)</h1>
+<p>IP is the foundation of host addressing.</p>
+<h2 id="cidr-notation-and-netmasks">CIDR notation and netmasks</h2>
+<p>There are two major versions of IP: IPv4 and IPv6. IPv4 addresses are 32 bit
+while IPv6 addresses are 64 bit. Overall, the governing principles are the same
+so these notes focus on IPv4 for simplicity.</p>
+<p>An IPv4 address range is usually denoted using Classless Inter-Domain Routing
+(CIDR) notation<sup id="sf-wiki/networking-1-back"><a href="#sf-wiki/networking-1" class="simple-footnote" title="There used to be a Classful network notation, but it has been obsolete for a long time due to a lack of flexibility">1</a></sup>.</p>
+<p>The CIDR format is <code>a.b.c.d/x</code>, where <code>x</code> is the size of the <em>netmask</em> (or
+subnet mask).</p>
+<ul>
+<li>Example range: <code>192.0.0.0/24</code><sup id="sf-wiki/networking-2-back"><a href="#sf-wiki/networking-2" class="simple-footnote" title="This is a reserved address range for   private networks, see Wikipedia for details">2</a></sup><ul>
+<li><code>a.b.c.d = 192.0.0.0</code>, this is the network part (or prefix) of any IP address in this
+  range</li>
+<li><code>x=24</code>, meaning that the network part of any IP address in this network
+  has 24 bits, leaving 8 bits for the host part</li>
+<li>The netmask is as many leading 1s (in binary) as the size of the network
+  prefix. In this case, it is <code>255.255.255.0</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="applying-a-netmask">Applying a netmask</h3>
+<p>The purpose of the netmask is to determine if an IP address is part of the
+network that the netmask belongs to. You apply the netmask by performing a
+logical AND with the IP address you wish to check. If the IP address belongs to
+the network, its network part will match the network's network part.</p>
+<p>Examples of applying the netmask for the network <code>192.0.0.0/24</code>:</p>
+<ul>
+<li>IP address: <code>192.0.0.1</code><ul>
+<li><code>192.0.0.1 &amp; 255.255.255.0 = 192.0.0.0</code></li>
+<li>Network part of address matches routing prefix, it belongs to the
+  network!</li>
+</ul>
+</li>
+<li>IP address: <code>192.0.1.1</code><ul>
+<li><code>192.0.1.1 &amp; 255.255.255.0 = 192.0.1.0</code></li>
+<li>Network part of address does <em>not</em> match routing prefix, it belongs to
+  some other network!</li>
+</ul>
+</li>
+</ul>
+<p>For example, the address <code>192.168.0.1</code> belongs to the network <code>192.168.0.0/16</code>,
+as <code>192.168.0.1 &amp; 255.255.0.0 = 192.168.0.0</code>. However, the address <code>192.169.0.1</code>
+does not, as <code>192.169.0.1 &amp; 255.255.0.0 = 192.169.0.0</code></p><ol class="simple-footnotes"><li id="sf-wiki/networking-1">There used to be a <a href="https://en.wikipedia.org/wiki/Classful_network">Classful network
+notation</a>, but it has been
+obsolete for a long time due to a lack of flexibility <a href="#sf-wiki/networking-1-back" class="simple-footnote-back">↩</a></li><li id="sf-wiki/networking-2">This is a reserved address range for
+  private networks, see <a href="https://en.wikipedia.org/wiki/Reserved_IP_addresses">Wikipedia for details</a> <a href="#sf-wiki/networking-2-back" class="simple-footnote-back">↩</a></li></ol>
+  </div>
 
-<nav class="index-pager">
 
-</nav> <!-- /index-pager -->
+</article>
         </div><!-- /content -->
 
         <div class="col-md-3 sidebar-nav" id="sidebar">

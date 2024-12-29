@@ -53,6 +53,11 @@ url = "/pages/wiki/media.html"
 title = "Awesome Media"
 
 [[input.files]]
+path = "pages/wiki/networking.html"
+url = "/pages/wiki/networking.html"
+title = "Networking"
+
+[[input.files]]
 path = "pages/projects.html"
 url = "/pages/projects.html"
 title = "Projects"

@@ -10,5 +10,6 @@ learned it. It's a forever-work-in-progress with no particular level of quality.
 * [Bash]({filename}bash.template.md)
 * [Databases]({filename}databases.md)
 * [Linux]({filename}linux.md)
+* [Networking]({filename}networking.md)
 * [Terms]({filename}terms.md)
 * [Tools for Software Engineering]({filename}tools.md)

@@ -8,31 +8,31 @@ This page summarizes networking concepts in software engineering.
 # Open Systems Interconnection (OSI) model
 The OSI model is a reference model for network communications. It partitions networking into 7 isolated layers, as follows.
 
-7. Application layer
-    - The communication protocols used at the application level
-    - E.g. HTTP, FTP, DNS, SMTP etc
-6. Presentation layer
-    - a.k.a "encoding layer"
-    - Character encoding, data compression etc
-    - Rarely meaningful to separate from the application layer
-5. Session layer
-    - Layer of dubious value in today's network architecture
-    - Supposedly responsible for establishing, maintaining and releasing connections, but that is also often performed at the transport layer by e.g. TCP
-    - I suppose TLS could be considered a session layer protocol?
+1. Physical layer
+    - The actual cables and radio signals that transmit data from point A to point B
+    - As a software engineer, you are very rarely concerned with this layer other than its throughput (e.g. "gigabit ethernet")
+2. Data Link layer
+    - Low-level networking using ARP, Mac addresses and frames
+    - Switches are (typically) layer 2 devices
+3. Network layer
+    - a.k.a the "IP layer"
+    - Uses the Internet Protocol (IP) address hosts
 4. Transport layer
     - In short, adds ports to be able to address specific sockets (processes) on hosts
     - E.g. TCP, UDP, QUIC
     - Firewalls are (typically) layer 4 devices. They need to keep track of
       ports!
-3. Network layer
-    - a.k.a the "IP layer"
-    - Uses the Internet Protocol (IP) address hosts
-2. Data Link layer
-    - Low-level networking using ARP, Mac addresses and frames
-    - Switches are (typically) layer 2 devices
-1. Physical layer
-    - The actual cables and radio signals that transmit data from point A to point B
-    - As a software engineer, you are very rarely concerned with this layer other than its throughput (e.g. "gigabit ethernet")
+5. Session layer
+    - Layer of dubious value in today's network architecture
+    - Supposedly responsible for establishing, maintaining and releasing connections, but that is also often performed at the transport layer by e.g. TCP
+    - I suppose TLS could be considered a session layer protocol?
+6. Presentation layer
+    - a.k.a "encoding layer"
+    - Character encoding, data compression etc
+    - Rarely meaningful to separate from the application layer
+7. Application layer
+    - The communication protocols used at the application level
+    - E.g. HTTP, FTP, DNS, SMTP etc
 
 The OSI model is often critiqued for being too granular. For example, it is
 rarely meaningful to distinguish bewteen layers 6 and 7. This is addressed by

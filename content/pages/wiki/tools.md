@@ -32,6 +32,10 @@ tools.
 * A _fuzzy finder_ allowing you to search through text with inexact (fuzzy) search terms
 * Great integration with `neovim`
 
+## [ghostty](https://ghostty.org/) - A powerful GPU-accelerated terminal emulator
+* A new and shiny terminal emulator
+* GPU-accelerated => very fast and supports things like inline images
+
 ## [hl](https://github.com/pamburus/hl) - An incredibly useful JSON log viewer
 * View JSON-formatted log output in a nicely formatted fashion
 * Easily search and filter logs
@@ -43,6 +47,9 @@ tools.
 ## [kanata](https://github.com/jtroo/kanata) - QMK but for any keyboard
 * A keyboard manager with powerful functionality like tap-hold
 * More or less QMK that runs on the host machine instead of on the keyboard
+
+## [kitty](https://sw.kovidgoyal.net/kitty/) - Another powerful GPU-accelerated terminal emulator
+* Pretty much the same thing as ghostty
 
 ## [pgcli](https://www.pgcli.com/) - A powerful CLI client for PostgreSQL
 * More user friendly version of `psql`
@@ -69,6 +76,15 @@ tools.
 ## [qmk](https://qmk.fm/) - Keyboard software for microcontrollers
 * The most popular keyboard software for home-built keyboards
 * [My QMK configuration](https://github.com/slarse/qmk_firmware/tree/slarse)
+
+## [yazi](https://yazi-rs.github.io/) - Terimnal file manager on steroids
+* Fast and easy-to-use terminal file manager
+* Integrates very well with GPU-powered terminal emulators (kitty, ghostty) - can show image previews and the like
+
+## [zellij](https://zellij.dev/) - Modern alternative to tmux
+* A terminal multiplexer that shares many of the features of tmux
+* Easy to get into thanks to the always-on-screen keyboard bindings - I recommend this to anyone that isn't yet entrenched in tmux!
+* Unlike tmux, provides a good experience out-of-the-box
 
 # GUI utilities
 I don't use a whole lot of GUI utilities, but I've found a few really neat ones

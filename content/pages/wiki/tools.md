@@ -66,6 +66,10 @@ tools.
 * Large amount of plugins and themes to customize it to your liking
     - But I run [mostly vanilla](https://github.com/slarse/config/blob/main/tmux/tmux.conf)
 
+## [tmuxp](https://tmuxp.git-pull.com/) - Session manager for `tmux`
+* Define session layouts through simple configuration files
+* Must-have extension to the `tmux` experience!
+
 ## [tldr](https://github.com/tldr-pages/tldr) - Short and concise man pages
 * Super short man pages that give just the bare minimum of information to use a tool
 * Very often, precisely what you need!

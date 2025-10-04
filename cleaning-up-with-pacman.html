@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content=" Posts tagged with enums" />
+    <meta name="description" content="" />
     <meta name="author" content="Simon Larsén" />
     <meta name="generator" content="Pelican (VoidyBootstrap theme)" />
 
-    <title>Tag:enums - Programming for fun and profit</title>
+    <title>Cleaning up unused packages with Pacman - Programming for fun and profit</title>
 
    
         <link rel="stylesheet"
@@ -90,50 +90,170 @@
     <div class="container" id="main-container">
       <div class="row">
         <div class="col-md-9" id="content">
-<div class="stork-wrapper">
-    <input class="stork-input" data-stork="sitesearch" placeholder="Search all stuff"/>
-    <div class="stork-output" data-stork="sitesearch-output"></div>
-</div><ol class="breadcrumb">
-    <li><a href="https://slar.se/" title="Home" rel="home">
-		<i class="fas fa-home fa-fw fa-lg"></i> </a></li>
-    <li>Tags </li>
-    <li class="active">enums</li>
-</ol>
-    <article>
+<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+  <header class="article-header">
 <abbr class="article-header-date">
-  Sun 10 November 2019
+  Sat 04 October 2025
 </abbr> <h1 class="article-header-title">
-  <a href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html" rel="bookmark"
-     title="Permalink to Don&#39;t use String for method options, use an enum!">
-    Don't use String for method options, use an enum!
+  <a href="https://slar.se/cleaning-up-with-pacman.html" rel="bookmark"
+     title="Permalink to Cleaning up unused packages with Pacman">
+    Cleaning up unused packages with Pacman
   </a>
 </h1><div class="article-header-info">
   <p>
       Posted by <a href="https://slar.se/author/simon-larsen.html">Simon Larsén</a>
     in 
-    <a href="https://slar.se/category/programming.html">
-      Programming</a>
+    <a href="https://slar.se/category/linux.html">
+      Linux</a>
     &nbsp;&nbsp;
   </p>
 </div> <!-- /.article-header-info --><div class="article-tag-list">
 <span class="label label-default">Tags</span>
-	<a href="https://slar.se/tag/java.html"><i class="fas fa-tag"></i>java</a>&nbsp;
-	<a href="https://slar.se/tag/enums.html"><i class="fas fa-tag"></i>enums</a>&nbsp;
-</div>
-      <div class="summary">
-		<p>In this article, we are going to have a look at a method that accepts an option.
-That is to say, it accepts an argument that somehow decides how it operates. If
-you use a lot of libraries in your day-to-day programming, you're bound to come
-across methods that accept …</p>
-		<p class="content-emphasis"><a href="https://slar.se/dont-use-string-for-method-options-use-an-enum.html">
-			Read more... <i class="fas fa-arrow-circle-right fa-fw fa-lg"></i> 
-		</a></p>
-      </div>    </article>
-    <hr />
+	<a href="https://slar.se/tag/linux.html"><i class="fas fa-tag"></i>linux</a>&nbsp;
+	<a href="https://slar.se/tag/arch-linux.html"><i class="fas fa-tag"></i>arch linux</a>&nbsp;
+	<a href="https://slar.se/tag/pacman.html"><i class="fas fa-tag"></i>pacman</a>&nbsp;
+</div>  </header>
+  <div class="content-body" itemprop="text articleBody">
+	<p>Every once in a while, I make a vain attempt to clean up packages. Lately, I've
+been upping my game in searching for packages I don't use anymore or don't have
+any recollection I even installed. In this article, I'll run through one full
+cleanup cycle using <code>pacman</code> to declutter my Arch Linux machine.</p>
+<h1 id="removing-installed-packages">Removing installed packages</h1>
+<p>There are two kinds of packages to look at:</p>
+<ul>
+<li>Native - packages that appear in the sync database(s)<ul>
+<li>You installed these with <code>pacman -S</code><sup id="sf-cleaning-up-with-pacman-1-back"><a href="#sf-cleaning-up-with-pacman-1" class="simple-footnote" title="Or if you're a good citizen,   you installed them with pacman -Syu to ensure you're all up to date">1</a></sup></li>
+</ul>
+</li>
+<li>Foreign - packages you've installed from other sources<ul>
+<li>For example, you downloaded a PKGBUILD from the <a href="https://wiki.archlinux.org/title/Arch_User_Repository">AUR</a> and installed it with <code>makepkg</code></li>
+</ul>
+</li>
+</ul>
+<p>I usually deal with these one at a time.</p>
+<h2 id="pruning-foreign-packages">Pruning foreign packages</h2>
+<p>I typically start with foreign packages. I prune these aggressively as foreign
+packages have no particular security standard - it'll vary by where you got the
+package from.</p>
+<p>You can list foreign packages like so:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pacman<span class="w"> </span>-Qqme
+autojump
+kanata-bin
+wdisplays
+<span class="o">[</span>...<span class="o">]</span>
+</code></pre></div>
 
-<nav class="index-pager">
+<p>The options are as follows:</p>
+<ul>
+<li><code>Q</code> - query, we're querying the local database</li>
+<li><code>q</code> - quiet, show less output</li>
+<li><code>m</code> - foreign, as described above</li>
+<li><code>e</code> - explicitly installed, as opposed to having been installed as a
+  dependency of something else</li>
+</ul>
+<p>Let's say I want to uninstall <code>wdisplays</code>. I'd do that like so:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-Rsn<span class="w"> </span>wdisplays
+checking<span class="w"> </span>dependencies...
 
-</nav> <!-- /index-pager -->
+Packages<span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="o">)</span><span class="w"> </span>wayland-protocols-1.45-1<span class="w">  </span>wdisplays-1.1.3-1
+
+Total<span class="w"> </span>Removed<span class="w"> </span>Size:<span class="w">  </span><span class="m">1</span>.02<span class="w"> </span>MiB
+
+::<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>remove<span class="w"> </span>these<span class="w"> </span>packages?<span class="w"> </span><span class="o">[</span>Y/n<span class="o">]</span>
+</code></pre></div>
+
+<p>Note that the we're prompted to approve the removal<sup id="sf-cleaning-up-with-pacman-2-back"><a href="#sf-cleaning-up-with-pacman-2" class="simple-footnote" title="For scripts, you can bypass the need for a prompt with --noconfirm. I tend to not script my system maintenance, however, as I like to be hands on when it comes to what's installed on my system.">2</a></sup>, and also that prompt lists <em>two</em> packages for removal:
+<code>wdisplays</code> and <code>wayland-protocols</code>. The latter is a dependency of <code>wdisplays</code>,
+which shows up due to the use of the <code>s</code> option, as specified below:</p>
+<ul>
+<li><code>R</code> - remove, we're removing a local package</li>
+<li><code>s</code> - recursive, remove all dependencies of the package provided that they
+  have no other dependents and were not explicitly installed by the user</li>
+<li><code>n</code> - nosave, prevents Pacman from backing up removed files (I really want
+  them gone)</li>
+</ul>
+<blockquote>
+<p><strong>Aside:</strong> Another useful option <code>-c|--cascade</code>. By specifying this, you
+will remove not only the target package, but any package that depends on it,
+recursively. I rarely use this myself, but it can be very convenient if
+there's a "middle of the dependency chain" package that you for one reason or
+another really need to remove.</p>
+</blockquote>
+<h2 id="pruning-native-packages">Pruning native packages</h2>
+<p>Now, we follow precisely the same procedure for native packages. To list native
+packages, we simply substitute the <code>m</code> option with the <code>n</code> argument.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pacman<span class="w"> </span>-Qqne
+<span class="o">[</span>...<span class="w"> </span>very<span class="w"> </span>long<span class="w"> </span>list<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
+
+<p>This list is going to be <em>way</em> larger than your list of foreign packages, so you
+might want to pipe the result to <code>less</code> and have a little look through it.
+Generally, I do not prune this as aggressively as I prune my foreign packages as
+the security standards in the official Arch repositories are adequate for my
+needs. That being said, it's still worth a little look every now and then, as
+every installed package makes system updates slower.</p>
+<p>When you find something to uninstall, you use precisely the same command as for
+a foreign package above.</p>
+<h2 id="pruning-orphaned-packages">Pruning orphaned packages</h2>
+<p>As a final step, I prune <em>orphaned</em> packages. These are packages that were
+installed as dependencies at one point, but no longer have any dependents. I
+typically accrue quite a few of these by forgetting the <code>s</code> option when removing
+packages, but they can also come about from e.g. a system update (<code>pacman -Syu</code>)
+where some updated package(s) no longer require prior dependencies. A system
+update <em>does not</em> remove orphans, meaning that you'll accumulate orphans in the
+system through normal usage.</p>
+<p>You can list orphaned packages like so:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pacman<span class="w"> </span>-Qqdt
+<span class="o">[</span>...<span class="o">]</span>
+</code></pre></div>
+
+<p>The <em>new</em> arguments are as follows:</p>
+<ul>
+<li><code>d</code> - dependencies, only shows packages that were <em>not</em> explicitly installed</li>
+<li><code>t</code> - unrequired, lists packages that have no dependents</li>
+</ul>
+<p>This will often be quite a large list, typically with dozens or hundreds of
+entries depending on how often you clean up your system, so it's typically
+necessary to pipe it to the removal command.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pacman<span class="w"> </span>-Qqdt<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>pacman<span class="w"> </span>-Rsn<span class="w"> </span>-
+<span class="o">[</span>...<span class="o">]</span>
+
+::<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>remove<span class="w"> </span>these<span class="w"> </span>packages?<span class="w"> </span><span class="o">[</span>Y/n<span class="o">]</span>
+</code></pre></div>
+
+<p>As usual, you need to confirm your action via the prompt, and the presence of
+the <code>s</code> option will likely cause the prompt to show more packages than the list
+you piped into it.</p>
+<blockquote>
+<p><strong>Important:</strong> The <code>q</code> option is actually important in the above command chain, as
+the extra information that's printed if you don't specify it causes <code>pacman
+-R</code> to error out.</p>
+<p><strong>Tip:</strong> You can trim the list a bit by adding the <code>t</code> option to exclude
+packages that are dependencies of other packages. Most often, I find that
+these packages <em>are</em> indeed packages that I want to keep, and I only
+explicitly installed them to resolve some issue with an update.</p>
+</blockquote>
+<h2 id="further-reading">Further reading</h2>
+<p>If you want to learn more about how to maintain your system, here are a few additional resources to have a look at.</p>
+<ul>
+<li>The <a href="https://wiki.archlinux.org/title/System_maintenance">System maintenance</a> page in the Arch Linux Wiki is a must-read for maintaining your system properly</li>
+<li>The <a href="https://wiki.archlinux.org/title/Pacman/Tips_and_tricks">pacman/Tips and tricks</a> page in the Arch Linux Wiki is a great place to get ideas for what you can do with <code>pacman</code>. It's essentially a much more comprehensive version of this very article.</li>
+<li>The manual page (<code>man pacman</code>) is very useful once you already know roughly what you want to do</li>
+</ul>
+<h1 id="and-thats-it">And that's it!</h1>
+<p>With that, you've learned how to prune packages on your system! It's not
+difficult to do, you just need a little bit of discipline to do it regularly.
+Pruning packages may seem unnecessary, but it has several benefits, not least of
+which is a smaller attack surface, less wasted disk space and faster system
+updates.</p><ol class="simple-footnotes"><li id="sf-cleaning-up-with-pacman-1">Or if you're a good citizen,
+  you installed them with <code>pacman -Syu</code> to ensure you're all up to date <a href="#sf-cleaning-up-with-pacman-1-back" class="simple-footnote-back">↩</a></li><li id="sf-cleaning-up-with-pacman-2">For scripts, you can
+bypass the need for a prompt with <code>--noconfirm</code>. I tend to not script my system
+maintenance, however, as I like to be hands on when it comes to what's installed
+on my system. <a href="#sf-cleaning-up-with-pacman-2-back" class="simple-footnote-back">↩</a></li></ol>
+  </div>
+
+
+</article>
         </div><!-- /content -->
 
         <div class="col-md-3 sidebar-nav" id="sidebar">

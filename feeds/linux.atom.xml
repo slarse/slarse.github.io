@@ -1,5 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Linux</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/linux.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2024-03-24T00:00:00+01:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Configuring touchpad tap in Sway</title><link href="https://slar.se/configuring-touchpad-in-sway.html" rel="alternate"></link><published>2024-03-24T00:00:00+01:00</published><updated>2024-03-24T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-03-24:/configuring-touchpad-in-sway.html</id><summary type="html">&lt;p&gt;One thing that didn't carry over from my i3 setup &lt;a href="https://slar.se/wayland-one-month-later.html"&gt;when moving over to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Programming for fun and profit - Linux</title><link href="https://slar.se/" rel="alternate"></link><link href="https://slar.se/feeds/linux.atom.xml" rel="self"></link><id>https://slar.se/</id><updated>2025-10-04T00:00:00+02:00</updated><subtitle>A blog about software engineering, programming languages and technical tinkering</subtitle><entry><title>Cleaning up unused packages with Pacman</title><link href="https://slar.se/cleaning-up-with-pacman.html" rel="alternate"></link><published>2025-10-04T00:00:00+02:00</published><updated>2025-10-04T00:00:00+02:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2025-10-04:/cleaning-up-with-pacman.html</id><summary type="html">&lt;p&gt;Every once in a while, I make a vain attempt to clean up packages. Lately, I've
+been upping my game in searching for packages I don't use anymore or don't have
+any recollection I even installed. In this article, I'll run through one full
+cleanup cycle using &lt;code&gt;pacman&lt;/code&gt; to declutter …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Every once in a while, I make a vain attempt to clean up packages. Lately, I've
+been upping my game in searching for packages I don't use anymore or don't have
+any recollection I even installed. In this article, I'll run through one full
+cleanup cycle using &lt;code&gt;pacman&lt;/code&gt; to declutter my Arch Linux machine.&lt;/p&gt;
+&lt;h1 id="removing-installed-packages"&gt;Removing installed packages&lt;/h1&gt;
+&lt;p&gt;There are two kinds of packages to look at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Native - packages that appear in the sync database(s)&lt;ul&gt;
+&lt;li&gt;You installed these with &lt;code&gt;pacman -S&lt;/code&gt;&lt;sup id="sf-cleaning-up-with-pacman-1-back"&gt;&lt;a href="#sf-cleaning-up-with-pacman-1" class="simple-footnote" title="Or if you're a good citizen,   you installed them with pacman -Syu to ensure you're all up to date"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Foreign - packages you've installed from other sources&lt;ul&gt;
+&lt;li&gt;For example, you downloaded a PKGBUILD from the &lt;a href="https://wiki.archlinux.org/title/Arch_User_Repository"&gt;AUR&lt;/a&gt; and installed it with &lt;code&gt;makepkg&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I usually deal with these one at a time.&lt;/p&gt;
+&lt;h2 id="pruning-foreign-packages"&gt;Pruning foreign packages&lt;/h2&gt;
+&lt;p&gt;I typically start with foreign packages. I prune these aggressively as foreign
+packages have no particular security standard - it'll vary by where you got the
+package from.&lt;/p&gt;
+&lt;p&gt;You can list foreign packages like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;pacman&lt;span class="w"&gt; &lt;/span&gt;-Qqme
+autojump
+kanata-bin
+wdisplays
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The options are as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Q&lt;/code&gt; - query, we're querying the local database&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q&lt;/code&gt; - quiet, show less output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m&lt;/code&gt; - foreign, as described above&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;e&lt;/code&gt; - explicitly installed, as opposed to having been installed as a
+  dependency of something else&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let's say I want to uninstall &lt;code&gt;wdisplays&lt;/code&gt;. I'd do that like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;pacman&lt;span class="w"&gt; &lt;/span&gt;-Rsn&lt;span class="w"&gt; &lt;/span&gt;wdisplays
+checking&lt;span class="w"&gt; &lt;/span&gt;dependencies...
+
+Packages&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;wayland-protocols-1.45-1&lt;span class="w"&gt;  &lt;/span&gt;wdisplays-1.1.3-1
+
+Total&lt;span class="w"&gt; &lt;/span&gt;Removed&lt;span class="w"&gt; &lt;/span&gt;Size:&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.02&lt;span class="w"&gt; &lt;/span&gt;MiB
+
+::&lt;span class="w"&gt; &lt;/span&gt;Do&lt;span class="w"&gt; &lt;/span&gt;you&lt;span class="w"&gt; &lt;/span&gt;want&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;remove&lt;span class="w"&gt; &lt;/span&gt;these&lt;span class="w"&gt; &lt;/span&gt;packages?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that the we're prompted to approve the removal&lt;sup id="sf-cleaning-up-with-pacman-2-back"&gt;&lt;a href="#sf-cleaning-up-with-pacman-2" class="simple-footnote" title="For scripts, you can bypass the need for a prompt with --noconfirm. I tend to not script my system maintenance, however, as I like to be hands on when it comes to what's installed on my system."&gt;2&lt;/a&gt;&lt;/sup&gt;, and also that prompt lists &lt;em&gt;two&lt;/em&gt; packages for removal:
+&lt;code&gt;wdisplays&lt;/code&gt; and &lt;code&gt;wayland-protocols&lt;/code&gt;. The latter is a dependency of &lt;code&gt;wdisplays&lt;/code&gt;,
+which shows up due to the use of the &lt;code&gt;s&lt;/code&gt; option, as specified below:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;R&lt;/code&gt; - remove, we're removing a local package&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s&lt;/code&gt; - recursive, remove all dependencies of the package provided that they
+  have no other dependents and were not explicitly installed by the user&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt; - nosave, prevents Pacman from backing up removed files (I really want
+  them gone)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Aside:&lt;/strong&gt; Another useful option &lt;code&gt;-c|--cascade&lt;/code&gt;. By specifying this, you
+will remove not only the target package, but any package that depends on it,
+recursively. I rarely use this myself, but it can be very convenient if
+there's a "middle of the dependency chain" package that you for one reason or
+another really need to remove.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="pruning-native-packages"&gt;Pruning native packages&lt;/h2&gt;
+&lt;p&gt;Now, we follow precisely the same procedure for native packages. To list native
+packages, we simply substitute the &lt;code&gt;m&lt;/code&gt; option with the &lt;code&gt;n&lt;/code&gt; argument.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;pacman&lt;span class="w"&gt; &lt;/span&gt;-Qqne
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="w"&gt; &lt;/span&gt;very&lt;span class="w"&gt; &lt;/span&gt;long&lt;span class="w"&gt; &lt;/span&gt;list&lt;span class="w"&gt; &lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This list is going to be &lt;em&gt;way&lt;/em&gt; larger than your list of foreign packages, so you
+might want to pipe the result to &lt;code&gt;less&lt;/code&gt; and have a little look through it.
+Generally, I do not prune this as aggressively as I prune my foreign packages as
+the security standards in the official Arch repositories are adequate for my
+needs. That being said, it's still worth a little look every now and then, as
+every installed package makes system updates slower.&lt;/p&gt;
+&lt;p&gt;When you find something to uninstall, you use precisely the same command as for
+a foreign package above.&lt;/p&gt;
+&lt;h2 id="pruning-orphaned-packages"&gt;Pruning orphaned packages&lt;/h2&gt;
+&lt;p&gt;As a final step, I prune &lt;em&gt;orphaned&lt;/em&gt; packages. These are packages that were
+installed as dependencies at one point, but no longer have any dependents. I
+typically accrue quite a few of these by forgetting the &lt;code&gt;s&lt;/code&gt; option when removing
+packages, but they can also come about from e.g. a system update (&lt;code&gt;pacman -Syu&lt;/code&gt;)
+where some updated package(s) no longer require prior dependencies. A system
+update &lt;em&gt;does not&lt;/em&gt; remove orphans, meaning that you'll accumulate orphans in the
+system through normal usage.&lt;/p&gt;
+&lt;p&gt;You can list orphaned packages like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;pacman&lt;span class="w"&gt; &lt;/span&gt;-Qqdt
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;em&gt;new&lt;/em&gt; arguments are as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;d&lt;/code&gt; - dependencies, only shows packages that were &lt;em&gt;not&lt;/em&gt; explicitly installed&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;t&lt;/code&gt; - unrequired, lists packages that have no dependents&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This will often be quite a large list, typically with dozens or hundreds of
+entries depending on how often you clean up your system, so it's typically
+necessary to pipe it to the removal command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;pacman&lt;span class="w"&gt; &lt;/span&gt;-Qqdt&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;pacman&lt;span class="w"&gt; &lt;/span&gt;-Rsn&lt;span class="w"&gt; &lt;/span&gt;-
+&lt;span class="o"&gt;[&lt;/span&gt;...&lt;span class="o"&gt;]&lt;/span&gt;
+
+::&lt;span class="w"&gt; &lt;/span&gt;Do&lt;span class="w"&gt; &lt;/span&gt;you&lt;span class="w"&gt; &lt;/span&gt;want&lt;span class="w"&gt; &lt;/span&gt;to&lt;span class="w"&gt; &lt;/span&gt;remove&lt;span class="w"&gt; &lt;/span&gt;these&lt;span class="w"&gt; &lt;/span&gt;packages?&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;Y/n&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As usual, you need to confirm your action via the prompt, and the presence of
+the &lt;code&gt;s&lt;/code&gt; option will likely cause the prompt to show more packages than the list
+you piped into it.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; The &lt;code&gt;q&lt;/code&gt; option is actually important in the above command chain, as
+the extra information that's printed if you don't specify it causes &lt;code&gt;pacman
+-R&lt;/code&gt; to error out.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; You can trim the list a bit by adding the &lt;code&gt;t&lt;/code&gt; option to exclude
+packages that are dependencies of other packages. Most often, I find that
+these packages &lt;em&gt;are&lt;/em&gt; indeed packages that I want to keep, and I only
+explicitly installed them to resolve some issue with an update.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="further-reading"&gt;Further reading&lt;/h2&gt;
+&lt;p&gt;If you want to learn more about how to maintain your system, here are a few additional resources to have a look at.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;a href="https://wiki.archlinux.org/title/System_maintenance"&gt;System maintenance&lt;/a&gt; page in the Arch Linux Wiki is a must-read for maintaining your system properly&lt;/li&gt;
+&lt;li&gt;The &lt;a href="https://wiki.archlinux.org/title/Pacman/Tips_and_tricks"&gt;pacman/Tips and tricks&lt;/a&gt; page in the Arch Linux Wiki is a great place to get ideas for what you can do with &lt;code&gt;pacman&lt;/code&gt;. It's essentially a much more comprehensive version of this very article.&lt;/li&gt;
+&lt;li&gt;The manual page (&lt;code&gt;man pacman&lt;/code&gt;) is very useful once you already know roughly what you want to do&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id="and-thats-it"&gt;And that's it!&lt;/h1&gt;
+&lt;p&gt;With that, you've learned how to prune packages on your system! It's not
+difficult to do, you just need a little bit of discipline to do it regularly.
+Pruning packages may seem unnecessary, but it has several benefits, not least of
+which is a smaller attack surface, less wasted disk space and faster system
+updates.&lt;/p&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-cleaning-up-with-pacman-1"&gt;Or if you're a good citizen,
+  you installed them with &lt;code&gt;pacman -Syu&lt;/code&gt; to ensure you're all up to date &lt;a href="#sf-cleaning-up-with-pacman-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;li id="sf-cleaning-up-with-pacman-2"&gt;For scripts, you can
+bypass the need for a prompt with &lt;code&gt;--noconfirm&lt;/code&gt;. I tend to not script my system
+maintenance, however, as I like to be hands on when it comes to what's installed
+on my system. &lt;a href="#sf-cleaning-up-with-pacman-2-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Linux"></category><category term="linux"></category><category term="arch linux"></category><category term="pacman"></category></entry><entry><title>Configuring touchpad tap in Sway</title><link href="https://slar.se/configuring-touchpad-in-sway.html" rel="alternate"></link><published>2024-03-24T00:00:00+01:00</published><updated>2024-03-24T00:00:00+01:00</updated><author><name>Simon Larsén</name></author><id>tag:slar.se,2024-03-24:/configuring-touchpad-in-sway.html</id><summary type="html">&lt;p&gt;One thing that didn't carry over from my i3 setup &lt;a href="https://slar.se/wayland-one-month-later.html"&gt;when moving over to
 Sway (i.e. Wayland)&lt;/a&gt; was the touchpad
 configuration. Input devices was a display server concern under X.Org, so the
 window manager had nothing to do with it. Notably, now click-on-tap is not

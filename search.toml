@@ -78,6 +78,11 @@ url = "/pages/wiki/arch-linux-on-xps-15-9520.html"
 title = "Arch Linux on XPS 15 9520"
 
 [[input.files]]
+path = "cleaning-up-with-pacman.html"
+url = "/cleaning-up-with-pacman.html"
+title = "Cleaning up unused packages with Pacman"
+
+[[input.files]]
 path = "set-png-dpi.html"
 url = "/set-png-dpi.html"
 title = "Programmatically set the pixel density (DPI) of a PNG image"
